@@ -1,0 +1,10 @@
+Particle Table
+|
+build = DBGMQ,		n0;
+start = 0xB8CB50,	0xB5DBA0;
+loop=0x25;
+i=0;
+format = tsv;
+|
+index:X4,	u32:X8, u32:X8, u32:X8, u32:X8,
+			u32:X8, u32:X8, u32:X8

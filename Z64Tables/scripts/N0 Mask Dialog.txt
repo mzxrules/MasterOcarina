@@ -1,0 +1,9 @@
+Masks
+|
+build = n0;
+start = 0xB66E60;
+loop = 0x3C;
+i=0;
+format=tsv;
+|
+index:X2, u16:X4, u16:X4, u16:X4, u16:X4, u16:X4, u16:X4, u16:X4, u16:X4, u16:X4

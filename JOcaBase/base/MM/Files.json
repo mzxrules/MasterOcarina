@@ -1,0 +1,7752 @@
+[
+  {
+    "Description": "",
+    "Filename": "makerom",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "boot",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "dmadata",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Audiobank",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Audioseq",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Audiotable",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "jpn_font_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "link_animetion",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Item Icons & Menu Backgrounds, Icons, & Text",
+    "Filename": "icon_item_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Quest Status Screen & Dungeon Map Icons",
+    "Filename": "icon_item_24_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "icon_item_field_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "icon_item_dungeon_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "icon_item_gameover_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "map_name_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Archive] Textures - Dungeon Room Minimaps",
+    "Filename": "J10_00A4B000",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Archive] Textures - Scene Minimaps",
+    "Filename": "J10_00A4C310",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Archive] Textures - Inventory Text",
+    "Filename": "J10_00A55660",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Archive] Textures - Location Names",
+    "Filename": "J10_00A68270",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Archive] Textures - Item Icons",
+    "Filename": "J10_00A69E60",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Bombers' Notebook Icons",
+    "Filename": "J10_00AB2CF0",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Bombers' Notebook Graphics",
+    "Filename": "J10_00ABE000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Grandma's Story Graphics",
+    "Filename": "J10_00AC2000",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "do_action_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "message_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "message_texture_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "nes_font_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "jpn_message_data_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "staff_message_data_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "code",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "title",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "select",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "opening",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "file_choose",
+    "IsStatic": false
+  },
+  {
+    "Description": "Day Transition Overlays",
+    "Filename": "daytelop",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "kaleido_scope",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "player_actor",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Test",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shop Inventory Data",
+    "Filename": "En_GirlA",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Part",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flame",
+    "Filename": "En_Light",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Door",
+    "Filename": "En_Door",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest",
+    "Filename": "En_Box",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gekko (Mini-Boss)",
+    "Filename": "En_Pametfrog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Octorok (Field Enemy)",
+    "Filename": "En_Okuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Powder Keg",
+    "Filename": "En_Bom",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wallmaster",
+    "Filename": "En_Wallmas",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dodongo",
+    "Filename": "En_Dodongo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keese",
+    "Filename": "En_Firefly",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Epona (Cutscenes)",
+    "Filename": "En_Horse",
+    "IsStatic": false
+  },
+  {
+    "Description": "Arrow",
+    "Filename": "En_Arrow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tatl (Gameplay) & Healing Fairy",
+    "Filename": "En_Elf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco (Friendly)",
+    "Filename": "En_Niw",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tektite",
+    "Filename": "En_Tite",
+    "IsStatic": false
+  },
+  {
+    "Description": "Peahat",
+    "Filename": "En_Peehat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Room Transition Plane",
+    "Filename": "En_Holl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dinolfos",
+    "Filename": "En_Dinofos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flagpole",
+    "Filename": "En_Hata",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Zelda [OoT]",
+    "Filename": "En_Zl1",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Viewer",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shabom",
+    "Filename": "En_Bubble",
+    "IsStatic": false
+  },
+  {
+    "Description": "Door Shutter",
+    "Filename": "Door_Shutter",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Fins",
+    "Filename": "En_Boom",
+    "IsStatic": false
+  },
+  {
+    "Description": "Elegy Statues",
+    "Filename": "En_Torch2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Frog I [?]",
+    "Filename": "En_Minifrog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skulltula",
+    "Filename": "En_St",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Inverter",
+    "Filename": "Obj_Wturn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sound Effects I",
+    "Filename": "En_River_Sound",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Ossan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Death Armos",
+    "Filename": "En_Famos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Flower",
+    "Filename": "En_Bombf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Armos",
+    "Filename": "En_Am",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Baba",
+    "Filename": "En_Dekubaba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Nut Effect",
+    "Filename": "En_M_Fire1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spin Attack & Sword Beam Effects",
+    "Filename": "En_M_Thunder",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Bg_Breakwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blue Warp & Boss Lair Warps",
+    "Filename": "Door_Warp1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Torch Stand (Generic)",
+    "Filename": "Obj_Syokudai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Heart Container",
+    "Filename": "Item_B_Heart",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Scrub (Field Enemy)",
+    "Filename": "En_Dekunuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Red Bubble",
+    "Filename": "En_Bbfall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hookshot",
+    "Filename": "Arms_Hook",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blue Bubble",
+    "Filename": "En_Bb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fountain Water",
+    "Filename": "Bg_Keikoku_Spr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Trees & Bushes",
+    "Filename": "En_Wood02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gomess",
+    "Filename": "En_Death",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gomess' Bats",
+    "Filename": "En_Minideath",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beamos",
+    "Filename": "En_Vm",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Demo_Effect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Environment Effects",
+    "Filename": "Demo_Kankyo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Floormaster",
+    "Filename": "En_Floormas",
+    "IsStatic": false
+  },
+  {
+    "Description": "Redead",
+    "Filename": "En_Rd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Elevator [Early]",
+    "Filename": "Bg_F40_Flift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Golden Gauntlets Rock",
+    "Filename": "Bg_Heavy_Block",
+    "IsStatic": false
+  },
+  {
+    "Description": "Group of Bugs / Fish / Butterflies",
+    "Filename": "Obj_Mure",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skullwalltula",
+    "Filename": "En_Sw",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Object_Kankyo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Epona (Gameplay)",
+    "Filename": "En_Horse_Link_Child",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grotto Hole",
+    "Filename": "Door_Ana",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Encount1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Glow",
+    "Filename": "Demo_Tre_Lgt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora Balloon (Astral Observatory)",
+    "Filename": "En_Encount2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rock & Beam of Light [OoT]",
+    "Filename": "En_Fire_Rock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Helix Path",
+    "Filename": "Bg_Ctower_Rot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Reflectable Ray of Light [?]",
+    "Filename": "Mir_Ray",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shellblade",
+    "Filename": "En_Sb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Jelly",
+    "Filename": "En_Bigslime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Withered Deku Baba & Mini Baba",
+    "Filename": "En_Karebaba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Bros.",
+    "Filename": "En_In",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bombchu",
+    "Filename": "En_Bom_Chu",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Horse_Game_Check",
+    "IsStatic": false
+  },
+  {
+    "Description": "Like Like",
+    "Filename": "En_Rr",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Fr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fishing Pond & Proprietor [OoT]",
+    "Filename": "En_Fishing",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pushblock",
+    "Filename": "Obj_Oshihiki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spin Attack Charge Particles",
+    "Filename": "Eff_Dust",
+    "IsStatic": false
+  },
+  {
+    "Description": "Horse Jumping Fence",
+    "Filename": "Bg_Umajump",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bug",
+    "Filename": "En_Insect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Butterfly",
+    "Filename": "En_Butte",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fish",
+    "Filename": "En_Fish",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Item_Etcetera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Collectible Fire Arrows",
+    "Filename": "Arrow_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Collectible Ice Arrows",
+    "Filename": "Arrow_Ice",
+    "IsStatic": false
+  },
+  {
+    "Description": "Collectible Light Arrows",
+    "Filename": "Arrow_Light",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Crate (Small)",
+    "Filename": "Obj_Kibako",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pot",
+    "Filename": "Obj_Tsubo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Iron Knuckle",
+    "Filename": "En_Ik",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Demo_Shd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Guard (Deku King's Chamber)",
+    "Filename": "En_Dns",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tatl Text Trigger Spot",
+    "Filename": "Elf_Msg",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Honotrap",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flying Pot",
+    "Filename": "En_Tubo_Trap",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Sparkle Effect",
+    "Filename": "Obj_Ice_Poly",
+    "IsStatic": false
+  },
+  {
+    "Description": "Freezard",
+    "Filename": "En_Fz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grass",
+    "Filename": "En_Kusa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Bean Plant",
+    "Filename": "Obj_Bean",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bombable Rock",
+    "Filename": "Obj_Bombiwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Switches",
+    "Filename": "Obj_Switch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Elevator",
+    "Filename": "Obj_Lift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Hookshot Pillar",
+    "Filename": "Obj_Hsblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ocarina Song Spot",
+    "Filename": "En_Okarina_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowball & Rolling Boulder [?]",
+    "Filename": "En_Goroiwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carpenter (Clock Town)",
+    "Filename": "En_Daiku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco Chick",
+    "Filename": "En_Nwc",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Item_Inbox",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirate Lieutenant",
+    "Filename": "En_Ge1",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Blockstop",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dynamic Shadow",
+    "Filename": "En_Sda",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Clear_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman",
+    "Filename": "En_Gm",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Bean Seller",
+    "Filename": "En_Ms",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grog",
+    "Filename": "En_Hs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boat Cruise Canoe",
+    "Filename": "Bg_Ingate",
+    "IsStatic": false
+  },
+  {
+    "Description": "Square Sign",
+    "Filename": "En_Kanban",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco (Attacking)",
+    "Filename": "En_Attack_Niw",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Scientist",
+    "Filename": "En_Mk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Owl",
+    "Filename": "En_Owl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rock",
+    "Filename": "En_Ishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Orange Graveyard Flower",
+    "Filename": "Obj_Hana",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sun Switch",
+    "Filename": "Obj_Lightswitch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grass & Rock Cluster",
+    "Filename": "Obj_Mure2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling (Gameplay)",
+    "Filename": "En_Fu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Water Spout",
+    "Filename": "En_Stream",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rock Sirloin",
+    "Filename": "En_Mm",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Weather_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Part-Timer",
+    "Filename": "En_Ani",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon Child",
+    "Filename": "En_Js",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Storms Effect I [?]",
+    "Filename": "En_Okarina_Effect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Title Logo",
+    "Filename": "En_Mag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Green Tatl Target Spot",
+    "Filename": "Elf_Msg2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Platform [Early]",
+    "Filename": "Bg_F40_Swlift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Scarecrow",
+    "Filename": "En_Kakasi",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Makeoshihiki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sun's Song Effect",
+    "Filename": "Oceff_Spot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest (Grotto)",
+    "Filename": "En_Torch",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Shot_Sun",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Roomtimer",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cursed Skulltula Man",
+    "Filename": "En_Ssh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Time Effect",
+    "Filename": "Oceff_Wipe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Dust",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Kirakira",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Bomb2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Blast",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_G_Spk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_D_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Bubble",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_G_Ripple",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_G_Splash",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_G_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Lightning",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Dt_Bubble",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Hahen",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Stick",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Sibuki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Stone1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Hitmark",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Fhg_Flash",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_K_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Solder_Srch_Ball",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Kakera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Ice_Piece",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_En_Ice",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Fire_Tail",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_En_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Extra",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Dead_Db",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Dead_Dd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Dead_Ds",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Storms Effect II [?]",
+    "Filename": "Oceff_Storm",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Demo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Jelly Droplets",
+    "Filename": "En_Minislime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Nut Projectile",
+    "Filename": "En_Nutsball",
+    "IsStatic": false
+  },
+  {
+    "Description": "Epona's Song Effect",
+    "Filename": "Oceff_Wipe2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Saria's Song Effect",
+    "Filename": "Oceff_Wipe3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dog (Generic)",
+    "Filename": "En_Dg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gold Skulltula Token",
+    "Filename": "En_Si",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beehive",
+    "Filename": "Obj_Comb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Crate (Large)",
+    "Filename": "Obj_Kibako2",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Hs2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rupee Cluster",
+    "Filename": "Obj_Mure3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling (Cutscenes)",
+    "Filename": "En_Tg",
+    "IsStatic": false
+  },
+  {
+    "Description": "White Wolfos & Wolfos (Field Enemy)",
+    "Filename": "En_Wf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stalchild (Generic)",
+    "Filename": "En_Skb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gossip Stone",
+    "Filename": "En_Gs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sound Effects II",
+    "Filename": "Obj_Sound",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guay (Field Enemy)",
+    "Filename": "En_Crow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow",
+    "Filename": "En_Cow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Scarecrow's Song Effect",
+    "Filename": "Oceff_Wipe4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora [Early]",
+    "Filename": "En_Zo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_Ss_Ice_Smoke",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Makekinsuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Aveil",
+    "Filename": "En_Ge3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bronze Boulder",
+    "Filename": "Obj_Hamishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Zl4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman's Letter to Himself",
+    "Filename": "En_Mm2",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Door_Spiral",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora Pushblock",
+    "Filename": "Obj_Pzlblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blade Trap",
+    "Filename": "Obj_Toge",
+    "IsStatic": false
+  },
+  {
+    "Description": "Armos Statue",
+    "Filename": "Obj_Armos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bumper",
+    "Filename": "Obj_Boyo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dragonfly",
+    "Filename": "En_Grasshopper",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Grass",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Grass_Carry",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grass Cluster",
+    "Filename": "Obj_Grass_Unit",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Bg_Fire_Wall",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Bu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Circle of Light [?]",
+    "Filename": "En_Encount3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Garo Master I [?]",
+    "Filename": "En_Jso",
+    "IsStatic": false
+  },
+  {
+    "Description": "Falling Block Row",
+    "Filename": "Obj_Chikuwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana & Henchmen [?]",
+    "Filename": "En_Knight",
+    "IsStatic": false
+  },
+  {
+    "Description": "Warp to Trial Entrance",
+    "Filename": "En_Warp_tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mamamu Yan",
+    "Filename": "En_Aob_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Boj_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Boj_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Boj_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Encount4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomber I [?]",
+    "Filename": "En_Bom_Bowl_Man",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shooting Gallery Proprietors [?]",
+    "Filename": "En_Syateki_Man",
+    "IsStatic": false
+  },
+  {
+    "Description": "Icicle",
+    "Filename": "Bg_Icicle",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guay (Shooting Gallery)",
+    "Filename": "En_Syateki_Crow",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Boj_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Thin Woman in Blue Dress [OoT]",
+    "Filename": "En_Cne_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Proprietor's Mother [Early]",
+    "Filename": "En_Bba_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shikashi",
+    "Filename": "En_Bji_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiderweb",
+    "Filename": "Bg_Spdweb",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Mt_tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Odolwa",
+    "Filename": "Boss_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold",
+    "Filename": "Boss_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gyorg",
+    "Filename": "Boss_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wart",
+    "Filename": "Boss_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bio Deku Baba",
+    "Filename": "Boss_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana [?]",
+    "Filename": "Boss_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora",
+    "Filename": "Boss_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy",
+    "Filename": "Bg_Dy_Yoseizo",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Boj_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Sob1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron (Generic) [?]",
+    "Filename": "En_Go",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carnivorous Lilypad",
+    "Filename": "En_Raf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Smoke Plume [Early]",
+    "Filename": "Obj_Funen",
+    "IsStatic": false
+  },
+  {
+    "Description": "Elevator (Deku Palace & Woodfall Temple) [?]",
+    "Filename": "Obj_Raillift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Flower",
+    "Filename": "Bg_Numa_Hana",
+    "IsStatic": false
+  },
+  {
+    "Description": "Potted Plant",
+    "Filename": "Obj_Flowerpot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Log (Horizontal)",
+    "Filename": "Obj_Spinyroll",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boss Remains",
+    "Filename": "Dm_Hina",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wolfos (Shooting Gallery)",
+    "Filename": "En_Syateki_Wf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Pushblock",
+    "Filename": "Obj_Skateblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - [Unknown]",
+    "Filename": "Effect_En_Ice_Block",
+    "IsStatic": false
+  },
+  {
+    "Description": "Frozen Enemy Ice Block",
+    "Filename": "Obj_Iceblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snapper (Mini-Boss)",
+    "Filename": "En_Bigpamet",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple Gears",
+    "Filename": "Bg_Dblue_Movebg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Scrub (Shooting Gallery)",
+    "Filename": "En_Syateki_Dekunuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Elf_Msg3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Frog II [?]",
+    "Filename": "En_Fg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tree Trunk",
+    "Filename": "Dm_Ravine",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Dm_Sa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Chuchu",
+    "Filename": "En_Slime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Desbreko",
+    "Filename": "En_Pr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Spotlight",
+    "Filename": "Obj_Toudai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Town 2D Chimney Backdrop",
+    "Filename": "Obj_Entotu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn Bell",
+    "Filename": "Obj_Bell",
+    "IsStatic": false
+  },
+  {
+    "Description": "Octorok (Shooting Gallery)",
+    "Filename": "En_Syateki_Okuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "West Clock Town Bank Shutter",
+    "Filename": "Obj_Shutter",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Zelda (Cutscenes)",
+    "Filename": "Dm_Zl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Adult Ruto [OoT]",
+    "Filename": "En_Ru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Group of Stray Fairies",
+    "Filename": "En_Elfgrp",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Dm_Tsg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Nejiron",
+    "Filename": "En_Baguo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Log (Vertical)",
+    "Filename": "Obj_Vspinyroll",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani Ranch Chimney Smoke",
+    "Filename": "Obj_Smork",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Test2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kafei",
+    "Filename": "En_Test3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Three-Day Timer",
+    "Filename": "En_Test4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bad Bat",
+    "Filename": "En_Bat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mikau's Grave & Song Pedestals [Early]",
+    "Filename": "En_Sekihi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wizzrobe",
+    "Filename": "En_Wiz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wizzrobe Warp Platform",
+    "Filename": "En_Wiz_Brock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wizzrobe Fire Attack",
+    "Filename": "En_Wiz_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Camera Refocuser",
+    "Filename": "Eff_Change",
+    "IsStatic": false
+  },
+  {
+    "Description": "Elegy Statue Light Beam [?]",
+    "Filename": "Dm_Statue",
+    "IsStatic": false
+  },
+  {
+    "Description": "Circle of Flames",
+    "Filename": "Obj_Fireshield",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ladder",
+    "Filename": "Bg_Ladder",
+    "IsStatic": false
+  },
+  {
+    "Description": "Black & White Boes",
+    "Filename": "En_Mkk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy's Mask & Great Fairy's Sword",
+    "Filename": "Demo_Getitem",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Dnb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boat Cruise Target Spot",
+    "Filename": "En_Dnh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hallucinatory Mad Scrubs",
+    "Filename": "En_Dnk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku King",
+    "Filename": "En_Dnq",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Iron Fence",
+    "Filename": "Bg_Keikoku_Saku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Powder Keg Boulder",
+    "Filename": "Obj_Hugebombiwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Firefly2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Real Bombchu",
+    "Filename": "En_Rat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dripping Water",
+    "Filename": "En_Water_Effect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keaton Grass Cluster",
+    "Filename": "En_Kusa2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Proximity-Activated Fire Wall",
+    "Filename": "Bg_Spout_Fire",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy Healing Beam",
+    "Filename": "En_Dy_Extra",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tingle (Gameplay)",
+    "Filename": "En_Bal",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bank Teller",
+    "Filename": "En_Ginko_Man",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Telescope",
+    "Filename": "En_Warp_Uzu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Drifting Ice Platform",
+    "Filename": "Obj_Driftice",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Guard (Palace Gardens)",
+    "Filename": "En_Look_Nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Mushi2",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Fall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman (Counting Game)",
+    "Filename": "En_Mm3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine Door Shutters",
+    "Filename": "Bg_Crace_Movebg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Butler",
+    "Filename": "En_Dno",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skullfish",
+    "Filename": "En_Pr2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skullfish (Defeated)",
+    "Filename": "En_Prz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Garo Master II [?]",
+    "Filename": "En_Jso2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Flower",
+    "Filename": "Obj_Etcetera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Eyegore",
+    "Filename": "En_Egol",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Metal Mine",
+    "Filename": "Obj_Mine",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Purify",
+    "IsStatic": false
+  },
+  {
+    "Description": "Koume (Gameplay) [?]",
+    "Filename": "En_Tru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kotake (No Broom) [?]",
+    "Filename": "En_Trt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spring Water",
+    "Filename": "En_Test5",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Time Cutscene Effects",
+    "Filename": "En_Test6",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beaver Bros.",
+    "Filename": "En_Az",
+    "IsStatic": false
+  },
+  {
+    "Description": "Eyegore Rubble",
+    "Filename": "En_Estone",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple Central Pillar",
+    "Filename": "Bg_Hakugin_Post",
+    "IsStatic": false
+  },
+  {
+    "Description": "Opening Cutscene Objects",
+    "Filename": "Dm_Opstage",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skull Kid",
+    "Filename": "Dm_Stk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tatl & Tael (Cutscenes) II [?]",
+    "Filename": "Dm_Char00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple Rises Cutscene Objects",
+    "Filename": "Dm_Char01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ocarina of Time & Majora's Mask (Clock Tower Roof) [?]",
+    "Filename": "Dm_Char02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Happy Mask Salesman (Cutscenes)",
+    "Filename": "Dm_Char03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tatl & Tael (Cutscenes) I [?]",
+    "Filename": "Dm_Char04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Masks (Cutscenes)",
+    "Filename": "Dm_Char05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village Cutscene Objects [?]",
+    "Filename": "Dm_Char06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar Stage (Cutscenes)",
+    "Filename": "Dm_Char07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Turtle (Cutscenes) [?]",
+    "Filename": "Dm_Char08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant Bee (Cutscenes)",
+    "Filename": "Dm_Char09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower & Light Beam",
+    "Filename": "Obj_Tokeidai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Monkey",
+    "Filename": "En_Mnk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Eyegore Block",
+    "Filename": "En_Egblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Guard (Palace Entrance) [?]",
+    "Filename": "En_Guard_Nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple Bombable Wall",
+    "Filename": "Bg_Hakugin_Bombwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Doors",
+    "Filename": "Obj_Tokei_Tobira",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple Punchable Pillar Inserts",
+    "Filename": "Bg_Hakugin_Elvpole",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani I [?]",
+    "Filename": "En_Ma4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beaver Race Ring",
+    "Filename": "En_Twig",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe Balloon",
+    "Filename": "En_Po_Fusen",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Door_Etc",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big Octo",
+    "Filename": "En_Bigokuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Arrow Platform",
+    "Filename": "Bg_Icefloe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Transition - [Unknown]",
+    "Filename": "J10_00F4EE70",
+    "IsStatic": false
+  },
+  {
+    "Description": "Transition - [Unknown]",
+    "Filename": "J10_00F4F5D0",
+    "IsStatic": false
+  },
+  {
+    "Description": "Transition - [Unknown]",
+    "Filename": "J10_00F50560",
+    "IsStatic": false
+  },
+  {
+    "Description": "Transition - [Unknown]",
+    "Filename": "J10_00F52250",
+    "IsStatic": false
+  },
+  {
+    "Description": "Transition - [Unknown]",
+    "Filename": "J10_00F52510",
+    "IsStatic": false
+  },
+  {
+    "Description": "Particle - Deku Link's Magic Bubble",
+    "Filename": "Effect_Ss_Sbn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Triforce Elevator",
+    "Filename": "Obj_Ocarinalift",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Time_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Emblem Door",
+    "Filename": "Bg_Open_Shutter",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skull Kid Spotlights",
+    "Filename": "Bg_Open_Spot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Rotating Platform",
+    "Filename": "Bg_Fu_Kaiten",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poured Water",
+    "Filename": "Obj_Aqua",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stray Fairy",
+    "Filename": "En_Elforg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stray Fairy Bubble",
+    "Filename": "En_Elfbub",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Target",
+    "Filename": "En_Fu_Mato",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Basket",
+    "Filename": "En_Fu_Kago",
+    "IsStatic": false
+  },
+  {
+    "Description": "Happy Mask Salesman (Gameplay)",
+    "Filename": "En_Osn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Gear",
+    "Filename": "Bg_Ctower_Gear",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kotake (Broom) [?]",
+    "Filename": "En_Trt2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Roof Door",
+    "Filename": "Obj_Tokei_Step",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lilypad",
+    "Filename": "Bg_Lotus",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snapper (Enemy)",
+    "Filename": "En_Kame",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Game Proximity-Activated Wall",
+    "Filename": "Obj_Takaraya_Wall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Moat",
+    "Filename": "Bg_Fu_Mizu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Business Scrub (Flying) [?]",
+    "Filename": "En_Sellnuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Prison Ivy",
+    "Filename": "Bg_Dkjail_Ivy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lens of Truth Platform",
+    "Filename": "Obj_Visiblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Game Employee",
+    "Filename": "En_Takaraya",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fisherman (Great Bay Village)",
+    "Filename": "En_Tsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Potion Shop Proprietor (Updated) [OoT]",
+    "Filename": "En_Ds2n",
+    "IsStatic": false
+  },
+  {
+    "Description": "Curiosity Shop Proprietor",
+    "Filename": "En_Fsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Tourist Center Guide",
+    "Filename": "En_Shn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Soldier (Gate Guard)",
+    "Filename": "En_Stop_heishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Block",
+    "Filename": "Obj_Bigicicle",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Playground Employee",
+    "Filename": "En_Lift_Nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé",
+    "Filename": "En_Tk",
+    "IsStatic": false
+  },
+  {
+    "Description": "West Clock Town Steps",
+    "Filename": "Bg_Market_Step",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Playground Elevator",
+    "Filename": "Obj_Lupygamelift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Soaring Cutscene Activator",
+    "Filename": "En_Test7",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dissolvable Light Block",
+    "Filename": "Obj_Lightblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Reflectable Ray of Light [?]",
+    "Filename": "Mir_Ray2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dexihand",
+    "Filename": "En_Wdhand",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Playground Rupee",
+    "Filename": "En_Gamelupy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Objects",
+    "Filename": "Bg_Danpei_Movebg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snow-Covered Tree",
+    "Filename": "En_Snowwd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman (Delivering Letters)",
+    "Filename": "En_Pm",
+    "IsStatic": false
+  },
+  {
+    "Description": "2D Music Staff",
+    "Filename": "En_Gakufu",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Elf_Msg4",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Elf_Msg5",
+    "IsStatic": false
+  },
+  {
+    "Description": "Piece of Heart",
+    "Filename": "En_Col_Man",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gibdo (Ikana Well)",
+    "Filename": "En_Talk_Gibud",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant",
+    "Filename": "En_Giant",
+    "IsStatic": false
+  },
+  {
+    "Description": "Large Snowball",
+    "Filename": "Obj_Snowball",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goht",
+    "Filename": "Boss_Hakugin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ghost Hut Proprietor",
+    "Filename": "En_Gb2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Monkey Instrument Prompt",
+    "Filename": "En_Onpuman",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine Gate",
+    "Filename": "Bg_Tobira01",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Tag_Obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Facade",
+    "Filename": "Obj_Dhouse",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gravestone",
+    "Filename": "Obj_Hakaisi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Switch",
+    "Filename": "Bg_Hakugin_Switch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big & Small Eeno",
+    "Filename": "En_Snowman",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "TG_Sw",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe Sisters",
+    "Filename": "En_Po_Sisters",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hiploop",
+    "Filename": "En_Pp",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goht Debris",
+    "Filename": "En_Hakurock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fireworks",
+    "Filename": "En_Hanabi",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Dowsing",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wind Funnel",
+    "Filename": "Obj_Wind",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dog (Doggie Racetrack)",
+    "Filename": "En_Racedog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman",
+    "Filename": "En_Kendo_Js",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain Keeta Race Gatepost",
+    "Filename": "Bg_Botihasira",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Research Lab Fish",
+    "Filename": "En_Fish2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postbox",
+    "Filename": "En_Pst",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe",
+    "Filename": "En_Poh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tent-Shaped Spider Web",
+    "Filename": "Obj_Spidertent",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Egg",
+    "Filename": "En_Zoraegg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zubora",
+    "Filename": "En_Kbt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Darmani's Ghost I [?]",
+    "Filename": "En_Gg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School Practice Log",
+    "Filename": "En_Maruta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Small Snowball",
+    "Filename": "Obj_Snowball2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Darmani's Ghost II [?]",
+    "Filename": "En_Gg2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Darmani's Gravestone",
+    "Filename": "Obj_Ghaka",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Princess",
+    "Filename": "En_Dnp",
+    "IsStatic": false
+  },
+  {
+    "Description": "Biggoron",
+    "Filename": "En_Dai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hot Spring Water",
+    "Filename": "Bg_Goron_Oyu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gabora",
+    "Filename": "En_Kgy",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Invadepoh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Elder's Son",
+    "Filename": "En_Gk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju (Gameplay)",
+    "Filename": "En_An",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant Bee (Gameplay)",
+    "Filename": "En_Bee",
+    "IsStatic": false
+  },
+  {
+    "Description": "Seahorse",
+    "Filename": "En_Ot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deep Python",
+    "Filename": "En_Dragon",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School Gong",
+    "Filename": "Obj_Dora",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big Poe",
+    "Filename": "En_Bigpo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School Wooden Board",
+    "Filename": "Obj_Kendo_Kanban",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow Figurine",
+    "Filename": "Obj_Hariko",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Sth",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Bg_Sinkai_Kabe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Grave Curtain",
+    "Filename": "Bg_Haka_Curtain",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Bombable Wall",
+    "Filename": "Bg_Kin2_Bombwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Fireplace Grate",
+    "Filename": "Bg_Kin2_Fence",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Skull Kid Painting",
+    "Filename": "Bg_Kin2_Picture",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Drawers & Bookshelf",
+    "Filename": "Bg_Kin2_Shelf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Circle of Stalchildren",
+    "Filename": "En_Rail_Skb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Elder",
+    "Filename": "En_Jg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Koume (Boat Cruise) [?]",
+    "Filename": "En_Tru_Mt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia's Cart",
+    "Filename": "Obj_Um",
+    "IsStatic": false
+  },
+  {
+    "Description": "Leever",
+    "Filename": "En_Neo_Reeba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar Chair",
+    "Filename": "Bg_Mbar_Chair",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Bg_Ikana_Block",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Mirror",
+    "Filename": "Bg_Ikana_Mirror",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Rotating Room",
+    "Filename": "Bg_Ikana_Rotaryroom",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple See-Saw",
+    "Filename": "Bg_Dblue_Balance",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple Water Spout",
+    "Filename": "Bg_Dblue_Waterfall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirate [?]",
+    "Filename": "En_Kaizoku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Patrolling Pirate Guard",
+    "Filename": "En_Ge2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani II [?]",
+    "Filename": "En_Ma_Yts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia",
+    "Filename": "En_Ma_Yto",
+    "IsStatic": false
+  },
+  {
+    "Description": "South Clock Town Objects",
+    "Filename": "Obj_Tokei_Turret",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple Elevator",
+    "Filename": "Bg_Dblue_Elevator",
+    "IsStatic": false
+  },
+  {
+    "Description": "Owl Statue",
+    "Filename": "Obj_Warpstone",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mikau",
+    "Filename": "En_Zog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Moon Trial Rotating Platform",
+    "Filename": "Obj_Rotlift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Elder's Drum",
+    "Filename": "Obj_Jg_Gakki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold's Lair Objects [?]",
+    "Filename": "Bg_Inibs_Movebg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora (Land)",
+    "Filename": "En_Zot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fork-Branched Tree",
+    "Filename": "Obj_Tree",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Mesh Elevator",
+    "Filename": "Obj_Y2lift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior Door",
+    "Filename": "Obj_Y2shutter",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Boat",
+    "Filename": "Obj_Boat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Barrel",
+    "Filename": "Obj_Taru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Geyser",
+    "Filename": "Obj_Hunsui",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boat Cruise Target",
+    "Filename": "En_Jc_Mato",
+    "IsStatic": false
+  },
+  {
+    "Description": "Reflectable Ray of Light [?]",
+    "Filename": "Mir_Ray3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Japas",
+    "Filename": "En_Zob",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Elf_Msg6",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Nozoki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Toto",
+    "Filename": "En_Toto",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gibdo (Ikana Canyon)",
+    "Filename": "En_Railgibud",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Proprietor's Mother",
+    "Filename": "En_Baba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sakon",
+    "Filename": "En_Suttari",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tijo",
+    "Filename": "En_Zod",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lottery Shop Kiosk",
+    "Filename": "En_Kujiya",
+    "IsStatic": false
+  },
+  {
+    "Description": "Don Gero",
+    "Filename": "En_Geg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mushroom Scent Cloud",
+    "Filename": "Obj_Kinoko",
+    "IsStatic": false
+  },
+  {
+    "Description": "Palm Tree",
+    "Filename": "Obj_Yasi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swarm of Moths",
+    "Filename": "En_Tanron1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wart's Bubbles",
+    "Filename": "En_Tanron2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gyorg's Fish",
+    "Filename": "En_Tanron3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village Chandelier",
+    "Filename": "Obj_Chan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Evan",
+    "Filename": "En_Zos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron (Goron Shrine & Bomb Shop) [?]",
+    "Filename": "En_S_Goro",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Grandmother (Gameplay)",
+    "Filename": "En_Nb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Jugglers",
+    "Filename": "En_Ja",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Shifting Block",
+    "Filename": "Bg_F40_Block",
+    "IsStatic": false
+  },
+  {
+    "Description": "Elegy Statue Switch",
+    "Filename": "Bg_F40_Switch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Composer Brothers",
+    "Filename": "En_Po_Composer",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guru-Guru",
+    "Filename": "En_Guruguru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sonata of Awakening Effect",
+    "Filename": "Oceff_Wipe5",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shiro",
+    "Filename": "En_Stone_heishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Soaring Effect",
+    "Filename": "Oceff_Wipe6",
+    "IsStatic": false
+  },
+  {
+    "Description": "Business Scrub (Telescope)",
+    "Filename": "En_Scopenuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guay (Observatory Telescope)",
+    "Filename": "En_Scopecrow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Healing Effect",
+    "Filename": "Oceff_Wipe7",
+    "IsStatic": false
+  },
+  {
+    "Description": "Turtle's Tsunami",
+    "Filename": "Eff_Kamejima_Wave",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pamela's Father (Normal)",
+    "Filename": "En_Hg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pamela's Father (Cursed)",
+    "Filename": "En_Hgo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lulu",
+    "Filename": "En_Zov",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Mother (Gameplay)",
+    "Filename": "En_Ah",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Box House Cupboard Doors",
+    "Filename": "Obj_Hgdoor",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Bombable Floor Tile & Wall",
+    "Filename": "Bg_Ikana_Bombwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Light Ray [?]",
+    "Filename": "Bg_Ikana_Ray",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Lattice Door",
+    "Filename": "Bg_Ikana_Shutter",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Grave Bombable Wall",
+    "Filename": "Bg_Haka_Bombwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flat's Tomb",
+    "Filename": "Bg_Haka_Tomb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Large Rotating Green Rupee",
+    "Filename": "En_Sc_Ruppe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sharp's Cave",
+    "Filename": "Bg_Iknv_Doukutu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon Objects",
+    "Filename": "Bg_Iknv_Obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pamela",
+    "Filename": "En_Pamera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hookshot Stump",
+    "Filename": "Obj_HsStump",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Scrub (Sleeping)",
+    "Filename": "En_Hidden_Nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora (Water)",
+    "Filename": "En_Zow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Green Check Spot",
+    "Filename": "En_Talk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Madame Aroma (Gameplay)",
+    "Filename": "En_Al",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mr. Barten",
+    "Filename": "En_Tab",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Bag",
+    "Filename": "En_Nimotsu",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Hit_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guay (Circling Clock Town)",
+    "Filename": "En_Ruppecrow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flock of Seagulls",
+    "Filename": "En_Tanron4",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Tanron5",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swarm of Giant Bees",
+    "Filename": "En_Tanron6",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carpenter (Milk Road)",
+    "Filename": "En_Daiku2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mutoh (Gameplay)",
+    "Filename": "En_Muto",
+    "IsStatic": false
+  },
+  {
+    "Description": "Viscen",
+    "Filename": "En_Baisen",
+    "IsStatic": false
+  },
+  {
+    "Description": "Soldier (Mayor's Residence)",
+    "Filename": "En_Heishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Soldier (Cutscenes) I [?]",
+    "Filename": "En_Demo_heishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor Dotour (Gameplay)",
+    "Filename": "En_Dt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Laundry Pool Bell [?]",
+    "Filename": "En_Cha",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia & Romani's Dinner",
+    "Filename": "Obj_Dinner",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon Fall Effects",
+    "Filename": "Eff_Lastday",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana Punchable Pillar Segments",
+    "Filename": "Bg_Ikana_Dharma",
+    "IsStatic": false
+  },
+  {
+    "Description": "Business Scrub (Burrowed) [?]",
+    "Filename": "En_Akindonuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skull Kid Moon-Summoning Effects [?]",
+    "Filename": "Eff_Stk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Link the Goron",
+    "Filename": "En_Ig",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron (Goron Racetrack)",
+    "Filename": "En_Rg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana & Henchmen's Heads",
+    "Filename": "En_Osk",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Sth2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kamaro",
+    "Filename": "En_Yb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rosa Sisters",
+    "Filename": "En_Rz",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Scopecoin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hand in Toilet",
+    "Filename": "En_Bjt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Jim I [?]",
+    "Filename": "En_Bomjima",
+    "IsStatic": false
+  },
+  {
+    "Description": "Jim II [?]",
+    "Filename": "En_Bomjimb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomber II [?]",
+    "Filename": "En_Bombers",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomber (Hideout Guard)",
+    "Filename": "En_Bombers2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora Balloon (North Clock Town)",
+    "Filename": "En_Bombal",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon's Tear",
+    "Filename": "Obj_Moon_Stone",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Mu_Pict",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana Objects [?]",
+    "Filename": "Bg_Ikninside",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blue Spotlight Effect",
+    "Filename": "Eff_Zoraband",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Track Buildings",
+    "Filename": "Obj_Kepn_Koya",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow Barn Roof (Exterior)",
+    "Filename": "Obj_Usiyane",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Butler's Son",
+    "Filename": "En_Nnh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Metal Portcullis",
+    "Filename": "Obj_Kzsaku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Chateau Romani Delivery Bottle",
+    "Filename": "Obj_Milk_Bin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keaton",
+    "Filename": "En_Kitan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory Bombable Wall",
+    "Filename": "Bg_Astr_Bombwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hot Checkered Ceiling [?]",
+    "Filename": "Bg_Iknin_Susceil",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain Keeta",
+    "Filename": "En_Bsb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Receptionist",
+    "Filename": "En_Recepgirl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Takkuri",
+    "Filename": "En_Thiefbird",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fisherman (Fisherman's Jumping Game)",
+    "Filename": "En_Jgame_Tsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Torch Stand (Fisherman's Jumping Game)",
+    "Filename": "Obj_Jgame_Light",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stockpot Inn Window",
+    "Filename": "Obj_Yado",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon Curse Lifted Effects",
+    "Filename": "Demo_Syoten",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon (Cutscenes)",
+    "Filename": "Demo_Moonend",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rainbow Hookshot Pillar",
+    "Filename": "Bg_Lbfshot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Link Moon Trial Bombable & Climbable Walls",
+    "Filename": "Bg_Last_Bwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju (Wedding Dress)",
+    "Filename": "En_And",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Invadepoh_Demo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine & Snowhead Temple Elevator [?]",
+    "Filename": "Obj_Danpeilift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Falling Moon",
+    "Filename": "En_Fall2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Madame Aroma (Cutscenes)",
+    "Filename": "Dm_Al",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju Cutscene Animations",
+    "Filename": "Dm_An",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Mother (Cutscenes)",
+    "Filename": "Dm_Ah",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Grandmother (Cutscenes)",
+    "Filename": "Dm_Nb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wedding Dress Mannequin",
+    "Filename": "En_Drs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor Dotour (Cutscenes)",
+    "Filename": "En_Ending_Hero",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tingle (Cutscenes)",
+    "Filename": "Dm_Bal",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tingle Confetti",
+    "Filename": "En_Paper",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stalchild (Oceanside Spider House)",
+    "Filename": "En_Hint_Skb",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Dm_Tag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Brown Bird",
+    "Filename": "En_Bh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Viscen (Cutscenes)",
+    "Filename": "En_Ending_Hero2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mutoh (Cutscenes)",
+    "Filename": "En_Ending_Hero3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Soldier (Cutscenes) II [?]",
+    "Filename": "En_Ending_Hero4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carpenter (Cutscenes)",
+    "Filename": "En_Ending_Hero5",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Ending_Hero6",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Dm_Gm",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "Obj_Swprize",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "En_Invisible_Ruppe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Epilogue Cutscene Objects",
+    "Filename": "Obj_Ending",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Proprietor",
+    "Filename": "En_Rsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Various Gameplay Objects",
+    "Filename": "gameplay_keep",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "gameplay_feild_keep",
+    "IsStatic": false
+  },
+  {
+    "Description": "Various Dungeon Objects",
+    "Filename": "gameplay_dangeon_keep",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "gameplay_object_exchange_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fierce Deity Link",
+    "Filename": "object_link_boy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Link",
+    "Filename": "object_link_child",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Link",
+    "Filename": "object_link_goron",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Link",
+    "Filename": "object_link_zora",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Link",
+    "Filename": "object_link_nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keaton Mask (Field Model)",
+    "Filename": "object_mask_ki_tan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bunny Hood (Field Model)",
+    "Filename": "object_mask_rabit",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain's Hat (Field Model)",
+    "Filename": "object_mask_skj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mask of Truth (Field Model)",
+    "Filename": "object_mask_truth",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gibdo Mask (Field Model)",
+    "Filename": "object_mask_gibudo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Garo's Mask (Field Model)",
+    "Filename": "object_mask_json",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kafei's Mask (Field Model)",
+    "Filename": "object_mask_kerfay",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy Mask (Field Model)",
+    "Filename": "object_mask_bigelf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant's Mask (Field Model)",
+    "Filename": "object_mask_kyojin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani's Mask (Field Model)",
+    "Filename": "object_mask_romerny",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman's Hat (Field Model)",
+    "Filename": "object_mask_posthat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Circus Leader's Mask (Field Model)",
+    "Filename": "object_mask_zacho",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Mask (Field Model)",
+    "Filename": "object_mask_stone",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bremen Mask (Field Model)",
+    "Filename": "object_mask_bree",
+    "IsStatic": false
+  },
+  {
+    "Description": "Don Gero's Mask (Field Model)",
+    "Filename": "object_mask_gero",
+    "IsStatic": false
+  },
+  {
+    "Description": "All-Night Mask (Field Model)",
+    "Filename": "object_mask_yofukasi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Couple's Mask (Field Model)",
+    "Filename": "object_mask_meoto",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kamaro's Mask (Field Model)",
+    "Filename": "object_mask_dancer",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blast Mask (Field Model)",
+    "Filename": "object_mask_bakuretu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mask of Scents (Field Model)",
+    "Filename": "object_mask_bu_san",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Transformation Assets",
+    "Filename": "object_mask_goron",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Transformation Assets",
+    "Filename": "object_mask_zora",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Transformation Assets",
+    "Filename": "object_mask_nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fierce Deity Transformation Assets",
+    "Filename": "object_mask_boy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest & Glow",
+    "Filename": "object_box",
+    "IsStatic": false
+  },
+  {
+    "Description": "Octorok",
+    "Filename": "object_okuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wallmaster & Floormaster",
+    "Filename": "object_wallmaster",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy & Healing Beam",
+    "Filename": "object_dy_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keese",
+    "Filename": "object_firefly",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dodongo",
+    "Filename": "object_dodongo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco",
+    "Filename": "object_niw",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tektite",
+    "Filename": "object_tite",
+    "IsStatic": false
+  },
+  {
+    "Description": "Peahat",
+    "Filename": "object_ph",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dinolfos",
+    "Filename": "object_dinofos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Zelda [OoT]",
+    "Filename": "object_zl1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shabom & Stray Fairy Bubble",
+    "Filename": "object_bubble",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kafei",
+    "Filename": "object_test3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Death Armos",
+    "Filename": "object_famos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skulltula / Skullwalltula / Gold Skulltula Token",
+    "Filename": "object_st",
+    "IsStatic": false
+  },
+  {
+    "Description": "Takkuri",
+    "Filename": "object_thiefbird",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Flower",
+    "Filename": "object_bombf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Armos & Armos Statue",
+    "Filename": "object_am",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Baba / Wilted Deku Baba / Mini Baba",
+    "Filename": "object_dekubaba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blue Warp",
+    "Filename": "object_warp1",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_b_heart",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Scrub",
+    "Filename": "object_dekunuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Red & Blue Bubble",
+    "Filename": "object_bb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gomess & Bats",
+    "Filename": "object_death",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flagpole",
+    "Filename": "object_hata",
+    "IsStatic": false
+  },
+  {
+    "Description": "Trees & Bushes",
+    "Filename": "object_wood02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blade Trap",
+    "Filename": "object_trap",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beamos",
+    "Filename": "object_vm",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rock & Beam of Light [OoT]",
+    "Filename": "object_efc_star_field",
+    "IsStatic": false
+  },
+  {
+    "Description": "Redead & Gibdo",
+    "Filename": "object_rd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village Ladder / Chimney Smoke / Embers",
+    "Filename": "object_yukimura_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Golden Gauntlets Rock",
+    "Filename": "object_heavy_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Epona",
+    "Filename": "object_horse_link_child",
+    "IsStatic": false
+  },
+  {
+    "Description": "Torch Stand",
+    "Filename": "object_syokudai",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_efc_tw",
+    "IsStatic": false
+  },
+  {
+    "Description": "Small Key (Get Item)",
+    "Filename": "object_gi_key",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mirror Shield Light Ray [?]",
+    "Filename": "object_mir_ray",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Gear & Helix Path",
+    "Filename": "object_ctower_rot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boss Doors",
+    "Filename": "object_bdoor",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shellblade",
+    "Filename": "object_sb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Notes (Get Item)",
+    "Filename": "object_gi_melody",
+    "IsStatic": false
+  },
+  {
+    "Description": "Recovery Heart (Get Item)",
+    "Filename": "object_gi_heart",
+    "IsStatic": false
+  },
+  {
+    "Description": "Compass (Get Item)",
+    "Filename": "object_gi_compass",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boss Key (Get Item)",
+    "Filename": "object_gi_bosskey",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Nuts (Get Item)",
+    "Filename": "object_gi_nuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Heart Container (Boss Lairs)",
+    "Filename": "object_gi_hearts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Quivers (Get Item)",
+    "Filename": "object_gi_arrowcase",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Bags (Get Item)",
+    "Filename": "object_gi_bombpouch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Bros.",
+    "Filename": "object_in",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_os_anime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Empty Bottle (Get Item)",
+    "Filename": "object_gi_bottle",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Stick (Get Item)",
+    "Filename": "object_gi_stick",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dungeon Map & Stone of Agony (Get Item)",
+    "Filename": "object_gi_map",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron (Generic) / Medigoron / Powder Keg Shop Goron / Don Gero [?]",
+    "Filename": "object_oF1d_map",
+    "IsStatic": false
+  },
+  {
+    "Description": "Adult Ruto [OoT]",
+    "Filename": "object_ru2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Jars (Get Item)",
+    "Filename": "object_gi_magicpot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb (Get Item)",
+    "Filename": "object_gi_bomb_1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia",
+    "Filename": "object_ma2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wallets (Get Item)",
+    "Filename": "object_gi_purse",
+    "IsStatic": false
+  },
+  {
+    "Description": "Like Like",
+    "Filename": "object_rr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Arrow Bundles (Get Item)",
+    "Filename": "object_gi_arrow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bombchu (Get Item)",
+    "Filename": "object_gi_bomb_2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hero's Shield (Get Item)",
+    "Filename": "object_gi_shield_2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hookshot (Get Item)",
+    "Filename": "object_gi_hookshot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ocarina of Time (Get Item)",
+    "Filename": "object_gi_ocarina",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk (Get Item)",
+    "Filename": "object_gi_milk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani",
+    "Filename": "object_ma1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Metal Mine",
+    "Filename": "object_ny",
+    "IsStatic": false
+  },
+  {
+    "Description": "Frog",
+    "Filename": "object_fr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hero's Bow (Get Item)",
+    "Filename": "object_gi_bow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lens of Truth (Get Item)",
+    "Filename": "object_gi_glasses",
+    "IsStatic": false
+  },
+  {
+    "Description": "Red / Blue / Green Potion (Get Item)",
+    "Filename": "object_gi_liquid",
+    "IsStatic": false
+  },
+  {
+    "Description": "Part-Timer",
+    "Filename": "object_ani",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mirror Shield (Get Item)",
+    "Filename": "object_gi_shield_3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Bean (Get Item)",
+    "Filename": "object_gi_bean",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fish (Get Item)",
+    "Filename": "object_gi_fish",
+    "IsStatic": false
+  },
+  {
+    "Description": "Biggoron's Sword (Get Item)",
+    "Filename": "object_gi_longsword",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora",
+    "Filename": "object_zo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Horse Jumping Fence",
+    "Filename": "object_umajump",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_mastergolon",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_masterzoora",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mamamu Yan",
+    "Filename": "object_aob",
+    "IsStatic": false
+  },
+  {
+    "Description": "Iron Knuckle",
+    "Filename": "object_ik",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bearded Man [OoT]",
+    "Filename": "object_ahg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Thin Woman in Blue Dress [OoT]",
+    "Filename": "object_cne",
+    "IsStatic": false
+  },
+  {
+    "Description": "Shikashi",
+    "Filename": "object_bji",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Proprietor's Mother",
+    "Filename": "object_bba",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju",
+    "Filename": "object_an1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bank Teller / Jugglers / Sakon / Bomb Shop Bag",
+    "Filename": "object_boj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Freezard",
+    "Filename": "object_fz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carpenter Boss's Wife [OoT]",
+    "Filename": "object_bob",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirate Lieutenant",
+    "Filename": "object_ge1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mini-Game Point Textures",
+    "Filename": "object_yabusame_point",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Hookshot Pillar",
+    "Filename": "object_d_hsblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Elevator & Falling Block Row",
+    "Filename": "object_d_lift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Bean Plant",
+    "Filename": "object_mamenoki",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowball & Rolling Boulder",
+    "Filename": "object_goroiwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mutoh",
+    "Filename": "object_toryo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carpenter",
+    "Filename": "object_daiku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco Chick",
+    "Filename": "object_nwc",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "object_gm",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Bean Seller",
+    "Filename": "object_ms",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grog",
+    "Filename": "object_hs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sun Switch",
+    "Filename": "object_lightswitch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grass",
+    "Filename": "object_kusa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pot",
+    "Filename": "object_tsubo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Square Sign",
+    "Filename": "object_kanban",
+    "IsStatic": false
+  },
+  {
+    "Description": "Owl",
+    "Filename": "object_owl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Scientist",
+    "Filename": "object_mk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guru-Guru",
+    "Filename": "object_fu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keaton Mask  (Get Item)",
+    "Filename": "object_gi_ki_tan_mask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain's Hat (Get Item)",
+    "Filename": "object_gi_mask18",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bunny Hood (Get Item)",
+    "Filename": "object_gi_rabit_mask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mask of Truth  (Get Item)",
+    "Filename": "object_gi_truth_mask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Water Spout",
+    "Filename": "object_stream",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman",
+    "Filename": "object_mm",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman",
+    "Filename": "object_js",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bombers & Jim",
+    "Filename": "object_cs",
+    "IsStatic": false
+  },
+  {
+    "Description": "SOLD OUT (Get Item)",
+    "Filename": "object_gi_soldout",
+    "IsStatic": false
+  },
+  {
+    "Description": "Title Logo",
+    "Filename": "object_mag",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Mask (Get Item)",
+    "Filename": "object_gi_golonmask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Mask (Get Item)",
+    "Filename": "object_gi_zoramask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pierre",
+    "Filename": "object_ka",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ganon's Tower Gate [OoT]",
+    "Filename": "object_zg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fire / Ice / Light Arrows (Get Item)",
+    "Filename": "object_gi_m_arrow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Potion Shop Proprietor [OoT]",
+    "Filename": "object_ds2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fishing Pond & Proprietor [OoT]",
+    "Filename": "object_fish",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gold Skulltula Token (Get Item)",
+    "Filename": "object_gi_sutaru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cursed Skulltula Man",
+    "Filename": "object_ssh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gekko (Mini-Boss) / Mad Jelly / Droplets",
+    "Filename": "object_bigslime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Game Employee & Mayor's Receptionist",
+    "Filename": "object_bg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bombable Rock & Powder Keg Boulder",
+    "Filename": "object_bombiwa",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mad Scrub (Sleeping)",
+    "Filename": "object_hintnuts",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop Proprietor",
+    "Filename": "object_rs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Patrolling Pirate Guard",
+    "Filename": "object_gla",
+    "IsStatic": false
+  },
+  {
+    "Description": "Aveil",
+    "Filename": "object_geldb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dog",
+    "Filename": "object_dog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Crate (Large)",
+    "Filename": "object_kibako2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Guard (Royal Chamber)",
+    "Filename": "object_dns",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Guard [?]",
+    "Filename": "object_dnk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bug (Get Item)",
+    "Filename": "object_gi_insect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe Soul (Get Item)",
+    "Filename": "object_gi_ghost",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Spirit (Get Item)",
+    "Filename": "object_gi_soul",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Elevators [Early] / Platforms [Early] / Shifting Blocks",
+    "Filename": "object_f40_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rupees (Get Item)",
+    "Filename": "object_gi_rupy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Composer Brothers",
+    "Filename": "object_po_composer",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling",
+    "Filename": "object_mu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wolfos",
+    "Filename": "object_wf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stalchild",
+    "Filename": "object_skb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gossip Stone",
+    "Filename": "object_gs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ghost Hut Proprietor",
+    "Filename": "object_ps",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow Barn Roof (Interior)",
+    "Filename": "object_omoya_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Guay",
+    "Filename": "object_crow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow",
+    "Filename": "object_cow",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kokiri Sword (Get Item)",
+    "Filename": "object_gi_sword_1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Child Zelda (Cutscenes)",
+    "Filename": "object_zl4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dragonfly",
+    "Filename": "object_grasshopper",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bumper",
+    "Filename": "object_boyo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Proximity-Activated Fire Wall",
+    "Filename": "object_fwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Garo Master",
+    "Filename": "object_jso",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana & Henchmen",
+    "Filename": "object_knight",
+    "IsStatic": false
+  },
+  {
+    "Description": "Icicle",
+    "Filename": "object_icicle",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiderweb",
+    "Filename": "object_spdweb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Odolwa",
+    "Filename": "object_boss01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold [?]",
+    "Filename": "object_boss02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gyorg & Fish",
+    "Filename": "object_boss03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wart & Bubbles",
+    "Filename": "object_boss04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bio Deku Baba",
+    "Filename": "object_boss05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora",
+    "Filename": "object_boss07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Carnivorous Lilypad",
+    "Filename": "object_raf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Smoke Plume [Early]",
+    "Filename": "object_funen",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_raillift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Flower",
+    "Filename": "object_numa_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Potted Plant",
+    "Filename": "object_flowerpot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Spiked Log",
+    "Filename": "object_spinyroll",
+    "IsStatic": false
+  },
+  {
+    "Description": "Frozen Enemy Ice Block",
+    "Filename": "object_ice_block",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tree Trunk & Opening Cutscene Objects [?]",
+    "Filename": "object_keikoku_demo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Chuchu",
+    "Filename": "object_slime",
+    "IsStatic": false
+  },
+  {
+    "Description": "Desbreko & Skullfish",
+    "Filename": "object_pr",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn Bell",
+    "Filename": "object_f52_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Spotlight / Romani Ranch Chimney Smoke / Clock Town 2D Chimney Backdrop / West Clock Town Bank Shutter",
+    "Filename": "object_f53_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wooden Crate (Small)",
+    "Filename": "object_kibako",
+    "IsStatic": false
+  },
+  {
+    "Description": "Owl Statue",
+    "Filename": "object_sek",
+    "IsStatic": false
+  },
+  {
+    "Description": "Nejiron",
+    "Filename": "object_gmo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bad Bat",
+    "Filename": "object_bat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Triforce Song Pedestal",
+    "Filename": "object_sekihil",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Song Pedestal",
+    "Filename": "object_sekihig",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kokiri Song Pedestal",
+    "Filename": "object_sekihin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Song of Soaring Pedestal",
+    "Filename": "object_sekihiz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wizzrobe / Warp Platform / Fire Attack",
+    "Filename": "object_wiz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ladder",
+    "Filename": "object_ladder",
+    "IsStatic": false
+  },
+  {
+    "Description": "Black & White Boe",
+    "Filename": "object_mkk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fountain Water / Spiked Iron Fence / Field Volcano Backdrop",
+    "Filename": "object_keikoku_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boat Cruise Canoe",
+    "Filename": "object_sichitai_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_dekucity_ana_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Real Bombchu",
+    "Filename": "object_rat",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dripping Water",
+    "Filename": "object_water_effect",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple Gears / See-Saw / Water Spout / Elevator",
+    "Filename": "object_dblue_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tingle & Confetti",
+    "Filename": "object_bal",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Telescope",
+    "Filename": "object_warp_uzu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Drifting Ice Platform",
+    "Filename": "object_driftice",
+    "IsStatic": false
+  },
+  {
+    "Description": "Falling Moon",
+    "Filename": "object_fall",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_hanareyama_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine Door Shutters",
+    "Filename": "object_crace_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku King",
+    "Filename": "object_dnq",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower & Light Beam",
+    "Filename": "object_obj_tokeidai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Eyegore / Rubble / Block",
+    "Filename": "object_eg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Koume & Broom",
+    "Filename": "object_tru",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kotake & Broom",
+    "Filename": "object_trt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple Central Pillar / Bombable Wall / Punchable Pillar Inserts",
+    "Filename": "object_hakugin_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_horse_game_check",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skull Kid / Flute / Ocarina / Link Mask / Majora's Mask",
+    "Filename": "object_stk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Monkey",
+    "Filename": "object_mnk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Red Potion (Get Item)",
+    "Filename": "object_gi_bottle_red",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Doors",
+    "Filename": "object_tokei_tobira",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beaver Bros.",
+    "Filename": "object_az",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beaver Race Ring",
+    "Filename": "object_twig",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Palace Water & Swamp Volcano Backdrop",
+    "Filename": "object_dekucity_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe Balloon",
+    "Filename": "object_po_fusen",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Race Magic Pot",
+    "Filename": "object_racetsubo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Donkey",
+    "Filename": "object_ha",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big Octo",
+    "Filename": "object_bigokuta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Emblem Door & Skull Kid Spotlights",
+    "Filename": "object_open_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Rotating Platform & Moat",
+    "Filename": "object_fu_kaiten",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop Target & Basket",
+    "Filename": "object_fu_mato",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple Rises Cutscene Objects [?]",
+    "Filename": "object_mtoride",
+    "IsStatic": false
+  },
+  {
+    "Description": "Happy Mask Salesman",
+    "Filename": "object_osn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Roof Door",
+    "Filename": "object_tokei_step",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lilypad",
+    "Filename": "object_lotus",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snapper",
+    "Filename": "object_tl",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Prison Ivy",
+    "Filename": "object_dkjail_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lens of Truth Platform",
+    "Filename": "object_visiblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fisherman",
+    "Filename": "object_tsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Potion Shop Proprietor (Updated) [OoT]",
+    "Filename": "object_ds2n",
+    "IsStatic": false
+  },
+  {
+    "Description": "Curiosity Shop Proprietor",
+    "Filename": "object_fsn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Tourist Center Guide & Shooting Gallery Proprietors",
+    "Filename": "object_shn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Block",
+    "Filename": "object_bigicicle",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Zora Egg (Get Item)",
+    "Filename": "object_gi_bottle_15",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé",
+    "Filename": "object_tk",
+    "IsStatic": false
+  },
+  {
+    "Description": "West Clock Town Steps",
+    "Filename": "object_market_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon's Tear (Get Item)",
+    "Filename": "object_gi_reserve00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Title Deeds (Get Item)",
+    "Filename": "object_gi_reserve01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dissolvable Light Block",
+    "Filename": "object_lightblock",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Game Proximity-Activated Wall",
+    "Filename": "object_takaraya_objects",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dexihand",
+    "Filename": "object_wdhand",
+    "IsStatic": false
+  },
+  {
+    "Description": "Soldier",
+    "Filename": "object_sdn",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snow-Covered Tree",
+    "Filename": "object_snowwd",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant",
+    "Filename": "object_giant",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beehive",
+    "Filename": "object_comb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Orange Graveyard Flower",
+    "Filename": "object_hana",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goht & Debris",
+    "Filename": "object_boss_hakugin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ladder & Stone Wall",
+    "Filename": "object_meganeana_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Mask (Get Item)",
+    "Filename": "object_gi_nutsmask",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_stk2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine Gate",
+    "Filename": "object_spot11_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Stairs",
+    "Filename": "object_danpei_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House Facade",
+    "Filename": "object_dhouse",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gravestone",
+    "Filename": "object_hakaisi",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe",
+    "Filename": "object_po",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big & Small Eeno",
+    "Filename": "object_snowman",
+    "IsStatic": false
+  },
+  {
+    "Description": "Poe Sisters",
+    "Filename": "object_po_sisters",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hiploop",
+    "Filename": "object_pp",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Switch",
+    "Filename": "object_goronswitch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tatl & Tael (Cutscenes)",
+    "Filename": "object_delf",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain Keeta Race Gatepost",
+    "Filename": "object_botihasira",
+    "IsStatic": false
+  },
+  {
+    "Description": "Powder Keg (Get Item)",
+    "Filename": "object_gi_bigbomb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postbox",
+    "Filename": "object_pst",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boss Remains",
+    "Filename": "object_bsmask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tent-Shaped Spider Web",
+    "Filename": "object_spidertent",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Egg",
+    "Filename": "object_zoraegg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zubora",
+    "Filename": "object_kbt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Darmani's Ghost",
+    "Filename": "object_gg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School Practice Log",
+    "Filename": "object_maruta",
+    "IsStatic": false
+  },
+  {
+    "Description": "Darmani's Gravestone",
+    "Filename": "object_ghaka",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hot Spring Water",
+    "Filename": "object_oyu",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Princess",
+    "Filename": "object_dnp",
+    "IsStatic": false
+  },
+  {
+    "Description": "Biggoron & Link the Goron",
+    "Filename": "object_dai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gabora",
+    "Filename": "object_kgy",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Research Lab Fish",
+    "Filename": "object_fb",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_taisou",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Elder's Son",
+    "Filename": "object_gk",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Grave Curtain / Bombable Wall / Flat's Tomb",
+    "Filename": "object_haka_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Business Scrub & Deku Scrub Playground Employee",
+    "Filename": "object_dnt",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_yukiyama",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ice Arrow Platform",
+    "Filename": "object_icefloe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gold Dust (Get Item)",
+    "Filename": "object_gi_gold_dust",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Gold Dust (Get Item)",
+    "Filename": "object_gi_bottle_16",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Hylian Loach (Get Item)",
+    "Filename": "object_gi_bottle_22",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant Bee",
+    "Filename": "object_bee",
+    "IsStatic": false
+  },
+  {
+    "Description": "Seahorse",
+    "Filename": "object_ot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deep Python",
+    "Filename": "object_utubo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School Gong & Wooden Board",
+    "Filename": "object_dora",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hylian Loach (Get Item)",
+    "Filename": "object_gi_loach",
+    "IsStatic": false
+  },
+  {
+    "Description": "Seahorse (Get Item)",
+    "Filename": "object_gi_seahorse",
+    "IsStatic": false
+  },
+  {
+    "Description": "Big Poe",
+    "Filename": "object_bigpo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow Figurine",
+    "Filename": "object_hariko",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Butler",
+    "Filename": "object_dno",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_sinkai_kabe",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Bombable Wall / Fireplace Grate / Skull Kid Painting / Drawers & Bookshelf",
+    "Filename": "object_kin2_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rock",
+    "Filename": "object_ishi",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_hakugin_demo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Elder & Drum",
+    "Filename": "object_jg",
+    "IsStatic": false
+  },
+  {
+    "Description": "Razor Sword (Get Item)",
+    "Filename": "object_gi_sword_2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gilded Sword (Get Item)",
+    "Filename": "object_gi_sword_3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy's Sword (Get Item)",
+    "Filename": "object_gi_sword_4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia's Cart",
+    "Filename": "object_um",
+    "IsStatic": false
+  },
+  {
+    "Description": "Leever",
+    "Filename": "object_rb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar Chair",
+    "Filename": "object_mbar_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple Mirror / Rotating Room / Bombable Floor Tile & Wall / Light Ray [?] / Lattice Door / Ancient Castle of Ikana Punchable Pillar Segments",
+    "Filename": "object_ikana_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_kz",
+    "IsStatic": false
+  },
+  {
+    "Description": "String of Flags & Carnival Platform",
+    "Filename": "object_tokei_turret",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mikau / Guitar / Grave [?]",
+    "Filename": "object_zog",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Moon Trial Rotating Platform",
+    "Filename": "object_rotlift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman's Hat / Bag / Closet Curtain",
+    "Filename": "object_posthouse_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Garo's Mask (Get Item)",
+    "Filename": "object_gi_mask09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Fairy Mask (Get Item)",
+    "Filename": "object_gi_mask14",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gibdo Mask (Get Item)",
+    "Filename": "object_gi_mask15",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold's Lair Objects [?]",
+    "Filename": "object_inibs_object",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fork-Branched Tree",
+    "Filename": "object_tree",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Mesh Elevator / Interior Door / Boat",
+    "Filename": "object_kaizoku_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Room Key (Get Item)",
+    "Filename": "object_gi_reserve_b_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Letter to Kafei (Get Item)",
+    "Filename": "object_gi_reserve_c_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Japas",
+    "Filename": "object_zob",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar Stage (Cutscenes)",
+    "Filename": "object_milkbar",
+    "IsStatic": false
+  },
+  {
+    "Description": "Masks (Cutscenes)",
+    "Filename": "object_dmask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pendant of Memories (Get Item)",
+    "Filename": "object_gi_reserve_c_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tijo",
+    "Filename": "object_zod",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Whirlwind",
+    "Filename": "object_kumo30",
+    "IsStatic": false
+  },
+  {
+    "Description": "Palm Tree",
+    "Filename": "object_obj_yasi",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "object_tanron1",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_tanron2",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_tanron3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Mushroom (Get Item)",
+    "Filename": "object_gi_magicmushroom",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine Chandelier",
+    "Filename": "object_obj_chan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani's Mask (Get Item)",
+    "Filename": "object_gi_mask10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Evan",
+    "Filename": "object_zos",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Umbrella",
+    "Filename": "object_an2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Broom",
+    "Filename": "object_an3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Elegy Statue Switch",
+    "Filename": "object_f40_switch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon",
+    "Filename": "object_lodmoon",
+    "IsStatic": false
+  },
+  {
+    "Description": "Boat Cruise Target Spot",
+    "Filename": "object_tro",
+    "IsStatic": false
+  },
+  {
+    "Description": "Postman's Hat (Get Item)",
+    "Filename": "object_gi_mask12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giant's Mask (Get Item)",
+    "Filename": "object_gi_mask23",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Chateau Romani (Get Item)",
+    "Filename": "object_gi_bottle_21",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pictograph Box (Get Item)",
+    "Filename": "object_gi_camera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Turtle & Tsunami",
+    "Filename": "object_kamejima",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Grandmother",
+    "Filename": "object_nb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pamela's Father",
+    "Filename": "object_harfgibud",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lulu",
+    "Filename": "object_zov",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju's Mother",
+    "Filename": "object_ah",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Box House Cupboard Doors",
+    "Filename": "object_hgdoor",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory & Marine Research Lab Door",
+    "Filename": "object_dor01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall Interior Door",
+    "Filename": "object_dor02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Tourist Center & Swamp Shooting Gallery Door",
+    "Filename": "object_dor03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Hags' Potion Shop Door",
+    "Filename": "object_dor04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Link Moon Trial Bombable Wall / Climbable Wall / Door",
+    "Filename": "object_last_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well Interior Door",
+    "Filename": "object_redead_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana Objects [?]",
+    "Filename": "object_ikninside_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sharp's Cave & Ikana Canyon Objects [?]",
+    "Filename": "object_iknv_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pamela",
+    "Filename": "object_pamera",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hookshot Stump",
+    "Filename": "object_hsstump",
+    "IsStatic": false
+  },
+  {
+    "Description": "Toto",
+    "Filename": "object_zm",
+    "IsStatic": false
+  },
+  {
+    "Description": "Madame Aroma",
+    "Filename": "object_al",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mr. Barten",
+    "Filename": "object_tab",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sakon's Hideout Objects [?]",
+    "Filename": "object_secom_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor Dotour",
+    "Filename": "object_dt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fierce Deity Mask (Get Item)",
+    "Filename": "object_gi_mask03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Laundry Pool Bell [?]",
+    "Filename": "object_cha",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cremia & Romani's Dinner",
+    "Filename": "object_obj_dinner",
+    "IsStatic": false
+  },
+  {
+    "Description": "Letter to Mama (Get Item)",
+    "Filename": "object_gi_reserve_b_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon Fall Effects",
+    "Filename": "object_lastday",
+    "IsStatic": false
+  },
+  {
+    "Description": "Viscen",
+    "Filename": "object_bai",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana & Henchmen's Heads",
+    "Filename": "object_ikn_demo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tingle's Map (Get Item)",
+    "Filename": "object_gi_fieldmap",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_big_fwall",
+    "IsStatic": false
+  },
+  {
+    "Description": "Geyser",
+    "Filename": "object_hunsui",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ghost Alien",
+    "Filename": "object_uch",
+    "IsStatic": false
+  },
+  {
+    "Description": "Flock of Seagulls",
+    "Filename": "object_tanron4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swarm of Giant Bees",
+    "Filename": "object_tanron5",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman",
+    "Filename": "object_in2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kamaro",
+    "Filename": "object_yb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rosa Sisters",
+    "Filename": "object_rz",
+    "IsStatic": false
+  },
+  {
+    "Description": "Hand in Toilet",
+    "Filename": "object_bjt",
+    "IsStatic": false
+  },
+  {
+    "Description": "Barrel",
+    "Filename": "object_taru",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_moonston",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomber's Notebook (Get Item)",
+    "Filename": "object_gi_schedule",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Mask (Get Item)",
+    "Filename": "object_gi_stonemask",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blue Spotlight Effect",
+    "Filename": "object_zoraband",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Track Buildings",
+    "Filename": "object_kepn_koya",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cow Barn Roof (Exterior)",
+    "Filename": "object_obj_usiyane",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kafei's Mask (Get Item)",
+    "Filename": "object_gi_mask05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Circus Leader's Mask (Get Item)",
+    "Filename": "object_gi_mask11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bremen Mask (Get Item)",
+    "Filename": "object_gi_mask20",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Butler's Son",
+    "Filename": "object_nnh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Metal Portcullis",
+    "Filename": "object_kzsaku",
+    "IsStatic": false
+  },
+  {
+    "Description": "Chateau Romani Delivery Bottle",
+    "Filename": "object_obj_milk_bin",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine Interior Door",
+    "Filename": "object_random_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lottery Shop Kiosk",
+    "Filename": "object_kujiya",
+    "IsStatic": false
+  },
+  {
+    "Description": "Keaton",
+    "Filename": "object_kitan",
+    "IsStatic": false
+  },
+  {
+    "Description": "All-Night Mask (Get Item)",
+    "Filename": "object_gi_mask06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Don Gero's Mask (Get Item)",
+    "Filename": "object_gi_mask16",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory Bombable Wall",
+    "Filename": "object_astr_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Captain Keeta",
+    "Filename": "object_bsb",
+    "IsStatic": false
+  },
+  {
+    "Description": "Falling Moon",
+    "Filename": "object_fall2",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_sth",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sun Mask (Get Item)",
+    "Filename": "object_gi_mssa",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_smtower",
+    "IsStatic": false
+  },
+  {
+    "Description": "Blast Mask (Get Item)",
+    "Filename": "object_gi_mask21",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stockpot Inn Window",
+    "Filename": "object_yado_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon Curse Lifted Effects",
+    "Filename": "object_syoten",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon (Cutscenes)",
+    "Filename": "object_moonend",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon Child",
+    "Filename": "object_ob",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bottled Fairy (Get Item)",
+    "Filename": "object_gi_bottle_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju (Wedding Dress)",
+    "Filename": "object_and",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "object_obj_danpeilift",
+    "IsStatic": false
+  },
+  {
+    "Description": "Wedding Dress Mannequin",
+    "Filename": "object_drs",
+    "IsStatic": false
+  },
+  {
+    "Description": "Moon Mask",
+    "Filename": "object_msmo",
+    "IsStatic": false
+  },
+  {
+    "Description": "Anju Animations [?]",
+    "Filename": "object_an4",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lottery Shop / Curiosity Shop / Mayor's Residence Door",
+    "Filename": "object_wdor01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Trading Post & Post Office Door",
+    "Filename": "object_wdor02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stockpot Inn & Swordsman's School Door",
+    "Filename": "object_wdor03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar Door",
+    "Filename": "object_wdor04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Box House Door",
+    "Filename": "object_wdor05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Skull Kid Animation File [?]",
+    "Filename": "object_stk3",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House Interior Door",
+    "Filename": "object_kinsta1_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House Interior Door",
+    "Filename": "object_kinsta2_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Brown Bird",
+    "Filename": "object_bh",
+    "IsStatic": false
+  },
+  {
+    "Description": "Kamaro's Mask (Get Item)",
+    "Filename": "object_gi_mask17",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mask of Scents (Get Item)",
+    "Filename": "object_gi_mask22",
+    "IsStatic": false
+  },
+  {
+    "Description": "Rainbow Hookshot Pillar",
+    "Filename": "object_lbfshot",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora Balloon",
+    "Filename": "object_fusen",
+    "IsStatic": false
+  },
+  {
+    "Description": "Epilogue Cutscene Objects [?]",
+    "Filename": "object_ending_obj",
+    "IsStatic": false
+  },
+  {
+    "Description": "Couple's Mask (Get Item)",
+    "Filename": "object_gi_mask13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Mayor's Residence",
+    "Filename": "J10_01E84000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG",
+    "Filename": "J10_01E89000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG (Lost Woods?)",
+    "Filename": "J10_01E8B000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG (Snowhead?)",
+    "Filename": "J10_01E90000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG (Great Bay?)",
+    "Filename": "J10_01E96000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG (Purified Swamp?)",
+    "Filename": "J10_01E9D000",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "J10_01EA3000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Unknown BG (Romani Ranch?)",
+    "Filename": "J10_01EA4000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Nintendo 64 Logo",
+    "Filename": "nintendo_rogo_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - File Select Screen",
+    "Filename": "title_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Expansion Pak Error Messages",
+    "Filename": "J10_01EDF000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Region Lock Error Messages",
+    "Filename": "J10_01EE1000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - HUD",
+    "Filename": "parameter_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Clock Face Days",
+    "Filename": "J10_01EEF000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Day Title Cards",
+    "Filename": "J10_01EF0000",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Skybox (Clear)",
+    "Filename": "vr_fine_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Skybox (Cloudy)",
+    "Filename": "vr_cloud_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Skybox (Holy)",
+    "Filename": "vr_holy_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "",
+    "Filename": "elf_message_field",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "elf_message_ydan",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Clear) - Scene File",
+    "Filename": "Z2_20SICHITAI2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Clear) - Room 00",
+    "Filename": "Z2_20SICHITAI2_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Clear) - Room 01",
+    "Filename": "Z2_20SICHITAI2_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Clear) - Room 02",
+    "Filename": "Z2_20SICHITAI2_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Hags' Potion Shop - Scene File",
+    "Filename": "Z2_WITCH_SHOP",
+    "IsStatic": false
+  },
+  {
+    "Description": "Magic Hags' Potion Shop - Room 00",
+    "Filename": "Z2_WITCH_SHOP_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora's Lair - Scene File",
+    "Filename": "Z2_LAST_BS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Majora's Lair - Room 00",
+    "Filename": "Z2_LAST_BS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Scene File",
+    "Filename": "Z2_HAKASHITA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Room 00",
+    "Filename": "Z2_HAKASHITA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Room 01",
+    "Filename": "Z2_HAKASHITA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Room 02",
+    "Filename": "Z2_HAKASHITA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Room 03",
+    "Filename": "Z2_HAKASHITA_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Graveyard - Room 04",
+    "Filename": "Z2_HAKASHITA_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Curiosity Shop - Scene File",
+    "Filename": "Z2_AYASHIISHOP",
+    "IsStatic": false
+  },
+  {
+    "Description": "Curiosity Shop - Room 00",
+    "Filename": "Z2_AYASHIISHOP_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Curiosity Shop - Room 01",
+    "Filename": "Z2_AYASHIISHOP_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ranch House & Barn - Scene File",
+    "Filename": "Z2_OMOYA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ranch House & Barn - Room 00",
+    "Filename": "Z2_OMOYA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ranch House & Barn - Room 01",
+    "Filename": "Z2_OMOYA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ranch House & Barn - Room 02",
+    "Filename": "Z2_OMOYA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop - Scene File",
+    "Filename": "Z2_BOWLING",
+    "IsStatic": false
+  },
+  {
+    "Description": "Honey & Darling's Shop - Room 00",
+    "Filename": "Z2_BOWLING_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Residence - Scene File",
+    "Filename": "Z2_SONCHONOIE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Residence - Room 00",
+    "Filename": "Z2_SONCHONOIE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Residence - Room 01",
+    "Filename": "Z2_SONCHONOIE_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Residence - Room 02",
+    "Filename": "Z2_SONCHONOIE_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mayor's Residence - Room 03",
+    "Filename": "Z2_SONCHONOIE_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Scene File",
+    "Filename": "Z2_IKANA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Room 00",
+    "Filename": "Z2_IKANA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Room 01",
+    "Filename": "Z2_IKANA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Room 02",
+    "Filename": "Z2_IKANA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Room 03",
+    "Filename": "Z2_IKANA_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Canyon - Room 04",
+    "Filename": "Z2_IKANA_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress - Scene File",
+    "Filename": "Z2_KAIZOKU",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress - Room 00",
+    "Filename": "Z2_KAIZOKU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar - Scene File",
+    "Filename": "Z2_MILK_BAR",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Bar - Room 00",
+    "Filename": "Z2_MILK_BAR_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Scene File",
+    "Filename": "Z2_INISIE_N",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 00",
+    "Filename": "Z2_INISIE_N_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 01",
+    "Filename": "Z2_INISIE_N_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 02",
+    "Filename": "Z2_INISIE_N_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 03",
+    "Filename": "Z2_INISIE_N_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 04",
+    "Filename": "Z2_INISIE_N_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 05",
+    "Filename": "Z2_INISIE_N_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 06",
+    "Filename": "Z2_INISIE_N_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 07",
+    "Filename": "Z2_INISIE_N_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 08",
+    "Filename": "Z2_INISIE_N_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 09",
+    "Filename": "Z2_INISIE_N_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 10",
+    "Filename": "Z2_INISIE_N_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple - Room 11",
+    "Filename": "Z2_INISIE_N_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Shop - Scene File",
+    "Filename": "Z2_TAKARAYA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Treasure Chest Shop - Room 00",
+    "Filename": "Z2_TAKARAYA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Scene File",
+    "Filename": "Z2_INISIE_R",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 00",
+    "Filename": "Z2_INISIE_R_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 01",
+    "Filename": "Z2_INISIE_R_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 02",
+    "Filename": "Z2_INISIE_R_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 03",
+    "Filename": "Z2_INISIE_R_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 04",
+    "Filename": "Z2_INISIE_R_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 05",
+    "Filename": "Z2_INISIE_R_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 06",
+    "Filename": "Z2_INISIE_R_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 07",
+    "Filename": "Z2_INISIE_R_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 08",
+    "Filename": "Z2_INISIE_R_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 09",
+    "Filename": "Z2_INISIE_R_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 10",
+    "Filename": "Z2_INISIE_R_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower Temple (Inverted) - Room 11",
+    "Filename": "Z2_INISIE_R_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Rooftop - Scene File",
+    "Filename": "Z2_OKUJOU",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Rooftop - Room 00",
+    "Filename": "Z2_OKUJOU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Before the Portal to Termina - Scene File",
+    "Filename": "Z2_OPENINGDAN",
+    "IsStatic": false
+  },
+  {
+    "Description": "Before the Portal to Termina - Room 00",
+    "Filename": "Z2_OPENINGDAN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Before the Portal to Termina - Room 01",
+    "Filename": "Z2_OPENINGDAN_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Scene File",
+    "Filename": "Z2_MITURIN",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 00",
+    "Filename": "Z2_MITURIN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 01",
+    "Filename": "Z2_MITURIN_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 02",
+    "Filename": "Z2_MITURIN_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 03",
+    "Filename": "Z2_MITURIN_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 04",
+    "Filename": "Z2_MITURIN_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 05",
+    "Filename": "Z2_MITURIN_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 06",
+    "Filename": "Z2_MITURIN_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 07",
+    "Filename": "Z2_MITURIN_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 08",
+    "Filename": "Z2_MITURIN_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 09",
+    "Filename": "Z2_MITURIN_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 10",
+    "Filename": "Z2_MITURIN_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 11",
+    "Filename": "Z2_MITURIN_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall Temple - Room 12",
+    "Filename": "Z2_MITURIN_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Mountain Village - Scene File",
+    "Filename": "Z2_13HUBUKINOMITI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Mountain Village - Room 00",
+    "Filename": "Z2_13HUBUKINOMITI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Scene File",
+    "Filename": "Z2_CASTLE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 00",
+    "Filename": "Z2_CASTLE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 01",
+    "Filename": "Z2_CASTLE_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 02",
+    "Filename": "Z2_CASTLE_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 03",
+    "Filename": "Z2_CASTLE_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 04",
+    "Filename": "Z2_CASTLE_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 05",
+    "Filename": "Z2_CASTLE_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 06",
+    "Filename": "Z2_CASTLE_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 07",
+    "Filename": "Z2_CASTLE_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 08",
+    "Filename": "Z2_CASTLE_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ancient Castle of Ikana - Room 09",
+    "Filename": "Z2_CASTLE_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Playground - Scene File",
+    "Filename": "Z2_DEKUTES",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Scrub Playground - Room 00",
+    "Filename": "Z2_DEKUTES_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Odolwa's Lair - Scene File",
+    "Filename": "Z2_MITURIN_BS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Odolwa's Lair - Room 00",
+    "Filename": "Z2_MITURIN_BS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Town Shooting Gallery - Scene File",
+    "Filename": "Z2_SYATEKI_MIZU",
+    "IsStatic": false
+  },
+  {
+    "Description": "Town Shooting Gallery - Room 00",
+    "Filename": "Z2_SYATEKI_MIZU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Scene File",
+    "Filename": "Z2_HAKUGIN",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 00",
+    "Filename": "Z2_HAKUGIN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 01",
+    "Filename": "Z2_HAKUGIN_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 02",
+    "Filename": "Z2_HAKUGIN_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 03",
+    "Filename": "Z2_HAKUGIN_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 04",
+    "Filename": "Z2_HAKUGIN_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 05",
+    "Filename": "Z2_HAKUGIN_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 06",
+    "Filename": "Z2_HAKUGIN_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 07",
+    "Filename": "Z2_HAKUGIN_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 08",
+    "Filename": "Z2_HAKUGIN_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 09",
+    "Filename": "Z2_HAKUGIN_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 10",
+    "Filename": "Z2_HAKUGIN_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 11",
+    "Filename": "Z2_HAKUGIN_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 12",
+    "Filename": "Z2_HAKUGIN_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead Temple - Room 13",
+    "Filename": "Z2_HAKUGIN_room_13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Road - Scene File",
+    "Filename": "Z2_ROMANYMAE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Milk Road - Room 00",
+    "Filename": "Z2_ROMANYMAE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Scene File",
+    "Filename": "Z2_PIRATE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 00",
+    "Filename": "Z2_PIRATE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 01",
+    "Filename": "Z2_PIRATE_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 02",
+    "Filename": "Z2_PIRATE_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 03",
+    "Filename": "Z2_PIRATE_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 04",
+    "Filename": "Z2_PIRATE_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 05",
+    "Filename": "Z2_PIRATE_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 06",
+    "Filename": "Z2_PIRATE_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 07",
+    "Filename": "Z2_PIRATE_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 08",
+    "Filename": "Z2_PIRATE_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 09",
+    "Filename": "Z2_PIRATE_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 10",
+    "Filename": "Z2_PIRATE_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 11",
+    "Filename": "Z2_PIRATE_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 12",
+    "Filename": "Z2_PIRATE_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 13",
+    "Filename": "Z2_PIRATE_room_13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Interior - Room 14",
+    "Filename": "Z2_PIRATE_room_14",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Shooting Gallery - Scene File",
+    "Filename": "Z2_SYATEKI_MORI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Shooting Gallery - Room 00",
+    "Filename": "Z2_SYATEKI_MORI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pinnacle Rock - Scene File",
+    "Filename": "Z2_SINKAI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pinnacle Rock - Room 00",
+    "Filename": "Z2_SINKAI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Scene File",
+    "Filename": "Z2_YOUSEI_IZUMI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Room 00",
+    "Filename": "Z2_YOUSEI_IZUMI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Room 01",
+    "Filename": "Z2_YOUSEI_IZUMI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Room 02",
+    "Filename": "Z2_YOUSEI_IZUMI_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Room 03",
+    "Filename": "Z2_YOUSEI_IZUMI_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fairy's Fountain - Room 04",
+    "Filename": "Z2_YOUSEI_IZUMI_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Scene File",
+    "Filename": "Z2_KINSTA1",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 00",
+    "Filename": "Z2_KINSTA1_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 01",
+    "Filename": "Z2_KINSTA1_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 02",
+    "Filename": "Z2_KINSTA1_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 03",
+    "Filename": "Z2_KINSTA1_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 04",
+    "Filename": "Z2_KINSTA1_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swamp Spider House - Room 05",
+    "Filename": "Z2_KINSTA1_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Scene File",
+    "Filename": "Z2_KINDAN2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 00",
+    "Filename": "Z2_KINDAN2_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 01",
+    "Filename": "Z2_KINDAN2_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 02",
+    "Filename": "Z2_KINDAN2_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 03",
+    "Filename": "Z2_KINDAN2_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 04",
+    "Filename": "Z2_KINDAN2_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Oceanside Spider House - Room 05",
+    "Filename": "Z2_KINDAN2_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory - Scene File",
+    "Filename": "Z2_TENMON_DAI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory - Room 00",
+    "Filename": "Z2_TENMON_DAI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Astral Observatory - Room 01",
+    "Filename": "Z2_TENMON_DAI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Deku Trial - Scene File",
+    "Filename": "Z2_LAST_DEKU",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Deku Trial - Room 00",
+    "Filename": "Z2_LAST_DEKU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Deku Trial - Room 01",
+    "Filename": "Z2_LAST_DEKU_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Palace - Scene File",
+    "Filename": "Z2_22DEKUCITY",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Palace - Room 00",
+    "Filename": "Z2_22DEKUCITY_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Palace - Room 01",
+    "Filename": "Z2_22DEKUCITY_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Palace - Room 02",
+    "Filename": "Z2_22DEKUCITY_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Smithy - Scene File",
+    "Filename": "Z2_KAJIYA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Smithy - Room 00",
+    "Filename": "Z2_KAJIYA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Termina Field - Scene File",
+    "Filename": "Z2_00KEIKOKU",
+    "IsStatic": false
+  },
+  {
+    "Description": "Termina Field - Room 00",
+    "Filename": "Z2_00KEIKOKU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Post Office - Scene File",
+    "Filename": "Z2_POSTHOUSE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Post Office - Room 00",
+    "Filename": "Z2_POSTHOUSE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Research Lab - Scene File",
+    "Filename": "Z2_LABO",
+    "IsStatic": false
+  },
+  {
+    "Description": "Marine Research Lab - Room 00",
+    "Filename": "Z2_LABO_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House - Scene File",
+    "Filename": "Z2_DANPEI2TEST",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House - Room 00",
+    "Filename": "Z2_DANPEI2TEST_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Dampé's House - Room 01",
+    "Filename": "Z2_DANPEI2TEST_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine - Scene File",
+    "Filename": "Z2_16GORON_HOUSE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine - Room 00",
+    "Filename": "Z2_16GORON_HOUSE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shrine - Room 01",
+    "Filename": "Z2_16GORON_HOUSE_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Scene File",
+    "Filename": "Z2_33ZORACITY",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Room 00",
+    "Filename": "Z2_33ZORACITY_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Trading Post - Scene File",
+    "Filename": "Z2_8ITEMSHOP",
+    "IsStatic": false
+  },
+  {
+    "Description": "Trading Post - Room 00",
+    "Filename": "Z2_8ITEMSHOP_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani Ranch - Scene File",
+    "Filename": "Z2_F01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Romani Ranch - Room 00",
+    "Filename": "Z2_F01_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold's Lair - Scene File",
+    "Filename": "Z2_INISIE_BS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Twinmold's Lair - Room 00",
+    "Filename": "Z2_INISIE_BS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Coast - Scene File",
+    "Filename": "Z2_30GYOSON",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Coast - Room 00",
+    "Filename": "Z2_30GYOSON_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Cape - Scene File",
+    "Filename": "Z2_31MISAKI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Cape - Room 00",
+    "Filename": "Z2_31MISAKI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lottery Shop - Scene File",
+    "Filename": "Z2_TAKARAKUJI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lottery Shop - Room 00",
+    "Filename": "Z2_TAKARAKUJI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Exterior - Scene File",
+    "Filename": "Z2_TORIDE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Pirates' Fortress Exterior - Room 00",
+    "Filename": "Z2_TORIDE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fisherman's Hut - Scene File",
+    "Filename": "Z2_FISHERMAN",
+    "IsStatic": false
+  },
+  {
+    "Description": "Fisherman's Hut - Room 00",
+    "Filename": "Z2_FISHERMAN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shop - Scene File",
+    "Filename": "Z2_GORONSHOP",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Shop - Room 00",
+    "Filename": "Z2_GORONSHOP_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku King's Chamber - Scene File",
+    "Filename": "Z2_DEKU_KING",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku King's Chamber - Room 00",
+    "Filename": "Z2_DEKU_KING_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Goron Trial - Scene File",
+    "Filename": "Z2_LAST_GORON",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Goron Trial - Room 00",
+    "Filename": "Z2_LAST_GORON_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Goron Trial - Room 01",
+    "Filename": "Z2_LAST_GORON_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Road to Southern Swamp - Scene File",
+    "Filename": "Z2_24KEMONOMITI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Road to Southern Swamp - Room 00",
+    "Filename": "Z2_24KEMONOMITI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Doggy Racetrack - Scene File",
+    "Filename": "Z2_F01_B",
+    "IsStatic": false
+  },
+  {
+    "Description": "Doggy Racetrack - Room 00",
+    "Filename": "Z2_F01_B_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco Shack - Scene File",
+    "Filename": "Z2_F01C",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cucco Shack - Room 00",
+    "Filename": "Z2_F01C_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Graveyard - Scene File",
+    "Filename": "Z2_BOTI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Graveyard - Room 00",
+    "Filename": "Z2_BOTI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ikana Graveyard - Room 01",
+    "Filename": "Z2_BOTI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goht's Lair - Scene File",
+    "Filename": "Z2_HAKUGIN_BS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goht's Lair - Room 00",
+    "Filename": "Z2_HAKUGIN_BS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Poisoned) - Scene File",
+    "Filename": "Z2_20SICHITAI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Poisoned) - Room 00",
+    "Filename": "Z2_20SICHITAI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Poisoned) - Room 01",
+    "Filename": "Z2_20SICHITAI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Southern Swamp (Poisoned) - Room 02",
+    "Filename": "Z2_20SICHITAI_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall - Scene File",
+    "Filename": "Z2_21MITURINMAE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woodfall - Room 00",
+    "Filename": "Z2_21MITURINMAE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Zora Trial - Scene File",
+    "Filename": "Z2_LAST_ZORA",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Zora Trial - Room 00",
+    "Filename": "Z2_LAST_ZORA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Spring) - Scene File",
+    "Filename": "Z2_11GORONNOSATO2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Spring) - Room 00",
+    "Filename": "Z2_11GORONNOSATO2_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Spring) - Room 01",
+    "Filename": "Z2_11GORONNOSATO2_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Scene File",
+    "Filename": "Z2_SEA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 00",
+    "Filename": "Z2_SEA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 01",
+    "Filename": "Z2_SEA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 02",
+    "Filename": "Z2_SEA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 03",
+    "Filename": "Z2_SEA_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 04",
+    "Filename": "Z2_SEA_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 05",
+    "Filename": "Z2_SEA_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 06",
+    "Filename": "Z2_SEA_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 07",
+    "Filename": "Z2_SEA_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 08",
+    "Filename": "Z2_SEA_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 09",
+    "Filename": "Z2_SEA_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 10",
+    "Filename": "Z2_SEA_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 11",
+    "Filename": "Z2_SEA_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 12",
+    "Filename": "Z2_SEA_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 13",
+    "Filename": "Z2_SEA_room_13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 14",
+    "Filename": "Z2_SEA_room_14",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay Temple - Room 15",
+    "Filename": "Z2_SEA_room_15",
+    "IsStatic": false
+  },
+  {
+    "Description": "Waterfall Rapids - Scene File",
+    "Filename": "Z2_35TAKI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Waterfall Rapids - Room 00",
+    "Filename": "Z2_35TAKI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Scene File",
+    "Filename": "Z2_REDEAD",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 00",
+    "Filename": "Z2_REDEAD_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 01",
+    "Filename": "Z2_REDEAD_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 02",
+    "Filename": "Z2_REDEAD_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 03",
+    "Filename": "Z2_REDEAD_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 04",
+    "Filename": "Z2_REDEAD_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 05",
+    "Filename": "Z2_REDEAD_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 06",
+    "Filename": "Z2_REDEAD_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 07",
+    "Filename": "Z2_REDEAD_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 08",
+    "Filename": "Z2_REDEAD_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 09",
+    "Filename": "Z2_REDEAD_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 10",
+    "Filename": "Z2_REDEAD_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 11",
+    "Filename": "Z2_REDEAD_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 12",
+    "Filename": "Z2_REDEAD_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Beneath the Well - Room 13",
+    "Filename": "Z2_REDEAD_room_13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Scene File",
+    "Filename": "Z2_BANDROOM",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Room 00",
+    "Filename": "Z2_BANDROOM_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Room 01",
+    "Filename": "Z2_BANDROOM_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Room 02",
+    "Filename": "Z2_BANDROOM_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Room 03",
+    "Filename": "Z2_BANDROOM_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Zora Hall - Rooms - Room 04",
+    "Filename": "Z2_BANDROOM_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Winter) - Scene File",
+    "Filename": "Z2_11GORONNOSATO",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Winter) - Room 00",
+    "Filename": "Z2_11GORONNOSATO_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Village (Winter) - Room 01",
+    "Filename": "Z2_11GORONNOSATO_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Graveyard - Scene File",
+    "Filename": "Z2_GORON_HAKA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Graveyard - Room 00",
+    "Filename": "Z2_GORON_HAKA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sakon's Hideout - Scene File",
+    "Filename": "Z2_SECOM",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sakon's Hideout - Room 00",
+    "Filename": "Z2_SECOM_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Sakon's Hideout - Room 01",
+    "Filename": "Z2_SECOM_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village (Winter) - Scene File",
+    "Filename": "Z2_10YUKIYAMANOMURA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village (Winter) - Room 00",
+    "Filename": "Z2_10YUKIYAMANOMURA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ghost Hut - Scene File",
+    "Filename": "Z2_TOUGITES",
+    "IsStatic": false
+  },
+  {
+    "Description": "Ghost Hut - Room 00",
+    "Filename": "Z2_TOUGITES_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Scene File",
+    "Filename": "Z2_DANPEI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 00",
+    "Filename": "Z2_DANPEI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 01",
+    "Filename": "Z2_DANPEI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 02",
+    "Filename": "Z2_DANPEI_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 03",
+    "Filename": "Z2_DANPEI_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 04",
+    "Filename": "Z2_DANPEI_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 05",
+    "Filename": "Z2_DANPEI_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 06",
+    "Filename": "Z2_DANPEI_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 07",
+    "Filename": "Z2_DANPEI_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Deku Shrine - Room 08",
+    "Filename": "Z2_DANPEI_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Road to Ikana - Scene File",
+    "Filename": "Z2_IKANAMAE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Road to Ikana - Room 00",
+    "Filename": "Z2_IKANAMAE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School - Scene File",
+    "Filename": "Z2_DOUJOU",
+    "IsStatic": false
+  },
+  {
+    "Description": "Swordsman's School - Room 00",
+    "Filename": "Z2_DOUJOU_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Box House - Scene File",
+    "Filename": "Z2_MUSICHOUSE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Music Box House - Room 00",
+    "Filename": "Z2_MUSICHOUSE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana's Lair - Scene File",
+    "Filename": "Z2_IKNINSIDE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana's Lair - Room 00",
+    "Filename": "Z2_IKNINSIDE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Igos du Ikana's Lair - Room 01",
+    "Filename": "Z2_IKNINSIDE_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tourist Information - Scene File",
+    "Filename": "Z2_MAP_SHOP",
+    "IsStatic": false
+  },
+  {
+    "Description": "Tourist Information - Room 00",
+    "Filename": "Z2_MAP_SHOP_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower - Scene File",
+    "Filename": "Z2_F40",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower - Room 00",
+    "Filename": "Z2_F40_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower (Inverted) - Scene File",
+    "Filename": "Z2_F41",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stone Tower (Inverted) - Room 00",
+    "Filename": "Z2_F41_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village (Spring) - Scene File",
+    "Filename": "Z2_10YUKIYAMANOMURA2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village (Spring) - Room 00",
+    "Filename": "Z2_10YUKIYAMANOMURA2_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Mountain Village (Spring) - Room 01",
+    "Filename": "Z2_10YUKIYAMANOMURA2_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Snowhead - Scene File",
+    "Filename": "Z2_14YUKIDAMANOMITI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Snowhead - Room 00",
+    "Filename": "Z2_14YUKIDAMANOMITI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead - Scene File",
+    "Filename": "Z2_12HAKUGINMAE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Snowhead - Room 00",
+    "Filename": "Z2_12HAKUGINMAE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Goron Village (Winter) - Scene File",
+    "Filename": "Z2_17SETUGEN",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Goron Village (Winter) - Room 00",
+    "Filename": "Z2_17SETUGEN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Goron Village (Spring) - Scene File",
+    "Filename": "Z2_17SETUGEN2",
+    "IsStatic": false
+  },
+  {
+    "Description": "Path to Goron Village (Spring) - Room 00",
+    "Filename": "Z2_17SETUGEN2_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gyorg's Lair - Scene File",
+    "Filename": "Z2_SEA_BS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gyorg's Lair - Room 00",
+    "Filename": "Z2_SEA_BS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Scene File",
+    "Filename": "Z2_RANDOM",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 00",
+    "Filename": "Z2_RANDOM_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 01",
+    "Filename": "Z2_RANDOM_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 02",
+    "Filename": "Z2_RANDOM_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 03",
+    "Filename": "Z2_RANDOM_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 04",
+    "Filename": "Z2_RANDOM_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Secret Shrine - Room 05",
+    "Filename": "Z2_RANDOM_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Scene File",
+    "Filename": "Z2_YADOYA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Room 00",
+    "Filename": "Z2_YADOYA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Room 01",
+    "Filename": "Z2_YADOYA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Room 02",
+    "Filename": "Z2_YADOYA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Room 03",
+    "Filename": "Z2_YADOYA_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Stock Pot Inn - Room 04",
+    "Filename": "Z2_YADOYA_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay (Cutscene) - Scene File",
+    "Filename": "Z2_KONPEKI_ENT",
+    "IsStatic": false
+  },
+  {
+    "Description": "Great Bay (Cutscene) - Room 00",
+    "Filename": "Z2_KONPEKI_ENT_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Interior - Scene File",
+    "Filename": "Z2_INSIDETOWER",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Interior - Room 00",
+    "Filename": "Z2_INSIDETOWER_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Clock Tower Interior - Room 01",
+    "Filename": "Z2_INSIDETOWER_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Scene File",
+    "Filename": "Z2_26SARUNOMORI",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 00",
+    "Filename": "Z2_26SARUNOMORI_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 01",
+    "Filename": "Z2_26SARUNOMORI_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 02",
+    "Filename": "Z2_26SARUNOMORI_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 03",
+    "Filename": "Z2_26SARUNOMORI_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 04",
+    "Filename": "Z2_26SARUNOMORI_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 05",
+    "Filename": "Z2_26SARUNOMORI_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 06",
+    "Filename": "Z2_26SARUNOMORI_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 07",
+    "Filename": "Z2_26SARUNOMORI_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Woods of Mystery - Room 08",
+    "Filename": "Z2_26SARUNOMORI_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lost Woods - Scene File",
+    "Filename": "Z2_LOST_WOODS",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lost Woods - Room 00",
+    "Filename": "Z2_LOST_WOODS_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lost Woods - Room 01",
+    "Filename": "Z2_LOST_WOODS_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Lost Woods - Room 02",
+    "Filename": "Z2_LOST_WOODS_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Scene File",
+    "Filename": "Z2_LAST_LINK",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 00",
+    "Filename": "Z2_LAST_LINK_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 01",
+    "Filename": "Z2_LAST_LINK_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 02",
+    "Filename": "Z2_LAST_LINK_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 03",
+    "Filename": "Z2_LAST_LINK_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 04",
+    "Filename": "Z2_LAST_LINK_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 05",
+    "Filename": "Z2_LAST_LINK_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 06",
+    "Filename": "Z2_LAST_LINK_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon Link Trial - Room 07",
+    "Filename": "Z2_LAST_LINK_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon - Scene File",
+    "Filename": "Z2_SOUGEN",
+    "IsStatic": false
+  },
+  {
+    "Description": "The Moon - Room 00",
+    "Filename": "Z2_SOUGEN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop - Scene File",
+    "Filename": "Z2_BOMYA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Bomb Shop - Room 00",
+    "Filename": "Z2_BOMYA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giants' Chamber - Scene File",
+    "Filename": "Z2_KYOJINNOMA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Giants' Chamber - Room 00",
+    "Filename": "Z2_KYOJINNOMA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Track - Scene File",
+    "Filename": "Z2_KOEPONARACE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Gorman Track - Room 00",
+    "Filename": "Z2_KOEPONARACE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Racetrack - Scene File",
+    "Filename": "Z2_GORONRACE",
+    "IsStatic": false
+  },
+  {
+    "Description": "Goron Racetrack - Room 00",
+    "Filename": "Z2_GORONRACE_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "East Clock Town - Scene File",
+    "Filename": "Z2_TOWN",
+    "IsStatic": false
+  },
+  {
+    "Description": "East Clock Town - Room 00",
+    "Filename": "Z2_TOWN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "West Clock Town - Scene File",
+    "Filename": "Z2_ICHIBA",
+    "IsStatic": false
+  },
+  {
+    "Description": "West Clock Town - Room 00",
+    "Filename": "Z2_ICHIBA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "North Clock Town - Scene File",
+    "Filename": "Z2_BACKTOWN",
+    "IsStatic": false
+  },
+  {
+    "Description": "North Clock Town - Room 00",
+    "Filename": "Z2_BACKTOWN_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "South Clock Town - Scene File",
+    "Filename": "Z2_CLOCKTOWER",
+    "IsStatic": false
+  },
+  {
+    "Description": "South Clock Town - Room 00",
+    "Filename": "Z2_CLOCKTOWER_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Laundry Pool - Scene File",
+    "Filename": "Z2_ALLEY",
+    "IsStatic": false
+  },
+  {
+    "Description": "Laundry Pool - Room 00",
+    "Filename": "Z2_ALLEY_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cutscene Map - Scene File",
+    "Filename": "SPOT00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Cutscene Map - Room 00",
+    "Filename": "SPOT00_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Scene File",
+    "Filename": "KAKUSIANA",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 00",
+    "Filename": "KAKUSIANA_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 01",
+    "Filename": "KAKUSIANA_room_01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 02",
+    "Filename": "KAKUSIANA_room_02",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 03",
+    "Filename": "KAKUSIANA_room_03",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 04",
+    "Filename": "KAKUSIANA_room_04",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 05",
+    "Filename": "KAKUSIANA_room_05",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 06",
+    "Filename": "KAKUSIANA_room_06",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 07",
+    "Filename": "KAKUSIANA_room_07",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 08",
+    "Filename": "KAKUSIANA_room_08",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 09",
+    "Filename": "KAKUSIANA_room_09",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 10",
+    "Filename": "KAKUSIANA_room_10",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 11",
+    "Filename": "KAKUSIANA_room_11",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 12",
+    "Filename": "KAKUSIANA_room_12",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 13",
+    "Filename": "KAKUSIANA_room_13",
+    "IsStatic": false
+  },
+  {
+    "Description": "Grottos - Room 14",
+    "Filename": "KAKUSIANA_room_14",
+    "IsStatic": false
+  },
+  {
+    "Description": "Test Map - Scene File",
+    "Filename": "TEST01",
+    "IsStatic": false
+  },
+  {
+    "Description": "Test Map - Room 00",
+    "Filename": "TEST01_room_00",
+    "IsStatic": false
+  },
+  {
+    "Description": "Textures - Mystery Man",
+    "Filename": "bump_texture_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_1_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_2_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_3_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_4_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_5_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_model_6_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_1_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_2_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_3_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_4_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_5_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "anime_texture_6_static",
+    "IsStatic": false
+  },
+  {
+    "Description": "[Deleted]",
+    "Filename": "softsprite_matrix_static",
+    "IsStatic": false
+  }
+]

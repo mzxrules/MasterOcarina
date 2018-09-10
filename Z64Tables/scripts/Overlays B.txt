@@ -1,0 +1,9 @@
+player_pause
+|
+build = DBGMQ,		N0, 		MQP;
+start = 0xBA4340,	0xB743E0, 	0xB723E0;
+loop = 2;
+format = csv, wiki;
+|
+	go 4, u32:X8, u32:X8, u32:X8,
+	u32:X8, go 4, u32:X8

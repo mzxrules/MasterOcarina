@@ -1,0 +1,10 @@
+Scene Table
+|
+build = DBGMQ,		n0, 		MQP;
+start = 0xBA0BB0,	0xB71440,	0xB6F440;
+loop = 110, 101;
+i=0;
+format = tsv;
+|
+index:X4,	u32:X8, u32:X8, u32:X8, u32:X8,
+			u32:X8

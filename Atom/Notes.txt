@@ -1,0 +1,39 @@
+﻿OOTDEBUG
+{0x80002130,    "DebugMessage"  },
+{0x800FB3AC,    "SetTextRGBA"   },
+{0x800FB41C,    "SetTextXY" },
+{0x800FBCB4,    "SetTextString" },
+{0x80031F50,    "ActorSpawn"    },
+{0x801031E0,    "sqrtf"     },
+{0x801067E0,    "absf"      },
+{0x80104610,    "cosf"      },
+{0x80100290,    "sinf"      },
+{0x80104780,    "coss"      },
+{0x80100450,    "sins"      }
+
+
+gpr common state
+
+{
+0,  0,  0,  0,  0x802245B0, 0x80212020, 0,  0,
+0,  0,  0,  0,  0,  0,  0,  0,
+0,  0,  0,  0,  0,  0,  0,  0,
+0,  0,  0,  0,  0,  0x80160000,     0,  0,
+};
+
+
+static string[] actTypes = new string[12]
+{
+    "Unknown",
+    "Prop",
+    "Unknown",
+    "Bomb",
+    "NPC",
+    "Enemy",
+    "Prop",
+    "Item/Action",
+    "Miscellaneous",
+    "Boss",
+    "Unknown",
+    "Door/Chest"
+};

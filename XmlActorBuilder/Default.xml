@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActorDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ProgramVersion="1.0.1.8">
+  <Definition Number="0x0000">
+    <Item Index="0" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Usage="ActorNumber" Description="Actor Type" ControlType="System.Windows.Forms.TextBox" />
+    <Item Index="2" ValueType="System.Int16" Usage="PositionX" Description="Position (X)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="4" ValueType="System.Int16" Usage="PositionY" Description="Position (Y)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="6" ValueType="System.Int16" Usage="PositionZ" Description="Position (Z)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="8" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationX" Description="Rotation (X)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="10" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationY" Description="Rotation (Y)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="12" ValueType="System.Int16" DisplayStyle="Hexadecimal" Usage="RotationZ" Description="Rotation (Z)" ControlType="System.Windows.Forms.TextBox" Mask="0xFFFF" />
+    <Item Index="14" ValueType="System.UInt16" DisplayStyle="Hexadecimal" Description="Variable" ControlType="System.Windows.Forms.TextBox" />
+  </Definition>
+</ActorDatabase>

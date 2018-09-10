@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15.125, 11.25" name="EntranceDef">
+  <DataContextMoniker Name="/OcarinaDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" absoluteBounds="3.125, 0.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/OcarinaDataContext/Scene" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a39cd295-2312-433b-9c04-ffe2136aa45f" absoluteBounds="3.14, 1.085, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bbda1561-ddc6-4dc9-8a84-3ca9588feb1b" absoluteBounds="5.625, 3.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/Room" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b1b4f46a-2b5c-4357-82fd-3168be98e81b" absoluteBounds="5.6400000000000006, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="61b50e29-5a69-49c8-a6ef-0498bb88ed21" absoluteBounds="0.75, 0.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/OcarinaDataContext/Entrance" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2bcc3f3c-c13a-4a12-82ea-925462eec739" absoluteBounds="0.765, 1.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="89bc03ec-df80-4301-b076-0a104fdcf895" absoluteBounds="10.375, 0.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/Faq" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f837f847-b6b3-4ad0-bbac-a724d7f4f3fe" absoluteBounds="10.39, 1.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e46dd9bd-0113-484b-97cc-69ec77f97bec" absoluteBounds="10.375, 4.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/ObjectFile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ed45179-c4f9-4c72-8c81-cbc20b49e51b" absoluteBounds="10.39, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d7d09492-cc23-480a-8e6b-cb12592b480b" absoluteBounds="10.375, 2.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/OcarinaDataContext/Actor" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b193eddf-03f5-4a72-95ee-d05139febc24" absoluteBounds="10.39, 2.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.375 : 4.25); (11.375 : 3.89589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/ObjectFile/ObjectFile_Actor" />
+      <nodes>
+        <classShapeMoniker Id="e46dd9bd-0113-484b-97cc-69ec77f97bec" />
+        <classShapeMoniker Id="d7d09492-cc23-480a-8e6b-cb12592b480b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.125 : 1.79890055338542); (2.75 : 1.79890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_Entrance" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="61b50e29-5a69-49c8-a6ef-0498bb88ed21" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="93125aa7-1611-4e80-bd68-e0efe76d2079" absoluteBounds="5.625, 0.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/OcarinaDataContext/EntranceDef" />
+      <nestedChildShapes>
+        <elementListCompartment Id="43fb1346-1c2c-4ec5-8537-c4375d4d7f39" absoluteBounds="5.64, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 1.60659912109375); (5.625 : 1.60659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_EntranceDef" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="93125aa7-1611-4e80-bd68-e0efe76d2079" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 1.05329956054688); (5.625 : 1.05329956054688)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_EntranceDef1" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="93125aa7-1611-4e80-bd68-e0efe76d2079" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="67966eac-4f03-4b65-8096-919e09a6c9ec" absoluteBounds="3.125, 7.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20dc4b0c-f156-40d5-bf8b-4fe24bbc3f1a" absoluteBounds="3.14, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="469d2bbc-e124-4be3-a969-7f8499c494ef" absoluteBounds="3.125, 9.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/Rba" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b21a0215-7928-4af7-bf4c-2f31414baa90" absoluteBounds="3.1399999999999997, 9.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="af5297f2-baeb-4c9d-beae-fa6e52266b87" absoluteBounds="5.625, 8.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/OcarinaDataContext/RbaBit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="323ae2f8-29fb-4c97-8e73-bdae8100ac03" absoluteBounds="5.64, 8.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="76530af7-0375-43ed-a297-b27c5b6cca88" absoluteBounds="8, 8.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/OcarinaDataContext/RbaBits2" />
+      <nestedChildShapes>
+        <elementListCompartment Id="86b147ef-e597-479c-9ae7-9c6ba64ac758" absoluteBounds="8.015, 8.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.125 : 9.1362939453125); (4.125 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Item/Item_Rba" />
+      <nodes>
+        <classShapeMoniker Id="67966eac-4f03-4b65-8096-919e09a6c9ec" />
+        <classShapeMoniker Id="469d2bbc-e124-4be3-a969-7f8499c494ef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 8.81814697265625); (5.625 : 8.81814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Item/Item_RbaBit" />
+      <nodes>
+        <classShapeMoniker Id="67966eac-4f03-4b65-8096-919e09a6c9ec" />
+        <classShapeMoniker Id="af5297f2-baeb-4c9d-beae-fa6e52266b87" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="decb5cc6-bd75-49c5-af36-c9baf5bc0c1a" absoluteBounds="5.625, 4.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/OcarinaDataContext/Trick" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b198fb12-fafd-445a-9806-a45b452e4fbc" absoluteBounds="5.64, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="139709b7-ef08-4510-8d91-337e3b4c072e" absoluteBounds="8, 6.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OcarinaDataContext/TrickTag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fa6a8506-3871-4107-a5ae-4cfa0a88861c" absoluteBounds="8.015, 7.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.625 : 6.52089680989583); (8 : 6.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Trick/Trick_TrickTag" />
+      <nodes>
+        <classShapeMoniker Id="decb5cc6-bd75-49c5-af36-c9baf5bc0c1a" />
+        <classShapeMoniker Id="139709b7-ef08-4510-8d91-337e3b4c072e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" absoluteBounds="10.25, 6.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OcarinaDataContext/Tag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e876e4ed-054d-4bb2-a38c-675340473344" absoluteBounds="10.265, 7.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.25 : 7.51849609375); (10 : 7.51849609375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Tag/Tag_TrickTag" />
+      <nodes>
+        <classShapeMoniker Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" />
+        <classShapeMoniker Id="139709b7-ef08-4510-8d91-337e3b4c072e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 2.97280110677083); (5.625 : 3.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_Room" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="bbda1561-ddc6-4dc9-8a84-3ca9588feb1b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ca9331de-349a-481c-8600-f0e376971b78" absoluteBounds="10.25, 8.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OcarinaDataContext/ActorTagDescription" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fb360d78-9d67-4814-a1ff-fb28765b2abc" absoluteBounds="10.265, 8.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.25 : 8.06899251302083); (11.25 : 8.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Tag/Tag_ActorTagDescription" />
+      <nodes>
+        <classShapeMoniker Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" />
+        <classShapeMoniker Id="ca9331de-349a-481c-8600-f0e376971b78" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e260fc9c-4114-4e98-aa02-3492d0f5a894" absoluteBounds="12.875, 5.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OcarinaDataContext/ActorTag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2c1d321d-2792-466c-b1a0-b09b5f7252aa" absoluteBounds="12.89, 6.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.375 : 3.01044840494792); (13.875 : 3.01044840494792); (13.875 : 5.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Actor/Actor_ActorTag" />
+      <nodes>
+        <classShapeMoniker Id="d7d09492-cc23-480a-8e6b-cb12592b480b" />
+        <classShapeMoniker Id="e260fc9c-4114-4e98-aa02-3492d0f5a894" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5000005 : 6.875); (11.5000005 : 6.47199625651042); (12.875 : 6.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Tag/Tag_ActorTag" />
+      <nodes>
+        <classShapeMoniker Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" />
+        <classShapeMoniker Id="e260fc9c-4114-4e98-aa02-3492d0f5a894" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f72ef6b8-1d31-4dfa-942e-a0cbda426c0a" absoluteBounds="12.875, 7.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OcarinaDataContext/ActorTagRelationship" />
+      <nestedChildShapes>
+        <elementListCompartment Id="99b54e7f-b172-46d6-a4ae-e2b2453f213f" absoluteBounds="12.89, 7.7100000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.25 : 7.65949625651042); (12.875 : 7.65949625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Tag/Tag_ActorTagRelationship" />
+      <nodes>
+        <classShapeMoniker Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" />
+        <classShapeMoniker Id="f72ef6b8-1d31-4dfa-942e-a0cbda426c0a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.25 : 7.39224812825521); (12.875 : 7.39224812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Tag/Tag_ActorTagRelationship1" />
+      <nodes>
+        <classShapeMoniker Id="dfeb456f-6d02-4cff-ae9a-ffe3f59ec5fd" />
+        <classShapeMoniker Id="f72ef6b8-1d31-4dfa-942e-a0cbda426c0a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b8c0e65c-ee39-42d8-ae6f-c76a4801d14d" absoluteBounds="3.125, 3.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/OcarinaDataContext/Exit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc193585-a49f-45fb-b1db-bfd9d4b89edb" absoluteBounds="3.1399999999999997, 3.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.0937475 : 2.97280110677083); (4.0937475 : 3.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_Exit" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="b8c0e65c-ee39-42d8-ae6f-c76a4801d14d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="473aba44-4847-4df2-9be6-3b055c6757b0" absoluteBounds="0.75, 3.125, 2, 1.9631982421875">
+      <DataClassMoniker Name="/OcarinaDataContext/EntranceIndex" />
+      <nestedChildShapes>
+        <elementListCompartment Id="89334e00-63e7-4b14-8c7d-67e4b4b3d04b" absoluteBounds="0.76500000000000012, 3.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.125 : 2.97280110677083); (2.75 : 3.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_EntranceIndex" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="473aba44-4847-4df2-9be6-3b055c6757b0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="11ef899d-4ca7-48cb-a10c-7cedcb58c7da" absoluteBounds="0.75, 5.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/SceneSearch" />
+      <nestedChildShapes>
+        <elementListCompartment Id="613a000b-c875-41f5-8d21-c4f492de7490" absoluteBounds="0.76500000000000012, 5.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7b40f9b6-5d12-4719-9b1b-054d1545a3e8" absoluteBounds="5.625, 6.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OcarinaDataContext/ItemSearch" />
+      <nestedChildShapes>
+        <elementListCompartment Id="910670ae-21a5-4a7d-bfa5-dc54762a6834" absoluteBounds="5.64, 7.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.125 : 2.97280110677083); (4.125 : 3.1875); (3.0625 : 3.1875); (3.0625 : 5.94314697265625); (2.75 : 5.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OcarinaDataContext/Scene/Scene_SceneSearch" />
+      <nodes>
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+        <classShapeMoniker Id="11ef899d-4ca7-48cb-a10c-7cedcb58c7da" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 8.00564697265625); (5.625 : 8.00564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OcarinaDataContext/Item/Item_ItemSearch" />
+      <nodes>
+        <classShapeMoniker Id="67966eac-4f03-4b65-8096-919e09a6c9ec" />
+        <classShapeMoniker Id="7b40f9b6-5d12-4719-9b1b-054d1545a3e8" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="09bb1014-2b15-4168-82f1-12a2b29a1dc1" absoluteBounds="8.125, 4.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/OcarinaDataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="51bdd82c-7013-4d99-a658-5d68e61bc9d2" absoluteBounds="8.14, 4.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" absoluteBounds="8.125, 0.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/OcarinaDataContext/File" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e6230e2-d0be-453b-a6aa-cc06dc45bf5b" absoluteBounds="8.14, 1.085, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.125 : 2.78049717447917); (5.125 : 2.78049717447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/File/File_Scene" />
+      <nodes>
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+        <classShapeMoniker Id="9348efc8-e740-404e-a80a-7c7e31f2bfc3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.914062625 : 2.97280110677083); (9.914062625 : 4.3125); (10.1875 : 4.3125); (10.1875 : 4.94314697265625); (10.375 : 4.94314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/File/File_ObjectFile" />
+      <nodes>
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+        <classShapeMoniker Id="e46dd9bd-0113-484b-97cc-69ec77f97bec" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.125 : 2.54890055338542); (10.375 : 2.54890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/File/File_Actor" />
+      <nodes>
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+        <classShapeMoniker Id="d7d09492-cc23-480a-8e6b-cb12592b480b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.0937475 : 4.375); (9.0937475 : 2.97280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Address/Address_File" />
+      <nodes>
+        <classShapeMoniker Id="09bb1014-2b15-4168-82f1-12a2b29a1dc1" />
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.5039050625 : 4.375); (9.5039050625 : 2.97280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Address/Address_File1" />
+      <nodes>
+        <classShapeMoniker Id="09bb1014-2b15-4168-82f1-12a2b29a1dc1" />
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.54687375 : 4.375); (8.54687375 : 2.97280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/OcarinaDataContext/Address/Address_File2" />
+      <nodes>
+        <classShapeMoniker Id="09bb1014-2b15-4168-82f1-12a2b29a1dc1" />
+        <classShapeMoniker Id="296c2ec0-96ae-495e-bc15-7a78fb7c91f4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c2c9a5d9-a756-4a99-8a07-e69c89a8d7cd" absoluteBounds="3.125, 5.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/OcarinaDataContext/SceneCutscene" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef70c0ce-8a18-4eb4-bc9e-2ea68a56405a" absoluteBounds="3.1399999999999997, 5.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

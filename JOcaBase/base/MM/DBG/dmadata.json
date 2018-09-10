@@ -1,0 +1,7862 @@
+[
+  {
+    "Filename": "makerom",
+    "VRomStart": 0,
+    "VRomEnd": 4192
+  },
+  {
+    "Filename": "boot",
+    "VRomStart": 4192,
+    "VRomEnd": 151392
+  },
+  {
+    "Filename": "dmadata",
+    "VRomStart": 151392,
+    "VRomEnd": 176848
+  },
+  {
+    "Filename": "Audiobank",
+    "VRomStart": 176848,
+    "VRomEnd": 333504
+  },
+  {
+    "Filename": "Audioseq",
+    "VRomStart": 333504,
+    "VRomEnd": 666432
+  },
+  {
+    "Filename": "Audiotable",
+    "VRomStart": 666432,
+    "VRomEnd": 6206128
+  },
+  {
+    "Filename": "link_animetion",
+    "VRomStart": 6206128,
+    "VRomEnd": 9326672
+  },
+  {
+    "Filename": "icon_item_field_static",
+    "VRomStart": 9977856,
+    "VRomEnd": 10062576
+  },
+  {
+    "Filename": "icon_item_dungeon_static",
+    "VRomStart": 10063872,
+    "VRomEnd": 10083200
+  },
+  {
+    "Filename": "icon_item_gameover_static",
+    "VRomStart": 10084352,
+    "VRomEnd": 10097408
+  },
+  {
+    "Filename": "map_name_static [EN]",
+    "VRomStart": 10100736,
+    "VRomEnd": 10131968
+  },
+  {
+    "Filename": "map_name_static [DE]",
+    "VRomStart": 10133504,
+    "VRomEnd": 10165504
+  },
+  {
+    "Filename": "map_name_static [FR]",
+    "VRomStart": 10166272,
+    "VRomEnd": 10198016
+  },
+  {
+    "Filename": "map_name_static [ES]",
+    "VRomStart": 10199040,
+    "VRomEnd": 10230784
+  },
+  {
+    "Filename": "DBG_009C2000",
+    "VRomStart": 10231808,
+    "VRomEnd": 10232544
+  },
+  {
+    "Filename": "map_i_static",
+    "VRomStart": 10235904,
+    "VRomEnd": 10240784
+  },
+  {
+    "Filename": "map_grand_static",
+    "VRomStart": 10240784,
+    "VRomEnd": 10278496
+  },
+  {
+    "Filename": "item_name_static [EN]",
+    "VRomStart": 10278496,
+    "VRomEnd": 10334960
+  },
+  {
+    "Filename": "item_name_static [DE]",
+    "VRomStart": 10334960,
+    "VRomEnd": 10386752
+  },
+  {
+    "Filename": "item_name_static [FR]",
+    "VRomStart": 10386752,
+    "VRomEnd": 10441952
+  },
+  {
+    "Filename": "item_name_static [ES]",
+    "VRomStart": 10441952,
+    "VRomEnd": 10497824
+  },
+  {
+    "Filename": "DBG_00A02F20",
+    "VRomStart": 10497824,
+    "VRomEnd": 10504256
+  },
+  {
+    "Filename": "DBG_00A04840",
+    "VRomStart": 10504256,
+    "VRomEnd": 10511152
+  },
+  {
+    "Filename": "DBG_00A06330",
+    "VRomStart": 10511152,
+    "VRomEnd": 10519040
+  },
+  {
+    "Filename": "DBG_00A08200",
+    "VRomStart": 10519040,
+    "VRomEnd": 10526320
+  },
+  {
+    "Filename": "icon_item_static",
+    "VRomStart": 10526320,
+    "VRomEnd": 10809664
+  },
+  {
+    "Filename": "icon_item_24_static",
+    "VRomStart": 10809664,
+    "VRomEnd": 10828288
+  },
+  {
+    "Filename": "DBG_00A5F000",
+    "VRomStart": 10874880,
+    "VRomEnd": 10902032
+  },
+  {
+    "Filename": "DBG_00A65A10",
+    "VRomStart": 10902032,
+    "VRomEnd": 10928352
+  },
+  {
+    "Filename": "DBG_00A6D000",
+    "VRomStart": 10932224,
+    "VRomEnd": 11086848
+  },
+  {
+    "Filename": "do_action_static [EN]",
+    "VRomStart": 11087872,
+    "VRomEnd": 11104000
+  },
+  {
+    "Filename": "do_action_static [DE]",
+    "VRomStart": 11104256,
+    "VRomEnd": 11120384
+  },
+  {
+    "Filename": "do_action_static [FR]",
+    "VRomStart": 11120640,
+    "VRomEnd": 11136768
+  },
+  {
+    "Filename": "do_action_static [ES]",
+    "VRomStart": 11137024,
+    "VRomEnd": 11153152
+  },
+  {
+    "Filename": "message_static",
+    "VRomStart": 11153408,
+    "VRomEnd": 11174272
+  },
+  {
+    "Filename": "message_texture_static",
+    "VRomStart": 11177984,
+    "VRomEnd": 11182592
+  },
+  {
+    "Filename": "nes_font_static",
+    "VRomStart": 11186176,
+    "VRomEnd": 11206144
+  },
+  {
+    "Filename": "nes_message_data_static",
+    "VRomStart": 11206656,
+    "VRomEnd": 11639424
+  },
+  {
+    "Filename": "ger_message_data_static",
+    "VRomStart": 11640832,
+    "VRomEnd": 12119536
+  },
+  {
+    "Filename": "fra_message_data_static",
+    "VRomStart": 12120064,
+    "VRomEnd": 12583200
+  },
+  {
+    "Filename": "esp_message_data_static",
+    "VRomStart": 12587008,
+    "VRomEnd": 13039040
+  },
+  {
+    "Filename": "staff_message_data_static",
+    "VRomStart": 13041664,
+    "VRomEnd": 13045376
+  },
+  {
+    "Filename": "DBG_00C71000",
+    "VRomStart": 13045760,
+    "VRomEnd": 13082480
+  },
+  {
+    "Filename": "DBG_00C7A000",
+    "VRomStart": 13082624,
+    "VRomEnd": 13118720
+  },
+  {
+    "Filename": "DBG_00C83000",
+    "VRomStart": 13119488,
+    "VRomEnd": 13155552
+  },
+  {
+    "Filename": "DBG_00C8C000",
+    "VRomStart": 13156352,
+    "VRomEnd": 13192416
+  },
+  {
+    "Filename": "code",
+    "VRomStart": 13193216,
+    "VRomEnd": 14755328
+  },
+  {
+    "Filename": "title",
+    "VRomStart": 14755328,
+    "VRomEnd": 14758944
+  },
+  {
+    "Filename": "select",
+    "VRomStart": 14758944,
+    "VRomEnd": 14773040
+  },
+  {
+    "Filename": "opening",
+    "VRomStart": 14773040,
+    "VRomEnd": 14773760
+  },
+  {
+    "Filename": "file_choose",
+    "VRomStart": 14773760,
+    "VRomEnd": 14855872
+  },
+  {
+    "Filename": "daytelop",
+    "VRomStart": 14855872,
+    "VRomEnd": 14861984
+  },
+  {
+    "Filename": "kaleido_scope",
+    "VRomStart": 14861984,
+    "VRomEnd": 14967904
+  },
+  {
+    "Filename": "player_actor",
+    "VRomStart": 14967904,
+    "VRomEnd": 15204128
+  },
+  {
+    "Filename": "En_Test",
+    "VRomStart": 15204128,
+    "VRomEnd": 15207920
+  },
+  {
+    "Filename": "En_GirlA",
+    "VRomStart": 15207920,
+    "VRomEnd": 15216832
+  },
+  {
+    "Filename": "En_Part",
+    "VRomStart": 15216832,
+    "VRomEnd": 15218624
+  },
+  {
+    "Filename": "En_Light",
+    "VRomStart": 15218624,
+    "VRomEnd": 15222608
+  },
+  {
+    "Filename": "En_Door",
+    "VRomStart": 15222608,
+    "VRomEnd": 15228080
+  },
+  {
+    "Filename": "En_Box",
+    "VRomStart": 15228080,
+    "VRomEnd": 15237984
+  },
+  {
+    "Filename": "En_Pametfrog",
+    "VRomStart": 15237984,
+    "VRomEnd": 15256560
+  },
+  {
+    "Filename": "En_Okuta",
+    "VRomStart": 15256560,
+    "VRomEnd": 15269856
+  },
+  {
+    "Filename": "En_Bom",
+    "VRomStart": 15269856,
+    "VRomEnd": 15285040
+  },
+  {
+    "Filename": "En_Wallmas",
+    "VRomStart": 15285040,
+    "VRomEnd": 15294064
+  },
+  {
+    "Filename": "En_Dodongo",
+    "VRomStart": 15294064,
+    "VRomEnd": 15307344
+  },
+  {
+    "Filename": "En_Firefly",
+    "VRomStart": 15307344,
+    "VRomEnd": 15316336
+  },
+  {
+    "Filename": "En_Horse",
+    "VRomStart": 15316336,
+    "VRomEnd": 15380944
+  },
+  {
+    "Filename": "En_Arrow",
+    "VRomStart": 15380944,
+    "VRomEnd": 15390656
+  },
+  {
+    "Filename": "En_Elf",
+    "VRomStart": 15390656,
+    "VRomEnd": 15411376
+  },
+  {
+    "Filename": "En_Niw",
+    "VRomStart": 15411376,
+    "VRomEnd": 15422240
+  },
+  {
+    "Filename": "En_Tite",
+    "VRomStart": 15422240,
+    "VRomEnd": 15437888
+  },
+  {
+    "Filename": "En_Peehat",
+    "VRomStart": 15437888,
+    "VRomEnd": 15449904
+  },
+  {
+    "Filename": "En_Holl",
+    "VRomStart": 15449904,
+    "VRomEnd": 15453776
+  },
+  {
+    "Filename": "En_Dinofos",
+    "VRomStart": 15453776,
+    "VRomEnd": 15472352
+  },
+  {
+    "Filename": "En_Hata",
+    "VRomStart": 15472352,
+    "VRomEnd": 15473664
+  },
+  {
+    "Filename": "En_Zl1",
+    "VRomStart": 15473664,
+    "VRomEnd": 15473808
+  },
+  {
+    "Filename": "En_Viewer",
+    "VRomStart": 15473808,
+    "VRomEnd": 15475680
+  },
+  {
+    "Filename": "En_Bubble",
+    "VRomStart": 15475680,
+    "VRomEnd": 15481424
+  },
+  {
+    "Filename": "Door_Shutter",
+    "VRomStart": 15481424,
+    "VRomEnd": 15489344
+  },
+  {
+    "Filename": "En_Boom",
+    "VRomStart": 15489344,
+    "VRomEnd": 15492960
+  },
+  {
+    "Filename": "En_Torch2",
+    "VRomStart": 15492960,
+    "VRomEnd": 15494432
+  },
+  {
+    "Filename": "En_Minifrog",
+    "VRomStart": 15494432,
+    "VRomEnd": 15502016
+  },
+  {
+    "Filename": "En_St",
+    "VRomStart": 15502016,
+    "VRomEnd": 15513440
+  },
+  {
+    "Filename": "Obj_Wturn",
+    "VRomStart": 15513440,
+    "VRomEnd": 15515072
+  },
+  {
+    "Filename": "En_River_Sound",
+    "VRomStart": 15515072,
+    "VRomEnd": 15516000
+  },
+  {
+    "Filename": "En_Ossan",
+    "VRomStart": 15516000,
+    "VRomEnd": 15537136
+  },
+  {
+    "Filename": "En_Famos",
+    "VRomStart": 15537136,
+    "VRomEnd": 15546416
+  },
+  {
+    "Filename": "En_Bombf",
+    "VRomStart": 15546416,
+    "VRomEnd": 15551984
+  },
+  {
+    "Filename": "En_Am",
+    "VRomStart": 15551984,
+    "VRomEnd": 15558560
+  },
+  {
+    "Filename": "En_Dekubaba",
+    "VRomStart": 15558560,
+    "VRomEnd": 15576624
+  },
+  {
+    "Filename": "En_M_Fire1",
+    "VRomStart": 15576624,
+    "VRomEnd": 15577120
+  },
+  {
+    "Filename": "En_M_Thunder",
+    "VRomStart": 15577120,
+    "VRomEnd": 15585680
+  },
+  {
+    "Filename": "Bg_Breakwall",
+    "VRomStart": 15585680,
+    "VRomEnd": 15591168
+  },
+  {
+    "Filename": "Door_Warp1",
+    "VRomStart": 15591168,
+    "VRomEnd": 15608096
+  },
+  {
+    "Filename": "Obj_Syokudai",
+    "VRomStart": 15608096,
+    "VRomEnd": 15611904
+  },
+  {
+    "Filename": "Item_B_Heart",
+    "VRomStart": 15611904,
+    "VRomEnd": 15613200
+  },
+  {
+    "Filename": "En_Dekunuts",
+    "VRomStart": 15613200,
+    "VRomEnd": 15622416
+  },
+  {
+    "Filename": "En_Bbfall",
+    "VRomStart": 15622416,
+    "VRomEnd": 15631024
+  },
+  {
+    "Filename": "Arms_Hook",
+    "VRomStart": 15631024,
+    "VRomEnd": 15634784
+  },
+  {
+    "Filename": "En_Bb",
+    "VRomStart": 15634784,
+    "VRomEnd": 15643152
+  },
+  {
+    "Filename": "Bg_Keikoku_Spr",
+    "VRomStart": 15643152,
+    "VRomEnd": 15643824
+  },
+  {
+    "Filename": "En_Wood02",
+    "VRomStart": 15643824,
+    "VRomEnd": 15649168
+  },
+  {
+    "Filename": "En_Death",
+    "VRomStart": 15649168,
+    "VRomEnd": 15672512
+  },
+  {
+    "Filename": "En_Minideath",
+    "VRomStart": 15672512,
+    "VRomEnd": 15681888
+  },
+  {
+    "Filename": "En_Vm",
+    "VRomStart": 15681888,
+    "VRomEnd": 15687904
+  },
+  {
+    "Filename": "Demo_Effect",
+    "VRomStart": 15687904,
+    "VRomEnd": 15692192
+  },
+  {
+    "Filename": "Demo_Kankyo",
+    "VRomStart": 15692192,
+    "VRomEnd": 15701536
+  },
+  {
+    "Filename": "En_Floormas",
+    "VRomStart": 15701536,
+    "VRomEnd": 15717440
+  },
+  {
+    "Filename": "En_Rd",
+    "VRomStart": 15717440,
+    "VRomEnd": 15732960
+  },
+  {
+    "Filename": "Bg_F40_Flift",
+    "VRomStart": 15732960,
+    "VRomEnd": 15734032
+  },
+  {
+    "Filename": "Obj_Mure",
+    "VRomStart": 15734032,
+    "VRomEnd": 15739280
+  },
+  {
+    "Filename": "En_Sw",
+    "VRomStart": 15739280,
+    "VRomEnd": 15753904
+  },
+  {
+    "Filename": "Object_Kankyo",
+    "VRomStart": 15753904,
+    "VRomEnd": 15764912
+  },
+  {
+    "Filename": "En_Horse_Link_Child",
+    "VRomStart": 15764912,
+    "VRomEnd": 15772800
+  },
+  {
+    "Filename": "Door_Ana",
+    "VRomStart": 15772800,
+    "VRomEnd": 15774672
+  },
+  {
+    "Filename": "En_Encount1",
+    "VRomStart": 15774672,
+    "VRomEnd": 15776560
+  },
+  {
+    "Filename": "Demo_Tre_Lgt",
+    "VRomStart": 15776560,
+    "VRomEnd": 15778864
+  },
+  {
+    "Filename": "En_Encount2",
+    "VRomStart": 15778864,
+    "VRomEnd": 15781968
+  },
+  {
+    "Filename": "En_Fire_Rock",
+    "VRomStart": 15781968,
+    "VRomEnd": 15782112
+  },
+  {
+    "Filename": "Bg_Ctower_Rot",
+    "VRomStart": 15782112,
+    "VRomEnd": 15783760
+  },
+  {
+    "Filename": "Mir_Ray",
+    "VRomStart": 15783760,
+    "VRomEnd": 15790608
+  },
+  {
+    "Filename": "En_Sb",
+    "VRomStart": 15790608,
+    "VRomEnd": 15795456
+  },
+  {
+    "Filename": "En_Bigslime",
+    "VRomStart": 15795456,
+    "VRomEnd": 15848832
+  },
+  {
+    "Filename": "En_Karebaba",
+    "VRomStart": 15848832,
+    "VRomEnd": 15857872
+  },
+  {
+    "Filename": "En_In",
+    "VRomStart": 15857872,
+    "VRomEnd": 15876768
+  },
+  {
+    "Filename": "En_Bom_Chu",
+    "VRomStart": 15876768,
+    "VRomEnd": 15883008
+  },
+  {
+    "Filename": "En_Horse_Game_Check",
+    "VRomStart": 15883008,
+    "VRomEnd": 15888432
+  },
+  {
+    "Filename": "En_Rr",
+    "VRomStart": 15888432,
+    "VRomEnd": 15899408
+  },
+  {
+    "Filename": "En_Fr",
+    "VRomStart": 15899408,
+    "VRomEnd": 15900240
+  },
+  {
+    "Filename": "Obj_Oshihiki",
+    "VRomStart": 15900240,
+    "VRomEnd": 15907408
+  },
+  {
+    "Filename": "Eff_Dust",
+    "VRomStart": 15907408,
+    "VRomEnd": 15913024
+  },
+  {
+    "Filename": "Bg_Umajump",
+    "VRomStart": 15913024,
+    "VRomEnd": 15915696
+  },
+  {
+    "Filename": "En_Insect",
+    "VRomStart": 15915696,
+    "VRomEnd": 15922368
+  },
+  {
+    "Filename": "En_Butte",
+    "VRomStart": 15922368,
+    "VRomEnd": 15928480
+  },
+  {
+    "Filename": "En_Fish",
+    "VRomStart": 15928480,
+    "VRomEnd": 15940080
+  },
+  {
+    "Filename": "Item_Etcetera",
+    "VRomStart": 15940080,
+    "VRomEnd": 15941472
+  },
+  {
+    "Filename": "Arrow_Fire",
+    "VRomStart": 15941472,
+    "VRomEnd": 15950288
+  },
+  {
+    "Filename": "Arrow_Ice",
+    "VRomStart": 15950288,
+    "VRomEnd": 15958528
+  },
+  {
+    "Filename": "Arrow_Light",
+    "VRomStart": 15958528,
+    "VRomEnd": 15966720
+  },
+  {
+    "Filename": "Obj_Kibako",
+    "VRomStart": 15966720,
+    "VRomEnd": 15972320
+  },
+  {
+    "Filename": "Obj_Tsubo",
+    "VRomStart": 15972320,
+    "VRomEnd": 15982208
+  },
+  {
+    "Filename": "En_Ik",
+    "VRomStart": 15982208,
+    "VRomEnd": 15994992
+  },
+  {
+    "Filename": "Demo_Shd",
+    "VRomStart": 15994992,
+    "VRomEnd": 15995136
+  },
+  {
+    "Filename": "En_Dns",
+    "VRomStart": 15995136,
+    "VRomEnd": 16002736
+  },
+  {
+    "Filename": "Elf_Msg",
+    "VRomStart": 16002736,
+    "VRomEnd": 16005216
+  },
+  {
+    "Filename": "En_Honotrap",
+    "VRomStart": 16005216,
+    "VRomEnd": 16015504
+  },
+  {
+    "Filename": "En_Tubo_Trap",
+    "VRomStart": 16015504,
+    "VRomEnd": 16019264
+  },
+  {
+    "Filename": "Obj_Ice_Poly",
+    "VRomStart": 16019264,
+    "VRomEnd": 16023536
+  },
+  {
+    "Filename": "En_Fz",
+    "VRomStart": 16023536,
+    "VRomEnd": 16034048
+  },
+  {
+    "Filename": "En_Kusa",
+    "VRomStart": 16034048,
+    "VRomEnd": 16043424
+  },
+  {
+    "Filename": "Obj_Bean",
+    "VRomStart": 16043424,
+    "VRomEnd": 16055792
+  },
+  {
+    "Filename": "Obj_Bombiwa",
+    "VRomStart": 16055792,
+    "VRomEnd": 16062816
+  },
+  {
+    "Filename": "Obj_Switch",
+    "VRomStart": 16062816,
+    "VRomEnd": 16074992
+  },
+  {
+    "Filename": "Obj_Lift",
+    "VRomStart": 16074992,
+    "VRomEnd": 16078112
+  },
+  {
+    "Filename": "Obj_Hsblock",
+    "VRomStart": 16078112,
+    "VRomEnd": 16080048
+  },
+  {
+    "Filename": "En_Okarina_Tag",
+    "VRomStart": 16080048,
+    "VRomEnd": 16081712
+  },
+  {
+    "Filename": "En_Goroiwa",
+    "VRomStart": 16081712,
+    "VRomEnd": 16102864
+  },
+  {
+    "Filename": "En_Daiku",
+    "VRomStart": 16102864,
+    "VRomEnd": 16106832
+  },
+  {
+    "Filename": "En_Nwc",
+    "VRomStart": 16106832,
+    "VRomEnd": 16112368
+  },
+  {
+    "Filename": "Item_Inbox",
+    "VRomStart": 16112368,
+    "VRomEnd": 16112832
+  },
+  {
+    "Filename": "En_Ge1",
+    "VRomStart": 16112832,
+    "VRomEnd": 16117648
+  },
+  {
+    "Filename": "Obj_Blockstop",
+    "VRomStart": 16117648,
+    "VRomEnd": 16118320
+  },
+  {
+    "Filename": "En_Sda",
+    "VRomStart": 16118320,
+    "VRomEnd": 16124320
+  },
+  {
+    "Filename": "En_Clear_Tag",
+    "VRomStart": 16124320,
+    "VRomEnd": 16149552
+  },
+  {
+    "Filename": "En_Gm",
+    "VRomStart": 16149552,
+    "VRomEnd": 16169408
+  },
+  {
+    "Filename": "En_Ms",
+    "VRomStart": 16169408,
+    "VRomEnd": 16171216
+  },
+  {
+    "Filename": "En_Hs",
+    "VRomStart": 16171216,
+    "VRomEnd": 16175280
+  },
+  {
+    "Filename": "Bg_Ingate",
+    "VRomStart": 16175280,
+    "VRomEnd": 16179648
+  },
+  {
+    "Filename": "En_Kanban",
+    "VRomStart": 16179648,
+    "VRomEnd": 16194256
+  },
+  {
+    "Filename": "En_Attack_Niw",
+    "VRomStart": 16194256,
+    "VRomEnd": 16199120
+  },
+  {
+    "Filename": "En_Mk",
+    "VRomStart": 16199120,
+    "VRomEnd": 16204240
+  },
+  {
+    "Filename": "En_Owl",
+    "VRomStart": 16204240,
+    "VRomEnd": 16218672
+  },
+  {
+    "Filename": "En_Ishi",
+    "VRomStart": 16218672,
+    "VRomEnd": 16229088
+  },
+  {
+    "Filename": "Obj_Hana",
+    "VRomStart": 16229088,
+    "VRomEnd": 16229376
+  },
+  {
+    "Filename": "Obj_Lightswitch",
+    "VRomStart": 16229376,
+    "VRomEnd": 16234656
+  },
+  {
+    "Filename": "Obj_Mure2",
+    "VRomStart": 16234656,
+    "VRomEnd": 16237568
+  },
+  {
+    "Filename": "En_Fu",
+    "VRomStart": 16237568,
+    "VRomEnd": 16255200
+  },
+  {
+    "Filename": "En_Stream",
+    "VRomStart": 16255200,
+    "VRomEnd": 16256848
+  },
+  {
+    "Filename": "En_Mm",
+    "VRomStart": 16256848,
+    "VRomEnd": 16259360
+  },
+  {
+    "Filename": "En_Weather_Tag",
+    "VRomStart": 16259360,
+    "VRomEnd": 16265568
+  },
+  {
+    "Filename": "En_Ani",
+    "VRomStart": 16265568,
+    "VRomEnd": 16269696
+  },
+  {
+    "Filename": "En_Js",
+    "VRomStart": 16269696,
+    "VRomEnd": 16281200
+  },
+  {
+    "Filename": "En_Okarina_Effect",
+    "VRomStart": 16281200,
+    "VRomEnd": 16282016
+  },
+  {
+    "Filename": "En_Mag",
+    "VRomStart": 16282016,
+    "VRomEnd": 16297504
+  },
+  {
+    "Filename": "Elf_Msg2",
+    "VRomStart": 16297504,
+    "VRomEnd": 16299680
+  },
+  {
+    "Filename": "Bg_F40_Swlift",
+    "VRomStart": 16299680,
+    "VRomEnd": 16300928
+  },
+  {
+    "Filename": "En_Kakasi",
+    "VRomStart": 16300928,
+    "VRomEnd": 16313424
+  },
+  {
+    "Filename": "Obj_Makeoshihiki",
+    "VRomStart": 16313424,
+    "VRomEnd": 16314624
+  },
+  {
+    "Filename": "Oceff_Spot",
+    "VRomStart": 16314624,
+    "VRomEnd": 16318832
+  },
+  {
+    "Filename": "En_Torch",
+    "VRomStart": 16318832,
+    "VRomEnd": 16319104
+  },
+  {
+    "Filename": "Shot_Sun",
+    "VRomStart": 16319104,
+    "VRomEnd": 16320832
+  },
+  {
+    "Filename": "Obj_Roomtimer",
+    "VRomStart": 16320832,
+    "VRomEnd": 16321616
+  },
+  {
+    "Filename": "En_Ssh",
+    "VRomStart": 16321616,
+    "VRomEnd": 16332608
+  },
+  {
+    "Filename": "Oceff_Wipe",
+    "VRomStart": 16332608,
+    "VRomEnd": 16336256
+  },
+  {
+    "Filename": "Effect_Ss_Dust",
+    "VRomStart": 16336256,
+    "VRomEnd": 16338496
+  },
+  {
+    "Filename": "Effect_Ss_Kirakira",
+    "VRomStart": 16338496,
+    "VRomEnd": 16340368
+  },
+  {
+    "Filename": "Effect_Ss_Bomb2",
+    "VRomStart": 16340368,
+    "VRomEnd": 16342848
+  },
+  {
+    "Filename": "Effect_Ss_Blast",
+    "VRomStart": 16342848,
+    "VRomEnd": 16343888
+  },
+  {
+    "Filename": "Effect_Ss_G_Spk",
+    "VRomStart": 16343888,
+    "VRomEnd": 16345504
+  },
+  {
+    "Filename": "Effect_Ss_D_Fire",
+    "VRomStart": 16345504,
+    "VRomEnd": 16346848
+  },
+  {
+    "Filename": "Effect_Ss_Bubble",
+    "VRomStart": 16346848,
+    "VRomEnd": 16348464
+  },
+  {
+    "Filename": "Effect_Ss_G_Ripple",
+    "VRomStart": 16348464,
+    "VRomEnd": 16350000
+  },
+  {
+    "Filename": "Effect_Ss_G_Splash",
+    "VRomStart": 16350000,
+    "VRomEnd": 16351136
+  },
+  {
+    "Filename": "Effect_Ss_G_Fire",
+    "VRomStart": 16351136,
+    "VRomEnd": 16351728
+  },
+  {
+    "Filename": "Effect_Ss_Lightning",
+    "VRomStart": 16351728,
+    "VRomEnd": 16353712
+  },
+  {
+    "Filename": "Effect_Ss_Dt_Bubble",
+    "VRomStart": 16353712,
+    "VRomEnd": 16355248
+  },
+  {
+    "Filename": "Effect_Ss_Hahen",
+    "VRomStart": 16355248,
+    "VRomEnd": 16357136
+  },
+  {
+    "Filename": "Effect_Ss_Stick",
+    "VRomStart": 16357136,
+    "VRomEnd": 16358048
+  },
+  {
+    "Filename": "Effect_Ss_Sibuki",
+    "VRomStart": 16358048,
+    "VRomEnd": 16359920
+  },
+  {
+    "Filename": "Effect_Ss_Stone1",
+    "VRomStart": 16359920,
+    "VRomEnd": 16361008
+  },
+  {
+    "Filename": "Effect_Ss_Hitmark",
+    "VRomStart": 16361008,
+    "VRomEnd": 16362448
+  },
+  {
+    "Filename": "Effect_Ss_Fhg_Flash",
+    "VRomStart": 16362448,
+    "VRomEnd": 16365376
+  },
+  {
+    "Filename": "Effect_Ss_K_Fire",
+    "VRomStart": 16365376,
+    "VRomEnd": 16366688
+  },
+  {
+    "Filename": "Effect_Ss_Solder_Srch_Ball",
+    "VRomStart": 16366688,
+    "VRomEnd": 16368016
+  },
+  {
+    "Filename": "Effect_Ss_Kakera",
+    "VRomStart": 16368016,
+    "VRomEnd": 16372688
+  },
+  {
+    "Filename": "Effect_Ss_Ice_Piece",
+    "VRomStart": 16372688,
+    "VRomEnd": 16373936
+  },
+  {
+    "Filename": "Effect_Ss_En_Ice",
+    "VRomStart": 16373936,
+    "VRomEnd": 16376144
+  },
+  {
+    "Filename": "Effect_Ss_Fire_Tail",
+    "VRomStart": 16376144,
+    "VRomEnd": 16378080
+  },
+  {
+    "Filename": "Effect_Ss_En_Fire",
+    "VRomStart": 16378080,
+    "VRomEnd": 16379968
+  },
+  {
+    "Filename": "Effect_Ss_Extra",
+    "VRomStart": 16379968,
+    "VRomEnd": 16381072
+  },
+  {
+    "Filename": "Effect_Ss_Dead_Db",
+    "VRomStart": 16381072,
+    "VRomEnd": 16382288
+  },
+  {
+    "Filename": "Effect_Ss_Dead_Dd",
+    "VRomStart": 16382288,
+    "VRomEnd": 16383888
+  },
+  {
+    "Filename": "Effect_Ss_Dead_Ds",
+    "VRomStart": 16383888,
+    "VRomEnd": 16385232
+  },
+  {
+    "Filename": "Oceff_Storm",
+    "VRomStart": 16385232,
+    "VRomEnd": 16393232
+  },
+  {
+    "Filename": "Obj_Demo",
+    "VRomStart": 16393232,
+    "VRomEnd": 16394352
+  },
+  {
+    "Filename": "En_Minislime",
+    "VRomStart": 16394352,
+    "VRomEnd": 16404208
+  },
+  {
+    "Filename": "En_Nutsball",
+    "VRomStart": 16404208,
+    "VRomEnd": 16406048
+  },
+  {
+    "Filename": "Oceff_Wipe2",
+    "VRomStart": 16406048,
+    "VRomEnd": 16412304
+  },
+  {
+    "Filename": "Oceff_Wipe3",
+    "VRomStart": 16412304,
+    "VRomEnd": 16418512
+  },
+  {
+    "Filename": "En_Dg",
+    "VRomStart": 16418512,
+    "VRomEnd": 16434464
+  },
+  {
+    "Filename": "En_Si",
+    "VRomStart": 16434464,
+    "VRomEnd": 16435744
+  },
+  {
+    "Filename": "Obj_Comb",
+    "VRomStart": 16435744,
+    "VRomEnd": 16442544
+  },
+  {
+    "Filename": "Obj_Kibako2",
+    "VRomStart": 16442544,
+    "VRomEnd": 16445392
+  },
+  {
+    "Filename": "En_Hs2",
+    "VRomStart": 16445392,
+    "VRomEnd": 16445680
+  },
+  {
+    "Filename": "Obj_Mure3",
+    "VRomStart": 16445680,
+    "VRomEnd": 16447952
+  },
+  {
+    "Filename": "En_Tg",
+    "VRomStart": 16447952,
+    "VRomEnd": 16451360
+  },
+  {
+    "Filename": "En_Wf",
+    "VRomStart": 16451360,
+    "VRomEnd": 16470512
+  },
+  {
+    "Filename": "En_Skb",
+    "VRomStart": 16470512,
+    "VRomEnd": 16485056
+  },
+  {
+    "Filename": "En_Gs",
+    "VRomStart": 16485056,
+    "VRomEnd": 16497888
+  },
+  {
+    "Filename": "Obj_Sound",
+    "VRomStart": 16497888,
+    "VRomEnd": 16498496
+  },
+  {
+    "Filename": "En_Crow",
+    "VRomStart": 16498496,
+    "VRomEnd": 16504960
+  },
+  {
+    "Filename": "En_Cow",
+    "VRomStart": 16504960,
+    "VRomEnd": 16510848
+  },
+  {
+    "Filename": "Oceff_Wipe4",
+    "VRomStart": 16510848,
+    "VRomEnd": 16515184
+  },
+  {
+    "Filename": "En_Zo",
+    "VRomStart": 16515184,
+    "VRomEnd": 16519696
+  },
+  {
+    "Filename": "Effect_Ss_Ice_Smoke",
+    "VRomStart": 16519696,
+    "VRomEnd": 16520704
+  },
+  {
+    "Filename": "Obj_Makekinsuta",
+    "VRomStart": 16520704,
+    "VRomEnd": 16522064
+  },
+  {
+    "Filename": "En_Ge3",
+    "VRomStart": 16522064,
+    "VRomEnd": 16526928
+  },
+  {
+    "Filename": "Obj_Hamishi",
+    "VRomStart": 16526928,
+    "VRomEnd": 16530576
+  },
+  {
+    "Filename": "En_Zl4",
+    "VRomStart": 16530576,
+    "VRomEnd": 16532064
+  },
+  {
+    "Filename": "En_Mm2",
+    "VRomStart": 16532064,
+    "VRomEnd": 16535200
+  },
+  {
+    "Filename": "Door_Spiral",
+    "VRomStart": 16535200,
+    "VRomEnd": 16537760
+  },
+  {
+    "Filename": "Obj_Pzlblock",
+    "VRomStart": 16537760,
+    "VRomEnd": 16542016
+  },
+  {
+    "Filename": "Obj_Toge",
+    "VRomStart": 16542016,
+    "VRomEnd": 16545632
+  },
+  {
+    "Filename": "Obj_Armos",
+    "VRomStart": 16545632,
+    "VRomEnd": 16550064
+  },
+  {
+    "Filename": "Obj_Boyo",
+    "VRomStart": 16550064,
+    "VRomEnd": 16551600
+  },
+  {
+    "Filename": "En_Grasshopper",
+    "VRomStart": 16551600,
+    "VRomEnd": 16564544
+  },
+  {
+    "Filename": "Obj_Grass",
+    "VRomStart": 16564544,
+    "VRomEnd": 16572688
+  },
+  {
+    "Filename": "Obj_Grass_Carry",
+    "VRomStart": 16572688,
+    "VRomEnd": 16577344
+  },
+  {
+    "Filename": "Obj_Grass_Unit",
+    "VRomStart": 16577344,
+    "VRomEnd": 16579696
+  },
+  {
+    "Filename": "Bg_Fire_Wall",
+    "VRomStart": 16579696,
+    "VRomEnd": 16582400
+  },
+  {
+    "Filename": "En_Bu",
+    "VRomStart": 16582400,
+    "VRomEnd": 16583024
+  },
+  {
+    "Filename": "En_Encount3",
+    "VRomStart": 16583024,
+    "VRomEnd": 16585824
+  },
+  {
+    "Filename": "En_Jso",
+    "VRomStart": 16585824,
+    "VRomEnd": 16602496
+  },
+  {
+    "Filename": "Obj_Chikuwa",
+    "VRomStart": 16602496,
+    "VRomEnd": 16605840
+  },
+  {
+    "Filename": "En_Knight",
+    "VRomStart": 16605840,
+    "VRomEnd": 16662112
+  },
+  {
+    "Filename": "En_Warp_tag",
+    "VRomStart": 16662112,
+    "VRomEnd": 16664912
+  },
+  {
+    "Filename": "En_Aob_01",
+    "VRomStart": 16664912,
+    "VRomEnd": 16677504
+  },
+  {
+    "Filename": "En_Boj_01",
+    "VRomStart": 16677504,
+    "VRomEnd": 16677648
+  },
+  {
+    "Filename": "En_Boj_02",
+    "VRomStart": 16677648,
+    "VRomEnd": 16677792
+  },
+  {
+    "Filename": "En_Boj_03",
+    "VRomStart": 16677792,
+    "VRomEnd": 16677936
+  },
+  {
+    "Filename": "En_Encount4",
+    "VRomStart": 16677936,
+    "VRomEnd": 16680288
+  },
+  {
+    "Filename": "En_Bom_Bowl_Man",
+    "VRomStart": 16680288,
+    "VRomEnd": 16688544
+  },
+  {
+    "Filename": "En_Syateki_Man",
+    "VRomStart": 16688544,
+    "VRomEnd": 16703184
+  },
+  {
+    "Filename": "Bg_Icicle",
+    "VRomStart": 16703184,
+    "VRomEnd": 16705888
+  },
+  {
+    "Filename": "En_Syateki_Crow",
+    "VRomStart": 16705888,
+    "VRomEnd": 16709888
+  },
+  {
+    "Filename": "En_Boj_04",
+    "VRomStart": 16709888,
+    "VRomEnd": 16710032
+  },
+  {
+    "Filename": "En_Cne_01",
+    "VRomStart": 16710032,
+    "VRomEnd": 16714240
+  },
+  {
+    "Filename": "En_Bba_01",
+    "VRomStart": 16714240,
+    "VRomEnd": 16718368
+  },
+  {
+    "Filename": "En_Bji_01",
+    "VRomStart": 16718368,
+    "VRomEnd": 16723344
+  },
+  {
+    "Filename": "Bg_Spdweb",
+    "VRomStart": 16723344,
+    "VRomEnd": 16729152
+  },
+  {
+    "Filename": "En_Mt_tag",
+    "VRomStart": 16729152,
+    "VRomEnd": 16734240
+  },
+  {
+    "Filename": "Boss_01",
+    "VRomStart": 16734240,
+    "VRomEnd": 16771184
+  },
+  {
+    "Filename": "Boss_02",
+    "VRomStart": 16771184,
+    "VRomEnd": 16797200
+  },
+  {
+    "Filename": "Boss_03",
+    "VRomStart": 16797200,
+    "VRomEnd": 16827856
+  },
+  {
+    "Filename": "Boss_04",
+    "VRomStart": 16827856,
+    "VRomEnd": 16837712
+  },
+  {
+    "Filename": "Boss_05",
+    "VRomStart": 16837712,
+    "VRomEnd": 16854208
+  },
+  {
+    "Filename": "Boss_06",
+    "VRomStart": 16854208,
+    "VRomEnd": 16863456
+  },
+  {
+    "Filename": "Boss_07",
+    "VRomStart": 16863456,
+    "VRomEnd": 16955344
+  },
+  {
+    "Filename": "Bg_Dy_Yoseizo",
+    "VRomStart": 16955344,
+    "VRomEnd": 16964112
+  },
+  {
+    "Filename": "En_Boj_05",
+    "VRomStart": 16964112,
+    "VRomEnd": 16964256
+  },
+  {
+    "Filename": "En_Sob1",
+    "VRomStart": 16964256,
+    "VRomEnd": 16985776
+  },
+  {
+    "Filename": "En_Go",
+    "VRomStart": 16985776,
+    "VRomEnd": 17012240
+  },
+  {
+    "Filename": "En_Raf",
+    "VRomStart": 17012240,
+    "VRomEnd": 17023808
+  },
+  {
+    "Filename": "Obj_Funen",
+    "VRomStart": 17023808,
+    "VRomEnd": 17024464
+  },
+  {
+    "Filename": "Obj_Raillift",
+    "VRomStart": 17024464,
+    "VRomEnd": 17028160
+  },
+  {
+    "Filename": "Bg_Numa_Hana",
+    "VRomStart": 17028160,
+    "VRomEnd": 17032608
+  },
+  {
+    "Filename": "Obj_Flowerpot",
+    "VRomStart": 17032608,
+    "VRomEnd": 17042672
+  },
+  {
+    "Filename": "Obj_Spinyroll",
+    "VRomStart": 17042672,
+    "VRomEnd": 17050544
+  },
+  {
+    "Filename": "Dm_Hina",
+    "VRomStart": 17050544,
+    "VRomEnd": 17053536
+  },
+  {
+    "Filename": "En_Syateki_Wf",
+    "VRomStart": 17053536,
+    "VRomEnd": 17059024
+  },
+  {
+    "Filename": "Obj_Skateblock",
+    "VRomStart": 17059024,
+    "VRomEnd": 17067040
+  },
+  {
+    "Filename": "Effect_En_Ice_Block",
+    "VRomStart": 17067040,
+    "VRomEnd": 17068176
+  },
+  {
+    "Filename": "Obj_Iceblock",
+    "VRomStart": 17068176,
+    "VRomEnd": 17087472
+  },
+  {
+    "Filename": "En_Bigpamet",
+    "VRomStart": 17087472,
+    "VRomEnd": 17098496
+  },
+  {
+    "Filename": "Bg_Dblue_Movebg",
+    "VRomStart": 17098496,
+    "VRomEnd": 17108400
+  },
+  {
+    "Filename": "En_Syateki_Dekunuts",
+    "VRomStart": 17108400,
+    "VRomEnd": 17113488
+  },
+  {
+    "Filename": "Elf_Msg3",
+    "VRomStart": 17113488,
+    "VRomEnd": 17115760
+  },
+  {
+    "Filename": "En_Fg",
+    "VRomStart": 17115760,
+    "VRomEnd": 17121920
+  },
+  {
+    "Filename": "Dm_Ravine",
+    "VRomStart": 17121920,
+    "VRomEnd": 17122416
+  },
+  {
+    "Filename": "Dm_Sa",
+    "VRomStart": 17122416,
+    "VRomEnd": 17123808
+  },
+  {
+    "Filename": "En_Slime",
+    "VRomStart": 17123808,
+    "VRomEnd": 17138480
+  },
+  {
+    "Filename": "En_Pr",
+    "VRomStart": 17138480,
+    "VRomEnd": 17145552
+  },
+  {
+    "Filename": "Obj_Toudai",
+    "VRomStart": 17145552,
+    "VRomEnd": 17149072
+  },
+  {
+    "Filename": "Obj_Entotu",
+    "VRomStart": 17149072,
+    "VRomEnd": 17153136
+  },
+  {
+    "Filename": "Obj_Bell",
+    "VRomStart": 17153136,
+    "VRomEnd": 17156688
+  },
+  {
+    "Filename": "En_Syateki_Okuta",
+    "VRomStart": 17156688,
+    "VRomEnd": 17165392
+  },
+  {
+    "Filename": "Obj_Shutter",
+    "VRomStart": 17165392,
+    "VRomEnd": 17166304
+  },
+  {
+    "Filename": "Dm_Zl",
+    "VRomStart": 17166304,
+    "VRomEnd": 17168784
+  },
+  {
+    "Filename": "En_Ru",
+    "VRomStart": 17168784,
+    "VRomEnd": 17172544
+  },
+  {
+    "Filename": "En_Elfgrp",
+    "VRomStart": 17172544,
+    "VRomEnd": 17178608
+  },
+  {
+    "Filename": "Dm_Tsg",
+    "VRomStart": 17178608,
+    "VRomEnd": 17179744
+  },
+  {
+    "Filename": "En_Baguo",
+    "VRomStart": 17179744,
+    "VRomEnd": 17185600
+  },
+  {
+    "Filename": "Obj_Vspinyroll",
+    "VRomStart": 17185600,
+    "VRomEnd": 17191376
+  },
+  {
+    "Filename": "Obj_Smork",
+    "VRomStart": 17191376,
+    "VRomEnd": 17195008
+  },
+  {
+    "Filename": "En_Test2",
+    "VRomStart": 17195008,
+    "VRomEnd": 17196320
+  },
+  {
+    "Filename": "En_Test3",
+    "VRomStart": 17196320,
+    "VRomEnd": 17211728
+  },
+  {
+    "Filename": "En_Test4",
+    "VRomStart": 17211728,
+    "VRomEnd": 17218096
+  },
+  {
+    "Filename": "En_Bat",
+    "VRomStart": 17218096,
+    "VRomEnd": 17224624
+  },
+  {
+    "Filename": "En_Sekihi",
+    "VRomStart": 17224624,
+    "VRomEnd": 17226928
+  },
+  {
+    "Filename": "En_Wiz",
+    "VRomStart": 17226928,
+    "VRomEnd": 17243360
+  },
+  {
+    "Filename": "En_Wiz_Brock",
+    "VRomStart": 17243360,
+    "VRomEnd": 17245440
+  },
+  {
+    "Filename": "En_Wiz_Fire",
+    "VRomStart": 17245440,
+    "VRomEnd": 17258464
+  },
+  {
+    "Filename": "Eff_Change",
+    "VRomStart": 17258464,
+    "VRomEnd": 17260000
+  },
+  {
+    "Filename": "Dm_Statue",
+    "VRomStart": 17260000,
+    "VRomEnd": 17260288
+  },
+  {
+    "Filename": "Obj_Fireshield",
+    "VRomStart": 17260288,
+    "VRomEnd": 17264688
+  },
+  {
+    "Filename": "Bg_Ladder",
+    "VRomStart": 17264688,
+    "VRomEnd": 17266272
+  },
+  {
+    "Filename": "En_Mkk",
+    "VRomStart": 17266272,
+    "VRomEnd": 17274304
+  },
+  {
+    "Filename": "Demo_Getitem",
+    "VRomStart": 17274304,
+    "VRomEnd": 17275408
+  },
+  {
+    "Filename": "En_Dnb",
+    "VRomStart": 17275408,
+    "VRomEnd": 17280112
+  },
+  {
+    "Filename": "En_Dnh",
+    "VRomStart": 17280112,
+    "VRomEnd": 17282416
+  },
+  {
+    "Filename": "En_Dnk",
+    "VRomStart": 17282416,
+    "VRomEnd": 17287360
+  },
+  {
+    "Filename": "En_Dnq",
+    "VRomStart": 17287360,
+    "VRomEnd": 17292592
+  },
+  {
+    "Filename": "Bg_Keikoku_Saku",
+    "VRomStart": 17292592,
+    "VRomEnd": 17293968
+  },
+  {
+    "Filename": "Obj_Hugebombiwa",
+    "VRomStart": 17293968,
+    "VRomEnd": 17304384
+  },
+  {
+    "Filename": "En_Firefly2",
+    "VRomStart": 17304384,
+    "VRomEnd": 17304528
+  },
+  {
+    "Filename": "En_Rat",
+    "VRomStart": 17304528,
+    "VRomEnd": 17315296
+  },
+  {
+    "Filename": "En_Water_Effect",
+    "VRomStart": 17315296,
+    "VRomEnd": 17326992
+  },
+  {
+    "Filename": "En_Kusa2",
+    "VRomStart": 17326992,
+    "VRomEnd": 17345120
+  },
+  {
+    "Filename": "Bg_Spout_Fire",
+    "VRomStart": 17345120,
+    "VRomEnd": 17347456
+  },
+  {
+    "Filename": "En_Dy_Extra",
+    "VRomStart": 17347456,
+    "VRomEnd": 17349104
+  },
+  {
+    "Filename": "En_Bal",
+    "VRomStart": 17349104,
+    "VRomEnd": 17361456
+  },
+  {
+    "Filename": "En_Ginko_Man",
+    "VRomStart": 17361456,
+    "VRomEnd": 17369392
+  },
+  {
+    "Filename": "En_Warp_Uzu",
+    "VRomStart": 17369392,
+    "VRomEnd": 17370608
+  },
+  {
+    "Filename": "Obj_Driftice",
+    "VRomStart": 17370608,
+    "VRomEnd": 17375984
+  },
+  {
+    "Filename": "En_Look_Nuts",
+    "VRomStart": 17375984,
+    "VRomEnd": 17380256
+  },
+  {
+    "Filename": "En_Mushi2",
+    "VRomStart": 17380256,
+    "VRomEnd": 17395984
+  },
+  {
+    "Filename": "En_Fall",
+    "VRomStart": 17395984,
+    "VRomEnd": 17408496
+  },
+  {
+    "Filename": "En_Mm3",
+    "VRomStart": 17408496,
+    "VRomEnd": 17414704
+  },
+  {
+    "Filename": "Bg_Crace_Movebg",
+    "VRomStart": 17414704,
+    "VRomEnd": 17417904
+  },
+  {
+    "Filename": "En_Dno",
+    "VRomStart": 17417904,
+    "VRomEnd": 17430608
+  },
+  {
+    "Filename": "En_Pr2",
+    "VRomStart": 17430608,
+    "VRomEnd": 17439152
+  },
+  {
+    "Filename": "En_Prz",
+    "VRomStart": 17439152,
+    "VRomEnd": 17445312
+  },
+  {
+    "Filename": "En_Jso2",
+    "VRomStart": 17445312,
+    "VRomEnd": 17465360
+  },
+  {
+    "Filename": "Obj_Etcetera",
+    "VRomStart": 17465360,
+    "VRomEnd": 17469328
+  },
+  {
+    "Filename": "En_Egol",
+    "VRomStart": 17469328,
+    "VRomEnd": 17489504
+  },
+  {
+    "Filename": "Obj_Mine",
+    "VRomStart": 17489504,
+    "VRomEnd": 17505696
+  },
+  {
+    "Filename": "Obj_Purify",
+    "VRomStart": 17505696,
+    "VRomEnd": 17509184
+  },
+  {
+    "Filename": "En_Tru",
+    "VRomStart": 17509184,
+    "VRomEnd": 17535744
+  },
+  {
+    "Filename": "En_Trt",
+    "VRomStart": 17535744,
+    "VRomEnd": 17557728
+  },
+  {
+    "Filename": "En_Test5",
+    "VRomStart": 17557728,
+    "VRomEnd": 17558704
+  },
+  {
+    "Filename": "En_Test6",
+    "VRomStart": 17558704,
+    "VRomEnd": 17577520
+  },
+  {
+    "Filename": "En_Az",
+    "VRomStart": 17577520,
+    "VRomEnd": 17600592
+  },
+  {
+    "Filename": "En_Estone",
+    "VRomStart": 17600592,
+    "VRomEnd": 17604752
+  },
+  {
+    "Filename": "Bg_Hakugin_Post",
+    "VRomStart": 17604752,
+    "VRomEnd": 17618704
+  },
+  {
+    "Filename": "Dm_Opstage",
+    "VRomStart": 17618704,
+    "VRomEnd": 17619968
+  },
+  {
+    "Filename": "Dm_Stk",
+    "VRomStart": 17619968,
+    "VRomEnd": 17644288
+  },
+  {
+    "Filename": "Dm_Char00",
+    "VRomStart": 17644288,
+    "VRomEnd": 17656432
+  },
+  {
+    "Filename": "Dm_Char01",
+    "VRomStart": 17656432,
+    "VRomEnd": 17668448
+  },
+  {
+    "Filename": "Dm_Char02",
+    "VRomStart": 17668448,
+    "VRomEnd": 17670288
+  },
+  {
+    "Filename": "Dm_Char03",
+    "VRomStart": 17670288,
+    "VRomEnd": 17672560
+  },
+  {
+    "Filename": "Dm_Char04",
+    "VRomStart": 17672560,
+    "VRomEnd": 17675280
+  },
+  {
+    "Filename": "Dm_Char05",
+    "VRomStart": 17675280,
+    "VRomEnd": 17684992
+  },
+  {
+    "Filename": "Dm_Char06",
+    "VRomStart": 17684992,
+    "VRomEnd": 17686080
+  },
+  {
+    "Filename": "Dm_Char07",
+    "VRomStart": 17686080,
+    "VRomEnd": 17688016
+  },
+  {
+    "Filename": "Dm_Char08",
+    "VRomStart": 17688016,
+    "VRomEnd": 17700496
+  },
+  {
+    "Filename": "Dm_Char09",
+    "VRomStart": 17700496,
+    "VRomEnd": 17703184
+  },
+  {
+    "Filename": "Obj_Tokeidai",
+    "VRomStart": 17703184,
+    "VRomEnd": 17714432
+  },
+  {
+    "Filename": "En_Mnk",
+    "VRomStart": 17714432,
+    "VRomEnd": 17740416
+  },
+  {
+    "Filename": "En_Egblock",
+    "VRomStart": 17740416,
+    "VRomEnd": 17743312
+  },
+  {
+    "Filename": "En_Guard_Nuts",
+    "VRomStart": 17743312,
+    "VRomEnd": 17747600
+  },
+  {
+    "Filename": "Bg_Hakugin_Bombwall",
+    "VRomStart": 17747600,
+    "VRomEnd": 17752592
+  },
+  {
+    "Filename": "Obj_Tokei_Tobira",
+    "VRomStart": 17752592,
+    "VRomEnd": 17754368
+  },
+  {
+    "Filename": "Bg_Hakugin_Elvpole",
+    "VRomStart": 17754368,
+    "VRomEnd": 17755840
+  },
+  {
+    "Filename": "En_Ma4",
+    "VRomStart": 17755840,
+    "VRomEnd": 17767984
+  },
+  {
+    "Filename": "En_Twig",
+    "VRomStart": 17767984,
+    "VRomEnd": 17770784
+  },
+  {
+    "Filename": "En_Po_Fusen",
+    "VRomStart": 17770784,
+    "VRomEnd": 17774208
+  },
+  {
+    "Filename": "En_Door_Etc",
+    "VRomStart": 17774208,
+    "VRomEnd": 17776608
+  },
+  {
+    "Filename": "En_Bigokuta",
+    "VRomStart": 17776608,
+    "VRomEnd": 17786320
+  },
+  {
+    "Filename": "Bg_Icefloe",
+    "VRomStart": 17786320,
+    "VRomEnd": 17788480
+  },
+  {
+    "Filename": "DBG_010F6E40",
+    "VRomStart": 17788480,
+    "VRomEnd": 17790384
+  },
+  {
+    "Filename": "DBG_010F75B0",
+    "VRomStart": 17790384,
+    "VRomEnd": 17794464
+  },
+  {
+    "Filename": "DBG_010F85A0",
+    "VRomStart": 17794464,
+    "VRomEnd": 17801984
+  },
+  {
+    "Filename": "DBG_010FA300",
+    "VRomStart": 17801984,
+    "VRomEnd": 17802736
+  },
+  {
+    "Filename": "DBG_010FA5F0",
+    "VRomStart": 17802736,
+    "VRomEnd": 17804176
+  },
+  {
+    "Filename": "Effect_Ss_Sbn",
+    "VRomStart": 17804176,
+    "VRomEnd": 17806944
+  },
+  {
+    "Filename": "Obj_Ocarinalift",
+    "VRomStart": 17806944,
+    "VRomEnd": 17810096
+  },
+  {
+    "Filename": "En_Time_Tag",
+    "VRomStart": 17810096,
+    "VRomEnd": 17813680
+  },
+  {
+    "Filename": "Bg_Open_Shutter",
+    "VRomStart": 17813680,
+    "VRomEnd": 17815680
+  },
+  {
+    "Filename": "Bg_Open_Spot",
+    "VRomStart": 17815680,
+    "VRomEnd": 17816432
+  },
+  {
+    "Filename": "Bg_Fu_Kaiten",
+    "VRomStart": 17816432,
+    "VRomEnd": 17817408
+  },
+  {
+    "Filename": "Obj_Aqua",
+    "VRomStart": 17817408,
+    "VRomEnd": 17821408
+  },
+  {
+    "Filename": "En_Elforg",
+    "VRomStart": 17821408,
+    "VRomEnd": 17829376
+  },
+  {
+    "Filename": "En_Elfbub",
+    "VRomStart": 17829376,
+    "VRomEnd": 17831312
+  },
+  {
+    "Filename": "En_Fu_Mato",
+    "VRomStart": 17831312,
+    "VRomEnd": 17837344
+  },
+  {
+    "Filename": "En_Fu_Kago",
+    "VRomStart": 17837344,
+    "VRomEnd": 17842288
+  },
+  {
+    "Filename": "En_Osn",
+    "VRomStart": 17842288,
+    "VRomEnd": 17852016
+  },
+  {
+    "Filename": "Bg_Ctower_Gear",
+    "VRomStart": 17852016,
+    "VRomEnd": 17854480
+  },
+  {
+    "Filename": "En_Trt2",
+    "VRomStart": 17854480,
+    "VRomEnd": 17866112
+  },
+  {
+    "Filename": "Obj_Tokei_Step",
+    "VRomStart": 17866112,
+    "VRomEnd": 17869728
+  },
+  {
+    "Filename": "Bg_Lotus",
+    "VRomStart": 17869728,
+    "VRomEnd": 17871600
+  },
+  {
+    "Filename": "En_Kame",
+    "VRomStart": 17871600,
+    "VRomEnd": 17882064
+  },
+  {
+    "Filename": "Obj_Takaraya_Wall",
+    "VRomStart": 17882064,
+    "VRomEnd": 17887056
+  },
+  {
+    "Filename": "Bg_Fu_Mizu",
+    "VRomStart": 17887056,
+    "VRomEnd": 17888064
+  },
+  {
+    "Filename": "En_Sellnuts",
+    "VRomStart": 17888064,
+    "VRomEnd": 17902432
+  },
+  {
+    "Filename": "Bg_Dkjail_Ivy",
+    "VRomStart": 17902432,
+    "VRomEnd": 17904944
+  },
+  {
+    "Filename": "Obj_Visiblock",
+    "VRomStart": 17904944,
+    "VRomEnd": 17905312
+  },
+  {
+    "Filename": "En_Takaraya",
+    "VRomStart": 17905312,
+    "VRomEnd": 17910288
+  },
+  {
+    "Filename": "En_Tsn",
+    "VRomStart": 17910288,
+    "VRomEnd": 17917536
+  },
+  {
+    "Filename": "En_Ds2n",
+    "VRomStart": 17917536,
+    "VRomEnd": 17919184
+  },
+  {
+    "Filename": "En_Fsn",
+    "VRomStart": 17919184,
+    "VRomEnd": 17939152
+  },
+  {
+    "Filename": "En_Shn",
+    "VRomStart": 17939152,
+    "VRomEnd": 17944352
+  },
+  {
+    "Filename": "En_Stop_heishi",
+    "VRomStart": 17944352,
+    "VRomEnd": 17950848
+  },
+  {
+    "Filename": "Obj_Bigicicle",
+    "VRomStart": 17950848,
+    "VRomEnd": 17954896
+  },
+  {
+    "Filename": "En_Lift_Nuts",
+    "VRomStart": 17954896,
+    "VRomEnd": 17966752
+  },
+  {
+    "Filename": "En_Tk",
+    "VRomStart": 17966752,
+    "VRomEnd": 17983696
+  },
+  {
+    "Filename": "Bg_Market_Step",
+    "VRomStart": 17983696,
+    "VRomEnd": 17984016
+  },
+  {
+    "Filename": "Obj_Lupygamelift",
+    "VRomStart": 17984016,
+    "VRomEnd": 17985904
+  },
+  {
+    "Filename": "En_Test7",
+    "VRomStart": 17985904,
+    "VRomEnd": 17999360
+  },
+  {
+    "Filename": "Obj_Lightblock",
+    "VRomStart": 17999360,
+    "VRomEnd": 18001424
+  },
+  {
+    "Filename": "Mir_Ray2",
+    "VRomStart": 18001424,
+    "VRomEnd": 18002688
+  },
+  {
+    "Filename": "En_Wdhand",
+    "VRomStart": 18002688,
+    "VRomEnd": 18012576
+  },
+  {
+    "Filename": "En_Gamelupy",
+    "VRomStart": 18012576,
+    "VRomEnd": 18014672
+  },
+  {
+    "Filename": "Bg_Danpei_Movebg",
+    "VRomStart": 18014672,
+    "VRomEnd": 18017152
+  },
+  {
+    "Filename": "En_Snowwd",
+    "VRomStart": 18017152,
+    "VRomEnd": 18018720
+  },
+  {
+    "Filename": "En_Pm",
+    "VRomStart": 18018720,
+    "VRomEnd": 18040144
+  },
+  {
+    "Filename": "En_Gakufu",
+    "VRomStart": 18040144,
+    "VRomEnd": 18043104
+  },
+  {
+    "Filename": "Elf_Msg4",
+    "VRomStart": 18043104,
+    "VRomEnd": 18045728
+  },
+  {
+    "Filename": "Elf_Msg5",
+    "VRomStart": 18045728,
+    "VRomEnd": 18047184
+  },
+  {
+    "Filename": "En_Col_Man",
+    "VRomStart": 18047184,
+    "VRomEnd": 18051216
+  },
+  {
+    "Filename": "En_Talk_Gibud",
+    "VRomStart": 18051216,
+    "VRomEnd": 18065184
+  },
+  {
+    "Filename": "En_Giant",
+    "VRomStart": 18065184,
+    "VRomEnd": 18070816
+  },
+  {
+    "Filename": "Obj_Snowball",
+    "VRomStart": 18070816,
+    "VRomEnd": 18081376
+  },
+  {
+    "Filename": "Boss_Hakugin",
+    "VRomStart": 18081376,
+    "VRomEnd": 18126784
+  },
+  {
+    "Filename": "En_Gb2",
+    "VRomStart": 18126784,
+    "VRomEnd": 18138128
+  },
+  {
+    "Filename": "En_Onpuman",
+    "VRomStart": 18138128,
+    "VRomEnd": 18139808
+  },
+  {
+    "Filename": "Bg_Tobira01",
+    "VRomStart": 18139808,
+    "VRomEnd": 18141152
+  },
+  {
+    "Filename": "En_Tag_Obj",
+    "VRomStart": 18141152,
+    "VRomEnd": 18141456
+  },
+  {
+    "Filename": "Obj_Dhouse",
+    "VRomStart": 18141456,
+    "VRomEnd": 18148368
+  },
+  {
+    "Filename": "Obj_Hakaisi",
+    "VRomStart": 18148368,
+    "VRomEnd": 18154960
+  },
+  {
+    "Filename": "Bg_Hakugin_Switch",
+    "VRomStart": 18154960,
+    "VRomEnd": 18160896
+  },
+  {
+    "Filename": "En_Snowman",
+    "VRomStart": 18160896,
+    "VRomEnd": 18175408
+  },
+  {
+    "Filename": "TG_Sw",
+    "VRomStart": 18175408,
+    "VRomEnd": 18176592
+  },
+  {
+    "Filename": "En_Po_Sisters",
+    "VRomStart": 18176592,
+    "VRomEnd": 18193088
+  },
+  {
+    "Filename": "En_Pp",
+    "VRomStart": 18193088,
+    "VRomEnd": 18209552
+  },
+  {
+    "Filename": "En_Hakurock",
+    "VRomStart": 18209552,
+    "VRomEnd": 18214624
+  },
+  {
+    "Filename": "En_Hanabi",
+    "VRomStart": 18214624,
+    "VRomEnd": 18219584
+  },
+  {
+    "Filename": "Obj_Dowsing",
+    "VRomStart": 18219584,
+    "VRomEnd": 18220080
+  },
+  {
+    "Filename": "Obj_Wind",
+    "VRomStart": 18220080,
+    "VRomEnd": 18223248
+  },
+  {
+    "Filename": "En_Racedog",
+    "VRomStart": 18223248,
+    "VRomEnd": 18231280
+  },
+  {
+    "Filename": "En_Kendo_Js",
+    "VRomStart": 18231280,
+    "VRomEnd": 18239536
+  },
+  {
+    "Filename": "Bg_Botihasira",
+    "VRomStart": 18239536,
+    "VRomEnd": 18240560
+  },
+  {
+    "Filename": "En_Fish2",
+    "VRomStart": 18240560,
+    "VRomEnd": 18255216
+  },
+  {
+    "Filename": "En_Pst",
+    "VRomStart": 18255216,
+    "VRomEnd": 18259344
+  },
+  {
+    "Filename": "En_Poh",
+    "VRomStart": 18259344,
+    "VRomEnd": 18274240
+  },
+  {
+    "Filename": "Obj_Spidertent",
+    "VRomStart": 18274240,
+    "VRomEnd": 18281696
+  },
+  {
+    "Filename": "En_Zoraegg",
+    "VRomStart": 18281696,
+    "VRomEnd": 18294416
+  },
+  {
+    "Filename": "En_Kbt",
+    "VRomStart": 18294416,
+    "VRomEnd": 18299440
+  },
+  {
+    "Filename": "En_Gg",
+    "VRomStart": 18299440,
+    "VRomEnd": 18308880
+  },
+  {
+    "Filename": "En_Maruta",
+    "VRomStart": 18308880,
+    "VRomEnd": 18317200
+  },
+  {
+    "Filename": "Obj_Snowball2",
+    "VRomStart": 18317200,
+    "VRomEnd": 18325488
+  },
+  {
+    "Filename": "En_Gg2",
+    "VRomStart": 18325488,
+    "VRomEnd": 18331744
+  },
+  {
+    "Filename": "Obj_Ghaka",
+    "VRomStart": 18331744,
+    "VRomEnd": 18334128
+  },
+  {
+    "Filename": "En_Dnp",
+    "VRomStart": 18334128,
+    "VRomEnd": 18340368
+  },
+  {
+    "Filename": "En_Dai",
+    "VRomStart": 18340368,
+    "VRomEnd": 18349872
+  },
+  {
+    "Filename": "Bg_Goron_Oyu",
+    "VRomStart": 18349872,
+    "VRomEnd": 18352208
+  },
+  {
+    "Filename": "En_Kgy",
+    "VRomStart": 18352208,
+    "VRomEnd": 18366000
+  },
+  {
+    "Filename": "En_Invadepoh",
+    "VRomStart": 18366000,
+    "VRomEnd": 18428176
+  },
+  {
+    "Filename": "En_Gk",
+    "VRomStart": 18428176,
+    "VRomEnd": 18442704
+  },
+  {
+    "Filename": "En_An",
+    "VRomStart": 18442704,
+    "VRomEnd": 18473088
+  },
+  {
+    "Filename": "En_Bee",
+    "VRomStart": 18473088,
+    "VRomEnd": 18476352
+  },
+  {
+    "Filename": "En_Ot",
+    "VRomStart": 18476352,
+    "VRomEnd": 18491792
+  },
+  {
+    "Filename": "En_Dragon",
+    "VRomStart": 18491792,
+    "VRomEnd": 18501120
+  },
+  {
+    "Filename": "Obj_Dora",
+    "VRomStart": 18501120,
+    "VRomEnd": 18504320
+  },
+  {
+    "Filename": "En_Bigpo",
+    "VRomStart": 18504320,
+    "VRomEnd": 18522592
+  },
+  {
+    "Filename": "Obj_Kendo_Kanban",
+    "VRomStart": 18522592,
+    "VRomEnd": 18528544
+  },
+  {
+    "Filename": "Obj_Hariko",
+    "VRomStart": 18528544,
+    "VRomEnd": 18529616
+  },
+  {
+    "Filename": "En_Sth",
+    "VRomStart": 18529616,
+    "VRomEnd": 18557680
+  },
+  {
+    "Filename": "Bg_Sinkai_Kabe",
+    "VRomStart": 18557680,
+    "VRomEnd": 18559200
+  },
+  {
+    "Filename": "Bg_Haka_Curtain",
+    "VRomStart": 18559200,
+    "VRomEnd": 18560560
+  },
+  {
+    "Filename": "Bg_Kin2_Bombwall",
+    "VRomStart": 18560560,
+    "VRomEnd": 18562864
+  },
+  {
+    "Filename": "Bg_Kin2_Fence",
+    "VRomStart": 18562864,
+    "VRomEnd": 18565328
+  },
+  {
+    "Filename": "Bg_Kin2_Picture",
+    "VRomStart": 18565328,
+    "VRomEnd": 18568656
+  },
+  {
+    "Filename": "Bg_Kin2_Shelf",
+    "VRomStart": 18568656,
+    "VRomEnd": 18572480
+  },
+  {
+    "Filename": "En_Rail_Skb",
+    "VRomStart": 18572480,
+    "VRomEnd": 18586544
+  },
+  {
+    "Filename": "En_Jg",
+    "VRomStart": 18586544,
+    "VRomEnd": 18596960
+  },
+  {
+    "Filename": "En_Tru_Mt",
+    "VRomStart": 18596960,
+    "VRomEnd": 18603808
+  },
+  {
+    "Filename": "Obj_Um",
+    "VRomStart": 18603808,
+    "VRomEnd": 18626400
+  },
+  {
+    "Filename": "En_Neo_Reeba",
+    "VRomStart": 18626400,
+    "VRomEnd": 18635680
+  },
+  {
+    "Filename": "Bg_Mbar_Chair",
+    "VRomStart": 18635680,
+    "VRomEnd": 18636064
+  },
+  {
+    "Filename": "Bg_Ikana_Block",
+    "VRomStart": 18636064,
+    "VRomEnd": 18639984
+  },
+  {
+    "Filename": "Bg_Ikana_Mirror",
+    "VRomStart": 18639984,
+    "VRomEnd": 18643392
+  },
+  {
+    "Filename": "Bg_Ikana_Rotaryroom",
+    "VRomStart": 18643392,
+    "VRomEnd": 18653312
+  },
+  {
+    "Filename": "Bg_Dblue_Balance",
+    "VRomStart": 18653312,
+    "VRomEnd": 18660592
+  },
+  {
+    "Filename": "Bg_Dblue_Waterfall",
+    "VRomStart": 18660592,
+    "VRomEnd": 18667728
+  },
+  {
+    "Filename": "En_Kaizoku",
+    "VRomStart": 18667728,
+    "VRomEnd": 18693168
+  },
+  {
+    "Filename": "En_Ge2",
+    "VRomStart": 18693168,
+    "VRomEnd": 18701536
+  },
+  {
+    "Filename": "En_Ma_Yts",
+    "VRomStart": 18701536,
+    "VRomEnd": 18707728
+  },
+  {
+    "Filename": "En_Ma_Yto",
+    "VRomStart": 18707728,
+    "VRomEnd": 18723328
+  },
+  {
+    "Filename": "Obj_Tokei_Turret",
+    "VRomStart": 18723328,
+    "VRomEnd": 18724176
+  },
+  {
+    "Filename": "Bg_Dblue_Elevator",
+    "VRomStart": 18724176,
+    "VRomEnd": 18727536
+  },
+  {
+    "Filename": "Obj_Warpstone",
+    "VRomStart": 18727536,
+    "VRomEnd": 18729968
+  },
+  {
+    "Filename": "En_Zog",
+    "VRomStart": 18729968,
+    "VRomEnd": 18742048
+  },
+  {
+    "Filename": "Obj_Rotlift",
+    "VRomStart": 18742048,
+    "VRomEnd": 18743152
+  },
+  {
+    "Filename": "Obj_Jg_Gakki",
+    "VRomStart": 18743152,
+    "VRomEnd": 18743824
+  },
+  {
+    "Filename": "Bg_Inibs_Movebg",
+    "VRomStart": 18743824,
+    "VRomEnd": 18744368
+  },
+  {
+    "Filename": "En_Zot",
+    "VRomStart": 18744368,
+    "VRomEnd": 18761072
+  },
+  {
+    "Filename": "Obj_Tree",
+    "VRomStart": 18761072,
+    "VRomEnd": 18762880
+  },
+  {
+    "Filename": "Obj_Y2lift",
+    "VRomStart": 18762880,
+    "VRomEnd": 18763808
+  },
+  {
+    "Filename": "Obj_Y2shutter",
+    "VRomStart": 18763808,
+    "VRomEnd": 18765440
+  },
+  {
+    "Filename": "Obj_Boat",
+    "VRomStart": 18765440,
+    "VRomEnd": 18767568
+  },
+  {
+    "Filename": "Obj_Taru",
+    "VRomStart": 18767568,
+    "VRomEnd": 18771456
+  },
+  {
+    "Filename": "Obj_Hunsui",
+    "VRomStart": 18771456,
+    "VRomEnd": 18779136
+  },
+  {
+    "Filename": "En_Jc_Mato",
+    "VRomStart": 18779136,
+    "VRomEnd": 18780464
+  },
+  {
+    "Filename": "Mir_Ray3",
+    "VRomStart": 18780464,
+    "VRomEnd": 18785616
+  },
+  {
+    "Filename": "En_Zob",
+    "VRomStart": 18785616,
+    "VRomEnd": 18794832
+  },
+  {
+    "Filename": "Elf_Msg6",
+    "VRomStart": 18794832,
+    "VRomEnd": 18799696
+  },
+  {
+    "Filename": "Obj_Nozoki",
+    "VRomStart": 18799696,
+    "VRomEnd": 18804992
+  },
+  {
+    "Filename": "En_Toto",
+    "VRomStart": 18804992,
+    "VRomEnd": 18813584
+  },
+  {
+    "Filename": "En_Railgibud",
+    "VRomStart": 18813584,
+    "VRomEnd": 18828240
+  },
+  {
+    "Filename": "En_Baba",
+    "VRomStart": 18828240,
+    "VRomEnd": 18836864
+  },
+  {
+    "Filename": "En_Suttari",
+    "VRomStart": 18836864,
+    "VRomEnd": 18857040
+  },
+  {
+    "Filename": "En_Zod",
+    "VRomStart": 18857040,
+    "VRomEnd": 18864352
+  },
+  {
+    "Filename": "En_Kujiya",
+    "VRomStart": 18864352,
+    "VRomEnd": 18868368
+  },
+  {
+    "Filename": "En_Geg",
+    "VRomStart": 18868368,
+    "VRomEnd": 18881952
+  },
+  {
+    "Filename": "Obj_Kinoko",
+    "VRomStart": 18881952,
+    "VRomEnd": 18883232
+  },
+  {
+    "Filename": "Obj_Yasi",
+    "VRomStart": 18883232,
+    "VRomEnd": 18884128
+  },
+  {
+    "Filename": "En_Tanron1",
+    "VRomStart": 18884128,
+    "VRomEnd": 18891072
+  },
+  {
+    "Filename": "En_Tanron2",
+    "VRomStart": 18891072,
+    "VRomEnd": 18898912
+  },
+  {
+    "Filename": "En_Tanron3",
+    "VRomStart": 18898912,
+    "VRomEnd": 18904224
+  },
+  {
+    "Filename": "Obj_Chan",
+    "VRomStart": 18904224,
+    "VRomEnd": 18910096
+  },
+  {
+    "Filename": "En_Zos",
+    "VRomStart": 18910096,
+    "VRomEnd": 18918640
+  },
+  {
+    "Filename": "En_S_Goro",
+    "VRomStart": 18918640,
+    "VRomEnd": 18933008
+  },
+  {
+    "Filename": "En_Nb",
+    "VRomStart": 18933008,
+    "VRomEnd": 18940848
+  },
+  {
+    "Filename": "En_Ja",
+    "VRomStart": 18940848,
+    "VRomEnd": 18950544
+  },
+  {
+    "Filename": "Bg_F40_Block",
+    "VRomStart": 18950544,
+    "VRomEnd": 18954656
+  },
+  {
+    "Filename": "Bg_F40_Switch",
+    "VRomStart": 18954656,
+    "VRomEnd": 18956800
+  },
+  {
+    "Filename": "En_Po_Composer",
+    "VRomStart": 18956800,
+    "VRomEnd": 18965056
+  },
+  {
+    "Filename": "En_Guruguru",
+    "VRomStart": 18965056,
+    "VRomEnd": 18969280
+  },
+  {
+    "Filename": "Oceff_Wipe5",
+    "VRomStart": 18969280,
+    "VRomEnd": 18975568
+  },
+  {
+    "Filename": "En_Stone_heishi",
+    "VRomStart": 18975568,
+    "VRomEnd": 18981104
+  },
+  {
+    "Filename": "Oceff_Wipe6",
+    "VRomStart": 18981104,
+    "VRomEnd": 18982992
+  },
+  {
+    "Filename": "En_Scopenuts",
+    "VRomStart": 18982992,
+    "VRomEnd": 18992944
+  },
+  {
+    "Filename": "En_Scopecrow",
+    "VRomStart": 18992944,
+    "VRomEnd": 18996480
+  },
+  {
+    "Filename": "Oceff_Wipe7",
+    "VRomStart": 18996480,
+    "VRomEnd": 19000416
+  },
+  {
+    "Filename": "Eff_Kamejima_Wave",
+    "VRomStart": 19000416,
+    "VRomEnd": 19002432
+  },
+  {
+    "Filename": "En_Hg",
+    "VRomStart": 19002432,
+    "VRomEnd": 19007424
+  },
+  {
+    "Filename": "En_Hgo",
+    "VRomStart": 19007424,
+    "VRomEnd": 19011792
+  },
+  {
+    "Filename": "En_Zov",
+    "VRomStart": 19011792,
+    "VRomEnd": 19018768
+  },
+  {
+    "Filename": "En_Ah",
+    "VRomStart": 19018768,
+    "VRomEnd": 19025344
+  },
+  {
+    "Filename": "Obj_Hgdoor",
+    "VRomStart": 19025344,
+    "VRomEnd": 19027408
+  },
+  {
+    "Filename": "Bg_Ikana_Bombwall",
+    "VRomStart": 19027408,
+    "VRomEnd": 19031008
+  },
+  {
+    "Filename": "Bg_Ikana_Ray",
+    "VRomStart": 19031008,
+    "VRomEnd": 19031904
+  },
+  {
+    "Filename": "Bg_Ikana_Shutter",
+    "VRomStart": 19031904,
+    "VRomEnd": 19034176
+  },
+  {
+    "Filename": "Bg_Haka_Bombwall",
+    "VRomStart": 19034176,
+    "VRomEnd": 19036368
+  },
+  {
+    "Filename": "Bg_Haka_Tomb",
+    "VRomStart": 19036368,
+    "VRomEnd": 19037472
+  },
+  {
+    "Filename": "En_Sc_Ruppe",
+    "VRomStart": 19037472,
+    "VRomEnd": 19039360
+  },
+  {
+    "Filename": "Bg_Iknv_Doukutu",
+    "VRomStart": 19039360,
+    "VRomEnd": 19043472
+  },
+  {
+    "Filename": "Bg_Iknv_Obj",
+    "VRomStart": 19043472,
+    "VRomEnd": 19046000
+  },
+  {
+    "Filename": "En_Pamera",
+    "VRomStart": 19046000,
+    "VRomEnd": 19057424
+  },
+  {
+    "Filename": "Obj_HsStump",
+    "VRomStart": 19057424,
+    "VRomEnd": 19059168
+  },
+  {
+    "Filename": "En_Hidden_Nuts",
+    "VRomStart": 19059168,
+    "VRomEnd": 19064416
+  },
+  {
+    "Filename": "En_Zow",
+    "VRomStart": 19064416,
+    "VRomEnd": 19073216
+  },
+  {
+    "Filename": "En_Talk",
+    "VRomStart": 19073216,
+    "VRomEnd": 19073776
+  },
+  {
+    "Filename": "En_Al",
+    "VRomStart": 19073776,
+    "VRomEnd": 19083840
+  },
+  {
+    "Filename": "En_Tab",
+    "VRomStart": 19083840,
+    "VRomEnd": 19090752
+  },
+  {
+    "Filename": "En_Nimotsu",
+    "VRomStart": 19090752,
+    "VRomEnd": 19091968
+  },
+  {
+    "Filename": "En_Hit_Tag",
+    "VRomStart": 19091968,
+    "VRomEnd": 19092640
+  },
+  {
+    "Filename": "En_Ruppecrow",
+    "VRomStart": 19092640,
+    "VRomEnd": 19099616
+  },
+  {
+    "Filename": "En_Tanron4",
+    "VRomStart": 19099616,
+    "VRomEnd": 19103312
+  },
+  {
+    "Filename": "En_Tanron5",
+    "VRomStart": 19103312,
+    "VRomEnd": 19109712
+  },
+  {
+    "Filename": "En_Tanron6",
+    "VRomStart": 19109712,
+    "VRomEnd": 19110176
+  },
+  {
+    "Filename": "En_Daiku2",
+    "VRomStart": 19110176,
+    "VRomEnd": 19117712
+  },
+  {
+    "Filename": "En_Muto",
+    "VRomStart": 19117712,
+    "VRomEnd": 19120512
+  },
+  {
+    "Filename": "En_Baisen",
+    "VRomStart": 19120512,
+    "VRomEnd": 19123424
+  },
+  {
+    "Filename": "En_Heishi",
+    "VRomStart": 19123424,
+    "VRomEnd": 19125120
+  },
+  {
+    "Filename": "En_Demo_heishi",
+    "VRomStart": 19125120,
+    "VRomEnd": 19126944
+  },
+  {
+    "Filename": "En_Dt",
+    "VRomStart": 19126944,
+    "VRomEnd": 19134192
+  },
+  {
+    "Filename": "En_Cha",
+    "VRomStart": 19134192,
+    "VRomEnd": 19135424
+  },
+  {
+    "Filename": "Obj_Dinner",
+    "VRomStart": 19135424,
+    "VRomEnd": 19136000
+  },
+  {
+    "Filename": "Eff_Lastday",
+    "VRomStart": 19136000,
+    "VRomEnd": 19138272
+  },
+  {
+    "Filename": "Bg_Ikana_Dharma",
+    "VRomStart": 19138272,
+    "VRomEnd": 19141104
+  },
+  {
+    "Filename": "En_Akindonuts",
+    "VRomStart": 19141104,
+    "VRomEnd": 19158976
+  },
+  {
+    "Filename": "Eff_Stk",
+    "VRomStart": 19158976,
+    "VRomEnd": 19160176
+  },
+  {
+    "Filename": "En_Ig",
+    "VRomStart": 19160176,
+    "VRomEnd": 19171504
+  },
+  {
+    "Filename": "En_Rg",
+    "VRomStart": 19171504,
+    "VRomEnd": 19181632
+  },
+  {
+    "Filename": "En_Osk",
+    "VRomStart": 19181632,
+    "VRomEnd": 19188544
+  },
+  {
+    "Filename": "En_Sth2",
+    "VRomStart": 19188544,
+    "VRomEnd": 19200304
+  },
+  {
+    "Filename": "En_Yb",
+    "VRomStart": 19200304,
+    "VRomEnd": 19206000
+  },
+  {
+    "Filename": "En_Rz",
+    "VRomStart": 19206000,
+    "VRomEnd": 19213920
+  },
+  {
+    "Filename": "En_Scopecoin",
+    "VRomStart": 19213920,
+    "VRomEnd": 19215008
+  },
+  {
+    "Filename": "En_Bjt",
+    "VRomStart": 19215008,
+    "VRomEnd": 19219120
+  },
+  {
+    "Filename": "En_Bomjima",
+    "VRomStart": 19219120,
+    "VRomEnd": 19231648
+  },
+  {
+    "Filename": "En_Bomjimb",
+    "VRomStart": 19231648,
+    "VRomEnd": 19242448
+  },
+  {
+    "Filename": "En_Bombers",
+    "VRomStart": 19242448,
+    "VRomEnd": 19248016
+  },
+  {
+    "Filename": "En_Bombers2",
+    "VRomStart": 19248016,
+    "VRomEnd": 19252848
+  },
+  {
+    "Filename": "En_Bombal",
+    "VRomStart": 19252848,
+    "VRomEnd": 19255984
+  },
+  {
+    "Filename": "Obj_Moon_Stone",
+    "VRomStart": 19255984,
+    "VRomEnd": 19257808
+  },
+  {
+    "Filename": "Obj_Mu_Pict",
+    "VRomStart": 19257808,
+    "VRomEnd": 19259664
+  },
+  {
+    "Filename": "Bg_Ikninside",
+    "VRomStart": 19259664,
+    "VRomEnd": 19261568
+  },
+  {
+    "Filename": "Eff_Zoraband",
+    "VRomStart": 19261568,
+    "VRomEnd": 19262816
+  },
+  {
+    "Filename": "Obj_Kepn_Koya",
+    "VRomStart": 19262816,
+    "VRomEnd": 19263248
+  },
+  {
+    "Filename": "Obj_Usiyane",
+    "VRomStart": 19263248,
+    "VRomEnd": 19266336
+  },
+  {
+    "Filename": "En_Nnh",
+    "VRomStart": 19266336,
+    "VRomEnd": 19267456
+  },
+  {
+    "Filename": "Obj_Kzsaku",
+    "VRomStart": 19267456,
+    "VRomEnd": 19268784
+  },
+  {
+    "Filename": "Obj_Milk_Bin",
+    "VRomStart": 19268784,
+    "VRomEnd": 19269552
+  },
+  {
+    "Filename": "En_Kitan",
+    "VRomStart": 19269552,
+    "VRomEnd": 19273664
+  },
+  {
+    "Filename": "Bg_Astr_Bombwall",
+    "VRomStart": 19273664,
+    "VRomEnd": 19276400
+  },
+  {
+    "Filename": "Bg_Iknin_Susceil",
+    "VRomStart": 19276400,
+    "VRomEnd": 19279728
+  },
+  {
+    "Filename": "En_Bsb",
+    "VRomStart": 19279728,
+    "VRomEnd": 19301296
+  },
+  {
+    "Filename": "En_Recepgirl",
+    "VRomStart": 19301296,
+    "VRomEnd": 19303616
+  },
+  {
+    "Filename": "En_Thiefbird",
+    "VRomStart": 19303616,
+    "VRomEnd": 19317664
+  },
+  {
+    "Filename": "En_Jgame_Tsn",
+    "VRomStart": 19317664,
+    "VRomEnd": 19324992
+  },
+  {
+    "Filename": "Obj_Jgame_Light",
+    "VRomStart": 19324992,
+    "VRomEnd": 19329248
+  },
+  {
+    "Filename": "Obj_Yado",
+    "VRomStart": 19329248,
+    "VRomEnd": 19330048
+  },
+  {
+    "Filename": "Demo_Syoten",
+    "VRomStart": 19330048,
+    "VRomEnd": 19336560
+  },
+  {
+    "Filename": "Demo_Moonend",
+    "VRomStart": 19336560,
+    "VRomEnd": 19338736
+  },
+  {
+    "Filename": "Bg_Lbfshot",
+    "VRomStart": 19338736,
+    "VRomEnd": 19339120
+  },
+  {
+    "Filename": "Bg_Last_Bwall",
+    "VRomStart": 19339120,
+    "VRomEnd": 19341760
+  },
+  {
+    "Filename": "En_And",
+    "VRomStart": 19341760,
+    "VRomEnd": 19343872
+  },
+  {
+    "Filename": "En_Invadepoh_Demo",
+    "VRomStart": 19343872,
+    "VRomEnd": 19353392
+  },
+  {
+    "Filename": "Obj_Danpeilift",
+    "VRomStart": 19353392,
+    "VRomEnd": 19355952
+  },
+  {
+    "Filename": "En_Fall2",
+    "VRomStart": 19355952,
+    "VRomEnd": 19358000
+  },
+  {
+    "Filename": "Dm_Al",
+    "VRomStart": 19358000,
+    "VRomEnd": 19359968
+  },
+  {
+    "Filename": "Dm_An",
+    "VRomStart": 19359968,
+    "VRomEnd": 19364640
+  },
+  {
+    "Filename": "Dm_Ah",
+    "VRomStart": 19364640,
+    "VRomEnd": 19367792
+  },
+  {
+    "Filename": "Dm_Nb",
+    "VRomStart": 19367792,
+    "VRomEnd": 19368896
+  },
+  {
+    "Filename": "En_Drs",
+    "VRomStart": 19368896,
+    "VRomEnd": 19370272
+  },
+  {
+    "Filename": "En_Ending_Hero",
+    "VRomStart": 19370272,
+    "VRomEnd": 19371344
+  },
+  {
+    "Filename": "Dm_Bal",
+    "VRomStart": 19371344,
+    "VRomEnd": 19374176
+  },
+  {
+    "Filename": "En_Paper",
+    "VRomStart": 19374176,
+    "VRomEnd": 19376848
+  },
+  {
+    "Filename": "En_Hint_Skb",
+    "VRomStart": 19376848,
+    "VRomEnd": 19387696
+  },
+  {
+    "Filename": "Dm_Tag",
+    "VRomStart": 19387696,
+    "VRomEnd": 19390528
+  },
+  {
+    "Filename": "En_Bh",
+    "VRomStart": 19390528,
+    "VRomEnd": 19391904
+  },
+  {
+    "Filename": "En_Ending_Hero2",
+    "VRomStart": 19391904,
+    "VRomEnd": 19392576
+  },
+  {
+    "Filename": "En_Ending_Hero3",
+    "VRomStart": 19392576,
+    "VRomEnd": 19393248
+  },
+  {
+    "Filename": "En_Ending_Hero4",
+    "VRomStart": 19393248,
+    "VRomEnd": 19393920
+  },
+  {
+    "Filename": "En_Ending_Hero5",
+    "VRomStart": 19393920,
+    "VRomEnd": 19395312
+  },
+  {
+    "Filename": "En_Ending_Hero6",
+    "VRomStart": 19395312,
+    "VRomEnd": 19397520
+  },
+  {
+    "Filename": "Dm_Gm",
+    "VRomStart": 19397520,
+    "VRomEnd": 19402192
+  },
+  {
+    "Filename": "Obj_Swprize",
+    "VRomStart": 19402192,
+    "VRomEnd": 19403728
+  },
+  {
+    "Filename": "En_Invisible_Ruppe",
+    "VRomStart": 19403728,
+    "VRomEnd": 19404688
+  },
+  {
+    "Filename": "Obj_Ending",
+    "VRomStart": 19404688,
+    "VRomEnd": 19405136
+  },
+  {
+    "Filename": "En_Rsn",
+    "VRomStart": 19405136,
+    "VRomEnd": 19406288
+  },
+  {
+    "Filename": "gameplay_keep",
+    "VRomStart": 19406848,
+    "VRomEnd": 20006368
+  },
+  {
+    "Filename": "gameplay_feild_keep",
+    "VRomStart": 20008960,
+    "VRomEnd": 20046480
+  },
+  {
+    "Filename": "gameplay_dangeon_keep",
+    "VRomStart": 20049920,
+    "VRomEnd": 20193920
+  },
+  {
+    "Filename": "gameplay_object_exchange_static",
+    "VRomStart": 20197376,
+    "VRomEnd": 20197392
+  },
+  {
+    "Filename": "object_link_boy",
+    "VRomStart": 20201472,
+    "VRomEnd": 20256912
+  },
+  {
+    "Filename": "object_link_child",
+    "VRomStart": 20258816,
+    "VRomEnd": 20382288
+  },
+  {
+    "Filename": "object_link_goron",
+    "VRomStart": 20385792,
+    "VRomEnd": 20482704
+  },
+  {
+    "Filename": "object_link_zora",
+    "VRomStart": 20484096,
+    "VRomEnd": 20560960
+  },
+  {
+    "Filename": "object_link_nuts",
+    "VRomStart": 20561920,
+    "VRomEnd": 20609584
+  },
+  {
+    "Filename": "object_mask_ki_tan",
+    "VRomStart": 20611072,
+    "VRomEnd": 20613840
+  },
+  {
+    "Filename": "object_mask_rabit",
+    "VRomStart": 20615168,
+    "VRomEnd": 20620192
+  },
+  {
+    "Filename": "object_mask_skj",
+    "VRomStart": 20623360,
+    "VRomEnd": 20629216
+  },
+  {
+    "Filename": "object_mask_truth",
+    "VRomStart": 20631552,
+    "VRomEnd": 20636320
+  },
+  {
+    "Filename": "object_mask_gibudo",
+    "VRomStart": 20639744,
+    "VRomEnd": 20643232
+  },
+  {
+    "Filename": "object_mask_json",
+    "VRomStart": 20643840,
+    "VRomEnd": 20648800
+  },
+  {
+    "Filename": "object_mask_kerfay",
+    "VRomStart": 20652032,
+    "VRomEnd": 20657600
+  },
+  {
+    "Filename": "object_mask_bigelf",
+    "VRomStart": 20660224,
+    "VRomEnd": 20673712
+  },
+  {
+    "Filename": "object_mask_kyojin",
+    "VRomStart": 20676608,
+    "VRomEnd": 20679840
+  },
+  {
+    "Filename": "object_mask_romerny",
+    "VRomStart": 20680704,
+    "VRomEnd": 20687376
+  },
+  {
+    "Filename": "object_mask_posthat",
+    "VRomStart": 20688896,
+    "VRomEnd": 20691792
+  },
+  {
+    "Filename": "object_mask_zacho",
+    "VRomStart": 20692992,
+    "VRomEnd": 20698768
+  },
+  {
+    "Filename": "object_mask_stone",
+    "VRomStart": 20701184,
+    "VRomEnd": 20705344
+  },
+  {
+    "Filename": "object_mask_bree",
+    "VRomStart": 20709376,
+    "VRomEnd": 20716960
+  },
+  {
+    "Filename": "object_mask_gero",
+    "VRomStart": 20717568,
+    "VRomEnd": 20729488
+  },
+  {
+    "Filename": "object_mask_yofukasi",
+    "VRomStart": 20729856,
+    "VRomEnd": 20736672
+  },
+  {
+    "Filename": "object_mask_meoto",
+    "VRomStart": 20738048,
+    "VRomEnd": 20745440
+  },
+  {
+    "Filename": "object_mask_dancer",
+    "VRomStart": 20746240,
+    "VRomEnd": 20753232
+  },
+  {
+    "Filename": "object_mask_bakuretu",
+    "VRomStart": 20754432,
+    "VRomEnd": 20759040
+  },
+  {
+    "Filename": "object_mask_bu_san",
+    "VRomStart": 20762624,
+    "VRomEnd": 20767728
+  },
+  {
+    "Filename": "object_mask_goron",
+    "VRomStart": 20770816,
+    "VRomEnd": 20776880
+  },
+  {
+    "Filename": "object_mask_zora",
+    "VRomStart": 20779008,
+    "VRomEnd": 20783248
+  },
+  {
+    "Filename": "object_mask_nuts",
+    "VRomStart": 20787200,
+    "VRomEnd": 20795616
+  },
+  {
+    "Filename": "object_mask_boy",
+    "VRomStart": 20799488,
+    "VRomEnd": 20807888
+  },
+  {
+    "Filename": "object_box",
+    "VRomStart": 20811776,
+    "VRomEnd": 20844832
+  },
+  {
+    "Filename": "object_okuta",
+    "VRomStart": 20848640,
+    "VRomEnd": 20866688
+  },
+  {
+    "Filename": "object_wallmaster",
+    "VRomStart": 20869120,
+    "VRomEnd": 20910192
+  },
+  {
+    "Filename": "object_dy_obj",
+    "VRomStart": 20914176,
+    "VRomEnd": 21031104
+  },
+  {
+    "Filename": "object_firefly",
+    "VRomStart": 21032960,
+    "VRomEnd": 21039296
+  },
+  {
+    "Filename": "object_dodongo",
+    "VRomStart": 21041152,
+    "VRomEnd": 21080384
+  },
+  {
+    "Filename": "object_niw",
+    "VRomStart": 21082112,
+    "VRomEnd": 21091648
+  },
+  {
+    "Filename": "object_tite",
+    "VRomStart": 21094400,
+    "VRomEnd": 21109296
+  },
+  {
+    "Filename": "object_ph",
+    "VRomStart": 21110784,
+    "VRomEnd": 21118096
+  },
+  {
+    "Filename": "object_dinofos",
+    "VRomStart": 21118976,
+    "VRomEnd": 21173824
+  },
+  {
+    "Filename": "object_zl1",
+    "VRomStart": 21176320,
+    "VRomEnd": 21259200
+  },
+  {
+    "Filename": "object_bubble",
+    "VRomStart": 21262336,
+    "VRomEnd": 21266624
+  },
+  {
+    "Filename": "object_test3",
+    "VRomStart": 21270528,
+    "VRomEnd": 21334016
+  },
+  {
+    "Filename": "object_famos",
+    "VRomStart": 21336064,
+    "VRomEnd": 21352000
+  },
+  {
+    "Filename": "object_st",
+    "VRomStart": 21352448,
+    "VRomEnd": 21375920
+  },
+  {
+    "Filename": "object_thiefbird",
+    "VRomStart": 21377024,
+    "VRomEnd": 21402592
+  },
+  {
+    "Filename": "object_bombf",
+    "VRomStart": 21405696,
+    "VRomEnd": 21412352
+  },
+  {
+    "Filename": "object_am",
+    "VRomStart": 21413888,
+    "VRomEnd": 21437744
+  },
+  {
+    "Filename": "object_dekubaba",
+    "VRomStart": 21438464,
+    "VRomEnd": 21453248
+  },
+  {
+    "Filename": "object_warp1",
+    "VRomStart": 21454848,
+    "VRomEnd": 21490688
+  },
+  {
+    "Filename": "object_b_heart",
+    "VRomStart": 21491712,
+    "VRomEnd": 21493312
+  },
+  {
+    "Filename": "object_dekunuts",
+    "VRomStart": 21495808,
+    "VRomEnd": 21510032
+  },
+  {
+    "Filename": "object_bb",
+    "VRomStart": 21512192,
+    "VRomEnd": 21518912
+  },
+  {
+    "Filename": "object_death",
+    "VRomStart": 21520384,
+    "VRomEnd": 21572560
+  },
+  {
+    "Filename": "object_hata",
+    "VRomStart": 21573632,
+    "VRomEnd": 21585888
+  },
+  {
+    "Filename": "object_wood02",
+    "VRomStart": 21585920,
+    "VRomEnd": 21624768
+  },
+  {
+    "Filename": "object_trap",
+    "VRomStart": 21626880,
+    "VRomEnd": 21636064
+  },
+  {
+    "Filename": "object_vm",
+    "VRomStart": 21639168,
+    "VRomEnd": 21655408
+  },
+  {
+    "Filename": "object_efc_star_field",
+    "VRomStart": 21655552,
+    "VRomEnd": 21661648
+  },
+  {
+    "Filename": "object_rd",
+    "VRomStart": 21663744,
+    "VRomEnd": 21737856
+  },
+  {
+    "Filename": "object_yukimura_obj",
+    "VRomStart": 21741568,
+    "VRomEnd": 21749920
+  },
+  {
+    "Filename": "object_horse_link_child",
+    "VRomStart": 21753856,
+    "VRomEnd": 21812464
+  },
+  {
+    "Filename": "object_syokudai",
+    "VRomStart": 21815296,
+    "VRomEnd": 21830800
+  },
+  {
+    "Filename": "object_efc_tw",
+    "VRomStart": 21831680,
+    "VRomEnd": 21836528
+  },
+  {
+    "Filename": "object_gi_key",
+    "VRomStart": 21839872,
+    "VRomEnd": 21842464
+  },
+  {
+    "Filename": "object_mir_ray",
+    "VRomStart": 21843968,
+    "VRomEnd": 21847392
+  },
+  {
+    "Filename": "object_ctower_rot",
+    "VRomStart": 21848064,
+    "VRomEnd": 21947840
+  },
+  {
+    "Filename": "object_bdoor",
+    "VRomStart": 21950464,
+    "VRomEnd": 21982112
+  },
+  {
+    "Filename": "object_sb",
+    "VRomStart": 21983232,
+    "VRomEnd": 21994656
+  },
+  {
+    "Filename": "object_gi_melody",
+    "VRomStart": 21995520,
+    "VRomEnd": 21998880
+  },
+  {
+    "Filename": "object_gi_heart",
+    "VRomStart": 21999616,
+    "VRomEnd": 22000112
+  },
+  {
+    "Filename": "object_gi_compass",
+    "VRomStart": 22003712,
+    "VRomEnd": 22007056
+  },
+  {
+    "Filename": "object_gi_bosskey",
+    "VRomStart": 22007808,
+    "VRomEnd": 22011920
+  },
+  {
+    "Filename": "object_gi_nuts",
+    "VRomStart": 22016000,
+    "VRomEnd": 22020544
+  },
+  {
+    "Filename": "object_gi_hearts",
+    "VRomStart": 22024192,
+    "VRomEnd": 22030256
+  },
+  {
+    "Filename": "object_gi_arrowcase",
+    "VRomStart": 22032384,
+    "VRomEnd": 22035632
+  },
+  {
+    "Filename": "object_gi_bombpouch",
+    "VRomStart": 22036480,
+    "VRomEnd": 22040160
+  },
+  {
+    "Filename": "object_in",
+    "VRomStart": 22040576,
+    "VRomEnd": 22159280
+  },
+  {
+    "Filename": "object_os_anime",
+    "VRomStart": 22159360,
+    "VRomEnd": 22170768
+  },
+  {
+    "Filename": "object_gi_bottle",
+    "VRomStart": 22171648,
+    "VRomEnd": 22173936
+  },
+  {
+    "Filename": "object_gi_stick",
+    "VRomStart": 22175744,
+    "VRomEnd": 22177472
+  },
+  {
+    "Filename": "object_gi_map",
+    "VRomStart": 22179840,
+    "VRomEnd": 22184288
+  },
+  {
+    "Filename": "object_oF1d_map",
+    "VRomStart": 22188032,
+    "VRomEnd": 22273424
+  },
+  {
+    "Filename": "object_ru2",
+    "VRomStart": 22274048,
+    "VRomEnd": 22337744
+  },
+  {
+    "Filename": "object_gi_magicpot",
+    "VRomStart": 22339584,
+    "VRomEnd": 22344144
+  },
+  {
+    "Filename": "object_gi_bomb_1",
+    "VRomStart": 22347776,
+    "VRomEnd": 22351024
+  },
+  {
+    "Filename": "object_ma2",
+    "VRomStart": 22351872,
+    "VRomEnd": 22443824
+  },
+  {
+    "Filename": "object_gi_purse",
+    "VRomStart": 22446080,
+    "VRomEnd": 22453104
+  },
+  {
+    "Filename": "object_rr",
+    "VRomStart": 22454272,
+    "VRomEnd": 22457856
+  },
+  {
+    "Filename": "object_gi_arrow",
+    "VRomStart": 22458368,
+    "VRomEnd": 22465296
+  },
+  {
+    "Filename": "object_gi_bomb_2",
+    "VRomStart": 22466560,
+    "VRomEnd": 22468256
+  },
+  {
+    "Filename": "object_gi_shield_2",
+    "VRomStart": 22470656,
+    "VRomEnd": 22478528
+  },
+  {
+    "Filename": "object_gi_hookshot",
+    "VRomStart": 22478848,
+    "VRomEnd": 22484048
+  },
+  {
+    "Filename": "object_gi_ocarina",
+    "VRomStart": 22487040,
+    "VRomEnd": 22490032
+  },
+  {
+    "Filename": "object_gi_milk",
+    "VRomStart": 22491136,
+    "VRomEnd": 22496368
+  },
+  {
+    "Filename": "object_ma1",
+    "VRomStart": 22499328,
+    "VRomEnd": 22611840
+  },
+  {
+    "Filename": "object_ny",
+    "VRomStart": 22614016,
+    "VRomEnd": 22623024
+  },
+  {
+    "Filename": "object_fr",
+    "VRomStart": 22626304,
+    "VRomEnd": 22672720
+  },
+  {
+    "Filename": "object_gi_bow",
+    "VRomStart": 22675456,
+    "VRomEnd": 22680304
+  },
+  {
+    "Filename": "object_gi_glasses",
+    "VRomStart": 22683648,
+    "VRomEnd": 22688128
+  },
+  {
+    "Filename": "object_gi_liquid",
+    "VRomStart": 22691840,
+    "VRomEnd": 22698192
+  },
+  {
+    "Filename": "object_ani",
+    "VRomStart": 22700032,
+    "VRomEnd": 22747328
+  },
+  {
+    "Filename": "object_gi_shield_3",
+    "VRomStart": 22749184,
+    "VRomEnd": 22756352
+  },
+  {
+    "Filename": "object_gi_bean",
+    "VRomStart": 22757376,
+    "VRomEnd": 22759616
+  },
+  {
+    "Filename": "object_gi_fish",
+    "VRomStart": 22761472,
+    "VRomEnd": 22763856
+  },
+  {
+    "Filename": "object_gi_longsword",
+    "VRomStart": 22765568,
+    "VRomEnd": 22767808
+  },
+  {
+    "Filename": "object_zo",
+    "VRomStart": 22769664,
+    "VRomEnd": 22840384
+  },
+  {
+    "Filename": "object_umajump",
+    "VRomStart": 22843392,
+    "VRomEnd": 22848912
+  },
+  {
+    "Filename": "object_mastergolon",
+    "VRomStart": 22851584,
+    "VRomEnd": 22851856
+  },
+  {
+    "Filename": "object_masterzoora",
+    "VRomStart": 22855680,
+    "VRomEnd": 22857632
+  },
+  {
+    "Filename": "object_aob",
+    "VRomStart": 22859776,
+    "VRomEnd": 22890352
+  },
+  {
+    "Filename": "object_ik",
+    "VRomStart": 22892544,
+    "VRomEnd": 22972080
+  },
+  {
+    "Filename": "object_ahg",
+    "VRomStart": 22974464,
+    "VRomEnd": 22997424
+  },
+  {
+    "Filename": "object_cne",
+    "VRomStart": 22999040,
+    "VRomEnd": 23009744
+  },
+  {
+    "Filename": "object_bji",
+    "VRomStart": 23011328,
+    "VRomEnd": 23034736
+  },
+  {
+    "Filename": "object_bba",
+    "VRomStart": 23035904,
+    "VRomEnd": 23077024
+  },
+  {
+    "Filename": "object_an1",
+    "VRomStart": 23080960,
+    "VRomEnd": 23162416
+  },
+  {
+    "Filename": "object_boj",
+    "VRomStart": 23162880,
+    "VRomEnd": 23242688
+  },
+  {
+    "Filename": "object_fz",
+    "VRomStart": 23244800,
+    "VRomEnd": 23258320
+  },
+  {
+    "Filename": "object_bob",
+    "VRomStart": 23261184,
+    "VRomEnd": 23281440
+  },
+  {
+    "Filename": "object_ge1",
+    "VRomStart": 23281664,
+    "VRomEnd": 23331296
+  },
+  {
+    "Filename": "object_yabusame_point",
+    "VRomStart": 23334912,
+    "VRomEnd": 23338576
+  },
+  {
+    "Filename": "object_d_hsblock",
+    "VRomStart": 23339008,
+    "VRomEnd": 23344992
+  },
+  {
+    "Filename": "object_d_lift",
+    "VRomStart": 23347200,
+    "VRomEnd": 23356208
+  },
+  {
+    "Filename": "object_mamenoki",
+    "VRomStart": 23359488,
+    "VRomEnd": 23369376
+  },
+  {
+    "Filename": "object_goroiwa",
+    "VRomStart": 23371776,
+    "VRomEnd": 23414176
+  },
+  {
+    "Filename": "object_toryo",
+    "VRomStart": 23416832,
+    "VRomEnd": 23445856
+  },
+  {
+    "Filename": "object_daiku",
+    "VRomStart": 23449600,
+    "VRomEnd": 23503680
+  },
+  {
+    "Filename": "object_nwc",
+    "VRomStart": 23506944,
+    "VRomEnd": 23514272
+  },
+  {
+    "Filename": "object_gm",
+    "VRomStart": 23515136,
+    "VRomEnd": 23515152
+  },
+  {
+    "Filename": "object_ms",
+    "VRomStart": 23519232,
+    "VRomEnd": 23535056
+  },
+  {
+    "Filename": "object_hs",
+    "VRomStart": 23535616,
+    "VRomEnd": 23560816
+  },
+  {
+    "Filename": "object_lightswitch",
+    "VRomStart": 23564288,
+    "VRomEnd": 23573536
+  },
+  {
+    "Filename": "object_kusa",
+    "VRomStart": 23576576,
+    "VRomEnd": 23577472
+  },
+  {
+    "Filename": "object_tsubo",
+    "VRomStart": 23580672,
+    "VRomEnd": 23587312
+  },
+  {
+    "Filename": "object_kanban",
+    "VRomStart": 23588864,
+    "VRomEnd": 23594928
+  },
+  {
+    "Filename": "object_owl",
+    "VRomStart": 23597056,
+    "VRomEnd": 23664080
+  },
+  {
+    "Filename": "object_mk",
+    "VRomStart": 23666688,
+    "VRomEnd": 23694512
+  },
+  {
+    "Filename": "object_fu",
+    "VRomStart": 23695360,
+    "VRomEnd": 23723168
+  },
+  {
+    "Filename": "object_gi_ki_tan_mask",
+    "VRomStart": 23724032,
+    "VRomEnd": 23727600
+  },
+  {
+    "Filename": "object_gi_mask18",
+    "VRomStart": 23728128,
+    "VRomEnd": 23734464
+  },
+  {
+    "Filename": "object_gi_rabit_mask",
+    "VRomStart": 23736320,
+    "VRomEnd": 23740160
+  },
+  {
+    "Filename": "object_gi_truth_mask",
+    "VRomStart": 23740416,
+    "VRomEnd": 23746656
+  },
+  {
+    "Filename": "object_stream",
+    "VRomStart": 23748608,
+    "VRomEnd": 23751296
+  },
+  {
+    "Filename": "object_mm",
+    "VRomStart": 23752704,
+    "VRomEnd": 23808608
+  },
+  {
+    "Filename": "object_js",
+    "VRomStart": 23810048,
+    "VRomEnd": 23837216
+  },
+  {
+    "Filename": "object_cs",
+    "VRomStart": 23838720,
+    "VRomEnd": 23907200
+  },
+  {
+    "Filename": "object_gi_soldout",
+    "VRomStart": 23908352,
+    "VRomEnd": 23909584
+  },
+  {
+    "Filename": "object_mag",
+    "VRomStart": 23912448,
+    "VRomEnd": 24048480
+  },
+  {
+    "Filename": "object_gi_golonmask",
+    "VRomStart": 24051712,
+    "VRomEnd": 24059168
+  },
+  {
+    "Filename": "object_gi_zoramask",
+    "VRomStart": 24059904,
+    "VRomEnd": 24065888
+  },
+  {
+    "Filename": "object_ka",
+    "VRomStart": 24068096,
+    "VRomEnd": 24101312
+  },
+  {
+    "Filename": "object_zg",
+    "VRomStart": 24104960,
+    "VRomEnd": 24109568
+  },
+  {
+    "Filename": "object_gi_m_arrow",
+    "VRomStart": 24113152,
+    "VRomEnd": 24116864
+  },
+  {
+    "Filename": "object_ds2",
+    "VRomStart": 24117248,
+    "VRomEnd": 24134256
+  },
+  {
+    "Filename": "object_fish",
+    "VRomStart": 24137728,
+    "VRomEnd": 24225264
+  },
+  {
+    "Filename": "object_gi_sutaru",
+    "VRomStart": 24227840,
+    "VRomEnd": 24229456
+  },
+  {
+    "Filename": "object_ssh",
+    "VRomStart": 24231936,
+    "VRomEnd": 24259984
+  },
+  {
+    "Filename": "object_bigslime",
+    "VRomStart": 24260608,
+    "VRomEnd": 24339456
+  },
+  {
+    "Filename": "object_bg",
+    "VRomStart": 24342528,
+    "VRomEnd": 24415088
+  },
+  {
+    "Filename": "object_bombiwa",
+    "VRomStart": 24416256,
+    "VRomEnd": 24443504
+  },
+  {
+    "Filename": "object_hintnuts",
+    "VRomStart": 24444928,
+    "VRomEnd": 24457536
+  },
+  {
+    "Filename": "object_rs",
+    "VRomStart": 24461312,
+    "VRomEnd": 24498736
+  },
+  {
+    "Filename": "object_gla",
+    "VRomStart": 24502272,
+    "VRomEnd": 24544096
+  },
+  {
+    "Filename": "object_geldb",
+    "VRomStart": 24547328,
+    "VRomEnd": 24592640
+  },
+  {
+    "Filename": "object_dog",
+    "VRomStart": 24596480,
+    "VRomEnd": 24629504
+  },
+  {
+    "Filename": "object_kibako2",
+    "VRomStart": 24633344,
+    "VRomEnd": 24637888
+  },
+  {
+    "Filename": "object_dns",
+    "VRomStart": 24641536,
+    "VRomEnd": 24655104
+  },
+  {
+    "Filename": "object_dnk",
+    "VRomStart": 24657920,
+    "VRomEnd": 24669056
+  },
+  {
+    "Filename": "object_gi_insect",
+    "VRomStart": 24670208,
+    "VRomEnd": 24673264
+  },
+  {
+    "Filename": "object_gi_ghost",
+    "VRomStart": 24674304,
+    "VRomEnd": 24677808
+  },
+  {
+    "Filename": "object_gi_soul",
+    "VRomStart": 24678400,
+    "VRomEnd": 24682416
+  },
+  {
+    "Filename": "object_f40_obj",
+    "VRomStart": 24682496,
+    "VRomEnd": 24700528
+  },
+  {
+    "Filename": "object_gi_rupy",
+    "VRomStart": 24702976,
+    "VRomEnd": 24705088
+  },
+  {
+    "Filename": "object_po_composer",
+    "VRomStart": 24707072,
+    "VRomEnd": 24745952
+  },
+  {
+    "Filename": "object_mu",
+    "VRomStart": 24748032,
+    "VRomEnd": 24795872
+  },
+  {
+    "Filename": "object_wf",
+    "VRomStart": 24797184,
+    "VRomEnd": 24839136
+  },
+  {
+    "Filename": "object_skb",
+    "VRomStart": 24842240,
+    "VRomEnd": 24870304
+  },
+  {
+    "Filename": "object_gs",
+    "VRomStart": 24870912,
+    "VRomEnd": 24873600
+  },
+  {
+    "Filename": "object_ps",
+    "VRomStart": 24875008,
+    "VRomEnd": 24906000
+  },
+  {
+    "Filename": "object_omoya_obj",
+    "VRomStart": 24907776,
+    "VRomEnd": 24914688
+  },
+  {
+    "Filename": "object_crow",
+    "VRomStart": 24915968,
+    "VRomEnd": 24920272
+  },
+  {
+    "Filename": "object_cow",
+    "VRomStart": 24924160,
+    "VRomEnd": 24944304
+  },
+  {
+    "Filename": "object_gi_sword_1",
+    "VRomStart": 24944640,
+    "VRomEnd": 24949280
+  },
+  {
+    "Filename": "object_zl4",
+    "VRomStart": 24952832,
+    "VRomEnd": 25104224
+  },
+  {
+    "Filename": "object_grasshopper",
+    "VRomStart": 25104384,
+    "VRomEnd": 25125472
+  },
+  {
+    "Filename": "object_boyo",
+    "VRomStart": 25128960,
+    "VRomEnd": 25132688
+  },
+  {
+    "Filename": "object_fwall",
+    "VRomStart": 25133056,
+    "VRomEnd": 25156768
+  },
+  {
+    "Filename": "object_jso",
+    "VRomStart": 25157632,
+    "VRomEnd": 25204224
+  },
+  {
+    "Filename": "object_knight",
+    "VRomStart": 25206784,
+    "VRomEnd": 25349312
+  },
+  {
+    "Filename": "object_icicle",
+    "VRomStart": 25350144,
+    "VRomEnd": 25354944
+  },
+  {
+    "Filename": "object_spdweb",
+    "VRomStart": 25358336,
+    "VRomEnd": 25368240
+  },
+  {
+    "Filename": "object_boss01",
+    "VRomStart": 25370624,
+    "VRomEnd": 25516384
+  },
+  {
+    "Filename": "object_boss02",
+    "VRomStart": 25518080,
+    "VRomEnd": 25603488
+  },
+  {
+    "Filename": "object_boss03",
+    "VRomStart": 25604096,
+    "VRomEnd": 25665216
+  },
+  {
+    "Filename": "object_boss04",
+    "VRomStart": 25665536,
+    "VRomEnd": 25683456
+  },
+  {
+    "Filename": "object_boss05",
+    "VRomStart": 25686016,
+    "VRomEnd": 25717024
+  },
+  {
+    "Filename": "object_boss07",
+    "VRomStart": 25718784,
+    "VRomEnd": 26023728
+  },
+  {
+    "Filename": "object_raf",
+    "VRomStart": 26025984,
+    "VRomEnd": 26039360
+  },
+  {
+    "Filename": "object_funen",
+    "VRomStart": 26042368,
+    "VRomEnd": 26043840
+  },
+  {
+    "Filename": "object_raillift",
+    "VRomStart": 26046464,
+    "VRomEnd": 26078896
+  },
+  {
+    "Filename": "object_numa_obj",
+    "VRomStart": 26079232,
+    "VRomEnd": 26161584
+  },
+  {
+    "Filename": "object_flowerpot",
+    "VRomStart": 26165248,
+    "VRomEnd": 26170944
+  },
+  {
+    "Filename": "object_spinyroll",
+    "VRomStart": 26173440,
+    "VRomEnd": 26177456
+  },
+  {
+    "Filename": "object_ice_block",
+    "VRomStart": 26177536,
+    "VRomEnd": 26184416
+  },
+  {
+    "Filename": "object_keikoku_demo",
+    "VRomStart": 26185728,
+    "VRomEnd": 26239792
+  },
+  {
+    "Filename": "object_slime",
+    "VRomStart": 26243072,
+    "VRomEnd": 26250352
+  },
+  {
+    "Filename": "object_pr",
+    "VRomStart": 26251264,
+    "VRomEnd": 26268496
+  },
+  {
+    "Filename": "object_f52_obj",
+    "VRomStart": 26271744,
+    "VRomEnd": 26278880
+  },
+  {
+    "Filename": "object_f53_obj",
+    "VRomStart": 26279936,
+    "VRomEnd": 26294896
+  },
+  {
+    "Filename": "object_kibako",
+    "VRomStart": 26296320,
+    "VRomEnd": 26303232
+  },
+  {
+    "Filename": "object_sek",
+    "VRomStart": 26304512,
+    "VRomEnd": 26323568
+  },
+  {
+    "Filename": "object_gmo",
+    "VRomStart": 26324992,
+    "VRomEnd": 26333424
+  },
+  {
+    "Filename": "object_bat",
+    "VRomStart": 26337280,
+    "VRomEnd": 26340512
+  },
+  {
+    "Filename": "object_sekihil",
+    "VRomStart": 26341376,
+    "VRomEnd": 26354736
+  },
+  {
+    "Filename": "object_sekihig",
+    "VRomStart": 26357760,
+    "VRomEnd": 26371088
+  },
+  {
+    "Filename": "object_sekihin",
+    "VRomStart": 26374144,
+    "VRomEnd": 26387472
+  },
+  {
+    "Filename": "object_sekihiz",
+    "VRomStart": 26390528,
+    "VRomEnd": 26394688
+  },
+  {
+    "Filename": "object_wiz",
+    "VRomStart": 26398720,
+    "VRomEnd": 26444592
+  },
+  {
+    "Filename": "object_ladder",
+    "VRomStart": 26447872,
+    "VRomEnd": 26452128
+  },
+  {
+    "Filename": "object_mkk",
+    "VRomStart": 26456064,
+    "VRomEnd": 26457360
+  },
+  {
+    "Filename": "object_keikoku_obj",
+    "VRomStart": 26460160,
+    "VRomEnd": 26481184
+  },
+  {
+    "Filename": "object_sichitai_obj",
+    "VRomStart": 26484736,
+    "VRomEnd": 26495248
+  },
+  {
+    "Filename": "object_dekucity_ana_obj",
+    "VRomStart": 26497024,
+    "VRomEnd": 26501376
+  },
+  {
+    "Filename": "object_rat",
+    "VRomStart": 26505216,
+    "VRomEnd": 26511472
+  },
+  {
+    "Filename": "object_water_effect",
+    "VRomStart": 26513408,
+    "VRomEnd": 26530832
+  },
+  {
+    "Filename": "object_dblue_object",
+    "VRomStart": 26533888,
+    "VRomEnd": 26635872
+  },
+  {
+    "Filename": "object_bal",
+    "VRomStart": 26636288,
+    "VRomEnd": 26691008
+  },
+  {
+    "Filename": "object_warp_uzu",
+    "VRomStart": 26693632,
+    "VRomEnd": 26702928
+  },
+  {
+    "Filename": "object_driftice",
+    "VRomStart": 26705920,
+    "VRomEnd": 26712800
+  },
+  {
+    "Filename": "object_fall",
+    "VRomStart": 26714112,
+    "VRomEnd": 26757952
+  },
+  {
+    "Filename": "object_hanareyama_object",
+    "VRomStart": 26759168,
+    "VRomEnd": 26779072
+  },
+  {
+    "Filename": "object_crace_object",
+    "VRomStart": 26779648,
+    "VRomEnd": 26783280
+  },
+  {
+    "Filename": "object_dnq",
+    "VRomStart": 26783744,
+    "VRomEnd": 26846496
+  },
+  {
+    "Filename": "object_obj_tokeidai",
+    "VRomStart": 26849280,
+    "VRomEnd": 26922112
+  },
+  {
+    "Filename": "object_eg",
+    "VRomStart": 26923008,
+    "VRomEnd": 27001328
+  },
+  {
+    "Filename": "object_tru",
+    "VRomStart": 27004928,
+    "VRomEnd": 27117024
+  },
+  {
+    "Filename": "object_trt",
+    "VRomStart": 27119616,
+    "VRomEnd": 27184896
+  },
+  {
+    "Filename": "object_hakugin_obj",
+    "VRomStart": 27185152,
+    "VRomEnd": 27251776
+  },
+  {
+    "Filename": "object_horse_game_check",
+    "VRomStart": 27254784,
+    "VRomEnd": 27269456
+  },
+  {
+    "Filename": "object_stk",
+    "VRomStart": 27271168,
+    "VRomEnd": 27390944
+  },
+  {
+    "Filename": "object_mnk",
+    "VRomStart": 27394048,
+    "VRomEnd": 27514160
+  },
+  {
+    "Filename": "object_gi_bottle_red",
+    "VRomStart": 27516928,
+    "VRomEnd": 27520976
+  },
+  {
+    "Filename": "object_tokei_tobira",
+    "VRomStart": 27521024,
+    "VRomEnd": 27526592
+  },
+  {
+    "Filename": "object_az",
+    "VRomStart": 27529216,
+    "VRomEnd": 27639248
+  },
+  {
+    "Filename": "object_twig",
+    "VRomStart": 27639808,
+    "VRomEnd": 27648208
+  },
+  {
+    "Filename": "object_dekucity_obj",
+    "VRomStart": 27652096,
+    "VRomEnd": 27670208
+  },
+  {
+    "Filename": "object_po_fusen",
+    "VRomStart": 27672576,
+    "VRomEnd": 27682048
+  },
+  {
+    "Filename": "object_racetsubo",
+    "VRomStart": 27684864,
+    "VRomEnd": 27691168
+  },
+  {
+    "Filename": "object_ha",
+    "VRomStart": 27693056,
+    "VRomEnd": 27779312
+  },
+  {
+    "Filename": "object_bigokuta",
+    "VRomStart": 27783168,
+    "VRomEnd": 27810768
+  },
+  {
+    "Filename": "object_open_obj",
+    "VRomStart": 27811840,
+    "VRomEnd": 27882608
+  },
+  {
+    "Filename": "object_fu_kaiten",
+    "VRomStart": 27885568,
+    "VRomEnd": 27899952
+  },
+  {
+    "Filename": "object_fu_mato",
+    "VRomStart": 27901952,
+    "VRomEnd": 27914832
+  },
+  {
+    "Filename": "object_mtoride",
+    "VRomStart": 27918336,
+    "VRomEnd": 27988160
+  },
+  {
+    "Filename": "object_osn",
+    "VRomStart": 27992064,
+    "VRomEnd": 28124512
+  },
+  {
+    "Filename": "object_tokei_step",
+    "VRomStart": 28127232,
+    "VRomEnd": 28129696
+  },
+  {
+    "Filename": "object_lotus",
+    "VRomStart": 28131328,
+    "VRomEnd": 28133968
+  },
+  {
+    "Filename": "object_tl",
+    "VRomStart": 28135424,
+    "VRomEnd": 28168784
+  },
+  {
+    "Filename": "object_dkjail_obj",
+    "VRomStart": 28172288,
+    "VRomEnd": 28176864
+  },
+  {
+    "Filename": "object_visiblock",
+    "VRomStart": 28180480,
+    "VRomEnd": 28183296
+  },
+  {
+    "Filename": "object_tsn",
+    "VRomStart": 28184576,
+    "VRomEnd": 28222224
+  },
+  {
+    "Filename": "object_ds2n",
+    "VRomStart": 28225536,
+    "VRomEnd": 28258688
+  },
+  {
+    "Filename": "object_fsn",
+    "VRomStart": 28262400,
+    "VRomEnd": 28345120
+  },
+  {
+    "Filename": "object_shn",
+    "VRomStart": 28348416,
+    "VRomEnd": 28418592
+  },
+  {
+    "Filename": "object_bigicicle",
+    "VRomStart": 28422144,
+    "VRomEnd": 28433776
+  },
+  {
+    "Filename": "object_gi_bottle_15",
+    "VRomStart": 28434432,
+    "VRomEnd": 28442624
+  },
+  {
+    "Filename": "object_tk",
+    "VRomStart": 28442624,
+    "VRomEnd": 28490240
+  },
+  {
+    "Filename": "object_market_obj",
+    "VRomStart": 28491776,
+    "VRomEnd": 28626384
+  },
+  {
+    "Filename": "object_gi_reserve00",
+    "VRomStart": 28626944,
+    "VRomEnd": 28634224
+  },
+  {
+    "Filename": "object_gi_reserve01",
+    "VRomStart": 28635136,
+    "VRomEnd": 28640784
+  },
+  {
+    "Filename": "object_lightblock",
+    "VRomStart": 28643328,
+    "VRomEnd": 28646320
+  },
+  {
+    "Filename": "object_takaraya_objects",
+    "VRomStart": 28647424,
+    "VRomEnd": 28651088
+  },
+  {
+    "Filename": "object_wdhand",
+    "VRomStart": 28651520,
+    "VRomEnd": 28659248
+  },
+  {
+    "Filename": "object_sdn",
+    "VRomStart": 28659712,
+    "VRomEnd": 28716176
+  },
+  {
+    "Filename": "object_snowwd",
+    "VRomStart": 28717056,
+    "VRomEnd": 28727968
+  },
+  {
+    "Filename": "object_giant",
+    "VRomStart": 28729344,
+    "VRomEnd": 28825952
+  },
+  {
+    "Filename": "object_comb",
+    "VRomStart": 28827648,
+    "VRomEnd": 28831952
+  },
+  {
+    "Filename": "object_hana",
+    "VRomStart": 28835840,
+    "VRomEnd": 28837712
+  },
+  {
+    "Filename": "object_boss_hakugin",
+    "VRomStart": 28839936,
+    "VRomEnd": 28932160
+  },
+  {
+    "Filename": "object_meganeana_obj",
+    "VRomStart": 28934144,
+    "VRomEnd": 28939728
+  },
+  {
+    "Filename": "object_gi_nutsmask",
+    "VRomStart": 28942336,
+    "VRomEnd": 28949552
+  },
+  {
+    "Filename": "object_stk2",
+    "VRomStart": 28950528,
+    "VRomEnd": 29190416
+  },
+  {
+    "Filename": "object_spot11_obj",
+    "VRomStart": 29192192,
+    "VRomEnd": 29200112
+  },
+  {
+    "Filename": "object_danpei_object",
+    "VRomStart": 29200384,
+    "VRomEnd": 29216272
+  },
+  {
+    "Filename": "object_dhouse",
+    "VRomStart": 29216768,
+    "VRomEnd": 29250240
+  },
+  {
+    "Filename": "object_hakaisi",
+    "VRomStart": 29253632,
+    "VRomEnd": 29265904
+  },
+  {
+    "Filename": "object_po",
+    "VRomStart": 29265920,
+    "VRomEnd": 29286624
+  },
+  {
+    "Filename": "object_snowman",
+    "VRomStart": 29290496,
+    "VRomEnd": 29321008
+  },
+  {
+    "Filename": "object_po_sisters",
+    "VRomStart": 29323264,
+    "VRomEnd": 29349328
+  },
+  {
+    "Filename": "object_pp",
+    "VRomStart": 29351936,
+    "VRomEnd": 29428480
+  },
+  {
+    "Filename": "object_goronswitch",
+    "VRomStart": 29429760,
+    "VRomEnd": 29440432
+  },
+  {
+    "Filename": "object_delf",
+    "VRomStart": 29442048,
+    "VRomEnd": 29527568
+  },
+  {
+    "Filename": "object_botihasira",
+    "VRomStart": 29528064,
+    "VRomEnd": 29535248
+  },
+  {
+    "Filename": "object_gi_bigbomb",
+    "VRomStart": 29536256,
+    "VRomEnd": 29542704
+  },
+  {
+    "Filename": "object_pst",
+    "VRomStart": 29544448,
+    "VRomEnd": 29551248
+  },
+  {
+    "Filename": "object_bsmask",
+    "VRomStart": 29552640,
+    "VRomEnd": 29604752
+  },
+  {
+    "Filename": "object_spidertent",
+    "VRomStart": 29605888,
+    "VRomEnd": 29615040
+  },
+  {
+    "Filename": "object_zoraegg",
+    "VRomStart": 29618176,
+    "VRomEnd": 29641136
+  },
+  {
+    "Filename": "object_kbt",
+    "VRomStart": 29642752,
+    "VRomEnd": 29704416
+  },
+  {
+    "Filename": "object_gg",
+    "VRomStart": 29708288,
+    "VRomEnd": 29774048
+  },
+  {
+    "Filename": "object_maruta",
+    "VRomStart": 29777920,
+    "VRomEnd": 29790176
+  },
+  {
+    "Filename": "object_ghaka",
+    "VRomStart": 29790208,
+    "VRomEnd": 29805824
+  },
+  {
+    "Filename": "object_oyu",
+    "VRomStart": 29806592,
+    "VRomEnd": 29809088
+  },
+  {
+    "Filename": "object_dnp",
+    "VRomStart": 29810688,
+    "VRomEnd": 29885504
+  },
+  {
+    "Filename": "object_dai",
+    "VRomStart": 29888512,
+    "VRomEnd": 29966560
+  },
+  {
+    "Filename": "object_kgy",
+    "VRomStart": 29970432,
+    "VRomEnd": 30038944
+  },
+  {
+    "Filename": "object_fb",
+    "VRomStart": 30040064,
+    "VRomEnd": 30068400
+  },
+  {
+    "Filename": "object_taisou",
+    "VRomStart": 30068736,
+    "VRomEnd": 30099328
+  },
+  {
+    "Filename": "object_gk",
+    "VRomStart": 30101504,
+    "VRomEnd": 30172960
+  },
+  {
+    "Filename": "object_haka_obj",
+    "VRomStart": 30175232,
+    "VRomEnd": 30206016
+  },
+  {
+    "Filename": "object_dnt",
+    "VRomStart": 30208000,
+    "VRomEnd": 30253776
+  },
+  {
+    "Filename": "object_yukiyama",
+    "VRomStart": 30257152,
+    "VRomEnd": 30283888
+  },
+  {
+    "Filename": "object_icefloe",
+    "VRomStart": 30285824,
+    "VRomEnd": 30289088
+  },
+  {
+    "Filename": "object_gi_gold_dust",
+    "VRomStart": 30289920,
+    "VRomEnd": 30294336
+  },
+  {
+    "Filename": "object_gi_bottle_16",
+    "VRomStart": 30298112,
+    "VRomEnd": 30303008
+  },
+  {
+    "Filename": "object_gi_bottle_22",
+    "VRomStart": 30306304,
+    "VRomEnd": 30313152
+  },
+  {
+    "Filename": "object_bee",
+    "VRomStart": 30314496,
+    "VRomEnd": 30319520
+  },
+  {
+    "Filename": "object_ot",
+    "VRomStart": 30322688,
+    "VRomEnd": 30341952
+  },
+  {
+    "Filename": "object_utubo",
+    "VRomStart": 30343168,
+    "VRomEnd": 30362320
+  },
+  {
+    "Filename": "object_dora",
+    "VRomStart": 30363648,
+    "VRomEnd": 30384656
+  },
+  {
+    "Filename": "object_gi_loach",
+    "VRomStart": 30388224,
+    "VRomEnd": 30393408
+  },
+  {
+    "Filename": "object_gi_seahorse",
+    "VRomStart": 30396416,
+    "VRomEnd": 30402512
+  },
+  {
+    "Filename": "object_bigpo",
+    "VRomStart": 30404608,
+    "VRomEnd": 30428192
+  },
+  {
+    "Filename": "object_hariko",
+    "VRomStart": 30429184,
+    "VRomEnd": 30430240
+  },
+  {
+    "Filename": "object_dno",
+    "VRomStart": 30433280,
+    "VRomEnd": 30491152
+  },
+  {
+    "Filename": "object_sinkai_kabe",
+    "VRomStart": 30494720,
+    "VRomEnd": 30494848
+  },
+  {
+    "Filename": "object_kin2_obj",
+    "VRomStart": 30498816,
+    "VRomEnd": 30532544
+  },
+  {
+    "Filename": "object_ishi",
+    "VRomStart": 30535680,
+    "VRomEnd": 30538336
+  },
+  {
+    "Filename": "object_hakugin_demo",
+    "VRomStart": 30539776,
+    "VRomEnd": 30552976
+  },
+  {
+    "Filename": "object_jg",
+    "VRomStart": 30556160,
+    "VRomEnd": 30667296
+  },
+  {
+    "Filename": "object_gi_sword_2",
+    "VRomStart": 30670848,
+    "VRomEnd": 30676320
+  },
+  {
+    "Filename": "object_gi_sword_3",
+    "VRomStart": 30679040,
+    "VRomEnd": 30683808
+  },
+  {
+    "Filename": "object_gi_sword_4",
+    "VRomStart": 30687232,
+    "VRomEnd": 30692448
+  },
+  {
+    "Filename": "object_um",
+    "VRomStart": 30695424,
+    "VRomEnd": 30801440
+  },
+  {
+    "Filename": "object_rb",
+    "VRomStart": 30801920,
+    "VRomEnd": 30809840
+  },
+  {
+    "Filename": "object_mbar_obj",
+    "VRomStart": 30810112,
+    "VRomEnd": 30816736
+  },
+  {
+    "Filename": "object_ikana_obj",
+    "VRomStart": 30818304,
+    "VRomEnd": 30907296
+  },
+  {
+    "Filename": "object_kz",
+    "VRomStart": 30908416,
+    "VRomEnd": 30972160
+  },
+  {
+    "Filename": "object_tokei_turret",
+    "VRomStart": 30973952,
+    "VRomEnd": 30986560
+  },
+  {
+    "Filename": "object_zog",
+    "VRomStart": 30990336,
+    "VRomEnd": 31158656
+  },
+  {
+    "Filename": "object_rotlift",
+    "VRomStart": 31162368,
+    "VRomEnd": 31182368
+  },
+  {
+    "Filename": "object_posthouse_obj",
+    "VRomStart": 31182848,
+    "VRomEnd": 31193472
+  },
+  {
+    "Filename": "object_gi_mask09",
+    "VRomStart": 31195136,
+    "VRomEnd": 31201120
+  },
+  {
+    "Filename": "object_gi_mask14",
+    "VRomStart": 31203328,
+    "VRomEnd": 31211392
+  },
+  {
+    "Filename": "object_gi_mask15",
+    "VRomStart": 31211520,
+    "VRomEnd": 31218528
+  },
+  {
+    "Filename": "object_inibs_object",
+    "VRomStart": 31219712,
+    "VRomEnd": 31280864
+  },
+  {
+    "Filename": "object_tree",
+    "VRomStart": 31281152,
+    "VRomEnd": 31288160
+  },
+  {
+    "Filename": "object_kaizoku_obj",
+    "VRomStart": 31289344,
+    "VRomEnd": 31336608
+  },
+  {
+    "Filename": "object_gi_reserve_b_00",
+    "VRomStart": 31338496,
+    "VRomEnd": 31342640
+  },
+  {
+    "Filename": "object_gi_reserve_c_00",
+    "VRomStart": 31346688,
+    "VRomEnd": 31351008
+  },
+  {
+    "Filename": "object_zob",
+    "VRomStart": 31354880,
+    "VRomEnd": 31424864
+  },
+  {
+    "Filename": "object_milkbar",
+    "VRomStart": 31428608,
+    "VRomEnd": 31500464
+  },
+  {
+    "Filename": "object_dmask",
+    "VRomStart": 31502336,
+    "VRomEnd": 31519424
+  },
+  {
+    "Filename": "object_gi_reserve_c_01",
+    "VRomStart": 31522816,
+    "VRomEnd": 31526656
+  },
+  {
+    "Filename": "object_zod",
+    "VRomStart": 31526912,
+    "VRomEnd": 31582656
+  },
+  {
+    "Filename": "object_kumo30",
+    "VRomStart": 31584256,
+    "VRomEnd": 31597424
+  },
+  {
+    "Filename": "object_obj_yasi",
+    "VRomStart": 31600640,
+    "VRomEnd": 31605856
+  },
+  {
+    "Filename": "object_tanron1",
+    "VRomStart": 31608832,
+    "VRomEnd": 31608848
+  },
+  {
+    "Filename": "object_tanron2",
+    "VRomStart": 31612928,
+    "VRomEnd": 31617696
+  },
+  {
+    "Filename": "object_tanron3",
+    "VRomStart": 31621120,
+    "VRomEnd": 31625888
+  },
+  {
+    "Filename": "object_gi_magicmushroom",
+    "VRomStart": 31629312,
+    "VRomEnd": 31632864
+  },
+  {
+    "Filename": "object_obj_chan",
+    "VRomStart": 31633408,
+    "VRomEnd": 31646960
+  },
+  {
+    "Filename": "object_gi_mask10",
+    "VRomStart": 31649792,
+    "VRomEnd": 31657152
+  },
+  {
+    "Filename": "object_zos",
+    "VRomStart": 31657984,
+    "VRomEnd": 31749408
+  },
+  {
+    "Filename": "object_an2",
+    "VRomStart": 31752192,
+    "VRomEnd": 31769312
+  },
+  {
+    "Filename": "object_an3",
+    "VRomStart": 31772672,
+    "VRomEnd": 31783520
+  },
+  {
+    "Filename": "object_f40_switch",
+    "VRomStart": 31784960,
+    "VRomEnd": 31788528
+  },
+  {
+    "Filename": "object_lodmoon",
+    "VRomStart": 31789056,
+    "VRomEnd": 31804960
+  },
+  {
+    "Filename": "object_tro",
+    "VRomStart": 31805440,
+    "VRomEnd": 31816032
+  },
+  {
+    "Filename": "object_gi_mask12",
+    "VRomStart": 31817728,
+    "VRomEnd": 31821568
+  },
+  {
+    "Filename": "object_gi_mask23",
+    "VRomStart": 31821824,
+    "VRomEnd": 31827216
+  },
+  {
+    "Filename": "object_gi_bottle_21",
+    "VRomStart": 31830016,
+    "VRomEnd": 31837344
+  },
+  {
+    "Filename": "object_gi_camera",
+    "VRomStart": 31838208,
+    "VRomEnd": 31844448
+  },
+  {
+    "Filename": "object_kamejima",
+    "VRomStart": 31846400,
+    "VRomEnd": 31932064
+  },
+  {
+    "Filename": "object_nb",
+    "VRomStart": 31932416,
+    "VRomEnd": 31968336
+  },
+  {
+    "Filename": "object_harfgibud",
+    "VRomStart": 31969280,
+    "VRomEnd": 32060928
+  },
+  {
+    "Filename": "object_zov",
+    "VRomStart": 32063488,
+    "VRomEnd": 32154224
+  },
+  {
+    "Filename": "object_ah",
+    "VRomStart": 32157696,
+    "VRomEnd": 32198272
+  },
+  {
+    "Filename": "object_hgdoor",
+    "VRomStart": 32198656,
+    "VRomEnd": 32206144
+  },
+  {
+    "Filename": "object_dor01",
+    "VRomStart": 32206848,
+    "VRomEnd": 32212560
+  },
+  {
+    "Filename": "object_dor02",
+    "VRomStart": 32215040,
+    "VRomEnd": 32220688
+  },
+  {
+    "Filename": "object_dor03",
+    "VRomStart": 32223232,
+    "VRomEnd": 32228560
+  },
+  {
+    "Filename": "object_dor04",
+    "VRomStart": 32231424,
+    "VRomEnd": 32237152
+  },
+  {
+    "Filename": "object_last_obj",
+    "VRomStart": 32239616,
+    "VRomEnd": 32258848
+  },
+  {
+    "Filename": "object_redead_obj",
+    "VRomStart": 32260096,
+    "VRomEnd": 32263088
+  },
+  {
+    "Filename": "object_ikninside_obj",
+    "VRomStart": 32264192,
+    "VRomEnd": 32321152
+  },
+  {
+    "Filename": "object_iknv_obj",
+    "VRomStart": 32321536,
+    "VRomEnd": 32399760
+  },
+  {
+    "Filename": "object_pamera",
+    "VRomStart": 32403456,
+    "VRomEnd": 32461184
+  },
+  {
+    "Filename": "object_hsstump",
+    "VRomStart": 32464896,
+    "VRomEnd": 32469472
+  },
+  {
+    "Filename": "object_zm",
+    "VRomStart": 32473088,
+    "VRomEnd": 32524432
+  },
+  {
+    "Filename": "object_al",
+    "VRomStart": 32526336,
+    "VRomEnd": 32582640
+  },
+  {
+    "Filename": "object_tab",
+    "VRomStart": 32583680,
+    "VRomEnd": 32618176
+  },
+  {
+    "Filename": "object_secom_obj",
+    "VRomStart": 32620544,
+    "VRomEnd": 32632048
+  },
+  {
+    "Filename": "object_dt",
+    "VRomStart": 32632832,
+    "VRomEnd": 32679184
+  },
+  {
+    "Filename": "object_gi_mask03",
+    "VRomStart": 32681984,
+    "VRomEnd": 32689840
+  },
+  {
+    "Filename": "object_cha",
+    "VRomStart": 32690176,
+    "VRomEnd": 32697872
+  },
+  {
+    "Filename": "object_obj_dinner",
+    "VRomStart": 32698368,
+    "VRomEnd": 32708160
+  },
+  {
+    "Filename": "object_gi_reserve_b_01",
+    "VRomStart": 32710656,
+    "VRomEnd": 32716512
+  },
+  {
+    "Filename": "object_lastday",
+    "VRomStart": 32718848,
+    "VRomEnd": 32729616
+  },
+  {
+    "Filename": "object_bai",
+    "VRomStart": 32731136,
+    "VRomEnd": 32764336
+  },
+  {
+    "Filename": "object_ikn_demo",
+    "VRomStart": 32768000,
+    "VRomEnd": 32823424
+  },
+  {
+    "Filename": "object_gi_fieldmap",
+    "VRomStart": 32825344,
+    "VRomEnd": 32831520
+  },
+  {
+    "Filename": "object_big_fwall",
+    "VRomStart": 32833536,
+    "VRomEnd": 32836288
+  },
+  {
+    "Filename": "object_hunsui",
+    "VRomStart": 32837632,
+    "VRomEnd": 32844096
+  },
+  {
+    "Filename": "object_uch",
+    "VRomStart": 32845824,
+    "VRomEnd": 32865888
+  },
+  {
+    "Filename": "object_tanron4",
+    "VRomStart": 32866304,
+    "VRomEnd": 32870016
+  },
+  {
+    "Filename": "object_tanron5",
+    "VRomStart": 32870400,
+    "VRomEnd": 32875168
+  },
+  {
+    "Filename": "object_in2",
+    "VRomStart": 32878592,
+    "VRomEnd": 32927824
+  },
+  {
+    "Filename": "object_yb",
+    "VRomStart": 32931840,
+    "VRomEnd": 32956256
+  },
+  {
+    "Filename": "object_rz",
+    "VRomStart": 32956416,
+    "VRomEnd": 33011952
+  },
+  {
+    "Filename": "object_bjt",
+    "VRomStart": 33013760,
+    "VRomEnd": 33022880
+  },
+  {
+    "Filename": "object_taru",
+    "VRomStart": 33026048,
+    "VRomEnd": 33033440
+  },
+  {
+    "Filename": "object_moonston",
+    "VRomStart": 33034240,
+    "VRomEnd": 33038896
+  },
+  {
+    "Filename": "object_gi_schedule",
+    "VRomStart": 33042432,
+    "VRomEnd": 33048768
+  },
+  {
+    "Filename": "object_gi_stonemask",
+    "VRomStart": 33050624,
+    "VRomEnd": 33055568
+  },
+  {
+    "Filename": "object_zoraband",
+    "VRomStart": 33058816,
+    "VRomEnd": 33062720
+  },
+  {
+    "Filename": "object_kepn_koya",
+    "VRomStart": 33062912,
+    "VRomEnd": 33095824
+  },
+  {
+    "Filename": "object_obj_usiyane",
+    "VRomStart": 33099776,
+    "VRomEnd": 33108704
+  },
+  {
+    "Filename": "object_gi_mask05",
+    "VRomStart": 33112064,
+    "VRomEnd": 33118912
+  },
+  {
+    "Filename": "object_gi_mask11",
+    "VRomStart": 33120256,
+    "VRomEnd": 33128080
+  },
+  {
+    "Filename": "object_gi_mask20",
+    "VRomStart": 33128448,
+    "VRomEnd": 33134656
+  },
+  {
+    "Filename": "object_nnh",
+    "VRomStart": 33136640,
+    "VRomEnd": 33148576
+  },
+  {
+    "Filename": "object_kzsaku",
+    "VRomStart": 33148928,
+    "VRomEnd": 33153360
+  },
+  {
+    "Filename": "object_obj_milk_bin",
+    "VRomStart": 33157120,
+    "VRomEnd": 33163776
+  },
+  {
+    "Filename": "object_random_obj",
+    "VRomStart": 33165312,
+    "VRomEnd": 33170160
+  },
+  {
+    "Filename": "object_kujiya",
+    "VRomStart": 33173504,
+    "VRomEnd": 33198512
+  },
+  {
+    "Filename": "object_kitan",
+    "VRomStart": 33202176,
+    "VRomEnd": 33234880
+  },
+  {
+    "Filename": "object_gi_mask06",
+    "VRomStart": 33234944,
+    "VRomEnd": 33241312
+  },
+  {
+    "Filename": "object_gi_mask16",
+    "VRomStart": 33243136,
+    "VRomEnd": 33251280
+  },
+  {
+    "Filename": "object_astr_obj",
+    "VRomStart": 33251328,
+    "VRomEnd": 33260752
+  },
+  {
+    "Filename": "object_bsb",
+    "VRomStart": 33263616,
+    "VRomEnd": 33317856
+  },
+  {
+    "Filename": "object_fall2",
+    "VRomStart": 33320960,
+    "VRomEnd": 33355936
+  },
+  {
+    "Filename": "object_sth",
+    "VRomStart": 33357824,
+    "VRomEnd": 33370640
+  },
+  {
+    "Filename": "object_gi_mssa",
+    "VRomStart": 33374208,
+    "VRomEnd": 33379440
+  },
+  {
+    "Filename": "object_smtower",
+    "VRomStart": 33382400,
+    "VRomEnd": 33388432
+  },
+  {
+    "Filename": "object_gi_mask21",
+    "VRomStart": 33390592,
+    "VRomEnd": 33395632
+  },
+  {
+    "Filename": "object_yado_obj",
+    "VRomStart": 33398784,
+    "VRomEnd": 33403632
+  },
+  {
+    "Filename": "object_syoten",
+    "VRomStart": 33406976,
+    "VRomEnd": 33426848
+  },
+  {
+    "Filename": "object_moonend",
+    "VRomStart": 33427456,
+    "VRomEnd": 33503744
+  },
+  {
+    "Filename": "object_ob",
+    "VRomStart": 33505280,
+    "VRomEnd": 33603248
+  },
+  {
+    "Filename": "object_gi_bottle_04",
+    "VRomStart": 33603584,
+    "VRomEnd": 33608288
+  },
+  {
+    "Filename": "object_and",
+    "VRomStart": 33611776,
+    "VRomEnd": 33686240
+  },
+  {
+    "Filename": "object_obj_danpeilift",
+    "VRomStart": 33689600,
+    "VRomEnd": 33692624
+  },
+  {
+    "Filename": "object_drs",
+    "VRomStart": 33693696,
+    "VRomEnd": 33716880
+  },
+  {
+    "Filename": "object_msmo",
+    "VRomStart": 33718272,
+    "VRomEnd": 33724064
+  },
+  {
+    "Filename": "object_an4",
+    "VRomStart": 33726464,
+    "VRomEnd": 33761488
+  },
+  {
+    "Filename": "object_wdor01",
+    "VRomStart": 33763328,
+    "VRomEnd": 33769136
+  },
+  {
+    "Filename": "object_wdor02",
+    "VRomStart": 33771520,
+    "VRomEnd": 33777328
+  },
+  {
+    "Filename": "object_wdor03",
+    "VRomStart": 33779712,
+    "VRomEnd": 33785520
+  },
+  {
+    "Filename": "object_wdor04",
+    "VRomStart": 33787904,
+    "VRomEnd": 33793648
+  },
+  {
+    "Filename": "object_wdor05",
+    "VRomStart": 33796096,
+    "VRomEnd": 33801840
+  },
+  {
+    "Filename": "object_stk3",
+    "VRomStart": 33804288,
+    "VRomEnd": 33828704
+  },
+  {
+    "Filename": "object_kinsta1_obj",
+    "VRomStart": 33828864,
+    "VRomEnd": 33833712
+  },
+  {
+    "Filename": "object_kinsta2_obj",
+    "VRomStart": 33837056,
+    "VRomEnd": 33842416
+  },
+  {
+    "Filename": "object_bh",
+    "VRomStart": 33845248,
+    "VRomEnd": 33853040
+  },
+  {
+    "Filename": "object_gi_mask17",
+    "VRomStart": 33853440,
+    "VRomEnd": 33860688
+  },
+  {
+    "Filename": "object_gi_mask22",
+    "VRomStart": 33861632,
+    "VRomEnd": 33867488
+  },
+  {
+    "Filename": "object_lbfshot",
+    "VRomStart": 33869824,
+    "VRomEnd": 33875216
+  },
+  {
+    "Filename": "object_fusen",
+    "VRomStart": 33878016,
+    "VRomEnd": 33887312
+  },
+  {
+    "Filename": "object_ending_obj",
+    "VRomStart": 33890304,
+    "VRomEnd": 33925088
+  },
+  {
+    "Filename": "object_gi_mask13",
+    "VRomStart": 33927168,
+    "VRomEnd": 33932800
+  },
+  {
+    "Filename": "DBG_0205D000",
+    "VRomStart": 33935360,
+    "VRomEnd": 33955072
+  },
+  {
+    "Filename": "DBG_02062000",
+    "VRomStart": 33955840,
+    "VRomEnd": 33963264
+  },
+  {
+    "Filename": "DBG_02064000",
+    "VRomStart": 33964032,
+    "VRomEnd": 33982464
+  },
+  {
+    "Filename": "DBG_02069000",
+    "VRomStart": 33984512,
+    "VRomEnd": 34005504
+  },
+  {
+    "Filename": "DBG_0206F000",
+    "VRomStart": 34009088,
+    "VRomEnd": 34035712
+  },
+  {
+    "Filename": "DBG_02076000",
+    "VRomStart": 34037760,
+    "VRomEnd": 34059360
+  },
+  {
+    "Filename": "DBG_0207C000",
+    "VRomStart": 34062336,
+    "VRomEnd": 34062352
+  },
+  {
+    "Filename": "DBG_0207D000",
+    "VRomStart": 34066432,
+    "VRomEnd": 34099200
+  },
+  {
+    "Filename": "nintendo_rogo_static",
+    "VRomStart": 34099200,
+    "VRomEnd": 34110912
+  },
+  {
+    "Filename": "title_static",
+    "VRomStart": 34111488,
+    "VRomEnd": 34464784
+  },
+  {
+    "Filename": "DBG_020DF000",
+    "VRomStart": 34467840,
+    "VRomEnd": 34481152
+  },
+  {
+    "Filename": "DBG_020E3000",
+    "VRomStart": 34484224,
+    "VRomEnd": 34490880
+  },
+  {
+    "Filename": "parameter_static",
+    "VRomStart": 34492416,
+    "VRomEnd": 34537216
+  },
+  {
+    "Filename": "DBG_020F0000",
+    "VRomStart": 34537472,
+    "VRomEnd": 34540000
+  },
+  {
+    "Filename": "DBG_020F1000",
+    "VRomStart": 34541568,
+    "VRomEnd": 34544096
+  },
+  {
+    "Filename": "DBG_020F2000",
+    "VRomStart": 34545664,
+    "VRomEnd": 34548720
+  },
+  {
+    "Filename": "DBG_020F3000",
+    "VRomStart": 34549760,
+    "VRomEnd": 34552288
+  },
+  {
+    "Filename": "DBG_020F4000",
+    "VRomStart": 34553856,
+    "VRomEnd": 34569408
+  },
+  {
+    "Filename": "DBG_020F8000",
+    "VRomStart": 34570240,
+    "VRomEnd": 34609920
+  },
+  {
+    "Filename": "DBG_02102000",
+    "VRomStart": 34611200,
+    "VRomEnd": 34650880
+  },
+  {
+    "Filename": "DBG_0210C000",
+    "VRomStart": 34652160,
+    "VRomEnd": 34691840
+  },
+  {
+    "Filename": "DBG_02116000",
+    "VRomStart": 34693120,
+    "VRomEnd": 34732800
+  },
+  {
+    "Filename": "DBG_02120000",
+    "VRomStart": 34734080,
+    "VRomEnd": 34783232
+  },
+  {
+    "Filename": "DBG_0212C000",
+    "VRomStart": 34783232,
+    "VRomEnd": 34832384
+  },
+  {
+    "Filename": "DBG_02138000",
+    "VRomStart": 34832384,
+    "VRomEnd": 34832896
+  },
+  {
+    "Filename": "elf_message_field",
+    "VRomStart": 34836480,
+    "VRomEnd": 34836592
+  },
+  {
+    "Filename": "elf_message_ydan",
+    "VRomStart": 34840576,
+    "VRomEnd": 34840592
+  },
+  {
+    "Filename": "Z2_20SICHITAI2",
+    "VRomStart": 34844672,
+    "VRomEnd": 34911792
+  },
+  {
+    "Filename": "Z2_20SICHITAI2_room_00",
+    "VRomStart": 34914304,
+    "VRomEnd": 35025472
+  },
+  {
+    "Filename": "Z2_20SICHITAI2_room_01",
+    "VRomStart": 35028992,
+    "VRomEnd": 35104288
+  },
+  {
+    "Filename": "Z2_20SICHITAI2_room_02",
+    "VRomStart": 35106816,
+    "VRomEnd": 35160224
+  },
+  {
+    "Filename": "Z2_WITCH_SHOP",
+    "VRomStart": 35164160,
+    "VRomEnd": 35208128
+  },
+  {
+    "Filename": "Z2_WITCH_SHOP_room_00",
+    "VRomStart": 35209216,
+    "VRomEnd": 35248736
+  },
+  {
+    "Filename": "Z2_LAST_BS",
+    "VRomStart": 35250176,
+    "VRomEnd": 35281024
+  },
+  {
+    "Filename": "Z2_LAST_BS_room_00",
+    "VRomStart": 35282944,
+    "VRomEnd": 35318368
+  },
+  {
+    "Filename": "Z2_HAKASHITA",
+    "VRomStart": 35319808,
+    "VRomEnd": 35370624
+  },
+  {
+    "Filename": "Z2_HAKASHITA_room_00",
+    "VRomStart": 35373056,
+    "VRomEnd": 35405888
+  },
+  {
+    "Filename": "Z2_HAKASHITA_room_01",
+    "VRomStart": 35409920,
+    "VRomEnd": 35440176
+  },
+  {
+    "Filename": "Z2_HAKASHITA_room_02",
+    "VRomStart": 35442688,
+    "VRomEnd": 35471328
+  },
+  {
+    "Filename": "Z2_HAKASHITA_room_03",
+    "VRomStart": 35471360,
+    "VRomEnd": 35489392
+  },
+  {
+    "Filename": "Z2_HAKASHITA_room_04",
+    "VRomStart": 35491840,
+    "VRomEnd": 35514816
+  },
+  {
+    "Filename": "Z2_AYASHIISHOP",
+    "VRomStart": 35516416,
+    "VRomEnd": 35529888
+  },
+  {
+    "Filename": "Z2_AYASHIISHOP_room_00",
+    "VRomStart": 35532800,
+    "VRomEnd": 35605120
+  },
+  {
+    "Filename": "Z2_AYASHIISHOP_room_01",
+    "VRomStart": 35606528,
+    "VRomEnd": 35628320
+  },
+  {
+    "Filename": "Z2_OMOYA",
+    "VRomStart": 35631104,
+    "VRomEnd": 35678224
+  },
+  {
+    "Filename": "Z2_OMOYA_room_00",
+    "VRomStart": 35680256,
+    "VRomEnd": 35718624
+  },
+  {
+    "Filename": "Z2_OMOYA_room_01",
+    "VRomStart": 35721216,
+    "VRomEnd": 35786832
+  },
+  {
+    "Filename": "Z2_OMOYA_room_02",
+    "VRomStart": 35790848,
+    "VRomEnd": 35831728
+  },
+  {
+    "Filename": "Z2_BOWLING",
+    "VRomStart": 35831808,
+    "VRomEnd": 35848352
+  },
+  {
+    "Filename": "Z2_BOWLING_room_00",
+    "VRomStart": 35852288,
+    "VRomEnd": 35872080
+  },
+  {
+    "Filename": "Z2_SONCHONOIE",
+    "VRomStart": 35872768,
+    "VRomEnd": 35902720
+  },
+  {
+    "Filename": "Z2_SONCHONOIE_room_00",
+    "VRomStart": 35905536,
+    "VRomEnd": 35943888
+  },
+  {
+    "Filename": "Z2_SONCHONOIE_room_01",
+    "VRomStart": 35946496,
+    "VRomEnd": 35975040
+  },
+  {
+    "Filename": "Z2_SONCHONOIE_room_02",
+    "VRomStart": 35975168,
+    "VRomEnd": 36016496
+  },
+  {
+    "Filename": "Z2_SONCHONOIE_room_03",
+    "VRomStart": 36020224,
+    "VRomEnd": 36060528
+  },
+  {
+    "Filename": "Z2_IKANA",
+    "VRomStart": 36061184,
+    "VRomEnd": 36184960
+  },
+  {
+    "Filename": "Z2_IKANA_room_00",
+    "VRomStart": 36188160,
+    "VRomEnd": 36358000
+  },
+  {
+    "Filename": "Z2_IKANA_room_01",
+    "VRomStart": 36360192,
+    "VRomEnd": 36361360
+  },
+  {
+    "Filename": "Z2_IKANA_room_02",
+    "VRomStart": 36364288,
+    "VRomEnd": 36379440
+  },
+  {
+    "Filename": "Z2_IKANA_room_03",
+    "VRomStart": 36380672,
+    "VRomEnd": 36392288
+  },
+  {
+    "Filename": "Z2_IKANA_room_04",
+    "VRomStart": 36392960,
+    "VRomEnd": 36427888
+  },
+  {
+    "Filename": "Z2_KAIZOKU",
+    "VRomStart": 36429824,
+    "VRomEnd": 36502816
+  },
+  {
+    "Filename": "Z2_KAIZOKU_room_00",
+    "VRomStart": 36503552,
+    "VRomEnd": 36585280
+  },
+  {
+    "Filename": "Z2_MILK_BAR",
+    "VRomStart": 36585472,
+    "VRomEnd": 36639696
+  },
+  {
+    "Filename": "Z2_MILK_BAR_room_00",
+    "VRomStart": 36642816,
+    "VRomEnd": 36687744
+  },
+  {
+    "Filename": "Z2_INISIE_N",
+    "VRomStart": 36687872,
+    "VRomEnd": 36763184
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_00",
+    "VRomStart": 36765696,
+    "VRomEnd": 36825664
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_01",
+    "VRomStart": 36827136,
+    "VRomEnd": 36869376
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_02",
+    "VRomStart": 36872192,
+    "VRomEnd": 36902640
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_03",
+    "VRomStart": 36904960,
+    "VRomEnd": 36948032
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_04",
+    "VRomStart": 36950016,
+    "VRomEnd": 36980016
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_05",
+    "VRomStart": 36982784,
+    "VRomEnd": 36983216
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_06",
+    "VRomStart": 36986880,
+    "VRomEnd": 36987312
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_07",
+    "VRomStart": 36990976,
+    "VRomEnd": 37006096
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_08",
+    "VRomStart": 37007360,
+    "VRomEnd": 37026896
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_09",
+    "VRomStart": 37027840,
+    "VRomEnd": 37061264
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_10",
+    "VRomStart": 37064704,
+    "VRomEnd": 37083696
+  },
+  {
+    "Filename": "Z2_INISIE_N_room_11",
+    "VRomStart": 37085184,
+    "VRomEnd": 37085648
+  },
+  {
+    "Filename": "Z2_TAKARAYA",
+    "VRomStart": 37089280,
+    "VRomEnd": 37128320
+  },
+  {
+    "Filename": "Z2_TAKARAYA_room_00",
+    "VRomStart": 37130240,
+    "VRomEnd": 37162624
+  },
+  {
+    "Filename": "Z2_INISIE_R",
+    "VRomStart": 37163008,
+    "VRomEnd": 37236864
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_00",
+    "VRomStart": 37240832,
+    "VRomEnd": 37295216
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_01",
+    "VRomStart": 37298176,
+    "VRomEnd": 37336656
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_02",
+    "VRomStart": 37339136,
+    "VRomEnd": 37372944
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_03",
+    "VRomStart": 37376000,
+    "VRomEnd": 37420656
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_04",
+    "VRomStart": 37421056,
+    "VRomEnd": 37447328
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_05",
+    "VRomStart": 37449728,
+    "VRomEnd": 37450336
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_06",
+    "VRomStart": 37453824,
+    "VRomEnd": 37454400
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_07",
+    "VRomStart": 37457920,
+    "VRomEnd": 37458384
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_08",
+    "VRomStart": 37462016,
+    "VRomEnd": 37479472
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_09",
+    "VRomStart": 37482496,
+    "VRomEnd": 37482960
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_10",
+    "VRomStart": 37486592,
+    "VRomEnd": 37509072
+  },
+  {
+    "Filename": "Z2_INISIE_R_room_11",
+    "VRomStart": 37511168,
+    "VRomEnd": 37528320
+  },
+  {
+    "Filename": "Z2_OKUJOU",
+    "VRomStart": 37531648,
+    "VRomEnd": 37642144
+  },
+  {
+    "Filename": "Z2_OKUJOU_room_00",
+    "VRomStart": 37642240,
+    "VRomEnd": 37654400
+  },
+  {
+    "Filename": "Z2_OPENINGDAN",
+    "VRomStart": 37654528,
+    "VRomEnd": 37699168
+  },
+  {
+    "Filename": "Z2_OPENINGDAN_room_00",
+    "VRomStart": 37699584,
+    "VRomEnd": 37746896
+  },
+  {
+    "Filename": "Z2_OPENINGDAN_room_01",
+    "VRomStart": 37748736,
+    "VRomEnd": 37775024
+  },
+  {
+    "Filename": "Z2_MITURIN",
+    "VRomStart": 37777408,
+    "VRomEnd": 37872528
+  },
+  {
+    "Filename": "Z2_MITURIN_room_00",
+    "VRomStart": 37875712,
+    "VRomEnd": 37915728
+  },
+  {
+    "Filename": "Z2_MITURIN_room_01",
+    "VRomStart": 37916672,
+    "VRomEnd": 37951600
+  },
+  {
+    "Filename": "Z2_MITURIN_room_02",
+    "VRomStart": 37953536,
+    "VRomEnd": 37981408
+  },
+  {
+    "Filename": "Z2_MITURIN_room_03",
+    "VRomStart": 37982208,
+    "VRomEnd": 38022592
+  },
+  {
+    "Filename": "Z2_MITURIN_room_04",
+    "VRomStart": 38023168,
+    "VRomEnd": 38032464
+  },
+  {
+    "Filename": "Z2_MITURIN_room_05",
+    "VRomStart": 38035456,
+    "VRomEnd": 38060096
+  },
+  {
+    "Filename": "Z2_MITURIN_room_06",
+    "VRomStart": 38064128,
+    "VRomEnd": 38076432
+  },
+  {
+    "Filename": "Z2_MITURIN_room_07",
+    "VRomStart": 38080512,
+    "VRomEnd": 38094688
+  },
+  {
+    "Filename": "Z2_MITURIN_room_08",
+    "VRomStart": 38096896,
+    "VRomEnd": 38123312
+  },
+  {
+    "Filename": "Z2_MITURIN_room_09",
+    "VRomStart": 38125568,
+    "VRomEnd": 38170080
+  },
+  {
+    "Filename": "Z2_MITURIN_room_10",
+    "VRomStart": 38170624,
+    "VRomEnd": 38190768
+  },
+  {
+    "Filename": "Z2_MITURIN_room_11",
+    "VRomStart": 38191104,
+    "VRomEnd": 38219168
+  },
+  {
+    "Filename": "Z2_MITURIN_room_12",
+    "VRomStart": 38219776,
+    "VRomEnd": 38235280
+  },
+  {
+    "Filename": "Z2_13HUBUKINOMITI",
+    "VRomStart": 38236160,
+    "VRomEnd": 38268400
+  },
+  {
+    "Filename": "Z2_13HUBUKINOMITI_room_00",
+    "VRomStart": 38268928,
+    "VRomEnd": 38286624
+  },
+  {
+    "Filename": "Z2_CASTLE",
+    "VRomStart": 38289408,
+    "VRomEnd": 38353008
+  },
+  {
+    "Filename": "Z2_CASTLE_room_00",
+    "VRomStart": 38354944,
+    "VRomEnd": 38453312
+  },
+  {
+    "Filename": "Z2_CASTLE_room_01",
+    "VRomStart": 38457344,
+    "VRomEnd": 38482528
+  },
+  {
+    "Filename": "Z2_CASTLE_room_02",
+    "VRomStart": 38486016,
+    "VRomEnd": 38508352
+  },
+  {
+    "Filename": "Z2_CASTLE_room_03",
+    "VRomStart": 38510592,
+    "VRomEnd": 38532464
+  },
+  {
+    "Filename": "Z2_CASTLE_room_04",
+    "VRomStart": 38535168,
+    "VRomEnd": 38569696
+  },
+  {
+    "Filename": "Z2_CASTLE_room_05",
+    "VRomStart": 38572032,
+    "VRomEnd": 38588528
+  },
+  {
+    "Filename": "Z2_CASTLE_room_06",
+    "VRomStart": 38592512,
+    "VRomEnd": 38602176
+  },
+  {
+    "Filename": "Z2_CASTLE_room_07",
+    "VRomStart": 38604800,
+    "VRomEnd": 38614640
+  },
+  {
+    "Filename": "Z2_CASTLE_room_08",
+    "VRomStart": 38617088,
+    "VRomEnd": 38620944
+  },
+  {
+    "Filename": "Z2_CASTLE_room_09",
+    "VRomStart": 38621184,
+    "VRomEnd": 38625040
+  },
+  {
+    "Filename": "Z2_DEKUTES",
+    "VRomStart": 38625280,
+    "VRomEnd": 38661776
+  },
+  {
+    "Filename": "Z2_DEKUTES_room_00",
+    "VRomStart": 38662144,
+    "VRomEnd": 38679392
+  },
+  {
+    "Filename": "Z2_MITURIN_BS",
+    "VRomStart": 38682624,
+    "VRomEnd": 38695344
+  },
+  {
+    "Filename": "Z2_MITURIN_BS_room_00",
+    "VRomStart": 38699008,
+    "VRomEnd": 38706352
+  },
+  {
+    "Filename": "Z2_SYATEKI_MIZU",
+    "VRomStart": 38707200,
+    "VRomEnd": 38745792
+  },
+  {
+    "Filename": "Z2_SYATEKI_MIZU_room_00",
+    "VRomStart": 38748160,
+    "VRomEnd": 38773072
+  },
+  {
+    "Filename": "Z2_HAKUGIN",
+    "VRomStart": 38776832,
+    "VRomEnd": 38889936
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_00",
+    "VRomStart": 38891520,
+    "VRomEnd": 38925360
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_01",
+    "VRomStart": 38928384,
+    "VRomEnd": 38956304
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_02",
+    "VRomStart": 38957056,
+    "VRomEnd": 39007392
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_03",
+    "VRomStart": 39010304,
+    "VRomEnd": 39032912
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_04",
+    "VRomStart": 39034880,
+    "VRomEnd": 39172000
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_05",
+    "VRomStart": 39174144,
+    "VRomEnd": 39204512
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_06",
+    "VRomStart": 39206912,
+    "VRomEnd": 39221840
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_07",
+    "VRomStart": 39223296,
+    "VRomEnd": 39250608
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_08",
+    "VRomStart": 39251968,
+    "VRomEnd": 39272400
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_09",
+    "VRomStart": 39272448,
+    "VRomEnd": 39306304
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_10",
+    "VRomStart": 39309312,
+    "VRomEnd": 39322752
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_11",
+    "VRomStart": 39325696,
+    "VRomEnd": 39337776
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_12",
+    "VRomStart": 39337984,
+    "VRomEnd": 39357712
+  },
+  {
+    "Filename": "Z2_HAKUGIN_room_13",
+    "VRomStart": 39358464,
+    "VRomEnd": 39375616
+  },
+  {
+    "Filename": "Z2_ROMANYMAE",
+    "VRomStart": 39378944,
+    "VRomEnd": 39392944
+  },
+  {
+    "Filename": "Z2_ROMANYMAE_room_00",
+    "VRomStart": 39395328,
+    "VRomEnd": 39408480
+  },
+  {
+    "Filename": "Z2_PIRATE",
+    "VRomStart": 39411712,
+    "VRomEnd": 39495248
+  },
+  {
+    "Filename": "Z2_PIRATE_room_00",
+    "VRomStart": 39497728,
+    "VRomEnd": 39509952
+  },
+  {
+    "Filename": "Z2_PIRATE_room_01",
+    "VRomStart": 39510016,
+    "VRomEnd": 39529984
+  },
+  {
+    "Filename": "Z2_PIRATE_room_02",
+    "VRomStart": 39530496,
+    "VRomEnd": 39552128
+  },
+  {
+    "Filename": "Z2_PIRATE_room_03",
+    "VRomStart": 39555072,
+    "VRomEnd": 39651680
+  },
+  {
+    "Filename": "Z2_PIRATE_room_04",
+    "VRomStart": 39653376,
+    "VRomEnd": 39666016
+  },
+  {
+    "Filename": "Z2_PIRATE_room_05",
+    "VRomStart": 39669760,
+    "VRomEnd": 39734048
+  },
+  {
+    "Filename": "Z2_PIRATE_room_06",
+    "VRomStart": 39735296,
+    "VRomEnd": 39750912
+  },
+  {
+    "Filename": "Z2_PIRATE_room_07",
+    "VRomStart": 39751680,
+    "VRomEnd": 39823872
+  },
+  {
+    "Filename": "Z2_PIRATE_room_08",
+    "VRomStart": 39825408,
+    "VRomEnd": 39839712
+  },
+  {
+    "Filename": "Z2_PIRATE_room_09",
+    "VRomStart": 39841792,
+    "VRomEnd": 39882032
+  },
+  {
+    "Filename": "Z2_PIRATE_room_10",
+    "VRomStart": 39882752,
+    "VRomEnd": 39926880
+  },
+  {
+    "Filename": "Z2_PIRATE_room_11",
+    "VRomStart": 39927808,
+    "VRomEnd": 39967856
+  },
+  {
+    "Filename": "Z2_PIRATE_room_12",
+    "VRomStart": 39968768,
+    "VRomEnd": 40023600
+  },
+  {
+    "Filename": "Z2_PIRATE_room_13",
+    "VRomStart": 40026112,
+    "VRomEnd": 40042992
+  },
+  {
+    "Filename": "Z2_PIRATE_room_14",
+    "VRomStart": 40046592,
+    "VRomEnd": 40052032
+  },
+  {
+    "Filename": "Z2_SYATEKI_MORI",
+    "VRomStart": 40054784,
+    "VRomEnd": 40127696
+  },
+  {
+    "Filename": "Z2_SYATEKI_MORI_room_00",
+    "VRomStart": 40128512,
+    "VRomEnd": 40153168
+  },
+  {
+    "Filename": "Z2_SINKAI",
+    "VRomStart": 40157184,
+    "VRomEnd": 40197792
+  },
+  {
+    "Filename": "Z2_SINKAI_room_00",
+    "VRomStart": 40198144,
+    "VRomEnd": 40229968
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI",
+    "VRomStart": 40230912,
+    "VRomEnd": 40375232
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI_room_00",
+    "VRomStart": 40378368,
+    "VRomEnd": 40399072
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI_room_01",
+    "VRomStart": 40402944,
+    "VRomEnd": 40423520
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI_room_02",
+    "VRomStart": 40427520,
+    "VRomEnd": 40448128
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI_room_03",
+    "VRomStart": 40452096,
+    "VRomEnd": 40472672
+  },
+  {
+    "Filename": "Z2_YOUSEI_IZUMI_room_04",
+    "VRomStart": 40476672,
+    "VRomEnd": 40497296
+  },
+  {
+    "Filename": "Z2_KINSTA1",
+    "VRomStart": 40501248,
+    "VRomEnd": 40545376
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_00",
+    "VRomStart": 40546304,
+    "VRomEnd": 40555040
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_01",
+    "VRomStart": 40558592,
+    "VRomEnd": 40599808
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_02",
+    "VRomStart": 40603648,
+    "VRomEnd": 40625696
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_03",
+    "VRomStart": 40628224,
+    "VRomEnd": 40646352
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_04",
+    "VRomStart": 40648704,
+    "VRomEnd": 40685648
+  },
+  {
+    "Filename": "Z2_KINSTA1_room_05",
+    "VRomStart": 40689664,
+    "VRomEnd": 40697648
+  },
+  {
+    "Filename": "Z2_KINDAN2",
+    "VRomStart": 40697856,
+    "VRomEnd": 40762944
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_00",
+    "VRomStart": 40763392,
+    "VRomEnd": 40790592
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_01",
+    "VRomStart": 40792064,
+    "VRomEnd": 40842000
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_02",
+    "VRomStart": 40845312,
+    "VRomEnd": 40887104
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_03",
+    "VRomStart": 40890368,
+    "VRomEnd": 40928288
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_04",
+    "VRomStart": 40931328,
+    "VRomEnd": 40950464
+  },
+  {
+    "Filename": "Z2_KINDAN2_room_05",
+    "VRomStart": 40951808,
+    "VRomEnd": 40984048
+  },
+  {
+    "Filename": "Z2_TENMON_DAI",
+    "VRomStart": 40984576,
+    "VRomEnd": 41019264
+  },
+  {
+    "Filename": "Z2_TENMON_DAI_room_00",
+    "VRomStart": 41021440,
+    "VRomEnd": 41095968
+  },
+  {
+    "Filename": "Z2_TENMON_DAI_room_01",
+    "VRomStart": 41099264,
+    "VRomEnd": 41200304
+  },
+  {
+    "Filename": "Z2_LAST_DEKU",
+    "VRomStart": 41201664,
+    "VRomEnd": 41217936
+  },
+  {
+    "Filename": "Z2_LAST_DEKU_room_00",
+    "VRomStart": 41218048,
+    "VRomEnd": 41274112
+  },
+  {
+    "Filename": "Z2_LAST_DEKU_room_01",
+    "VRomStart": 41275392,
+    "VRomEnd": 41293728
+  },
+  {
+    "Filename": "Z2_22DEKUCITY",
+    "VRomStart": 41295872,
+    "VRomEnd": 41349664
+  },
+  {
+    "Filename": "Z2_22DEKUCITY_room_00",
+    "VRomStart": 41353216,
+    "VRomEnd": 41425488
+  },
+  {
+    "Filename": "Z2_22DEKUCITY_room_01",
+    "VRomStart": 41426944,
+    "VRomEnd": 41486672
+  },
+  {
+    "Filename": "Z2_22DEKUCITY_room_02",
+    "VRomStart": 41488384,
+    "VRomEnd": 41563376
+  },
+  {
+    "Filename": "Z2_KAJIYA",
+    "VRomStart": 41566208,
+    "VRomEnd": 41597392
+  },
+  {
+    "Filename": "Z2_KAJIYA_room_00",
+    "VRomStart": 41598976,
+    "VRomEnd": 41654560
+  },
+  {
+    "Filename": "Z2_00KEIKOKU",
+    "VRomStart": 41656320,
+    "VRomEnd": 41887104
+  },
+  {
+    "Filename": "Z2_00KEIKOKU_room_00",
+    "VRomStart": 41889792,
+    "VRomEnd": 42055776
+  },
+  {
+    "Filename": "Z2_POSTHOUSE",
+    "VRomStart": 42057728,
+    "VRomEnd": 42096560
+  },
+  {
+    "Filename": "Z2_POSTHOUSE_room_00",
+    "VRomStart": 42098688,
+    "VRomEnd": 42133776
+  },
+  {
+    "Filename": "Z2_LABO",
+    "VRomStart": 42135552,
+    "VRomEnd": 42191936
+  },
+  {
+    "Filename": "Z2_LABO_room_00",
+    "VRomStart": 42192896,
+    "VRomEnd": 42227360
+  },
+  {
+    "Filename": "Z2_DANPEI2TEST",
+    "VRomStart": 42229760,
+    "VRomEnd": 42253392
+  },
+  {
+    "Filename": "Z2_DANPEI2TEST_room_00",
+    "VRomStart": 42254336,
+    "VRomEnd": 42347616
+  },
+  {
+    "Filename": "Z2_DANPEI2TEST_room_01",
+    "VRomStart": 42348544,
+    "VRomEnd": 42372272
+  },
+  {
+    "Filename": "Z2_16GORON_HOUSE",
+    "VRomStart": 42373120,
+    "VRomEnd": 42426976
+  },
+  {
+    "Filename": "Z2_16GORON_HOUSE_room_00",
+    "VRomStart": 42430464,
+    "VRomEnd": 42481104
+  },
+  {
+    "Filename": "Z2_16GORON_HOUSE_room_01",
+    "VRomStart": 42483712,
+    "VRomEnd": 42513264
+  },
+  {
+    "Filename": "Z2_33ZORACITY",
+    "VRomStart": 42516480,
+    "VRomEnd": 42575728
+  },
+  {
+    "Filename": "Z2_33ZORACITY_room_00",
+    "VRomStart": 42577920,
+    "VRomEnd": 42618960
+  },
+  {
+    "Filename": "Z2_8ITEMSHOP",
+    "VRomStart": 42622976,
+    "VRomEnd": 42664560
+  },
+  {
+    "Filename": "Z2_8ITEMSHOP_room_00",
+    "VRomStart": 42668032,
+    "VRomEnd": 42719792
+  },
+  {
+    "Filename": "Z2_F01",
+    "VRomStart": 42721280,
+    "VRomEnd": 42837088
+  },
+  {
+    "Filename": "Z2_F01_room_00",
+    "VRomStart": 42840064,
+    "VRomEnd": 42894016
+  },
+  {
+    "Filename": "Z2_INISIE_BS",
+    "VRomStart": 42897408,
+    "VRomEnd": 42908688
+  },
+  {
+    "Filename": "Z2_INISIE_BS_room_00",
+    "VRomStart": 42909696,
+    "VRomEnd": 42910128
+  },
+  {
+    "Filename": "Z2_30GYOSON",
+    "VRomStart": 42913792,
+    "VRomEnd": 43040208
+  },
+  {
+    "Filename": "Z2_30GYOSON_room_00",
+    "VRomStart": 43040768,
+    "VRomEnd": 43160320
+  },
+  {
+    "Filename": "Z2_31MISAKI",
+    "VRomStart": 43163648,
+    "VRomEnd": 43265936
+  },
+  {
+    "Filename": "Z2_31MISAKI_room_00",
+    "VRomStart": 43266048,
+    "VRomEnd": 43361392
+  },
+  {
+    "Filename": "Z2_TAKARAKUJI",
+    "VRomStart": 43364352,
+    "VRomEnd": 43374096
+  },
+  {
+    "Filename": "Z2_TAKARAKUJI_room_00",
+    "VRomStart": 43376640,
+    "VRomEnd": 43388496
+  },
+  {
+    "Filename": "Z2_TORIDE",
+    "VRomStart": 43388928,
+    "VRomEnd": 43438160
+  },
+  {
+    "Filename": "Z2_TORIDE_room_00",
+    "VRomStart": 43442176,
+    "VRomEnd": 43495936
+  },
+  {
+    "Filename": "Z2_FISHERMAN",
+    "VRomStart": 43499520,
+    "VRomEnd": 43536720
+  },
+  {
+    "Filename": "Z2_FISHERMAN_room_00",
+    "VRomStart": 43540480,
+    "VRomEnd": 43574592
+  },
+  {
+    "Filename": "Z2_GORONSHOP",
+    "VRomStart": 43577344,
+    "VRomEnd": 43627312
+  },
+  {
+    "Filename": "Z2_GORONSHOP_room_00",
+    "VRomStart": 43630592,
+    "VRomEnd": 43668896
+  },
+  {
+    "Filename": "Z2_DEKU_KING",
+    "VRomStart": 43671552,
+    "VRomEnd": 43744192
+  },
+  {
+    "Filename": "Z2_DEKU_KING_room_00",
+    "VRomStart": 43745280,
+    "VRomEnd": 43783392
+  },
+  {
+    "Filename": "Z2_LAST_GORON",
+    "VRomStart": 43786240,
+    "VRomEnd": 43824576
+  },
+  {
+    "Filename": "Z2_LAST_GORON_room_00",
+    "VRomStart": 43827200,
+    "VRomEnd": 43916944
+  },
+  {
+    "Filename": "Z2_LAST_GORON_room_01",
+    "VRomStart": 43917312,
+    "VRomEnd": 43934912
+  },
+  {
+    "Filename": "Z2_24KEMONOMITI",
+    "VRomStart": 43937792,
+    "VRomEnd": 43969360
+  },
+  {
+    "Filename": "Z2_24KEMONOMITI_room_00",
+    "VRomStart": 43970560,
+    "VRomEnd": 43995616
+  },
+  {
+    "Filename": "Z2_F01_B",
+    "VRomStart": 43999232,
+    "VRomEnd": 44046624
+  },
+  {
+    "Filename": "Z2_F01_B_room_00",
+    "VRomStart": 44048384,
+    "VRomEnd": 44077696
+  },
+  {
+    "Filename": "Z2_F01C",
+    "VRomStart": 44081152,
+    "VRomEnd": 44139184
+  },
+  {
+    "Filename": "Z2_F01C_room_00",
+    "VRomStart": 44142592,
+    "VRomEnd": 44165680
+  },
+  {
+    "Filename": "Z2_BOTI",
+    "VRomStart": 44167168,
+    "VRomEnd": 44224976
+  },
+  {
+    "Filename": "Z2_BOTI_room_00",
+    "VRomStart": 44228608,
+    "VRomEnd": 44278240
+  },
+  {
+    "Filename": "Z2_BOTI_room_01",
+    "VRomStart": 44281856,
+    "VRomEnd": 44317472
+  },
+  {
+    "Filename": "Z2_HAKUGIN_BS",
+    "VRomStart": 44318720,
+    "VRomEnd": 44351408
+  },
+  {
+    "Filename": "Z2_HAKUGIN_BS_room_00",
+    "VRomStart": 44351488,
+    "VRomEnd": 44376656
+  },
+  {
+    "Filename": "Z2_20SICHITAI",
+    "VRomStart": 44380160,
+    "VRomEnd": 44451168
+  },
+  {
+    "Filename": "Z2_20SICHITAI_room_00",
+    "VRomStart": 44453888,
+    "VRomEnd": 44575632
+  },
+  {
+    "Filename": "Z2_20SICHITAI_room_01",
+    "VRomStart": 44576768,
+    "VRomEnd": 44659968
+  },
+  {
+    "Filename": "Z2_20SICHITAI_room_02",
+    "VRomStart": 44662784,
+    "VRomEnd": 44721376
+  },
+  {
+    "Filename": "Z2_21MITURINMAE",
+    "VRomStart": 44724224,
+    "VRomEnd": 44769264
+  },
+  {
+    "Filename": "Z2_21MITURINMAE_room_00",
+    "VRomStart": 44769280,
+    "VRomEnd": 44833856
+  },
+  {
+    "Filename": "Z2_LAST_ZORA",
+    "VRomStart": 44834816,
+    "VRomEnd": 44918816
+  },
+  {
+    "Filename": "Z2_LAST_ZORA_room_00",
+    "VRomStart": 44920832,
+    "VRomEnd": 44980064
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO2",
+    "VRomStart": 44982272,
+    "VRomEnd": 45008640
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO2_room_00",
+    "VRomStart": 45010944,
+    "VRomEnd": 45102832
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO2_room_01",
+    "VRomStart": 45105152,
+    "VRomEnd": 45115040
+  },
+  {
+    "Filename": "Z2_SEA",
+    "VRomStart": 45117440,
+    "VRomEnd": 45233984
+  },
+  {
+    "Filename": "Z2_SEA_room_00",
+    "VRomStart": 45236224,
+    "VRomEnd": 45296224
+  },
+  {
+    "Filename": "Z2_SEA_room_01",
+    "VRomStart": 45297664,
+    "VRomEnd": 45331360
+  },
+  {
+    "Filename": "Z2_SEA_room_02",
+    "VRomStart": 45334528,
+    "VRomEnd": 45342912
+  },
+  {
+    "Filename": "Z2_SEA_room_03",
+    "VRomStart": 45346816,
+    "VRomEnd": 45356096
+  },
+  {
+    "Filename": "Z2_SEA_room_04",
+    "VRomStart": 45359104,
+    "VRomEnd": 45394832
+  },
+  {
+    "Filename": "Z2_SEA_room_05",
+    "VRomStart": 45395968,
+    "VRomEnd": 45417200
+  },
+  {
+    "Filename": "Z2_SEA_room_06",
+    "VRomStart": 45420544,
+    "VRomEnd": 45469072
+  },
+  {
+    "Filename": "Z2_SEA_room_07",
+    "VRomStart": 45469696,
+    "VRomEnd": 45490368
+  },
+  {
+    "Filename": "Z2_SEA_room_08",
+    "VRomStart": 45494272,
+    "VRomEnd": 45536256
+  },
+  {
+    "Filename": "Z2_SEA_room_09",
+    "VRomStart": 45539328,
+    "VRomEnd": 45558512
+  },
+  {
+    "Filename": "Z2_SEA_room_10",
+    "VRomStart": 45559808,
+    "VRomEnd": 45595424
+  },
+  {
+    "Filename": "Z2_SEA_room_11",
+    "VRomStart": 45596672,
+    "VRomEnd": 45640432
+  },
+  {
+    "Filename": "Z2_SEA_room_12",
+    "VRomStart": 45641728,
+    "VRomEnd": 45675888
+  },
+  {
+    "Filename": "Z2_SEA_room_13",
+    "VRomStart": 45678592,
+    "VRomEnd": 45692816
+  },
+  {
+    "Filename": "Z2_SEA_room_14",
+    "VRomStart": 45694976,
+    "VRomEnd": 45701952
+  },
+  {
+    "Filename": "Z2_SEA_room_15",
+    "VRomStart": 45703168,
+    "VRomEnd": 45709680
+  },
+  {
+    "Filename": "Z2_35TAKI",
+    "VRomStart": 45711360,
+    "VRomEnd": 45811712
+  },
+  {
+    "Filename": "Z2_35TAKI_room_00",
+    "VRomStart": 45813760,
+    "VRomEnd": 45915408
+  },
+  {
+    "Filename": "Z2_REDEAD",
+    "VRomStart": 45916160,
+    "VRomEnd": 45969456
+  },
+  {
+    "Filename": "Z2_REDEAD_room_00",
+    "VRomStart": 45973504,
+    "VRomEnd": 45994736
+  },
+  {
+    "Filename": "Z2_REDEAD_room_01",
+    "VRomStart": 45998080,
+    "VRomEnd": 46033808
+  },
+  {
+    "Filename": "Z2_REDEAD_room_02",
+    "VRomStart": 46034944,
+    "VRomEnd": 46067840
+  },
+  {
+    "Filename": "Z2_REDEAD_room_03",
+    "VRomStart": 46071808,
+    "VRomEnd": 46102832
+  },
+  {
+    "Filename": "Z2_REDEAD_room_04",
+    "VRomStart": 46104576,
+    "VRomEnd": 46134336
+  },
+  {
+    "Filename": "Z2_REDEAD_room_05",
+    "VRomStart": 46137344,
+    "VRomEnd": 46175136
+  },
+  {
+    "Filename": "Z2_REDEAD_room_06",
+    "VRomStart": 46178304,
+    "VRomEnd": 46206624
+  },
+  {
+    "Filename": "Z2_REDEAD_room_07",
+    "VRomStart": 46206976,
+    "VRomEnd": 46231744
+  },
+  {
+    "Filename": "Z2_REDEAD_room_08",
+    "VRomStart": 46235648,
+    "VRomEnd": 46245472
+  },
+  {
+    "Filename": "Z2_REDEAD_room_09",
+    "VRomStart": 46247936,
+    "VRomEnd": 46258224
+  },
+  {
+    "Filename": "Z2_REDEAD_room_10",
+    "VRomStart": 46260224,
+    "VRomEnd": 46270976
+  },
+  {
+    "Filename": "Z2_REDEAD_room_11",
+    "VRomStart": 46272512,
+    "VRomEnd": 46311296
+  },
+  {
+    "Filename": "Z2_REDEAD_room_12",
+    "VRomStart": 46313472,
+    "VRomEnd": 46317456
+  },
+  {
+    "Filename": "Z2_REDEAD_room_13",
+    "VRomStart": 46317568,
+    "VRomEnd": 46323856
+  },
+  {
+    "Filename": "Z2_BANDROOM",
+    "VRomStart": 46325760,
+    "VRomEnd": 46373040
+  },
+  {
+    "Filename": "Z2_BANDROOM_room_00",
+    "VRomStart": 46374912,
+    "VRomEnd": 46448592
+  },
+  {
+    "Filename": "Z2_BANDROOM_room_01",
+    "VRomStart": 46448640,
+    "VRomEnd": 46495520
+  },
+  {
+    "Filename": "Z2_BANDROOM_room_02",
+    "VRomStart": 46497792,
+    "VRomEnd": 46556592
+  },
+  {
+    "Filename": "Z2_BANDROOM_room_03",
+    "VRomStart": 46559232,
+    "VRomEnd": 46602096
+  },
+  {
+    "Filename": "Z2_BANDROOM_room_04",
+    "VRomStart": 46604288,
+    "VRomEnd": 46642768
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO",
+    "VRomStart": 46645248,
+    "VRomEnd": 46667520
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO_room_00",
+    "VRomStart": 46669824,
+    "VRomEnd": 46750816
+  },
+  {
+    "Filename": "Z2_11GORONNOSATO_room_01",
+    "VRomStart": 46751744,
+    "VRomEnd": 46762592
+  },
+  {
+    "Filename": "Z2_GORON_HAKA",
+    "VRomStart": 46764032,
+    "VRomEnd": 46798736
+  },
+  {
+    "Filename": "Z2_GORON_HAKA_room_00",
+    "VRomStart": 46800896,
+    "VRomEnd": 46833072
+  },
+  {
+    "Filename": "Z2_SECOM",
+    "VRomStart": 46833664,
+    "VRomEnd": 46860816
+  },
+  {
+    "Filename": "Z2_SECOM_room_00",
+    "VRomStart": 46862336,
+    "VRomEnd": 46875376
+  },
+  {
+    "Filename": "Z2_SECOM_room_01",
+    "VRomStart": 46878720,
+    "VRomEnd": 46942640
+  },
+  {
+    "Filename": "Z2_10YUKIYAMANOMURA",
+    "VRomStart": 46944256,
+    "VRomEnd": 47003216
+  },
+  {
+    "Filename": "Z2_10YUKIYAMANOMURA_room_00",
+    "VRomStart": 47005696,
+    "VRomEnd": 47052480
+  },
+  {
+    "Filename": "Z2_TOUGITES",
+    "VRomStart": 47054848,
+    "VRomEnd": 47081408
+  },
+  {
+    "Filename": "Z2_TOUGITES_room_00",
+    "VRomStart": 47083520,
+    "VRomEnd": 47101392
+  },
+  {
+    "Filename": "Z2_DANPEI",
+    "VRomStart": 47104000,
+    "VRomEnd": 47172352
+  },
+  {
+    "Filename": "Z2_DANPEI_room_00",
+    "VRomStart": 47173632,
+    "VRomEnd": 47217600
+  },
+  {
+    "Filename": "Z2_DANPEI_room_01",
+    "VRomStart": 47218688,
+    "VRomEnd": 47252096
+  },
+  {
+    "Filename": "Z2_DANPEI_room_02",
+    "VRomStart": 47255552,
+    "VRomEnd": 47306960
+  },
+  {
+    "Filename": "Z2_DANPEI_room_03",
+    "VRomStart": 47308800,
+    "VRomEnd": 47349520
+  },
+  {
+    "Filename": "Z2_DANPEI_room_04",
+    "VRomStart": 47349760,
+    "VRomEnd": 47371440
+  },
+  {
+    "Filename": "Z2_DANPEI_room_05",
+    "VRomStart": 47374336,
+    "VRomEnd": 47414896
+  },
+  {
+    "Filename": "Z2_DANPEI_room_06",
+    "VRomStart": 47415296,
+    "VRomEnd": 47460944
+  },
+  {
+    "Filename": "Z2_DANPEI_room_07",
+    "VRomStart": 47464448,
+    "VRomEnd": 47520528
+  },
+  {
+    "Filename": "Z2_DANPEI_room_08",
+    "VRomStart": 47521792,
+    "VRomEnd": 47547408
+  },
+  {
+    "Filename": "Z2_IKANAMAE",
+    "VRomStart": 47550464,
+    "VRomEnd": 47583376
+  },
+  {
+    "Filename": "Z2_IKANAMAE_room_00",
+    "VRomStart": 47587328,
+    "VRomEnd": 47606736
+  },
+  {
+    "Filename": "Z2_DOUJOU",
+    "VRomStart": 47607808,
+    "VRomEnd": 47637808
+  },
+  {
+    "Filename": "Z2_DOUJOU_room_00",
+    "VRomStart": 47640576,
+    "VRomEnd": 47666400
+  },
+  {
+    "Filename": "Z2_MUSICHOUSE",
+    "VRomStart": 47669248,
+    "VRomEnd": 47773696
+  },
+  {
+    "Filename": "Z2_MUSICHOUSE_room_00",
+    "VRomStart": 47775744,
+    "VRomEnd": 47827552
+  },
+  {
+    "Filename": "Z2_IKNINSIDE",
+    "VRomStart": 47828992,
+    "VRomEnd": 47874032
+  },
+  {
+    "Filename": "Z2_IKNINSIDE_room_00",
+    "VRomStart": 47874048,
+    "VRomEnd": 47884768
+  },
+  {
+    "Filename": "Z2_IKNINSIDE_room_01",
+    "VRomStart": 47886336,
+    "VRomEnd": 47917120
+  },
+  {
+    "Filename": "Z2_MAP_SHOP",
+    "VRomStart": 47919104,
+    "VRomEnd": 47947808
+  },
+  {
+    "Filename": "Z2_MAP_SHOP_room_00",
+    "VRomStart": 47951872,
+    "VRomEnd": 47974496
+  },
+  {
+    "Filename": "Z2_F40",
+    "VRomStart": 47976448,
+    "VRomEnd": 48059136
+  },
+  {
+    "Filename": "Z2_F40_room_00",
+    "VRomStart": 48062464,
+    "VRomEnd": 48111216
+  },
+  {
+    "Filename": "Z2_F41",
+    "VRomStart": 48111616,
+    "VRomEnd": 48192240
+  },
+  {
+    "Filename": "Z2_F41_room_00",
+    "VRomStart": 48193536,
+    "VRomEnd": 48240992
+  },
+  {
+    "Filename": "Z2_10YUKIYAMANOMURA2",
+    "VRomStart": 48242688,
+    "VRomEnd": 48271456
+  },
+  {
+    "Filename": "Z2_10YUKIYAMANOMURA2_room_00",
+    "VRomStart": 48275456,
+    "VRomEnd": 48399504
+  },
+  {
+    "Filename": "Z2_10YUKIYAMANOMURA2_room_01",
+    "VRomStart": 48402432,
+    "VRomEnd": 48410160
+  },
+  {
+    "Filename": "Z2_14YUKIDAMANOMITI",
+    "VRomStart": 48410624,
+    "VRomEnd": 48434416
+  },
+  {
+    "Filename": "Z2_14YUKIDAMANOMITI_room_00",
+    "VRomStart": 48435200,
+    "VRomEnd": 48453040
+  },
+  {
+    "Filename": "Z2_12HAKUGINMAE",
+    "VRomStart": 48455680,
+    "VRomEnd": 48485728
+  },
+  {
+    "Filename": "Z2_12HAKUGINMAE_room_00",
+    "VRomStart": 48488448,
+    "VRomEnd": 48517296
+  },
+  {
+    "Filename": "Z2_17SETUGEN",
+    "VRomStart": 48521216,
+    "VRomEnd": 48561072
+  },
+  {
+    "Filename": "Z2_17SETUGEN_room_00",
+    "VRomStart": 48562176,
+    "VRomEnd": 48592624
+  },
+  {
+    "Filename": "Z2_17SETUGEN2",
+    "VRomStart": 48594944,
+    "VRomEnd": 48630480
+  },
+  {
+    "Filename": "Z2_17SETUGEN2_room_00",
+    "VRomStart": 48631808,
+    "VRomEnd": 48660960
+  },
+  {
+    "Filename": "Z2_SEA_BS",
+    "VRomStart": 48664576,
+    "VRomEnd": 48685808
+  },
+  {
+    "Filename": "Z2_SEA_BS_room_00",
+    "VRomStart": 48689152,
+    "VRomEnd": 48711888
+  },
+  {
+    "Filename": "Z2_RANDOM",
+    "VRomStart": 48713728,
+    "VRomEnd": 48759008
+  },
+  {
+    "Filename": "Z2_RANDOM_room_00",
+    "VRomStart": 48762880,
+    "VRomEnd": 48773920
+  },
+  {
+    "Filename": "Z2_RANDOM_room_01",
+    "VRomStart": 48775168,
+    "VRomEnd": 48813904
+  },
+  {
+    "Filename": "Z2_RANDOM_room_02",
+    "VRomStart": 48816128,
+    "VRomEnd": 48845264
+  },
+  {
+    "Filename": "Z2_RANDOM_room_03",
+    "VRomStart": 48848896,
+    "VRomEnd": 48878320
+  },
+  {
+    "Filename": "Z2_RANDOM_room_04",
+    "VRomStart": 48881664,
+    "VRomEnd": 48895424
+  },
+  {
+    "Filename": "Z2_RANDOM_room_05",
+    "VRomStart": 48898048,
+    "VRomEnd": 48913408
+  },
+  {
+    "Filename": "Z2_YADOYA",
+    "VRomStart": 48914432,
+    "VRomEnd": 48976544
+  },
+  {
+    "Filename": "Z2_YADOYA_room_00",
+    "VRomStart": 48979968,
+    "VRomEnd": 49079488
+  },
+  {
+    "Filename": "Z2_YADOYA_room_01",
+    "VRomStart": 49082368,
+    "VRomEnd": 49115952
+  },
+  {
+    "Filename": "Z2_YADOYA_room_02",
+    "VRomStart": 49119232,
+    "VRomEnd": 49143520
+  },
+  {
+    "Filename": "Z2_YADOYA_room_03",
+    "VRomStart": 49143808,
+    "VRomEnd": 49164480
+  },
+  {
+    "Filename": "Z2_YADOYA_room_04",
+    "VRomStart": 49168384,
+    "VRomEnd": 49198384
+  },
+  {
+    "Filename": "Z2_KONPEKI_ENT",
+    "VRomStart": 49201152,
+    "VRomEnd": 49230368
+  },
+  {
+    "Filename": "Z2_KONPEKI_ENT_room_00",
+    "VRomStart": 49233920,
+    "VRomEnd": 49259424
+  },
+  {
+    "Filename": "Z2_INSIDETOWER",
+    "VRomStart": 49262592,
+    "VRomEnd": 49294720
+  },
+  {
+    "Filename": "Z2_INSIDETOWER_room_00",
+    "VRomStart": 49295360,
+    "VRomEnd": 49359376
+  },
+  {
+    "Filename": "Z2_INSIDETOWER_room_01",
+    "VRomStart": 49360896,
+    "VRomEnd": 49361328
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI",
+    "VRomStart": 49364992,
+    "VRomEnd": 49415392
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_00",
+    "VRomStart": 49418240,
+    "VRomEnd": 49432048
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_01",
+    "VRomStart": 49434624,
+    "VRomEnd": 49448416
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_02",
+    "VRomStart": 49451008,
+    "VRomEnd": 49468000
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_03",
+    "VRomStart": 49471488,
+    "VRomEnd": 49481584
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_04",
+    "VRomStart": 49483776,
+    "VRomEnd": 49497168
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_05",
+    "VRomStart": 49500160,
+    "VRomEnd": 49510256
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_06",
+    "VRomStart": 49512448,
+    "VRomEnd": 49528880
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_07",
+    "VRomStart": 49532928,
+    "VRomEnd": 49543024
+  },
+  {
+    "Filename": "Z2_26SARUNOMORI_room_08",
+    "VRomStart": 49545216,
+    "VRomEnd": 49558832
+  },
+  {
+    "Filename": "Z2_LOST_WOODS",
+    "VRomStart": 49561600,
+    "VRomEnd": 49625568
+  },
+  {
+    "Filename": "Z2_LOST_WOODS_room_00",
+    "VRomStart": 49627136,
+    "VRomEnd": 49660144
+  },
+  {
+    "Filename": "Z2_LOST_WOODS_room_01",
+    "VRomStart": 49664000,
+    "VRomEnd": 49704224
+  },
+  {
+    "Filename": "Z2_LOST_WOODS_room_02",
+    "VRomStart": 49704960,
+    "VRomEnd": 49712576
+  },
+  {
+    "Filename": "Z2_LAST_LINK",
+    "VRomStart": 49713152,
+    "VRomEnd": 49742608
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_00",
+    "VRomStart": 49745920,
+    "VRomEnd": 49758656
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_01",
+    "VRomStart": 49762304,
+    "VRomEnd": 49772032
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_02",
+    "VRomStart": 49774592,
+    "VRomEnd": 49786608
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_03",
+    "VRomStart": 49786880,
+    "VRomEnd": 49802064
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_04",
+    "VRomStart": 49803264,
+    "VRomEnd": 49809808
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_05",
+    "VRomStart": 49811456,
+    "VRomEnd": 49827632
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_06",
+    "VRomStart": 49827840,
+    "VRomEnd": 49830720
+  },
+  {
+    "Filename": "Z2_LAST_LINK_room_07",
+    "VRomStart": 49831936,
+    "VRomEnd": 49834816
+  },
+  {
+    "Filename": "Z2_SOUGEN",
+    "VRomStart": 49836032,
+    "VRomEnd": 49881040
+  },
+  {
+    "Filename": "Z2_SOUGEN_room_00",
+    "VRomStart": 49881088,
+    "VRomEnd": 49912544
+  },
+  {
+    "Filename": "Z2_BOMYA",
+    "VRomStart": 49913856,
+    "VRomEnd": 49965424
+  },
+  {
+    "Filename": "Z2_BOMYA_room_00",
+    "VRomStart": 49967104,
+    "VRomEnd": 49999584
+  },
+  {
+    "Filename": "Z2_KYOJINNOMA",
+    "VRomStart": 49999872,
+    "VRomEnd": 50060720
+  },
+  {
+    "Filename": "Z2_KYOJINNOMA_room_00",
+    "VRomStart": 50061312,
+    "VRomEnd": 50068016
+  },
+  {
+    "Filename": "Z2_KOEPONARACE",
+    "VRomStart": 50069504,
+    "VRomEnd": 50111632
+  },
+  {
+    "Filename": "Z2_KOEPONARACE_room_00",
+    "VRomStart": 50114560,
+    "VRomEnd": 50148416
+  },
+  {
+    "Filename": "Z2_GORONRACE",
+    "VRomStart": 50151424,
+    "VRomEnd": 50214544
+  },
+  {
+    "Filename": "Z2_GORONRACE_room_00",
+    "VRomStart": 50216960,
+    "VRomEnd": 50273136
+  },
+  {
+    "Filename": "Z2_TOWN",
+    "VRomStart": 50274304,
+    "VRomEnd": 50399088
+  },
+  {
+    "Filename": "Z2_TOWN_room_00",
+    "VRomStart": 50401280,
+    "VRomEnd": 50497184
+  },
+  {
+    "Filename": "Z2_ICHIBA",
+    "VRomStart": 50499584,
+    "VRomEnd": 50589248
+  },
+  {
+    "Filename": "Z2_ICHIBA_room_00",
+    "VRomStart": 50589696,
+    "VRomEnd": 50633472
+  },
+  {
+    "Filename": "Z2_BACKTOWN",
+    "VRomStart": 50634752,
+    "VRomEnd": 50704096
+  },
+  {
+    "Filename": "Z2_BACKTOWN_room_00",
+    "VRomStart": 50704384,
+    "VRomEnd": 50745728
+  },
+  {
+    "Filename": "Z2_CLOCKTOWER",
+    "VRomStart": 50749440,
+    "VRomEnd": 50890336
+  },
+  {
+    "Filename": "Z2_CLOCKTOWER_room_00",
+    "VRomStart": 50892800,
+    "VRomEnd": 50972848
+  },
+  {
+    "Filename": "Z2_ALLEY",
+    "VRomStart": 50974720,
+    "VRomEnd": 51030112
+  },
+  {
+    "Filename": "Z2_ALLEY_room_00",
+    "VRomStart": 51032064,
+    "VRomEnd": 51068144
+  },
+  {
+    "Filename": "SPOT00",
+    "VRomStart": 51068928,
+    "VRomEnd": 51119952
+  },
+  {
+    "Filename": "SPOT00_room_00",
+    "VRomStart": 51122176,
+    "VRomEnd": 51124496
+  },
+  {
+    "Filename": "KAKUSIANA",
+    "VRomStart": 51126272,
+    "VRomEnd": 51190992
+  },
+  {
+    "Filename": "KAKUSIANA_room_00",
+    "VRomStart": 51191808,
+    "VRomEnd": 51206800
+  },
+  {
+    "Filename": "KAKUSIANA_room_01",
+    "VRomStart": 51208192,
+    "VRomEnd": 51235120
+  },
+  {
+    "Filename": "KAKUSIANA_room_02",
+    "VRomStart": 51236864,
+    "VRomEnd": 51245472
+  },
+  {
+    "Filename": "KAKUSIANA_room_03",
+    "VRomStart": 51249152,
+    "VRomEnd": 51258016
+  },
+  {
+    "Filename": "KAKUSIANA_room_04",
+    "VRomStart": 51261440,
+    "VRomEnd": 51268000
+  },
+  {
+    "Filename": "KAKUSIANA_room_05",
+    "VRomStart": 51269632,
+    "VRomEnd": 51275504
+  },
+  {
+    "Filename": "KAKUSIANA_room_06",
+    "VRomStart": 51277824,
+    "VRomEnd": 51286832
+  },
+  {
+    "Filename": "KAKUSIANA_room_07",
+    "VRomStart": 51290112,
+    "VRomEnd": 51300992
+  },
+  {
+    "Filename": "KAKUSIANA_room_08",
+    "VRomStart": 51302400,
+    "VRomEnd": 51315040
+  },
+  {
+    "Filename": "KAKUSIANA_room_09",
+    "VRomStart": 51318784,
+    "VRomEnd": 51327504
+  },
+  {
+    "Filename": "KAKUSIANA_room_10",
+    "VRomStart": 51331072,
+    "VRomEnd": 51336096
+  },
+  {
+    "Filename": "KAKUSIANA_room_11",
+    "VRomStart": 51339264,
+    "VRomEnd": 51348976
+  },
+  {
+    "Filename": "KAKUSIANA_room_12",
+    "VRomStart": 51351552,
+    "VRomEnd": 51377376
+  },
+  {
+    "Filename": "KAKUSIANA_room_13",
+    "VRomStart": 51380224,
+    "VRomEnd": 51394400
+  },
+  {
+    "Filename": "KAKUSIANA_room_14",
+    "VRomStart": 51396608,
+    "VRomEnd": 51405520
+  },
+  {
+    "Filename": "TEST01",
+    "VRomStart": 51408896,
+    "VRomEnd": 51428800
+  },
+  {
+    "Filename": "TEST01_room_00",
+    "VRomStart": 51429376,
+    "VRomEnd": 51470480
+  },
+  {
+    "Filename": "bump_texture_static",
+    "VRomStart": 51474432,
+    "VRomEnd": 51475456
+  },
+  {
+    "Filename": "anime_model_1_static",
+    "VRomStart": 51478528,
+    "VRomEnd": 51478544
+  },
+  {
+    "Filename": "anime_model_2_static",
+    "VRomStart": 51482624,
+    "VRomEnd": 51482640
+  },
+  {
+    "Filename": "anime_model_3_static",
+    "VRomStart": 51486720,
+    "VRomEnd": 51486736
+  },
+  {
+    "Filename": "anime_model_4_static",
+    "VRomStart": 51490816,
+    "VRomEnd": 51490832
+  },
+  {
+    "Filename": "anime_model_5_static",
+    "VRomStart": 51494912,
+    "VRomEnd": 51494928
+  },
+  {
+    "Filename": "anime_model_6_static",
+    "VRomStart": 51499008,
+    "VRomEnd": 51499024
+  },
+  {
+    "Filename": "anime_texture_1_static",
+    "VRomStart": 51503104,
+    "VRomEnd": 51503120
+  },
+  {
+    "Filename": "anime_texture_2_static",
+    "VRomStart": 51507200,
+    "VRomEnd": 51507216
+  },
+  {
+    "Filename": "anime_texture_3_static",
+    "VRomStart": 51511296,
+    "VRomEnd": 51511312
+  },
+  {
+    "Filename": "anime_texture_4_static",
+    "VRomStart": 51515392,
+    "VRomEnd": 51515408
+  },
+  {
+    "Filename": "anime_texture_5_static",
+    "VRomStart": 51519488,
+    "VRomEnd": 51519504
+  },
+  {
+    "Filename": "anime_texture_6_static",
+    "VRomStart": 51523584,
+    "VRomEnd": 51523600
+  },
+  {
+    "Filename": "DBG_03124000",
+    "VRomStart": 51527680,
+    "VRomEnd": 51527744
+  }
+]

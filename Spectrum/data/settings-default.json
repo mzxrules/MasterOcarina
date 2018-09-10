@@ -1,0 +1,46 @@
+{
+  "Emulators": [
+    {
+      "Key": "pj64",
+      "Value": {
+        "ProcessDescription": "Project 64 1.6",
+        "ProcessName": "project64",
+        "RamStart": "[`project64.exe`+d6a1c]"
+      }
+    },
+    {
+      "Key": "nemu",
+      "Value": {
+        "ProcessDescription": "Nemu64 0.8",
+        "ProcessName": "nemu64",
+        "RamStart": "10020000"
+      }
+    },
+    {
+      "Key": "retroarch",
+      "Value": {
+        "ProcessDescription": "retroarch 1.3.6",
+        "ProcessName": "retroarch",
+        "RamStart": "`parallel_libretro.dll`+3A2660"
+      }
+    },
+    {
+      "Key": "pj64d",
+      "Value": {
+        "ProcessDescription": "Project64 2.3 debug",
+        "ProcessName": "project64d 5-15-17",
+        "RamStart": "10000000"
+      }
+    }
+  ],
+  "ShowActors": true,
+  "ShowAllSegments": false,
+  "ShowLinkedList": false,
+  "ShowObjects": true,
+  "ShowSize": false,
+  "Version": {
+    "Game": 1,
+    "MVer": 0,
+    "OVer": 2
+  }
+}

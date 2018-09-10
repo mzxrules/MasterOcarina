@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Ocarinabot" Class="OcarinaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-FANIQR9C\SQLEXPRESS;Initial Catalog=Ocarinabot;Integrated Security=True" SettingsObjectName="OcaBase.Properties.Settings" SettingsPropertyName="OcarinabotConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Scenes" Member="Scenes">
+    <Type Name="Scene">
+      <Column Name="ID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Storage="_Scene" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="x18" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Rooms" Storage="_Maps" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Entrances" Member="EntranceNum" Storage="_Ent" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Exits" Storage="_Ex" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MapSelect" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileId" Storage="_FileId_DBG" Type="System.Int32" DbType="Int" CanBeNull="false" />
+      <Association Name="Scene_Room" Member="Rooms1" Storage="_OcarinaMaps" ThisKey="ID" OtherKey="SceneId" Type="Room" />
+      <Association Name="Scene_Entrance" Member="Entrances" ThisKey="ID" OtherKey="SceneId" Type="Entrance" />
+      <Association Name="Scene_EntranceDef" Member="EntranceDefs" ThisKey="ID" OtherKey="SceneId" Type="EntranceDef" Cardinality="One" />
+      <Association Name="Scene_EntranceDef1" Member="EntranceDefs1" ThisKey="ID" OtherKey="PrevId" Type="EntranceDef" />
+      <Association Name="Scene_Exit" Member="Exits1" ThisKey="ID" OtherKey="Scene" Type="Exit" />
+      <Association Name="Scene_EntranceIndex" Member="EntranceIndexes" ThisKey="ID" OtherKey="SceneId" Type="EntranceIndex" />
+      <Association Name="Scene_SceneSearch" Member="SceneSearches" ThisKey="ID" OtherKey="SceneId" Type="SceneSearch" />
+      <Association Name="File_Scene" Member="File" ThisKey="FileId" OtherKey="FileId" Type="File" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rooms" Member="Rooms">
+    <Type Name="Room">
+      <Column Name="SceneId" Storage="_Scene" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoomId" Storage="_Map" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Scene_Room" Member="Scene" Storage="_OcarinaScene" ThisKey="SceneId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Entrances" Member="Entrances">
+    <Type Name="Entrance">
+      <Column Name="SceneId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Setup" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EntranceNum" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Room" Storage="_Map" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PosId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="x" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="y" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="z" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Scene_Entrance" Member="Scene" Storage="_OcarinaScene" ThisKey="SceneId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FAQ" Member="Faqs">
+    <Type Name="Faq">
+      <Column Name="FaqId" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Display" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Link" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ObjectFiles" Member="ObjectFiles">
+    <Type Name="ObjectFile">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Filename" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FileId" Storage="_FileId_DBG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ObjectFile_Actor" Member="Actors" ThisKey="ID" OtherKey="Object" Type="Actor" />
+      <Association Name="File_ObjectFile" Member="File" ThisKey="FileId" OtherKey="FileId" Type="File" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actors" Member="Actors">
+    <Type Name="Actor">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileId" Storage="_FileID_DBG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Object" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Filename" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Actor_ActorTag" Member="ActorTags" ThisKey="ID" OtherKey="ActorId" Type="ActorTag" />
+      <Association Name="ObjectFile_Actor" Member="ObjectFile" ThisKey="Object" OtherKey="ID" Type="ObjectFile" IsForeignKey="true" />
+      <Association Name="File_Actor" Member="File" ThisKey="FileId" OtherKey="FileId" Type="File" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EntranceDefs" Member="EntranceDefs">
+    <Type Name="EntranceDef">
+      <Column Name="SceneId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EntranceNum" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DestInfo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Prev" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PrevInfo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PrevId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="Scene_EntranceDef" Member="Scene" ThisKey="SceneId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+      <Association Name="Scene_EntranceDef1" Member="Scene1" ThisKey="PrevId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Items" Member="Items">
+    <Type Name="Item">
+      <Column Name="ID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" AccessModifier="Private" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Item_Rba" Member="Rbas" ThisKey="ID" OtherKey="ItemId" Type="Rba" Cardinality="One" />
+      <Association Name="Item_RbaBit" Member="RbaBits" ThisKey="ID" OtherKey="ItemId" Type="RbaBit" Cardinality="One" />
+      <Association Name="Item_ItemSearch" Member="ItemSearches" ThisKey="ID" OtherKey="ItemId" Type="ItemSearch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rba" Member="Rbas">
+    <Type Name="Rba">
+      <Column Name="ItemId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Effect" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Item_Rba" Member="Item" ThisKey="ItemId" OtherKey="ID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RbaBits" Member="RbaBits">
+    <Type Name="RbaBit">
+      <Column Name="ItemId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[1]" Member="_1" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[2]" Member="_2" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[4]" Member="_4" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[8]" Member="_8" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[16]" Member="_16" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[32]" Member="_32" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[64]" Member="_64" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[128]" Member="_128" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Item_RbaBit" Member="Item" ThisKey="ItemId" OtherKey="ID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RbaBits2" Member="RbaBits2s">
+    <Type Name="RbaBits2">
+      <Column Name="Item" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[0]" Member="_0" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[1]" Member="_1" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[2]" Member="_2" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[3]" Member="_3" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[4]" Member="_4" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[5]" Member="_5" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[6]" Member="_6" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[7]" Member="_7" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tricks" Member="Tricks">
+    <Type Name="Trick">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Flag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Trick_TrickTag" Member="TrickTags" ThisKey="Id" OtherKey="TrickId" Type="TrickTag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrickTags" Member="TrickTags">
+    <Type Name="TrickTag">
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TrickId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Trick_TrickTag" Member="Trick" ThisKey="TrickId" OtherKey="Id" Type="Trick" IsForeignKey="true" />
+      <Association Name="Tag_TrickTag" Member="Tag" ThisKey="TagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tags" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_TrickTag" Member="TrickTags" ThisKey="Id" OtherKey="TagId" Type="TrickTag" />
+      <Association Name="Tag_ActorTagDescription" Member="ActorTagDescription" ThisKey="Id" OtherKey="TagId" Type="ActorTagDescription" Cardinality="One" />
+      <Association Name="Tag_ActorTag" Member="ActorTags" ThisKey="Id" OtherKey="TagId" Type="ActorTag" />
+      <Association Name="Tag_ActorTagRelationship" Member="ActorTagRelationships_Child" Storage="_ActorTagRelationships" ThisKey="Id" OtherKey="ChildTagId" Type="ActorTagRelationship" />
+      <Association Name="Tag_ActorTagRelationship1" Member="ActorTagRelationships_Parent" Storage="_ActorTagRelationships1" ThisKey="Id" OtherKey="ParentTagId" Type="ActorTagRelationship" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActorTagDescriptions" Member="ActorTagDescriptions">
+    <Type Name="ActorTagDescription">
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_ActorTagDescription" Member="Tag" ThisKey="TagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActorTags" Member="ActorTags">
+    <Type Name="ActorTag">
+      <Column Name="ActorId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Actor_ActorTag" Member="Actor" ThisKey="ActorId" OtherKey="ID" Type="Actor" IsForeignKey="true" />
+      <Association Name="Tag_ActorTag" Member="Tag" ThisKey="TagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActorTagRelationships" Member="ActorTagRelationships">
+    <Type Name="ActorTagRelationship">
+      <Column Name="TagId_Parent" Member="ParentTagId" Storage="_ParentTag" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagId_Child" Member="ChildTagId" Storage="_ChildTag" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Tag_ActorTagRelationship" Member="ChildTag" Storage="_Tag" ThisKey="ChildTagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+      <Association Name="Tag_ActorTagRelationship1" Member="ParentTag" Storage="_Tag1" ThisKey="ParentTagId" OtherKey="Id" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Exits" Member="Exits">
+    <Type Name="Exit">
+      <Column Name="Scene" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Setup" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ExitNum" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="EntranceId" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Scene_Exit" Member="Scene1" ThisKey="Scene" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EntranceIndexes" Member="EntranceIndexes">
+    <Type Name="EntranceIndex">
+      <Column Name="ID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SceneId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="EntranceNum" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Variable" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Kaleidoscope" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="BaseIndex" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Scene_EntranceIndex" Member="Scene" ThisKey="SceneId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SceneSearch3" Member="SceneSearches">
+    <Type Name="SceneSearch">
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SceneId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rank" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Scene_SceneSearch" Member="Scene" ThisKey="SceneId" OtherKey="ID" Type="Scene" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemSearch3" Member="ItemSearches">
+    <Type Name="ItemSearch">
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rank" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Item_ItemSearch" Member="Item" ThisKey="ItemId" OtherKey="ID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Addresses" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[Index]" Member="Index" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VersionCode" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="StartAddr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EndAddr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartPhysicalAddr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EndPhysicalAddr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Address_File" Member="DBG_File" ThisKey="ID" OtherKey="DBG_Address" Type="File" Cardinality="One" />
+      <Association Name="Address_File1" Member="MQP_File" ThisKey="ID" OtherKey="MQP_Address" Type="File" Cardinality="One" />
+      <Association Name="Address_File2" Member="N0_File" ThisKey="ID" OtherKey="N0_Address" Type="File" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Files" Member="Files">
+    <Type Name="File">
+      <Column Name="FileId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Filename" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Filetype" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Compressed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DBG_Address" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="N0_Address" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MQP_Address" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="File_Scene" Member="Scenes" ThisKey="FileId" OtherKey="FileId" Type="Scene" />
+      <Association Name="File_ObjectFile" Member="ObjectFiles" ThisKey="FileId" OtherKey="FileId" Type="ObjectFile" />
+      <Association Name="File_Actor" Member="Actors" ThisKey="FileId" OtherKey="FileId" Type="Actor" />
+      <Association Name="Address_File" Member="Address_DBG" ThisKey="DBG_Address" OtherKey="ID" Type="Address" IsForeignKey="true" />
+      <Association Name="Address_File1" Member="Address_MQP" ThisKey="MQP_Address" OtherKey="ID" Type="Address" IsForeignKey="true" />
+      <Association Name="Address_File2" Member="Address_N0" ThisKey="N0_Address" OtherKey="ID" Type="Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SceneCutscenes" Member="SceneCutscenes">
+    <Type Name="SceneCutscene">
+      <Column Name="Scene" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Setup" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Offset" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pointer" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="OnEntrance" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ActorTriggered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

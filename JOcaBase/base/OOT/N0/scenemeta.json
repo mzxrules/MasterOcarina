@@ -1,0 +1,872 @@
+[
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 46656,
+        "Setup": 0
+      }
+    ],
+    "Id": 0
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 85888,
+        "Setup": 0
+      }
+    ],
+    "Id": 1
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 77952,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 87520,
+        "Setup": 0
+      }
+    ],
+    "Id": 2
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 592,
+        "Setup": 4
+      }
+    ],
+    "Id": 9
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 124800,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 126816,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 136048,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 123856,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 122752,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 125744,
+        "Setup": 0
+      }
+    ],
+    "Id": 13
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 11184,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 16256,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 22608,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 11184,
+        "Setup": 0
+      }
+    ],
+    "Id": 23
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 4160,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 5584,
+        "Setup": 5
+      }
+    ],
+    "Id": 52
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 304,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 5088,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 9680,
+        "Setup": 6
+      }
+    ],
+    "Id": 59
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 352,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 4128,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 8000,
+        "Setup": 6
+      }
+    ],
+    "Id": 61
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 9376,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 10464,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 10464,
+        "Setup": 0
+      }
+    ],
+    "Id": 65
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 5200,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 5696,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 6192,
+        "Setup": 6
+      }
+    ],
+    "Id": 66
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 18160,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 15280,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 27936,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 13104,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 14528,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 13776,
+        "Setup": 9
+      },
+      {
+        "Description": "?",
+        "FileOffset": 48784,
+        "Setup": 10
+      },
+      {
+        "Description": "?",
+        "FileOffset": 25024,
+        "Setup": 11
+      },
+      {
+        "Description": "?",
+        "FileOffset": 34016,
+        "Setup": 12
+      },
+      {
+        "Description": "?",
+        "FileOffset": 35776,
+        "Setup": 13
+      },
+      {
+        "Description": "?",
+        "FileOffset": 40816,
+        "Setup": 14
+      },
+      {
+        "Description": "?",
+        "FileOffset": 52736,
+        "Setup": 0
+      }
+    ],
+    "Id": 67
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 288,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 4768,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 5776,
+        "Setup": 6
+      }
+    ],
+    "Id": 68
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 256,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 3664,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 4704,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 6752,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 7936,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 8976,
+        "Setup": 9
+      },
+      {
+        "Description": "?",
+        "FileOffset": 9360,
+        "Setup": 10
+      },
+      {
+        "Description": "?",
+        "FileOffset": 10384,
+        "Setup": 11
+      },
+      {
+        "Description": "?",
+        "FileOffset": 12256,
+        "Setup": 12
+      }
+    ],
+    "Id": 71
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 7172,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 9508,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 13488,
+        "Setup": 6
+      }
+    ],
+    "Id": 74
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 432,
+        "Setup": 4
+      }
+    ],
+    "Id": 79
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 74752,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 33940,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 40960,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 43296,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 48000,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 48960,
+        "Setup": 9
+      },
+      {
+        "Description": "?",
+        "FileOffset": 49440,
+        "Setup": 10
+      },
+      {
+        "Description": "?",
+        "FileOffset": 51392,
+        "Setup": 11
+      },
+      {
+        "Description": "?",
+        "FileOffset": 56496,
+        "Setup": 12
+      },
+      {
+        "Description": "?",
+        "FileOffset": 80544,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 63968,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 65280,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 66896,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 68400,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 48000,
+        "Setup": 0
+      }
+    ],
+    "Id": 81
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 19024,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 28144,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 32912,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 34416,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 36576,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 42304,
+        "Setup": 0
+      }
+    ],
+    "Id": 82
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 15488,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 20112,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 28864,
+        "Setup": 0
+      }
+    ],
+    "Id": 83
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 35152,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 36256,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 37792,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 42704,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 45696,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 47104,
+        "Setup": 9
+      },
+      {
+        "Description": "?",
+        "FileOffset": 47536,
+        "Setup": 10
+      },
+      {
+        "Description": "?",
+        "FileOffset": 47904,
+        "Setup": 11
+      },
+      {
+        "Description": "?",
+        "FileOffset": 48304,
+        "Setup": 12
+      },
+      {
+        "Description": "?",
+        "FileOffset": 51664,
+        "Setup": 13
+      },
+      {
+        "Description": "?",
+        "FileOffset": 51664,
+        "Setup": 0
+      }
+    ],
+    "Id": 85
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 16256,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 22320,
+        "Setup": 5
+      }
+    ],
+    "Id": 86
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 21984,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 28304,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 31280,
+        "Setup": 0
+      }
+    ],
+    "Id": 87
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 14416,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 15728,
+        "Setup": 0
+      }
+    ],
+    "Id": 88
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 11536,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 15488,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 16880,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 19072,
+        "Setup": 0
+      }
+    ],
+    "Id": 89
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 8544,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 9232,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 10464,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 12768,
+        "Setup": 0
+      }
+    ],
+    "Id": 90
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 44240,
+        "Setup": 4
+      }
+    ],
+    "Id": 91
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 20240,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 26096,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 31120,
+        "Setup": 0
+      }
+    ],
+    "Id": 92
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 20576,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 21584,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 21952,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 25744,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 21952,
+        "Setup": 0
+      }
+    ],
+    "Id": 93
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 16192,
+        "Setup": 0
+      }
+    ],
+    "Id": 95
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 15680,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 16560,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 25552,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 25936,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 26336,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 32416,
+        "Setup": 0
+      }
+    ],
+    "Id": 96
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 17872,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 26800,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 30416,
+        "Setup": 0
+      },
+      {
+        "Description": "?",
+        "FileOffset": 30416,
+        "Setup": 0
+      }
+    ],
+    "Id": 97
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 26928,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 30784,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 33792,
+        "Setup": 0
+      }
+    ],
+    "Id": 98
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 10624,
+        "Setup": 4
+      },
+      {
+        "Description": "?",
+        "FileOffset": 11072,
+        "Setup": 5
+      },
+      {
+        "Description": "?",
+        "FileOffset": 12160,
+        "Setup": 6
+      },
+      {
+        "Description": "?",
+        "FileOffset": 12768,
+        "Setup": 7
+      },
+      {
+        "Description": "?",
+        "FileOffset": 13392,
+        "Setup": 8
+      },
+      {
+        "Description": "?",
+        "FileOffset": 14128,
+        "Setup": 9
+      },
+      {
+        "Description": "?",
+        "FileOffset": 14720,
+        "Setup": 10
+      },
+      {
+        "Description": "?",
+        "FileOffset": 17504,
+        "Setup": 11
+      },
+      {
+        "Description": "?",
+        "FileOffset": 23408,
+        "Setup": 0
+      }
+    ],
+    "Id": 99
+  },
+  {
+    "Cutscenes": [
+      {
+        "Description": "?",
+        "FileOffset": 17024,
+        "Setup": 0
+      }
+    ],
+    "Id": 100
+  }
+]

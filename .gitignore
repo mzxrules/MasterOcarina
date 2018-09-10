@@ -243,3 +243,15 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# ignore wip or dead projects
+WadDisect/
+VerboseWPF/
+CutsceneEditor/
+DungeonRush/
+DungeonRushMQ/
+PetriesChallenge/
+Experimental/
+RomBlock/
+RomWorkshop/
+PatchShared/
