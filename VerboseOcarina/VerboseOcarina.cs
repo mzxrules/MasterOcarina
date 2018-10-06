@@ -281,9 +281,9 @@ namespace VerboseOcarina
 
             if (!int.TryParse(numberTextBox.Text, out int sceneNumber)
                 || sceneNumber < 0
-                || !(sceneNumber <= rom.Scenes))
+                || !(sceneNumber < rom.Scenes))
             {
-                MessageBox.Show($"Value must be between 0 and {rom.Scenes}");
+                MessageBox.Show($"Value must be between 0 and {rom.Scenes - 1}");
                 return;
             }
 
@@ -292,14 +292,14 @@ namespace VerboseOcarina
             outputRichTextBox.Text = sb.ToString();
         }
 
-        private void PrintScene(int sceneNumber, StringBuilder sb)
+        private void PrintScene(int sceneId, StringBuilder sb)
         {
             Scene scene = null;
             List<Room> rooms = new List<Room>();
 
             //try
             //{
-                scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneNumber), sceneNumber);
+                scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneId), sceneId);
             //}
             //catch { }
             if (scene == null)
