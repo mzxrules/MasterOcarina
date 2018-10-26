@@ -119,6 +119,9 @@ namespace Spectrum
         [ViewVariable]
         public static Ptr Debug_Heap_Ptr;
 
+        public static Ptr SceneTable;
+        public static Ptr EntranceTable;
+
         public static void GetVariables()
         {
             List<(int addr, string desc)> Values = new List<(int, string)>();
@@ -222,6 +225,19 @@ namespace Spectrum
 
             Addresser.TryGetRam("RAM_SEGMENT_TABLE", version, out temp);
             Segment_Table = temp;
+
+            if (Addresser.TryGetRam("SceneTable_Start", version, out temp))
+                SceneTable = SPtr.New(temp);
+            else
+                SceneTable = null;
+
+            if (Addresser.TryGetRam("EntranceIndexTable_Start", version, out temp))
+                EntranceTable = SPtr.New(temp);
+            else
+                EntranceTable = null;
+            
+
+
 
         }
 

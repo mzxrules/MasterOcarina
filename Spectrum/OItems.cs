@@ -118,6 +118,7 @@ namespace Spectrum
             Strength = 0x101,
             Scale = 0x102,
         }
+
         const int MASK_NUTS         = 0x00700000; //Deku Nuts
         const int MASK_STICKS       = 0x000E0000; //Deku Sticks
         const int MASK_BULLET_BAG   = 0x0001C000; //Bullet Bag

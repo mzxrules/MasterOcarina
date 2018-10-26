@@ -525,6 +525,25 @@ namespace Spectrum
             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
         }
 
+        private static int GetExternalSceneId_Mask(byte inScene)
+        {
+            var table = SpectrumVariables.EntranceTable;
+            if (table == null || inScene > 127)
+                return 0;
+
+            int[] externIds = new int[128];
+            for (int i = 0; i < 0x6E; i ++)
+            {
+                var off = i * 0x0C;
+                if (table.ReadByte(off) == 0)
+                    continue;
+                var firstRecord = table.RelOff(off + 0x04).Deref().Deref();
+                int sceneId = Math.Abs((sbyte)firstRecord.ReadByte(0));
+                externIds[sceneId] = i; 
+            }
+            return externIds[inScene];
+        }
+
         private static void SetEntranceIndexSpawn(short index)
         {
             if (Options.Version == Game.OcarinaOfTime)
@@ -557,8 +576,19 @@ namespace Spectrum
         private static void SetZoneoutSpawn_Mask(short? index, ref Spawn spawn)
         {
             //MM J0 start addr 801F33C4, off 0x3F64
-            Ptr zonoutType = SaveContext.RelOff(0x3F64);
-            Ptr zoneoutRecord = SaveContext.RelOff(0x3F68);
+            //MM U0 start addr 801F3324, off 0x3CB4
+
+            int zoneoutOff;
+
+            switch((MRom.Build)Options.Version)
+            {
+                case MRom.Build.J0: zoneoutOff = 0x3F68; break;
+                case MRom.Build.J1: zoneoutOff = 0x3F68; break;
+                default: zoneoutOff = 0x3CB4; break;
+            }
+
+            //Ptr zonoutType = SaveContext.RelOff(0x3F64);
+            Ptr zoneoutRecord = SaveContext.RelOff(zoneoutOff);
             Ptr linkAddr;
             if (SpectrumVariables.Actor_Category_Table == 0)
                 return;
@@ -567,12 +597,6 @@ namespace Spectrum
 
             if (linkAddr == 0) //0x1DAA30;
                 return;
-
-            //not needed, since oobs doesn't deal damage?
-            //short health = SaveContext.ReadInt16(0x36);
-
-            //health += 0x10;
-            //SaveContext.Write(0x36, health);
 
             zoneoutRecord.Write(
                 0x00, spawn.x,
@@ -785,8 +809,9 @@ namespace Spectrum
             if (Options.Version == Game.OcarinaOfTime)
             {
                 ramItems.AddRange(SegmentAddress.GetSegmentAddressMap(Options.ShowAllSegments));
-                ramItems.Add(RamScene.GetSceneInfo(GlobalContext));
             }
+
+            ramItems.Add(RamScene.GetSceneInfo(Options.Version, GlobalContext, SpectrumVariables.SceneTable));
 
             ramItems.Add(RamRoom.GetRoomInfo());
 

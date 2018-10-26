@@ -867,6 +867,7 @@ namespace Spectrum
 
             if (Options.Version == Game.MajorasMask)
             {
+                scene = GetExternalSceneId_Mask((byte)scene);
                 short mmIndex = (short)((scene << 5) + ent << 4);
                 SetEntranceIndexSpawn(mmIndex);
                 return;
@@ -901,6 +902,10 @@ namespace Spectrum
             byte r = (byte)args[1];
             Vector3<float> c = (Vector3<float>)args[2];
 
+            if (Options.Version.Game != Game.OcarinaOfTime)
+            {
+                return;
+            }
             if (!TryGetEntranceIndex(s, 0, out EntranceIndex index))
                 return;
 
@@ -909,9 +914,7 @@ namespace Spectrum
             if (Options.Version.Game == Game.OcarinaOfTime)
                 SetZoneoutSpawn_Ocarina(index.id, ref spawn);
             else if (Options.Version.Game == Game.MajorasMask)
-                if (Options.Version == MRom.Build.J0
-                    || Options.Version == MRom.Build.J1)
-                    SetZoneoutSpawn_Mask(index.id, ref spawn);
+                SetZoneoutSpawn_Mask(index.id, ref spawn);
         }
 
         [SpectrumCommand(
@@ -930,11 +933,7 @@ namespace Spectrum
             if (Options.Version.Game == Game.OcarinaOfTime)
                 SetZoneoutSpawn_Ocarina(null, ref spawn);
             else if (Options.Version.Game == Game.MajorasMask)
-            {
-                if (Options.Version == MRom.Build.J0
-                    || Options.Version == MRom.Build.J1)
-                    SetZoneoutSpawn_Mask(null, ref spawn);
-            }
+                SetZoneoutSpawn_Mask(null, ref spawn);
         }
 
         [SpectrumCommand(
@@ -1489,17 +1488,13 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "colctx",
             Cat = SpectrumCommand.Category.Collision,
-            Description = "Prints Collision Context (Global Context + 0x7C0)",
-            Sup = SpectrumCommand.Supported.OoT)]
+            Description = "Prints Collision Context (Global Context + 0x7C0 oot, + 0x830 mm)")]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { })]
         private static void PrintCollisionContext(Arguments args)
         {
-            if (Options.Version.Game != Game.OcarinaOfTime)
-                return;
-
             Console.Clear();
-            CollisionCtx cctx = new CollisionCtx(GlobalContext.RelOff(0x7C0));
+            CollisionCtx cctx = new CollisionCtx(GetColCtxPtr());
             Console.WriteLine(cctx);
         }
 
@@ -1514,8 +1509,6 @@ namespace Spectrum
             Help = "{0} = Mesh Id, 0x32 = Scene Mesh")]
         private static void GetActorCollision(Arguments args)
         {
-            if (Options.Version.Game != Game.OcarinaOfTime)
-                return;
             Console.Clear();
 
             if (args.Length == 1)
@@ -1529,7 +1522,7 @@ namespace Spectrum
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    var ptr = GlobalContext.RelOff(0x7C0 + 0x54 + (0x64 * i));
+                    var ptr = GetColCtxPtr().RelOff(0x54 + (0x64 * i));
                     CollisionActor actor = new CollisionActor(ptr);
                     if (actor.ActorInstance != 0)
                     {
@@ -1549,7 +1542,17 @@ namespace Spectrum
             Description = "Gets 'simple body' collision data")]
         private static void GetActorBodyCollision(Arguments args)
         {
-            Ptr colPtr = GlobalContext.RelOff(0x11E60);
+            int colaOffset;
+
+            if (Options.Version.Game == Game.OcarinaOfTime)
+                colaOffset = 0x11E60;
+            else if (Options.Version == MRom.Build.J0
+                || Options.Version == MRom.Build.J1)
+                colaOffset = 0x18864;
+            else
+                colaOffset = 0x18884;
+
+            Ptr colPtr = GlobalContext.RelOff(colaOffset);
             short colAtCount = colPtr.ReadInt16(0);
             ushort colAtUnk = colPtr.ReadUInt16(2);
             Console.Clear();
@@ -1566,8 +1569,8 @@ namespace Spectrum
             }
             Console.WriteLine();
 
-            ColB_GetGroup("AC", 0x11F2C);
-            ColB_GetGroup("OT", 0x12020);
+            ColB_GetGroup("AC", colaOffset + 0xCC);
+            ColB_GetGroup("OT", colaOffset + 0x1C0);
         }
 
         [SpectrumCommand(
@@ -1579,9 +1582,6 @@ namespace Spectrum
             Help = "{0} = World x, y, z")]
         private static void GetSceneCollisionCoords(Arguments args)
         {
-            if (Options.Version.Game != Game.OcarinaOfTime)
-                return;
-
             Vector3<float> coords = (Vector3<float>)args[0];
             GetColInfo(coords, false);
         }
@@ -1595,16 +1595,13 @@ namespace Spectrum
             Help = "{0} = Sector x, y, z")]
         private static void GetSceneCollsionSection(Arguments args)
         {
-            if (Options.Version.Game != Game.OcarinaOfTime)
-                return;
-
             Vector3<float> coords = (Vector3<float>)args[0];
             GetColInfo(coords, true);
         }
 
         private static void GetColInfo(Vector3<float> xyz, bool coordsAreColSec)
         {
-            CollisionCtx colctx = new CollisionCtx(GlobalContext.RelOff(0x7C0));
+            CollisionCtx colctx = new CollisionCtx(GetColCtxPtr());
 
             int[] colsec;
 
@@ -1651,9 +1648,6 @@ namespace Spectrum
             Help = "{0} = Sector x, y, z")]
         private static void GetColSecPoly(Arguments args)
         {
-            if (Options.Version.Game != Game.OcarinaOfTime)
-                return;
-
             Vector3<float> xyz = (Vector3<float>)args[0];
             int[] colsec = new int[3]
             {
@@ -1662,7 +1656,7 @@ namespace Spectrum
                 (int)xyz.z
             };
 
-            CollisionCtx ctx = new CollisionCtx(GlobalContext.RelOff(0x7C0));
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
             CollisionMesh mesh = GetCollisionMesh(0x32);
 
 
@@ -1738,7 +1732,7 @@ namespace Spectrum
             };
             
 
-            CollisionCtx ctx = new CollisionCtx(GlobalContext.RelOff(0x7C0));
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
             if (!ctx.ColSecInBounds(colsec))
                 return;
             
@@ -1776,7 +1770,7 @@ namespace Spectrum
             short searchPolyId = (short)args[0];
             int[] colsec = new int[3];
 
-            CollisionCtx ctx = new CollisionCtx(GlobalContext.RelOff(0x7C0));
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
 
             string[] type = new string[3]
             {
@@ -1818,25 +1812,27 @@ namespace Spectrum
             if (!TryEvaluate((string)args[1], out long addr))
                 return;
 
-            if (Options.Version != Game.OcarinaOfTime)
-                return;
-
             CollisionMesh mesh = GetCollisionMesh(id);
             if (mesh == null)
                 return;
             Console.WriteLine(mesh.GetPolyFormattedInfo(addr));
         }
 
+        private static Ptr GetColCtxPtr()
+        {
+            int colctxOff = (Options.Version.Game == Game.OcarinaOfTime) ?
+                0x7C0 : 0x830;
+            return GlobalContext.RelOff(colctxOff);
+        }
+
         private static CollisionMesh GetCollisionMesh(int id)
         {
-            if (Options.Version != Game.OcarinaOfTime)
-                return null;
             if (id < 0 || id > 0x32)
                 return null;
 
             Ptr MeshPtr;
 
-            Ptr ColContext = GlobalContext.RelOff(0x7C0);
+            Ptr ColContext = GetColCtxPtr();
             if (id == 0x32)
                 MeshPtr = ColContext.Deref();
             else
@@ -2116,44 +2112,75 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "items",
             Cat = SpectrumCommand.Category.Item,
-            Description = "Lists all items",
-            Sup = SpectrumCommand.Supported.OoT)]
+            Description = "Lists all items")]
         [SpectrumCommandSignature(Sig = new Tokens[] {},
             Help = "")]
         private static void ListItems(Arguments args)
         {
-            var names = Enum.GetNames(typeof(OItems.Item));
-            var values = Enum.GetValues(typeof(OItems.Item));
-
-            Console.Clear();
-
-            for (int i = 0; i < names.Length; i++)
+            if (Options.Version.Game == Game.OcarinaOfTime)
             {
-                int value = (int)values.GetValue(i);
-                if (value >= 255)
-                {
-                    return;
-                }
+                var names = Enum.GetNames(typeof(OItems.Item));
+                var values = Enum.GetValues(typeof(OItems.Item));
 
-                Console.WriteLine($"{names[i],-13} = {value:X2}");
+                Console.Clear();
+
+                for (int i = 0; i < names.Length; i++)
+                {
+                    int value = (int)values.GetValue(i);
+                    if (value >= 255)
+                    {
+                        return;
+                    }
+
+                    Console.WriteLine($"{names[i],-13} = {value:X2}");
+                }
+            }
+            else
+            {
+                foreach (var name in Enum.GetNames(typeof(MItems.Item)))
+                {
+                    Console.WriteLine($"{name}");
+                }
             }
         }
 
         [SpectrumCommand(
             Name = "have",
             Cat = SpectrumCommand.Category.Item,
-            Description = "Gives Item",
-            Sup = SpectrumCommand.Supported.OoT)]
+            Description = "Gives Item")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S },
             Help = "{0} = Item to give")]
         private static void GiveItem(Arguments args)
         {
-            string itemLiteral = (string)args[0];
-            if (!Enum.TryParse<OItems.Item>(itemLiteral, true, out var item))
+            string arg = (string)args[0];
+            if (Options.Version.Game == Game.OcarinaOfTime)
+                GiveOItem(arg);
+            else
+                GiveMItem(arg);
+
+        }
+
+        private static void GiveMItem(string arg)
+        {
+            if (!Enum.TryParse<MItems.Item>(arg, true, out var item))
             {
                 return;
             }
-            
+
+            if (item >= MItems.Item.None)
+            {
+                return;
+            }
+            MItems.SetInventoryItem(Options.Version, item, SaveContext);
+        }
+
+        private static void GiveOItem(string arg)
+        {
+            if (!Enum.TryParse<OItems.Item>(arg, true, out var item))
+            {
+                return;
+            }
+
             if (item >= OItems.Item.None)
             {
                 return;
@@ -2169,8 +2196,6 @@ namespace Spectrum
                 OItems.SetEquipment(item, true, ref equip);
                 SaveContext.Write(0x9C, equip);
             }
-
-
         }
         #endregion
 

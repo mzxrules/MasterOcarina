@@ -168,8 +168,7 @@ namespace Spectrum
 
             if (Options.Version.Game == Game.OcarinaOfTime)
                 SetZoneoutSpawn_Ocarina(index.id, ref spawn);
-            else if (Options.Version.Game == Game.MajorasMask
-                && Options.Version == MRom.Build.J0)
+            else if (Options.Version.Game == Game.MajorasMask)
                 SetZoneoutSpawn_Mask(index.id, ref spawn);
         }
 

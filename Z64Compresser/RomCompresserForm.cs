@@ -59,7 +59,7 @@ namespace Z64Compresser
 
                 using (FileStream fw = new FileStream("Compressed_Test.z64", FileMode.Create))
                 {
-                    RomBuilder.CompressRom(new mzxrules.OcaLib.ORom(modifiedFile, version), new mzxrules.OcaLib.ORom(compressedFile, version), fw);
+                    RomBuilder.CompressRom(new ORom(modifiedFile, version), new ORom(compressedFile, version), fw);
                 }
             }
             this.Text = "Compressed!";
