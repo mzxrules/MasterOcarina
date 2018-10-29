@@ -82,25 +82,19 @@ namespace Spectrum
             if (SpectrumVariables.GlobalContext == 0)
                 return new List<ActorInstance>();
 
-            if (version.Game == Game.OcarinaOfTime)
-            {
-                actors = Zpr.ReadRamInt32(ACTOR_LL_TABLE_ADDR + (cat * 8));
-                actorPtr = Zpr.ReadRamInt32(ACTOR_LL_TABLE_ADDR + (cat * 8) + 4);
-            }
-            else
-            {
-                actors = Zpr.ReadRamInt32(ACTOR_LL_TABLE_ADDR + (cat * 0xC));
-                actorPtr = Zpr.ReadRamInt32(ACTOR_LL_TABLE_ADDR + (cat * 0xC) + 4);
-            }
+            int recordSize = (version.Game == Game.OcarinaOfTime) ? 0x08 : 0x0C;
 
-            if (actors > 256)
+            actors = ACTOR_LL_TABLE_ADDR.ReadInt32(cat * recordSize);
+            actorPtr = ACTOR_LL_TABLE_ADDR.ReadInt32(cat * recordSize + 4);
+
+            if (actors > 255)
                 return result;
             
             if (actors > 0)
             {
                 for (int j = 0; j < actors; j++)
                 {
-                    ActorInstance ai = new ActorInstance(version, actorPtr);//, Zpr.ReadRam((int)actorPtr , 0x13C));
+                    ActorInstance ai = new ActorInstance(version, actorPtr);
                     result.Add(ai);
                     actorPtr = ai.NextActor;
                 }
@@ -112,29 +106,27 @@ namespace Spectrum
         {
             N64Ptr readAddr;
             uint offset;
-            
 
-            if ((VRamActorInfo & 0xFFFFFF) < 0x800000)
+
+            if (VRamActorInfo.Offset < 0x800000)
             {
-                //Read address 0E in the ovl file
-                readAddr = VRamActorInfo + 0x0E;
+                //Read address 0C in the ovl file
+                readAddr = VRamActorInfo + 0x0C;
             }
-            else if (!IsFileLoaded)
+            else if (IsFileLoaded)
             {
-                return;
-            }
-            else
-            {
-                offset = (uint)(VRamActorInfo - VRam.Start) + 0x0E;
+                offset = (uint)(VRamActorInfo - VRam.Start) + 0x0C;
                 readAddr = Ram.Start + offset;
             }
+            else
+                return;
 
-            InstanceSize[Actor] = (ushort)Zpr.ReadRamInt16(readAddr);
+            InstanceSize[Actor] = (ushort)Zpr.ReadRamInt32(readAddr);
         }
 
         public override string ToString()
         {
-            int dataOffset = (int)(VRamActorInfo-VRam.Start);
+            int dataOffset = (int)(VRamActorInfo - VRam.Start);
             int initRam = (int)(Ram.Start + dataOffset);
             int initRom = (int)(VRom.Start + dataOffset);
             return $"AF {Actor:X4}:  {AllocationType:X4} {NumSpawned:X2} FILE: " +

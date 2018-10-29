@@ -10,7 +10,7 @@ namespace Spectrum
         public CodeFile()
         {
             var ramStart = SpectrumVariables.Code_Addr;
-            VRom = RamDmadata.Data.GetFileAddress(SpectrumVariables.Code_VRom);
+            VRom = RamDmadata.GetFileAddress(SpectrumVariables.Code_VRom);
             Ram = new FileAddress(ramStart, ramStart + VRom.Size);
         }
 

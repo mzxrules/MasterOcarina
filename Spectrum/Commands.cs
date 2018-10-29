@@ -540,22 +540,23 @@ namespace Spectrum
         {
             if (!TryEvaluate((string)args[0], out long addr))
                 return;
-            int address = (int)(addr & 0xFFFFFF);
+            N64Ptr address = (addr & 0xFFFFFF) | 0x8000_0000;
             var actors = from n in GetRamMap().OfType<ActorInstance>()
-                         where (n.Ram.Start & 0xFFFFFF) == address
+                         where (n.Ram.Start & 0xFFFFFF) == address.Offset
                          select n;
 
             foreach (ActorInstance a in actors)
             {
-                int readStart = (int)(a.Ram.Start & 0xFFFFFF);
-                using (BinaryWriter bw = new BinaryWriter(
-                    new FileStream($"dump/AI{a.Actor:X3}_80{address:X6}.z64", FileMode.Create)))
+                Ptr ptr = SPtr.New(a.Ram.Start);
+                string path = $"dump/AI{a.Actor:X3}_{ptr}.z64";
+                using (BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Create)))
                 {
                     for (int i = 0; i < a.Ram.Size; i += 4)
                     {
-                        bw.WriteBig(Zpr.ReadRamInt32(readStart + i));
+                        bw.WriteBig(ptr.ReadInt32(i));
                     }
                 }
+                Console.WriteLine($"{path} created.");
             }
         }
 
@@ -670,20 +671,23 @@ namespace Spectrum
 
         private static void PrintRam_X8(N64Ptr a)
         {
+            Ptr p = SPtr.New(a);
             Console.WriteLine(string.Format("{0:X8}: {1:X8} {2:X8} {3:X8} {4:X8}",
-                a,
-                Zpr.ReadRamInt32(a),
-                Zpr.ReadRamInt32(a + 0x04),
-                Zpr.ReadRamInt32(a + 0x08),
-                Zpr.ReadRamInt32(a + 0x0C)));
+                p,
+                p.ReadInt32(0x00),
+                p.ReadInt32(0x04),
+                p.ReadInt32(0x08),
+                p.ReadInt32(0x0C)));
         }
 
         private static void PrintRam_U16(N64Ptr a)
         {
+            Ptr p = SPtr.New(a);
             string[] v = new string[8];
+            
             for (int i = 0; i < 8; i++)
             {
-                ushort value = (ushort)Zpr.ReadRamInt16(a + (i*2));
+                ushort value = p.ReadUInt16(i * 2);
                 v[i] = $"{value,6}";
             }
             Console.WriteLine($"{a:X8}: {string.Join(" ", v)}");
@@ -691,10 +695,12 @@ namespace Spectrum
 
         private static void PrintRam_S16(N64Ptr a)
         {
+            Ptr p = SPtr.New(a);
             string[] v = new string[8];
+
             for (int i = 0; i < 8; i++)
             {
-                short value = Zpr.ReadRamInt16(a + (i * 2));
+                short value = p.ReadInt16(i * 2);
                 v[i] = $"{value,6}";
             }
             Console.WriteLine($"{a:X8}: {string.Join(" ", v)}");
@@ -702,12 +708,12 @@ namespace Spectrum
 
         private static void PrintRam_F(N64Ptr a)
         {
+            Ptr p = SPtr.New(a);
             string[] v = new string[4];
 
             for (int i = 0; i < 4; i++)
             {
-                var dat = Zpr.ReadRamInt32(a + (i * 4));
-                var val = BitConverter.ToSingle(BitConverter.GetBytes(dat), 0);
+                float val = p.ReadFloat(i * 4);
                 if (val == 0f)
                 {
                     v[i] = "0.0  ";
@@ -2216,18 +2222,7 @@ namespace Spectrum
             MemoryStream ms = new MemoryStream(data);
 
             string result = CStr.Get(ms, enc);
-
-            //StreamReader sw = new StreamReader(ms, enc);
-
-
-            //char c = (char)sw.Read();
-            //int i = 0;
-            //while (c != '\0' && i < 0x100)
-            //{
-            //    result += c;
-            //    c = (char)sw.Read();
-            //    i++;
-            //}
+            
             Console.OutputEncoding = Encoding.Unicode;
             Console.WriteLine(result);
         }

@@ -10,51 +10,41 @@ namespace Spectrum
         public const int LENGTH = 4 * 7;
         public const int COUNT = 2;
 
-        public FileAddress Ram
-        {
-            get { return _RamAddress; }
-        }
+        public FileAddress Ram { get; }
         int Item;
-        FileAddress _RamAddress;
+
         public FileAddress VRom { get; set; }
         public FileAddress VRam { get; set; }
         uint RamFileName;
 
-        public OvlPause(int i, byte[] data)
+        public OvlPause(int i, Ptr ptr)
         {
             uint ramFileStart;
             Item = i;
 
-            ramFileStart = BitConverter.ToUInt32(data, 0x0);
+            ramFileStart = ptr.ReadUInt32(0x00);
 
             VRom = new FileAddress(
-                BitConverter.ToUInt32(data, 0x04),
-                BitConverter.ToUInt32(data, 0x08));
+                ptr.ReadUInt32(0x04),
+                ptr.ReadUInt32(0x08));
             VRam = new FileAddress(
-                BitConverter.ToUInt32(data, 0x0C),
-                BitConverter.ToUInt32(data, 0x10));
-            _RamAddress = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
+                ptr.ReadUInt32(0x0C),
+                ptr.ReadUInt32(0x10));
+            Ram = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
 
-            RamFileName = BitConverter.ToUInt32(data, 0x18);
+            RamFileName = ptr.ReadUInt32(0x18);
 
         }
 
         internal static List<OvlPause> GetActive()
         {
             List<OvlPause> ovlPause = new List<OvlPause>();
-            OvlPause working;
-            int ovlPauseCount;
-            byte[] objTbl;
-            byte[] ovlObjData = new byte[LENGTH];
-
-            ovlPauseCount = COUNT;
-
-            objTbl = Zpr.ReadRam(TABLE_ADDRESS, ovlPauseCount * LENGTH);
-            objTbl.Reverse32();
-            for (int i = 0; i < ovlPauseCount; i++)
+            Ptr ovlPausePtr = SPtr.New(TABLE_ADDRESS);
+            
+            for (int i = 0; i < COUNT; i++)
             {
-                Array.Copy(objTbl, i * LENGTH, ovlObjData, 0, LENGTH);
-                working = new OvlPause(i, ovlObjData);
+                Ptr ptr = ovlPausePtr.RelOff(LENGTH * i);
+                OvlPause working = new OvlPause(i, ptr);
                 if (working.Ram.Start != 0)
                     ovlPause.Add(working);
             }

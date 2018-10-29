@@ -205,10 +205,6 @@ namespace ZCodec
             using (FileStream fw = new FileStream(outRom, FileMode.Create))
             {
                 Rom rom = Rom.New(inRom, version);
-                //if (version.Game == Game.OcarinaOfTime)
-                //    rom = new ORom(inRom, version);
-                //else
-                //    rom = new MRom(inRom, version);
                 RomBuilder.DecompressRom(rom, fw);
             }
         }

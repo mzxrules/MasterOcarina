@@ -113,8 +113,7 @@ namespace Spectrum
         public static int Code_VRom;
 
         [ViewVariable("dmadata")]
-        public static int Dma_Data_Addr;
-        public static int Dma_Data_VRom;
+        public static Ptr Dmadata_Addr;
 
         [ViewVariable]
         public static Ptr Debug_Heap_Ptr;
@@ -168,8 +167,8 @@ namespace Spectrum
             //dma data
             fileToken = (version == Game.OcarinaOfTime) ?
                 (RomFileToken)ORom.FileList.dmadata : (RomFileToken)MRom.FileList.dmadata;
-            Addresser.TryGetRam(fileToken, version, out Dma_Data_Addr);
-            Addresser.TryGetRom(fileToken, version, (uint)Dma_Data_Addr, out Dma_Data_VRom);
+            Addresser.TryGetRam(fileToken, version, out int temp);
+            Dmadata_Addr = SPtr.New(temp);
 
             //code
             fileToken = (version == Game.OcarinaOfTime) ?
@@ -178,7 +177,7 @@ namespace Spectrum
             Addresser.TryGetRom(fileToken, version, (uint)Code_Addr, out Code_VRom);
 
             //Global Context
-            Addresser.TryGetRam("RAM_GLOBAL_CONTEXT", version, out int temp);
+            Addresser.TryGetRam("RAM_GLOBAL_CONTEXT", version, out temp);
             if (version == ORom.Build.IQUEC || version == ORom.Build.IQUET)
             {
                 GlobalContext = SPtr.New(temp);

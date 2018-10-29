@@ -71,7 +71,6 @@
     <Compile Include="Help.cs" />
     <Compile Include="MItems.cs" />
     <Compile Include="OItems.cs" />
-    <Compile Include="LegacyCommands.cs" />
     <Compile Include="mem\Emulator.cs" />
     <Compile Include="Express\Ev.cs" />
     <Compile Include="Express\Expression.cs" />

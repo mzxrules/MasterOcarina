@@ -18,22 +18,19 @@ namespace Spectrum
 
         public static RamScene GetSceneInfo(RomVersion ver, Ptr globalCtx, Ptr sceneTable)
         {
-            RamScene result = new RamScene();
-
             short sceneId = globalCtx.ReadInt16(0xA4);
             N64Ptr ramStart = globalCtx.ReadInt32(0xB0);
+            int recordSize = (ver.Game == Game.OcarinaOfTime) ? 0x14 : 0x10;
+            Ptr sceneRecord = sceneTable.RelOff(recordSize * sceneId);
+            FileAddress vrom = new FileAddress(sceneRecord.ReadInt32(0), sceneRecord.ReadInt32(4));
+            N64Ptr ramEnd = ramStart + vrom.Size;
 
-            int recordSize = 0x14;
-
-            if (ver.Game == Game.MajorasMask)
-                recordSize = 0x10;
-
-            var sceneRecord = sceneTable.RelOff(recordSize * sceneId);
-
-            result.VRom = new FileAddress(sceneRecord.ReadInt32(0), sceneRecord.ReadInt32(4));
-            N64Ptr ramEnd = ramStart + result.VRom.Size;
-            result.Ram = new FileAddress(ramStart, ramEnd);
-            result.Id = sceneId;
+            RamScene result = new RamScene
+            {
+                VRom = vrom,
+                Ram = new FileAddress(ramStart, ramEnd),
+                Id = sceneId
+            };
 
             return result;
         }

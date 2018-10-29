@@ -7,17 +7,14 @@ namespace Spectrum
     class SegmentAddress : IRamItem
     {
         static int SegmentAddressTable { get { return SpectrumVariables.Segment_Table; } }// = 0x120C38;
-        public FileAddress Ram
-        {
-            get { return _RamAddress; }
-        }
-        private FileAddress _RamAddress;
+        public FileAddress Ram { get; }
+
         private int segment;
 
-        public SegmentAddress(int bank, FileAddress f)
+        public SegmentAddress(int id, FileAddress addr)
         {
-            _RamAddress = f;
-            this.segment = bank;
+            Ram = addr;
+            segment = id;
         }
         public override string ToString()
         {
@@ -36,18 +33,16 @@ namespace Spectrum
             if (SegmentAddressTable == 0)
                 return addrs;
 
+            Ptr ptr = SPtr.New(SegmentAddressTable);
             for (int i = 0; i < 0x10; i++)
             {
-                if (i != 2)
-                    addrs.Add(new SegmentAddress(i, new FileAddress(Zpr.ReadRamInt32(SegmentAddressTable + (i * 0x4)), 0)));
-                else
-                    addrs.Add(new SegmentAddress(02, new FileAddress(Zpr.ReadRamInt32(SegmentAddressTable + (2 * 0x4)), 0x384980)));
+                addrs.Add(new SegmentAddress(i, new FileAddress(ptr.ReadInt32(i * 0x4), 0)));
             }
 
             if (showAllSegments)
                 return addrs.Where(x => x.Ram.Start != 0).ToList();
             else
-                return addrs.Where(x => new int[] { 0x02, 0x03 }.Contains(x.segment)).ToList();
+                return addrs.Where(x => new int[] { 0x03 }.Contains(x.segment)).ToList();
         }
 
     }

@@ -5,28 +5,30 @@ namespace Spectrum
 {
     class RamDmadata :  IFile
     {
-        public static RamDmadata Data;
+        private static RamDmadata Data;
         public FileAddress Ram { get; set; } 
         public FileAddress VRom { get; set; }
 
         public RamDmadata()
         {
-            var start = SpectrumVariables.Dma_Data_Addr;
-            VRom = new FileAddress(Zpr.ReadRamInt32(start + 0x20), Zpr.ReadRamInt32(start + 0x24));
-            Ram = new FileAddress(start, start + VRom.Size);
+            Ptr ptr = SpectrumVariables.Dmadata_Addr;
+            VRom = new FileAddress(ptr.ReadInt32(0x20), ptr.ReadInt32(0x24));
+            Ram = new FileAddress(ptr, ptr + VRom.Size);
 
             Data = this;
         }
 
-        public FileAddress GetFileAddress(int addr)
+        public static FileAddress GetFileAddress(int addr)
         {
-            if (VRom.Size < 0 || VRom.Size > 0x400000)
-                throw new InvalidOperationException("DMA data is not initialized correctly");
-            for (int i = 0; i < VRom.Size; i += 0x10)
+            if (Data.VRom.Size < 0 || Data.VRom.Size > 0x40000)
+                throw new InvalidOperationException("dmadata reference is not initialized correctly");
+
+            Ptr ptr = SPtr.New(Data.Ram.Start);
+            for (int i = 0; i < Data.VRom.Size; i += 0x10)
             {
-                int start = Zpr.ReadRamInt32((int)Ram.Start + i);
+                int start = ptr.ReadInt32(i);
                 if (addr == start)
-                    return new FileAddress(Zpr.ReadRamInt32((int)Ram.Start + i), Zpr.ReadRamInt32((int)Ram.Start + i + 4));
+                    return new FileAddress(start, ptr.ReadInt32(i + 0x04));
             }
             return new FileAddress();
         }

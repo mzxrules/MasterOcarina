@@ -8,8 +8,6 @@ namespace Spectrum
         public FileAddress Ram { get; protected set; }
         public bool IsFree { get; protected set; }
 
-        //protected uint[] Data;
-
         public uint Size;
         public N64Ptr Prev, Next;
 

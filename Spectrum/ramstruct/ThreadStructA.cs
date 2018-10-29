@@ -239,16 +239,16 @@ namespace Spectrum
             }
             public void Initialize()
             {
-                int start = (int)Ram.Start;
-                NextPtr = Zpr.ReadRamInt32(start + 0x00);
-                PrevPtr = Zpr.ReadRamInt32(start + 0x04);
-                int StartPtr = Zpr.ReadRamInt32(start + 0x08);
-                int EndPtr = Zpr.ReadRamInt32(start + 0x0C);
+                Ptr ptr = SPtr.New(Ram.Start);
+                NextPtr = ptr.ReadInt32(0x00);
+                PrevPtr = ptr.ReadInt32(0x04);
+                int StartPtr = ptr.ReadInt32(0x08);
+                int EndPtr = ptr.ReadInt32(0x0C);
                 StackAddr = new ThreadStackData(this, new FileAddress(StartPtr, EndPtr));
                 //0x10
-                Unknown = Zpr.ReadRamInt32(start + 0x14);
+                Unknown = ptr.ReadInt32(0x14);
                 //0x18
-                Unknown2 = Zpr.ReadRamInt32(start + 0x1C);
+                Unknown2 = ptr.ReadInt32(0x1C);
             }
 
             public override string ToString()

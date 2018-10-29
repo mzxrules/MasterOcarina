@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using mzxrules.Helper;
+﻿using mzxrules.Helper;
 using mzxrules.OcaLib;
 
 namespace Spectrum
@@ -102,12 +97,12 @@ namespace Spectrum
             _RamAddress = new FileAddress(Address, Address + instanceSize);
 
 
-            Variable = ptr.ReadUInt16(0x1C); //BitConverter.ToUInt16(instance, Zpr.End16(0x1C));
+            Variable = ptr.ReadUInt16(0x1C); 
 
             Position = new Vector3<float>(
-                ptr.ReadFloat(0x24), //BitConverter.ToSingle(instance, 0x24),
-                ptr.ReadFloat(0x28), //BitConverter.ToSingle(instance, 0x28),
-                ptr.ReadFloat(0x2C)); //BitConverter.ToSingle(instance, 0x2C));
+                ptr.ReadFloat(0x24),
+                ptr.ReadFloat(0x28),
+                ptr.ReadFloat(0x2C)); 
 
 
             if (version.Game == Game.OcarinaOfTime)
@@ -115,7 +110,7 @@ namespace Spectrum
             else
                 off = 8;
 
-            Rotation = new Vector3<Int16>(
+            Rotation = new Vector3<short>(
                 ptr.ReadInt16(0xB4 + off),
                 ptr.ReadInt16(0xB6 + off),
                 ptr.ReadInt16(0xB8 + off)); 

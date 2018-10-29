@@ -24,12 +24,12 @@ namespace Spectrum
 
             ObjectFiles = new FileAddress[OBJECT_FILE_COUNT];
 
-            int addr = OBJ_FILE_TABLE_ADDR;
+            Ptr ptr = SPtr.New(OBJ_FILE_TABLE_ADDR);
             
             for (int i = 0; i < OBJECT_FILE_COUNT; i++)
             {
-                ObjectFiles[i] = new FileAddress(Zpr.ReadRamInt32(addr), Zpr.ReadRamInt32(addr + 4));
-                addr += 8;
+                int off = i * 8;
+                ObjectFiles[i] = new FileAddress(ptr.ReadInt32(off), ptr.ReadInt32(off + 4));
             }
         }
         
@@ -56,10 +56,10 @@ namespace Spectrum
 
         public RamObject(Ptr ptr)
         {
-            Object = ptr.ReadInt16(0);//BitConverter.ToInt16(data, Zpr.End16(0));
+            Object = ptr.ReadInt16(0);
             IsLoaded = Object >= 0;
             Object = Math.Abs(Object);
-            N64Ptr addr = ptr.ReadUInt32(4); //BitConverter.ToUInt32(data, 4);
+            N64Ptr addr = ptr.ReadUInt32(4); 
             Size = (ObjectFiles.Length <= Object || Object < 0) ? 0 : (int)ObjectFiles[Object].Size;
             _RamAddress = new FileAddress(addr, addr + Size);
         }
@@ -74,14 +74,13 @@ namespace Spectrum
             int objCount = GetCount();
 
             Ptr ptr = OBJ_ALLOC_TABLE_ADDR.RelOff(0xC);
-            //objTbl = Zpr.ReadRam(OBJ_ALLOC_TABLE_ADDR + 0x0C, ovlObjectCount * LENGTH);
-            //objTbl.Reverse32();
+
             for (int i = 0; i < objCount; i++)
             {
-                //Array.Copy(objTbl, i * LENGTH, ovlObjData, 0, LENGTH);
                 RamObject working = new RamObject(ptr);
-                ptr = ptr.RelOff(LENGTH);
                 ovlObjects.Add(working);
+
+                ptr = ptr.RelOff(LENGTH);
             }
             return ovlObjects;
         }

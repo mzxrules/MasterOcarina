@@ -6,30 +6,23 @@ namespace Spectrum
     class RamRoom : IFile
     {
         static int Room_Alloc_Table { get { return SpectrumVariables.Room_Allocation_Table; } }
-        public FileAddress Ram { get { return _RamAddress; } }
+        public FileAddress Ram { get; }
         public FileAddress VRom { get; set; }
-        FileAddress _RamAddress;
 
-        public RamRoom(byte[] data)
+        public RamRoom(Ptr ptr)
         {
-            _RamAddress = new FileAddress(
-                BitConverter.ToInt32(data, 0),
-                BitConverter.ToInt32(data, 4));
+            Ram = new FileAddress(
+                ptr.ReadInt32(0x00),
+                ptr.ReadInt32(0x04));
 
-            int RoomFile = BitConverter.ToInt32(data, 0x10);
-            VRom = RamDmadata.Data.GetFileAddress(RoomFile);
+            int RoomFile = ptr.ReadInt32(0x10);
+            VRom = RamDmadata.GetFileAddress(RoomFile);
         }
 
         public static RamRoom GetRoomInfo()
         {
-            RamRoom result;
-            byte[] data;
-
-            data = Zpr.ReadRam(Room_Alloc_Table, 0x1C);
-            data.Reverse32();
-            result = new RamRoom(data);
-
-            return result;
+            Ptr ptr = SPtr.New(Room_Alloc_Table);
+            return new RamRoom(ptr);
         }
 
         public override string ToString()
