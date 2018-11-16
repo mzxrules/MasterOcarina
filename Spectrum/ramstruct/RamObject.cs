@@ -14,11 +14,11 @@ namespace Spectrum
         
         static FileAddress[] ObjectFiles;
 
-        internal static void ChangeVersion(RomVersion b)
+        internal static void ChangeVersion(RomVersion v, bool g)
         {
-            if (b.Game == Game.OcarinaOfTime)
+            if (v.Game == Game.OcarinaOfTime)
                 OBJECT_FILE_COUNT = 0x192;
-            else if (b.Game == Game.MajorasMask)
+            else if (v.Game == Game.MajorasMask)
                 OBJECT_FILE_COUNT = 0x283;
             
 

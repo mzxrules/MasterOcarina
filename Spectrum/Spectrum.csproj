@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Arguments.cs" />
     <Compile Include="BetaQuest.cs" />
+    <Compile Include="BuildTime.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="datastruct\CollisionBody.cs" />
@@ -139,6 +140,9 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>echo namespace Spectrum { partial class Program { public const string Timestamp = "%25DATE%25 %25TIME%25";}} &gt; "$(ProjectDir)\BuildTime.cs"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

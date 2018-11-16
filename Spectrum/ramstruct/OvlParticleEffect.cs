@@ -20,7 +20,7 @@ namespace Spectrum
             }
         }
 
-        internal static void ChangeVersion(RomVersion v)
+        internal static void ChangeVersion(RomVersion v, bool g)
         {
             if (v.Game == Game.OcarinaOfTime)
                 TOTAL_PARTICLE_EFFECTS = 0x19;

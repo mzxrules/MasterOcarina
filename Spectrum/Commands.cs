@@ -2418,6 +2418,40 @@ namespace Spectrum
             }
         }
 
+
+        [SpectrumCommand(
+            Name = "gct",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Sets Global Context Pointer")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.EXPRESSION_S })]
+        private static void SetGlobalContext(Arguments args)
+        {
+            if (!TryEvaluate((string)args[0], out long address))
+                return;
+
+            SpectrumVariables.GlobalContext = SPtr.New(address);
+            ChangeVersion(Options.Version, false);
+        }
+
+        [SpectrumCommand(
+            Name = "dbgr",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Skips crash debugger input code (update dynarec)")]
+        [SpectrumCommandSignature()]
+        private static void SetNoInputDebugger(Arguments args)
+        {
+            if (Options.Version == ORom.Build.N0)
+            {
+                SPtr.New(0xAEA5C).Write(0x00, (ushort)0x5400);
+            }
+            else
+            {
+                Console.WriteLine("Version not supported");
+            }
+        }
+
+
         [SpectrumCommand(
             Name = "plane",
             Cat = SpectrumCommand.Category.Proto,

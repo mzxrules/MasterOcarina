@@ -160,7 +160,7 @@ namespace Spectrum
             SaveContext =  SPtr.New(0);
         }
 
-        internal static void ChangeVersion(RomVersion version)
+        internal static void ChangeVersion(RomVersion version, bool setGctx = true)
         {
             RomFileToken fileToken;
 
@@ -177,15 +177,19 @@ namespace Spectrum
             Addresser.TryGetRom(fileToken, version, (uint)Code_Addr, out Code_VRom);
 
             //Global Context
-            Addresser.TryGetRam("RAM_GLOBAL_CONTEXT", version, out temp);
-            if (version == ORom.Build.IQUEC || version == ORom.Build.IQUET)
+            if (setGctx)
             {
-                GlobalContext = SPtr.New(temp);
+                Addresser.TryGetRam("RAM_GLOBAL_CONTEXT", version, out temp);
+                if (version == ORom.Build.IQUEC || version == ORom.Build.IQUET)
+                {
+                    GlobalContext = SPtr.New(temp);
+                }
+                else
+                {
+                    GlobalContext = SPtr.New(temp).Deref();
+                }
             }
-            else
-            {
-                GlobalContext = SPtr.New(temp).Deref();
-            }
+
             SetGfxContext(version);
 
             //Heap
@@ -234,10 +238,6 @@ namespace Spectrum
                 EntranceTable = SPtr.New(temp);
             else
                 EntranceTable = null;
-            
-
-
-
         }
 
         public static void SetGfxContext(RomVersion version)

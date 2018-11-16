@@ -20,7 +20,7 @@ namespace Spectrum
     {
         const string TITLE = "Spectrum - Time never really passes in Hyrule... does it?";
         static SpectrumOptions Options = new SpectrumOptions();
-        public delegate void SetVersionEventHandler(RomVersion b);
+        public delegate void SetVersionEventHandler(RomVersion v, bool b = true);
         public static event SetVersionEventHandler ChangeVersion;
         static List<BlockNode> LastActorLL = new List<BlockNode>();
         static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
@@ -76,7 +76,7 @@ namespace Spectrum
 
             MountEmulator("");
 
-            Console.WriteLine("Created by mzxrules 2014-2018");
+            Console.WriteLine($"Created by mzxrules 2014-2018, compiled {Timestamp}");
             Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
             Console.WriteLine($"Data logging enabled? {Options.EnableDataLogging}");
         }
@@ -402,7 +402,7 @@ namespace Spectrum
             return null;
         }
 
-        private static void UpdateSetVersion(RomVersion v)
+        private static void UpdateSetVersion(RomVersion v, bool g)
         {
             string gameStr = "?";
             string buildStr = "?";
@@ -430,7 +430,7 @@ namespace Spectrum
             SaveSettings();
         }
 
-        private static void SetBlockNodeLength(RomVersion v)
+        private static void SetBlockNodeLength(RomVersion v, bool g)
         {
             if (v.Game == Game.OcarinaOfTime)
             {
