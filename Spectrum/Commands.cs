@@ -2133,7 +2133,7 @@ namespace Spectrum
             }
             if (!TryEvaluate((string)args[0], out long address))
                 return;
-            ThreadStructs.OSThread thread = new ThreadStructs.OSThread(SPtr.New((int)address));
+            OSThread thread = new OSThread(SPtr.New((int)address));
 
             Console.Clear();
             thread.PrintState();
@@ -2151,12 +2151,12 @@ namespace Spectrum
             int kill = 40;
 
 
-            List<ThreadStructs.OSThread> threads = new List<ThreadStructs.OSThread>();
+            List<OSThread> threads = new List<OSThread>();
             while (kill-- > 0
                 && threadCur != 0
                 && threadCur != (N64Ptr)threadStart)
             {
-                ThreadStructs.OSThread thread = new ThreadStructs.OSThread(SPtr.New(threadCur));
+                OSThread thread = new OSThread(SPtr.New(threadCur));
                 threads.Add(thread);
                 threadCur = thread.OSThread_tlnext;
             }
