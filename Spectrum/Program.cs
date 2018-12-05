@@ -3,15 +3,11 @@ using mzxrules.OcaLib;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using uCode;
 
 namespace Spectrum
 {
@@ -85,75 +81,8 @@ namespace Spectrum
         {
             List<Command> commands = new List<Command>()
             {
-                //new Command("help", (a) => Help(), "Shows this help menu"),
-                //new Command("=", (a) => Evaluate(a.GetCommandArgumentsString()), "Evaluates an expression"),
-                //new Command("emu", (a)=>SetEmulator(a.GetCommandArgumentsString()),"Sets/updates emulator settings"),
-                //new Command("delemu", (a)=>DeleteEmulator(a.Legacy()), "Removes emulator settings for an emulator"),
-                //new Command("mount", (a)=>MountEmulator(a.Legacy()),"Locates a running emulator to interface with"),
-                //new Command("game", (a) => SetGame(a.Legacy()), "Sets game to profile, and optionally lets you specify a version"),
-                //new Command("ver", (a)=> TrySetVersion(a.Legacy()), "Sets game version/displays supported game versions"),
-                //new Command("", (a)=>Default(), "Creates a memory map"),
-                //new Command("var", (a) => SpectrumVariables.GetVariables(), "Shows a list of variables the program uses"),
-                //new Command("addr", (a) => PrintEmuAddr(a.Legacy()), "Converts N64 address into an emulator's process address"),
-                //new Command("ram", (a)=> PrintRam(a.Legacy()), "Prints RDRAM starting at the given address"),
-                //new Command("ramf", (a)=> PrintRamF(a.Legacy()), "Prints RDRAM starting at the given address, view as floating point"),
-                //new Command("a", (a)=> GetAddresses(a.Legacy()), "Returns whatever major structure is located at the given address"),
-                //new Command("r", (a)=> ConvertRomToRam(a.Legacy()), "Converts rom address to ram, if possible"),
-                //new Command("f", (a)=> ToHex(a.Legacy(), typeof(float)), "Converts floating point to hex representation"),
-                //new Command("ff", (a)=> FromHex(a.Legacy(), typeof(float)), "Converts hexadecimal to floating point"),
-                //new Command("i", (a)=> ToHex(a.Legacy(), typeof(int)), "Converts integer to hex representation"),
-                //new Command("ii", (a)=> FromHex(a.Legacy(), typeof(int)), "Converts hex to integer"),
-                //new Command("ll", (a)=> { ToggleSettings(ref Options.ShowLinkedList); Default(); }, "Show/Hide link list nodes"),
-                //new Command("obj", (a)=> { ToggleSettings(ref Options.ShowObjects); Default(); }, "Show/Hide object files"),
-                //new Command("size", (a)=> { ToggleSettings(ref Options.ShowSize); Default(); }, "Show Size or End Address"),
-                //new Command("actor", (a)=> { ToggleSettings(ref Options.ShowActors); Default(); }, "Show/Hide actor files/instances"),
-                //new Command("thread", (a)=> { ToggleSettings(ref Options.ShowThreadingStructs); Default(); }, "Show/Hide thread structs"),
-                //new Command("vthread", (a)=> ViewThread(a.Legacy()), "View the state of a thread on last context swap"),
-                //new Command("hidea", (a)=> HideActor(a.Legacy()), "Hide actor file/instance of a given id"),
-                //new Command("showalla", (a) => {Options.HiddenActors.Clear(); Default(); }, "Unhide all hidden actors"),
-                //new Command("anear",(a)=>FindNearestActor(), "Locates actors nearest to Link in 3D"),
-                //new Command("ent", (a)=>SpawnAtEntranceIndex(a.Legacy()), "Spawns Link at a given entrance index"),
-                //new Command("sp", (a)=> SpawnToEntrance(a.Legacy()), "Spawns Link in a given scene number"),
-                //new Command("sa", (a)=> SpawnAnywhere(a.Legacy()), "Spawn anywhere with a given scene,room,x,y,z coordinate"),
-                //new Command("sr", (a)=> SpawnInRoom(a.Legacy()), "Spawns Link in a specified room,x,y,z using the current scene"),
-                //new Command("y", (a)=> SetCoordinatesY(a.Legacy()), "Sets y coordinate"),
-                //new Command("xyz", (a)=> SetCoordinates(a.Legacy()), "Sets x,y,z coordinates"),
-                //new Command("dumpa",(a)=>DumpActor(a.Legacy()), "Dumps all data for an actor instance"),
-                //new Command("age", (a)=>SetAge(a.Legacy()), "Sets Link's age"),
-                //new Command("ef0", (a)=>EventFlag(a.Legacy(), false), "Sets event flag to 0" ),
-                //new Command("ef1", (a)=>EventFlag(a.Legacy(), true), "Sets event flag to 1" ),
-                //new Command("time", (a)=>GetTime(a.Legacy()), "Gets world time"),
-                //new Command("save", (a)=>SaveSettings(), "Save Settings (program usually does this automatically)"),
-                //new Command("txt", (a)=> DisplayText(a.Legacy()), "Interprets data at given address as null terminated string, and displays it"),
-                //new Command("col", (a)=>GetActorCollision(), "Gets 'complex mesh' collision data"),
-                //new Command("colb", (a)=>GetActorBodyCollision(), "Gets 'simple body' collision data"),
-                //new Command("colxyz", (a)=>GetSceneCollisionCoords(a.Legacy()), "converts xyz into scene collision hashtable coords/finds record"),
-                //new Command("colsec", (a)=>GetSceneCollsionSection(a.Legacy()), "converts collision sector coords into bounding box for that unit"),
-                //new Command("w16",(a)=> WriteRam(a.Legacy(), typeof(short)), "Write 16 bit data"),
-                //new Command("w32",(a)=> WriteRam(a.Legacy(), typeof(int)), "Write 32 bit data"),
-                //new Command("wf",(a)=> WriteRam(a.Legacy(), typeof(float)), "Write float"),
-                //new Command("framepng",(a)=> GetFrameBufferPng(), "Dumps framebuffer to .png"),
-                //new Command("view",(a)=>ViewFrameBuffer(), "View framebuffer in console window live"),
-                //new Command("gfx", (a)=>DisplayGraphicsContext(), "Displays variables related to the 'Graphics Context'"),
-                //new Command("gfxclean", (a)=> CleanFrameDlistBuffers(), "Zero clears 'garbage' data in gbi buffers"),
-                //new Command("setgfx", (a)=> SetGraphicsContext(a.Legacy()), "Allows the 'Graphics Context' pointer to be set manually"),
-                //new Command("gbi", (a) => PrintGbi(a.Legacy()), "Prints out a sequence of GBI, starting at the specified address"),
-                //new Command("dumpgbi", (a) => DumpGbi(a.Legacy()), "Creates a text dump of a GBI task, starting at the specified address"),
-                //new Command("dumpgbiimg", (a) => DumpGbiTextures(a.Legacy()), "Creates a text dump of all texture related instructions in a GBI task"), 
-                //new Command("tracegbi", (a) => TraceGbi(), "Auto-documents display lists for the current frame"),
-                //new Command("dumpframe", (a)=>DumpFrame(a.Legacy()), "Dumps gbi buffer for frame"),
-                //new Command("loadframe", (a)=>LoadFrame(a.Legacy()), "Restores gbi buffer for frame from file 'dump/frame.bin'"),
-                //new Command("rsp",(a)=>PrintRspAsm(a.Legacy()), "RSP disassembler"),
-                //new Command("jtxt", (a)=>DumpJsonToText(a.Legacy()), "dunno"),
-                //new Command("status", (a)=>StatusRegister(a.Legacy()),"broken"),
-                //new Command("module", (a)=>GetModule(a.Legacy()),"test function"),
-                //new Command("mips", (a)=>PrintMipsAsm(a.Legacy()), "MIPS disassembler"),
                 new Command("pause",(a)=>PauseGame(), "Pauses game by setting game state's 'update' func pointer to return"),
                 new Command("mpause", (a)=>PauseGameModel(), "secret :)"),
-                //new Command("dh", (a)=>DlistHalt(a.Legacy()), "secret :)"),
-                //new Command("loc", (a)=> PrintLocation(), "Prints Location Info"),
-                //new Command("beta_shuffle", (a)=> TestBetaQuestShuffleData(), "Checks for repeats in beta quest shuffle group"),
-                //new Command("beta_ent", (a)=>LocateBetaQuestEntrance(a.Legacy()), "Locates Beta Quest entrance"),
             };
 
             foreach (var item in commands)
@@ -359,7 +288,6 @@ namespace Spectrum
                     sw.WriteLine(item.ToString());
                 }
             }
-            //using (BinaryReader br = new BinaryReader(new FileStream("dump/frame.bin", FileMode.Open)))
         }
 
         private static void DumpReferenceLogger<T>(ReferenceLogger<T> logger, string path)
@@ -586,8 +514,7 @@ namespace Spectrum
                 case MRom.Build.J1: zoneoutOff = 0x3F68; break;
                 default: zoneoutOff = 0x3CB4; break;
             }
-
-            //Ptr zonoutType = SaveContext.RelOff(0x3F64);
+            
             Ptr zoneoutRecord = SaveContext.RelOff(zoneoutOff);
             Ptr linkAddr;
             if (SpectrumVariables.Actor_Category_Table == 0)
@@ -595,7 +522,7 @@ namespace Spectrum
 
             linkAddr = SpectrumVariables.Actor_Category_Table.RelOff(0xC * 2 + 4).Deref();
 
-            if (linkAddr == 0) //0x1DAA30;
+            if (linkAddr == 0)
                 return;
 
             zoneoutRecord.Write(
