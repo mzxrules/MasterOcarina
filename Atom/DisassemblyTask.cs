@@ -162,48 +162,23 @@ namespace Atom
             
             file.Stream.Position = ovlRec.VRamActorInfo - startAddr;
             actorInfo = new ActorInit(new BinaryReader(file));
-
-            if (ovlRec.VRamActorInfo != 0)
-            {
-                var lbl = new Label(Label.Type.VAR, ovlRec.VRamActorInfo, true)
-                {
-                    Name = $"{task.Name}_InitVars"
-                };
-                task.Functions.Add(lbl);
-            }
             
-            if (actorInfo.init_func != 0)
+            BindSymbol(ovlRec.VRamActorInfo, Label.Type.VAR, "InitVars");
+            BindSymbol(actorInfo.init_func, Label.Type.FUNC, "Init");
+            BindSymbol(actorInfo.draw_func, Label.Type.FUNC, "Draw");
+            BindSymbol(actorInfo.update_func, Label.Type.FUNC, "Update");
+            BindSymbol(actorInfo.dest_func, Label.Type.FUNC, "Destructor");
+            
+            void BindSymbol(N64Ptr ptr, Label.Type type, string name)
             {
-                var func = new Label(Label.Type.FUNC, actorInfo.init_func, true)
+                if (ptr != 0)
                 {
-                    Name = $"{task.Name}_Init"
-                };
-                task.Functions.Add(func);
-            }
-            if (actorInfo.draw_func != 0)
-            {
-                var func = new Label(Label.Type.FUNC, actorInfo.draw_func, true)
-                {
-                    Name = $"{task.Name}_Draw"
-                };
-                task.Functions.Add(func);
-            }
-
-            if (actorInfo.update_func != 0)
-            {
-                var func = new Label(Label.Type.FUNC, actorInfo.update_func, true)
-                {
-                    Name = $"{task.Name}_Update"
-                };
-                task.Functions.Add(func);
-            }
-            if (actorInfo.dest_func != 0)
-            {
-                var func = new Label(Label.Type.FUNC, actorInfo.dest_func, true)
-                {
-                    Name = $"{task.Name}_Destructor"
-                };
-                task.Functions.Add(func);
+                    var func = new Label(type, ptr, true)
+                    {
+                        Name = $"{task.Name}_{name}"
+                    };
+                    task.Functions.Add(func);
+                }
             }
         }
 

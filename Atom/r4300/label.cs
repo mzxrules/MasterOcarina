@@ -21,7 +21,7 @@ namespace Atom
         public string Desc;
         public string Desc2;
         public string Args;
-        public Int32 hits;
+        public int hits;
 
         public bool Confirmed = false;
 
