@@ -22,22 +22,25 @@ namespace Spectrum
         }
         public class OSThread
         {
+            N64Ptr address;
             /*0x00*/
-            N64Ptr OSThread_next { get; set; } //run/mesg queue link
-            int priority;
-            N64Ptr OSThread_queue { get; set; } //queue thread is on. Double pointer
-            N64Ptr OSThread_tlnext { get; set; } //all threads queue link
+            public N64Ptr OSThread_next { get; set; } //run/mesg queue link
+            public int priority;
+            public N64Ptr OSThread_queue { get; set; } //queue thread is on. Double pointer
+            public N64Ptr OSThread_tlnext { get; set; } //all threads queue link
             /*0x10*/
-            ushort state { get; set; } //OS_STATE_
-            ushort flags; //flags for rmon
-            int OSId { get; set; } //id for debugging
-            int fp; //thread has used floating point unit (COP0)
+            public ushort state { get; set; } //OS_STATE_
+            public ushort flags; //flags for rmon
+            public int OSId { get; set; } //id for debugging
+            public int fp; //thread has used floating point unit (COP0)
             /*0x1C*/ //OSThreadprofile, workarea for thread profiler
             /*0x20*/
             OSThreadContext c; //register/interrupt mask
 
             public OSThread(Ptr ptr)
             {
+                address = ptr;
+
                 OSThread_next = ptr.ReadUInt32(0);
                 priority = ptr.ReadInt32(4);
                 OSThread_queue = ptr.ReadUInt32(8);
@@ -49,10 +52,9 @@ namespace Spectrum
                 fp = ptr.ReadInt32(0x18);
                 c = new OSThreadContext(ptr.RelOff(0x20));
             }
-            public void PrintThreadState()
+            public void PrintState()
             {
-                WriteLine($"THREAD: {OSId}  {(OS_STATE)state}  PRIORITY: {priority:X2}");
-                WriteLine($"PC: {w(c.pc)}   SR: {w(c.sr)} VA: {w(c.badvaddr)}");
+                PrintBasicInfo();
                 WriteLine();
                 WriteLine($"AT: {w(c.at)}   V0: {w(c.v0)}   V1: {w(c.v1)}");
                 WriteLine($"A0: {w(c.a0)}   A1: {w(c.a1)}   A2: {w(c.a2)}");
@@ -82,6 +84,18 @@ namespace Spectrum
                 {
                     WriteLine("FP UNUSED");
                 }
+
+                string w(ulong val)
+                {
+                    return $"{(uint)val:X8}";
+                }
+            }
+
+            public void PrintBasicInfo()
+            {
+                WriteLine($"{address} THREAD: {OSId}  {(OS_STATE)state}  PRIORITY: {priority:X2}");
+                WriteLine($"next: {OSThread_next} queue: {OSThread_queue} tlnext: {OSThread_tlnext}");
+                WriteLine($"PC: {w(c.pc)}   SR: {w(c.sr)} VA: {w(c.badvaddr)}");
 
                 string w(ulong val)
                 {

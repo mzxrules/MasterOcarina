@@ -86,7 +86,7 @@ namespace Spectrum
         [ViewVariable]
         public static Ptr Actor_Category_Table;// = 0x1CA0D0;
         [ViewVariable]
-        public static Ptr Actor_Space_Heap;
+        public static Ptr Scene_Heap_Ptr;
 
         [ViewVariable]
         public static int Object_File_Table;
@@ -120,6 +120,8 @@ namespace Spectrum
 
         public static Ptr SceneTable;
         public static Ptr EntranceTable;
+
+        public static Ptr Queue_Thread_Ptr;
 
         public static void GetVariables()
         {
@@ -197,7 +199,7 @@ namespace Spectrum
             Main_Heap_Ptr = SPtr.New(temp).Deref(); 
 
             Addresser.TryGetRam("RAM_ARENA_SCENES", version, out temp);
-            Actor_Space_Heap = SPtr.New(temp).Deref();
+            Scene_Heap_Ptr = SPtr.New(temp).Deref();
             
             Addresser.TryGetRam("RAM_ARENA_DEBUG", version, out temp);
             if (temp == 0)
@@ -238,6 +240,10 @@ namespace Spectrum
                 EntranceTable = SPtr.New(temp);
             else
                 EntranceTable = null;
+
+            Addresser.TryGetRam("QUEUE_THREAD", version, out temp);
+            Queue_Thread_Ptr = SPtr.New(temp);
+                
         }
 
         public static void SetGfxContext(RomVersion version)

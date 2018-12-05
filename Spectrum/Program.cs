@@ -839,7 +839,7 @@ namespace Spectrum
         private static List<BlockNode> GetActorLinkedList(List<IRamItem> ramItems)
         {
             List<BlockNode> actorLL;
-            actorLL = BlockNode.GetBlockList(SpectrumVariables.Actor_Space_Heap);
+            actorLL = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
 
             foreach (BlockNode item in actorLL)
             {

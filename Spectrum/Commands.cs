@@ -842,6 +842,56 @@ namespace Spectrum
         {
             SpectrumVariables.GetVariables();
         }
+
+        [SpectrumCommand(
+            Name = "heap",
+            Cat = SpectrumCommand.Category.Ram,
+            Description = "Dump heap stats")]
+        private static void GetHeapInfo(Arguments args)
+        {
+            var arena_main = BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr);
+            var arena_scene = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
+
+
+            PrintHeapInfo("ARENA_MAIN", arena_main);
+            PrintHeapInfo("ARENA_SCENE", arena_scene);
+
+            if (SpectrumVariables.Debug_Heap_Ptr != 0)
+            {
+                var arena_debug = BlockNode.GetBlockList(SpectrumVariables.Debug_Heap_Ptr);
+                PrintHeapInfo("ARENA_DEBUG", arena_debug);
+            }
+
+        }
+
+        private static void PrintHeapInfo(string heap, List<BlockNode> list)
+        {
+            uint size = 0;
+            uint heapFree = 0;
+            uint heapAlloc = 0;
+            uint largestFree = 0;
+
+            foreach (var node in list)
+            {
+                size += (uint)BlockNode.LENGTH;
+                heapAlloc += (uint)BlockNode.LENGTH;
+                size += node.Size;
+                if (node.IsFree)
+                {
+                    heapFree += node.Size;
+                    if (largestFree < node.Size)
+                    {
+                        largestFree = node.Size;
+                    }
+                }
+                else //not free
+                {
+                    heapAlloc += node.Size;
+                }
+            }
+            Console.WriteLine($"{heap:,-11‬} Size: {size:X6} Alloc: {heapAlloc:X6} Free: {heapFree:X6} ({largestFree:X6})");
+        }
+
 #endregion
 
         #region Spawn
@@ -2068,18 +2118,54 @@ namespace Spectrum
         }
 
         [SpectrumCommand(
-            Name = "vthread",
-            Description = "View the state of a thread on last context swap")]
+            Name = "thread",
+            Description = "View the state of a thread(s) on last context swap")]
+        [SpectrumCommandSignature(Sig = new Tokens[] { },
+            Help = "Dump a listing of all initialized threads")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S },
             Help = "{0} = Address of OSThread")]
         private static void ViewThread(Arguments args)
         {
+            if (args.Length == 0)
+            {
+                ViewThreads(args);
+                return;
+            }
             if (!TryEvaluate((string)args[0], out long address))
                 return;
             ThreadStructs.OSThread thread = new ThreadStructs.OSThread(SPtr.New((int)address));
 
             Console.Clear();
-            thread.PrintThreadState();
+            thread.PrintState();
+        }
+        
+        private static void ViewThreads(Arguments args)
+        {
+            Console.Clear();
+            var threadStart = SpectrumVariables.Queue_Thread_Ptr;
+            if (threadStart == 0)
+                return;
+
+            N64Ptr threadCur = threadStart.Deref(0x0C);
+
+            int kill = 40;
+
+
+            List<ThreadStructs.OSThread> threads = new List<ThreadStructs.OSThread>();
+            while (kill-- > 0
+                && threadCur != 0
+                && threadCur != (N64Ptr)threadStart)
+            {
+                ThreadStructs.OSThread thread = new ThreadStructs.OSThread(SPtr.New(threadCur));
+                threads.Add(thread);
+                threadCur = thread.OSThread_tlnext;
+            }
+            foreach (var thread in threads)
+            {
+                thread.PrintBasicInfo();
+                Console.WriteLine();
+            }
+
         }
 
 
