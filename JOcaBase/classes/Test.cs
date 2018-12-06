@@ -33,9 +33,6 @@ namespace JOcaBase
     }
 
 
-
-
-
     [DataContract]
     public class DmaData_Wiki
     {

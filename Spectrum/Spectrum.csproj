@@ -70,6 +70,7 @@
     <Compile Include="datastruct\CollisionVertex.cs" />
     <Compile Include="datastruct\GfxDList.cs" />
     <Compile Include="Help.cs" />
+    <Compile Include="mem\ValueSearch.cs" />
     <Compile Include="MItems.cs" />
     <Compile Include="OItems.cs" />
     <Compile Include="mem\Emulator.cs" />

@@ -892,7 +892,83 @@ namespace Spectrum
             Console.WriteLine($"{heap:,-11‬} Size: {size:X6} Alloc: {heapAlloc:X6} Free: {heapFree:X6} ({largestFree:X6})");
         }
 
-#endregion
+        static ValueSearch search = new ValueSearch();
+
+        [SpectrumCommand(
+            Name = "s",
+            Cat = SpectrumCommand.Category.Ram,
+            Description = "Dump heap stats")]
+        [SpectrumCommandSignature(Sig = new Tokens[] { })]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL })]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S32 })]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S32, Tokens.HEX_S32 })]
+        private static void SearchRam(Arguments args)
+        {
+            if (args.Length > 0)
+            {
+                SearchFuncs str;
+                if (!Enum.TryParse((string)args[0], true, out str))
+                {
+                    Console.WriteLine("Invalid Operation");
+                    return;
+                }
+                switch (str)
+                {
+                    case SearchFuncs.R: search.Initialize(); break;
+                    case SearchFuncs.NEW:
+                        {
+                            if (args.Length != 3)
+                            {
+                                Console.WriteLine("Invalid range: specify ptr and search size");
+                                return;
+                            }
+
+                            N64Ptr addr = (int)args[1];
+                            int size = (int)args[2] & -4;
+                            int ramSize = Constants.GetRamSize(Options.Version);
+
+                            if (addr.Offset + size > ramSize)
+                            {
+                                Console.WriteLine("Invalid Range");
+                                return;
+                            }
+                            var options = new SearchOptions(addr, size);
+                            search = new ValueSearch(options);
+                            search.Initialize();
+
+                        } break;
+                    case SearchFuncs.X:
+                        {
+                            if (args.Length != 2)
+                            {
+                                Console.WriteLine("Invalid exact value");
+                                return;
+                            }
+                            search.Exact((int)args[1]);
+
+                        } break;
+                    case SearchFuncs.GT: search.GreaterThan(); break;
+                    case SearchFuncs.LT: search.LessThan(); break;
+                    case SearchFuncs.E: search.Equal(); break;
+                    case SearchFuncs.N: search.Different(); break;
+                    case SearchFuncs.FORCE: PrintSearchResult(0x3E8); return;
+                }
+            }
+            PrintSearchResult(40);
+        }
+
+        private static void PrintSearchResult(int count)
+        {
+            Console.Clear();
+            foreach (var item in search.GetList(count))
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine($"Found {search.FoundElements} items.");
+        }
+
+
+        #endregion
 
         #region Spawn
         [SpectrumCommand(
