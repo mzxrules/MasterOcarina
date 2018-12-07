@@ -1,0 +1,302 @@
+[
+  {
+    "File": "boot",
+    "Game": "OcarinaOfTime",
+    "Version": "N0",
+    "Rom": {
+      "Start": "00001060",
+      "End": "00007430"
+    },
+    "Ram": {
+      "Start": "80000460",
+      "End": "80006830"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80000460",
+          "End": "800060B0"
+        }
+      }
+    ]
+  },
+  {
+    "File": "boot",
+    "Game": "OcarinaOfTime",
+    "Version": "DBGMQ",
+    "Rom": {
+      "Start": "00001060",
+      "End": "00012F70"
+    },
+    "Ram": {
+      "Start": "80000460",
+      "End": "80012370"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80000460",
+          "End": "80012370"
+        }
+      }
+    ]
+  },
+  {
+    "File": "boot",
+    "Game": "MajorasMask",
+    "Version": "J0",
+    "Rom": {
+      "Start": "00001060",
+      "End": "0001C110"
+    },
+    "Ram": {
+      "Start": "80080060",
+      "End": "8009B110"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80080060",
+          "End": "800979BC"
+        }
+      }
+    ]
+  },
+  {
+    "File": "boot",
+    "Game": "MajorasMask",
+    "Version": "U0",
+    "Rom": {
+      "Start": "00001060",
+      "End": "0001A500"
+    },
+    "Ram": {
+      "Start": "80080060",
+      "End": "80099500"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80080060",
+          "End": "800969C0"
+        }
+      },
+      {
+        "Name": "data",
+        "Subsection": 0,
+        "IsCode": false,
+        "Ram": {
+          "Start": "800969C0",
+          "End": "80099500"
+        }
+      }
+    ]
+  }, 
+  {
+    "File": "boot",
+    "Game": "MajorasMask",
+    "Version": "DBG",
+    "Rom": {
+      "Start": "00001060",
+      "End": "00024F60"
+    },
+    "Ram": {
+      "Start": "80080060",
+      "End": "800A3F60"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80080060",
+          "End": "8009F4D0"
+        }
+      }
+    ]
+  },
+  {
+    "File": "code",
+    "Game": "OcarinaOfTime",
+    "Version": "N0",
+    "Rom": {
+      "Start": "00A87000",
+      "End": "00B8AD30"
+    },
+    "Ram": {
+      "Start": "800110A0",
+      "End": "80114DD0"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "800110A0",
+          "End": "800E310C"
+        }
+      }
+    ]
+  },
+  {
+    "File": "code",
+    "Game": "OcarinaOfTime",
+    "Version": "DBGMQ",
+    "Rom": {
+      "Start": "00A94000",
+      "End": "00BCEF30"
+    },
+    "Ram": {
+      "Start": "8001CE60",
+      "End": "80157D90"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "8001CE60",
+          "End": "80157D90"
+        }
+      }
+    ]
+  },
+  {
+    "File": "code",
+    "Game": "MajorasMask",
+    "Version": "U0",
+    "Rom": {
+      "Start": "00B3C000",
+      "End": "00C7A4E0"
+    },
+    "Ram": {
+      "Start": "800A5AC0",
+      "End": "801E3FA0"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "800A5AC0",
+          "End": "80186028"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 1,
+        "IsCode": false,
+        "Ram": {
+          "Start": "80186028",
+          "End": "80186A70"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 2,
+        "IsCode": true,
+        "Ram": {
+          "Start": "80186A70",
+          "End": "801AAAB0"
+        }
+      },
+      {
+        "Name": "data",
+        "Subsection": 0,
+        "IsCode": false,
+        "Ram": {
+          "Start": "801AAAB0",
+          "End": "801E3FA0"
+        }
+      }
+    ]
+  },
+  {
+    "File": "code",
+    "Game": "MajorasMask",
+    "Version": "J0",
+    "Rom": {
+      "Start": "00B5F000",
+      "End": "00C9B6F0"
+    },
+    "Ram": {
+      "Start": "800A76A0",
+      "End": "801E3D90"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "800A76A0",
+          "End": "801A5990"
+        }
+      }
+    ]
+  },
+  {
+    "File": "code",
+    "Game": "MajorasMask",
+    "Version": "DBG",
+    "Rom": {
+      "Start": "00C95000",
+      "End": "00E12600"
+    },
+    "Ram": {
+      "Start": "800B6AC0",
+      "End": "802340C0"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "800B6AC0",
+          "End": "801F3070"
+        }
+      }
+    ]
+  },
+  {
+    "File": "n64dd",
+    "Game": "OcarinaOfTime",
+    "Version": "N0",
+    "Rom": {
+      "Start": "00B8AD30",
+      "End": "00B9DA40"
+    },
+    "Ram": {
+      "Start": "801C6E80",
+      "End": "801D9B90"
+    },
+    "Sections": [
+      {
+        "Name": "text",
+        "Subsection": 0,
+        "IsCode": true,
+        "Ram": {
+          "Start": "801C6E80",
+          "End": "801D9B90"
+        }
+      }
+    ]
+  }
+]

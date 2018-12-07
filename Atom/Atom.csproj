@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisassemblyTask.cs" />
+    <Compile Include="JFileInfo.cs" />
     <Compile Include="JQuery.cs" />
     <Compile Include="r4300\COP0.cs" />
     <Compile Include="r4300\COP1.cs" />
@@ -71,6 +72,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="RSP\opcodes_priv_h.cs" />
+    <None Include="data\fileinfo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="data\mm-j0.json" />
     <None Include="data\oot-n0.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

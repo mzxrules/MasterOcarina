@@ -19,20 +19,11 @@ namespace Atom
         //80A44CD0 80A46710
 
         //int NAMETABLE_ADD = 0xA771A0;
-
-        //static Dictionary<RomVersion, string> RomPath =
-        //    new Dictionary<RomVersion, string>()
-        //    {
-        //        { ORom.Build.DBGMQ, @"C:\Users\mzxrules\Documents\Roms\N64\Games\Ocarina\Ocarina (Debug)\Ocarina (Debug).z64" },
-        //        { ORom.Build.N0,    @"C:\Users\mzxrules\Documents\Roms\N64\Games\Ocarina\Ocarina (U10)\Ocarina (U10).z64"  },
-        //        { MRom.Build.J0,    @"C:\Users\mzxrules\Documents\Roms\N64\Games\Mask\Mask (J10)\Mask (J10).z64"},
-        //        { MRom.Build.DBG,   @"C:\Users\mzxrules\Documents\Roms\N64\Games\Mask\Mask (DBG)\Mask (DBG).z64" }
-        //    };
+        
 
         static void Main(string[] a)
         {
             PathUtil.Initialize();
-            
             
             if (a.Length == 0)
             {
@@ -139,16 +130,10 @@ namespace Atom
             {
                 ElfToOverlayTest();
             }
-            else if (a[0] == "dtest" && a.Length == 3)
-            {
-                using (BinaryReader br = new BinaryReader(new FileStream(a[2], FileMode.Open)))
-                {
-                    using (StreamWriter sw = new StreamWriter($"test.txt"))
-                    {
-                        Disassemble.SimpleDisassebly(sw, br, 0, (int)br.BaseStream.Length);
-                    }
-                }
-            }
+            //else if (a[0] == "fileinfo")
+            //{
+            //    DisassemblyTask.ConvertFileInfoToJson();
+            //}
         }
 
         static string[] ParseArguments(string commandLine)
@@ -200,7 +185,7 @@ namespace Atom
             RomVersion ver = MRom.Build.DBG;
             PathUtil.TryGetRomLocation(ver, out string path);
             Rom rom = new MRom(path, ver);
-            var task = DisassemblyTask.New("code", ver);
+            DisassemblyTask task = null;// DisassemblyTask.New("code", ver);
             Disassemble.PrintRelocations = true;
 
             var reader = new BinaryReader(rom.Files.GetFile(task.VRom));
@@ -209,7 +194,7 @@ namespace Atom
             {
                 BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom));
                 Disassemble.FirstParse(br, task);
-                Disassemble.TextDisassembly(sw, br, task);
+                Disassemble.Task(sw, br, task);
             }
         }
 
@@ -250,13 +235,12 @@ namespace Atom
                     sw.WriteLine(".set noat");
                     sw.WriteLine();
                 }
-                Disassemble.TextDisassembly(sw, br, task);
-                Disassemble.DataDisassembly(sw, br, task);
+                Disassemble.Task(sw, br, task);
             }
             
             using (StreamWriter sw = new StreamWriter($"__{testOvl}_f.txt"))
             {
-                foreach (var item in Disassemble.Labels.OrderBy(x => x.Key))
+                foreach (var item in Disassemble.Symbols.OrderBy(x => x.Key))
                 {
                     sw.WriteLine($"{item.Value.ToString()} = 0x{item.Key}");
                 }
@@ -280,12 +264,11 @@ namespace Atom
             List<DisassemblyTask> taskList = DisassemblyTask.CreateTaskList(rom);
             taskList = taskList.Where(x => x.VRom.End > 0).ToList();
             Console.WriteLine("DONE!");
-            Console.Write($"Initializing labels: ");
+            Console.Write($"Building symbol table: ");
             Stream getFile(FileAddress x) => rom.Files.GetFile(x);
 
-
             LoadFunctionDatabase(ver);
-            InitializeLabels(taskList, rom.Version, getFile);
+            GetSymbols(taskList, rom.Version, getFile);
 
             Console.WriteLine("DONE!");
             Console.WriteLine("Disassembling files: ");
@@ -294,7 +277,7 @@ namespace Atom
             DumpFoundFunctions(rom.Version, Disassemble.GetFunctions());
         }
 
-        private static void InitializeLabels(List<DisassemblyTask> tasks, RomVersion ver, Func<FileAddress, Stream> getFile)
+        private static void GetSymbols(List<DisassemblyTask> tasks, RomVersion ver, Func<FileAddress, Stream> getFile)
         {
             foreach (var task in tasks)
             {
@@ -305,7 +288,6 @@ namespace Atom
 
                 //Get a list of function names
                 Disassemble.FirstParse(FileReader, task);
-
             }
         }
 
@@ -328,8 +310,7 @@ namespace Atom
                         sw.WriteLine(".set noat");
                         sw.WriteLine();
                     }
-                    Disassemble.TextDisassembly(sw, reader, task);
-                    Disassemble.DataDisassembly(sw, reader, task);
+                    Disassemble.Task(sw, reader, task);
                 }
             }
             Console.CursorVisible = true;
@@ -359,10 +340,5 @@ namespace Atom
             Directory.CreateDirectory(dir);
             return dir;
         }
-        
-        
-
-
-
     }
 }

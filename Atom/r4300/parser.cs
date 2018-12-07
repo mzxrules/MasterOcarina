@@ -10,34 +10,56 @@ namespace Atom
 {
     public partial class Disassemble
     {
+        internal static void Task(StreamWriter sw, BinaryReader br, DisassemblyTask task)
+        {
+            foreach(Section section in task.Sections.Values.OrderBy(x => x.VRam))
+            {
+                if (section.IsCode)
+                {
+                    TextDisassembly(sw, br, section);
+                }
+                else if (section.Name == "bss")
+                {
+                    Bss(sw, section);
+                }
+                else
+                {
+                    DataDisassembly(sw, br, section, task.Relocations.Where(x => x.RelocType == Reloc.R_MIPS32));
+                }
+            }
+        }
+
+
         /// <summary>
         /// Performs a dissassembly using the initialized function list
         /// </summary>
         /// <param name="sw">the output disassembly</param>
         /// <param name="br">source file to disassemble</param>
         /// <param name="task">meta-data container for the disassembly task</param>
-        internal static void TextDisassembly(StreamWriter sw, BinaryReader br, DisassemblyTask task)
+        internal static void TextDisassembly(StreamWriter sw, BinaryReader br, Section section)
         {
-            sw.WriteLine(".text");
-            SimpleDisassebly(sw, br, task.VRam.Start, task.Sections["text"].Size);
+            WriteSectionName(sw, section);
+            SimpleDisassembly(sw, br, section);
+            sw.WriteLine();
         }
 
-        internal static void SimpleDisassebly(StreamWriter sw, BinaryReader br, N64Ptr pcount, int textsize)
+        internal static void SimpleDisassembly(StreamWriter sw, BinaryReader br, Section section)
         {
-            //disable locating branches
+            //disable symbol detection
             First_Parse = false;
             jaltaken = 0;
 
-            pc = pcount;
-            //pc = task.OvlRecord.VRam.Start;
-            br.BaseStream.Position = 0;
+            pc = section.VRam; 
+
+            br.BaseStream.Position = section.Offset;
             Reset_Gpr_Regs();
 
+            int textsize = section.Size;
             for (int i = 0; i < textsize; i += 4)
             {
-                if (Labels.ContainsKey(pc))
+                if (Symbols.ContainsKey(pc))
                 {
-                    var label = Labels[pc];
+                    var label = Symbols[pc];
 
                     //if function start
                     if (label.Kind == Label.Type.FUNC)
@@ -64,10 +86,9 @@ namespace Atom
 
                 pc += 4;
 
-                if (Labels.ContainsKey(pc)
-                    && Labels[pc].Kind == Label.Type.FUNC)
+                if (Symbols.ContainsKey(pc)
+                    && Symbols[pc].Kind == Label.Type.FUNC)
                 {
-
                     sw.WriteLine();
                     sw.WriteLine();
                 }
@@ -75,83 +96,127 @@ namespace Atom
 
         }
 
-        internal static void DataDisassembly(StreamWriter w, BinaryReader br, DisassemblyTask task)
+        internal static void DataDisassembly(StreamWriter sw, BinaryReader br, Section section, IEnumerable<Overlay.RelocationWord> rel)
         {
-            br.BaseStream.Position = task.Sections["text"].Size;
-            var rel = task.Relocations.Where(x => x.RelocType == Reloc.R_MIPS32);
-            var ovlStart = new N64Ptr(task.VRam.Start);
-            var bssEnd = new N64Ptr(task.VRam.End);
+            WriteSectionName(sw, section);
+            sw.WriteLine();
 
+            br.BaseStream.Position = section.Offset;
+            pc = section.VRam;
 
-            var dataStart = ovlStart + task.Sections["text"].Size;
-            var rodataStart = dataStart + task.Sections["data"].Size;
-            var rodataEnd = rodataStart + task.Sections["rodata"].Size;
-            var bssStart = Align.To16(new N64Ptr(rodataEnd + 0x14 + (task.Relocations.Count * 4)));
+            List<byte> byteChain = new List<byte>();
+            N64Ptr end = section.VRam + section.Size;
 
-            (string name, N64Ptr start, N64Ptr end)[] blocks =
+            while (pc < end)
             {
-                (".data", dataStart, rodataStart),
-                (".section .rodata", rodataStart, rodataEnd)
-            };
-
-            //.data and .rodata sections
-            for (int blockId = 0; blockId < 2; blockId++)
-            {
-                var (name, start, end) = blocks[blockId];
-                List<byte> byteChain = new List<byte>();
-                w.WriteLine();
-                w.WriteLine(name);
-                w.WriteLine();
-                pc = start;
-                while (pc < end)
+                if (Symbols.ContainsKey(pc))
                 {
-                    if (Labels.ContainsKey(pc))
-                    {
-                        DumpByteChain(w, ref byteChain);
-                        w.Write($"{Labels[pc]}: ");
-                    }
-
-                    if (rel.Any(x => x.Offset == br.BaseStream.Position))
-                    {
-                        DumpByteChain(w, ref byteChain);
-                        N64Ptr lbl = br.ReadBigInt32();
-                        pc += 4;
-                        w.WriteLine($".word {Labels[lbl]}");
-                    }
-                    else
-                    {
-                        byteChain.Add(br.ReadByte());
-                        pc += 1;
-                    }
+                    DumpByteChain(sw, ref byteChain);
+                    sw.Write($"{Symbols[pc]}: ");
                 }
-                DumpByteChain(w, ref byteChain);
-            }
 
-            Bss(w, bssStart, bssEnd);
+                if (rel.Any(x => x.Offset == br.BaseStream.Position))
+                {
+                    DumpByteChain(sw, ref byteChain);
+                    N64Ptr lbl = br.ReadBigInt32();
+                    pc += 4;
+                    sw.WriteLine($".word {Symbols[lbl]}");
+                }
+                else
+                {
+                    byteChain.Add(br.ReadByte());
+                    pc += 1;
+                }
+            }
+            DumpByteChain(sw, ref byteChain);
+            sw.WriteLine();
         }
 
-        private static void Bss(StreamWriter w, N64Ptr bssStart, N64Ptr bssEnd)
+        private static void WriteSectionName(StreamWriter w, Section section)
         {
+            w.WriteLine($".section .{section.Name}");
+            if (section.Subsection > 0)
+                w.WriteLine($".subsection {section.Subsection}");
+        }
+
+        //internal static void DataDisassembly(StreamWriter w, BinaryReader br, DisassemblyTask task)
+        //{
+        //    br.BaseStream.Position = task.Sections["text"].Size;
+        //    var rel = task.Relocations.Where(x => x.RelocType == Reloc.R_MIPS32);
+        //    var ovlStart = new N64Ptr(task.VRam.Start);
+        //    var bssEnd = new N64Ptr(task.VRam.End);
+
+
+        //    int dataStart = ovlStart + task.Sections["text"].Size;
+        //    int rodataStart = dataStart + task.Sections["data"].Size;
+        //    int rodataEnd = rodataStart + task.Sections["rodata"].Size;
+        //    int bssStart = Align.To16(new N64Ptr(rodataEnd + 0x14 + (task.Relocations.Count * 4)));
+
+        //    (string name, N64Ptr start, N64Ptr end)[] blocks =
+        //    {
+        //        (".data", dataStart, rodataStart),
+        //        (".section .rodata", rodataStart, rodataEnd)
+        //    };
+
+        //    //.data and .rodata sections
+        //    for (int blockId = 0; blockId < 2; blockId++)
+        //    {
+        //        var (name, start, end) = blocks[blockId];
+        //        List<byte> byteChain = new List<byte>();
+        //        w.WriteLine();
+        //        w.WriteLine(name);
+        //        w.WriteLine();
+        //        pc = start;
+        //        while (pc < end)
+        //        {
+        //            if (Symbols.ContainsKey(pc))
+        //            {
+        //                DumpByteChain(w, ref byteChain);
+        //                w.Write($"{Symbols[pc]}: ");
+        //            }
+
+        //            if (rel.Any(x => x.Offset == br.BaseStream.Position))
+        //            {
+        //                DumpByteChain(w, ref byteChain);
+        //                N64Ptr lbl = br.ReadBigInt32();
+        //                pc += 4;
+        //                w.WriteLine($".word {Symbols[lbl]}");
+        //            }
+        //            else
+        //            {
+        //                byteChain.Add(br.ReadByte());
+        //                pc += 1;
+        //            }
+        //        }
+        //        DumpByteChain(w, ref byteChain);
+        //    }
+
+        //    Bss(w, bssStart, bssEnd);
+        //}
+
+        private static void Bss(StreamWriter sw, Section section)
+        {
+            N64Ptr bssStart = section.VRam;
+            N64Ptr bssEnd = bssStart + section.Size;
             //.bss
-            var bssLabels = Labels.Where(x => x.Key >= bssStart && x.Key < bssEnd).Select(x => x.Value).OrderBy(x => x.Addr).ToList();
+            var bssLabels = Symbols.Where(x => x.Key >= bssStart && x.Key < bssEnd).Select(x => x.Value).OrderBy(x => x.Addr).ToList();
             if (bssLabels.Count == 0)
                 return;
 
             bssLabels.Add(new Label(Label.Type.VAR, bssEnd, false));
-            w.WriteLine();
-            w.WriteLine(".bss");
-            w.WriteLine();
+            sw.WriteLine(".bss");
+            sw.WriteLine();
             var firstBss = bssLabels[0];
             if (firstBss.Addr != bssStart)
             {
-                w.WriteLine($".space 0x{firstBss.Addr - bssStart:X2}");
+                sw.WriteLine($".space 0x{firstBss.Addr - bssStart:X2}");
             }
             for (int i = 0; i < bssLabels.Count - 1; i++)
             {
                 var cur = bssLabels[i];
                 var next = bssLabels[i + 1];
-                w.Write($"{cur}: ");
-                w.WriteLine($".space 0x{next.Addr - cur.Addr:X2}");
+                sw.Write($"{cur}: ");
+                sw.WriteLine($".space 0x{next.Addr - cur.Addr:X2}");
             }
         }
 
@@ -227,7 +292,7 @@ namespace Atom
 
         private static void PrintFunctionStart(StreamWriter sw)
         {
-            Label curFunc = Labels[pc];
+            Label curFunc = Symbols[pc];
 
             sw.WriteLine($"{curFunc}:");
             PrintCommentLines(curFunc.Name);
@@ -245,22 +310,51 @@ namespace Atom
 
         #region SymbolDetection
 
+        internal static void FirstParse(BinaryReader br, DisassemblyTask task)
+        {
+            InitRelocationLabels(br, task);
+
+            foreach (Section s in task.Sections.Values)
+            {
+                if (s.IsCode)
+                    FirstParse(br, s);
+            }
+            //complete the label list
+            RemoveFalseFunctions();
+
+            List<(N64Ptr start, N64Ptr end)> textSections = GetTextSectionRanges(task);
+            foreach (var addr in RelocationLabels.Values)
+            {
+                if (!Symbols.ContainsKey(addr))
+                {
+                    if (textSections.Exists(x => x.start >= addr && addr < x.end))
+                    {
+                        Symbols[addr] = new Label(Label.Type.LBL, addr);
+                    }
+                    else
+                    {
+                        Symbols[addr] = new Label(Label.Type.VAR, addr);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Performs a first pass over the assembly, computing various constants 
         /// </summary>
         /// <param name="br"></param>
         /// <param name="task"></param>
-        internal static void FirstParse(BinaryReader br, DisassemblyTask task)
+        internal static void FirstParse(BinaryReader br, Section section)
         {
-            pc = task.VRam.Start;
+            br.BaseStream.Position = section.Offset;
+            pc = section.VRam;
 
             int word;
             int opId;
 
-            int text_size = task.Sections["text"].Size;
+            int text_size = section.Size;
 
             First_Parse = true;
-            InitRelocationLabels(br, task);
 
             Reset_Gpr_Regs();
 
@@ -293,32 +387,13 @@ namespace Atom
             }
             First_Parse = false;
             Reset_Gpr_Regs();
-
-            //complete the label list
-            RemoveFalseFunctions();
-
-            foreach (var addr in RelocationLabels.Values)
-            {
-                if (!Labels.ContainsKey(addr))
-                {
-                    var v = addr - new N64Ptr(task.VRam.Start);
-                    if (v < text_size)
-                    {
-                        Labels[addr] = new Label(Label.Type.LBL, addr);
-                    }
-                    else
-                    {
-                        Labels[addr] = new Label(Label.Type.VAR, addr);
-                    }
-                }
-            }
         }
 
         private static void RemoveFalseFunctions()
         {
-            foreach (var func in Labels.Values.Where(x => x.Kind == Label.Type.FUNC && x.Confirmed == false))
+            foreach (var func in Symbols.Values.Where(x => x.Kind == Label.Type.FUNC && x.Confirmed == false))
             {
-                if (Labels.TryGetValue(func.Addr + 4, out Label lbl))
+                if (Symbols.TryGetValue(func.Addr + 4, out Label lbl))
                 {
                     func.Kind = Label.Type.LBL;
                 }
@@ -331,7 +406,7 @@ namespace Atom
             Rel_Parse = true;
 
             N64Ptr start = task.VRam.Start;
-            N64Ptr text_end = start + task.Sections["text"].Size;
+            List<(N64Ptr start, N64Ptr end)> textSections = GetTextSectionRanges(task);
 
             foreach (var reloc in task.Relocations)
             {
@@ -361,12 +436,13 @@ namespace Atom
                 else if (reloc.RelocType == Reloc.R_MIPS32)
                 {
                     N64Ptr ptr = br.ReadBigInt32();
-                    if (ptr >= start && ptr < text_end)
+
+                    if (textSections.Exists(x => x.start >= ptr && ptr < x.end))
                     {
                         AddLabel(ptr, false);
                     }
                     else
-                        Labels[ptr] = new Label(Label.Type.VAR, ptr);
+                        Symbols[ptr] = new Label(Label.Type.VAR, ptr);
                 }
             }
 
@@ -374,9 +450,23 @@ namespace Atom
             br.BaseStream.Position = 0;
         }
 
+        private static List<(N64Ptr start, N64Ptr end)> GetTextSectionRanges(DisassemblyTask task)
+        {
+            List<(N64Ptr start, N64Ptr end)> textSections = new List<(N64Ptr start, N64Ptr end)>();
+            foreach (var section in task.Sections.Values)
+            {
+                if (section.IsCode)
+                {
+                    textSections.Add((section.VRam, section.Size));
+                }
+            }
+
+            return textSections;
+        }
+
         internal static List<Label> GetFunctions()
         {
-            return Labels.Values.Where(x => x.Kind == Label.Type.FUNC).ToList();
+            return Symbols.Values.Where(x => x.Kind == Label.Type.FUNC).ToList();
         }
 
         
@@ -390,8 +480,8 @@ namespace Atom
 
         internal static void AddFunction(Label f)
         {
-            if (!Labels.ContainsKey(f.Addr))
-                Labels.Add(f.Addr, f);
+            if (!Symbols.ContainsKey(f.Addr))
+                Symbols.Add(f.Addr, f);
         }
         
         /// <summary>
@@ -405,7 +495,7 @@ namespace Atom
             addr = addr | 0x80000000;
 
             // Label already mapped?
-            if (Labels.TryGetValue(addr, out Label lbl))
+            if (Symbols.TryGetValue(addr, out Label lbl))
             {
                 if (lbl.Kind != Label.Type.FUNC)
                 {
@@ -423,17 +513,17 @@ namespace Atom
             }
             else
             {
-                Labels.Add(addr, new Label(Label.Type.FUNC, addr, confirmed));
+                Symbols.Add(addr, new Label(Label.Type.FUNC, addr, confirmed));
             }
         }
 
         static Label AddLabel(N64Ptr addr, bool confirmed = true)
         {
-            if (!Labels.TryGetValue(addr, out Label label)
+            if (!Symbols.TryGetValue(addr, out Label label)
                 || (label.Confirmed == false && confirmed == true))
             {
                 label = new Label(Label.Type.LBL, addr, confirmed);
-                Labels[addr] = label;
+                Symbols[addr] = label;
             }
 
             return label;
@@ -443,6 +533,3 @@ namespace Atom
 
     }
 }
-//useless and spammy
-//outputf.Write("\t.set\tnoreorder\n\t.set\tnoat\n\t.global\t{0}\n\t.ent\t{1}\n\n", currFuncName, currFuncName);
-//fprintf(outputf, "\n\t.end\t%s\n\t.set\tat\n\t.set\tnoreorder\n\n    /* #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# */\n\n", currFuncName);

@@ -38,5 +38,33 @@ namespace Atom
             return result;
 
         }
+
+        public static T Deserialize<T>(string path)
+        {
+            DataContractJsonSerializer serializer;
+
+            serializer = new DataContractJsonSerializer(typeof(T));
+
+            T result;
+
+            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                result = (T)serializer.ReadObject(fs);
+            }
+            return result;
+        }
+
+
+        public static void Serialize<T>(string path, T obj)
+        {
+            DataContractJsonSerializer serializer;
+
+            serializer = new DataContractJsonSerializer(typeof(T));
+
+            using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                serializer.WriteObject(fs, obj);
+            }
+        }
     }
 }

@@ -15,10 +15,10 @@ namespace Atom
         /// <summary>
         /// List of defined labels
         /// </summary>
-        public static Dictionary<N64Ptr, Label> Labels = new Dictionary<N64Ptr, Label>();
+        public static Dictionary<N64Ptr, Label> Symbols = new Dictionary<N64Ptr, Label>();
         static Dictionary<N64Ptr, N64Ptr> RelocationLabels = new Dictionary<N64Ptr, N64Ptr>();
 
-        static Label GetRelocLabel(N64Ptr pc) => Labels[RelocationLabels[pc]];
+        static Label GetRelocLabel(N64Ptr pc) => Symbols[RelocationLabels[pc]];
         
         static bool First_Parse = false;
         static bool Rel_Parse = false;
@@ -98,7 +98,7 @@ namespace Atom
         {
             N64Ptr addr = TARGET(iw) | 0x80000000;
 
-            if (Labels.TryGetValue(addr, out Label label)
+            if (Symbols.TryGetValue(addr, out Label label)
                 && label.Kind == Label.Type.FUNC)
             {
                 var func = label;
