@@ -38,102 +38,15 @@ namespace Atom
             Particle,
             PlayPause,
             Game,
+            Transition
         }
 
-        //static Dictionary<(string, RomVersion), (FileAddress vrom, FileAddress vram, int text_size)> LegacyFileInfo =
-        //    new Dictionary<(string, RomVersion), (FileAddress, FileAddress, int)>
-        //    {
-        //        { ("boot", ORom.Build.N0),      ((0x1060, 0x007430),    (0x80000460, 0x80006830), (int)(0x800060B0 - 0x80000460)) },
-        //        { ("boot", ORom.Build.DBGMQ),   ((0x1060, 0x012F70),    (0x80000460, 0x80012370), (int)(0x12F70 - 0x1060)) },
-        //        { ("boot", MRom.Build.J0),      ((0x1060, 0x01C110),    (0x80080060, 0x8009B110), (int)(0x800979BC-0x80080060))},//800979BC
-        //        { ("boot", MRom.Build.U0),      ((0x1060, 0x01A500),    (0x80080060, 0x80099500), (int)(0x80099500-0x80080060))},
-        //        { ("boot", MRom.Build.DBG),     ((0x1060, 0x024F60),    (0x80080060, 0x800A3F60), (int)(0x8009F4D0-0x80080060))},
-        //        { ("code", ORom.Build.N0),      ((0xA87000, 0xB8AD30),  (0x800110A0, 0x80114DD0), (int)(0x800E30E0 + 0x2C - 0x800110A0)) },
-        //        { ("code", ORom.Build.DBGMQ),   ((0xA94000, 0xBCEF30),  (0x8001CE60, 0x80157D90), (int)(0xBCEF30 - 0xA94000)) },
-        //        { ("code", MRom.Build.U0),      ((0xB3C000, 0xC7A4E0),  (0x800A5AC0, 0x801E3FA0), (int)(0x80186028-0x800A5AC0))}, 
-        //        { ("code", MRom.Build.J0),      ((0xB5F000, 0xC9B6F0),  (0x800A76A0, 0x801E3D90), (int)(0x801A5990-0x800A76A0))},
-        //        { ("code", MRom.Build.DBG),     ((0xC95000, 0xE12600),  (0x800B6AC0, 0x802340C0), (int)(0x801F3070-0x800B6AC0))},
-        //        { ("n64dd", ORom.Build.N0), ((0xB8AD30,0xB8AD30+0x12D10), (0x801C6E80,0x801D9B90),0x00012D10) } 
-        //    };
-
-
-        //public static void ConvertFileInfoToJson()
-        //{
-        //    List<JFileInfo> files = new List<JFileInfo>();
-        //    foreach (var item in LegacyFileInfo)
-        //    {
-        //        var (file, ver) = item.Key;
-        //        var (rom, ram, size) = item.Value;
-
-        //        JSectionInfo info = new JSectionInfo("text", 0, true, new FileAddress(ram.Start, ram.Start + size));
-        //        JFileInfo fileInfo = new JFileInfo(file, ver, rom, ram, info);
-        //        files.Add(fileInfo);
-        //    }
-        //    JQuery.Serialize("__fileinfo.txt", files);
-        //}
-
-
-
+        
         public override string ToString()
         {
             return Name;
         }
-
-        //public static DisassemblyTask New(string name, RomVersion version)
-        //{
-        //    var task = new DisassemblyTask()
-        //    {
-        //        Name = name,
-        //    };
-
-        //    if (name == "boot" || name == "code" || name == "n64dd")
-        //    {
-        //        if (!FileInfo.ContainsKey((name, version)))
-        //            return null;
-
-        //        var (vrom, vram, text_size) = FileInfo[(name, version)];
-        //        task.VRom = vrom;
-        //        task.VRam = vram;
-        //        Section text = new Section("text", task.VRam.Start, task.VRam.Start, text_size, 0, true);
-        //        task.Sections.Values.Add(text);
-
-        //        if (version == MRom.Build.U0 && name == "code")
-        //        {
-        //            N64Ptr size;
-        //            N64Ptr off;
-        //            Section section;
-
-        //            N64Ptr hs = 0x800A5AC0 - task.VRom.Start;
-
-        //            N64Ptr start;
-        //            N64Ptr end;
-
-        //            start = 0x80186028;
-        //            end = 0x80186A70;
-        //            size = end - start;
-        //            off = start - 0x800A5AC0;
-        //            section = new Section("text", task.VRam.Start, start, size, 1, false);
-        //            task.Sections.Values.Add(section);
-
-
-        //            start = 0x80186A70;
-        //            end = 0x801AAAB0;
-        //            size = end - start;
-        //            off = start - 0x800A5AC0;
-        //            section = new Section("text", task.VRam.Start, start, size, 2, true);
-        //            task.Sections.Values.Add(section);
-
-
-        //            //0x801E3FA0 0x801AAAB0
-        //            size = 0x801E3FA0 - 0x801AAAB0;
-        //            off = 0x801AAAB0 - 0x800A5AC0;
-        //            section = new Section("data", task.VRam.Start, 0x801AAAB0, size, 0);
-        //            task.Sections.Values.Add(section);
-        //        }
-        //    }
-
-        //    return task;
-        //}
+        
 
         public static DisassemblyTask New(JFileInfo file)
         {
@@ -286,19 +199,11 @@ namespace Atom
                 taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.PlayPause));
             }
 
-            //string[] special;
-
-            //if (rom.Version == Game.OcarinaOfTime)
-            //    special = new string[] { "code", "boot", "n64dd" };
-            //else
-            //    special = new string[] { "code", "boot" };
-
-            //foreach (var name in special)
-            //{
-            //    var task = New(name, rom.Version);
-            //    if (task != null)
-            //        taskList.Add(task);
-            //}
+            for (int i = 0; i < tables.Transitions.Records; i++)
+            {
+                var ovlRec = rom.Files.GetOverlayRecord(i, TableInfo.Type.Transitions);
+                taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.Transition));
+            }
 
             List<JFileInfo> fileInfo = JQuery.Deserialize<List<JFileInfo>>("data/fileinfo.json");
             
@@ -308,8 +213,6 @@ namespace Atom
             {
                 taskList.Add(New(file));
             }
-
-
             return taskList;
         }
     }

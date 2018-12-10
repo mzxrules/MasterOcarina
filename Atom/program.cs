@@ -130,10 +130,6 @@ namespace Atom
             {
                 ElfToOverlayTest();
             }
-            //else if (a[0] == "fileinfo")
-            //{
-            //    DisassemblyTask.ConvertFileInfoToJson();
-            //}
         }
 
         static string[] ParseArguments(string commandLine)
@@ -185,7 +181,7 @@ namespace Atom
             RomVersion ver = MRom.Build.DBG;
             PathUtil.TryGetRomLocation(ver, out string path);
             Rom rom = new MRom(path, ver);
-            DisassemblyTask task = null;// DisassemblyTask.New("code", ver);
+            DisassemblyTask task = null;
             Disassemble.PrintRelocations = true;
 
             var reader = new BinaryReader(rom.Files.GetFile(task.VRom));

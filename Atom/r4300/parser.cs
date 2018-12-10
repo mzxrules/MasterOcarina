@@ -139,61 +139,6 @@ namespace Atom
                 w.WriteLine($".subsection {section.Subsection}");
         }
 
-        //internal static void DataDisassembly(StreamWriter w, BinaryReader br, DisassemblyTask task)
-        //{
-        //    br.BaseStream.Position = task.Sections["text"].Size;
-        //    var rel = task.Relocations.Where(x => x.RelocType == Reloc.R_MIPS32);
-        //    var ovlStart = new N64Ptr(task.VRam.Start);
-        //    var bssEnd = new N64Ptr(task.VRam.End);
-
-
-        //    int dataStart = ovlStart + task.Sections["text"].Size;
-        //    int rodataStart = dataStart + task.Sections["data"].Size;
-        //    int rodataEnd = rodataStart + task.Sections["rodata"].Size;
-        //    int bssStart = Align.To16(new N64Ptr(rodataEnd + 0x14 + (task.Relocations.Count * 4)));
-
-        //    (string name, N64Ptr start, N64Ptr end)[] blocks =
-        //    {
-        //        (".data", dataStart, rodataStart),
-        //        (".section .rodata", rodataStart, rodataEnd)
-        //    };
-
-        //    //.data and .rodata sections
-        //    for (int blockId = 0; blockId < 2; blockId++)
-        //    {
-        //        var (name, start, end) = blocks[blockId];
-        //        List<byte> byteChain = new List<byte>();
-        //        w.WriteLine();
-        //        w.WriteLine(name);
-        //        w.WriteLine();
-        //        pc = start;
-        //        while (pc < end)
-        //        {
-        //            if (Symbols.ContainsKey(pc))
-        //            {
-        //                DumpByteChain(w, ref byteChain);
-        //                w.Write($"{Symbols[pc]}: ");
-        //            }
-
-        //            if (rel.Any(x => x.Offset == br.BaseStream.Position))
-        //            {
-        //                DumpByteChain(w, ref byteChain);
-        //                N64Ptr lbl = br.ReadBigInt32();
-        //                pc += 4;
-        //                w.WriteLine($".word {Symbols[lbl]}");
-        //            }
-        //            else
-        //            {
-        //                byteChain.Add(br.ReadByte());
-        //                pc += 1;
-        //            }
-        //        }
-        //        DumpByteChain(w, ref byteChain);
-        //    }
-
-        //    Bss(w, bssStart, bssEnd);
-        //}
-
         private static void Bss(StreamWriter sw, Section section)
         {
             N64Ptr bssStart = section.VRam;
