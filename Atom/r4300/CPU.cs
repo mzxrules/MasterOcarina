@@ -205,7 +205,7 @@ namespace Atom
 
         static string SYSCALL(uint iw) => $"syscall\t{IMM_P(iw)}";
 
-        static string BREAK(uint iw) => $"break\t0x{CODE(iw):X5}";
+        static string BREAK(uint iw) => $"break\t## 0x{CODE(iw):X5}";
 
         static string SYNC(uint iw) => $"sync";
 
