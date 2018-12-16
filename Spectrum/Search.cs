@@ -9,6 +9,49 @@ namespace Spectrum
     class Search
     {
     }
+
+    class Pattern<T>
+    {
+        Dictionary<T, List<int>> Lookup = new Dictionary<T, List<int>>();
+        public T[] Data;
+        public int Length => Data.Length;
+
+        public Pattern(T[] pattern)
+        {
+            Data = pattern;
+            Dictionary<T, int> nextLowest = new Dictionary<T, int>();
+
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                foreach (var item in nextLowest)
+                {
+                    Lookup[item.Key][i] = item.Value;
+                }
+
+                T key = pattern[i];
+                if (!Lookup.ContainsKey(key))
+                {
+                    Lookup[key] = Enumerable.Repeat(-1, pattern.Length).ToList();
+                    nextLowest[key] = i;
+                    continue;
+                }
+                else
+                {
+                    Lookup[key][i] = nextLowest[key];
+                    nextLowest[key] = i;
+                }
+            }
+        }
+        public int GetShift(T key, int index)
+        {
+            if (Lookup.TryGetValue(key, out List<int> list))
+            {
+                return list[index];
+            }
+            return -1;
+        }
+    }
+
     class BayerMoore
     {
         class Pattern

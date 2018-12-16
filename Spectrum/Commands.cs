@@ -179,6 +179,45 @@ namespace Spectrum
                     ChangeVersion(v);
             }
         }
+        
+        [SpectrumCommand(
+            Name = "trainer",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Description = "Runs a trainer script for configuring an emulator" )]
+        private static void MupenTrainer(Arguments args)
+        {
+            const int ootN0SearchStringOff = 0x0FB4C0; //-0x20 of scene table
+            uint[] ootN0SearchString =
+            {
+                0x57094183, 0x57094183, 0x57094183, 0x57094183,
+                0x5C084183, 0x5C084183, 0x5C084183, 0x5C084183,
+                0x02499000, 0x024A6A10, 0x01994000, 0x01995B00,
+                0x01130200, 0x01F12000, 0x01F27140, 0x01998000,
+                0x01999B00, 0x01140300, 0x0273E000, 0x027537C0,
+                0x01996000, 0x01997B00, 0x01150400, 0x023CF000,
+                0x023E4F90, 0x0198A000, 0x0198BB00, 0x02160500,
+                0x022D8000, 0x022F2970, 0x0198E000, 0x0198FB00,
+                0x02120600, 0x025B8000, 0x025CDCF0, 0x01990000,
+                0x01991B00, 0x01170700, 0x02ADE000, 0x02AF7B40,
+                0x01992000, 0x01993B00, 0x01190800, 0x027A7000,
+                0x027BF3C0, 0x0198C000, 0x0198DB00, 0x02180900,
+                0x032C6000, 0x032D2560, 0x019F4000, 0x019F5B00,
+                0x02180A00, 0x02BEB000, 0x02BFC610, 0x0199C000,
+                0x0199DB00, 0x00250000, 0x02EE3000, 0x02EF37B0
+            };
+
+            Console.WriteLine("Launch a mupen64plus or pj64 based emulator, and open Ocarina of Time V1.0.");
+            Console.WriteLine("Pause the game on the title screen. Type n to cancel the scan, or enter to continue");
+            var key = Console.ReadKey();
+            if (key.KeyChar == 'n')
+                return;
+
+            var emulator =  Zpr.Trainer(ootN0SearchString, ootN0SearchStringOff);
+            if (emulator != null)
+            {
+                AddEmulator(emulator.ProcessName, emulator);
+            }
+        }
 
         [SpectrumCommand(
             Name = "emu",
@@ -203,12 +242,17 @@ namespace Spectrum
         private static void SetEmulator(Arguments args)
         {
             Emulator emu;
-            String key = "";
+            string key = "";
             if (args.Length != 0)
                 emu = SetEmulator_Legacy(args, ref key);
-            else 
+            else
                 emu = SetEmulator_GetArgs(args, ref key);
 
+            AddEmulator(key, emu);
+        }
+
+        private static void AddEmulator(string key, Emulator emu)
+        {
             if (!Options.Emulators.TryGetValue(key, out Emulator emuOld))
             {
                 Options.Emulators.Add(key, emu);
@@ -568,20 +612,20 @@ namespace Spectrum
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S, Tokens.COORDS_FLOAT })]
         private static void SetActorCoordinates(Arguments args)
         {
-            if (!TryEvaluate((string)args[0], out long address))
+            if (!TryEvaluate((string)args[0], out long addr))
                 return;
+            
+            addr |= 0x80000000;
+            N64Ptr address = addr;
 
-            address &= 0xFFFFFF;
-            address |= 0x80000000;
-
-            var instance = InfoPoll.GetAllActorInstances().Where(x => x.Address == address).SingleOrDefault();
+            var instance = InfoPoll.GetAllActorInstances().Where(x => x.Address.Offset == address.Offset).SingleOrDefault();
 
             if (instance == null)
                 return;
 
             Vector3<float> a = (Vector3<float>)args[1];
 
-            Ptr ptr = SPtr.New((int)instance.Address);
+            Ptr ptr = SPtr.New(instance.Address);
 
             SetActorCoordinates(ptr, a.x, a.y, a.z);
         }

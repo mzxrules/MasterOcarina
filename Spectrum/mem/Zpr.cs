@@ -5,19 +5,6 @@ using mzxrules.Helper;
 
 namespace Spectrum
 {
-    class EmulatorProcess
-    {
-        public Emulator Stats { get; private set; }
-        public Process Process { get; private set; }
-        public List<ProcessModule> WatchedModules = new List<ProcessModule>();
-
-        public EmulatorProcess (Emulator stat, Process p)
-        {
-            Stats = stat;
-            Process = p;
-        }
-    }
-
     class Zpr
     {
         static EmulatorProcess Emulator;
@@ -26,6 +13,7 @@ namespace Spectrum
 
         public static bool IsEmulatorSet { get { return Emulator != null; } }
 
+        
         public static bool TryMountEmulator(List<Emulator> emulators)
         {
             bool result;
@@ -37,6 +25,129 @@ namespace Spectrum
             if (result)
                 Console.WriteLine(emulator.Stats.ProcessDescription);
             return result;
+        }
+
+        public static Emulator Trainer(uint[] pattern, int rdramOff)
+        {
+            Console.WriteLine("Begin scanning...");
+            //"mupen64plus.dll"
+            foreach (var p in Process.GetProcesses())
+            {
+                if (p.ProcessName.ToLowerInvariant().Contains("project64"))
+                {
+                    Console.WriteLine($"Project64 detected, {p.WorkingSet64:X8}");
+                    Console.WriteLine($"Note: PJ64 uses dynamic memory allocation; Address changes on program re-launch");
+                    int result = BayerMooreScanForSignature(p, pattern, (IntPtr)0x0, 0x7FFF0000);
+                    if (result < 0)
+                    {
+                        Console.WriteLine("RDRAM not found");
+                        continue;
+                    }
+                    result -= rdramOff;
+                    Console.WriteLine($"RDRAM begins at {result:X8}");
+                    Emulator emulator = new Emulator(p.ProcessName, "generated", 32, $"{result:X8}", 0);
+                    return emulator;
+                }
+                try
+                {
+                    foreach (ProcessModule m in p.Modules)
+                    {
+                        if (m.ModuleName == "mupen64plus.dll")
+                        {
+                            Console.WriteLine($"Process {p.ProcessName} contains mupen64plus.dll");
+                            
+                            int result = BayerMooreScanForSignature(p, m, pattern);
+
+                            if (result < 0)
+                            {
+                                Console.WriteLine("RDRAM not found");
+                                continue;
+                            }
+                            else
+                            {
+                                result -= rdramOff;
+                                Console.WriteLine($"RDRAM begins at {result:X8}");
+                                Emulator emulator = new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result:X8}", 0);
+                                return emulator;
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    ;
+                }
+            }
+            Console.WriteLine("Finished");
+            return null;
+        }
+
+        private static int BayerMooreScanForSignature(Process proc, ProcessModule m, uint[]p)
+        {
+            return BayerMooreScanForSignature(proc, p, m.BaseAddress, m.ModuleMemorySize);
+        }
+
+        private static int BayerMooreScanForSignature(Process proc, uint[] p, IntPtr baseAddr, int memorySize)
+        {
+            Pattern<uint> pattern = new Pattern<uint>(p);
+            
+            int size = memorySize;
+            int ti = 0;
+            int pi = (pattern.Length - 1);
+            int patternSize = pattern.Length * sizeof(uint);
+
+            while (ti + patternSize <= size)
+            {
+                int readIndex = pi * sizeof(uint) + ti;
+                uint tV = (uint)ReadProcessInt32(proc, baseAddr + readIndex, out int r);
+
+                if (tV == pattern.Data[pi])
+                {
+                    pi--;
+                    if (pi < 0)
+                    {
+                        return ti;
+                    }
+                    continue;
+                }
+                //pattern doesn't match
+                int shift = pattern.GetShift(tV, pi);
+                if (shift < 0)
+                    ti += pattern.Length * sizeof(uint);
+                else
+                    ti += (pi - shift) * sizeof(uint);
+
+                pi = (pattern.Length - 1);
+            }
+            return -1;
+        } 
+
+        private static void ScanForOoTSignature(Process p, ProcessModule m, uint[] searchString)
+        {
+            IntPtr baseAddr = m.BaseAddress;
+
+            int loop = m.ModuleMemorySize - (searchString.Length * 4);
+            int matchIndex = 0;
+            int j = 0;
+            for (int i = 0; i < loop; i+= 4)
+            {
+                uint value = (uint)ReadProcessInt32(p, baseAddr + i, out int r);
+                if (value != searchString[j])
+                {
+                    j = 0;
+                    continue;
+                }
+                if (j == 0)
+                    matchIndex = i;
+                j++;
+                if (j == searchString.Length)
+                {
+                    Console.WriteLine($"{matchIndex:X8}");
+                    break;
+                }
+
+            }
         }
 
         private static EmulatorProcess SelectEmulator(List<Emulator> emulators)
@@ -80,12 +191,12 @@ namespace Spectrum
 
             return foundEmulators[i];
         }
-        
+
         private static bool MountEmulator(EmulatorProcess emu)
         {
             ExpressTest.ExpressionEvaluator ExpressionEvalulator;
             string ramStartExpression = emu.Stats.RamStart;
-            Emulator = emu;//.Process;
+            Emulator = emu;
 
             if (Emulator == null)
                 return false;
@@ -102,7 +213,7 @@ namespace Spectrum
                     emu.WatchedModules.Add(item);
                 }
             }
-            Func<long,long> ReadProc;
+            Func<long, long> ReadProc;
             if (emu.Stats.ProcessType == 64)
             {
                 ReadProc = ReadProcess64;
@@ -126,7 +237,7 @@ namespace Spectrum
                 Console.WriteLine("No Emulator!");
                 return;
             }
-            foreach(ProcessModule item in Emulator.Process.Modules)
+            foreach (ProcessModule item in Emulator.Process.Modules)
             {
                 IntPtr baseAddress = item.BaseAddress;
                 int size = item.ModuleMemorySize;
@@ -137,26 +248,26 @@ namespace Spectrum
                 if (base64 <= addr64
                     && (addr64 < base64 + size))
                 {
-                    Console.WriteLine($"{item.ModuleName} - ADDR: {base64:X8} SIZE: {size:X8} OFF: {addr64-base64:X8}");
+                    Console.WriteLine($"{item.ModuleName} - ADDR: {base64:X8} SIZE: {size:X8} OFF: {addr64 - base64:X8}");
                 }
             }
         }
-        
+
         public static long ReadProcess32(long x)
         {
-            int result = ReadProcessInt32(Emulator.Process, new IntPtr(x), out int bytesRead);
-            return result;
+            return ReadProcessInt32(Emulator.Process, new IntPtr(x), out int bytesRead);
         }
+
         public static long ReadProcess64(long x)
         {
             return ReadProcessInt64(Emulator.Process, new IntPtr(x), out int bytesRead);
         }
-        
+
         public static long GetEmulatedAddress(N64Ptr addr)
         {
-            return (long)IntPtr.Add(RamPointer, (int)(addr & 0xFFFFFF));
+            return (long)IntPtr.Add(RamPointer, addr.Offset);
         }
-        
+
         /// <summary>
         /// Returns a block of RDRAM in Big Endian order
         /// </summary>
@@ -259,13 +370,13 @@ namespace Spectrum
         private static byte[] ReadN64Rdram(N64Ptr pointer, int bytes, out int bytesRead, bool BigEndian)
         {
             Process process = Emulator.Process;
-            IntPtr address = IntPtr.Add(RamPointer, (int)(pointer & 0xFFFFFF));
+            IntPtr address = IntPtr.Add(RamPointer, pointer.Offset);
 
             var addrStart = address.ToInt64();
             int off = (int)(addrStart & 0x3);
             addrStart >>= 2;
             addrStart <<= 2;
-            int numOfBytes = (off + bytes + 3) & (unchecked((int)0xFFFFFFFC));
+            int numOfBytes = (off + bytes + 3) & -4;
             IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
 
             byte[] buffer = new byte[numOfBytes];
@@ -292,20 +403,20 @@ namespace Spectrum
             byte[] buffer = new byte[bytes];
             NativeMethods.ReadProcessMemory(hProc, address, buffer, (IntPtr)bytes, out bytesRead);
             NativeMethods.CloseHandle(hProc);
-            
+
             return buffer;
         }
 
         private static Int32 ReadProcessInt32(Process process, IntPtr address, out int bytesRead)
         {
-            return BitConverter.ToInt32(ReadProcess(process, address, sizeof(Int32), out bytesRead), 0);
+            return BitConverter.ToInt32(ReadProcess(process, address, sizeof(int), out bytesRead), 0);
         }
 
         private static Int64 ReadProcessInt64(Process process, IntPtr address, out int bytesRead)
         {
-            return BitConverter.ToInt64(ReadProcess(process, address, sizeof(Int64), out bytesRead), 0);
+            return BitConverter.ToInt64(ReadProcess(process, address, sizeof(long), out bytesRead), 0);
         }
-        
+
 
         private static bool WriteProcess()
         {
@@ -345,7 +456,7 @@ namespace Spectrum
             {
                 int offStart = ptr & 0x3;
                 int offEnd = (int)((ptr + data.LongLength) & 3);
-                
+
                 if (offStart != 0 || offEnd != 0)
                 {
 
@@ -353,7 +464,7 @@ namespace Spectrum
                     int w_startLen = (offStart == 0) ? 0 : Math.Min(data.Length, 4 - offStart);
                     int w_midLen = Math.Max(0, data.Length - w_startLen - offEnd);
                     int w_endLen = Math.Max(0, data.Length - w_startLen - w_midLen);
-                    
+
                     byte[] startData = new byte[w_startLen];
                     byte[] midData = new byte[w_midLen];
                     byte[] endData = new byte[w_endLen];
@@ -363,7 +474,7 @@ namespace Spectrum
 
                     IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
                     bool worked = true;
-                    
+
                     if (w_startLen > 0)
                     {
                         int startOffset = End8(offStart) + 1 - w_startLen;
@@ -434,7 +545,7 @@ namespace Spectrum
 
             return worked;
         }
-        
+
         private static bool WriteProcess(Process process, IntPtr address, float value, out int bytesWritten)
         {
             IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
@@ -447,7 +558,7 @@ namespace Spectrum
 
             return worked;
         }
-        
+
         private static bool WriteProcess(Process process, IntPtr address, short value, out int bytesWritten)
         {
             IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);

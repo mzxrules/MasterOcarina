@@ -5,47 +5,9 @@ namespace Spectrum
 {
     class ActorInstance : IRamItem, IActorItem
     {
-        /*
-        struct z64_actor_t
-        {
-            u16                     number;
-            u8                      type;
-            u8                      status;
-            u8                      __pad0000[4];
-            union z64_xyz_t         coords_1;
-            struct z64_rot_t        rotation_1;
-            u8                      __pad0001[2];
-            u16                     variable;
-            u8                      __pad0002[6];
-            union z64_xyz_t         coords_2;
-            struct z64_rot_t        rotation_2;
-            u8                      __pad0003[2];
-            union z64_xyz_t         coords_3;
-            struct z64_rot_t        rotation_3;
-            u8                      __pad0004[6];
-            union z64_xyz_t         scale;
-            union z64_xyz_t         acceleration;
-            u8                      __pad0005[184];
-            struct z64_actor_t *    previous;
-            struct z64_actor_t *    next;
-            ZAFunc                  f_init;
-            ZAFunc                  f_routine1;
-            ZAFunc                  f_routine2;
-            ZAFunc                  f_routine3;
-            ZAFunc                  f_code_entry;
-            u8                      __pad0006[84];
-            ZAFunc                  f_next;
-        };
-         
-         */
+        public FileAddress Ram { get; }
 
-        public FileAddress Ram
-        {
-            get { return _RamAddress; }
-        }
-        private FileAddress _RamAddress;
-
-        public int Address;
+        public N64Ptr Address;
         public int Actor
         {
             get { return ActorId; }
@@ -94,7 +56,7 @@ namespace Spectrum
                 instanceSize = 0;
             }
 
-            _RamAddress = new FileAddress(Address, Address + instanceSize);
+            Ram = new FileAddress(Address, Address + instanceSize);
 
 
             Variable = ptr.ReadUInt16(0x1C); 
