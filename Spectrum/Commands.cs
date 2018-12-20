@@ -216,6 +216,7 @@ namespace Spectrum
             if (emulator != null)
             {
                 AddEmulator(emulator.ProcessName, emulator);
+                MountEmulator();
             }
         }
 
@@ -399,6 +400,8 @@ namespace Spectrum
             string emu = (args.Length == 1) ? (string)args[0] : "";
             MountEmulator(emu);
         }
+
+        private static void MountEmulator() => MountEmulator("");
 
         private static void MountEmulator(string emu)
         {
