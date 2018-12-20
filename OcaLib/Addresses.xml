@@ -1,0 +1,863 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Addresses>
+  <Game name="OcarinaOfTime">
+    <Block name="(none)">
+      <Start>
+        <!--<Identifier id="Template">-->
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0"></Data>
+          <Data ver="N1"></Data>
+          <Data ver="N2"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="MQJ"></Data>
+          <Data ver="MQU"></Data>
+          <Data ver="MQP"></Data>
+          <Data ver="DBGMQ"></Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="dmadata">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <!--First record in the file table-->
+          <Data ver="N0">7430</Data>
+          <Data ver="N1">7430</Data>
+          <Data ver="N2">7960</Data>
+          <Data ver="P0">7950</Data>
+          <Data ver="P1">7950</Data>
+          <Data ver="GCJ">7170</Data>
+          <Data ver="GCU">7170</Data>
+          <Data ver="GCP">7170</Data>
+          <Data ver="MQJ">7170</Data>
+          <Data ver="MQU">7170</Data>
+          <Data ver="MQP">7170</Data>
+          <Data ver="DBGMQ">12F70</Data>
+          <Data ver="IQUEC">B7A0</Data>
+          <Data ver="IQUET">B240</Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">B140</Data>
+          <Data ver="N1">B140</Data>
+          <Data ver="N2">B780</Data>
+          <Data ver="P0">B770</Data>
+          <Data ver="P1">B770</Data>
+          <Data ver="GCJ">AF90</Data>
+          <Data ver="GCU">AF90</Data>
+          <Data ver="GCP">AF90</Data>
+          <Data ver="MQJ">AF90</Data>
+          <Data ver="MQU">AF90</Data>
+          <Data ver="MQP">AF90</Data>
+          <Data ver="DBGMQ">16DA0</Data>
+          <Data ver="IQUEC">13040</Data>
+          <Data ver="IQUET">12AF0</Data>
+        </Address>
+      </Start>
+      <Identifier id="__End">
+        <Address reftype="absolute" domain="ROM">
+          <!--Final record in the file table (NO LONGER USED)-->
+          <Data ver="N0">D280</Data>
+          <Data ver="N1">D280</Data>
+          <Data ver="N2">D7B0</Data>
+          <Data ver="MQP">CFC0</Data>
+          <Data ver="DBGMQ">18F20</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="Scenes_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Start of the portion of the file table that contains scene / map files-->
+          <!--//const int SCENE_MAP_FILE_COUNT = 489 *2;-->
+          <Data ver="N0">B320</Data>
+          <Data ver="N1" />
+          <Data ver="N2" />
+          <Data ver="P0" />
+          <Data ver="P1" />
+          <Data ver="GCJ" />
+          <Data ver="GCP" />
+          <Data ver="MQP" />
+          <Data ver="MQJ" />
+          <Data ver="DBGMQ">16EC0</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="Scenes_End">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">D1A0</Data>
+          <Data ver="N1" />
+          <Data ver="N2" />
+          <Data ver="P0" />
+          <Data ver="P1" />
+          <Data ver="GCJ" />
+          <Data ver="GCP" />
+          <Data ver="MQP" />
+          <Data ver="MQJ" />
+          <Data ver="DBGMQ">17240</Data>
+        </Address>
+      </Identifier>
+    </Block>
+    <Block name="code">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">A87000</Data>
+          <Data ver="N1">A87000</Data>
+          <Data ver="N2">A87000</Data>
+          <Data ver="P0">A89000</Data>
+          <Data ver="P1">A89000</Data>
+          <Data ver="GCJ">A86000</Data>
+          <Data ver="GCU">A86000</Data>
+          <Data ver="GCP">A88000</Data>
+          <Data ver="MQJ">A86000</Data>
+          <Data ver="MQU">A86000</Data>
+          <Data ver="MQP">A88000</Data>
+          <Data ver="DBGMQ">A94000</Data>
+          <Data ver="IQUEC">AB0000</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">110A0</Data>
+          <Data ver="N1">110A0</Data>
+          <Data ver="N2">116E0</Data>
+          <Data ver="P0">116E0</Data>
+          <Data ver="P1">116E0</Data>
+          <Data ver="GCJ">10EE0</Data>
+          <Data ver="GCU">10EE0</Data>
+          <Data ver="GCP">10F00</Data>
+          <Data ver="MQJ">10EE0</Data>
+          <Data ver="MQU">10EE0</Data>
+          <Data ver="MQP">10F00</Data>
+          <Data ver="DBGMQ">1CE60</Data>
+          <Data ver="IQUEC">18FA0</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Start>
+      <Identifier id="TextbankTable">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">B808AC</Data>
+          <Data ver="N1">B80A6C</Data>
+          <Data ver="N2">B8091C</Data>
+          <Data ver="P0">B801DC</Data>
+          <Data ver="P1">B8021C</Data>
+          <Data ver="GCJ">B7EFCC</Data>
+          <Data ver="GCU">B7EFAC</Data>
+          <Data ver="GCP">B7E910</Data>
+          <Data ver="MQJ">B7EFAC</Data>
+          <Data ver="MQU">B7EF8C</Data>
+          <Data ver="MQP">B7E8F0</Data>
+          <Data ver="DBGMQ">BC24C0</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="ParticleTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Length 0x1C:
+        VA start, end, vram start, end-->
+          <!--25 files, 0x26 records-->
+          <Data ver="N0">B5DBA0</Data>
+          <Data ver="N1">B5DD60</Data>
+          <Data ver="N2">B5DBA0</Data>
+          <Data ver="P0">B5D4B0</Data>
+          <Data ver="P1">B5D4F0</Data>
+          <Data ver="GCJ">B5C270</Data>
+          <Data ver="GCU">B5C250</Data>
+          <Data ver="GCP">B5BBB0</Data>
+          <Data ver="MQJ">B5C250</Data>
+          <Data ver="MQU">B5C230</Data>
+          <Data ver="MQP">B5BB90</Data>
+          <Data ver="DBGMQ">B8CB50</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="ActorTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- Length 0x20-->
+          <!-- Actor count = 0x1D7;-->
+          <Data ver="N0">B5E490</Data>
+          <Data ver="N1">B5E650</Data>
+          <Data ver="N2">B5E490</Data>
+          <Data ver="P0">B5DDA0</Data>
+          <Data ver="P1">B5DDE0</Data>
+          <Data ver="GCJ">B5CB60</Data>
+          <Data ver="GCU">B5CB40</Data>
+          <Data ver="GCP">B5C4A0</Data>
+          <Data ver="MQJ">B5CB40</Data>
+          <Data ver="MQU">B5CB20</Data>
+          <Data ver="MQP">B5C480</Data>
+          <Data ver="DBGMQ">B8D440</Data>
+          <Data ver ="IQUEC">B87180</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="GameContextTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- Length 0x30-->
+          <Data ver="N0">B672A0</Data>
+          <Data ver="N1">B67460</Data>
+          <Data ver="N2">B672A0</Data>
+          <Data ver="P0">B66BB0</Data>
+          <Data ver="P1">B66BF0</Data>
+          <Data ver="GCJ">B65970</Data>
+          <Data ver="GCU">B65950</Data>
+          <Data ver="GCP">B652B0</Data>
+          <Data ver="MQJ">B65950</Data>
+          <Data ver="MQU">B65930</Data>
+          <Data ver="MQP">B65290</Data>
+          <Data ver="DBGMQ">B969D0</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="HyruleSkyboxTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Hyrule Field Skybox. 9 Variations-->
+          <Data ver="N0">B677AC</Data>
+          <Data ver="N1">B6796C</Data>
+          <Data ver="N2">B677AC</Data>
+          <Data ver="P0">B670BC</Data>
+          <Data ver="P1">B670FC</Data>
+          <Data ver="GCJ">B65E7C</Data>
+          <Data ver="GCU">B65E5C</Data>
+          <Data ver="GCP">B657BC</Data>
+          <Data ver="MQJ">B65E5C</Data>
+          <Data ver="MQU">B65E3C</Data>
+          <Data ver="MQP">B6579C</Data>
+          <Data ver="DBGMQ">B96EDC</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="ObjectTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- Object count = 0x192;-->
+          <Data ver="N0">B6EF58</Data>
+          <Data ver="N1">B6F118</Data>
+          <Data ver="N2">B6EF68</Data>
+          <Data ver="P0">B6E878</Data>
+          <Data ver="P1">B6E8B8</Data>
+          <Data ver="GCJ">B6D638</Data>
+          <Data ver="GCU">B6D618</Data>
+          <Data ver="GCP">B6CF78</Data>
+          <Data ver="MQJ">B6D618</Data>
+          <Data ver="MQU">B6D5F8</Data>
+          <Data ver="MQP">B6CF58</Data>
+          <Data ver="DBGMQ">B9E6C8</Data>
+          <Data ver="IQUEC">B97C38</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+      <Identifier id="EntranceIndexTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Entrance Record Count = 0x614-->
+          <Data ver="N0">B6FBF0</Data>
+          <Data ver="N1">B6FDB0</Data>
+          <Data ver="N2">B6FC00</Data>
+          <Data ver="P0">B6F510</Data>
+          <Data ver="P1">B6F550</Data>
+          <Data ver="GCJ">B6E2D0</Data>
+          <Data ver="GCU">B6E2B0</Data>
+          <Data ver="GCP">B6DC10</Data>
+          <Data ver="MQJ">B6E2B0</Data>
+          <Data ver="MQU">B6E290</Data>
+          <Data ver="MQP">B6DBF0</Data>
+          <Data ver="DBGMQ">B9F360</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="SceneTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- Length 0x14-->
+          <!-- scene count = 101 or 109 in debug-->
+          <Data ver="N0">B71440</Data>
+          <Data ver="N1">B71600</Data>
+          <Data ver="N2">B71450</Data>
+          <Data ver="P0">B70D60</Data>
+          <Data ver="P1">B70DA0</Data>
+          <Data ver="GCJ">B6FB20</Data>
+          <Data ver="GCU">B6FB00</Data>
+          <Data ver="GCP">B6F460</Data>
+          <Data ver="MQJ">B6FB00</Data>
+          <Data ver="MQU">B6FAE0</Data>
+          <Data ver="MQP">B6F440</Data>
+          <Data ver="DBGMQ">BA0BB0</Data>
+          <Data ver="IQUEC">B9A120</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+      <Identifier id="PlayerPauseOverlayTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- Length 0x1C -->
+          <!--Two records, then after both (0x1C * 2) is start addr for file in ram, and which one is loaded-->
+          <Data ver="N0">B743E0</Data>
+          <Data ver="N1">B745A0</Data>
+          <Data ver="N2">B743F0</Data>
+          <Data ver="P0">B73D00</Data>
+          <Data ver="P1">B73D40</Data>
+          <Data ver="GCJ">B72AC0</Data>
+          <Data ver="GCU">B72AA0</Data>
+          <Data ver="GCP">B72400</Data>
+          <Data ver="MQJ">B72AA0</Data>
+          <Data ver="MQU">B72A80</Data>
+          <Data ver="MQP">B723E0</Data>
+          <Data ver="DBGMQ">BA4340</Data>
+        </Address>
+      </Identifier>
+    </Block>
+    <Block name="jpn_message_data_static">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">8EB000</Data>
+          <Data ver="N1">8EB000</Data>
+          <Data ver="N2">8F2000</Data>
+          <Data ver="GCJ">8F1000</Data>
+          <Data ver="GCU">8F1000</Data>
+          <Data ver="MQJ">8F1000</Data>
+          <Data ver="MQU">8F1000</Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="nes_message_data_static">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">92D000</Data>
+          <Data ver="N1">92D000</Data>
+          <Data ver="N2">92D000</Data>
+          <Data ver="P0">8BB000</Data>
+          <Data ver="P1">8BB000</Data>
+          <Data ver="GCJ">92C000</Data>
+          <Data ver="GCU">92C000</Data>
+          <Data ver="GCP">8BA000</Data>
+          <Data ver="MQJ">92C000</Data>
+          <Data ver="MQU">92C000</Data>
+          <Data ver="MQP">8BA000</Data>
+          <Data ver="DBGMQ">8C6000</Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="ger_message_data_static">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="P0">8F4000</Data>
+          <Data ver="P1">8F4000</Data>
+          <Data ver="GCP">8F3000</Data>
+          <Data ver="MQP">8F3000</Data>
+          <Data ver="DBGMQ">8FF000</Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="fra_message_data_static">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="P0">930000</Data>
+          <Data ver="P1">930000</Data>
+          <Data ver="GCP">92F000</Data>
+          <Data ver="MQP">92F000</Data>
+          <Data ver="DBGMQ">93B000</Data>
+        </Address>
+      </Start>
+    </Block>
+
+    <Block name="GlobalContext">
+      <!--Not used by Spectrum-->
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="DBGMQ">212020</Data>
+          <Data ver="N0">1C84A0</Data>
+          <Data ver="N1">1C8660</Data>
+          <Data ver="N2">1C8D60</Data>
+          <Data ver="P0">1C64E0</Data>
+          <Data ver="P1">1C6520</Data>
+        </Address>
+      </Start>
+
+      <!-- Address of the actor category linked list table -->
+      <Identifier id="ACTOR_CAT_LL_Start">
+        <Offset>001C30</Offset>
+        <!--1CA0D0-->
+      </Identifier>
+
+      <!--Address containing the start of the table for loaded obj files-->
+      <!--0x08 = num loaded object files "OBJ_COUNT_ADDR"-->
+      <!--0x0C = start of table "OBJ_LIST_START_ADDR"-->
+      <Identifier id ="OBJ_ALLOC_TABLE">
+        <Offset>117A4</Offset>
+      </Identifier>
+
+      <!--Address to struct that manages room allocation-->
+      <Identifier id ="ROOM_ALLOC_ADDR">
+        <Offset>11CE4</Offset>
+      </Identifier>
+
+      <!--Start pointer to actor linked list-->
+      <!--Obsolete, does not work for all verions. Lazy fuck-->
+      <Identifier id="OVL_LL_First">
+        <Offset>012560</Offset>
+        <!--1DAA00-->
+      </Identifier>
+    </Block>
+    <!--*************RAM*************-->
+    <Block name="ram">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">00</Data>
+        </Address>
+      </Start>
+      <!--Address of the dummy "Queue" thread -->
+      <Identifier id="QUEUE_THREAD">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">80006330</Data>
+          <Data ver="N1"></Data>
+          <Data ver="N2"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="MQJ"></Data>
+          <Data ver="MQU"></Data>
+          <Data ver="MQP"></Data>
+          <Data ver="DBGMQ"></Data>
+          <Data ver="IQUEC"></Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+
+      <!--Address to in-game save ram and other variables-->
+      <Identifier id="SRAM_START">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">11A5D0</Data>
+          <Data ver="N1">11A790</Data>
+          <Data ver="N2">11AC80</Data>
+          <Data ver="P0">1183D0</Data>
+          <Data ver="P1">118410</Data>
+          <Data ver="GCJ">11B168</Data>
+          <Data ver="GCU">11B148</Data>
+          <Data ver="GCP">118958</Data>
+          <Data ver="MQJ">11B148</Data>
+          <Data ver="MQU">11B128</Data>
+          <Data ver="MQP">118938</Data>
+          <Data ver="DBGMQ">15E660</Data>
+          <Data ver="IQUEC">137F40</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="GFX_START">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">11F290</Data>
+          <Data ver="N1"></Data>
+          <Data ver="N2"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU">11FE78</Data>
+          <Data ver="GCP"></Data>
+          <Data ver="MQJ"></Data>
+          <Data ver="MQU"></Data>
+          <Data ver="MQP"></Data>
+          <Data ver="DBGMQ">168688</Data>
+          <Data ver="IQUEC"></Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="RAM_SEGMENT_TABLE">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">120C38</Data>
+          <Data ver="DBGMQ">166FA8</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="RAM_ARENA_MAIN">
+        <!-- Main Heap reference -->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">12BAA0</Data>
+          <Data ver="N1">12BC60</Data>
+          <Data ver="N2">12C370</Data>
+          <Data ver="P0">129AC0</Data>
+          <Data ver="P1">129B00</Data>
+          <Data ver="GCJ">12CC80</Data>
+          <Data ver="GCU">12CC60</Data>
+          <Data ver="GCP">12A470</Data>
+          <Data ver="MQJ">12CC60</Data>
+          <Data ver="MQU">12CC40</Data>
+          <Data ver="MQP">12A450</Data>
+          <Data ver="DBGMQ">175610</Data>
+          <Data ver="IQUEC">137E50</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id ="RAM_ARENA_SCENES">
+        <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">11BEF0</Data>
+          <Data ver="N1">11C0B0</Data>
+          <Data ver="N2">11C5A0</Data>
+          <Data ver="P0">119CF0</Data>
+          <Data ver="P1">119D30</Data>
+          <Data ver="GCJ">11CA80</Data>
+          <Data ver="GCU">11CA60</Data>
+          <Data ver="GCP">11A270</Data>
+          <Data ver="MQJ">11CA60</Data>
+          <Data ver="MQU">11CA40</Data>
+          <Data ver="MQP">11A250</Data>
+          <Data ver="DBGMQ">15FF80</Data>
+          <Data ver="IQUEC">127C50</Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+
+
+      <Identifier id ="RAM_ARENA_DEBUG">
+        <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="DBGMQ">16A7D0</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id ="RAM_GLOBAL_CONTEXT">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">114DE0</Data>
+          <Data ver="N1">114FA0</Data>
+          <Data ver="N2">115490</Data>
+          <Data ver="P0">112BE0</Data>
+          <Data ver="P1">112C20</Data>
+          <Data ver="GCJ">115970</Data>
+          <Data ver="GCU">115950</Data>
+          <Data ver="GCP">113160</Data>
+          <Data ver="MQJ">115950</Data>
+          <Data ver="MQU">115930</Data>
+          <Data ver="MQP">113140</Data>
+          <Data ver="DBGMQ">157DA0</Data>
+          <!-- These are hardcoded direct references to the global context-->
+          <Data ver="IQUEC">1D5A20</Data>
+          <Data ver="IQUET">12AF0</Data>
+        </Address>
+      </Identifier>
+
+
+      <!--Address to a Linked list that maps out certain memory blocks-->
+      <!-- No longer used by Spectrum-->
+      <Identifier id="RAM_LL_First">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">1C6E60</Data>
+          <Data ver="N1" />
+          <Data ver="N2" />
+          <Data ver="P0">1C4EA0</Data>
+          <Data ver="P1" />
+          <Data ver="GCJ" />
+          <Data ver="GCP" />
+          <Data ver="MQP" />
+          <Data ver="MQJ" />
+          <Data ver="DBGMQ">2109E0</Data>
+        </Address>
+      </Identifier>
+
+    </Block>
+  </Game>
+
+  <!--*************MM**************-->
+  <Game name="MajorasMask">
+    <Block name="(none)">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0"></Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="dmadata">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <!--First record in the file table-->
+          <Data ver="J0">1C110</Data>
+          <Data ver="J1">1C050</Data>
+          <Data ver="U0">1A500</Data>
+          <Data ver="P0">1A650</Data>
+          <Data ver="P1">1A8D0</Data>
+          <Data ver="GCJ">1AE90</Data>
+          <Data ver="GCU">1AE90</Data>
+          <Data ver="GCP">1AE90</Data>
+          <Data ver="DBG">24F60</Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <!--About 6330 before code start-->
+          <Data ver="J0">A14B0</Data>
+          <Data ver="J1">A13F0</Data>
+          <Data ver="U0">9F8B0</Data>
+          <Data ver="P0">9FA00</Data>
+          <Data ver="P1">9FC80</Data>
+          <Data ver="GCJ">A0270</Data>
+          <Data ver="GCU">A0270</Data>
+          <Data ver="GCP">A0270</Data>
+          <Data ver="DBG">B0740</Data>
+        </Address>
+      </Start>
+    </Block>
+
+    <Block name="code">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">B5F000</Data>
+          <Data ver="J1">B5F000</Data>
+          <Data ver="U0">B3C000</Data>
+          <Data ver="P0">C8A000</Data>
+          <Data ver="P1">C8A000</Data>
+          <Data ver="GCJ">B45000</Data>
+          <Data ver="GCU">B4B000</Data>
+          <Data ver="GCP">C99000</Data>
+          <Data ver="DBG">C95000</Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">A76A0</Data>
+          <Data ver="J1">A75E0</Data>
+          <Data ver="U0">A5AC0</Data>
+          <Data ver="P0">A5D60</Data>
+          <Data ver="P1">A5FE0</Data>
+          <Data ver="GCJ">A6420</Data>
+          <Data ver="GCU">A6440</Data>
+          <Data ver="GCP">A65A0</Data>
+          <Data ver="DBG">B6AC0</Data>
+        </Address>
+      </Start>
+      <Identifier id="ParticleTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C60C90</Data>
+          <Data ver="J1">C60F90</Data>
+          <Data ver="U0">C449E0</Data>
+          <Data ver="P0">D93260</Data>
+          <Data ver="P1">D93380</Data>
+          <Data ver="GCJ">C4BB80</Data>
+          <Data ver="GCU">C51AC0</Data>
+          <Data ver="GCP">DA0380</Data>
+          <Data ver="DBG">DD4F20</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="ActorTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Count = 0x2B2-->
+          <Data ver="J0">C617C0</Data>
+          <Data ver="J1">C61AC0</Data>
+          <Data ver="U0">C45510</Data>
+          <Data ver="P0">D93A00</Data>
+          <Data ver="P1">D93B20</Data>
+          <Data ver="GCJ">C4C320</Data>
+          <Data ver="GCU">C52260</Data>
+          <Data ver="GCP">DA0B20</Data>
+          <Data ver="DBG">DD5A50</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="GameContextTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C70100</Data>
+          <Data ver="J1">C70400</Data>
+          <Data ver="U0">C53E50</Data>
+          <Data ver="P0">DA2340</Data>
+          <Data ver="P1">DA2460</Data>
+          <Data ver="GCJ">C5AC60</Data>
+          <Data ver="GCU">C60BA0</Data>
+          <Data ver="GCP">DAF460</Data>
+          <Data ver="DBG">DE4D60</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="ObjectTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C74FB0</Data>
+          <Data ver="J1">C75280</Data>
+          <Data ver="U0">C58C80</Data>
+          <Data ver="P0">DA7300</Data>
+          <Data ver="P1">DA7420</Data>
+          <Data ver="GCJ">C5FA10</Data>
+          <Data ver="GCU">C659F0</Data>
+          <Data ver="GCP">DB4420</Data>
+          <Data ver="DBG">DE9D50</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="SceneTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!-- scene count =?-->
+          <Data ver="J0">C76510</Data>
+          <Data ver="J1">C767E0</Data>
+          <Data ver="U0">C5A1E0</Data>
+          <Data ver="P0">DA8860</Data>
+          <Data ver="P1">DA8980</Data>
+          <Data ver="GCJ">C60F70</Data>
+          <Data ver="GCU">C66F50</Data>
+          <Data ver="GCP">DB5980</Data>
+          <Data ver="DBG">DEB2B0</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="EntranceIndexTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Record Count = 110?-->
+          <Data ver ="J0">C77F84</Data>
+          <Data ver="J1">C78254</Data>
+          <Data ver="U0">C5BC60</Data>
+          <Data ver="P0">DAA2E0</Data>
+          <Data ver="P1">DAA400</Data>
+          <Data ver="GCJ">C629F0</Data>
+          <Data ver="GCU">C689D0</Data>
+          <Data ver="GCP">DB7400</Data>
+          <Data ver="DBG">DECD38</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="PlayerPauseOverlayTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C82C90</Data>
+          <Data ver="J1">C82F60</Data>
+          <Data ver="U0">C670B0</Data>
+          <Data ver="P0">DAD350</Data>
+          <Data ver="P1">DAD470</Data>
+          <Data ver="GCJ">C6E9C0</Data>
+          <Data ver="GCU">C749B0</Data>
+          <Data ver="GCP">DBA470</Data>
+          <Data ver="DBG">DF05C0</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="TransitionTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C82CD0</Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0">C670F0</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
+        </Address>
+      </Identifier>
+    </Block>
+
+    <Block name="GlobalContext">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">3E6CC0</Data>
+        </Address>
+      </Start>
+      <Identifier id="OBJ_ALLOC_TABLE">
+        <Offset id="J">17D68</Offset>
+        <!--3FEA58 in MM J0, End also follows immediately-->
+        <Offset>17D88</Offset>
+      </Identifier>
+
+      <!--Address to struct that manages room allocation-->
+      <Identifier id ="ROOM_ALLOC_ADDR">
+        <Offset id="J">186E8</Offset>
+        <Offset>18708</Offset>
+      </Identifier>
+
+      <!-- Address of the actor category linked list table -->
+      <Identifier id="ACTOR_CAT_LL_Start">
+        <Offset>001CB0</Offset>
+        <!--1CA0D0-->
+      </Identifier>
+    </Block>
+
+    <Block name="ram">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">0</Data>
+          <Data ver="J1">0</Data>
+          <Data ver="U0">0</Data>
+          <Data ver="P1">0</Data>
+          <Data ver="GCJ">0</Data>
+          <Data ver="GCU">0</Data>
+          <Data ver="GCP">0</Data>
+          <Data ver="DBG">0</Data>
+        </Address>
+      </Start>
+
+      <Identifier id="QUEUE_THREAD">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0"></Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0">80097E10</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
+        </Address>
+      </Identifier>
+          
+      <Identifier id ="SRAM_START">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1EF460</Data>
+          <Data ver="J1">1EF710</Data>
+          <Data ver="U0">1EF670</Data>
+          <Data ver="P0">1E6B50</Data>
+          <Data ver="P1">1E6EF0</Data>
+          <Data ver="GCJ">1ED820</Data>
+          <Data ver="GCU">1ED830</Data>
+          <Data ver="GCP">1E5480</Data>
+          <Data ver="DBG">23F790</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="RAM_ARENA_MAIN">
+        <!-- Main Heap reference -->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">9E920</Data>
+          <Data ver="J1">9E860</Data>
+          <Data ver="U0">9CD20</Data>
+          <Data ver="P0">9CE70</Data>
+          <Data ver="P1">9D0F0</Data>
+          <Data ver="GCJ">9D6E0</Data>
+          <Data ver="GCU">9D6E0</Data>
+          <Data ver="GCP">9D6E0</Data>
+          <Data ver="DBG">A77D0</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id ="RAM_GLOBAL_CONTEXT">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1E3DA0</Data>
+          <Data ver="J1">1E4050</Data>
+          <Data ver="U0">1BD8C0</Data>
+          <!--Different Global Context Variable!-->
+          <Data ver="P0">1BE050</Data>
+          <!--Different Global Context Variable!-->
+          <Data ver="P1">1DB840</Data>
+          <Data ver="GCJ">1E2170</Data>
+          <Data ver="GCU">1E2180</Data>
+          <Data ver="GCP">1BC9B0</Data>
+          <Data ver="DBG">2340D0</Data>
+        </Address>
+      </Identifier>
+        
+      <Identifier id ="RAM_ARENA_SCENES">
+        <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1F5280</Data>
+          <Data ver="J1">1F5530</Data>
+          <Data ver="U0">1F5100</Data>
+          <Data ver="P0">1EC5E0</Data>
+          <Data ver="P1">1EC980</Data>
+          <Data ver="GCJ">1F32B0</Data>
+          <Data ver="GCU">1F32C0</Data>
+          <Data ver="GCP">1EAF10</Data>
+          <Data ver="DBG">245260</Data>
+        </Address>
+      </Identifier>
+      
+      <Identifier id="RAM_SEGMENT_TABLE">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="U0">1F8180</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="OVL_LL_First">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="U0">3FFDA0</Data>
+        </Address>
+      </Identifier>
+    </Block>
+  </Game>
+</Addresses>

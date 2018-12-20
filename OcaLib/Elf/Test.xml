@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Script>
+  <Rom>
+    <Path>C:\Users\mzxrules\Documents\Roms\N64\Games\zcodec\ovl_test.z64</Path>
+    <ActorTable>B5E490</ActorTable>
+  </Rom>
+  <Actor>
+    <Path>C:\Users\mzxrules\Documents\c\work\act\cust.o</Path>
+    <InitBinding>initVars</InitBinding>
+    <Id>00D8</Id>
+    <VRam>80B87280</VRam>
+    <VRom>0347E000</VRom>
+    <DMA>D280</DMA>
+  </Actor>
+</Script>

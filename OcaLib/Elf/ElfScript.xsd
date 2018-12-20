@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Script">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Rom" type="XRom" maxOccurs="1"/>
+        <xs:sequence>
+          <xs:element name="Actor" type="XActor" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="XRom">
+    <xs:sequence>
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="ActorTable" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="XActors">
+    <xs:sequence>
+      <xs:element name="Actor" type="XActor" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="XActor">
+    <xs:sequence>
+      <xs:element name="Path" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="InitBinding" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="Id" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="VRam" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="VRom" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="DMA" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

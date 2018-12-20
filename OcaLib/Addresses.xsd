@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Addresses"
+    elementFormDefault="unqualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Addresses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Game" type="Game" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="Game">
+    <xs:sequence>
+      <xs:element name="Block" maxOccurs="unbounded" type="Block"/>
+      
+    </xs:sequence>
+    <xs:attribute name="name" type="GameEnum" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="GameEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OcarinaOfTime"/>
+      <xs:enumeration value="MajorasMask"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Block">
+    <xs:sequence>
+      <xs:element name="Start" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Address" type="Address" minOccurs="1" maxOccurs="2"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Identifier">
+    <xs:choice>
+      <xs:element name="Address" type="Address"/>
+      <xs:element name="Offset" type="Offset" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element name="Data" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="ver" type="xs:string" use ="required"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="reftype" type="AddressType" use ="required"/>
+    <xs:attribute name="domain" type="SpaceDomain" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Offset">
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="id" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="AddressType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="absolute"/>
+      <xs:enumeration value="relative"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="SpaceDomain">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RAM"/>
+      <xs:enumeration value="ROM"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

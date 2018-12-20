@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Addresses.xml" />
+    <None Remove="Elf\Test.xml" />
+    <None Remove="PathUtil\Test.xml" />
+    <None Remove="SceneRoom\Notes.txt" />
+    <None Remove="XSLTFile1.xslt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Elf\Test.xml" />
+    <Content Include="PathUtil\Test.xml" />
+    <Content Include="SceneRoom\Notes.txt" />
+    <Content Include="XSLTFile1.xslt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Addresses.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helper\Helper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PathUtil\RomPaths.designer.cs">
+      <DependentUpon>RomPaths.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
