@@ -1,0 +1,31 @@
+﻿default = input box, hex
+
+bitflag = sets binary state
+
+collectflag = sets collectible flag
+
+switchflag = sets switch flag
+
+select = dropdown selector
+
+num = integer input
+  params: 
+    display (display type hex, int, inherited)
+
+numupdown = numericUpDown
+  params:
+	unit (display unit)
+	increment
+	min (integer)
+
+randomdrop = Random drop table
+
+reflink = refers to a different ui element
+	params: undetermined
+
+path = pathway selector
+textid = game text id
+  params:
+	base (base id number, hex)
+
+none = no special ui, uses default value

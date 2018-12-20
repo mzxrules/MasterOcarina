@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Spectrum</RootNamespace>
     <AssemblyName>Spectrum</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -119,12 +119,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OcaLib\Helper\Helper.csproj">
-      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{5af4d836-00b5-43c2-8974-8affabd2df90}</Project>
       <Name>Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OcaLib\source\OcaLib.csproj">
-      <Project>{ec69e9e2-4cfb-43f9-8e37-cb6a52935e4c}</Project>
+    <ProjectReference Include="..\OcaLib\OcaLib.csproj">
+      <Project>{fc18ebff-fa5c-4f92-a90c-fe14e29d9471}</Project>
       <Name>OcaLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\uCode\uCode\uCode.csproj">

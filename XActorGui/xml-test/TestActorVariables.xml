@@ -1,0 +1,59 @@
+<Actors>
+	<Actor id="0002">
+		<Objects varied="1">
+			<Object>a</Object>
+      <Object>a</Object>
+		</Objects>
+    <Description/>
+		<Comment/>
+    <Comment-Other/>
+		<Variables>
+			<Variable>
+				<Mask type="">0F00</Mask>
+				<Description>afa</Description>
+				<Comment></Comment>
+				<Value>
+					<Data repeat="" object-id="">a</Data>
+          <Description/>
+					<Comment>b</Comment>
+				</Value>
+        <Value>
+          <Data object-id="">a</Data>
+          <Description/>
+          <Comment>b</Comment>
+        </Value>
+        <Value>
+          <Data>a</Data>
+          <Description/>
+          <Comment/>
+        </Value>
+			</Variable>
+		</Variables>
+	</Actor>
+  
+  <Actor id="0001">
+    <Objects>
+      <Object>a</Object>
+    </Objects>
+    <Description/>
+    <Comment>a</Comment>
+    <Comment-Other/>
+    <Variables>
+      <Variable altvar="zRot">
+        <Mask type=""></Mask>
+        <Description></Description>
+        <Comment></Comment>
+        <Value>
+          <Data repeat="" object-id="">a</Data>
+          <Description/>
+          <Comment>b</Comment>
+        </Value>
+        <Value>
+          <Data repeat="" object-id="">a</Data>
+          <Description/>
+          <Comment>b</Comment>
+        </Value>
+      </Variable>
+    </Variables>
+  </Actor>
+</Actors>

@@ -1,0 +1,38 @@
+﻿{{TOC limit|2}}
+== Overview ==
+The following page is a cheat sheet used for spawning the actors within Ocarina of Time.   All known variable values that affect the actor are listed below; any missing numbers create nothing or have no effect (glitching and crashing are listed for reference purposes). 
+
+Actors are documented in the following format:
+
+Actor number and internal name, Identity, [[Object]](s), Comments
+
+Following that is a list of variables packed into the actor spawn data reference. Because bitpacking is used to store multiple values with different bitlengths, the a special notation is used to provide a concise way of representing the packed in variables, at the expense of being a little less user friendly. 
+
+To understand the format better, lets take a look at the chest actor documentation, which looks something like this: 
+
+;v &>> F000 = Chest Type
+;v &>> 0FE0 = Chest Contents
+:00 = invalid
+:01 = item 1
+:02 = item 2, etc.
+;v &>> 001F = Chest Flag
+;rz &>> 0x3F = Switch Flag to spawn chest.
+
+We start with the expression <tt>v &>> F000</tt>. v stands for the actor variable, which is a component to actor spawns. rx, ry, and rz can also appear here, representing what's usually used to store the x, y, or z rotation for most actors, but is instead being used to store data. Following that is the <tt>&>></tt> operator, which I've invented. Essentially what this operator does is it performs a normal bitwise (which captures all the valid bits), then essentially right-shifts our value by as many bits needed to reach the first 1 bit on our right operand. 
+
+This means that the two byte actor variable actually contains 3 bitpacked values of differing lengths. The &>> mask-shift captures the length of the bitpacked value in bits as such:
+<pre>
+& 001F = 0000 0000 0001 1111
+& 0FE0 = 0000 1111 1110 0000
+& F000 = 1111 0000 0000 0000
+</pre>
+
+To set the actor variable, you would chose what values you want (ex. Chest flag set to 0x04, contents set to 0x10, type set to 0x07), then left-shift the value by the number of zeros on the right hand side, and then sum everything up
+
+<pre>
+0x04 = 0000 0010 << 00 = 0000 0000 0000 0010
+0x2F = 0010 1111 << 05 = 0000 0101 1110 0000
+0x07 = 0000 0111 << 12 = 0111 0000 0000 0000
+                         0111 0101 1110 0010
+                            7    5    E    2
+</pre>

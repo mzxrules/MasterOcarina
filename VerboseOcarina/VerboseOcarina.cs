@@ -453,10 +453,10 @@ namespace VerboseOcarina
             SetRomTypeSettings(DefaultVersion);
             ActorFactory.BindOcarinaActorFactories
                 (mzxrules.XActor.XActorFactory.NewOcaActor,
-                mzxrules.ZActor.OActors.TransitionActorFactory.New);
+                mzxrules.XActor.OActors.TransitionActorFactory.New);
             ActorFactory.BindMaskActorFactories
                 (mzxrules.XActor.XActorFactory.NewMMActor,
-                mzxrules.ZActor.MActors.MTransitionActorFactory.New);
+                mzxrules.XActor.MActors.MTransitionActorFactory.New);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)

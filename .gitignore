@@ -245,6 +245,7 @@ ModelManifest.xml
 .fake/
 
 # ignore wip or dead projects
+CoreTest/
 WadDisect/
 VerboseWPF/
 CutsceneEditor/

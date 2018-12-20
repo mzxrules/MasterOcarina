@@ -1,0 +1,2 @@
+﻿xsd2Code ActorVars.xsd mzxrules.XActor ActorVars.designer.cs /pl Net40 /is /xa
+$(ItemPath) namespace $(ItemFileName).designer.cs /pl Net40 /is /xa

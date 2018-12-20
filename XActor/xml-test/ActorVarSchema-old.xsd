@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Actors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Actor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Objects">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Object" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="varied" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Comment" type="xs:string" nillable ="true" />
+              <xs:element maxOccurs="unbounded" name="Variables">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Variable">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Mask">
+                            <xs:complexType>
+                              <xs:attribute name="type" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Description" />
+                          <xs:element name="Comment" nillable ="true" />
+                          <xs:element maxOccurs="unbounded" name="Value">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Data">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute name="repeat" type="xs:string" use="optional" />
+                                        <xs:attribute name="object" type="xs:string" use="optional" />
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Comment" type="xs:string" nillable="true" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="cOff" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
