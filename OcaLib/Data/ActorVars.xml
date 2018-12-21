@@ -15651,51 +15651,171 @@
     <Description>Time block</Description>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
-        <Description>Type</Description>
-        <Comment>B80D Causes block to not spawn as a child, but spawn as an Adult</Comment>
+        <Capture>v &amp;&gt;&gt; 0x8000</Capture>
+        <Condition>v &amp;>> 0x0040 == 0</Condition>
+        <Description>Default Visibility (Age Inverted)</Description>
         <UI>
-            <Select/>
+          <DropTable/>
         </UI>
         <Value>
-          <Data>0000</Data>
-          <Description>Large time block, doesn’t react to Song of Time</Description>
+          <Data>00</Data>
+          <Description>Child Visible</Description>
           <Meta />
         </Value>
         <Value>
-          <Data>0038</Data>
-          <Description>Invisible time block, doesn’t react to Song of Time</Description>
+          <Data>01</Data>
+          <Description>Adult Visible</Description>
+          <Meta />
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x8000</Capture>
+        <Condition>v &amp;>> 0x0040 == 1</Condition>
+        <Description>Default Visibility (Normal)</Description>
+        <UI>
+          <DropTable/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>Invisible</Description>
           <Meta />
         </Value>
         <Value>
-          <Data>0100</Data>
-          <Description>Small time block, reacts to Song of Time</Description>
+          <Data>01</Data>
+          <Description>Visible</Description>
           <Meta />
         </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x3800</Capture>
+        <Description>Song of Time Distance</Description>
+        <UI>
+          <DropTable/>
+        </UI>
         <Value>
-          <Data>0138</Data>
-          <Description>Invisible small time block, reacts to Song of Time</Description>
-          <Meta />
+          <Data>00</Data>
+          <Description>60</Description>
         </Value>
         <Value>
-          <Data>FE00</Data>
-          <Description>Large time block, reacts to Song of Time</Description>
-          <Meta />
+          <Data>01</Data>
+          <Description>100</Description>
         </Value>
         <Value>
-          <Data>FE38</Data>
-          <Description>Large time block, reacts to Song of Time</Description>
-          <Meta />
+          <Data>02</Data>
+          <Description>140</Description>
         </Value>
         <Value>
-          <Data>FF00</Data>
-          <Description>Small time block, reacts to Song of Time</Description>
-          <Meta />
+          <Data>03</Data>
+          <Description>180</Description>
         </Value>
         <Value>
-          <Data>FF38</Data>
-          <Description>Small time block, reacts to Song of Time</Description>
-          <Meta />
+          <Data>04</Data>
+          <Description>220</Description>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>260</Description>
+        </Value>
+        <Value>
+          <Data>06</Data>
+          <Description>300</Description>
+        </Value>
+        <Value>
+          <Data>07</Data>
+          <Description>300</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x0400</Capture>
+        <Description>Unknown</Description>
+        <Comment>FIXME: Never used, unusual behavior when set</Comment>
+        <UI>
+          <BitFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x0100</Capture>
+        <Description>Size</Description>
+        <UI>
+          <BitFlag/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>Large</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Small</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x0040</Capture>
+        <Description>Default Visibility Behavior</Description>
+        <Comment>If set, ignore switch flag</Comment>
+        <UI>
+          <DropTable/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>Age Inverted</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Normal</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>rz &amp;>> 0x0007</Capture>
+        <Description>Color</Description>
+        <UI>
+          <DropTable/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>#6496C8</Description>
+          <Comment>Default</Comment>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>#508CC8</Description>
+          <Comment>Water Temple</Comment>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>#6496C8</Description>
+          <Comment>Shadow Temple</Comment>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>#64C8F0</Description>
+          <Comment>Spirit Temple</Comment>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>#506E8C</Description>
+          <Comment>Forest Temple</Comment>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>#46A0E1</Description>
+          <Comment>Dampe's Grave</Comment>
+        </Value>
+        <Value>
+          <Data>06</Data>
+          <Description>#506482</Description>
+          <Comment>Gerudo Training Ground</Comment>
+        </Value>
+        <Value>
+          <Data>07</Data>
+          <Description>#646EBE</Description>
+          <Comment>Ganon's Castle</Comment>
         </Value>
       </Variable>
     </Variables>
