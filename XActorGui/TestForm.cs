@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+using mzxrules.OcaLib;
 
 namespace mzxrules.XActor
 {
     public partial class TestForm : Form
     {
         XActors Document { get; set; }
-        Game Game = Game.Oca;
+        Game Game = Game.OcarinaOfTime;
 
 
         public TestForm()
@@ -87,7 +88,7 @@ namespace mzxrules.XActor
         {
             XActors actors;
             Int16[] bitDictionary = new Int16[16];
-            actors = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
+            actors = XActors.LoadFromFile(XActors.OcaXmlPath);
 
             for (int i = 0; i < 16; i++)
             {
@@ -200,7 +201,7 @@ namespace mzxrules.XActor
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();
 
-            actorList = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
+            actorList = XActors.LoadFromFile(XActors.OcaXmlPath);
 
             sb.AppendLine("{|class=\"wikitable sortable\"");
             sb.AppendLine("! data-sort-type=\"text\" | Actor");
@@ -254,9 +255,9 @@ namespace mzxrules.XActor
 
         private void loadOcaButton_Click(object sender, EventArgs e)
         {
-            Document = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
+            Document = XActors.LoadFromFile(XActors.OcaXmlPath);
             actorControl.Document = Document;
-            Game = Game.Oca;
+            Game = Game.OcarinaOfTime;
 
             //foreach (var item in Document.Actor)
             //{
@@ -265,9 +266,9 @@ namespace mzxrules.XActor
         }
         private void loadMMButton_Click(object sender, EventArgs e)
         {
-            Document = XActors.LoadFromFile(Constants.MaskXmlFileLoaction);
+            Document = XActors.LoadFromFile(XActors.MaskXmlPath);
             actorControl.Document = Document;
-            Game = Game.Mask;
+            Game = Game.MajorasMask;
 
             //foreach(var item in Document.Actor)
             //{

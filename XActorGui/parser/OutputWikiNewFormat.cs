@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using mzxrules.OcaLib;
 
 namespace mzxrules.XActor
 {
@@ -78,7 +76,7 @@ namespace mzxrules.XActor
             int shiftback = ShiftBack(int.Parse(value.Data, System.Globalization.NumberStyles.HexNumber), capture.Mask);
             string obj = null;
 
-            if (SetGame != Game.Oca && capture.VarType != CaptureVar.v)
+            if (SetGame != Game.OcarinaOfTime && capture.VarType != CaptureVar.v)
             {
                 shiftback = ShiftBack(shiftback, 0xFF80);
             }

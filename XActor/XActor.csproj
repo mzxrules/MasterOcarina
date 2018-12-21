@@ -6,20 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ActorVars.xml" />
-    <None Remove="MMActorVars.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="ActorVars.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MMActorVars.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Helper\Helper.csproj" />
     <ProjectReference Include="..\OcaLib\OcaLib.csproj" />
   </ItemGroup>

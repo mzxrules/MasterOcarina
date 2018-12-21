@@ -3,7 +3,7 @@ using System;
 
 namespace mzxrules.XActor.MActors
 {
-    public class MActorRecord : OActors.ActorRecord_Wrapper
+    public class MActorRecord : ActorRecord_Wrapper
     {
         protected ushort DayFlags;
         protected byte Scene_0x1B;
@@ -49,7 +49,7 @@ namespace mzxrules.XActor.MActors
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X3}:{1:X4} {2}{3}{4} {5} {6} Days: {7} 1B?: {8:X4}",
+            return string.Format("{0:X3}:{1:X4} {2}{3}{4} {5} {6} Days: {7} 1B?: {8:X4}",
                 Actor,
                 Variable,
                 (actorName.Length > 0) ? actorName + ", " : "",
@@ -78,7 +78,7 @@ namespace mzxrules.XActor.MActors
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X3},{1:X4},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14:X2}",
+            return string.Format("{0:X3},{1:X4},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14:X2}",
                 Actor,
                 Variable,
                 actorName.Replace(',', ';'),

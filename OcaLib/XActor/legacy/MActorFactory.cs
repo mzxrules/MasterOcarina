@@ -36,7 +36,7 @@ namespace mzxrules.XActor.MActors
             }
         }
     }
-    public class MTransitionActor : OcaLib.Actor.TransitionActor
+    public class MTransitionActor : TransitionActor
     {
         byte SwitchToFrontRoom;
         byte SwitchToFrontCamera;
@@ -81,7 +81,7 @@ namespace mzxrules.XActor.MActors
 
             varString = GetVariable();
             return
-                String.Format("{0}, {1:X4}:{2:X4}, {3}, {4}{5}",
+                string.Format("{0}, {1:X4}:{2:X4}, {3}, {4}{5}",
                 PrintTransition(),
                 Actor,
                 Variable,
@@ -92,7 +92,7 @@ namespace mzxrules.XActor.MActors
 
         new protected string PrintTransition()
         {
-            return String.Format("{0:D2} {1:X2} -> {2:D2} {3:X2}",
+            return string.Format("{0:D2} {1:X2} -> {2:D2} {3:X2}",
                 SwitchToBackRoom,
                 SwitchToBackCamera,
                 SwitchToFrontRoom,

@@ -34,7 +34,7 @@ namespace mzxrules.OcaLib.Actor
             dest_func = br.ReadBigUInt32();
             update_func = br.ReadBigUInt32();
             draw_func = br.ReadBigUInt32();
-
+            
         }
     }
 

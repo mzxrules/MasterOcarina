@@ -1,5 +1,5 @@
 ﻿using mzxrules.OcaLib.Actor;
-namespace mzxrules.XActor.OActors
+namespace mzxrules.XActor
 {
     /// <summary>
     /// Wrapper class to avoid refactoring the ZActor lib

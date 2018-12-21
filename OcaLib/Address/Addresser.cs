@@ -3,7 +3,6 @@ using mzxrules.OcaLib.Addr2;
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using Addr = mzxrules.OcaLib.Addr2.Address;
@@ -17,10 +16,7 @@ namespace mzxrules.OcaLib
         static Addresses AddressDoc { get; set; }
         static Addresser()
         {
-            //var stream = Assembly.GetExecutingAssembly()
-            //    .GetManifestResourceStream("mzxrules.OcaLib.Addresses.xml");
-
-            using (FileStream stream = File.OpenRead("Addresses.xml"))
+            using (FileStream stream = File.OpenRead("Data/Addresses.xml"))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Addresses));
 

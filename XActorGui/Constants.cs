@@ -8,8 +8,6 @@ namespace mzxrules.XActor
 {
     class Constants
     {
-        public static string OcaXmlFileLocation = "ActorVars.xml";
-        public static string MaskXmlFileLoaction = "MMActorVars.xml";
         public static string[] MaskActorNames =
    {
 "player_actor",

@@ -160,10 +160,6 @@
       <Project>{fc18ebff-fa5c-4f92-a90c-fe14e29d9471}</Project>
       <Name>OcaLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XActor\XActor.csproj">
-      <Project>{fa36a46f-d251-4e1c-9e27-d4bfc6f84d54}</Project>
-      <Name>XActor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

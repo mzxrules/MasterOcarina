@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using mzxrules.OcaLib;
 
 namespace mzxrules.XActor
 {
@@ -9,11 +10,11 @@ namespace mzxrules.XActor
         static Dictionary<short, XActorParser> MaskActorParsers;
         static XActorFactory()
         {
-            var Document = XActors.LoadFromFile("ActorVars.xml");
-            OcarinaActorParsers = GetXActorParsers(Document, Game.Oca);
+            var Document = XActors.LoadFromFile(XActors.OcaXmlPath);
+            OcarinaActorParsers = GetXActorParsers(Document, Game.OcarinaOfTime);
 
-            Document = XActors.LoadFromFile("MMActorVars.xml");
-            MaskActorParsers = GetXActorParsers(Document, Game.Mask);
+            Document = XActors.LoadFromFile(XActors.MaskXmlPath);
+            MaskActorParsers = GetXActorParsers(Document, Game.MajorasMask);
         }
 
         static Dictionary<short, XActorParser> GetXActorParsers(XActors root, Game game)

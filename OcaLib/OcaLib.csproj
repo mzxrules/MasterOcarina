@@ -9,6 +9,8 @@
     <None Remove="Elf\Test.xml" />
     <None Remove="PathUtil\Test.xml" />
     <None Remove="SceneRoom\Notes.txt" />
+    <None Remove="XActor\ActorVars.xml" />
+    <None Remove="XActor\MMActorVars.xml" />
     <None Remove="XSLTFile1.xslt" />
   </ItemGroup>
 
@@ -16,11 +18,17 @@
     <Content Include="Elf\Test.xml" />
     <Content Include="PathUtil\Test.xml" />
     <Content Include="SceneRoom\Notes.txt" />
+    <Content Include="Data\ActorVars.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MMActorVars.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="XSLTFile1.xslt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Addresses.xml">
+    <Content Include="Data\Addresses.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

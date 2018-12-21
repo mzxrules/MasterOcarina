@@ -2,7 +2,7 @@
 {
     public enum Game
     {
-        Oca,
-        Mask
+        OcarinaOfTime,
+        MajorasMask
     }
 }
