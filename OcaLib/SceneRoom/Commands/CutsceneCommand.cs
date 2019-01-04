@@ -39,7 +39,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         List<Record> records = new List<Record>();
         
-        private Game game;
+        private readonly Game game;
 
         public CutsceneCommand(Game game) => this.game = game;
 
@@ -48,8 +48,6 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             base.SetCommand(command);
             Cutscenes = Command.Data1;
             SegmentAddress = Command.Data2;
-            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
-                throw new Exception();
         }
 
         public override string Read()
@@ -75,6 +73,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             if (game ==  Game.MajorasMask)
             {
+                if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
+                    throw new Exception();
                 br.BaseStream.Position = SegmentAddress.Offset;
                 for (int i = 0; i < Cutscenes; i++)
                 {

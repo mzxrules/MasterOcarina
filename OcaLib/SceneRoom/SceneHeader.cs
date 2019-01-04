@@ -79,7 +79,7 @@ namespace mzxrules.OcaLib.SceneRoom
         public void SetCommand(SceneWord sceneWord, long HeaderOffset)
         {
             SceneCommand command;
-             
+
             switch ((HeaderCommands)sceneWord.Code)
             {
                 case HeaderCommands.PositionList:       //0x00
@@ -148,9 +148,37 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.AlternateHeaders:   //0x18
                     command = new AlternateHeadersCommand(Game);
                     break;
-                case HeaderCommands.JpegBackground:     //0x19
+                case HeaderCommands.CameraAndWorldMap:  //0x19
                     command = new SettingsCommand();
                     break;
+                case HeaderCommands.Textures:           //0x1A
+                    if (Game == Game.MajorasMask)
+                    {
+                        command = new TexturesCommand();
+                        break;
+                    }
+                    goto default;
+                case HeaderCommands._0x1B:              //0x1B
+                    if (Game == Game.MajorasMask)
+                    {
+                        command = new _0x1BCommand();
+                        break;
+                    }
+                    goto default;
+                case HeaderCommands.Minimap:
+                    if (Game == Game.MajorasMask)
+                    {
+                        command = new MinimapCommand();
+                        break;
+                    }
+                    goto default;
+                case HeaderCommands.MinimapChests:
+                    if (Game == Game.MajorasMask)
+                    {
+                        command = new MinimapChestsCommand();
+                        break;
+                    }
+                    goto default;
                 default: command = new SceneCommand(); 
                     break;
             }

@@ -41,7 +41,7 @@
                 case HeaderCommands.SoundSettingsEcho:
                     return $"Sound Settings: Echo {Command[7]}";
 
-                case HeaderCommands.JpegBackground:
+                case HeaderCommands.CameraAndWorldMap:
                     return $"JPEG background camera related: {Command.Data1:X2} Overworld Region:  {(byte)Command.Data2:X2}";
             }
             return base.ToString();

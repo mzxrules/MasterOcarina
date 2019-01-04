@@ -25,6 +25,11 @@
         SoundSettingsEcho   = 0x16,
         Cutscene            = 0x17,
         AlternateHeaders    = 0x18,
-        JpegBackground      = 0x19,
+        CameraAndWorldMap   = 0x19,
+        //MM only
+        Textures            = 0x1A,
+        _0x1B               = 0x1B,
+        Minimap             = 0x1C,
+        MinimapChests       = 0x1E,
     }
 }

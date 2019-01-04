@@ -1,6 +1,7 @@
 ﻿using mzxrules.Helper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -23,7 +24,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 throw new Exception();
         }
 
-        public void Initialize(System.IO.BinaryReader br)
+        public void Initialize(BinaryReader br)
         {
             int maxEntrances;
             byte position;
