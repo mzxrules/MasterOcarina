@@ -14,7 +14,7 @@ namespace mzxrules.OcaLib.SceneRoom
             cmd.SetCommand(new byte[] { 0x18, 0, 0, 0, /**/ 2, 0, 0, 0 });
             cmds.Add(cmd);
 
-            Alternate.SpiritHack(cs0, cs1);
+            Alternate.SpiritHack((int)cs0, (int)cs1);
         }
     }
 }
@@ -123,12 +123,12 @@ namespace mzxrules.OcaLib
             header.SpiritHackSetAlternateHeaders(cs0, cs1);
             header.InitializeAssets(br);
 
-            for (int i = 0; i < header.Alternate.HeaderList.Count; i++)
+            for (int i = 0; i < header.Alternate.Headers.Count; i++)
             {
-                if (header.Alternate.HeaderList[i] != null)
+                if (header.Alternate.Headers[i] != null)
                 {
-                    header.Alternate.HeaderList[i].Load(br, header.Alternate.HeaderOffsetsList[i]);
-                    header.Alternate.HeaderList[i].InitializeAssets(br);
+                    header.Alternate.Headers[i].Load(br, header.Alternate.Offsets[i].Offset);
+                    header.Alternate.Headers[i].InitializeAssets(br);
                 }
             }
         }

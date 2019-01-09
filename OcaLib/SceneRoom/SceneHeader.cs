@@ -63,7 +63,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
             if (HasAlternateHeaders())
             {
-                Alternate.HeaderListEndAddress = AltHeaderEnd();
+                Alternate.DataEndOffset = AltHeaderEnd();
                 Alternate.Initialize(br);
             }
         }
@@ -283,7 +283,7 @@ namespace mzxrules.OcaLib.SceneRoom
             if (HasAlternateHeaders())
             {
                 //for every scene setup
-                foreach (SceneHeader altHeader in Alternate.HeaderList.Where(x => x != null))
+                foreach (SceneHeader altHeader in Alternate.Headers.Where(x => x != null))
                 {
                     //for every room in that scene setup
                     cmd = (RoomListCommand)altHeader[HeaderCommands.RoomList];
@@ -303,7 +303,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private IEnumerable<SceneHeader> GetAltHeaders()
         {
-            return from alt in Alternate.HeaderList
+            return from alt in Alternate.Headers
                    where alt != null
                    select alt;
         }
@@ -321,10 +321,10 @@ namespace mzxrules.OcaLib.SceneRoom
             altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {
-                for (int i = 0; i < altCmd.HeaderList.Count; i++)
+                for (int i = 0; i < altCmd.Headers.Count; i++)
                 {
-                    if (altCmd.HeaderList[i] != null)
-                        result.Add(altCmd.HeaderList[i].GetActorsById(id));
+                    if (altCmd.Headers[i] != null)
+                        result.Add(altCmd.Headers[i].GetActorsById(id));
                     else
                         result.Add(new List<ActorSpawn>());
                 }
@@ -368,10 +368,10 @@ namespace mzxrules.OcaLib.SceneRoom
             altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {
-                for (int i = 0; i < altCmd.HeaderList.Count; i++)
+                for (int i = 0; i < altCmd.Headers.Count; i++)
                 {
-                    if (altCmd.HeaderList[i] != null)
-                        result.Add(altCmd.HeaderList[i].GetObjectsById(id));
+                    if (altCmd.Headers[i] != null)
+                        result.Add(altCmd.Headers[i].GetObjectsById(id));
                     else
                         result.Add(new List<ushort>());
                 }
@@ -422,7 +422,7 @@ namespace mzxrules.OcaLib.SceneRoom
             };
             if (HasAlternateHeaders())
             {
-                foreach (SceneHeader h in Alternate.HeaderList)
+                foreach (SceneHeader h in Alternate.Headers)
                 {
                     if (h == null)
                         result.Add(new List<SceneCommand>());

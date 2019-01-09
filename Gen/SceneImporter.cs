@@ -153,7 +153,7 @@ namespace Gen
             if (scene.Header.HasAlternateHeaders())
             {
                 //update all alternate headers
-                foreach (SceneHeader header in scene.Header.Alternate.HeaderList) 
+                foreach (SceneHeader header in scene.Header.Alternate.Headers) 
                 {
                     if (header != null)
                     {

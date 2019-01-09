@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     public class AlternateHeadersCommand : SceneCommand, IDataCommand
     {
         Game Game { get; set; }
-        public int HeaderListEndAddress { get; set; }
-        public List<SceneHeader> HeaderList = new List<SceneHeader>();
-        public List<long> HeaderOffsetsList = new List<long>();
+        public int DataEndOffset { get; set; }
+        public List<SceneHeader> Headers = new List<SceneHeader>();
+        public List<SegmentAddress> Offsets = new List<SegmentAddress>();
         public SegmentAddress SegmentAddress { get; set; }
 
         public AlternateHeadersCommand(Game game)
@@ -30,10 +31,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public void Initialize(BinaryReader br)
         {
             int headerCount;
-            List<uint> headerOffsets = new List<uint>();
+            List<SegmentAddress> headerOffsets = new List<SegmentAddress>();
 
             //Get the number of headers
-            headerCount = (HeaderListEndAddress - SegmentAddress.Offset) / 4;
+            headerCount = (DataEndOffset - SegmentAddress.Offset) / 4;
 
             //If there are an impossibly high number of headers, only parse the maximum of 20
             if (headerCount >= 0x14)
@@ -45,43 +46,41 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 headerOffsets.Add(br.ReadBigUInt32());
             }
-
-
+            
             //For every header
-            foreach (uint headerOffset in headerOffsets)//int i = 0; i < headerCount; i++)
+            foreach (var segoff in headerOffsets)//int i = 0; i < headerCount; i++)
             {
                 //Capture the Bank Number and offset to the headers
-                var bank = (headerOffset & 0xFF000000) >> 24;
-                var relOffset = headerOffset & 0xFFFFFF;
+                var segment = segoff.Segment;
+                var off = segoff.Offset;
 
-                if (!(bank == 02 || bank == 03))
-                    if (!(headerOffset == 0))
-                        break;
+                if (segment != 02 && segment != 03 && segoff != 0)
+                    break;
 
-                if (relOffset != 0)
+                Offsets.Add(segoff);
+
+                if (off != 0)
                 {
-                    HeaderList.Add(new SceneHeader(Game));
-                    HeaderOffsetsList.Add(relOffset);
+                    Headers.Add(new SceneHeader(Game));
                 }
                 else
                 {
-                    HeaderList.Add(null);
-                    HeaderOffsetsList.Add(0);
+                    Headers.Add(null);
                 }
             }
         }
 
-        public void SpiritHack(long cs0, long cs1)
+        public void SpiritHack(int cs0, int cs1)
         {
             for (int i = 0; i < 3; i++)
             {
-                HeaderList.Add(null);
-                HeaderOffsetsList.Add(0);
+                Headers.Add(null);
+                Offsets.Add(0);
             }
-            HeaderList.Add(new SceneHeader(Game.OcarinaOfTime));
-            HeaderOffsetsList.Add(cs0);
-            HeaderList.Add(new SceneHeader(Game.OcarinaOfTime));
-            HeaderOffsetsList.Add(cs1);
+            Headers.Add(new SceneHeader(Game.OcarinaOfTime));
+            Offsets.Add(cs0);
+            Headers.Add(new SceneHeader(Game.OcarinaOfTime));
+            Offsets.Add(cs1);
         }
 
         public override string Read()

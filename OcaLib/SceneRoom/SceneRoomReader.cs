@@ -98,12 +98,12 @@ namespace mzxrules.OcaLib.SceneRoom
 
             if (header.HasAlternateHeaders())
             {
-                for (int i = 0; i < header.Alternate.HeaderList.Count; i++)
+                for (int i = 0; i < header.Alternate.Headers.Count; i++)
                 {
-                    if (header.Alternate.HeaderList[i] != null)
+                    if (header.Alternate.Headers[i] != null)
                     {
-                        header.Alternate.HeaderList[i].Load(br, header.Alternate.HeaderOffsetsList[i]);
-                        header.Alternate.HeaderList[i].InitializeAssets(br);
+                        header.Alternate.Headers[i].Load(br, header.Alternate.Offsets[i].Offset);
+                        header.Alternate.Headers[i].InitializeAssets(br);
                     }
                 }
             }
@@ -156,9 +156,9 @@ namespace mzxrules.OcaLib.SceneRoom
             if (Header.HasAlternateHeaders())
             {
                 var Alternate = Header.Alternate;
-                for (int i = 0; i < Alternate.HeaderList.Count; i++)
+                for (int i = 0; i < Alternate.Headers.Count; i++)
                 {
-                    if (Alternate.HeaderList[i] == null)
+                    if (Alternate.Headers[i] == null)
                         continue;
 
                     if (i < 3)
@@ -169,8 +169,8 @@ namespace mzxrules.OcaLib.SceneRoom
                     {
                         result.Append($"Cutscene {(i - 3)}: ");
                     }
-                    result.AppendLine(Alternate.HeaderOffsetsList[i].ToString("X8"));
-                    result.AppendLine(Alternate.HeaderList[i].Read());
+                    result.AppendLine(Alternate.Offsets[i].Offset.ToString("X8"));
+                    result.AppendLine(Alternate.Headers[i].Read());
                 }
             }
             return result.ToString();
