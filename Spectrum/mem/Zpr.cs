@@ -5,7 +5,7 @@ using mzxrules.Helper;
 
 namespace Spectrum
 {
-    class Zpr
+    partial class Zpr
     {
         static EmulatorProcess Emulator;
         static IntPtr RamPointer;
@@ -27,26 +27,57 @@ namespace Spectrum
             return result;
         }
 
-        public static Emulator Trainer(uint[] pattern, int rdramOff)
+        public static Emulator Trainer(SearchSignature sig)
         {
             Console.WriteLine("Begin scanning...");
             //"mupen64plus.dll"
-            foreach (var p in Process.GetProcesses())
+            var processes = Process.GetProcesses();
+            foreach (var p in processes)
             {
                 if (p.ProcessName.ToLowerInvariant().Contains("project64"))
                 {
                     Console.WriteLine($"Project64 detected, {p.WorkingSet64:X8}");
                     Console.WriteLine($"Note: PJ64 uses dynamic memory allocation; Address changes on program re-launch");
-                    int result = BayerMooreScanForSignature(p, pattern, (IntPtr)0x0, 0x7FFF0000);
-                    if (result < 0)
+                    List<long> results = new List<long>();
+                    long searchNext = 0;
+                    long searchEnd = 0xFFFFFFFF;
+
+                    while (searchNext < searchEnd)
+                    {
+                        long sigFound = BayerMooreScanForSignature(p, sig.Pattern, (IntPtr)searchNext, searchEnd-searchNext);
+
+                        if (sigFound >= 0)
+                        {
+                            long result = searchNext + sigFound - sig.Address.Offset;
+                            searchNext += sigFound + 4;
+
+                            bool verified = true;
+                            foreach (var (ptr, val) in sig.Verification)
+                            {
+                                uint value = (uint)ReadProcessInt32(p, (IntPtr)(result + ptr.Offset), out int r);
+                                if (value != val)
+                                {
+                                    verified = false;
+                                    break;
+                                }
+                            }
+                            if (verified)
+                            {
+                                Console.WriteLine($"RDRAM begins at {result:X8}");
+                                return new Emulator(p.ProcessName, $"generated", 32, $"{result:X8}", 0);
+                            }
+                        }
+                        else
+                        {
+                            searchNext = searchEnd;
+                        }
+                    }
+                    if (results.Count == 0)
                     {
                         Console.WriteLine("RDRAM not found");
                         continue;
                     }
-                    result -= rdramOff;
-                    Console.WriteLine($"RDRAM begins at {result:X8}");
-                    Emulator emulator = new Emulator(p.ProcessName, "generated", 32, $"{result:X8}", 0);
-                    return emulator;
+                    return null;
                 }
                 try
                 {
@@ -56,7 +87,7 @@ namespace Spectrum
                         {
                             Console.WriteLine($"Process {p.ProcessName} contains mupen64plus.dll");
                             
-                            int result = BayerMooreScanForSignature(p, m, pattern);
+                            long result = BayerMooreScanForSignature(p, m, sig.Pattern);
 
                             if (result < 0)
                             {
@@ -65,7 +96,7 @@ namespace Spectrum
                             }
                             else
                             {
-                                result -= rdramOff;
+                                result -= sig.Address.Offset;
                                 Console.WriteLine($"RDRAM begins at {result:X8}");
                                 Emulator emulator = new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result:X8}", 0);
                                 return emulator;
@@ -83,25 +114,27 @@ namespace Spectrum
             return null;
         }
 
-        private static int BayerMooreScanForSignature(Process proc, ProcessModule m, uint[]p)
+        private static long BayerMooreScanForSignature(Process proc, ProcessModule m, uint[]p)
         {
             return BayerMooreScanForSignature(proc, p, m.BaseAddress, m.ModuleMemorySize);
         }
 
-        private static int BayerMooreScanForSignature(Process proc, uint[] p, IntPtr baseAddr, int memorySize)
+        private static long BayerMooreScanForSignature(Process proc, uint[] p, IntPtr baseAddr, long size)
         {
             Pattern<uint> pattern = new Pattern<uint>(p);
             
-            int size = memorySize;
-            int ti = 0;
-            int pi = (pattern.Length - 1);
+            long ti = 0; //text index 
+            int pi = (pattern.Length - 1); //pattern index
             int patternSize = pattern.Length * sizeof(uint);
+
+            ProcessBuffer buffer = new ProcessBuffer();
+            //buffer.Initialize(proc, baseAddr);
 
             while (ti + patternSize <= size)
             {
-                int readIndex = pi * sizeof(uint) + ti;
-                uint tV = (uint)ReadProcessInt32(proc, baseAddr + readIndex, out int r);
-
+                long readIndex = pi * sizeof(uint) + ti;
+                uint tV = //(uint)ReadProcessInt32(proc, baseAddr + readIndex, out int r);
+                    (uint)buffer.ReadInt32(proc, (IntPtr) ((long)baseAddr + readIndex));
                 if (tV == pattern.Data[pi])
                 {
                     pi--;
@@ -415,22 +448,6 @@ namespace Spectrum
         private static Int64 ReadProcessInt64(Process process, IntPtr address, out int bytesRead)
         {
             return BitConverter.ToInt64(ReadProcess(process, address, sizeof(long), out bytesRead), 0);
-        }
-
-
-        private static bool WriteProcess()
-        {
-            return false;
-            Process process; IntPtr address; long value;
-            IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
-
-            byte[] val = BitConverter.GetBytes(value);
-
-            bool worked = NativeMethods.WriteProcessMemory(hProc, address, val, (IntPtr)val.LongLength, out int bytesWritten);
-
-            NativeMethods.CloseHandle(hProc);
-
-            return worked;
         }
 
         /// <summary>
