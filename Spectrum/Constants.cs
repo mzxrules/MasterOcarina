@@ -25,14 +25,14 @@ namespace Spectrum
             return (0, 0);
         }
 
-        public static int GetRamSize(RomVersion version)
-        {
-            if (version.Game == Game.MajorasMask
-                || version == ORom.Build.DBGMQ)
-            {
-                return 0x800000;
-            }
-            return 0x400000;
-        }
+        //public static int GetRamSize(RomVersion version)
+        //{
+        //    if (version.Game == Game.MajorasMask
+        //        || version == ORom.Build.DBGMQ)
+        //    {
+        //        return 0x800000;
+        //    }
+        //    return 0x400000;
+        //}
     }
 }

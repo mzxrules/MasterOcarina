@@ -230,6 +230,21 @@ namespace Spectrum
             return result;
         }
 
+        private static int GetRamSize()
+        {
+            Ptr ptr = SPtr.New(0x318);
+
+            int value = ptr.ReadInt32(0);
+
+            if (value == 0x40_0000)
+                return value;
+
+            if (value == 0x080_0000)
+                return value;
+
+            return 0x40_0000;
+        }
+
         private static void WriteRam(string expression, object value)
         {
             if (!TryEvaluate(expression, out long address))
@@ -237,7 +252,8 @@ namespace Spectrum
 
             N64Ptr addr = address;
 
-            if (addr.Base() >= Constants.GetRamSize(Options.Version))
+
+            if (addr.Base() >= GetRamSize())
             {
                 return;
             }
@@ -325,6 +341,14 @@ namespace Spectrum
                 GfxDList Overlay_Disp = new GfxDList("OVERLAY_DISP", Gfx.RelOff(0x2A8));
                 GfxDList Poly_Opa_Disp = new GfxDList("POLY_OPA_DISP", Gfx.RelOff(0x2B8));
                 GfxDList Poly_Xlu_Disp = new GfxDList("POLY_XLU_DISP", Gfx.RelOff(0x2C8));
+                return new GfxDList[] { Work_Disp, Poly_Opa_Disp, Poly_Xlu_Disp, Overlay_Disp };
+            }
+            else if(Options.Version == Game.MajorasMask)
+            {
+                GfxDList Work_Disp = new GfxDList("WORK_DISP", Gfx.RelOff(0x1A4));
+                GfxDList Overlay_Disp = new GfxDList("OVERLAY_DISP", Gfx.RelOff(0x298));
+                GfxDList Poly_Opa_Disp = new GfxDList("POLY_OPA_DISP", Gfx.RelOff(0x2A8));
+                GfxDList Poly_Xlu_Disp = new GfxDList("POLY_XLU_DISP", Gfx.RelOff(0x2B8));
                 return new GfxDList[] { Work_Disp, Poly_Opa_Disp, Poly_Xlu_Disp, Overlay_Disp };
             }
             return null;

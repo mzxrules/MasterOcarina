@@ -1,1 +1,1 @@
-namespace Spectrum { partial class Program { public const string Timestamp = "Thu 12/20/2018 20:09:50.00";}} 
+namespace Spectrum { partial class Program { public const string Timestamp = "Sun 01/06/2019 16:16:13.23";}} 

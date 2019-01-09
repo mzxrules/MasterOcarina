@@ -972,7 +972,7 @@ namespace Spectrum
 
                             N64Ptr addr = (int)args[1];
                             int size = (int)args[2] & -4;
-                            int ramSize = Constants.GetRamSize(Options.Version);
+                            int ramSize = GetRamSize();
 
                             if (addr.Offset + size > ramSize)
                             {
@@ -1150,18 +1150,18 @@ namespace Spectrum
         #region Graphics
         [SpectrumCommand(
             Name = "gfx",
-            Sup = SpectrumCommand.Supported.OoT,
             Cat = SpectrumCommand.Category.Gfx,
             Description = "Displays variables related to the 'Graphics Context'")]
         private static void DisplayGraphicsContext(Arguments args)
         {
-            if (Gfx == 0)
-                return;
+            GfxDList[] dlists = new GfxDList[0];
 
-            var DLists = GetFrameDlists(Gfx);
-
+            if (Gfx != 0)
+            {
+                dlists= GetFrameDlists(Gfx);
+            }
             Console.Clear();
-            PrintGraphicsContext(DLists);
+            PrintGraphicsContext(dlists);
         }
 
         private static void PrintGraphicsContext(GfxDList[] DLists)
@@ -1171,11 +1171,11 @@ namespace Spectrum
             foreach (var dlist in DLists)
             {
                 var freeSize = dlist.AppendEndPtr - dlist.AppendStartPtr;
-                Console.WriteLine("{6:X4} {0,-13}: {1:X4} {2:X6} {3:X6} {4:X6} Free: {5:X4}", dlist.Name, dlist.Size,
+                Console.WriteLine("{6:X4} {0,-13}: {1:X5} {2:X6} {3:X6} {4:X6} Free: {5:X5}", dlist.Name, dlist.Size,
                     dlist.StartPtr & 0xFFFFFF,
                     dlist.AppendStartPtr & 0xFFFFFF,
                     dlist.AppendEndPtr & 0xFFFFFF,
-                    (freeSize >= 0) ? freeSize : 0xFFFF,
+                    (freeSize >= 0) ? freeSize : 0xFFFFF,
                     (dlist.RecordPtr - (Gfx & 0xFFFFFF)) & 0xFFFFFF);
             }
         }
@@ -1272,7 +1272,7 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
-            var data = Zpr.ReadRam(0, Constants.GetRamSize(Options.Version));
+            var data = Zpr.ReadRam(0, GetRamSize());
 
             string gameStr = string.Format("{0}_{1}_frame.txt",
                 (Options.Version == Game.OcarinaOfTime) ? "oot" : (Options.Version == Game.MajorasMask) ? "mm" : "unk",
@@ -1302,7 +1302,7 @@ namespace Spectrum
 
             var fileMap = GetRamMap(true).OfType<IFile>().ToList();
 
-            var data = Zpr.ReadRam(0, Constants.GetRamSize(Options.Version));
+            var data = Zpr.ReadRam(0, GetRamSize());
 
             string gameStr = string.Format("{0}_{1}_frame_img.txt",
                 (Options.Version == Game.OcarinaOfTime) ? "oot" : (Options.Version == Game.MajorasMask) ? "mm" : "unk",
@@ -1440,7 +1440,7 @@ namespace Spectrum
             var topDlist = GlobalContext.Deref().RelOff(0xB8).Deref();
 
             var ramMap = GetRamMap(true).OfType<IFile>().ToList();
-            var data = Zpr.ReadRam(0, Constants.GetRamSize(Options.Version));
+            var data = Zpr.ReadRam(0, GetRamSize());
 
             using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
             {

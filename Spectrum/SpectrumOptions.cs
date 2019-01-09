@@ -251,7 +251,7 @@ namespace Spectrum
             if (!Addresser.TryGetRam("GFX_START", version, out int temp))
             {
                 if (GlobalContext != 0)
-                    Gfx = SPtr.New(GlobalContext.ReadInt32(0));
+                    Gfx = GlobalContext.Deref();
                 else
                     Gfx = SPtr.New(0);
             }
