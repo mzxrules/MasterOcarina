@@ -38,45 +38,17 @@ namespace Spectrum
                 {
                     Console.WriteLine($"Project64 detected, {p.WorkingSet64:X8}");
                     Console.WriteLine($"Note: PJ64 uses dynamic memory allocation; Address changes on program re-launch");
-                    List<long> results = new List<long>();
-                    long searchNext = 0;
-                    long searchEnd = 0xFFFFFFFF;
 
-                    while (searchNext < searchEnd)
+                    long result = ScanForSignature(p, sig, (IntPtr)0, 0xFFFF_FFFF);
+
+                    if (result >= 0)
                     {
-                        long sigFound = BayerMooreScanForSignature(p, sig.Pattern, (IntPtr)searchNext, searchEnd-searchNext);
+                        Console.WriteLine($"RDRAM begins at {result:X8}");
+                        return new Emulator(p.ProcessName, $"generated", 32, $"{result:X8}", 0);
 
-                        if (sigFound >= 0)
-                        {
-                            long result = searchNext + sigFound - sig.Address.Offset;
-                            searchNext += sigFound + 4;
+                    }
 
-                            bool verified = true;
-                            foreach (var (ptr, val) in sig.Verification)
-                            {
-                                uint value = (uint)ReadProcessInt32(p, (IntPtr)(result + ptr.Offset), out int r);
-                                if (value != val)
-                                {
-                                    verified = false;
-                                    break;
-                                }
-                            }
-                            if (verified)
-                            {
-                                Console.WriteLine($"RDRAM begins at {result:X8}");
-                                return new Emulator(p.ProcessName, $"generated", 32, $"{result:X8}", 0);
-                            }
-                        }
-                        else
-                        {
-                            searchNext = searchEnd;
-                        }
-                    }
-                    if (results.Count == 0)
-                    {
-                        Console.WriteLine("RDRAM not found");
-                        continue;
-                    }
+                    Console.WriteLine("RDRAM not found");
                     return null;
                 }
                 try
@@ -86,8 +58,8 @@ namespace Spectrum
                         if (m.ModuleName == "mupen64plus.dll")
                         {
                             Console.WriteLine($"Process {p.ProcessName} contains mupen64plus.dll");
-                            
-                            long result = BayerMooreScanForSignature(p, m, sig.Pattern);
+
+                            long result = ScanForSignature(p, m, sig);
 
                             if (result < 0)
                             {
@@ -96,30 +68,57 @@ namespace Spectrum
                             }
                             else
                             {
-                                result -= sig.Address.Offset;
                                 Console.WriteLine($"RDRAM begins at {result:X8}");
-                                Emulator emulator = new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result:X8}", 0);
-                                return emulator;
+                                return new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result:X8}", 0);
                             }
                         }
 
                     }
                 }
-                catch (Exception e)
-                {
-                    ;
-                }
+                catch (Exception) { }
             }
             Console.WriteLine("Finished");
             return null;
         }
 
-        private static long BayerMooreScanForSignature(Process proc, ProcessModule m, uint[]p)
+        private static long ScanForSignature(Process proc, ProcessModule m, SearchSignature s)
         {
-            return BayerMooreScanForSignature(proc, p, m.BaseAddress, m.ModuleMemorySize);
+            return ScanForSignature(proc, s, m.BaseAddress, m.ModuleMemorySize);
         }
 
-        private static long BayerMooreScanForSignature(Process proc, uint[] p, IntPtr baseAddr, long size)
+        private static long ScanForSignature(Process proc, SearchSignature s, IntPtr baseAddr, long size)
+        {
+            long next = (long)baseAddr;
+            long end = next + size;
+
+            while (true)
+            {
+                long patternIndex = BayerMooreScanForPattern(proc, s.Pattern, (IntPtr)next, end - next);
+
+                if (patternIndex >= 0)
+                {
+                    long result = next + patternIndex - s.Address.Offset;
+                    next += patternIndex + 4;
+
+                    bool verified = true;
+                    foreach (var (ptr, val) in s.Verification)
+                    {
+                        uint value = (uint)ReadProcessInt32(proc, (IntPtr)(result + ptr.Offset), out int r);
+                        if (value != val)
+                        {
+                            verified = false;
+                            break;
+                        }
+                    }
+                    if (verified)
+                        return result;
+                }
+                else
+                    return -1;
+            }
+        }
+
+        private static long BayerMooreScanForPattern(Process proc, uint[] p, IntPtr baseAddr, long size)
         {
             Pattern<uint> pattern = new Pattern<uint>(p);
             
