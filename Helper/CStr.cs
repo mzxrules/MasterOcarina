@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace mzxrules.Helper
 {
@@ -13,18 +10,19 @@ namespace mzxrules.Helper
         {
             string result = "";
             StreamReader sw = new StreamReader(stream, enc);
-
+            
             if (maxSeek == 0)
                 maxSeek = int.MaxValue;
-            maxSeek = Math.Min(maxSeek, stream.Length);
+            maxSeek = Math.Min(maxSeek, stream.Length - stream.Position);
 
-            char c = (char)sw.Read();
-            int i = 0;
-            while (c != '\0' && i < maxSeek)
+            char c;
+            for (int i = 0; i < maxSeek; i++)
             {
-                result += c;
                 c = (char)sw.Read();
-                i++;
+                if (c == '\0')
+                    break;
+
+                result += c;
             }
 
             return result;
