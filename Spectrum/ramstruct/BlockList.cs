@@ -5,7 +5,7 @@ namespace Spectrum
 {
     class BlockNode : IRamItem
     {
-        public FileAddress Ram { get; protected set; }
+        public N64PtrRange Ram { get; protected set; }
         public bool IsFree { get; protected set; }
 
         public uint Size;
@@ -22,7 +22,7 @@ namespace Spectrum
             Size = ptr.ReadUInt32(4);
             Next = ptr.ReadInt32(8);
             Prev = ptr.ReadInt32(0xC);
-            Ram = new FileAddress(addr, addr + LENGTH);
+            Ram = new N64PtrRange(addr, addr + LENGTH);
         }
 
         public static List<BlockNode> GetBlockList(N64Ptr address)

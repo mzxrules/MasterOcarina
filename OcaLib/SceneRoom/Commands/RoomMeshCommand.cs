@@ -24,7 +24,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string Read()
         {
-            return header.ToString() ;
+            return ToString() + Environment.NewLine +  header.ToString() ;
         }
         public override string ToString()
         {

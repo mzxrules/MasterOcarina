@@ -4,10 +4,10 @@ namespace Spectrum
 {
     interface IRamItem
     {
-        FileAddress Ram { get; }
+        N64PtrRange Ram { get; }
     }
     interface IVRamItem
     {
-        FileAddress VRam { get; }
+        N64PtrRange VRam { get; }
     }
 }

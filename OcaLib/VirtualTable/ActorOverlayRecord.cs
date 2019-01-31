@@ -56,7 +56,7 @@ namespace mzxrules.OcaLib
         {
             Actor = index;
             VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
-            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+            VRam = new N64PtrRange(br.ReadBigUInt32(), br.ReadBigUInt32());
 
             RamStart = br.ReadBigUInt32();
             VRamActorInfo = br.ReadBigUInt32();
@@ -69,7 +69,7 @@ namespace mzxrules.OcaLib
         {
             Actor = index;
             VRom = new FileAddress(recordPtr.ReadUInt32(0x00), recordPtr.ReadUInt32(0x04));
-            VRam = new FileAddress(recordPtr.ReadUInt32(0x08), recordPtr.ReadUInt32(0x0C));
+            VRam = new N64PtrRange(recordPtr.ReadUInt32(0x08), recordPtr.ReadUInt32(0x0C));
 
             RamStart = recordPtr.ReadUInt32(0x10);
             VRamActorInfo = recordPtr.ReadUInt32(0x14);

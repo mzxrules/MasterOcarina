@@ -5,7 +5,7 @@ namespace Spectrum
 {
     class ActorInstance : IRamItem, IActorItem
     {
-        public FileAddress Ram { get; }
+        public N64PtrRange Ram { get; }
 
         public N64Ptr Address;
         public int Actor
@@ -56,7 +56,7 @@ namespace Spectrum
                 instanceSize = 0;
             }
 
-            Ram = new FileAddress(Address, Address + instanceSize);
+            Ram = new N64PtrRange(Address, Address + instanceSize);
 
 
             Variable = ptr.ReadUInt16(0x1C); 

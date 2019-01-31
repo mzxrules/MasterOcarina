@@ -10,11 +10,11 @@ namespace Spectrum
         public const int LENGTH = 4 * 7;
         public const int COUNT = 2;
 
-        public FileAddress Ram { get; }
+        public N64PtrRange Ram { get; }
         int Item;
 
         public FileAddress VRom { get; set; }
-        public FileAddress VRam { get; set; }
+        public N64PtrRange VRam { get; set; }
         uint RamFileName;
 
         public OvlPause(int i, Ptr ptr)
@@ -27,10 +27,10 @@ namespace Spectrum
             VRom = new FileAddress(
                 ptr.ReadUInt32(0x04),
                 ptr.ReadUInt32(0x08));
-            VRam = new FileAddress(
+            VRam = new N64PtrRange(
                 ptr.ReadUInt32(0x0C),
                 ptr.ReadUInt32(0x10));
-            Ram = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
+            Ram = new N64PtrRange(ramFileStart, ramFileStart + VRam.Size);
 
             RamFileName = ptr.ReadUInt32(0x18);
 

@@ -199,37 +199,48 @@ namespace Spectrum
     }
     class ThreadStackData : IRamItem
     {
-        public FileAddress Ram { get; set; }
-        private ThreadStackCtx Parent;
+        public N64PtrRange Ram { get; set; }
+        private ThreadStack Parent;
 
-        public ThreadStackData(ThreadStackCtx parent, FileAddress addr)
+        public ThreadStackData(ThreadStack parent, N64PtrRange addr)
         {
             Parent = parent;
             Ram = addr;
         }
         public override string ToString()
         {
-            return string.Format("{0,-6} STACK {1:X8}:{2:X8}",
-                Parent.Name,
-                (int)Ram.Start, (int)Ram.End);
-
+            return $"{Parent.Name,-10} STACK {(int)Ram.Start:X8}:{(int)Ram.End:X8}";
         }
     }
 
-    class ThreadStackCtx : IRamItem
+    class ThreadStack : IRamItem
     {
-        static ThreadStackCtx[] ThreadContextA = new ThreadStackCtx[]{
-                new ThreadStackCtx(0x80006830, "boot"),
-                new ThreadStackCtx(0x80006E00, "idle"),
-                new ThreadStackCtx(0x80007BD0, "main"),
-                new ThreadStackCtx(0x80007D20, "dmamgr"),
-                new ThreadStackCtx(0x80121C68, "fault"),
-                new ThreadStackCtx(0x80120C18, "irqmgr"),
-                new ThreadStackCtx(0x80120BF8, "padmgr"),
-                new ThreadStackCtx(0x80120BD8, "audio"),
-                new ThreadStackCtx(0x80120BB8, "sched"),
-                new ThreadStackCtx(0x80120B98, "graph")
+        static ThreadStack[] ThreadContextA = new ThreadStack[]{
+                new ThreadStack(0x80006830, "boot"),
+                new ThreadStack(0x80006E00, "idle"),
+                new ThreadStack(0x80007BD0, "main"),
+                new ThreadStack(0x80007D20, "dmamgr"),
+                new ThreadStack(0x80121C68, "fault"),
+                new ThreadStack(0x80120C18, "irqmgr"),
+                new ThreadStack(0x80120BF8, "padmgr"),
+                new ThreadStack(0x80120BD8, "audio"),
+                new ThreadStack(0x80120BB8, "sched"),
+                new ThreadStack(0x80120B98, "graph")
             };
+
+        public N64PtrRange Ram { get; }
+        public string Name { get; }
+
+
+        public N64Ptr NextPtr { get; set; }
+        public N64Ptr PrevPtr { get; set; }
+        public ThreadStackData StackAddr { get; set; }
+        //0x10 = init value
+        public int Unknown { get; set; }
+        //0x18 = str ptr
+        public int Unknown2 { get; set; }
+
+
 
         public static List<IRamItem> GetIRamItems()
         {
@@ -245,21 +256,9 @@ namespace Spectrum
             return result;
         }
 
-        public FileAddress Ram { get; }
-        public string Name { get; }
-
-
-        public N64Ptr NextPtr { get; set; }
-        public N64Ptr PrevPtr { get; set; }
-        public ThreadStackData StackAddr { get; set; }
-        //0x10 = init value
-        public int Unknown { get; set; }
-        //0x18 = str ptr
-        public int Unknown2 { get; set; }
-
-        public ThreadStackCtx(N64Ptr addr, string name)
+        public ThreadStack(N64Ptr addr, string name)
         {
-            Ram = new FileAddress(addr, addr + 0x20);
+            Ram = new N64PtrRange(addr, addr + 0x20);
             Name = name;
 
         }
@@ -270,7 +269,7 @@ namespace Spectrum
             PrevPtr = ptr.ReadInt32(0x04);
             int StartPtr = ptr.ReadInt32(0x08);
             int EndPtr = ptr.ReadInt32(0x0C);
-            StackAddr = new ThreadStackData(this, new FileAddress(StartPtr, EndPtr));
+            StackAddr = new ThreadStackData(this, new N64PtrRange(StartPtr, EndPtr));
             //0x10
             Unknown = ptr.ReadInt32(0x14);
             //0x18

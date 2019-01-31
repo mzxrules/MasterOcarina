@@ -12,7 +12,7 @@ namespace Spectrum
     {
         public FileAddress VRom { get; set; }
 
-        public FileAddress Ram { get; set; }
+        public N64PtrRange Ram { get; set; }
 
         public int Id { get; set; }
 
@@ -28,7 +28,7 @@ namespace Spectrum
             RamScene result = new RamScene
             {
                 VRom = vrom,
-                Ram = new FileAddress(ramStart, ramEnd),
+                Ram = new N64PtrRange(ramStart, ramEnd),
                 Id = sceneId
             };
 

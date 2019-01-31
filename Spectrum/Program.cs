@@ -782,7 +782,7 @@ namespace Spectrum
 
             if (Options.Version == ORom.Build.N0
                 && (fetchAll || Options.ShowThreadingStructs))
-                ramItems.AddRange(ThreadStackCtx.GetIRamItems());
+                ramItems.AddRange(ThreadStack.GetIRamItems());
 
             return ramItems;
         }

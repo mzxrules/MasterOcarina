@@ -24,7 +24,7 @@ namespace Atom
             }
         }
         public string Name;
-        public FileAddress VRam { get; protected set; }
+        public N64PtrRange VRam { get; protected set; }
         public FileAddress VRom { get; protected set; }
 
         public SectionList Sections = new SectionList();
@@ -50,10 +50,11 @@ namespace Atom
 
         public static DisassemblyTask New(JFileInfo file)
         {
+            FileAddress ptr = file.Ram.Convert();
             var task = new DisassemblyTask()
             {
                 Name = file.File,
-                VRam = file.Ram.Convert(),
+                VRam = new N64PtrRange(ptr.Start, ptr.End),
                 VRom = file.Rom.Convert()
             };
 

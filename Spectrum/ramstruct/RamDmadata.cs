@@ -6,14 +6,14 @@ namespace Spectrum
     class RamDmadata :  IFile
     {
         private static RamDmadata Data;
-        public FileAddress Ram { get; set; } 
+        public N64PtrRange Ram { get; set; } 
         public FileAddress VRom { get; set; }
 
         public RamDmadata()
         {
             Ptr ptr = SpectrumVariables.Dmadata_Addr;
             VRom = new FileAddress(ptr.ReadInt32(0x20), ptr.ReadInt32(0x24));
-            Ram = new FileAddress(ptr, ptr + VRom.Size);
+            Ram = new N64PtrRange(ptr, ptr + VRom.Size);
 
             Data = this;
         }

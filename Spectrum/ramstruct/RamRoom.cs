@@ -6,12 +6,12 @@ namespace Spectrum
     class RamRoom : IFile
     {
         static int Room_Alloc_Table { get { return SpectrumVariables.Room_Allocation_Table; } }
-        public FileAddress Ram { get; }
+        public N64PtrRange Ram { get; }
         public FileAddress VRom { get; set; }
 
         public RamRoom(Ptr ptr)
         {
-            Ram = new FileAddress(
+            Ram = new N64PtrRange(
                 ptr.ReadInt32(0x00),
                 ptr.ReadInt32(0x04));
 

@@ -14,6 +14,17 @@ namespace Spectrum
         
         static FileAddress[] ObjectFiles;
 
+        public short Object { get; private set; }
+        public bool IsLoaded { get; private set; }
+        public N64PtrRange Ram { get; }
+
+        public FileAddress VRom
+        {
+            get { return ObjectFiles[Object]; }
+            set { ObjectFiles[Object] = value; }
+        }
+
+
         internal static void ChangeVersion(RomVersion v, bool g)
         {
             if (v.Game == Game.OcarinaOfTime)
@@ -38,20 +49,7 @@ namespace Spectrum
             return Zpr.ReadRamByte(OBJ_ALLOC_TABLE_ADDR + 0x08);
         }
 
-        public short Object { get; private set; }
-        public bool IsLoaded { get; private set; }
-        public FileAddress Ram
-        {
-            get { return _RamAddress; }
-        }
 
-        public FileAddress VRom
-        {
-            get { return ObjectFiles[Object]; }
-            set { ObjectFiles[Object] = value; }
-        }
-
-        FileAddress _RamAddress;
         int Size;
 
         public RamObject(Ptr ptr)
@@ -61,7 +59,7 @@ namespace Spectrum
             Object = Math.Abs(Object);
             N64Ptr addr = ptr.ReadUInt32(4); 
             Size = (ObjectFiles.Length <= Object || Object < 0) ? 0 : (int)ObjectFiles[Object].Size;
-            _RamAddress = new FileAddress(addr, addr + Size);
+            Ram = new N64PtrRange(addr, addr + Size);
         }
 
         internal static List<RamObject> GetObjects()

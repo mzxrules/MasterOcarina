@@ -29,7 +29,7 @@ namespace mzxrules.OcaLib
         {
             Id = index;
             VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
-            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+            VRam = new N64PtrRange(br.ReadBigUInt32(), br.ReadBigUInt32());
 
             RamStart = br.ReadBigUInt32();
             UnknownPtr = br.ReadBigUInt32();

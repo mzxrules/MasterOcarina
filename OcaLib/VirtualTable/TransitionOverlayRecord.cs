@@ -30,7 +30,7 @@ namespace mzxrules.OcaLib
         {
             Index = index;
             RamStart = br.ReadBigUInt32();
-            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+            VRam = new N64PtrRange(br.ReadBigUInt32(), br.ReadBigUInt32());
             VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
             unk = br.ReadBigUInt32();
             AllocateSize = br.ReadBigInt32();

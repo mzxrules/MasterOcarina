@@ -7,11 +7,11 @@ namespace Spectrum
     class SegmentAddress : IRamItem
     {
         static int SegmentAddressTable { get { return SpectrumVariables.Segment_Table; } }// = 0x120C38;
-        public FileAddress Ram { get; }
+        public N64PtrRange Ram { get; }
 
         private int segment;
 
-        public SegmentAddress(int id, FileAddress addr)
+        public SegmentAddress(int id, N64PtrRange addr)
         {
             Ram = addr;
             segment = id;
@@ -36,7 +36,7 @@ namespace Spectrum
             Ptr ptr = SPtr.New(SegmentAddressTable);
             for (int i = 0; i < 0x10; i++)
             {
-                addrs.Add(new SegmentAddress(i, new FileAddress(ptr.ReadInt32(i * 0x4), 0)));
+                addrs.Add(new SegmentAddress(i, new N64PtrRange(ptr.ReadInt32(i * 0x4), 0)));
             }
 
             if (showAllSegments)
