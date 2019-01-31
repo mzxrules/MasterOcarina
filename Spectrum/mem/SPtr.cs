@@ -14,6 +14,7 @@ namespace Spectrum
             ReadFloat = Zpr.ReadRamFloat,
             ReadInt16 = Zpr.ReadRamInt16,
             ReadByte = Zpr.ReadRamByte,
+            ReadBytes = Zpr.ReadRam,
 
             WriteInt32 = Zpr.WriteRam32,
             WriteFloat32 = Zpr.WriteRam32,

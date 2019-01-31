@@ -305,16 +305,9 @@ namespace uCode
             br.BaseStream.Position = microcode.EncodingLow & 0xFFFFFF;
 
             Encoding enc = Encoding.GetEncoding("EUC-JP");
-            StreamReader sw = new StreamReader(br.BaseStream, enc);
 
-            char c = (char)sw.Read();
-            int i = 0;
-            while(c != '\0' && i < 0x100)
-            {
-                result += c;
-                c = (char)sw.Read();
-                i++;
-            }
+            result = CStr.Get(br.BaseStream, enc, 0x100);
+            
             br.BaseStream.Position = jumpBack;
             return result;
         }

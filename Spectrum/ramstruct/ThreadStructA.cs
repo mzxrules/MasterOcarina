@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mzxrules.Helper;
 
 using u64 = System.UInt64;
 using u32 = System.UInt32;
 using static System.Console;
+using System.Text;
 
 namespace Spectrum
 {
@@ -197,92 +195,79 @@ namespace Spectrum
             }
         }
     }
-    class ThreadStackData : IRamItem
+
+    class NamedBuffer : IRamItem
     {
         public N64PtrRange Ram { get; set; }
-        private ThreadStack Parent;
 
-        public ThreadStackData(ThreadStack parent, N64PtrRange addr)
+        readonly string Name;
+
+        public NamedBuffer(N64PtrRange addr, string name)
         {
-            Parent = parent;
             Ram = addr;
+            Name = name;
         }
         public override string ToString()
         {
-            return $"{Parent.Name,-10} STACK {(int)Ram.Start:X8}:{(int)Ram.End:X8}";
+            return $"{Name} {(int)Ram.Start:X8}:{(int)Ram.End:X8}";
         }
     }
 
     class ThreadStack : IRamItem
     {
-        static ThreadStack[] ThreadContextA = new ThreadStack[]{
-                new ThreadStack(0x80006830, "boot"),
-                new ThreadStack(0x80006E00, "idle"),
-                new ThreadStack(0x80007BD0, "main"),
-                new ThreadStack(0x80007D20, "dmamgr"),
-                new ThreadStack(0x80121C68, "fault"),
-                new ThreadStack(0x80120C18, "irqmgr"),
-                new ThreadStack(0x80120BF8, "padmgr"),
-                new ThreadStack(0x80120BD8, "audio"),
-                new ThreadStack(0x80120BB8, "sched"),
-                new ThreadStack(0x80120B98, "graph")
-            };
-
         public N64PtrRange Ram { get; }
         public string Name { get; }
-
-
+        
         public N64Ptr NextPtr { get; set; }
         public N64Ptr PrevPtr { get; set; }
-        public ThreadStackData StackAddr { get; set; }
+        public NamedBuffer StackAddr { get; set; }
         //0x10 = init value
         public int Unknown { get; set; }
-        //0x18 = str ptr
+        //public N64Ptr NamePtr { get; set; }
         public int Unknown2 { get; set; }
-
-
+        
 
         public static List<IRamItem> GetIRamItems()
         {
             var result = new List<IRamItem>();
 
-            foreach (var item in ThreadContextA)
+            Ptr next = SpectrumVariables.Stack_List_Ptr;
+            if (next == 0)
+                return result;
+            next = next.Deref();
+            while (next != 0)
             {
-                item.Initialize();
-                result.Add(item);
-                result.Add(item.StackAddr);
+                ThreadStack stack = new ThreadStack(next);
+                if (stack.StackAddr.Ram.Size <= 0)
+                    break;
+                result.Add(stack);
+                result.Add(stack.StackAddr);
+                next = next.Deref();
             }
-
             return result;
         }
 
-        public ThreadStack(N64Ptr addr, string name)
+        public ThreadStack(N64Ptr addr)
         {
             Ram = new N64PtrRange(addr, addr + 0x20);
-            Name = name;
 
-        }
-        public void Initialize()
-        {
-            Ptr ptr = SPtr.New(Ram.Start);
+            Ptr ptr = SPtr.New(addr);
             NextPtr = ptr.ReadInt32(0x00);
             PrevPtr = ptr.ReadInt32(0x04);
-            int StartPtr = ptr.ReadInt32(0x08);
-            int EndPtr = ptr.ReadInt32(0x0C);
-            StackAddr = new ThreadStackData(this, new N64PtrRange(StartPtr, EndPtr));
-            //0x10
+            N64Ptr StartPtr = ptr.ReadInt32(0x08);
+            N64Ptr EndPtr = ptr.ReadInt32(0x0C);
             Unknown = ptr.ReadInt32(0x14);
-            //0x18
+            //NamePtr = ptr.ReadInt32(0x18);
             Unknown2 = ptr.ReadInt32(0x1C);
+
+            byte[] nameBuff = ptr.Deref(0x18).ReadBytes(0, 0x20);
+            Name = CStr.Get(nameBuff, Encoding.GetEncoding("EUC-JP"), 0x20);
+            StackAddr = new NamedBuffer(new N64PtrRange(StartPtr, EndPtr), $"{Name,-13} STACK");
         }
 
         public override string ToString()
         {
-            return string.Format("{0,-6} Ctx1 NEXT {1:X6} PREV {2:X6} - {3:X6}:{4:X6}",
-                Name,
-                NextPtr, PrevPtr,
-                StackAddr.Ram.Start & 0xFFFFFF,
-                StackAddr.Ram.End & 0xFFFFFF);
+            return $"{Name,-13} STACKINFO NEXT {NextPtr} PREV {PrevPtr} - {StackAddr.Ram}";
         }
     }
 }

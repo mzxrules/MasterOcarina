@@ -37,5 +37,11 @@ namespace mzxrules.Helper
         {
             return Get(stream, Encoding.GetEncoding(encoding), maxSeek);
         }
+
+        public static string Get(byte[] buffer, Encoding encoding, long maxSeek = 0)
+        {
+            MemoryStream ms = new MemoryStream(buffer);
+            return Get(ms, encoding, maxSeek);
+        }
     }
 }

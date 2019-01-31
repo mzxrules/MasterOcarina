@@ -394,6 +394,27 @@
           <Data ver="N0">00</Data>
         </Address>
       </Start>
+      
+      <Identifier id="STACK_LIST">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">800062E0</Data>
+          <Data ver="N1"></Data>
+          <Data ver="N2"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="MQJ"></Data>
+          <Data ver="MQU"></Data>
+          <Data ver="MQP"></Data>
+          <Data ver="DBGMQ"></Data>
+          <Data ver="IQUEC"></Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Identifier>
+      
+      
       <!--Address of the dummy "Queue" thread -->
       <Identifier id="QUEUE_THREAD">
         <Address reftype="absolute" domain="RAM">
@@ -772,6 +793,20 @@
           <Data ver="DBG">0</Data>
         </Address>
       </Start>
+
+      <Identifier id="STACK_LIST">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0"></Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0">80096C40</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
+        </Address>
+      </Identifier>
 
       <Identifier id="QUEUE_THREAD">
         <Address reftype="absolute" domain="RAM">

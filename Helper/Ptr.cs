@@ -11,6 +11,7 @@ namespace mzxrules.Helper
         public Func<Address, float> ReadFloat;
         public Func<Address, short> ReadInt16;
         public Func<Address, byte> ReadByte;
+        public Func<Address, int, byte[]> ReadBytes;
 
         public Action<Address, int> WriteInt32;
         public Action<Address, float> WriteFloat32;
@@ -163,7 +164,7 @@ namespace mzxrules.Helper
                 }
                 else
                 {
-                    System.Console.WriteLine($"Invalid SPtr Write Type: {item.GetType()}");
+                    Console.WriteLine($"Invalid SPtr Write Type: {item.GetType()}");
                 }
             }
         }
@@ -215,6 +216,10 @@ namespace mzxrules.Helper
         public byte ReadByte(int offset)
         {
             return Mem.ReadByte(this + offset);
+        }
+        public byte[] ReadBytes(int offset, int count)
+        {
+            return Mem.ReadBytes(this + offset, count);
         }
     }
 }

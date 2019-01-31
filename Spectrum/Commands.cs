@@ -2404,16 +2404,11 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
-
-            Encoding enc = Encoding.GetEncoding("EUC-JP");
             var data = Zpr.ReadRam(address, 0x100);
-            MemoryStream ms = new MemoryStream(data);
-
-            string result = CStr.Get(ms, enc);
-            
-            Console.OutputEncoding = Encoding.Unicode;
+            string result = CStr.Get(data, Encoding.GetEncoding("EUC-JP"));
             Console.WriteLine(result);
         }
+        
 
 
         [SpectrumCommand(

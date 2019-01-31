@@ -122,6 +122,7 @@ namespace Spectrum
         public static Ptr EntranceTable;
 
         public static Ptr Queue_Thread_Ptr;
+        public static Ptr Stack_List_Ptr;
 
         public static void GetVariables()
         {
@@ -243,7 +244,9 @@ namespace Spectrum
 
             Addresser.TryGetRam("QUEUE_THREAD", version, out temp);
             Queue_Thread_Ptr = SPtr.New(temp);
-                
+
+            Addresser.TryGetRam("STACK_LIST", version, out temp);
+            Stack_List_Ptr = SPtr.New(temp);
         }
 
         public static void SetGfxContext(RomVersion version)

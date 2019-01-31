@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,6 +37,7 @@ namespace Spectrum
         static void Main(string[] args)
         {
             string readLine;
+            Console.OutputEncoding = Encoding.Unicode;
             Initialize();
 
             do
@@ -780,8 +782,7 @@ namespace Spectrum
                 ramItems.AddRange(InfoPoll.GetAllActorInstances().Where(x => !Options.HiddenActors.Contains(x.Actor)));
             }
 
-            if (Options.Version == ORom.Build.N0
-                && (fetchAll || Options.ShowThreadingStructs))
+            if (fetchAll || Options.ShowThreadingStructs)
                 ramItems.AddRange(ThreadStack.GetIRamItems());
 
             return ramItems;
