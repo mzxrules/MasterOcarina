@@ -56,9 +56,6 @@
     <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gbi_h.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Helper\Helper.csproj">
       <Project>{5af4d836-00b5-43c2-8974-8affabd2df90}</Project>
       <Name>Helper</Name>
