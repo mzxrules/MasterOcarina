@@ -49,13 +49,13 @@ namespace Gen
                 if (!exclusions.Contains(i))
                 {
                     dstsize = Yaz.Encode(data, data.Length, outRom);
-                    dstsize = (int)LineLength(dstsize);
+                    dstsize = Align.To16(dstsize);
                     physical = new FileAddress(cur, cur + dstsize);
                 }
                 else
                 {
                     dstsize = data.Length;
-                    dstsize = (int)LineLength(dstsize);
+                    dstsize = Align.To16(dstsize);
 
                     outRom.Write(data, 0, data.Length);
                     physical = new FileAddress(cur, 0);
@@ -316,10 +316,10 @@ namespace Gen
                     if (record.IsCompressed)
                         Yaz.DecodeSize(file, out vromFilesize);
                     else
-                        vromFilesize = LineLength(file.Length);
+                        vromFilesize = Align.To16(file.Length);
 
                     //get the physical file size with padding
-                    romFilesize = LineLength(file.Length);
+                    romFilesize = Align.To16(file.Length);
                 }
                 else //copy a source rom file.
                 {
@@ -351,11 +351,6 @@ namespace Gen
 
             //write crc
             CRC.Write(output);
-        }
-
-        private static long LineLength(long length)
-        {
-            return (length + 0xF) & -0x10;
         }
 
         public static void SetLanguage(Stream rom, Rom.Language language)

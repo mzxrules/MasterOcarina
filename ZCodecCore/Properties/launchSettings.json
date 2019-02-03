@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ZCodecCore": {
+      "commandName": "Project",
+      "commandLineArgs": "compdual ootN0.txt mmU0.txt \"C:\\Users\\mzxrules\\Documents\\Roms\\N64\\Games\\Dual\\roms\\oot_mm.z64\""
+    }
+  }
+}

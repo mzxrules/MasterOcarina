@@ -134,29 +134,29 @@ namespace mzxrules.Helper
         /// <summary>
         /// Simple and straight encoding scheme for Yaz
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">Source array</param>
         /// <param name="size"></param>
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static UInt32 SimpleEnc(byte[] src, int size, int pos, ref uint /* u32* */ pMatchPos)
+        static uint SimpleEnc(byte[] src, int size, int pos, ref uint pMatchPos)
         {
             int startPos = pos - 0x1000;
             int numBytes = 1;
             int matchPos = 0;
-            int sizeMinusPos = size - pos; //Replaces J loop terminating condition
+            int maxEnc = size - pos; //Replaces J loop terminating condition
 
             if (startPos < 0)
                 startPos = 0;
 
             //limits forward seeking to the maximum number of bytes that can be encoded
-            if (sizeMinusPos > 0xff + 0x12)
-                sizeMinusPos = 0xff + 0x12;
+            if (maxEnc > 0xff + 0x12)
+                maxEnc = 0xff + 0x12;
 
             for (int i = startPos; i < pos; i++)
             {
                 int j;
-                for (j = 0; j < sizeMinusPos/*size - pos*/; j++)
+                for (j = 0; j < maxEnc; j++)
                 {
                     if (src[i + j] != src[j + pos])
                         break;
@@ -167,7 +167,7 @@ namespace mzxrules.Helper
                     matchPos = i;
                 }
             }
-            pMatchPos = (uint)matchPos; //*pMatchPos = matchPos;
+            pMatchPos = (uint)matchPos;
             if (numBytes == 2)
                 numBytes = 1;
             return (uint)numBytes;
@@ -221,12 +221,12 @@ namespace mzxrules.Helper
             return numBytes;
         }
 
-        public static Task<int> EncodeAsync(byte[] src, int srcSize, Stream dstFile)
-        {
-            Task<int> encodeTask = new Task<int>(() => Encode(src, srcSize, dstFile));
-            encodeTask.Start();
-            return encodeTask;
-        }
+        //public static Task<int> EncodeAsync(byte[] src, int srcSize, Stream dstFile)
+        //{
+        //    Task<int> encodeTask = new Task<int>(() => Encode(src, srcSize, dstFile));
+        //    encodeTask.Start();
+        //    return encodeTask;
+        //}
 
         /// <summary>
         /// Writes compressed file to given stream, starting at stream's position.
@@ -325,6 +325,119 @@ namespace mzxrules.Helper
                 r.dstPos = 0;
             }
             return dstSize;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="srcSize"></param>
+        /// <param name="dstFile"></param>
+        /// <returns>Size of the file aligned to the nearest 0x10, or -1 if the file can't be compressed</returns>
+        public static int Encode(byte[] src, int srcSize, out byte[] dstFile)
+        {
+            if (srcSize < 0x10)
+            {
+                dstFile = new byte[0];
+                return -1;
+            }
+
+            Ret r = new Ret(0, 0);
+            byte[] dst = new byte[24]; // 8 codes * 3 bytes maximum
+            int dstSize = 0;
+            dstFile = new byte[srcSize];
+
+            uint validBitCount = 0; //number of valid bits left in "code" byte
+            byte currCodeByte = 0;
+
+            uint numBytes;
+            uint matchPos = 0;
+
+
+            StaticEncodeVars var = new StaticEncodeVars();
+
+            //Write Header
+            byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
+            byte[] header = new byte[] { 0x59, 0x61, 0x7A, 0x30 }; //Yaz0
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(srcSizeArr);
+            
+            Array.Copy(header, dstFile, 4);
+            Array.Copy(srcSizeArr, 0, dstFile, 4, 4);
+            dstSize += 0x10;
+
+            while (r.srcPos < srcSize)
+            {
+                numBytes = NintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
+
+                if (numBytes < 3)
+                {
+                    //straight copy
+                    dst[r.dstPos] = src[r.srcPos];
+                    r.dstPos++;
+                    r.srcPos++;
+                    //set flag for straight copy
+                    currCodeByte |= (byte)(0x80 >> (int)validBitCount);
+                }
+                else
+                {
+                    //RLE part
+                    uint dist = (uint)r.srcPos - matchPos - 1;
+                    byte byte1, byte2, byte3;
+
+                    if (numBytes >= 0x12)  // 3 byte encoding
+                    {
+                        byte1 = (byte)(0 | (dist >> 8));
+                        byte2 = (byte)(dist & 0xff);
+                        dst[r.dstPos++] = byte1;
+                        dst[r.dstPos++] = byte2;
+                        // maximum runlength for 3 byte encoding
+                        if (numBytes > 0xff + 0x12)
+                            numBytes = 0xff + 0x12;
+                        byte3 = (byte)(numBytes - 0x12);
+                        dst[r.dstPos++] = byte3;
+                    }
+                    else  // 2 byte encoding
+                    {
+                        byte1 = (byte)(((numBytes - 2) << 4) | (dist >> 8));
+                        byte2 = (byte)(dist & 0xff);
+                        dst[r.dstPos++] = byte1;
+                        dst[r.dstPos++] = byte2;
+                    }
+                    r.srcPos += (int)numBytes;
+                }
+                validBitCount++;
+                //write eight codes
+                if (validBitCount == 8)
+                {
+                    int dstSizeNext = dstSize + r.dstPos + 1;
+                    if (dstSizeNext > dstFile.Length)
+                        return -1;
+
+                    dstFile[dstSize] = currCodeByte;
+                    Array.Copy(dst, 0, dstFile, dstSize + 1, r.dstPos);
+                    dstSize = dstSizeNext;
+
+                    currCodeByte = 0;
+                    validBitCount = 0;
+                    r.dstPos = 0;
+                }
+            }
+            if (validBitCount > 0)
+            {
+                int dstSizeNext = dstSize + r.dstPos + 1;
+                if (dstSizeNext > dstFile.Length)
+                    return -1;
+
+                dstFile[dstSize] = currCodeByte;
+                Array.Copy(dst, 0, dstFile, dstSize + 1, r.dstPos);
+                dstSize = dstSizeNext;
+
+                currCodeByte = 0;
+                validBitCount = 0;
+                r.dstPos = 0;
+            }
+            return Align.To16(dstSize);
         }
     }
 }

@@ -2,22 +2,24 @@
 {
     public static class Align
     {
-        public static uint To(uint value, uint align)
-        {
-            uint i = value % align;
-
-            if (i == 0)
-                return value;
-
-            return value + align - i;
-        }
-        public static int To16(int value)
-        {
-            return (int)To((uint)value, 16);
-        }
         public static int To8(int value)
         {
-            return (int)To((uint)value, 8);
+            return (value + 0x7) & -0x8;
+        }
+
+        public static long To8(long value)
+        {
+            return (value + 0x7) & -0x8;
+        }
+
+        public static int To16(int value)
+        {
+            return (value + 0xF) & -0x10;
+        }
+
+        public static long To16(long value)
+        {
+            return (value + 0xF) & -0x10;
         }
     }
 }
