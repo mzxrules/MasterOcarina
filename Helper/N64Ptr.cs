@@ -5,15 +5,9 @@ namespace mzxrules.Helper
     {
         private long value;
 
-        public byte Segment
-        {
-            get { return (byte)(value >> 24); }
-        }
+        public byte Segment => (byte)(value >> 24);
 
-        public int Offset
-        {
-            get { return (int)(value & 0xFFFFFF); }
-        }
+        public int Offset => (int)(value & 0xFFFFFF);
 
         public N64Ptr(long ptr)
         {
@@ -88,11 +82,6 @@ namespace mzxrules.Helper
         public override string ToString()
         {
             return $"{(int)value:X8}";
-        }
-
-        public int Base()
-        {
-            return (int)value & 0xFFFFFF;
         }
 
         public bool Equals(N64Ptr other)

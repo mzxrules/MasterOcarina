@@ -35,7 +35,7 @@ namespace Spectrum
         }
         public override string ToString()
         {
-            return $"{Address.Base():X6}: AI {ActorId:X4} OFF: {(Address-Instance&0xFFFFFF):X4}  "
+            return $"{Address.Offset:X6}: AI {ActorId:X4} OFF: {(Address-Instance&0xFFFFFF):X4}  "
                 + $" {(int)Instance:X8} {(int)CollidingInstance1:X8} {(int)CollidingInstance2:X8} {(int)CollidingInstance3:X8}  "
                 + $" {flags1:X8} {flags2:X8}";
         }

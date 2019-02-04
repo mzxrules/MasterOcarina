@@ -48,7 +48,7 @@ namespace Spectrum
 
         public override string ToString()
         {
-            return $"{Address.Base():X6}: AI {ActorId:X4} - {(int)ActorInstance:X8}   MESH {(int)MeshPtr:X8} {Environment.NewLine}"
+            return $"{Address.Offset:X6}: AI {ActorId:X4} - {(int)ActorInstance:X8}   MESH {(int)MeshPtr:X8} {Environment.NewLine}"
                 + $"         {First}{Environment.NewLine}"
                 + $"         {Second}";
         }

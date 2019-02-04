@@ -86,12 +86,12 @@ namespace mzxrules.OcaLib
             {
                 data = new byte[record.DataAddress.Size];
                 fs.Position = record.DataAddress.Start;
-                fs.Read(data, 0, (int)record.DataAddress.Size);
+                fs.Read(data, 0, record.DataAddress.Size);
 
                 if (record.IsCompressed)
                 {
                     ms = new MemoryStream(data);
-                    decompressedData = Yaz.Decode(ms, (int)(record.DataAddress.Size));
+                    decompressedData = Yaz.Decode(ms, record.DataAddress.Size);
                 }
                 else
                 {
@@ -138,7 +138,7 @@ namespace mzxrules.OcaLib
             {
                 data = new byte[tableRecord.DataAddress.Size];
                 fs.Position = tableRecord.DataAddress.Start;
-                fs.Read(data, 0, (int)tableRecord.DataAddress.Size);
+                fs.Read(data, 0, tableRecord.DataAddress.Size);
 
             }
             return ms = new MemoryStream(data);

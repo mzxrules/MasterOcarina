@@ -43,7 +43,7 @@ namespace Gen
                 
                 br.BaseStream.Position = record.PhysicalAddress.Start;
 
-                byte[] data = br.ReadBytes((int)record.VirtualAddress.Size);
+                byte[] data = br.ReadBytes(record.VirtualAddress.Size);
                 int dstsize;
                 FileAddress physical;
                 if (!exclusions.Contains(i))
@@ -118,7 +118,7 @@ namespace Gen
                     MemoryStream ms = new MemoryStream();
                     using (BinaryReader br = new BinaryReader(outstream))
                     {
-                        byte[] data = br.ReadBytes((int)record.VirtualAddress.Size);
+                        byte[] data = br.ReadBytes(record.VirtualAddress.Size);
                         Yaz.Encode(data, data.Length, ms);
                         ms.Position = 0;
                     }
@@ -229,7 +229,7 @@ namespace Gen
 
             using (BinaryReader br = new BinaryReader(rom.Files.GetFile(record.VirtualAddress.Start)))
             {
-                data = br.ReadBytes((int)record.VirtualAddress.Size);
+                data = br.ReadBytes(record.VirtualAddress.Size);
             }
 
             //compress file
@@ -258,7 +258,7 @@ namespace Gen
                 sw.PadToLength(addr.Start);
 
                 //MM Check
-                if ((int)record.PhysicalAddress.Start == -1)
+                if (record.PhysicalAddress.Start == -1)
                 {
                     newDmaTable.Add(new FileRecord(addr, new FileAddress(record.PhysicalAddress.Start, 0), record.Index));
                 }
@@ -371,16 +371,16 @@ namespace Gen
 
         private static void WriteFileTable(Stream sw, FileAddress dmaStart, List<FileRecord> fileTable)
         {
-            int fileTableLoc = (int)dmaStart.Start;
+            int fileTableLoc = dmaStart.Start;
             sw.Position = fileTableLoc;
 
             BinaryWriter bw = new BinaryWriter(sw);
             foreach (FileRecord record in fileTable)
             {
-                bw.WriteBig((int)record.VirtualAddress.Start);
-                bw.WriteBig((int)record.VirtualAddress.End);
-                bw.WriteBig((int)record.PhysicalAddress.Start);
-                bw.WriteBig((int)record.PhysicalAddress.End);
+                bw.WriteBig(record.VirtualAddress.Start);
+                bw.WriteBig(record.VirtualAddress.End);
+                bw.WriteBig(record.PhysicalAddress.Start);
+                bw.WriteBig(record.PhysicalAddress.End);
             }
         }
         

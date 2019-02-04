@@ -126,9 +126,9 @@ namespace Spectrum
 
         public override string ToString()
         {
-            int dataOffset = (int)(VRamActorInfo - VRam.Start);
-            int initRam = (int)(Ram.Start + dataOffset);
-            int initRom = (int)(VRom.Start + dataOffset);
+            int dataOffset = VRamActorInfo - VRam.Start;
+            int initRam = Ram.Start + dataOffset;
+            int initRom = VRom.Start + dataOffset;
             return $"AF {Actor:X4}:  {AllocationType:X4} {NumSpawned:X2} FILE: " +
                 $"{VRom.Start:X8}:{VRom.End:X8} INIT {initRam:X8}:{initRom:X8}";
         }

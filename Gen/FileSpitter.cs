@@ -43,10 +43,10 @@ namespace Gen
             using (FileStream dest = new FileStream($"{record.VirtualAddress.Start}/{folder:X8}", FileMode.CreateNew))
             {
                 data = new byte[record.VirtualAddress.Size];
-                file.Read(data, 0, (int)record.VirtualAddress.Size);
+                file.Read(data, 0, record.VirtualAddress.Size);
 
                 if (compress)
-                    Yaz.Encode(data, (int)record.VirtualAddress.Size, dest);
+                    Yaz.Encode(data, record.VirtualAddress.Size, dest);
                 else
                     dest.Write(data, 0, data.Length);
             }

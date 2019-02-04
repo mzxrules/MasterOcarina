@@ -569,7 +569,7 @@ namespace Spectrum
                 return;
             N64Ptr address = (addr & 0xFFFFFF) | 0x8000_0000;
             var actors = from n in GetRamMap().OfType<ActorInstance>()
-                         where (n.Ram.Start & 0xFFFFFF) == address.Offset
+                         where n.Ram.Start.Offset == address.Offset
                          select n;
 
             foreach (ActorInstance a in actors)
@@ -776,12 +776,10 @@ namespace Spectrum
             N64Ptr addr = inAddr;
 
             //if virtual address
-            if (inAddr.Base() >= 0x800000)
+            if (inAddr.Offset>= 0x800000)
             {
                 vItems = from x in GetRamMap(true).OfType<IVRamItem>()
-                         where (x.VRam.Start & 0xFFFFFF) <= inAddr.Base()
-                         && (x.VRam.End & 0xFFFFFF) > inAddr.Base()
-                         select x;
+                         where (x.VRam.Start & 0xFFFFFF) <= inAddr.Offset                         && (x.VRam.End & 0xFFFFFF) > inAddr.Offset                         select x;
                 items = vItems.Cast<IRamItem>();
                 var temp = vItems.ToList();
                 if (temp.Count == 0)
@@ -805,24 +803,22 @@ namespace Spectrum
             {
                 Console.WriteLine($"{addr:X8}:");
                 items = from x in GetRamMap(true)
-                        where (x.Ram.Start & 0xFFFFFF) <= addr.Base()
-                        && (x.Ram.End & 0xFFFFFF) > addr.Base()
-                        select x;
+                        where (x.Ram.Start & 0xFFFFFF) <= addr.Offset                        && (x.Ram.End & 0xFFFFFF) > addr.Offset                        select x;
             }
 
             //var debug = items.ToArray();
             foreach (var item in items)
             {
                 Console.WriteLine(item.ToString());
-                int offset = addr.Base() - (int)(item.Ram.Start & 0xFFFFFF);
+                int offset = addr.Offset- item.Ram.Start.Offset;
                 string line = $"Start {(int)item.Ram.Start:X8} Off: {offset:X6} ";
 
                 if (item is IFile iFile)
                 {
                     if (iFile.VRom.Size > offset)
-                        line += $"VRom: {(int)(iFile.VRom.Start + offset):X8} ";
+                        line += $"VRom: {iFile.VRom.Start + offset:X8} ";
                     else
-                        line += $".bss: {(int)(offset - iFile.VRom.Size):X8} ";
+                        line += $".bss: {offset - iFile.VRom.Size:X8} ";
                 }
 
                 if (item is IVRamItem iRamItem)
@@ -839,22 +835,23 @@ namespace Spectrum
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S })]
         private static void ConvertRomToRam(Arguments args)
         {
-            long offset;
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
             var items = from x in GetRamMap(true).OfType<IFile>()
-                        where (x.VRom.Start) <= address
-                        && (x.VRom.End) > address
+                        where x.VRom.Start <= address
+                        && x.VRom.End > address
                         select x;
 
             foreach (var item in items)
             {
                 if (item is IRamItem iRamItem)
                 {
+                    var (start, end) = item.VRom;
                     Console.WriteLine(item);
-                    offset = address - (int)(item.VRom.Start);
-                    N64Ptr addr = new N64Ptr(((iRamItem.Ram.Start + offset) & 0xFFFFFF) + 0x8000_0000);
+                    long offset = address - item.VRom.Start;
+                    N64Ptr addr = iRamItem.Ram.Start + offset;
+                    addr = 0x8000_0000 + addr.Offset;
 
                     Console.WriteLine($"Addr: {addr}");
                 }

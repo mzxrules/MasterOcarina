@@ -58,7 +58,7 @@ namespace Spectrum
             IsLoaded = Object >= 0;
             Object = Math.Abs(Object);
             N64Ptr addr = ptr.ReadUInt32(4); 
-            Size = (ObjectFiles.Length <= Object || Object < 0) ? 0 : (int)ObjectFiles[Object].Size;
+            Size = (ObjectFiles.Length <= Object || Object < 0) ? 0 : ObjectFiles[Object].Size;
             Ram = new N64PtrRange(addr, addr + Size);
         }
 

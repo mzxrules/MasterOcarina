@@ -60,9 +60,9 @@ namespace Gen
         private static void UpdateSceneTable(BinaryWriter bw, int scene, FileAddress addr)
         {
                 //update the scene table
-                bw.BaseStream.Position = SceneTable_Start + (scene * 5 * sizeof(Int32));
-                bw.Write(Endian.ConvertInt32((int)addr.Start));
-                bw.Write(Endian.ConvertInt32((int)addr.End));
+                bw.BaseStream.Position = SceneTable_Start + (scene * 5 * sizeof(int));
+                bw.WriteBig(addr.Start);
+                bw.WriteBig(addr.End);
         }
 
         private static void AddSceneAndRooms(int sceneId, ref int NextWriteAddress, string fileLocation, BinaryWriter bw)
@@ -101,9 +101,9 @@ namespace Gen
         private static void UpdateFileTable(BinaryWriter bw, FileAddress fileAddr)
         {
             bw.BaseStream.Position = FileTable_Off;
-            bw.Write(Endian.ConvertInt32((int)fileAddr.Start));
-            bw.Write(Endian.ConvertInt32((int)fileAddr.End));
-            bw.Write(Endian.ConvertInt32((int)fileAddr.Start));
+            bw.WriteBig(fileAddr.Start);
+            bw.WriteBig(fileAddr.End);
+            bw.WriteBig(fileAddr.Start);
             FileTable_Off += 0x10;
         }
 
@@ -126,8 +126,8 @@ namespace Gen
                 fs.Length + WriteAddress);
             //scrub out unused values
 
-            //set CurFileAddress to the next open address
-            WriteAddress = (((int)result.End / 0x1000) + 1) * 0x1000;
+            //Set WriteAddress to the next open address
+            WriteAddress = (result.End + 0xFFF) & (-0x1000);
 
             //update file table
             UpdateFileTable(bw, result);
@@ -145,8 +145,8 @@ namespace Gen
             bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
             foreach (FileAddress room in addr)
             {
-                bw.Write(Endian.ConvertInt32((int)room.Start));
-                bw.Write(Endian.ConvertInt32((int)room.End));
+                bw.WriteBig(room.Start);
+                bw.WriteBig(room.End);
             }
 
             //check if scene has alt headers
@@ -162,8 +162,8 @@ namespace Gen
                         bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
                         foreach (FileAddress room in addr)
                         {
-                            bw.Write(Endian.ConvertInt32((int)room.Start));
-                            bw.Write(Endian.ConvertInt32((int)room.End));
+                            bw.WriteBig(room.Start);
+                            bw.WriteBig(room.End);
                         }
                     }
                 }

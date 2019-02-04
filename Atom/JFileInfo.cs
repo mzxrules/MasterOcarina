@@ -83,14 +83,25 @@ namespace Atom
             End = f.End.ToString("X8");
         }
 
+        public JFileAddress(N64PtrRange range)
+        {
+            Start = range.Start.ToString();
+            End = range.End.ToString();
+        }
+
         public static implicit operator JFileAddress(FileAddress v)
+        {
+            return new JFileAddress(v);
+        }
+
+        public static implicit operator JFileAddress(N64PtrRange v)
         {
             return new JFileAddress(v);
         }
 
         public FileAddress Convert()
         {
-            return new FileAddress(long.Parse(Start, NumberStyles.HexNumber), long.Parse(End, NumberStyles.HexNumber));
+            return new FileAddress(int.Parse(Start, NumberStyles.HexNumber), int.Parse(End, NumberStyles.HexNumber));
         }
     }
 

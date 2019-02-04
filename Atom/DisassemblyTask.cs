@@ -61,7 +61,7 @@ namespace Atom
             foreach(var item in file.Sections)
             {
                 var ram = item.Ram.Convert();
-                Section section = new Section(item.Name, task.VRam.Start, ram.Start, (int)ram.Size, item.Subsection, item.IsCode);
+                Section section = new Section(item.Name, task.VRam.Start, ram.Start, ram.Size, item.Subsection, item.IsCode);
                 task.Sections.Values.Add(section);
             }
             return task;

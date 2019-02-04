@@ -7,13 +7,13 @@ namespace mzxrules.Helper
     public struct FileAddress
     {
         //[NonSerialized]
-        public long Start { get; private set; } 
+        public int Start { get; private set; } 
 
         //[NonSerialized]
-        public long End { get; private set; }
+        public int End { get; private set; }
 
         //[NonSerialized]
-        public long Size { get { return End - Start; } }
+        public int Size { get { return End - Start; } }
         public FileAddress(byte[] data)
             : this()
         {
@@ -24,35 +24,41 @@ namespace mzxrules.Helper
             Start = list[0];
             End = list[1];
         }
-        public FileAddress(long start, long end)
+        public FileAddress(int start, int end)
             : this()
         {
             Start = start;
             End = end;
         }
 
-        public FileAddress((long start, long end) addr)
+        public FileAddress((int start, int end) addr)
+            : this()
         {
             Start = addr.start;
             End = addr.end;
         }
 
-        public static implicit operator FileAddress((long start, long end) addr)
+        public FileAddress(long start, long end)
         {
-            return new FileAddress(addr);
+            Start = (int)start;
+            End = (int)end;
         }
-        public static implicit operator FileAddress((uint start, uint end) addr)
+
+        public void Deconstruct(out int start, out int end)
+        {
+            start = Start;
+            end = End;
+        }
+
+        public static implicit operator FileAddress((int start, int end) addr)
         {
             return new FileAddress(addr);
         }
 
         public static bool operator ==(FileAddress v1, FileAddress v2)
         {
-            if (object.ReferenceEquals(v1, v2))
+            if (ReferenceEquals(v1, v2))
                 return true;
-
-            if ((object)v1 == null || (object)v2 == null)
-                return false;
 
             return v1.Start == v2.Start && v1.End == v2.End;
         }

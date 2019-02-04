@@ -20,7 +20,7 @@ namespace Spectrum
 
         public static FileAddress GetFileAddress(int addr)
         {
-            if (Data.VRom.Size < 0 || Data.VRom.Size > 0x40000)
+            if (Data.VRom.Size < 0 || Data.VRom.Size > 0x4_0000)
                 throw new InvalidOperationException("dmadata reference is not initialized correctly");
 
             Ptr ptr = SPtr.New(Data.Ram.Start);

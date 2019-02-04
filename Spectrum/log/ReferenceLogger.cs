@@ -84,8 +84,8 @@ namespace Spectrum
             var item = new Reference<T>()
             {
                 Version = version,
-                VRom = (int)file.VRom.Start,
-                Offset = (address & 0xFFFFFF) - (int)(file.Ram.Start & 0xFFFFFF),
+                VRom = file.VRom.Start,
+                Offset = (address & 0xFFFFFF) - (file.Ram.Start.Offset),
                 Data = data
             };
             if (LoggedReferences.Exists(x =>

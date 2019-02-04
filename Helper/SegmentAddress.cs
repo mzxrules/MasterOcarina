@@ -4,15 +4,9 @@
     {
         private int value;
 
-        public byte Segment
-        {
-            get { return (byte)(value >> 24); }
-        }
+        public byte Segment => (byte)(value >> 24);
 
-        public int Offset
-        {
-            get { return value & 0xFFFFFF; }
-        }
+        public int Offset => value & 0xFFFFFF;
 
         public SegmentAddress(int addr)
         {

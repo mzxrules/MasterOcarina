@@ -135,7 +135,7 @@ namespace Spectrum
 
         private static void Default()
         {
-            PrintAddresses(GetRamMap().OrderBy(x => (x.Ram.Start & 0xFFFFFF)));
+            PrintAddresses(GetRamMap().OrderBy(x => x.Ram.Start.Offset));
         }
 
         
@@ -255,7 +255,7 @@ namespace Spectrum
             N64Ptr addr = address;
 
 
-            if (addr.Base() >= GetRamSize())
+            if (addr.Offset>= GetRamSize())
             {
                 return;
             }
@@ -322,17 +322,17 @@ namespace Spectrum
 
         private static IFile GetIFile(IEnumerable<IFile> ramMap, N64Ptr address)
         {
-            var addr = address & 0xFFFFFF;
+            var addr = address.Offset;
             return ramMap.Where(x =>
-                (x.Ram.Start & 0xFFFFFF) <= addr
-                && (x.Ram.End & 0xFFFFFF) > addr).SingleOrDefault();
+                x.Ram.Start.Offset <= addr
+                && x.Ram.End.Offset > addr).SingleOrDefault();
         }
 
         private static IFile GetIFile(N64Ptr address)
         {
             return GetRamMap(true).Where(x =>
-                (x.Ram.Start & 0xFFFFFF) <= address.Base()
-                && (x.Ram.End & 0xFFFFFF) > address.Base()).OfType<IFile>().SingleOrDefault();
+                x.Ram.Start.Offset  <= address.Offset
+                && x.Ram.End.Offset  > address.Offset).OfType<IFile>().SingleOrDefault();
         }
 
         private static GfxDList[] GetFrameDlists(Ptr Gfx)
