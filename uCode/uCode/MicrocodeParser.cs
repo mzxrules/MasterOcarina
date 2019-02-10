@@ -327,7 +327,7 @@ namespace uCode
             result = string.Format("{0} // {1} ({2}, {3}, {4})", microcode, microcode.Name,
                 Type[2][(lowerHigh >> 2) & 1],
                 Type[1][(lowerHigh >> 1) & 1],
-                Type[0][(lowerHigh >> 0) & 1]);
+                Type[0][((lowerHigh >> 0) ^ 1) & 1]); //inverted in original source
 
             if (!simpleParse)
             {
