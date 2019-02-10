@@ -138,6 +138,11 @@ namespace Spectrum
             Default();
         }
 
+        private static void Default()
+        {
+            PrintAddresses(GetRamMap().OrderBy(x => x.Ram.Start.Offset));
+        }
+
         [SpectrumCommand(
             Name = "=",
             Cat = SpectrumCommand.Category.Spectrum,
@@ -212,7 +217,7 @@ namespace Spectrum
             "{0} = Key, used to specify a specific emulator with the mount command;" +
             "{1} = Process Name, used to locate the emulator process;" +
             "{2} = Process Description, used to describe the emulator in more detail;" +
-            "{3} = Process Type, 32 for 32 bit, 64 for 64 bit" +
+            "{3} = Process Type, 32 for 32 bit, 64 for 64 bit;" +
             "{4} = Ram Start Expression;" +
             "{5} = Is Big Endian (for now);" +
             "When writing expressions, you can wrap a module name with back ticks to reference;" +
@@ -425,7 +430,7 @@ namespace Spectrum
             "size = Show Size or End Address;" +
             "actor = Show/Hide actor files/instances;" +
             "obj = Show/Hide object files;" +
-            "part = Show/Hide particle files" +
+            "part = Show/Hide particle files;" +
             "thread = Show/Hide thread structs")]
         private static void ToggleSettings(Arguments args)
         {
@@ -1728,6 +1733,24 @@ namespace Spectrum
             ColB_GetGroup("OT", colaOffset + 0x1C0);
         }
 
+        private static void ColB_GetGroup(string v1, int v2)
+        {
+            Ptr ptr = GlobalContext.RelOff(v2);
+            int count = ptr.ReadInt32(0);
+
+            Console.WriteLine($"{ptr}: col{v1}, {count:D2} elements");
+            if (count > 70)
+                return;
+
+            ptr = ptr.RelOff(4);
+            for (int i = 0; i < (count * 4); i += 4)
+            {
+                CollisionBody body = new CollisionBody(ptr.RelOff(i).Deref());
+                Console.WriteLine(body.ToString());
+            }
+            Console.WriteLine();
+        }
+
         [SpectrumCommand(
             Name = "colxyz",
             Cat = SpectrumCommand.Category.Collision,
@@ -2169,7 +2192,10 @@ namespace Spectrum
             Sup = SpectrumCommand.Supported.OoT,
             Description = "Sets event flag state")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.U8, Tokens.HEX_S16, Tokens.U8 },
-            Help = "{0} = Value to write (0 or 1); {1} = flag address, relative to the start of the Save Context; {2} = number of the bit to flip (0-7)")]
+            Help = 
+            "{0} = Value to write (0 or 1);" +
+            "{1} = flag address, relative to the start of the Save Context;" +
+            "{2} = number of the bit to flip (0-7)")]
         private static void EventFlag(Arguments args)
         {
             bool setFlag = (byte)args[0] > 0;
@@ -2339,7 +2365,7 @@ namespace Spectrum
             Name = "have",
             Cat = SpectrumCommand.Category.Item,
             Description = "Gives Item")]
-        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S },
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.STRING },
             Help = "{0} = Item to give")]
         private static void GiveItem(Arguments args)
         {
@@ -2436,7 +2462,7 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "jtxt",
             Cat = SpectrumCommand.Category.Proto,
-            Description = "Jumps logged data to json",
+            Description = "Dumps logged data to json",
             Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.LITERAL })]
@@ -2698,6 +2724,40 @@ namespace Spectrum
                     Console.WriteLine($"{dist}\tA: {rA} -> {rA_i:X8} B: {rB} -> {rB_i:X8} F: {rC} -> {rC_i:X8}");
                 }
             }
+        }
+
+        [SpectrumCommand(
+            Name = "pause",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Pauses game by setting game state's 'update' func pointer to return",
+            Sup = SpectrumCommand.Supported.OoT)]
+        [SpectrumCommandSignature()]
+        private static bool PauseGame()
+        {
+            if (Options.Version != ORom.Build.N0)
+                return false;
+
+            if (GlobalContext == 0)
+                return false;
+
+            int update = GlobalContext.ReadInt32(4);
+            int deconstruct = GlobalContext.ReadInt32(8);
+            if (update == EXECUTE_PTR)
+            {
+                //unpause
+                if (deconstruct != FrameHaltVars.deconstructor)
+                    return false;
+                GlobalContext.Write(4, FrameHaltVars.update);
+                return false;
+            }
+            else
+            {
+                //pause
+                FrameHaltVars = new FrameHalt(update, deconstruct);
+                GlobalContext.Write(4, EXECUTE_PTR);
+                return true;
+            }
+
         }
     }
 }

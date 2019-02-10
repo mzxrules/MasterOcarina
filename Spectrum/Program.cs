@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace Spectrum
         static List<BlockNode> LastActorLL = new List<BlockNode>();
         static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
         static Dictionary<string, Command> CommandDictionary = new Dictionary<string, Command>();
-        static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, NewCommandDelegate method)> NewCommandDictionary;
+        static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, CommandDelegate method)> NewCommandDictionary;
 
         static CollisionAutoDoc CollisionActorDoc = new CollisionAutoDoc();
         static ReferenceLogger<DisplayListRecord> DisplayListLogger = new ReferenceLogger<DisplayListRecord>();
@@ -74,7 +75,7 @@ namespace Spectrum
 
             MountEmulator("");
 
-            Console.WriteLine($"Created by mzxrules 2014-2018, compiled {Timestamp}");
+            Console.WriteLine($"Created by mzxrules 2014-2019, compiled {Timestamp}");
             Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
             Console.WriteLine($"Data logging enabled? {Options.EnableDataLogging}");
         }
@@ -95,47 +96,59 @@ namespace Spectrum
 
         private static void ProcessCommand(CommandRequest request)
         {
-            if (NewCommandDictionary.TryGetValue(request.CommandName, out var value))
+            if (!NewCommandDictionary.TryGetValue(request.CommandName, out var value))
             {
-                if (!value.attr.IsSupported(Options.Version))
+                return;
+            }
+
+            if (!value.attr.IsSupported(Options.Version))
+            {
+                Console.WriteLine("Command not supported for selected game or version");
+                return;
+            }
+
+            foreach (var signature in value.args)
+            {
+                Arguments args = new Arguments(request.Arguments, signature.Sig);
+                if (args.Valid)
                 {
-                    Console.WriteLine("Command not supported for selected game or version");
+                    value.method(args);
                     return;
                 }
-
-                foreach (var signature in value.args)
-                {
-                    Arguments args = new Arguments(request.Arguments, signature.Sig);
-                    if (args.Valid)
-                    {
-                        value.method(args);
-                        return;
-                    }
-                }
             }
         }
 
-        private static void ColB_GetGroup(string v1, int v2)
+        public delegate void CommandDelegate(Arguments args);
+
+        static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, CommandDelegate method)> BuildCommands()
         {
-            Ptr ptr = GlobalContext.RelOff(v2);
-            int count = ptr.ReadInt32(0);
+            var methods = typeof(Program).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+                .Where(m => Attribute.IsDefined(m, typeof(SpectrumCommand))).ToList();
 
-            Console.WriteLine($"{ptr}: col{v1}, {count:D2} elements");
-            if (count > 70)
-                return;
+            var Commands = new Dictionary<string, (SpectrumCommand, SpectrumCommandSignature[], CommandDelegate)>();
 
-            ptr = ptr.RelOff(4);
-            for (int i = 0; i < (count * 4); i += 4)
+            foreach (var method in methods)
             {
-                CollisionBody body = new CollisionBody(ptr.RelOff(i).Deref());
-                Console.WriteLine(body.ToString());
+                var commandAttr = (SpectrumCommand)method.GetCustomAttribute(typeof(SpectrumCommand));
+                var argsAttr = (SpectrumCommandSignature[])method.GetCustomAttributes(typeof(SpectrumCommandSignature));
+                if (argsAttr.Length == 0)
+                {
+                    argsAttr = new SpectrumCommandSignature[]
+                    {
+                        new SpectrumCommandSignature()
+                        {
+                            Sig = new Tokens[] { }
+                        }
+                    };
+                }
+                var command = (CommandDelegate)method.CreateDelegate(typeof(CommandDelegate));
+#if !DEBUG
+                if (commandAttr.Cat == SpectrumCommand.Category.Proto)
+                    continue;
+#endif
+                Commands.Add(commandAttr.Name, (commandAttr, argsAttr, command));
             }
-            Console.WriteLine();
-        }
-
-        private static void Default()
-        {
-            PrintAddresses(GetRamMap().OrderBy(x => x.Ram.Start.Offset));
+            return Commands;
         }
 
         
@@ -195,34 +208,6 @@ namespace Spectrum
             ModelViewer = null;
         }
 
-        private static bool PauseGame()
-        {
-            if (Options.Version != ORom.Build.N0)
-                return false;
-
-            if (GlobalContext == 0)
-                return false;
-
-            int update = GlobalContext.ReadInt32(4);
-            int deconstruct = GlobalContext.ReadInt32(8);
-            if (update == EXECUTE_PTR)
-            {
-                //unpause
-                if (deconstruct != FrameHaltVars.deconstructor)
-                    return false;
-                GlobalContext.Write(4, FrameHaltVars.update);
-                return false;
-            }
-            else
-            {
-                //pause
-                FrameHaltVars = new FrameHalt(update, deconstruct);
-                GlobalContext.Write(4, EXECUTE_PTR);
-                return true;
-            }
-
-        }
-
 
 
         private static double CalculateDistance3D(Vector3<float> position1, Vector3<float> position2)
@@ -241,7 +226,7 @@ namespace Spectrum
             if (value == 0x40_0000)
                 return value;
 
-            if (value == 0x080_0000)
+            if (value == 0x80_0000)
                 return value;
 
             return 0x40_0000;
@@ -255,7 +240,7 @@ namespace Spectrum
             N64Ptr addr = address;
 
 
-            if (addr.Offset>= GetRamSize())
+            if (addr.Offset >= GetRamSize())
             {
                 return;
             }
@@ -281,7 +266,7 @@ namespace Spectrum
                     Console.WriteLine("Alignment error");
                     return;
                 }
-                
+
                 Zpr.WriteRam32(addr, v32);
                 PrintRam(addr, PrintRam_X8, 1);
             }
@@ -740,8 +725,8 @@ namespace Spectrum
             Console.Clear();
             foreach (IRamItem item in Items)
                 Console.WriteLine(string.Format("{0:X6}:{1:X6} {2}",
-                    item.Ram.Start & 0xFFFFFF,
-                    (!Options.ShowSize) ? item.Ram.End & 0xFFFFFF : item.Ram.Size & 0xFFFFFF,
+                    item.Ram.Start.Offset,
+                    (!Options.ShowSize) ? item.Ram.End.Offset : item.Ram.Size.Offset,
                     item.ToString()));
         }
         
