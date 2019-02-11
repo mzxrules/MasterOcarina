@@ -8,8 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
@@ -78,20 +76,6 @@ namespace Spectrum
             Console.WriteLine($"Created by mzxrules 2014-2019, compiled {Timestamp}");
             Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
             Console.WriteLine($"Data logging enabled? {Options.EnableDataLogging}");
-        }
-
-        private static void InitializeCommands()
-        {
-            List<Command> commands = new List<Command>()
-            {
-                new Command("pause",(a)=>PauseGame(), "Pauses game by setting game state's 'update' func pointer to return"),
-                new Command("mpause", (a)=>PauseGameModel(), "secret :)"),
-            };
-
-            foreach (var item in commands)
-            {
-                CommandDictionary.Add(item.Id, item);
-            }
         }
 
         private static void ProcessCommand(CommandRequest request)
@@ -176,39 +160,6 @@ namespace Spectrum
             }
             Console.Clear();
         }
-
-        public static ModelViewerOoT ModelViewer;
-
-        private static void PauseGameModel()
-        {
-            if (Options.Version != ORom.Build.N0)
-                return;
-
-            Ptr staticContext = SPtr.New(0x11BA00).Deref();
-
-            if (staticContext == 0)
-                return;
-
-            Ptr pauseFlag = staticContext.RelOff(0x15D4);
-
-            if (pauseFlag.ReadInt32(0) == 0)
-            {
-                pauseFlag.Write(0, 1);
-                CancellationToken token = new CancellationToken();
-                //Action syncToEmu = 
-                Task.Run(async () => { while (GlobalContext.ReadInt32(4) != EXECUTE_PTR) { await Task.Delay(200); } Console.WriteLine("Sync Complete"); }
-                    , token);
-                ModelViewer = new ModelViewerOoT(GetFrameDlists(Gfx));
-                ModelControl();
-
-            }
-
-            pauseFlag.Write(0, 0);
-            ModelViewer?.RestoreBranches();
-            ModelViewer = null;
-        }
-
-
 
         private static double CalculateDistance3D(Vector3<float> position1, Vector3<float> position2)
         {

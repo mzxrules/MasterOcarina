@@ -2732,13 +2732,13 @@ namespace Spectrum
             Description = "Pauses game by setting game state's 'update' func pointer to return",
             Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature()]
-        private static bool PauseGame()
+        private static void PauseGame(Arguments args)
         {
             if (Options.Version != ORom.Build.N0)
-                return false;
+                return;
 
             if (GlobalContext == 0)
-                return false;
+                return;
 
             int update = GlobalContext.ReadInt32(4);
             int deconstruct = GlobalContext.ReadInt32(8);
@@ -2746,18 +2746,60 @@ namespace Spectrum
             {
                 //unpause
                 if (deconstruct != FrameHaltVars.deconstructor)
-                    return false;
+                    return;
                 GlobalContext.Write(4, FrameHaltVars.update);
-                return false;
+                return;
             }
             else
             {
                 //pause
                 FrameHaltVars = new FrameHalt(update, deconstruct);
                 GlobalContext.Write(4, EXECUTE_PTR);
-                return true;
+                return;
             }
 
+        }
+
+        public static ModelViewerOoT ModelViewer;
+        [SpectrumCommand(
+            Name = "mpause",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "secret :)",
+            Sup = SpectrumCommand.Supported.OoT)]
+        [SpectrumCommandSignature()]
+        private static void PauseGameModel(Arguments args)
+        {
+            if (Options.Version != ORom.Build.N0)
+                return;
+
+            Ptr staticContext = SPtr.New(0x11BA00).Deref();
+
+            if (staticContext == 0)
+                return;
+
+            Ptr pauseFlag = staticContext.RelOff(0x15D4);
+
+            if (pauseFlag.ReadInt32(0) == 0)
+            {
+                pauseFlag.Write(0, 1);
+                System.Threading.CancellationToken token = new System.Threading.CancellationToken();
+                //Action syncToEmu = 
+                Task.Run(async () => 
+                {
+                    while (GlobalContext.ReadInt32(4) != EXECUTE_PTR)
+                    {
+                        await Task.Delay(200);
+                    }
+                    Console.WriteLine("Sync Complete");
+                }, token);
+                ModelViewer = new ModelViewerOoT(GetFrameDlists(Gfx));
+                ModelControl();
+
+            }
+
+            pauseFlag.Write(0, 0);
+            ModelViewer?.RestoreBranches();
+            ModelViewer = null;
         }
     }
 }
