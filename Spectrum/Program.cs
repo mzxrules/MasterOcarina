@@ -20,8 +20,7 @@ namespace Spectrum
         public static event SetVersionEventHandler ChangeVersion;
         static List<BlockNode> LastActorLL = new List<BlockNode>();
         static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
-        static Dictionary<string, Command> CommandDictionary = new Dictionary<string, Command>();
-        static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, CommandDelegate method)> NewCommandDictionary;
+        static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, CommandDelegate method)> CommandDictionary;
 
         static CollisionAutoDoc CollisionActorDoc = new CollisionAutoDoc();
         static ReferenceLogger<DisplayListRecord> DisplayListLogger = new ReferenceLogger<DisplayListRecord>();
@@ -66,7 +65,7 @@ namespace Spectrum
             ChangeVersion += UpdateSetVersion;
             ChangeVersion += OvlParticle.ChangeVersion;
             
-            NewCommandDictionary = BuildCommands();
+            CommandDictionary = BuildCommands();
 
             SpawnData.Load();
             LoadSettings();
@@ -80,7 +79,7 @@ namespace Spectrum
 
         private static void ProcessCommand(CommandRequest request)
         {
-            if (!NewCommandDictionary.TryGetValue(request.CommandName, out var value))
+            if (!CommandDictionary.TryGetValue(request.CommandName, out var value))
             {
                 return;
             }

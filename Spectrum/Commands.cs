@@ -31,7 +31,7 @@ namespace Spectrum
             }
 
             string key = (string)args[0];
-            if (!NewCommandDictionary.TryGetValue(key, out var data))
+            if (!CommandDictionary.TryGetValue(key, out var data))
             {
                 Console.WriteLine($"Cannot find help for command '{key}'");
                 return;
@@ -58,7 +58,7 @@ namespace Spectrum
         {
             var commandNotes = new List<(SpectrumCommand.Category cat, string Id, string Support, string Description, string args, bool hide)>();
             
-            foreach (var (attr, args, method) in NewCommandDictionary.Values)
+            foreach (var (attr, args, method) in CommandDictionary.Values)
             {
                 int l = 0;
 

@@ -8,21 +8,6 @@ using System.Threading.Tasks;
 
 namespace Spectrum
 {
-    public delegate void LegacyCommandDelegate(Arguments args);
-
-    public class Command
-    {
-        public string Id { get; private set; }
-        public string Description { get; private set; }
-        public LegacyCommandDelegate CommandAction { get; private set; }
-        public Command(string id, LegacyCommandDelegate d, string description)
-        {
-            Id = id;
-            Description = description;
-            CommandAction = d;
-        }
-    }
-
     public class CommandRequest
     {
         public string CommandName { get; private set; } = "";
@@ -56,15 +41,6 @@ namespace Spectrum
             }
 
             Arguments = Input.Substring(CommandArgsIndex).TrimStart();
-        }
-
-        public string[] Legacy()
-        {
-            string readLine = Input;
-            var args = readLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (args.Length == 0)
-                args = new string[] { "" };
-            return args;
         }
     }
 
