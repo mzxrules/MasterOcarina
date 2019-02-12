@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Buffers.Binary;
 using mzxrules.Helper;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -22,7 +23,7 @@ namespace ZCodecCore
         {
 
         }
-        
+
         public CompressTask(StreamReader reader)
         {
             string line;
@@ -41,15 +42,15 @@ namespace ZCodecCore
     }
     public class Util
     {
-        public static string GetExclusions(BinaryReader read, int dmadata)
+        public static string GetExclusions(ReadOnlySpan<byte> read, int dmadata)
         {
+            DmadataRecord rec = GetDmadataRec(read, dmadata);
+            var records = GetDmadataRecords(read.Slice(rec.Rom.Start, rec.VRom.Size));
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"{dmadata:X8}");
 
-            read.Seek(dmadata);
-
-            var records = GetDmadataRecords(read);
-            for(int i = 0; i < records.Count; i++)
+            for (int i = 0; i < records.Count; i++)
             {
                 var record = records[i];
 
@@ -62,12 +63,10 @@ namespace ZCodecCore
             return sb.ToString();
         }
 
-        public static int Compress(BinaryReader read, byte[] write, CompressTask task, int cur = 0)
+        public static int Compress(ReadOnlySpan<byte> read, Span<byte> w, CompressTask task, int cur = 0)
         {
-            read.Seek(task.Dmadata);
-            var dmadata = GetDmadataRecords(read);
-
-            Span<byte> w = write;
+            DmadataRecord dmadataRec = GetDmadataRec(read, task.Dmadata);
+            var dmadata = GetDmadataRecords(read, task.Dmadata);
 
             for (int i = 0; i < dmadata.Count; i++)
             {
@@ -79,14 +78,12 @@ namespace ZCodecCore
                 if (rom.Start < 0)
                     continue;
 
-                read.Seek(rom.Start);
-
-                Span<byte> r = read.ReadBytes((int)vrom.Size);
+                ReadOnlySpan<byte> file = read.Slice(rom.Start, vrom.Size);
 
                 //if file should be compressed
                 if (!task.Exclusions.Contains(i))
                 {
-                    int size = Yaz.Encode(r.ToArray(), (int)vrom.Size, out byte[] comp);
+                    int size = Yaz.Encode(file.ToArray(), vrom.Size, out byte[] comp);
                     if (size > 0)
                     {
                         Span<byte> c = new Span<byte>(comp, 0, size);
@@ -97,73 +94,66 @@ namespace ZCodecCore
                     }
                 }
 
-                r.CopyTo(w.Slice(cur, (int)vrom.Size));
+                file.CopyTo(w.Slice(cur, vrom.Size));
                 dmarec.Rom = new FileAddress(cur, 0);
-                cur += (int)vrom.Size;
+                cur += vrom.Size;
             }
-
-            read.Seek(task.Dmadata);
-
-            Span<int> dmabinary = new int[dmadata.Count * 0x4];
-            for (int i = 0; i < dmadata.Count * 4; i += 4)
-            {
-                DmadataRecord rec = dmadata[i / 4];
-                dmabinary[i + 0] = Endian.ConvertInt32((int)rec.VRom.Start);
-                dmabinary[i + 1] = Endian.ConvertInt32((int)rec.VRom.End);
-                dmabinary[i + 2] = Endian.ConvertInt32((int)rec.Rom.Start);
-                dmabinary[i + 3] = Endian.ConvertInt32((int)rec.Rom.End);
-            }
-            MemoryMarshal.Cast<int, byte>(dmabinary)
-                .CopyTo(w.Slice(task.Dmadata, dmadata.Count * 0x10));
+            WriteDmadataRecords(w.Slice(dmadataRec.Rom.Start, dmadataRec.VRom.Size), dmadata);
 
             return cur;
         }
 
-        static List<DmadataRecord> GetDmadataRecords(BinaryReader br)
+        private static DmadataRecord GetDmadataRec(ReadOnlySpan<byte> read, int dmadata)
+        {
+            int start = EndianX.ConvertInt32(read, dmadata + 0x20);
+            int end = EndianX.ConvertInt32(read, dmadata + 0x24);
+
+            return new DmadataRecord()
+            {
+                VRom = new FileAddress(start, end),
+                Rom = new FileAddress(dmadata, 0)
+            };
+        }
+
+        static List<DmadataRecord> GetDmadataRecords(ReadOnlySpan<byte> read, int dmadata)
+        {
+            var dmadataRec = GetDmadataRec(read, dmadata);
+            var slice = read.Slice(dmadataRec.Rom.Start, dmadataRec.VRom.Size);
+            return GetDmadataRecords(slice);
+        }
+
+        static List<DmadataRecord> GetDmadataRecords(ReadOnlySpan<byte> read)
         {
             List<DmadataRecord> result = new List<DmadataRecord>();
             DmadataRecord record;
-            do
-            {
+
+            for (int i = 0; i < read.Length; i+= 0x10)
+            { 
                 record = new DmadataRecord()
                 {
-                    VRom = new FileAddress(br.ReadBigInt32(), br.ReadBigInt32()),
-                    Rom = new FileAddress(br.ReadBigInt32(), br.ReadBigInt32())
+                    VRom = new FileAddress(EndianX.ConvertInt32(read, i + 0x0), EndianX.ConvertInt32(read, i + 0x4)),
+                    Rom = new FileAddress(EndianX.ConvertInt32(read, i + 0x8), EndianX.ConvertInt32(read, i + 0xC))
                 };
+                if (record.VRom.End == 0)
+                {
+                    break;
+                }
                 result.Add(record);
             }
-            while (record.VRom.End != 0);
             return result;
         }
 
-        static void WriteDmadataRecords(BinaryWriter bw, List<DmadataRecord> record)
+        static void WriteDmadataRecords(Span<byte> write, List<DmadataRecord> record)
         {
+            int i = 0;
             foreach (var item in record)
             {
-                bw.WriteBig((int)item.VRom.Start);
-                bw.WriteBig((int)item.VRom.End);
-                bw.WriteBig((int)item.Rom.Start);
-                bw.WriteBig((int)item.Rom.End);
+                BinaryPrimitives.WriteInt32BigEndian(write.Slice(i + 0x0), item.VRom.Start);
+                BinaryPrimitives.WriteInt32BigEndian(write.Slice(i + 0x4), item.VRom.End);
+                BinaryPrimitives.WriteInt32BigEndian(write.Slice(i + 0x8), item.Rom.Start);
+                BinaryPrimitives.WriteInt32BigEndian(write.Slice(i + 0xC), item.Rom.End);
+                i += 0x10;
             }
-        }
-
-        const int STATIC_SEGMENT = 0x400_0000 - 0x10000;
-        public static void CompressDual(BinaryReader br, BinaryWriter bw, CompressTask g0, CompressTask g1)
-        {
-            g0.Dmadata = STATIC_SEGMENT + 0x40;
-            g1.Dmadata = g0.Dmadata + 0x6200;
-
-            byte[] compressed = new byte[0x400_0000];
-            Console.WriteLine("Compressing G0");
-            int cur = Compress(br, compressed, g0);
-            Console.WriteLine($"Compressing G1, cur = {cur:X8}");
-            Compress(br, compressed, g1, cur);
-            Console.WriteLine($"Compression Complete, cur = {cur:X8}");
-            br.Seek(STATIC_SEGMENT);
-            Span<byte> header = br.ReadBytes(0x40);
-            Span<byte> comp = compressed;
-            header.CopyTo(comp.Slice(STATIC_SEGMENT, 0x40));
-            bw.Write(compressed);
         }
     }
 }
