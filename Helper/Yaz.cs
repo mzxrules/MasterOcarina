@@ -58,50 +58,51 @@ namespace mzxrules.Helper
         /// <summary>
         /// Decodes a Yaz block
         /// </summary>
-        /// <param name="src">points to the Yaz source data (to the "real" source data, not at the header!)</param>
-        /// <param name="dst">points to a buffer uncompressedSize bytes large (you get uncompressedSize from</param>
-        /// <param name="uncompressedSize">the second 4 bytes in the Yaz header)</param>
-        static void Decode(byte[] src, out byte[] dst, int uncompressedSize)
+        /// <param name="src">Yaz raw data, past the header</param>
+        /// <param name="dst">Decompressed file</param>
+        /// <param name="decompressedSize">Decompressed size, in bytes</param>
+        static void Decode(byte[] src, out byte[] dst, int decompressedSize)
         {
-            int srcPlace = 0, dstPlace = 0; //current read/write positions
+            int srcPos = 0; //read position
+            int dstPos = 0; //write position
 
             int validBitCount = 0; //number of valid bits left in "code" byte
-            byte currCodeByte = 0;//set on first pass
+            byte curCodeByte = 0; //set on first pass
 
-            dst = new byte[uncompressedSize];
+            dst = new byte[decompressedSize];
 
-            while (dstPlace < uncompressedSize)
+            while (dstPos < decompressedSize)
             {
                 //read new "code" byte if the current one is used up
                 if (validBitCount == 0)
                 {
-                    currCodeByte = src[srcPlace];
-                    ++srcPlace;
+                    curCodeByte = src[srcPos];
+                    ++srcPos;
                     validBitCount = 8;
                 }
 
-                if ((currCodeByte & 0x80) != 0)
+                if ((curCodeByte & 0x80) != 0)
                 {
                     //straight copy
-                    dst[dstPlace] = src[srcPlace];
-                    dstPlace++;
-                    srcPlace++;
+                    dst[dstPos] = src[srcPos];
+                    dstPos++;
+                    srcPos++;
                 }
                 else
                 {
                     //RLE part
-                    byte byte1 = src[srcPlace];
-                    byte byte2 = src[srcPlace + 1];
-                    srcPlace += 2;
+                    byte byte1 = src[srcPos];
+                    byte byte2 = src[srcPos + 1];
+                    srcPos += 2;
 
-                    uint dist = (uint)((byte1 & 0xF) << 8) | byte2;
-                    uint copySource = (uint)dstPlace - (dist + 1);
+                    int dist = ((byte1 << 8) | byte2) & 0xFFF;
+                    int copySource = dstPos - (dist + 1);
 
-                    uint numBytes = (uint)byte1 >> 4;
+                    int numBytes = byte1 >> 4;
                     if (numBytes == 0)
                     {
-                        numBytes = (uint)src[srcPlace] + 0x12;
-                        srcPlace++;
+                        numBytes = src[srcPos] + 0x12;
+                        srcPos++;
                     }
                     else
                         numBytes += 2;
@@ -109,25 +110,15 @@ namespace mzxrules.Helper
                     //copy run
                     for (int i = 0; i < numBytes; ++i)
                     {
-                        dst[dstPlace] = dst[copySource];
+                        dst[dstPos] = dst[copySource];
                         copySource++;
-                        dstPlace++;
+                        dstPos++;
                     }
                 }
 
                 //use next bit from "code" byte
-                currCodeByte <<= 1;
+                curCodeByte <<= 1;
                 validBitCount -= 1;
-            }
-        }
-
-        struct Ret
-        {
-            public int srcPos, dstPos;
-            public Ret(int s, int d)
-            {
-                srcPos = s;
-                dstPos = d;
             }
         }
 
@@ -139,19 +130,13 @@ namespace mzxrules.Helper
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static uint SimpleEnc(byte[] src, int size, int pos, ref uint pMatchPos)
+        static int SimpleEnc(byte[] src, int size, int pos, ref int matchPos)
         {
-            int startPos = pos - 0x1000;
+            //int matchPos = 0;
+            int startPos = Math.Max(pos - 0x1000, 0);
             int numBytes = 1;
-            int matchPos = 0;
-            int maxEnc = size - pos; //Replaces J loop terminating condition
+            int maxEnc = Math.Min(size - pos, 0xff + 0x12); //limits forward seeking to the maximum number of bytes that can be encoded
 
-            if (startPos < 0)
-                startPos = 0;
-
-            //limits forward seeking to the maximum number of bytes that can be encoded
-            if (maxEnc > 0xff + 0x12)
-                maxEnc = 0xff + 0x12;
 
             for (int i = startPos; i < pos; i++)
             {
@@ -167,66 +152,57 @@ namespace mzxrules.Helper
                     matchPos = i;
                 }
             }
-            pMatchPos = (uint)matchPos;
             if (numBytes == 2)
                 numBytes = 1;
-            return (uint)numBytes;
+            return numBytes;
         }
 
-        class StaticEncodeVars
+        class SimpleEncodeResult
         {
-            public uint numBytes1;
-            public uint matchPos;
-            public int prevFlag;
+            public int Length;
+            public int matchPos;
+            public bool UseResult;
         }
 
         /// <summary>
-        /// a lookahead encoding scheme for ngc Yaz
+        /// a lookahead encoding scheme for Yaz
         /// </summary>
         /// <param name="src"></param>
         /// <param name="size"></param>
         /// <param name="pos"></param>
-        /// <param name="pMatchPos"></param>
+        /// <param name="matchPos"></param>
         /// <returns></returns>
-        static uint NintendoEnc(byte[] src, int size, int pos, ref uint pMatchPos, StaticEncodeVars var)
-        //u32 nintendoEnc(u8* src, int size, int pos, u32 *pMatchPos)
+        static int NintendoEnc(byte[] src, int size, int pos, ref int matchPos, SimpleEncodeResult prev)
         {
-            //int startPos = pos - 0x1000;
-            uint numBytes = 1;
+            int numBytes = 1;
 
-            // if prevFlag is set, it means that the previous position was determined by look-ahead try.
+            // if UseResult is set, it means that the previous position was determined by look-ahead try,
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
-            if (var.prevFlag == 1)
+            if (prev.UseResult == true)
             {
-                pMatchPos = var.matchPos; //*pMatchPos = matchPos;
-                var.prevFlag = 0;
-                return var.numBytes1;
+                matchPos = prev.matchPos;
+                prev.matchPos = 0;
+                prev.UseResult = false;
+                return prev.Length;
             }
-            var.prevFlag = 0;
-            numBytes = SimpleEnc(src, size, pos, ref var.matchPos); //numBytes = simpleEnc(src, size, pos, &matchPos);
-            pMatchPos = var.matchPos; //*pMatchPos = matchPos;
+            prev.UseResult = false;
+            numBytes = SimpleEnc(src, size, pos, ref prev.matchPos); 
+            matchPos = prev.matchPos;
 
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
             if (numBytes >= 3)
             {
-                var.numBytes1 = SimpleEnc(src, size, pos + 1, ref var.matchPos); //numBytes1 = simpleEnc(src, size, pos+1, &matchPos);
+                prev.Length = SimpleEnc(src, size, pos + 1, ref prev.matchPos);
                 // if the next position encoding is +2 longer than current position, choose it.
                 // this does not guarantee the best optimization, but fairly good optimization with speed.
-                if (var.numBytes1 >= numBytes + 2)
+                if (prev.Length >= numBytes + 2)
                 {
                     numBytes = 1;
-                    var.prevFlag = 1;
+                    prev.UseResult = true;
                 }
             }
             return numBytes;
         }
-
-        //public static Task<int> EncodeAsync(byte[] src, int srcSize, Stream dstFile)
-        //{
-        //    Task<int> encodeTask = new Task<int>(() => Encode(src, srcSize, dstFile));
-        //    encodeTask.Start();
-        //    return encodeTask;
-        //}
 
         /// <summary>
         /// Writes compressed file to given stream, starting at stream's position.
@@ -237,17 +213,17 @@ namespace mzxrules.Helper
         /// <returns></returns>
         public static int Encode(byte[] src, int srcSize, Stream dstFile)
         {
-            Ret r = new Ret(0, 0);
+            int srcPos = 0;
+            int dstPos = 0;
             byte[] dst = new byte[24]; // 8 codes * 3 bytes maximum
             int dstSize = 0;
 
-            uint validBitCount = 0; //number of valid bits left in "code" byte
-            byte currCodeByte = 0;
+            int validBitCount = 0; //number of valid bits left in "code" byte
+            byte curCodeByte = 0;
 
-            uint numBytes;
-            uint matchPos = 0;
+            int matchPos = 0;
 
-            StaticEncodeVars var = new StaticEncodeVars();
+            SimpleEncodeResult var = new SimpleEncodeResult();
 
             //Write Header
             byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
@@ -260,69 +236,62 @@ namespace mzxrules.Helper
             for (int i = 0; i < 8; i++)
                 dstFile.WriteByte(0);
 
-            while (r.srcPos < srcSize)
+            while (srcPos < srcSize)
             {
-                numBytes = NintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
+                int numBytes = NintendoEnc(src, srcSize, srcPos, ref matchPos, var); //matchPos passed ref &matchpos
 
                 if (numBytes < 3)
                 {
                     //straight copy
-                    dst[r.dstPos] = src[r.srcPos];
-                    r.dstPos++;
-                    r.srcPos++;
+                    dst[dstPos] = src[srcPos];
+                    dstPos++;
+                    srcPos++;
                     //set flag for straight copy
-                    currCodeByte |= (byte)(0x80 >> (int)validBitCount);
+                    curCodeByte |= (byte)(0x80 >> validBitCount);
                 }
                 else
                 {
                     //RLE part
-                    uint dist = (uint)r.srcPos - matchPos - 1;
-                    byte byte1, byte2, byte3;
+                    int dist = srcPos - matchPos - 1;
 
-                    if (numBytes >= 0x12)  // 3 byte encoding
+                    if (numBytes < 0x12) // 2 byte encoding
                     {
-                        byte1 = (byte)(0 | (dist >> 8));
-                        byte2 = (byte)(dist & 0xff);
-                        dst[r.dstPos++] = byte1;
-                        dst[r.dstPos++] = byte2;
-                        // maximum runlength for 3 byte encoding
-                        if (numBytes > 0xff + 0x12)
-                            numBytes = 0xff + 0x12;
-                        byte3 = (byte)(numBytes - 0x12);
-                        dst[r.dstPos++] = byte3;
+                        dst[dstPos++] = (byte)(((numBytes - 2) << 4) | (dist >> 8));
+                        dst[dstPos++] = (byte)(dist & 0xff);
                     }
-                    else  // 2 byte encoding
+                    else // 3 byte encoding
                     {
-                        byte1 = (byte)(((numBytes - 2) << 4) | (dist >> 8));
-                        byte2 = (byte)(dist & 0xff);
-                        dst[r.dstPos++] = byte1;
-                        dst[r.dstPos++] = byte2;
+                        //write offset
+                        dst[dstPos++] = (byte)(dist >> 8);
+                        dst[dstPos++] = (byte)(dist & 0xff);
+                        //write num bytes, displaced by 0x12. maximum encoding = 0xff + 0x12 bytes
+                        dst[dstPos++] = (byte)(numBytes - 0x12);
                     }
-                    r.srcPos += (int)numBytes;
+                    srcPos += numBytes;
                 }
                 validBitCount++;
                 //write eight codes
                 if (validBitCount == 8)
                 {
-                    dstFile.WriteByte(currCodeByte);
-                    dstFile.Write(dst, 0, r.dstPos);
+                    dstFile.WriteByte(curCodeByte);
+                    dstFile.Write(dst, 0, dstPos);
 
-                    dstSize += r.dstPos + 1;
+                    dstSize += dstPos + 1;
 
-                    currCodeByte = 0;
+                    curCodeByte = 0;
                     validBitCount = 0;
-                    r.dstPos = 0;
+                    dstPos = 0;
                 }
             }
             if (validBitCount > 0)
             {
-                dstFile.WriteByte(currCodeByte);
-                dstFile.Write(dst, 0, r.dstPos);
-                dstSize += r.dstPos + 1;
+                dstFile.WriteByte(curCodeByte);
+                dstFile.Write(dst, 0, dstPos);
+                dstSize += dstPos + 1;
 
-                currCodeByte = 0;
+                curCodeByte = 0;
                 validBitCount = 0;
-                r.dstPos = 0;
+                dstPos = 0;
             }
             return dstSize;
         }
@@ -342,19 +311,19 @@ namespace mzxrules.Helper
                 return -1;
             }
 
-            Ret r = new Ret(0, 0);
+            int srcPos = 0;
+            int dstPos = 0;
+            
             byte[] dst = new byte[24]; // 8 codes * 3 bytes maximum
             int dstSize = 0;
             dstFile = new byte[srcSize];
 
-            uint validBitCount = 0; //number of valid bits left in "code" byte
+            int validBitCount = 0; //number of valid bits left in "code" byte
             byte currCodeByte = 0;
+            
+            int matchPos = 0;
 
-            uint numBytes;
-            uint matchPos = 0;
-
-
-            StaticEncodeVars var = new StaticEncodeVars();
+            SimpleEncodeResult prev = new SimpleEncodeResult();
 
             //Write Header
             byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
@@ -366,76 +335,68 @@ namespace mzxrules.Helper
             Array.Copy(srcSizeArr, 0, dstFile, 4, 4);
             dstSize += 0x10;
 
-            while (r.srcPos < srcSize)
+            while (srcPos < srcSize)
             {
-                numBytes = NintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
+                int numBytes = NintendoEnc(src, srcSize, srcPos, ref matchPos, prev); //matchPos passed ref &matchpos
 
-                if (numBytes < 3)
+                if (numBytes < 3) //one byte copy
                 {
-                    //straight copy
-                    dst[r.dstPos] = src[r.srcPos];
-                    r.dstPos++;
-                    r.srcPos++;
+                    dst[dstPos] = src[srcPos];
+                    dstPos++;
+                    srcPos++;
                     //set flag for straight copy
-                    currCodeByte |= (byte)(0x80 >> (int)validBitCount);
+                    currCodeByte |= (byte)(0x80 >> validBitCount);
                 }
                 else
                 {
                     //RLE part
-                    uint dist = (uint)r.srcPos - matchPos - 1;
-                    byte byte1, byte2, byte3;
+                    int dist = srcPos - matchPos - 1;
 
-                    if (numBytes >= 0x12)  // 3 byte encoding
+                    if (numBytes < 0x12)  // 2 byte encoding
                     {
-                        byte1 = (byte)(0 | (dist >> 8));
-                        byte2 = (byte)(dist & 0xff);
-                        dst[r.dstPos++] = byte1;
-                        dst[r.dstPos++] = byte2;
-                        // maximum runlength for 3 byte encoding
-                        if (numBytes > 0xff + 0x12)
-                            numBytes = 0xff + 0x12;
-                        byte3 = (byte)(numBytes - 0x12);
-                        dst[r.dstPos++] = byte3;
+                        dst[dstPos++] = (byte)(((numBytes - 2) << 4) | (dist >> 8));
+                        dst[dstPos++] = (byte)(dist & 0xff);
                     }
-                    else  // 2 byte encoding
+                    else  // 3 byte encoding
                     {
-                        byte1 = (byte)(((numBytes - 2) << 4) | (dist >> 8));
-                        byte2 = (byte)(dist & 0xff);
-                        dst[r.dstPos++] = byte1;
-                        dst[r.dstPos++] = byte2;
+                        //write offset
+                        dst[dstPos++] = (byte)(dist >> 8);
+                        dst[dstPos++] = (byte)(dist & 0xff);
+                        //write num bytes, displaced by 0x12. maximum encoding = 0xff + 0x12 bytes
+                        dst[dstPos++] = (byte)(numBytes - 0x12);
                     }
-                    r.srcPos += (int)numBytes;
+                    srcPos += numBytes;
                 }
                 validBitCount++;
                 //write eight codes
                 if (validBitCount == 8)
                 {
-                    int dstSizeNext = dstSize + r.dstPos + 1;
+                    int dstSizeNext = dstSize + dstPos + 1;
                     if (dstSizeNext > dstFile.Length)
                         return -1;
 
                     dstFile[dstSize] = currCodeByte;
-                    Array.Copy(dst, 0, dstFile, dstSize + 1, r.dstPos);
+                    Array.Copy(dst, 0, dstFile, dstSize + 1, dstPos);
                     dstSize = dstSizeNext;
 
                     currCodeByte = 0;
                     validBitCount = 0;
-                    r.dstPos = 0;
+                    dstPos = 0;
                 }
             }
             if (validBitCount > 0)
             {
-                int dstSizeNext = dstSize + r.dstPos + 1;
+                int dstSizeNext = dstSize + dstPos + 1;
                 if (dstSizeNext > dstFile.Length)
                     return -1;
 
                 dstFile[dstSize] = currCodeByte;
-                Array.Copy(dst, 0, dstFile, dstSize + 1, r.dstPos);
+                Array.Copy(dst, 0, dstFile, dstSize + 1, dstPos);
                 dstSize = dstSizeNext;
 
                 currCodeByte = 0;
                 validBitCount = 0;
-                r.dstPos = 0;
+                dstPos = 0;
             }
             return Align.To16(dstSize);
         }
