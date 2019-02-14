@@ -400,5 +400,51 @@ namespace mzxrules.Helper
             }
             return Align.To16(dstSize);
         }
+
+        /// <summary>
+        /// Dumps only the code bytes within a compressed file
+        /// </summary>
+        /// <param name="src">Compressed file</param>
+        /// <param name="srcSize">File size</param>
+        /// <param name="dstSize">Output encoding data file size</param>
+        /// <returns></returns>
+        public static byte[] GetEncodingData(byte[] src, int srcSize, out int dstSize)
+        {
+            int srcPos = 0x10;
+            dstSize = 0x00;
+
+            byte[] dst = new byte[srcSize -= 0x10];
+
+            byte curCodeByte = 0;
+            int validBitCount = 0;
+
+            while (srcPos < srcSize)
+            {
+                if (validBitCount == 0)
+                {
+                    curCodeByte = src[srcPos];
+                    validBitCount = 8;
+                    dst[dstSize] = curCodeByte;
+                    srcPos++;
+                    dstSize++;
+                }
+                if ((curCodeByte & 0x80) != 1)
+                {
+                    srcPos++;
+                }
+                else
+                {
+                    byte temp = src[srcPos];
+                    dst[dstSize++] = src[srcPos++];
+                    dst[dstSize++] = src[srcPos++];
+                    if ((temp & 0xF0) == 0)
+                        dst[dstSize++] = src[srcPos++];
+                }
+                curCodeByte <<= 1;
+                validBitCount--;
+            }
+
+            return dst;
+        }
     }
 }
