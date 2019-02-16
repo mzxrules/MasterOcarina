@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace mzxrules.Helper
@@ -203,6 +204,29 @@ namespace mzxrules.Helper
             }
             return numBytes;
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static EncodeResult NintendoEnc(YazText src, int size, int pos)
+        {
+            // if UseResult is set, it means that the previous position was determined by look-ahead try,
+            // so just use it. this is not the best optimization, but nintendo's choice for speed.
+            
+            EncodeResult resultA = src.MatchNext(pos);
+
+            // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
+            if (resultA.Length >= 3)
+            {
+                EncodeResult resultB = src.MatchNext(pos + 1); //SimpleEnc(src, size, pos + 1, ref prev.matchPos);
+                // if the next position encoding is +2 longer than current position, choose it.
+                // this does not guarantee the best optimization, but fairly good optimization with speed.
+                if (resultB.Length >= resultA.Length + 2)
+                {
+                    resultB.SkipByte = true;
+                    return resultB;
+                }
+            }
+            return resultA;
+        }
 
         /// <summary>
         /// Writes compressed file to given stream, starting at stream's position.
@@ -319,11 +343,10 @@ namespace mzxrules.Helper
             dstFile = new byte[srcSize];
 
             int validBitCount = 0; //number of valid bits left in "code" byte
-            byte currCodeByte = 0;
+            byte curCode = 0;
             
-            int matchPos = 0;
 
-            SimpleEncodeResult prev = new SimpleEncodeResult();
+            //SimpleEncodeResult prev = new SimpleEncodeResult();
 
             //Write Header
             byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
@@ -335,9 +358,26 @@ namespace mzxrules.Helper
             Array.Copy(srcSizeArr, 0, dstFile, 4, 4);
             dstSize += 0x10;
 
+            YazText yazText = new YazText(src, srcSize);
+            EncodeResult result = new EncodeResult();
             while (srcPos < srcSize)
             {
-                int numBytes = NintendoEnc(src, srcSize, srcPos, ref matchPos, prev); //matchPos passed ref &matchpos
+                //int numBytes = NintendoEnc(src, srcSize, srcPos, ref matchPos, prev); //matchPos passed ref &matchpos
+
+                if (result.Length == 0)
+                    result = NintendoEnc(yazText, srcSize, srcPos);
+                int numBytes;
+                if (result.SkipByte)
+                {
+                    numBytes = 1;
+                    result.SkipByte = false;
+                }
+                else
+                {
+                    numBytes = result.Length;
+                    result.Length = 0;
+                }
+                int matchPos = result.MatchPos;
 
                 if (numBytes < 3) //one byte copy
                 {
@@ -345,7 +385,7 @@ namespace mzxrules.Helper
                     dstPos++;
                     srcPos++;
                     //set flag for straight copy
-                    currCodeByte |= (byte)(0x80 >> validBitCount);
+                    curCode |= (byte)(0x80 >> validBitCount);
                 }
                 else
                 {
@@ -371,34 +411,36 @@ namespace mzxrules.Helper
                 //write eight codes
                 if (validBitCount == 8)
                 {
-                    int dstSizeNext = dstSize + dstPos + 1;
-                    if (dstSizeNext > dstFile.Length)
+                    bool success = FlushToDest(dstFile);//dstFile, ref dstPos, dst, ref dstSize, ref curCode);
+                    if (!success)
                         return -1;
-
-                    dstFile[dstSize] = currCodeByte;
-                    Array.Copy(dst, 0, dstFile, dstSize + 1, dstPos);
-                    dstSize = dstSizeNext;
-
-                    currCodeByte = 0;
                     validBitCount = 0;
-                    dstPos = 0;
                 }
             }
             if (validBitCount > 0)
             {
-                int dstSizeNext = dstSize + dstPos + 1;
-                if (dstSizeNext > dstFile.Length)
+                bool success = FlushToDest(dstFile);//dstFile, ref dstPos, dst, ref dstSize, ref curCode);
+                if (!success)
                     return -1;
-
-                dstFile[dstSize] = currCodeByte;
-                Array.Copy(dst, 0, dstFile, dstSize + 1, dstPos);
-                dstSize = dstSizeNext;
-
-                currCodeByte = 0;
-                validBitCount = 0;
-                dstPos = 0;
             }
             return Align.To16(dstSize);
+
+            bool FlushToDest(byte[] dFile)//byte[] dstFile, ref int dstPos, byte[] dst, ref int dstSize, ref byte curCode)
+            {
+                int dstSizeNext = dstSize + dstPos + 1;
+                if (dstSizeNext > dFile.Length)
+                {
+                    return false;
+                }
+
+                dFile[dstSize] = curCode;
+                Array.Copy(dst, 0, dFile, dstSize + 1, dstPos);
+                dstSize = dstSizeNext;
+
+                curCode = 0;
+                dstPos = 0;
+                return true;
+            }
         }
 
         /// <summary>
@@ -445,6 +487,141 @@ namespace mzxrules.Helper
             }
 
             return dst;
+        }
+
+        sealed class YazText
+        {
+            public byte[] Text;
+            public int Length;
+            public int[] Lookup;
+
+            public YazText(byte[] text, int length)
+            {
+                Text = text;
+                Length = length;
+                Lookup = new int[Length];
+                InitializeYazText();
+            }
+
+            private void InitializeYazText()
+            {
+                int[] last = new int[256];
+
+                for (int i = Length - 1; i > 0; i--)
+                {
+                    byte c = Text[i];
+
+                    if (last[c] == 0)
+                    {
+                        last[c] = i;
+                        continue;
+                    }
+                    int l = last[c];
+                    Lookup[l] = i;
+                    last[c] = i;
+                }
+            }
+
+
+
+            public EncodeResult MatchNext(int pos)
+            {
+                bool foundMatch = false;
+                int scanPos = pos + 1;
+                int scanStart = Math.Max(pos - 0x1000, 0) + 1;
+                int numBytes = 2; //the smallest encodeable string is 3 bytes
+                int maxEnc = Math.Min(Length - pos, 0xff + 0x12); //limits forward seeking to the maximum number of bytes that can be encoded
+
+                if (maxEnc < 3)
+                {
+                    return new EncodeResult()
+                    {
+                        Length = 1
+                    };
+                }
+
+                EncodeResult result = new EncodeResult();
+                int indexNext = Lookup[scanPos];
+
+                while (indexNext >= scanStart)
+                {
+                    int index = indexNext;
+                    indexNext = Lookup[indexNext];
+
+                    //i = pattern index + 2
+                    bool noMatch = false;
+                    for (int i = 1; i < numBytes; i++)
+                    {
+                        if (Text[index + i] != Text[scanPos + i])
+                        {
+                            noMatch = true;
+                            break;
+                        }
+                    }
+                    if (noMatch)
+                        continue;
+
+                    if (Text[index - 1] != Text[pos])
+                        continue;
+
+                    foundMatch = true;
+                    result.MatchPos = index - 1;
+
+
+                    for (int i = numBytes; i < maxEnc - 1; i++)
+                    {
+                        if (Text[index + i] != Text[scanPos + i])
+                        {
+                            break;
+                        }
+                        numBytes++;
+                    }
+                }
+
+                result.Length = foundMatch ? numBytes + 1 : 1;
+                return result;
+            }
+
+            public int MatchNext2(int pos, ref int matchPos)
+            {
+                matchPos = 0;
+                int scanPos = pos + 1;
+                int scanStart = Math.Max(pos - 0x1000, 0) + 1;
+                int numBytes = 1; //the smallest encodeable string is 3 bytes
+                int maxEnc = Math.Min(Length - pos, 0xff + 0x12); //limits forward seeking to the maximum number of bytes that can be encoded
+
+                if (maxEnc < 3)
+                    return 1;
+
+                int indexNext = Lookup[scanPos];
+
+                while (indexNext >= scanStart)
+                {
+                    int index = indexNext - 1;
+                    indexNext = Lookup[indexNext];
+
+                    int j;
+                    for (j = 0; j < maxEnc; j++)
+                    {
+                        if (Text[index + j] != Text[pos + j])
+                            break;
+                    }
+                    if (j >= numBytes)
+                    {
+                        numBytes = j;
+                        matchPos = index;
+                    }
+                }
+
+                return numBytes > 2 ? numBytes : 1;
+            }
+        }
+
+        sealed class EncodeResult
+        {
+            public int MatchPos;
+            public int Length;
+            public bool SkipByte;
         }
     }
 }
