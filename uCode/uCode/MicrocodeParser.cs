@@ -14,15 +14,16 @@ namespace uCode
         public N64Ptr StartAddress { get; }
         public N64Ptr CurrentAddress { get; private set; }
 
-        public UInt32 G_RDPHALF_1;
-        public UInt32 G_RDPHALF_2;
+        public uint G_RDPHALF_1;
+        public uint G_RDPHALF_2;
         
-        public MicrocodeParserTask(N64Ptr startAddress)
+        public MicrocodeParserTask(N64Ptr start)
         {
-            StartAddress = startAddress;
-            CurrentAddress = startAddress;
+            StartAddress = start;
+            CurrentAddress = start;
         }
     }
+
     public static class MicrocodeParser
     {
         /// <summary>
@@ -146,107 +147,113 @@ namespace uCode
             }
         }
 
+        delegate string ParseG(BinaryReader memory, Microcode microcode, bool simpleParse);
+
+        static readonly Dictionary<G_, ParseG> ParseFunc = new Dictionary<G_, ParseG>
+        {
+            {G_.G_NOOP, ParseG_NOOP },
+            {G_.G_MTX, ParseG_MTX },
+            {G_.G_MOVEWORD, ParseG_MOVEWORD },
+            {G_.G_MOVEMEM, ParseG_MOVEMEM },
+            {G_.G_DL, ParseG_DL },
+            {G_.G_LOADTLUT, ParseG_LOADTLUT },
+            {G_.G_LOADBLOCK, ParseG_LOADBLOCK },
+            {G_.G_SETTILESIZE, ParseG_LOADTILE },
+            {G_.G_LOADTILE, ParseG_LOADTILE },
+            {G_.G_SETTILE, ParseG_SETTILE },
+            {G_.G_SETTIMG, ParseG_SET_IMG },
+            {G_.G_SETCIMG, ParseG_SET_IMG },
+        };
+
         public static string PrintMicrocode(BinaryReader memory, Microcode microcode, bool simpleParse = true)
         {
-            string result;
-            switch (microcode.Name)
+            if (ParseFunc.ContainsKey(microcode.Name))
             {
-                case G_.G_NOOP:
-                    result = $"{microcode} // {microcode.Name} {ParseG_NOOP(memory, microcode, simpleParse)}";
-                    break;
-                case G_.G_MOVEWORD:
-                    result = 
-                        string.Format("{0} // {1} ({2} #{3:D2}, {4:X8})",
-                        microcode, microcode.Name,
-                        (G_MW)((microcode.EncodingHigh >> 16) & 0xFF),
-                        (microcode.EncodingHigh & 0xFFFF) >> 2, microcode.EncodingLow); break;
-                case G_.G_DL:
-                    result = (((microcode.EncodingHigh >> 16) & 0xFF) == 0) ?
-                        $"{microcode} // {microcode.Name} Jump and Link"
-                        : $"{microcode} // {microcode.Name} Branch"; break;
-                case G_.G_MTX:
-                    result = ParseG_MTX(memory, microcode, simpleParse); break;
-                case G_.G_MOVEMEM:
-                    result = ParseG_MOVEMEM(memory, microcode, simpleParse);
-                    break;
-                case G_.G_SETTILE: result = $"{microcode} // {microcode.Name} {ParseG_SETTILE(microcode)}"; break;
-                case G_.G_SETTIMG: result = $"{microcode} // {microcode.Name} {ParseG_SET_IMG(microcode, false)}"; break;
-                case G_.G_SETCIMG: result = $"{microcode} // {microcode.Name} {ParseG_SET_IMG(microcode, true)}"; break;
-                case G_.G_LOADBLOCK: result = $"{microcode} // {microcode.Name} {ParseG_LOADBLOCK(microcode)}"; break;
-                case G_.G_SETTILESIZE: //same parameters
-                case G_.G_LOADTILE: result = $"{microcode} // {microcode.Name} {ParseG_LOADTILE(microcode)}"; break;
-                case G_.G_LOADTLUT: result = $"{microcode} // {microcode.Name} {ParseG_LOADTLUT(microcode)}"; break;
-                case G_.G_ENDDL: goto default;
-                default:
-                    result = $"{microcode} // {microcode.Name}";
-                    break;
+                return $"{microcode} // {microcode.Name} {ParseFunc[microcode.Name](memory, microcode, simpleParse)}";
             }
-            return result;
+            return $"{microcode} // {microcode.Name}";
         }
 
-        private static string ParseG_LOADBLOCK(Microcode microcode)
+        private static string ParseG_DL(BinaryReader memory, Microcode microcode, bool simpleParse)
+        {
+            int v = Shift.AsByte(microcode.EncodingHigh, 0xFF0000);
+            return (v == 0) ? "Jump and Link" : "Branch";
+        }
+
+        private static string ParseG_MOVEWORD(BinaryReader memory, Microcode microcode, bool simpleParse)
+        {
+            return string.Format("({0} #{1:D2}, {2:X8})",
+                (G_MW)((microcode.EncodingHigh >> 16) & 0xFF),
+                (microcode.EncodingHigh & 0xFFFF) >> 2,
+                microcode.EncodingLow);
+        }
+
+        private static string ParseG_LOADBLOCK(BinaryReader memory, Microcode microcode, bool simpleParse)
         {
             float uls = ((float)Shift.AsUInt16(microcode.EncodingHigh, 0xFFF000)) / 4;
             float ult = ((float)Shift.AsUInt16(microcode.EncodingHigh, 0x000FFF)) / 4;
-            uint tile = Shift.AsUInt16(microcode.EncodingLow, 0x0F000000);
+            int tile = Shift.AsUInt16(microcode.EncodingLow, 0x0F000000);
             int texels = Shift.AsUInt16(microcode.EncodingLow, 0x00FFF000) + 1;
             float dxt = microcode.EncodingLow & 0xFFF;
             dxt /= 2048;
             float rdxt = 1 / dxt;
-            return $"TILE {tile} ST ({uls:F2},{ult:F2}) TEXELS {texels:X4} DXT {dxt} 1/DXT {rdxt}";
+            return $"{G_TX_.Tile(tile)} ST ({uls:F2},{ult:F2}) TEXELS {texels:X4} DXT {dxt} 1/DXT {rdxt}";
         }
 
-        private static string ParseG_LOADTILE(Microcode microcode)
+        private static string ParseG_LOADTILE(BinaryReader memory, Microcode microcode, bool simpleParse)
         {
-            float uls = ((float)Shift.AsUInt16(microcode.EncodingHigh, 0xFFF000)) / 4;
-            float ult = ((float)Shift.AsUInt16(microcode.EncodingHigh, 0x000FFF)) / 4;
-            uint tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
+            float uls = Shift.AsUInt16(microcode.EncodingHigh, 0xFFF000) / 4f;
+            float ult = Shift.AsUInt16(microcode.EncodingHigh, 0x000FFF) / 4f;
+            int tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
 
-            float lrs = ((float)Shift.AsUInt16(microcode.EncodingLow, 0xFFF000)) / 4;
-            float lrt = ((float)Shift.AsUInt16(microcode.EncodingLow, 0x000FFF)) / 4;
-            return $"TILE {tile} ST ({uls:F2},{ult:F2}), ({lrs:F2},{lrt:F2})";
+            float lrs = Shift.AsUInt16(microcode.EncodingLow, 0xFFF000) / 4f;
+            float lrt = Shift.AsUInt16(microcode.EncodingLow, 0x000FFF) / 4f;
+            return $"{G_TX_.Tile(tile)} ST ({uls:F2},{ult:F2}), ({lrs:F2},{lrt:F2})";
         }
 
-        private static string ParseG_LOADTLUT(Microcode microcode)
+        private static string ParseG_LOADTLUT(BinaryReader memory, Microcode microcode, bool simpleParse)
         {
-            uint tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
+            int tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
             int colors = Shift.AsUInt16(microcode.EncodingLow, 0xFFC000) + 1;
 
-            return $"TILE {tile} COLORS {colors}";
+            return $"{G_TX_.Tile(tile)} COLORS {colors}";
         }
 
-        private static string ParseG_SETTILE(Microcode microcode)
+        private static string ParseG_SETTILE(BinaryReader memory, Microcode microcode, bool simpleParse)
         {
-            uint fmt = Shift.AsUInt16(microcode.EncodingHigh,  0xE00000);
-            uint siz = Shift.AsUInt16(microcode.EncodingHigh,  0x180000);
-            uint line = Shift.AsUInt16(microcode.EncodingHigh, 0x03FE00);
-            uint tmem = Shift.AsUInt16(microcode.EncodingHigh, 0x0001FF);
-            uint tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
-            uint palette = Shift.AsUInt16(microcode.EncodingLow, 0x00F00000);
+            int fmt = Shift.AsUInt16(microcode.EncodingHigh,  0xE00000);
+            int siz = Shift.AsUInt16(microcode.EncodingHigh,  0x180000);
+            int line = Shift.AsUInt16(microcode.EncodingHigh, 0x03FE00);
+            int tmem = Shift.AsUInt16(microcode.EncodingHigh, 0x0001FF);
+            int tile = Shift.AsUInt16(microcode.EncodingLow, 0x07000000);
+            int palette = Shift.AsUInt16(microcode.EncodingLow, 0x00F00000);
             uint T_dat = Shift.AsUInt16(microcode.EncodingLow, 0x000FFC00);
             uint S_dat = Shift.AsUInt16(microcode.EncodingLow, 0x000003FF);
-            (G_TX cmA, G_TX cmB, int mask, int shift) T, S;
+
+            (string cmA, string cmB, int mask, int shift) T, S;
             T = SetAxis(T_dat);
             S = SetAxis(S_dat);
+            
+            string result = $"{G_TX_.Tile(tile)} {(G_IM_FMT_)fmt} {(G_IM_SIZ_)siz} line {line} PAL {palette}";
+            if (!simpleParse)
+                result += $"{Environment.NewLine} S ({PrintAxis(S)}) {Environment.NewLine} T ({PrintAxis(T)})";
+            return result;
 
-            return $"TILE {tile} {(G_IM_FMT_)fmt} {(G_IM_SIZ_)siz} line {line} PAL {palette}";// +
-                //$" T ({PrintAxis(T)}) S ({PrintAxis(S)})";
-
-            (G_TX cmA, G_TX cmB, int mask, int shift) SetAxis(uint t_dat)
+            (string cmA, string cmB, int mask, int shift) SetAxis(uint t_dat)
             {
-                G_TX cmA = (Shift.AsBool(t_dat, 0x100)) ? G_TX.G_TX_MIRROR : G_TX.G_TX_NOMIRROR;
-                G_TX cmB = (Shift.AsBool(t_dat, 0x200)) ? G_TX.G_TX_CLAMP : G_TX.G_TX_WRAP;
+                string cmA = (Shift.AsBool(t_dat, 0x100)) ? nameof(G_TX_.G_TX_MIRROR) : nameof(G_TX_.G_TX_NOMIRROR);
+                string cmB = (Shift.AsBool(t_dat, 0x200)) ? nameof(G_TX_.G_TX_CLAMP) : nameof(G_TX_.G_TX_WRAP);
                 int mask = Shift.AsUInt16(t_dat, 0xF0);
                 int shift = Shift.AsUInt16(t_dat, 0x0F);
                 return (cmA, cmB, mask, shift);
             }
-            string PrintAxis((G_TX cmA, G_TX cmB, int mask, int shift) t)
+            string PrintAxis((string cmA, string cmB, int mask, int shift) t)
             {
                 return $"{t.cmA} {t.cmB} MASK {t.mask} SHIFT {t.shift}";
             }
         }
         
-        private static string ParseG_SET_IMG(Microcode microcode, bool showWidth)
+        private static string ParseG_SET_IMG(BinaryReader memory, Microcode microcode, bool showWidth)
         {
             uint fmt = Shift.AsUInt16(microcode.EncodingHigh, 0xE00000);
             uint siz = Shift.AsUInt16(microcode.EncodingHigh, 0x180000);
@@ -264,7 +271,7 @@ namespace uCode
             byte offset = (byte)((microcode.EncodingHigh >> 8) * 8);
             byte size = (byte)(((microcode.EncodingHigh >> 16) & 0xF8) + 8);
 
-            result = $"{microcode} // {microcode.Name} {(G_MV)(microcode.EncodingHigh & 0xff)}: +0x{offset:X2} size 0x{size:X2}";
+            result = $"{(G_MV)(microcode.EncodingHigh & 0xff)}: +0x{offset:X2} size 0x{size:X2}";
 
             if (!simpleParse)
             {
@@ -282,8 +289,7 @@ namespace uCode
             return result;
         }
 
-        internal static string JoinFormat<T>(this IEnumerable<T> list, string separator,
-                                   string formatString)
+        internal static string JoinFormat<T>(this IEnumerable<T> list, string separator, string formatString)
         {
             formatString = string.IsNullOrWhiteSpace(formatString) ? "{0}" : formatString;
             return string.Join(separator,
@@ -316,15 +322,15 @@ namespace uCode
         {
             Matrix m;
             string result;
-            List<G_MTX_[]> Type = new List<G_MTX_[]>()
+            List<string[]> Type = new List<string[]>()
             {
-                new G_MTX_[] { G_MTX_.G_MTX_NOPUSH, G_MTX_.G_MTX_PUSH},
-                new G_MTX_[] { G_MTX_.G_MTX_MUL, G_MTX_.G_MTX_LOAD},
-                new G_MTX_[] { G_MTX_.G_MTX_MODEL_VIEW, G_MTX_.G_MTX_PROJECTION}
+                new string[] { nameof(G_MTX_.G_MTX_NOPUSH), nameof(G_MTX_.G_MTX_PUSH)},
+                new string[] { nameof(G_MTX_.G_MTX_MUL), nameof(G_MTX_.G_MTX_LOAD)},
+                new string[] { nameof(G_MTX_.G_MTX_MODEL_VIEW), nameof(G_MTX_.G_MTX_PROJECTION)}
             };
 
             var lowerHigh = microcode.EncodingHigh & 0xFFFF;
-            result = string.Format("{0} // {1} ({2}, {3}, {4})", microcode, microcode.Name,
+            result = string.Format("({0}, {1}, {2})",
                 Type[2][(lowerHigh >> 2) & 1],
                 Type[1][(lowerHigh >> 1) & 1],
                 Type[0][((lowerHigh >> 0) ^ 1) & 1]); //inverted in original source
