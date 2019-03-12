@@ -78,7 +78,6 @@
     <Compile Include="OItems.cs" />
     <Compile Include="mem\Emulator.cs" />
     <Compile Include="Express\Ev.cs" />
-    <Compile Include="Express\Expression.cs" />
     <Compile Include="log\CollisionAutoDoc.cs" />
     <Compile Include="log\DisplayListRecord.cs" />
     <Compile Include="log\ReferenceLogger.cs" />
