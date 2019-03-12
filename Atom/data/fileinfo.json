@@ -147,7 +147,16 @@
         "IsCode": true,
         "Ram": {
           "Start": "800110A0",
-          "End": "800E310C"
+          "End": "800E2FC0"
+        }
+      },
+      {
+        "Name": "data",
+        "Subsection": 0,
+        "IsCode": false,
+        "Ram": {
+          "Start": "800E2FC0",
+          "End": "80114DD0"
         }
       }
     ]
@@ -294,6 +303,51 @@
         "IsCode": true,
         "Ram": {
           "Start": "801C6E80",
+          "End": "801CF168"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 1,
+        "IsCode": false,
+        "Ram": {
+          "Start": "801CF168",
+          "End": "801CFBB0"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 2,
+        "IsCode": true,
+        "Ram": {
+          "Start": "801CFBB0",
+          "End": "801CFC20"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 3,
+        "IsCode": false,
+        "Ram": {
+          "Start": "801CFC20",
+          "End": "801D2040"
+        }
+      },
+      {
+        "Name": "text",
+        "Subsection": 4,
+        "IsCode": true,
+        "Ram": {
+          "Start": "801D2040",
+          "End": "801D2E50"
+        }
+      },
+      {
+        "Name": "data",
+        "Subsection": 0,
+        "IsCode": false,
+        "Ram": {
+          "Start": "801D2E50",
           "End": "801D9B90"
         }
       }

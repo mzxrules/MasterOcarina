@@ -333,6 +333,10 @@ namespace Atom
         {
             string game = Version.Game.ToString()[0].ToString();
             var dir = $"{game}/{Version.ToString().ToUpper()}";
+            if (!Disassemble.GccOutput)
+            {
+                dir += "_r";
+            }
             Directory.CreateDirectory(dir);
             return dir;
         }
