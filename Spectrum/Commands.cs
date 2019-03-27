@@ -1654,7 +1654,7 @@ namespace Spectrum
         private static void PrintCollisionContext(Arguments args)
         {
             Console.Clear();
-            CollisionCtx cctx = new CollisionCtx(GetColCtxPtr());
+            CollisionCtx cctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
             Console.WriteLine(cctx);
         }
 
@@ -1779,7 +1779,7 @@ namespace Spectrum
 
         private static void GetColInfo(Vector3<float> xyz, bool coordsAreColSec)
         {
-            CollisionCtx colctx = new CollisionCtx(GetColCtxPtr());
+            CollisionCtx colctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
 
             int[] colsec;
 
@@ -1834,7 +1834,7 @@ namespace Spectrum
                 (int)xyz.z
             };
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
             CollisionMesh mesh = GetCollisionMesh(0x32);
 
 
@@ -1910,7 +1910,7 @@ namespace Spectrum
             };
             
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
             if (!ctx.ColSecInBounds(colsec))
                 return;
             
@@ -1948,7 +1948,7 @@ namespace Spectrum
             short searchPolyId = (short)args[0];
             int[] colsec = new int[3];
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr());
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
 
             string[] type = new string[3]
             {

@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Spectrum
 {
     class CollisionCtx
     {
+        RomVersion version;
         /* 0x00 */ public N64Ptr SceneMeshPtr;
         /* 0x04 */ public Vector3<float> boxmin;
         /* 0x10 */ public Vector3<float> boxmax;
@@ -21,8 +23,22 @@ namespace Spectrum
         /* 0x48 */ public Ptr Links;
         /* 0x4C */ public Ptr Checks;
 
-        public CollisionCtx(Ptr ctx)
+        /* 0x1440 */ public Ptr dyn_poly;
+        public Ptr dyn_vtx;
+        public int mm_0x1448;
+        public Ptr mm_0x144C;
+        public Ptr dyn_list;
+        public int dyn_count;
+        public int dyn_max;
+        public int dyn_list_max;
+        public int dyn_poly_max;
+        public int dyn_vtx_max;
+        public int mem_size;
+        public int mm_0x146C;
+
+        public CollisionCtx(Ptr ctx, RomVersion version)
         {
+            this.version = version;
             SceneMeshPtr = ctx.ReadInt32(0);
 
             boxmin = new Vector3<float>(
@@ -60,15 +76,64 @@ namespace Spectrum
             LinksAlloc = ctx.ReadInt16(0x46);
             Links = ctx.Deref(0x48);
             Checks = ctx.Deref(0x4C);
+
+            dyn_poly = ctx.Deref(0x1440);
+            dyn_vtx = ctx.Deref(0x1444);
+
+            if (version.Game == Game.OcarinaOfTime)
+            {
+                dyn_list = ctx.Deref(0x1448);
+                dyn_count = ctx.ReadInt32(0x144C);
+                dyn_max = ctx.ReadInt32(0x1450);
+                dyn_list_max = ctx.ReadInt32(0x1454);
+                dyn_poly_max = ctx.ReadInt32(0x1458);
+                dyn_vtx_max = ctx.ReadInt32(0x145C);
+                mem_size = ctx.ReadInt32(0x1460);
+            }
+            else if (version.Game == Game.MajorasMask)
+            {
+                mm_0x1448 = ctx.ReadInt32(0x1448);
+                mm_0x144C = ctx.Deref(0x144C);
+                dyn_list = ctx.Deref(0x1450);
+                dyn_count = ctx.ReadInt32(0x1454);
+                dyn_max = ctx.ReadInt32(0x1458);
+                dyn_list_max = ctx.ReadInt32(0x145C);
+                dyn_poly_max = ctx.ReadInt32(0x1460);
+                dyn_vtx_max = ctx.ReadInt32(0x1464);
+                mem_size = ctx.ReadInt32(0x1468);
+                mm_0x146C = ctx.ReadInt32(0x1468);
+            }
         }
 
         public override string ToString()
         {
-            return $"Scene Mesh: {SceneMeshPtr}{Environment.NewLine}" +
+            string result = $"Scene Mesh: {SceneMeshPtr}{Environment.NewLine}" +
                 $"Bounding Box: ({boxmin.x},{boxmin.y},{boxmin.z}) ({boxmax.x}, {boxmax.y}, {boxmax.z}){Environment.NewLine}" +
                 $"Subdivisions: ({max.x}, {max.y}, {max.z}) Section Size: ({unitSize.x}, {unitSize.y}, {unitSize.z}){Environment.NewLine}" +
                 $"Max PolyLinks: {LinksMax:X4} Allocated: {LinksAlloc:X4}{Environment.NewLine}" +
-                $"Table: {Table} Links: {Links} Checks: {Checks}";
+                $"Table: {Table} Links: {Links} Checks: {Checks}{Environment.NewLine}" +
+                $"dyn_poly = {dyn_poly}{Environment.NewLine}" +
+                $"dyn_vtx = {dyn_vtx}{Environment.NewLine}";
+            if (version.Game == Game.MajorasMask)
+            {
+                result +=
+                    $"mm_0x1448 = {mm_0x1448:X8}{Environment.NewLine}" +
+                    $"mm_0x144C = {mm_0x144C}{Environment.NewLine}";
+            }
+            result +=
+                $"dyn_list = {dyn_list}{Environment.NewLine}" +
+                $"dyn_count = {dyn_count}{Environment.NewLine}" +
+                $"dyn_max = {dyn_max}{Environment.NewLine}" +
+                $"dyn_list_max = {dyn_list_max}{Environment.NewLine}" +
+                $"dyn_poly_max = {dyn_poly_max}{Environment.NewLine}" +
+                $"dyn_vtx_max = {dyn_vtx_max}{Environment.NewLine}" +
+                $"mem_size = {mem_size:X6}";
+
+            if (version.Game == Game.MajorasMask)
+            {
+                result += $"{Environment.NewLine}unk_0x146C = {mm_0x146C:X8}";
+            }
+            return result;
         }
 
         public int[] ComputeColSec(Vector3<float> xyz)
