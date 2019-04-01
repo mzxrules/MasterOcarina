@@ -310,97 +310,90 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Standard Door</Description>
-    <Comment>if the fourth digit is not 0, then the doors will spawn artifacts of themselves</Comment>
+    <Description>Door</Description>
+    <Comment>Model dependent on current scene</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFFC0</Capture>
+        <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
+        <Description>Transition Actor List Identifier</Description>
+        <Comment>Reserved for use by the game engine</Comment>
+        <UI>
+          <Hidden/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0380</Capture>
         <Description>Type</Description>
         <UI>
           <Select/>
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Wooden Door</Description>
-          <Comment>Loads rooms</Comment>
+          <Description>Loads Rooms</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Double Wooden Doors</Description>
-          <Comment>Loads rooms</Comment>
+          <Description>Small Key Locked</Description>
+          <Comment>Loads Rooms. If double doors, then the left door is locked on one side and the right door is locked on the other.</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Small Key Locked Door</Description>
+          <Description>Loads Rooms</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Locked Double Wooden Doors</Description>
-          <Comment>Left door is locked on one side, right door is locked on the other. Loads rooms.</Comment>
+          <Description>Doesn't Load Rooms</Description>
+          <Comment>Used for scene transitions</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Double Wooden Two-Way Doors</Description>
-          <Comment>Loads rooms</Comment>
+          <Description>Ajar</Description>
+          <Comment>Slams shut on approach, then says "It won't open!" if you try to interact with it.</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Double Wooden Two-Way Doors</Description>
-          <Comment>Loads rooms</Comment>
-          <Meta />
+          <Description>Talking Door</Description>
         </Value>
         <Value>
           <Data>0006</Data>
-          <Description>Double Wooden Two-Way Doors</Description>
-          <Comment>Loads rooms</Comment>
+          <Description>Time Locked Wooden Door</Description>
+          <Comment>Dampe's Shack, unlocked between 18:00 to 21:00, else displays message</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0007</Data>
-          <Description>Double Wooden Two-Way Doors</Description>
-          <Comment>Loads rooms</Comment>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0008</Data>
-          <Description>Ajar Wooden Door</Description>
-          <Comment>Door slams shut on approach, then says "It won't open!" if you try to interact with it.</Comment>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000A</Data>
-          <Description>Wooden Door with Message</Description>
-        </Value>
-        <Value>
-          <Data>000C</Data>
-          <Description>Wooden Two-Way Door with Message</Description>
-          <Comment>Last two values' text matches that of actor 0185, but in increments of 1 instead</Comment>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0010</Data>
-          <Description>Wooden Two-Way Door</Description>
-          <Comment>Doesn't load room</Comment>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>03FF</Data>
-          <Description>Double Wooden One-Way Doors</Description>
-          <Comment>FIXME: Game crashes if you try to open them.</Comment>
-          <Meta />
+          <Description>Loads Rooms</Description>
         </Value>
       </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0040</Capture>
+        <Description>Double Door</Description>
+        <UI>
+          <BitFlag/>
+        </UI>
+      </Variable>
       <Variable default="3F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0380 == 1</Condition>
         <Description>Switch Flag</Description>
         <Comment>Used by locked doors only</Comment>
         <UI>
             <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0380 != 1</Condition>
+        <Description>Message ID (+0200)</Description>
+        <UI>
+            <TextId>
+              <Base>0200</Base>
+            </TextId>
         </UI>
       </Variable>
     </Variables>
@@ -2019,8 +2012,16 @@
     </Objects>
     <Description>Room changing plane</Description>
     <Variables>
+      <Variable default="00">
+        <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
+        <Description>Transition Actor List Identifier</Description>
+        <Comment>Reserved for use by the game engine</Comment>
+        <UI>
+          <Hidden/>
+        </UI>
+      </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x03C0</Capture>
+        <Capture>v &amp;&gt;&gt; 0x01C0</Capture>
         <Description>Type</Description>
         <UI>
           <Select/>
@@ -2060,25 +2061,17 @@
         </Value>
         <Value>
           <Data>06</Data>
-          <Description>Two-Way Vetical Plane, no fade</Description>
-          <Comment>FIXME: Used in Water Temple, why is this different?</Comment>
+          <Description>Two-Way Vertical Plane, no fade</Description>
+          <Comment>FIXME: Used in Water Temple, why is this different? Uses 200.0 instead of 100.0 for a calculation</Comment>
           <Meta />
         </Value>
       </Variable>
       <Variable default="3F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
         <Description>Switch Flag</Description>
         <Comment>Used by type 03 only</Comment>
         <UI>
             <SwitchFlag/>
-        </UI>
-      </Variable>
-      <Variable default="00">
-        <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
-        <Description>Transition Actor List Identifier</Description>
-        <Comment>Reserved for use by the game engine</Comment>
-        <UI>
-            <None/>
         </UI>
       </Variable>
     </Variables>
@@ -2359,12 +2352,20 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Lifting Dungeon Door</Description>
-    <Comment>Design/object dependencies changes depending on scene //FIXME: Figure out more</Comment>
+    <Description>Shutter Door</Description>
+    <Comment>Design/object dependencies change depending on scene</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x0FC0</Capture>
-        <Description>Door type</Description>
+        <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
+        <Description>Transition Actor List Identifier</Description>
+        <Comment>Reserved for use by the game engine</Comment>
+        <UI>
+          <Hidden/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x03C0</Capture>
+        <Description>Type</Description>
         <UI>
             <Select/>
         </UI>
@@ -2389,23 +2390,50 @@
           <Meta />
         </Value>
         <Value>
+          <Data>04</Data>
+          <Description>Phantom Ganon Bars</Description>
+          <Comment>Needs object 0x0037</Comment>
+        </Value>
+        <Value>
           <Data>05</Data>
           <Description>Boss door</Description>
           <Meta />
         </Value>
         <Value>
+          <Data>06</Data>
+          <Description>Falling Gohma Door</Description>
+          <Comment>Needs object 0x001C</Comment>
+        </Value>
+        <Value>
           <Data>07</Data>
-          <Description>Front side attached to Switch, Back to Room Clear</Description>
+          <Description>Front attached to Switch, Back to Room Clear</Description>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>08</Data>
+          <Description>Lifting (Phantom Ganon Bars?)</Description>
+          <Comment>Needs object 0x0037</Comment>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>09</Data>
+          <Description>Lifting</Description>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>0A</Data>
+          <Description>Lifting</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0B</Data>
-          <Description>Key Locked door</Description>
+          <Description>Small Key Locked</Description>
+          <Comment>Visible on back side</Comment>
           <Meta />
         </Value>
       </Variable>
       <Variable default="3F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
         <Description>Switch Flag</Description>
         <UI>
             <SwitchFlag/>
@@ -3154,61 +3182,67 @@
       <Object>0001</Object>
     </Objects>
     <Description>Flame circle</Description>
-    <Comment>FIXME</Comment>
     <Variables>
-      <Variable default="003F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
-        <Description>Switch Flag</Description>
-        <UI>
-            <SwitchFlag/>
-        </UI>
-      </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
+        <Capture>v &amp;&gt;&gt; 0xF000</Capture>
         <Description>Type</Description>
         <UI>
             <Default/>
         </UI>
-        <Value repeat="+">
+        <Value>
           <Data>00</Data>
-          <Description>Large, doesn't switch off.</Description>
+          <Description>Large, disabled on room clear</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>10</Data>
-          <Description>Small, switches off for long time with ticking sound.</Description>
+        <Value>
+          <Data>01</Data>
+          <Description>Large, plays cutscene, long timer, ticking sfx, disabled on chest flag</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>20</Data>
-          <Description>Small, switches off for long time.</Description>
+        <Value>
+          <Data>02</Data>
+          <Description>Small, short timer, no ticking sfx</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>30</Data>
-          <Description>Large, switches off for a short time with ticking sound.</Description>
+        <Value>
+          <Data>03</Data>
+          <Description>Large, plays cutscene, short timer, ticking sfx</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>40</Data>
-          <Description>Disabled, small, switches on for short time.</Description>
+        <Value>
+          <Data>04</Data>
+          <Description>Disabled, small, switches on for short time</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>50</Data>
-          <Description>Disabled, large, switches on permanently.</Description>
+        <Value>
+          <Data>05</Data>
+          <Description>Disabled, large, can be toggled on and off</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>60</Data>
-          <Description>Large, switches off permanently.</Description>
+        <Value>
+          <Data>06</Data>
+          <Description>Large, disabled on room clear, sets switch flag on clear</Description>
           <Meta />
         </Value>
-        <Value uihide="true" repeat="+">
-          <Data>70</Data>
+        <Value uihide="true">
+          <Data>07</Data>
           <Description>Nothing</Description>
           <Meta />
         </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0FC0</Capture>
+        <Description>Chest Flag</Description>
+        <UI>
+          <ChestFlag/>
+        </UI>
+      </Variable>
+      <Variable default="003F" nullable="true">
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
       </Variable>
     </Variables>
   </Actor>
@@ -3459,29 +3493,48 @@
   <Actor id="0059" name="Bg_Breakwall">
     <Objects>
       <Object>0001</Object>
+      <Object>????</Object>
     </Objects>
     <Description>Bombable Wall</Description>
-    <Comment>FIXME</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
-        <Description>??</Description>
+        <Capture>v &amp;&gt;&gt; 0x8000</Capture>
+        <Description>Play Discovery Sound</Description>
+        <UI>
+          <BitFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x6000</Capture>
+        <Description>Type</Description>
         <UI>
             <Default/>
         </UI>
         <Value>
           <Data>00</Data>
-          <Description>Normal</Description>
-          <Meta />
+          <Description>Bombable Wall, Cutscene</Description>
+          <Comment>plays Dodongo's Cavern intro</Comment>
+          <Meta>
+            <Object>018A</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data>A0</Data>
-          <Description>Dodongo's Cavern cutscene</Description>
-          <Meta />
+          <Data>01</Data>
+          <Description>Bombable Wall</Description>
+          <Meta>
+            <Object>018A</Object>
+          </Meta>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>Bombable Floor</Description>
+          <Meta>
+            <Object>0019</Object>
+          </Meta>
         </Value>
       </Variable>
       <Variable default="3F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
         <Description>Switch Flag</Description>
         <UI>
             <SwitchFlag/>
@@ -4638,57 +4691,33 @@
       <Object>008B</Object>
     </Objects>
     <Description>Beamos</Description>
-    <Comment>FIXME: does not attack/missing variables</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x0F00</Capture>
-        <Description>Type</Description>
+        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
+        <Description>Sight Distance</Description>
+        <Comment>Signed, increments of 40.0f</Comment>
         <UI>
-            <Select/>
+          <NumberUpDown>
+            <Unit>Units</Unit>
+            <Increment>40</Increment>
+            <Min>0</Min>
+          </NumberUpDown>
         </UI>
-        <Value>
-          <Data>4</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>5</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>6</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>7</Data>
-          <Description>Attacking Beamos</Description>
-          <Comment>shoots lazer within proximity/range. Value not used for spawning</Comment>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>8</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>A</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>C</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x1</Capture>
-        <Description>Unknown</Description>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
+        <Description>Size</Description>
         <UI>
             <Default/>
         </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>Large</Description>
+        </Value>
+        <Value repeat="+">
+          <Data>01</Data>
+          <Description>Small</Description>
+        </Value>
       </Variable>
     </Variables>
   </Actor>
@@ -7123,27 +7152,49 @@
       <Object>00C2</Object>
     </Objects>
     <Description>Dodongo Cavern Entrance Rock</Description>
-    <Comment>FIXME</Comment>
-    <Comment-Other>
-      Old Notes
-      - 0000+ = Nothing
-      - FFFF = Giant Rock
-    </Comment-Other>
     <Variables>
-      <Variable default="FF" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
-        <Description>Nullable Switch Flag</Description>
-        <Comment>Invisible if value is FF?</Comment>
+      <Variable default="3F" nullable="true">
+        <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
+        <Description>Switch Flag</Description>
         <UI>
             <SwitchFlag/>
         </UI>
       </Variable>
       <Variable default="FF">
-        <Capture>v &amp;&gt;&gt; 0xFF</Capture>
-        <Description>? (Always FF)</Description>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
+        <Description>Type</Description>
         <UI>
             <None/>
         </UI>
+        <Value>
+          <Data>FF</Data>
+          <Description>Cavern Rock</Description>
+        </Value>
+        <Value>
+          <Data>00</Data>
+          <Description>Debris</Description>
+          <Comment>Spawns Debris 05</Comment>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Debris</Description>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>Debris</Description>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Debris</Description>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>Debris</Description>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>Debris</Description>
+        </Value>
       </Variable>
     </Variables>
   </Actor>
@@ -8348,27 +8399,40 @@
         </UI>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x00F0</Capture>
+        <Capture>v &amp;&gt;&gt; 0x00C0</Capture>
         <Description>Color</Description>
-        <Comment>FIXME: Color 0C</Comment>
+        <Comment>Scene based</Comment>
         <UI>
             <Select/>
         </UI>
         <Value>
           <Data>00</Data>
-          <Description>Red</Description>
+          <Description>Color 1</Description>
           <Meta />
         </Value>
         <Value>
-          <Data>04</Data>
-          <Description>Green</Description>
+          <Data>01</Data>
+          <Description>Color 2</Description>
           <Meta />
         </Value>
         <Value>
-          <Data>0C</Data>
-          <Description>?</Description>
+          <Data>02</Data>
+          <Description>Color 3</Description>
           <Meta />
         </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Color 4</Description>
+          <Meta />
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0008</Capture>
+        <Description>Unknown</Description>
+        <Comment>Crashes</Comment>
+        <UI>
+          <BitFlag/>
+        </UI>
       </Variable>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x0004</Capture>
@@ -10298,8 +10362,47 @@
       <Object>011E</Object>
     </Objects>
     <Description>Bean Plant Spot</Description>
-    <Comment>FIXME</Comment>
-    <Variables />
+    <Comment>FIXME: Gold Skulltula Spawn</Comment>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x1F00</Capture>
+        <Description>Path</Description>
+        <Comment>1F is no path</Comment>
+        <UI>
+          <Path/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>rz &amp;&gt;&gt; 0x0003</Capture>
+        <Description>Speed, Acceleration</Description>
+        <UI>
+          <DropTable/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>3.0 velocity, 0.3 acceleration</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>10.0 velocity, 0.5 acceleration</Description>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>30.0 velocity, 0.5 acceleration</Description>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>3.0 velocity, 0.3 acceleration</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0127" name="Obj_Bombiwa">
     <Objects>
@@ -12808,8 +12911,53 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Push Block (With own save point?)</Description>
-    <Comment>Requires Goron Bracelet or better to move as child or adult</Comment>
+    <Description>Push Block (Hardcoded)</Description>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x4000</Capture>
+        <Description>Ignore Switch Flag (First Destination)</Description>
+        <UI>
+          <BitFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
+        <Description>Switch Flag (First Destination)</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0040</Capture>
+        <Description>Ignore Switch Flag (Second Destination)</Description>
+        <UI>
+          <BitFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag (Second Destination)</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>rz &amp;&gt;&gt; 0x0001</Capture>
+        <Description>Type</Description>
+        <UI>
+          <DropTable/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>Water Temple</Description>
+          <Comment>Requires Goron Bracelet or better to move as child or adult</Comment>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Deku Tree</Description>
+        </Value>
+      </Variable>
+    </Variables>
     <Variables />
   </Actor>
   <Actor id="017E" name="Oceff_Spot">
