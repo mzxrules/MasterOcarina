@@ -1,5 +1,4 @@
 ﻿using mzxrules.Helper;
-using System;
 
 namespace mzxrules.OcaLib.Actor
 {
@@ -21,7 +20,7 @@ namespace mzxrules.OcaLib.Actor
         {
             value = b;
         }
-        public SwitchFlag(UInt16 variable, UInt16 mask)
+        public SwitchFlag(ushort variable, ushort mask)
         {
             value = Shift.AsByte(variable, mask); 
         }

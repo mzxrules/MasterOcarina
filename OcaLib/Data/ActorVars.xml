@@ -2353,7 +2353,8 @@
       <Object>0001</Object>
     </Objects>
     <Description>Shutter Door</Description>
-    <Comment>Design/object dependencies change depending on scene</Comment>
+    <Comment-Other>object dependencies change depending on scene
+    Doors with Room Clear or Switch Flag are barred on the side stated</Comment-Other>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
@@ -2376,17 +2377,17 @@
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Front side attached to Room Clear</Description>
+          <Description>Front Room Clear</Description>
           <Meta />
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>Front side attached to Switch</Description>
+          <Description>Front Switch Flag</Description>
           <Meta />
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>Back side permanently locked</Description>
+          <Description>Back permanently locked</Description>
           <Meta />
         </Value>
         <Value>
@@ -2396,7 +2397,7 @@
         </Value>
         <Value>
           <Data>05</Data>
-          <Description>Boss door</Description>
+          <Description>Boss Door</Description>
           <Meta />
         </Value>
         <Value>
@@ -2406,7 +2407,7 @@
         </Value>
         <Value>
           <Data>07</Data>
-          <Description>Front attached to Switch, Back to Room Clear</Description>
+          <Description>Front Switch Flag, Back Room Clear</Description>
           <Meta />
         </Value>
         <Value>

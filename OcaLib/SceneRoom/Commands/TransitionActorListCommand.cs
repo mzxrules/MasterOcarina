@@ -12,12 +12,24 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         Game Game { get; set; }
         public SegmentAddress SegmentAddress { get; set; }
 
-        public List<TransitionActor> TransitionActorList = new List<TransitionActor>();
+        public List<TransitionActorSpawn> TransitionActorList = new List<TransitionActorSpawn>();
         public int TransitionActors { get; set; }
+
+        private delegate TransitionActorSpawn GetTransitionActorRecord(byte[] data);
+        readonly GetTransitionActorRecord NewTransitionActor;
 
         public TransitionActorListCommand(Game game)
         {
             Game = game;
+
+            if (game == Game.OcarinaOfTime)
+            {
+                NewTransitionActor = ActorSpawnFactory.OcarinaTransitionActors;
+            }
+            else if (game == Game.MajorasMask)
+            {
+                NewTransitionActor = ActorSpawnFactory.MaskTransitionActors;
+            }
         }
 
         public override void SetCommand(SceneWord command)
@@ -45,7 +57,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             for (int i = 0; i < loop; i++)
             {
                 br.Read(actorArray, 0, 16);
-                TransitionActorList.Add(ActorFactory.OcarinaTransitionActors(actorArray));
+                TransitionActorList.Add(NewTransitionActor(actorArray));
             }
         }
 
@@ -53,7 +65,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             string result;
             result = ToString();
-            foreach (TransitionActor a in TransitionActorList)
+            foreach (TransitionActorSpawn a in TransitionActorList)
             {
                 result += Environment.NewLine + a.Print();
             }

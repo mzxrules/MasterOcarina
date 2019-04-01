@@ -47,7 +47,29 @@ namespace mzxrules.Helper
             }
         }
 
-        
+        public static byte[] BigShortsToBytes(short[] v)
+        {
+            byte[] arr = new byte[v.Length * 2];
+
+            for (int i = 0; i < v.Length; i++)
+            {
+                arr[i * 2] = (byte)(v[i] >> 8);
+                arr[i * 2 + 1] = (byte)(v[i]);
+            }
+            return arr;
+        }
+
+        public static short[] BytesToBigShorts(byte[] v)
+        {
+            short[] arr = new short[v.Length / 2];
+            for (int i = 0; i < v.Length; i += 2)
+            {
+                arr[i/2] = ConvertShort(v, i);
+            }
+            return arr;
+        }
+
+
         #region Int16
 
         public static void Convert(ref short v)

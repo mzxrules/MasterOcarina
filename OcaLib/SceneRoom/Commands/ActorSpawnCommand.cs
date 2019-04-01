@@ -15,16 +15,17 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public int Actors { get; set; }
         public List<IActor> ActorList = new List<IActor>();
         private delegate ActorSpawn GetActorRecord(short[] data);
-        GetActorRecord NewActor;
+
+        readonly GetActorRecord NewActor;
 
         public ActorSpawnCommand(Game game)
         {
             Game = game;
 
             if (Game == Game.OcarinaOfTime)
-                NewActor = ActorFactory.OcarinaActors;
+                NewActor = ActorSpawnFactory.OcarinaActors;
             else if (Game == Game.MajorasMask)
-                NewActor = ActorFactory.MaskActors;
+                NewActor = ActorSpawnFactory.MaskActors;
         }
 
         public override void SetCommand(SceneWord command)

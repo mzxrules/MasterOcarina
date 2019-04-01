@@ -451,12 +451,6 @@ namespace VerboseOcarina
         {
             numberTextBox.Text = "0";
             SetRomTypeSettings(DefaultVersion);
-            ActorFactory.BindOcarinaActorFactories
-                (mzxrules.XActor.XActorFactory.NewOcaActor,
-                mzxrules.XActor.OActors.TransitionActorFactory.New);
-            ActorFactory.BindMaskActorFactories
-                (mzxrules.XActor.XActorFactory.NewMMActor,
-                mzxrules.XActor.MActors.MTransitionActorFactory.New);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)

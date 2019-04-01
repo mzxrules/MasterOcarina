@@ -30,15 +30,25 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         private delegate ActorSpawn GetActorRecord(short[] data);
         GetActorRecord NewActor;
 
+        private delegate TransitionActorSpawn GetTransitionActorRecord(byte[] data);
+        GetTransitionActorRecord NewTransitionActor;
+
+
         public ActorList(Game game, SegmentAddress addr, int actors)
         {
             Address = addr;
             this.actors = actors;
 
             if (game == Game.OcarinaOfTime)
-                NewActor = ActorFactory.OcarinaActors;
+            {
+                NewActor = ActorSpawnFactory.OcarinaActors;
+                NewTransitionActor = ActorSpawnFactory.OcarinaTransitionActors;
+            }
             else if (game == Game.MajorasMask)
-                NewActor = ActorFactory.MaskActors;
+            {
+                NewActor = ActorSpawnFactory.MaskActors;
+                NewTransitionActor = ActorSpawnFactory.MaskTransitionActors;
+            }
         }
 
         public void LoadSpawns(BinaryReader br)
@@ -72,7 +82,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 byte[] actorArray = new byte[ActorSpawn.SIZE];
                 br.Read(actorArray, 0, 16);
-                list.Add(ActorFactory.OcarinaTransitionActors(actorArray));
+                list.Add(NewTransitionActor(actorArray));
             }
 
             Actors = list;

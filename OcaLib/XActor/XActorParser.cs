@@ -28,7 +28,7 @@ namespace mzxrules.XActor
             List<string> results = new List<string>();
             foreach (var item in Variables)
             {
-                if (item.TestCondition(record, GetValue))
+                if (!item.hidden && item.TestCondition(record, GetValue))
                 {
                     results.Add(item.PrintVariable(record, GetValue));
                 }

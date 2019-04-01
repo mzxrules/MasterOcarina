@@ -1,6 +1,6 @@
 ﻿namespace mzxrules.XActor.MActors
 {
-    class MSimpleActor : MActorRecord
+    class MSimpleActor : OcaLib.Actor.MActorSpawn
     {
         public MSimpleActor(short[] record)
             : base(record)
@@ -15,7 +15,7 @@
         }
 
         #region ActorName
-        string[] ActorName = new string[]
+        readonly string[] ActorName = new string[]
         {
             "Player",
             "En_Test",

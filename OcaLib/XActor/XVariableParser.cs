@@ -12,7 +12,8 @@ namespace mzxrules.XActor
 
         public CaptureExpression capture;
         public ConditionExpression condition;
-        
+        public bool hidden;
+
         internal delegate string PrintVariableDelegate(short[] actorRecord, CaptureExpression.GetValueDelegate getValDelegate);
         internal PrintVariableDelegate PrintVariable;
 
@@ -23,6 +24,7 @@ namespace mzxrules.XActor
         {
             this.item = var;
             this.game = game;
+            this.hidden = (var.UI.Item is UIHidden);
 
             foreach (var v in var.Value)
             {
@@ -39,20 +41,20 @@ namespace mzxrules.XActor
 
             capture = new CaptureExpression(var.Capture);
             condition = new ConditionExpression(var.Condition);
-            switch(var.UI.Item)
+            switch (var.UI.Item)
             {
                 case UITextId textId:
-                    PrintVariable = (x,get) => 
+                    PrintVariable = (x, get) =>
                     {
                         ushort baseId = ushort.Parse(textId.Base, NumberStyles.HexNumber);
                         return $"{item.Description}: { get(capture)(x) + baseId:X4}";
                     }; break;
                 case UISwitchFlag sf:
-                    PrintVariable = (x,get) => { return $"{item.Description}: {get(capture)(x):X2}"; }; break;
+                    PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x):X2}"; }; break;
                 case UIBitFlag bf:
-                    PrintVariable = (x,get) => { return $"{item.Description}: {get(capture)(x) > 0}"; }; break;
+                    PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x) > 0}"; }; break;
                 default:
-                    PrintVariable = (x,get) => 
+                    PrintVariable = (x, get) =>
                     {
                         short value = (short)get(capture)(x);
                         if (valueDefinitions.TryGetValue(value, out XVariableValue valueDef))
@@ -70,7 +72,7 @@ namespace mzxrules.XActor
             }
         }
 
-        internal bool TestCondition(short[] record,CaptureExpression.GetValueDelegate GetValue)
+        internal bool TestCondition(short[] record, CaptureExpression.GetValueDelegate GetValue)
         {
             return condition.Test(record, GetValue);
         }

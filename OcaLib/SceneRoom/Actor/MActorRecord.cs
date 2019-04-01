@@ -3,12 +3,12 @@ using System;
 
 namespace mzxrules.OcaLib.Actor
 {
-    public class MActorRecord : ActorSpawn
+    public class MActorSpawn : ActorSpawn
     {
         protected ushort DayFlags;
         protected byte Scene_0x1B;
         
-        public MActorRecord(short[] record)
+        public MActorSpawn(short[] record)
         {
             //Endian.Convert(out ushort actor, record, 0);
             //Actor = actor;
@@ -25,17 +25,17 @@ namespace mzxrules.OcaLib.Actor
             Coords = new Vector3<short>(record[1], record[2], record[3]);
 
 
-            DayFlags = (ushort)((record[4] & 7) << 7 + (record[6] & 0x7F)); 
+            DayFlags = (ushort)((record[4] & 7) << 7 + (record[6] & 0x7F));
 
-            ushort rx = Shift.AsUInt16((ushort)record[4], 0xFF80); 
-            ushort ry = Shift.AsUInt16((ushort)record[5], 0xFF80); 
+            ushort rx = Shift.AsUInt16((ushort)record[4], 0xFF80);
+            ushort ry = Shift.AsUInt16((ushort)record[5], 0xFF80);
             ushort rz = Shift.AsUInt16((ushort)record[6], 0xFF80);
             Rotation = new Vector3<ushort>(rx, ry, rz);
 
             Scene_0x1B = Shift.AsByte((ushort)record[5], 0x7F);
             Variable = (ushort)record[7];
         }
-        protected MActorRecord()
+        protected MActorSpawn()
         {
         }
         new public virtual Vector3<short> GetCoords()
@@ -49,7 +49,7 @@ namespace mzxrules.OcaLib.Actor
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X3}:{1:X4} {2}{3}{4} {5} {6} Days: {7} 1B?: {8:X4}",
+            return string.Format("{0:X3}:{1:X4} {2}{3}{4} {5} {6} Days: {7} 1B?: {8:X4}",
                 Actor,
                 Variable,
                 (actorName.Length > 0) ? actorName + ", " : "",
@@ -78,7 +78,7 @@ namespace mzxrules.OcaLib.Actor
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X3},{1:X4},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14:X2}",
+            return string.Format("{0:X3},{1:X4},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14:X2}",
                 Actor,
                 Variable,
                 actorName.Replace(',', ';'),

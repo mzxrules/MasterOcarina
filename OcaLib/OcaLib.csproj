@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="XActor\legacy\MActorRecord.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Addresses.xml" />
     <None Remove="Elf\Test.xml" />
     <None Remove="PathUtil\Test.xml" />

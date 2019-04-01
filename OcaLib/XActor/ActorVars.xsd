@@ -134,6 +134,9 @@
       <xs:element name="DropTable">
         <xs:complexType></xs:complexType>
       </xs:element>
+      <xs:element name="Hidden">
+        <xs:complexType></xs:complexType>
+      </xs:element>
       <xs:element name="None">
         <xs:complexType></xs:complexType>
       </xs:element>

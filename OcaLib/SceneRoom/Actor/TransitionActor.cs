@@ -4,13 +4,13 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Actor
 {
-    public class TransitionActor : ActorSpawn
+    public class TransitionActorSpawn : ActorSpawn
     {
         byte SwitchToFrontRoom;
         byte SwitchToFrontCamera;
         byte SwitchToBackRoom;
         byte SwitchToBackCamera;
-        public TransitionActor(byte[] record)
+        public TransitionActorSpawn(byte[] record)
         {
             SwitchToFrontRoom = record[0];
             SwitchToFrontCamera = record[1];
@@ -29,7 +29,7 @@ namespace mzxrules.OcaLib.Actor
             Endian.Convert(out ushort variable, record, 14);
             Variable = variable;
         }
-        protected TransitionActor()
+        protected TransitionActorSpawn()
         {
         }
         public override void Serialize(BinaryWriter bw)
