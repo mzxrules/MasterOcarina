@@ -25,8 +25,8 @@ namespace Gen
 
             foreach (FileRecord record in sourceRom.Files)
             {
-                source = new BinaryReader(sourceRom.Files.GetFile(record.VirtualAddress));
-                modifiedFile = modifiedRom.Files.GetFile(record.VirtualAddress);
+                source = new BinaryReader(sourceRom.Files.GetFile(record.VRom));
+                modifiedFile = modifiedRom.Files.GetFile(record.VRom);
                 modified = new BinaryReader(modifiedFile);
 
                 if (source.BaseStream.IsDifferentTo(modified.BaseStream))
@@ -40,13 +40,13 @@ namespace Gen
         private static void WriteFile(BinaryReader file, FileRecord record, bool compress, string folder)
         {
             byte[] data;
-            using (FileStream dest = new FileStream($"{record.VirtualAddress.Start}/{folder:X8}", FileMode.CreateNew))
+            using (FileStream dest = new FileStream($"{record.VRom.Start}/{folder:X8}", FileMode.CreateNew))
             {
-                data = new byte[record.VirtualAddress.Size];
-                file.Read(data, 0, record.VirtualAddress.Size);
+                data = new byte[record.VRom.Size];
+                file.Read(data, 0, record.VRom.Size);
 
                 if (compress)
-                    Yaz.Encode(data, record.VirtualAddress.Size, dest);
+                    Yaz.Encode(data, record.VRom.Size, dest);
                 else
                     dest.Write(data, 0, data.Length);
             }

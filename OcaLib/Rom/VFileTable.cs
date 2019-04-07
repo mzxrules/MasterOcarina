@@ -6,10 +6,16 @@ using System.Linq;
 
 namespace mzxrules.OcaLib
 {
-    public class VFileTable : /*IDisposable,*/ IEnumerable<FileRecord>
+    public class VFileTable : /*IDisposable,*/ IList<FileRecord>
     {
         protected DmaData dmadata;
         public RomVersion Version { get; protected set; }
+
+        public int Count => dmadata.Table.Count;
+
+        public bool IsReadOnly => false;
+
+        public FileRecord this[int index] { get => dmadata.Table[index]; set => dmadata.Table[index] = value; }
 
         protected string RomLocation;
 
@@ -26,7 +32,7 @@ namespace mzxrules.OcaLib
 
         public FileAddress GetDmaDataStart()
         {
-            return dmadata.Address.VirtualAddress;
+            return dmadata.Address.VRom;
         }
 
         private void ResetFileCache()
@@ -40,26 +46,26 @@ namespace mzxrules.OcaLib
         /// <summary>
         /// Returns a stream pointed to the decompressed file at the given address
         /// </summary>
-        /// <param name="vAddr"></param>
+        /// <param name="address"></param>
         /// <returns></returns>
-        public RomFile GetFile(FileAddress vAddr)
+        public RomFile GetFile(FileAddress address)
         {
-            if (dmadata.TryGetFileRecord(vAddr.Start, out FileRecord record)
-                && vAddr.Size == record.VirtualAddress.Size)
+            if (dmadata.TryGetFileRecord(address.Start, out FileRecord record)
+                && address.Size == record.VRom.Size)
                     return GetFile(record);
             
-            return GetFile(new FileRecord(vAddr, new FileAddress(vAddr.Start, 0), -1));
+            return GetFile(new FileRecord(address, new FileAddress(address.Start, 0)));
         }
 
         /// <summary>
         /// Returns a stream pointed to the decompressed file at the given address
         /// </summary>
-        /// <param name="virtualAddress"></param>
+        /// <param name="vromStart"></param>
         /// <param name="recordCopy"></param>
         /// <returns></returns>
-        public RomFile GetFile(long virtualAddress)
+        public RomFile GetFile(int vromStart)
         {
-            if (!dmadata.TryGetFileRecord(virtualAddress, out FileRecord record))
+            if (!dmadata.TryGetFileRecord(vromStart, out FileRecord record))
                 throw new Exception();
 
             return GetFile(new FileRecord(record));
@@ -76,7 +82,7 @@ namespace mzxrules.OcaLib
             byte[] data;
             byte[] decompressedData;
 
-            if (record.VirtualAddress == CachedFileAddress)
+            if (record.VRom == CachedFileAddress)
             {
                 ms = new MemoryStream(CachedFile);
                 return new RomFile(record, ms, Version);
@@ -84,14 +90,14 @@ namespace mzxrules.OcaLib
 
             using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
             {
-                data = new byte[record.DataAddress.Size];
-                fs.Position = record.DataAddress.Start;
-                fs.Read(data, 0, record.DataAddress.Size);
+                data = new byte[record.Data.Size];
+                fs.Position = record.Data.Start;
+                fs.Read(data, 0, record.Data.Size);
 
                 if (record.IsCompressed)
                 {
                     ms = new MemoryStream(data);
-                    decompressedData = Yaz.Decode(ms, record.DataAddress.Size);
+                    decompressedData = Yaz.Decode(ms, record.Data.Size);
                 }
                 else
                 {
@@ -100,7 +106,7 @@ namespace mzxrules.OcaLib
             }
             CachedFile = decompressedData;
             ms = new MemoryStream(decompressedData);
-            CachedFileAddress = record.VirtualAddress;
+            CachedFileAddress = record.VRom;
             return new RomFile(record, ms, Version);
         }
 
@@ -117,96 +123,95 @@ namespace mzxrules.OcaLib
         /// <summary>
         /// Returns a file without attempting to decompress it.  
         /// </summary>
-        /// <param name="virtualAddress">Address containing the location of the file</param>
+        /// <param name="address">Address containing the location of the file</param>
         /// <returns>Returns a stream containing the file</returns>
-        public Stream GetPhysicalFile(FileAddress virtualAddress) => GetPhysicalFile(virtualAddress.Start);
+        public Stream GetPhysicalFile(FileAddress address) => GetPhysicalFile(address.Start);
         
         /// <summary>
         /// Returns a file without attempting to decompress it.
         /// </summary>
-        /// <param name="virtualAddress">Address containing the location of the file</param>
+        /// <param name="vromStart">Address containing the location of the file</param>
         /// <returns></returns>
-        public Stream GetPhysicalFile(long virtualAddress)
+        public Stream GetPhysicalFile(int vromStart)
         {
-            MemoryStream ms;
             byte[] data;
             
-            if (!dmadata.TryGetFileRecord(virtualAddress, out FileRecord tableRecord))
+            if (!dmadata.TryGetFileRecord(vromStart, out FileRecord tableRecord))
                 throw new Exception();
 
             using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
             {
-                data = new byte[tableRecord.DataAddress.Size];
-                fs.Position = tableRecord.DataAddress.Start;
-                fs.Read(data, 0, tableRecord.DataAddress.Size);
+                data = new byte[tableRecord.Data.Size];
+                fs.Position = tableRecord.Data.Start;
+                fs.Read(data, 0, tableRecord.Data.Size);
 
             }
-            return ms = new MemoryStream(data);
+            return new MemoryStream(data);
         }
 
 
         /// <summary>
         /// Returns the full FileRecord for a file that contains the given address
         /// </summary>
-        /// <param name="virtualAddress"></param>
+        /// <param name="vromStart"></param>
         /// <returns>The FileRecord of the containing file, or null if no file contains the given address</returns>
-        public FileRecord GetFileStart(long virtualAddress)
+        public FileRecord GetFileStart(int vromStart)
         {
-            return dmadata.Table.FirstOrDefault(x => x.VirtualAddress.Start <= virtualAddress
-                && virtualAddress < x.VirtualAddress.End);
+            return dmadata.Table.FirstOrDefault(x => x.VRom.Start <= vromStart
+                && vromStart < x.VRom.End);
         }
 
         /// <summary>
         /// Tries to get the full FileRecord for a file with the given virtual FileAddress
         /// </summary>
-        /// <param name="virtualAddress">The virtual FileAddress of the record to return. Does not verify end address</param>
+        /// <param name="vrom">The virtual FileAddress of the record to return. Does not verify end address</param>
         /// <param name="record">Returns the full FileRecord for that file</param>
         /// <returns>True if operation is successful</returns>
-        public bool TryGetFileRecord(FileAddress virtualAddress, out FileRecord record)
+        public bool TryGetFileRecord(FileAddress vrom, out FileRecord record)
         {
-            return dmadata.TryGetFileRecord(virtualAddress.Start, out record);
+            return dmadata.TryGetFileRecord(vrom.Start, out record);
         }
 
         /// <summary>
         /// Tries to get the full FileRecord for a file with the given starting virtual address
         /// </summary>
-        /// <param name="virtualAddress">The virtual address of the record to return.</param>
+        /// <param name="vrom">The virtual address of the record to return.</param>
         /// <param name="record">Returns the full FileRecord for that file</param>
         /// <returns>True if operation is successful</returns>
-        public bool TryGetFileRecord(long virtualAddress, out FileRecord record)
+        public bool TryGetFileRecord(int vrom, out FileRecord record)
         {
-            return dmadata.TryGetFileRecord(virtualAddress, out record);
+            return dmadata.TryGetFileRecord(vrom, out record);
         }
 
         /// <summary>
         /// Tries to return the virtual FileAddress of a file with a given start address
         /// </summary>
-        /// <param name="address">The file's VROM address. Must match FileAddress's Vrom.Start</param>
-        /// <param name="resultAddress">The returned FileAddress</param>
+        /// <param name="vromStart">The file's VROM address. Must match FileAddress's Vrom.Start</param>
+        /// <param name="address">The returned FileAddress</param>
         /// <returns>True if the operation is successful</returns>
-        public bool TryGetVirtualAddress(long address, out FileAddress resultAddress)
+        public bool TryGetVirtualAddress(int vromStart, out FileAddress address)
         {
             bool getValue;
 
-            getValue = dmadata.TryGetFileRecord(address, out FileRecord record);
+            getValue = dmadata.TryGetFileRecord(vromStart, out FileRecord record);
             if (getValue)
-                resultAddress = record.VirtualAddress;
+                address = record.VRom;
             else
-                resultAddress = new FileAddress();
+                address = new FileAddress();
             return getValue;
         }
 
         /// <summary>
         /// Gets the virtual FileAddress of a file with a given start address
         /// </summary>
-        /// <param name="address">The file's VROM address. Must match FileAddress's Vrom.Start</param>
+        /// <param name="vromStart">The file's VROM address. Must match FileAddress's Vrom.Start</param>
         /// <returns>The returned FileAddress</returns>
-        public FileAddress GetVRomAddress(long address)
+        public FileAddress GetVRomAddress(int vromStart)
         {
-            if (!dmadata.TryGetFileRecord(address, out FileRecord record))
+            if (!dmadata.TryGetFileRecord(vromStart, out FileRecord record))
                 throw new FileNotFoundException();
 
-            return record.VirtualAddress;
+            return record.VRom;
         }
 
         protected int ReadInt32(int addr)
@@ -217,22 +222,6 @@ namespace mzxrules.OcaLib
                 reader.BaseStream.Position = record.GetRelativeAddress(addr);
                 return reader.ReadBigInt32();
             }
-        }
-
-
-        public void Dispose()
-        {
-        }
-        
-
-        public IEnumerator<FileRecord> GetEnumerator()
-        {
-            return dmadata.Table.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return dmadata.Table.GetEnumerator();
         }
 
 
@@ -292,7 +281,8 @@ namespace mzxrules.OcaLib
             endAddr = startAddr + 4;
             startAddr = ReadInt32(startAddr);
             endAddr = ReadInt32(endAddr);
-            FileAddress result = new FileAddress();
+
+            FileAddress result;
             try
             {
                 result = GetVRomAddress(startAddr);
@@ -379,6 +369,8 @@ namespace mzxrules.OcaLib
             return new PlayPauseOverlayRecord(index, new BinaryReader(code));
         }
 
+        #endregion
+
         private RomFileToken GetCodeFileToken()
         {
             RomFileToken token = ORom.FileList.invalid;
@@ -389,7 +381,56 @@ namespace mzxrules.OcaLib
             return token;
         }
 
-        #endregion
+
+        public IEnumerator<FileRecord> GetEnumerator()
+        {
+            return dmadata.Table.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return dmadata.Table.GetEnumerator();
+        }
+
+        public int IndexOf(FileRecord item)
+        {
+            return dmadata.Table.IndexOf(item);
+        }
+
+        public void Insert(int index, FileRecord item)
+        {
+            dmadata.Table.Insert(index, item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            dmadata.Table.RemoveAt(index);
+        }
+
+        public void Add(FileRecord item)
+        {
+            dmadata.Table.Add(item);
+        }
+
+        public void Clear()
+        {
+            dmadata.Table.Clear();
+        }
+
+        public bool Contains(FileRecord item)
+        {
+            return dmadata.Table.Contains(item);
+        }
+
+        public void CopyTo(FileRecord[] array, int arrayIndex)
+        {
+            dmadata.Table.CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(FileRecord item)
+        {
+            return dmadata.Table.Remove(item);
+        }
 
     }
 }

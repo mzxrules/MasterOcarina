@@ -56,7 +56,7 @@ namespace mzxrules.OcaLib
                     br.ReadBigInt32(),
                     br.ReadBigInt32());
 
-                fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress, i);
+                fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress);
                 Table.Add(fileRecord);
             }
             TryGetFileRecord(address, out FileRecord addr);
@@ -67,16 +67,16 @@ namespace mzxrules.OcaLib
         {
             foreach (FileRecord item in Table)
             {
-                if (item.VirtualAddress.Start == virtualStart)
+                if (item.VRom.Start == virtualStart)
                 {
                     fr = item;
                     return true;
                 }
-                if (item.VirtualAddress.Start == 0
-                    && item.VirtualAddress.End == 0)
+                if (item.VRom.Start == 0
+                    && item.VRom.End == 0)
                     break;
             }
-            fr = new FileRecord(new FileAddress(), new FileAddress(), 0);
+            fr = new FileRecord(new FileAddress(), new FileAddress());
             return false;
         }
 

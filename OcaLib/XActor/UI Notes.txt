@@ -29,3 +29,5 @@ textid = game text id
 	base (base id number, hex)
 
 none = no special ui, uses default value
+
+hidden = not displayed at all, used primarily by transition actiors

@@ -1,10 +1,8 @@
 ﻿using mzxrules.OcaLib;
-using mzxrules.OcaLib.Actor;
 using mzxrules.OcaLib.SceneRoom;
 using mzxrules.OcaLib.Cutscenes;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using mzxrules.Helper;
@@ -414,7 +412,7 @@ namespace VerboseOcarina
                 }
                 catch (Exception ex)
                 {
-                    var va = sceneFile.Record.VirtualAddress;
+                    var va = sceneFile.Record.VRom;
                     sb.AppendLine($"ParseError: Scene {sceneNumber} {va.Start:X8}-{va.End:X8}");
                     sb.AppendLine(ex.TargetSite.ToString());
                 }

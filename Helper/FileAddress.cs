@@ -6,13 +6,10 @@ namespace mzxrules.Helper
     [Serializable]
     public struct FileAddress
     {
-        //[NonSerialized]
         public int Start { get; private set; } 
 
-        //[NonSerialized]
         public int End { get; private set; }
 
-        //[NonSerialized]
         public int Size { get { return End - Start; } }
         public FileAddress(byte[] data)
             : this()

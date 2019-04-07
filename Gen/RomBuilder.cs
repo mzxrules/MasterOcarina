@@ -34,16 +34,16 @@ namespace Gen
             for (int i = 0; i < dmadata.Table.Count; i++)
             {
                 FileRecord record = dmadata.Table[i];
-                if (record.VirtualAddress.End == 0)
+                if (record.VRom.End == 0)
                 {
-                    var r = new FileRecord(new FileAddress(), new FileAddress(), i);
+                    var r = new FileRecord(new FileAddress(), new FileAddress());
                     newDmaTable.Add(r);
                     break;
                 }
                 
-                br.BaseStream.Position = record.PhysicalAddress.Start;
+                br.BaseStream.Position = record.Rom.Start;
 
-                byte[] data = br.ReadBytes(record.VirtualAddress.Size);
+                byte[] data = br.ReadBytes(record.VRom.Size);
                 int dstsize;
                 FileAddress physical;
                 if (!exclusions.Contains(i))
@@ -61,14 +61,14 @@ namespace Gen
                     physical = new FileAddress(cur, 0);
                     exclusions.Remove(i);
                 }
-                var newRec = new FileRecord(record.VirtualAddress, physical, i);
+                var newRec = new FileRecord(record.VRom, physical);
                 newDmaTable.Add(newRec);
 
                 cur += dstsize;
                 outRom.Position = cur;
             }
             
-            WriteFileTable(outRom, dmadata.Address.VirtualAddress, newDmaTable);
+            WriteFileTable(outRom, dmadata.Address.VRom, newDmaTable);
             CRC.Write(outRom);
             outRom.Position = 0;
             outRom.CopyTo(sw);
@@ -80,9 +80,9 @@ namespace Gen
 
             foreach (FileRecord r in refRom.Files)
             {
-                if (r.VirtualAddress.End == 0)
+                if (r.VRom.End == 0)
                     break;
-                sourceRecords.Add(r.VirtualAddress.Start, r);
+                sourceRecords.Add(r.VRom.Start, r);
             }
 
             Stopwatch stopwatch = new Stopwatch();
@@ -106,19 +106,19 @@ namespace Gen
                 filesTotal = rom.Files.Count();
 
                 //get file
-                outstream = rom.Files.GetFile(record.VirtualAddress.Start);
+                outstream = rom.Files.GetFile(record.VRom.Start);
 
                 //Compress if the file can't be found in the don't compress list,
                 //or if the file listed should be compressed (legacy)
-                if (!refFileList.ContainsKey(record.VirtualAddress.Start)
-                    || refFileList[record.VirtualAddress.Start].IsCompressed)
+                if (!refFileList.ContainsKey(record.VRom.Start)
+                    || refFileList[record.VRom.Start].IsCompressed)
                 {
                     //compress file
                     IsCompressed = true;
                     MemoryStream ms = new MemoryStream();
                     using (BinaryReader br = new BinaryReader(outstream))
                     {
-                        byte[] data = br.ReadBytes(record.VirtualAddress.Size);
+                        byte[] data = br.ReadBytes(record.VRom.Size);
                         Yaz.Encode(data, data.Length, ms);
                         ms.Position = 0;
                     }
@@ -167,7 +167,7 @@ namespace Gen
             FileRecord refRecord;
 
             //If a matching file record can't be found, assume that the file should be compressed
-            if (!refRom.Files.TryGetFileRecord(record.VirtualAddress, out refRecord))
+            if (!refRom.Files.TryGetFileRecord(record.VRom, out refRecord))
             {
                 IsCompressed = true;
                 return CompressFile(uncompressedRom, record);
@@ -181,17 +181,17 @@ namespace Gen
             //if file isn't compressed, just send the uncompressed file from the uncompressed rom
             if (!IsCompressed)
             {
-                return uncompressedRom.Files.GetFile(record.VirtualAddress.Start);
+                return uncompressedRom.Files.GetFile(record.VRom.Start);
             }
 
             //the file is compressed, try and see if the reference rom already has an identical
             //file compressed for us
 
-            using (Stream uncompressed = uncompressedRom.Files.GetFile(record.VirtualAddress))
-            using (Stream comp = refRom.Files.GetFile(record.VirtualAddress))
+            using (Stream uncompressed = uncompressedRom.Files.GetFile(record.VRom))
+            using (Stream comp = refRom.Files.GetFile(record.VRom))
             {
                 if (!uncompressed.IsDifferentTo(comp))
-                    return refRom.Files.GetPhysicalFile(record.VirtualAddress);
+                    return refRom.Files.GetPhysicalFile(record.VRom);
                 else
                     return CompressFile(uncompressedRom, record);
 
@@ -214,7 +214,7 @@ namespace Gen
                         (IsCompressed) ? pos + file.Length + offset : 0);
 
             //create a new file table record for the file
-            dmaTable.Add(new FileRecord(record.VirtualAddress, physicalAddress, dmaTable.Count));
+            dmaTable.Add(new FileRecord(record.VRom, physicalAddress));
             file.CopyTo(sw);
             sw.PadToNextLine();
             sw.Flush();
@@ -227,9 +227,9 @@ namespace Gen
         {
             byte[] data;
 
-            using (BinaryReader br = new BinaryReader(rom.Files.GetFile(record.VirtualAddress.Start)))
+            using (BinaryReader br = new BinaryReader(rom.Files.GetFile(record.VRom.Start)))
             {
-                data = br.ReadBytes(record.VirtualAddress.Size);
+                data = br.ReadBytes(record.VRom.Size);
             }
 
             //compress file
@@ -243,38 +243,42 @@ namespace Gen
         public static void DecompressRom(Rom compressedRom, Stream sw)
         {
             List<FileRecord> newDmaTable = new List<FileRecord>();
-            FileAddress addr; //current address
-
-
             int filesProcessed = 0;
             int filesTotal;
 
             filesTotal = compressedRom.Files.Count();
 
-            foreach (FileRecord record in compressedRom.Files.OrderBy(x => x.VirtualAddress.Start))
+            //build the new dmadata table
+            foreach (FileRecord record in compressedRom.Files)
             {
-                addr = record.VirtualAddress;
+                FileAddress vrom = record.VRom; //current address
+                
+                //MM Check for empty file
+                int start = (record.Rom.Start == -1) ? -1 : vrom.Start;
+                FileRecord rec = new FileRecord(vrom, new FileAddress(start, 0));
+                newDmaTable.Add(rec);
+            }
 
-                sw.PadToLength(addr.Start);
+            //write the decompressed files to the stream
+            foreach (FileRecord record in compressedRom.Files.OrderBy(x => x.VRom.Start))
+            {
+                FileAddress vrom = record.VRom; //current address
+                sw.PadToLength(vrom.Start);
 
-                //MM Check
-                if (record.PhysicalAddress.Start == -1)
+                //If file exists (supports MM)
+                if (record.Rom.Start != -1)
                 {
-                    newDmaTable.Add(new FileRecord(addr, new FileAddress(record.PhysicalAddress.Start, 0), record.Index));
-                }
-                else
-                {
-                    var file = compressedRom.Files.GetFile(addr);
+                    var file = compressedRom.Files.GetFile(vrom);
                     ((Stream)file).CopyTo(sw);
-                    newDmaTable.Add(new FileRecord(addr, new FileAddress(addr.Start, 0), record.Index));
                 }
 
                 //writes progress to console window
                 filesProcessed++;
                 Console.Write(processedFiles, filesProcessed, filesTotal);
             }
+
             sw.PadToLength(0x4000000);
-            WriteFileTable(sw, compressedRom.Files.GetDmaDataStart(), newDmaTable.OrderBy(x => x.Index).ToList());
+            WriteFileTable(sw, compressedRom.Files.GetDmaDataStart(), newDmaTable);
             CRC.Write(sw);
         }
 
@@ -307,10 +311,10 @@ namespace Gen
                 Stream file;
 
                 //if the file is being replaced with a custom file
-                if (UpdateFiles.ContainsKey(record.VirtualAddress.Start))
+                if (UpdateFiles.ContainsKey(record.VRom.Start))
                 {
                     //get source file
-                    file = GetFile(UpdateFiles[record.VirtualAddress.Start]);
+                    file = GetFile(UpdateFiles[record.VRom.Start]);
 
                     //Get virtual file size
                     if (record.IsCompressed)
@@ -323,13 +327,13 @@ namespace Gen
                 }
                 else //copy a source rom file.
                 {
-                    vromFilesize = record.VirtualAddress.Size;
-                    romFilesize = record.DataAddress.Size;
+                    vromFilesize = record.VRom.Size;
+                    romFilesize = record.Data.Size;
 
                     if (romFilesize > 0x800000)
                         throw new Exception("Internal file too large");
 
-                    file = hostRom.Files.GetPhysicalFile(record.VirtualAddress.Start);
+                    file = hostRom.Files.GetPhysicalFile(record.VRom.Start);
                 }
 
                 //copy file
@@ -341,9 +345,8 @@ namespace Gen
 
                 //generate a new file table record
                 newDmaTable.Add(new FileRecord(
-                    new FileAddress(record.VirtualAddress.Start, record.VirtualAddress.Start + vromFilesize),
-                    new FileAddress(physicalStart, (record.IsCompressed) ? physicalStart + romFilesize : 0),
-                    record.Index));
+                    new FileAddress(record.VRom.Start, record.VRom.Start + vromFilesize),
+                    new FileAddress(physicalStart, (record.IsCompressed) ? physicalStart + romFilesize : 0)));
 
             }
             output.PadToLength(0x2000000);
@@ -377,10 +380,10 @@ namespace Gen
             BinaryWriter bw = new BinaryWriter(sw);
             foreach (FileRecord record in fileTable)
             {
-                bw.WriteBig(record.VirtualAddress.Start);
-                bw.WriteBig(record.VirtualAddress.End);
-                bw.WriteBig(record.PhysicalAddress.Start);
-                bw.WriteBig(record.PhysicalAddress.End);
+                bw.WriteBig(record.VRom.Start);
+                bw.WriteBig(record.VRom.End);
+                bw.WriteBig(record.Rom.Start);
+                bw.WriteBig(record.Rom.End);
             }
         }
         

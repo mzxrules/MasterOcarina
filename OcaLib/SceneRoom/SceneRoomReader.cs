@@ -39,7 +39,7 @@ namespace mzxrules.OcaLib.SceneRoom
             if (file == null)
                 return scene;
 
-            scene = new Scene(file.Version.Game, id, file.Record.VirtualAddress);
+            scene = new Scene(file.Version.Game, id, file.Record.VRom);
             BinaryReader br = new BinaryReader(file);
 
             //if (LocalFileTable.Version == ORom.Build.N0
@@ -48,7 +48,7 @@ namespace mzxrules.OcaLib.SceneRoom
             //else
             //try
             //{
-                LoadISceneRoomHeader(br, scene);
+            LoadISceneRoomHeader(br, scene);
             //}
             //catch
             //{
@@ -68,7 +68,7 @@ namespace mzxrules.OcaLib.SceneRoom
         public static Room InitializeRoom(RomFile file)
         {
             BinaryReader br;
-            Room newRoom = new Room(file.Version.Game, file.Record.VirtualAddress);
+            Room newRoom = new Room(file.Version.Game, file.Record.VRom);
 
             br = new BinaryReader(file);
             LoadISceneRoomHeader(br, newRoom);
@@ -111,7 +111,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         #endregion
 
-        public static bool TryGetCutscene(Rom rom, long address, out Cutscenes.Cutscene cutscene)
+        public static bool TryGetCutscene(Rom rom, int address, out Cutscenes.Cutscene cutscene)
         {
             FileRecord addr;
             cutscene = null;
@@ -119,7 +119,7 @@ namespace mzxrules.OcaLib.SceneRoom
             addr = rom.Files.GetFileStart(address);
             if (addr == null)
                 return false;
-            var s = (Stream)rom.Files.GetFile(addr.VirtualAddress);
+            var s = (Stream)rom.Files.GetFile(addr.VRom);
             s.Position = addr.GetRelativeAddress(address);
             cutscene = new Cutscenes.Cutscene(s);
             return true;
@@ -272,14 +272,14 @@ namespace mzxrules.OcaLib.SceneRoom
             result.AppendLine($"Total: {count}");
             return result.ToString();
         }
-        
+
         private static List<ItemLocation<T>> CreateCollectionById<T>(Rom rom, int id, CreateListThings<T> CreateThings)
         {
             Scene scene;
             List<FileAddress> roomAddresses;
             Room room;
             List<ItemLocation<T>> result = new List<ItemLocation<T>>();
-            
+
             for (int sceneId = 0; sceneId < rom.Scenes; sceneId++)
             {
                 //load scene
@@ -308,7 +308,7 @@ namespace mzxrules.OcaLib.SceneRoom
             }
             return result;
         }
-        
+
         private static List<ItemLocation<T>> CreateList<T>(int id, SceneHeader header, int scene, int room, CreateListThings<T> del)
         {
             List<ItemLocation<T>> result = new List<ItemLocation<T>>();
@@ -410,7 +410,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 }
             }
         }
-        
+
         private static void AppendCommandList(List<List<SceneCommand>> commandList, int scene, int room, StringBuilder result)
         {
             List<SceneCommand> setupList;

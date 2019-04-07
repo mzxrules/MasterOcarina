@@ -4,47 +4,47 @@ namespace mzxrules.OcaLib
 {
     public class FileRecord
     {
-        //public const int LENGTH = 0x10;
         /// <summary>
-        /// The file's mapped location in virtual space
+        /// The file's location when a rom is decompressed. Also determines decompressed size.
         /// </summary>
-        public FileAddress VirtualAddress { get; set; } 
-        /// <summary>
-        /// The file's mapped location on file. A zeroed end address means that the file is not compressed
-        /// </summary>
-        public FileAddress PhysicalAddress { get; set; } 
-        /// <summary>
-        /// The file's location independent of compression state
-        /// </summary>
-        public FileAddress DataAddress { get; private set; }
-        public bool IsCompressed => PhysicalAddress.End != 0; 
-        public int Index = -1;
+        public FileAddress VRom { get; set; }
 
-        public FileRecord(FileRecord fileRecord)
+        /// <summary>
+        /// The file's actual location in rom. A negative start address denotes that the file does not exist on rom.
+        /// A zeroed end address represents that the file is compressed
+        /// </summary>
+        public FileAddress Rom { get; set; }
+
+        /// <summary>
+        /// The file's location, independent of compression state.
+        /// </summary>
+        /// 
+        public FileAddress Data => GetDataAddress();
+
+        public bool IsCompressed => Rom.End != 0;
+
+        public FileRecord(FileRecord rec)
         {
-            VirtualAddress = fileRecord.VirtualAddress;
-            PhysicalAddress = fileRecord.PhysicalAddress;
-            DataAddress = fileRecord.DataAddress;
-            Index = fileRecord.Index;
+            VRom = rec.VRom;
+            Rom = rec.Rom;
         }
 
-        public FileRecord(FileAddress virtualAddr, FileAddress physicalAddr, int index)
+        public FileRecord(FileAddress vrom, FileAddress rom)
         {
-            VirtualAddress = virtualAddr;
-            PhysicalAddress = physicalAddr;
-            Index = index;
-
-            if (IsCompressed)
-            {
-                DataAddress = new FileAddress(PhysicalAddress.Start, PhysicalAddress.End);
-            }
-            else
-                DataAddress = new FileAddress(PhysicalAddress.Start, PhysicalAddress.Start + VirtualAddress.Size);
+            VRom = vrom;
+            Rom = rom;
         }
 
         public long GetRelativeAddress(long offset)
         {
-            return offset - VirtualAddress.Start;
+            return offset - VRom.Start;
+        }
+
+        private FileAddress GetDataAddress()
+        {
+            var start = Rom.Start;
+            var end = (IsCompressed) ? Rom.End : Rom.Start + VRom.Size;
+            return (start, end);
         }
     }
 }
