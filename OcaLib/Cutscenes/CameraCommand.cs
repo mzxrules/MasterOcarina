@@ -15,7 +15,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
 
-        public IEnumerable<IFrameData> IFrameDataEnum => throw new NotImplementedException();
+        public IEnumerable<IFrameData> IFrameDataEnum => Entries;
 
         public ushort UnknownA;
         public ushort zero;

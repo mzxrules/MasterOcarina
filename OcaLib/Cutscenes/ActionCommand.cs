@@ -11,7 +11,7 @@ namespace mzxrules.OcaLib.Cutscenes
         const int LENGTH = 8;
         public List<ActionEntry> Entries = new List<ActionEntry>();
 
-        public IEnumerable<IFrameData> IFrameDataEnum => throw new NotImplementedException();
+        public IEnumerable<IFrameData> IFrameDataEnum => Entries;
 
         public ActionCommand(int command, BinaryReader br)
             : base(command, br)

@@ -15,6 +15,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public bool InvalidCommandReached = false;
         public int Frames { get; set; }
         public int CommandCount { get { return Commands.Count; } }
+        private int command_count_private = -1;
 
         Dictionary<int, int> CommandMap = new Dictionary<int, int>()
         {
@@ -187,6 +188,7 @@ namespace mzxrules.OcaLib.Cutscenes
             //Read the header
             commands = br.ReadBigInt32();
             Frames = br.ReadBigInt32();
+            command_count_private = commands;
 
             error_CommandCount = commands;
 
@@ -331,10 +333,11 @@ namespace mzxrules.OcaLib.Cutscenes
             if (CommandCapReached)
                 return $"Exceeded {CommandCap} command limit: {error_CommandCount}";
 
-            output.AppendLine(String.Format("Length: {0:X4} Hit End? {1}, Commands {2:X8}, End Frame {3:X8}",
+            output.AppendLine(string.Format("Length: {0:X4} Hit End? {1}, Commands {2:X8}, End Frame {4:X8}{3}",
                 Commands.Sum(x => x.Length),
                 (Commands.Exists(x => x is EndCommand)) ? "YES" : "NO",
                 CommandCount,
+                (command_count_private >= 0 && CommandCount != command_count_private) ? $", Internal Command Count {command_count_private:X2}" : "",
                 Frames));
 
             var commandOffset = 8L; //Header data is 0x8 bytes
