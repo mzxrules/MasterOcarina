@@ -57,10 +57,11 @@ namespace Spectrum
                     {
                         if (m.ModuleName == "mupen64plus.dll")
                         {
-                            Console.WriteLine($"Process {p.ProcessName} contains mupen64plus.dll");
+                            long baseAddr = (long)m.BaseAddress;
+                            Console.WriteLine($"Process {p.ProcessName} contains mupen64plus.dll at address {baseAddr:X16}");
 
                             long result = ScanForSignature(p, m, sig);
-
+                            
                             if (result < 0)
                             {
                                 Console.WriteLine("RDRAM not found");
@@ -68,8 +69,8 @@ namespace Spectrum
                             }
                             else
                             {
-                                Console.WriteLine($"RDRAM begins at {result:X8}");
-                                return new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result:X8}", 0);
+                                Console.WriteLine($"RDRAM begins at {result:X16}");
+                                return new Emulator(p.ProcessName, "generated", 32, $"`{m.ModuleName}`+{result-baseAddr:X8}", 0);
                             }
                         }
 
