@@ -42,18 +42,11 @@ namespace mzxrules.OcaLib.SceneRoom
             scene = new Scene(file.Version.Game, id, file.Record.VRom);
             BinaryReader br = new BinaryReader(file);
 
-            //if (LocalFileTable.Version == ORom.Build.N0
-            //    && number == 6)
+            //if (file.Version == ORom.Build.N0
+            //    && id == 6)
             //    SpiritHack.LoadSpiritSceneHeader(br, scene);
             //else
-            //try
-            //{
             LoadISceneRoomHeader(br, scene);
-            //}
-            //catch
-            //{
-            //    scene = null;
-            //}
             return scene;
         }
 
@@ -68,22 +61,22 @@ namespace mzxrules.OcaLib.SceneRoom
         public static Room InitializeRoom(RomFile file)
         {
             BinaryReader br;
-            Room newRoom = new Room(file.Version.Game, file.Record.VRom);
+            Room room = new Room(file.Version.Game, file.Record.VRom);
 
             br = new BinaryReader(file);
-            LoadISceneRoomHeader(br, newRoom);
-            return newRoom;
+            LoadISceneRoomHeader(br, room);
+            return room;
         }
 
-        //public static Room LoadSpiritRoom(FileAddress addr, int roomNo)
-        //{
-        //    BinaryReader br;
-        //    Room item = new Room(LocalFileTable.Version.Game, addr);
+        public static Room LoadSpiritRoom(RomFile file, int roomNo)
+        {
+            BinaryReader br;
+            Room room = new Room(file.Version.Game, file.Record.VRom);
 
-        //    br = new BinaryReader(LocalFileTable.GetFile(item.VirtualAddress.Start));
-        //    SpiritHack.LoadSpiritRoomHeader(br, item, roomNo);
-        //    return item;
-        //}
+            br = new BinaryReader(file);
+            SpiritHack.LoadSpiritRoomHeader(br, room, roomNo);
+            return room;
+        }
 
         #region InitializeMembers
 

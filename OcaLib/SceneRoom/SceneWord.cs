@@ -17,7 +17,7 @@ namespace mzxrules.OcaLib.SceneRoom
             get { return command[1]; }
             set { command[1] = value; }
         }
-        public UInt32 Data2
+        public uint Data2
         {
             get { return Endian.ConvertUInt32(command, 4); }
             set 

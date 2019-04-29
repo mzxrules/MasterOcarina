@@ -6,10 +6,10 @@ namespace mzxrules.OcaLib.SceneRoom
     {
         public int Id { get; private set; }
 
-        public Scene(Game game, int id, FileAddress virtualAddress)
+        public Scene(Game game, int id, FileAddress address)
         {
             Header = new SceneHeader(game);
-            VirtualAddress = virtualAddress;
+            VirtualAddress = address;
             Id = id;
         }
     }
