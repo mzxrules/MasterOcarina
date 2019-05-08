@@ -19,7 +19,7 @@ namespace mzxrules.OcaLib.Cutscenes
         //0x0E
         public ushort d;
 
-        public bool IsLastEntry { get { return (Terminator == 0xFF); } }
+        public bool IsLastEntry => (Terminator == 0xFF);
 
         public CutsceneCommand RootCommand { get; set; }
         public short StartFrame { get; set; }

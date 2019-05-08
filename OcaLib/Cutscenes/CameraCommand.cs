@@ -146,6 +146,14 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
             bw.WriteBig(zero);
+
+            if (Entries.Count > 0)
+            {
+                foreach (CameraCommandEntry item in Entries)
+                    item.Terminator = 0;
+                var last = Entries[Entries.Count - 1];
+                last.Terminator = 0xFF;
+            }
             foreach (CameraCommandEntry item in Entries)
                 item.Save(bw);
         }
