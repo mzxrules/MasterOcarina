@@ -9,7 +9,6 @@ namespace Spectrum
     {
         static EmulatorProcess Emulator;
         static IntPtr RamPointer;
-        static int readBytes;
 
         public static bool IsEmulatorSet { get { return Emulator != null; } }
 
@@ -309,7 +308,7 @@ namespace Spectrum
         /// <returns></returns>
         public static byte[] ReadRam(N64Ptr addr, int numOfBytes)
         {
-            return ReadN64Rdram(addr, numOfBytes, out readBytes, true);
+            return ReadN64Rdram(addr, numOfBytes, out _, true);
         }
 
         public static Int64 ReadRamInt64(N64Ptr addr)
@@ -320,28 +319,28 @@ namespace Spectrum
             return (long)(left + right);
         }
 
-        public static Int32 ReadRamInt32(N64Ptr addr)
+        public static int ReadRamInt32(N64Ptr addr)
         {
-            var v = ReadN64Rdram(addr, sizeof(Int32), out readBytes, false);
+            var v = ReadN64Rdram(addr, sizeof(int), out _, false);
             return BitConverter.ToInt32(v, 0);
         }
 
         public static float ReadRamFloat(N64Ptr addr)
         {
-            var v = ReadN64Rdram(addr, sizeof(float), out readBytes, false);
+            var v = ReadN64Rdram(addr, sizeof(float), out _, false);
             return System.BitConverter.ToSingle(v, 0);
         }
 
-        public static Int16 ReadRamInt16(N64Ptr addr)
+        public static short ReadRamInt16(N64Ptr addr)
         {
-            var b = ReadN64Rdram(addr, sizeof(Int16), out readBytes, true);
+            var b = ReadN64Rdram(addr, sizeof(short), out _, true);
             var v = BitConverter.ToInt16(b, 0);
             return Endian.ConvertInt16(v);
         }
 
         public static byte ReadRamByte(N64Ptr addr)
         {
-            return ReadN64Rdram(addr, sizeof(byte), out readBytes, true)[0];
+            return ReadN64Rdram(addr, sizeof(byte), out _, true)[0];
         }
 
         public static void WriteRam32(N64Ptr addr, int v)
