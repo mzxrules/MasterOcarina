@@ -16,6 +16,7 @@ namespace Spectrum
         LITERAL,
         HEX_U8,
         HEX_S8,
+        HEX_U16,
         HEX_S16,
         HEX_S32,
         HEX_FLOAT,
@@ -87,19 +88,19 @@ namespace Spectrum
                             return false;
                         break;
                     case Spectrum.Tokens.HEX_U8:
-                        {
-                            if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(byte)))
-                                return false;
-                        }
+                        if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(byte)))
+                            return false;
                         break;
                     case Spectrum.Tokens.HEX_S8:
-                        {
-                            if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(sbyte)))
-                                return false;
-                        }
+                        if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(sbyte)))
+                            return false;
                         break;
                     case Spectrum.Tokens.HEX_S16:
                         if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(short)))
+                            return false;
+                        break;
+                    case Spectrum.Tokens.HEX_U16:
+                        if (!TryGetHEX_TYPE(argsStr, ref cur, typeof(ushort)))
                             return false;
                         break;
                     case Spectrum.Tokens.HEX_S32:
@@ -219,6 +220,14 @@ namespace Spectrum
                 if (short.TryParse(test, NumberStyles.HexNumber, new CultureInfo("en-US"), out short s16))
                 {
                     argObjects.Add(s16);
+                    return true;
+                }
+            }
+            else if (type == typeof(ushort))
+            {
+                if (ushort.TryParse(test, NumberStyles.HexNumber, new CultureInfo("en-US"), out ushort u16))
+                {
+                    argObjects.Add(u16);
                     return true;
                 }
             }

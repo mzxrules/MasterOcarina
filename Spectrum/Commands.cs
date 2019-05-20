@@ -1034,21 +1034,51 @@ namespace Spectrum
                 return;
             }
 
-            if (!TryGetEntranceIndex(scene, ent, out EntranceIndex index))
-                return;
+            if (TryGetOoTEntranceIndex(scene, ent, out EntranceIndex index))
+            {
+                SetEntranceIndexSpawn(index.id);
+            }
+        }
+
+        [SpectrumCommand(
+            Name = "spc",
+            Cat = SpectrumCommand.Category.Spawn,
+            Description = "Spawns Link in a given scene number, with a specific cutscene",
+            Sup = SpectrumCommand.Supported.OoT)]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.U8, Tokens.HEX_U16 },
+            Help = "{0} = Scene; {1} = Cutscene")]
+        private static void SpawnToCutscene(Arguments args)
+        {
+            int scene = (byte)args[0];
+            ushort cutscene = (ushort)args[1];
+
+            if (TryGetOoTEntranceIndex(scene, 0, out EntranceIndex index))
+            {
+                SaveContext.Write(0x1412, cutscene);
+                SetEntranceIndexSpawn(index.id);
+            }
+        }
+
+        private static bool TryGetOoTEntranceIndex(int scene, int ent, out EntranceIndex index)
+        {
+            if (!TryGetEntranceIndex(scene, ent, out index))
+                return false;
+
+            var i = index;
 
             var spawnQuery = from a in SpawnData.Spawns
-                             where a.scene == index.scene && (a.ent == index.ent || a.ent == 0)
+                             where a.scene == i.scene && (a.ent == i.ent || a.ent == 0)
                              orderby a.ent descending
                              select a;
 
             var spawnList = spawnQuery.ToList();
 
             if (spawnList.Count == 0)
-                return;
+                return false;
 
             var spawn = spawnList[0];
-            SetEntranceIndexSpawn(index.id);
+            return true;
         }
 
         [SpectrumCommand(

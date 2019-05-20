@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerboseOcarina", "VerboseOcarina\VerboseOcarina.csproj", "{957A3D9E-6B39-48BD-B547-0D91325261B1}"
 EndProject
@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcaLib", "OcaLib\OcaLib.csproj", "{FC18EBFF-FA5C-4F92-A90C-FE14E29D9471}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZCodecCore", "ZCodecCore\ZCodecCore.csproj", "{84DE0764-286E-4C2A-B8B7-BAD712CEA5DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZCodecCore", "ZCodecCore\ZCodecCore.csproj", "{84DE0764-286E-4C2A-B8B7-BAD712CEA5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
