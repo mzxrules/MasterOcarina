@@ -196,8 +196,8 @@ namespace Spectrum
             var key = Console.ReadKey();
             if (key.KeyChar == 'n')
                 return;
-
-            var emulator = Zpr.Trainer(SearchSignature.GetN0Signature());
+            var signature = SearchSignature.Deserialize("data/trainer/n0_signature.bin");
+            var emulator = Zpr.Trainer(signature);
             if (emulator != null)
             {
                 AddEmulator(emulator.ProcessName, emulator);
@@ -1743,42 +1743,64 @@ namespace Spectrum
                 colaOffset = 0x18884;
 
             Ptr colPtr = GlobalContext.RelOff(colaOffset);
-            short colAtCount = colPtr.ReadInt16(0);
-            ushort colAtUnk = colPtr.ReadUInt16(2);
+            var pools = GetActorCollisionPools(colPtr);
             Console.Clear();
-
-            Console.WriteLine($"{colPtr}: colAT, {colAtCount:D2} elements, {colAtUnk:X4}");
-            if (colAtCount > 70)
-                return;
-
-            colPtr = colPtr.RelOff(4);
-            for (int i = 0; i < (colAtCount * 4); i += 4)
+            foreach(var (desc, shapes) in pools)
             {
-                CollisionBody body = new CollisionBody(colPtr.RelOff(i).Deref());
-                Console.WriteLine(body.ToString());
+                Console.WriteLine(desc);
+                foreach (var shape in shapes)
+                {
+                    Console.WriteLine(shape.collider);
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
-
-            ColB_GetGroup("AC", colaOffset + 0xCC);
-            ColB_GetGroup("OT", colaOffset + 0x1C0);
         }
 
-        private static void ColB_GetGroup(string v1, int v2)
+        private static List<(string description, List<CollisionShape>)> GetActorCollisionPools(Ptr colPtr)
         {
-            Ptr ptr = GlobalContext.RelOff(v2);
-            int count = ptr.ReadInt32(0);
+            var result = new List<(string, List<CollisionShape>)>();
 
-            Console.WriteLine($"{ptr}: col{v1}, {count:D2} elements");
-            if (count > 70)
-                return;
+            //get AT collection
+            short colAtCount = colPtr.ReadInt16(0);
+            ushort colAtUnk = colPtr.ReadUInt16(2);
 
-            ptr = ptr.RelOff(4);
-            for (int i = 0; i < (count * 4); i += 4)
+            string colAt = $"{colPtr}: colAT, {colAtCount:D2} elements, {colAtUnk:X4}";
+            List<CollisionShape> shapes = new List<CollisionShape>();
+
+            result.Add((colAt, shapes));
+
+            if (colAtCount <= 70)
             {
-                CollisionBody body = new CollisionBody(ptr.RelOff(i).Deref());
-                Console.WriteLine(body.ToString());
+                var curPtr = colPtr.RelOff(4);
+                for (int i = 0; i < (colAtCount * 4); i += 4)
+                {
+                    var shape = CollisionShape.Initialize(curPtr.RelOff(i).Deref());
+                    shapes.Add(shape);
+                }
             }
-            Console.WriteLine();
+
+            result.Add(ColB_GetGroup("AC", colPtr.RelOff(0xCC)));
+            result.Add(ColB_GetGroup("OT", colPtr.RelOff(0x1C0)));
+            return result;
+        }
+
+        private static (string, List<CollisionShape>) ColB_GetGroup(string name, Ptr colPtr)
+        {
+            int count = colPtr.ReadInt32(0);
+
+            string description = $"{colPtr}: col{name}, {count:D2} elements";
+            List<CollisionShape> shapes = new List<CollisionShape>();
+
+            if (count <= 70)
+            {
+                colPtr = colPtr.RelOff(4);
+                for (int i = 0; i < (count * 4); i += 4)
+                {
+                    var shape = CollisionShape.Initialize(colPtr.RelOff(i).Deref());
+                    shapes.Add(shape);
+                }
+            }
+            return (description, shapes);
         }
 
         [SpectrumCommand(
@@ -1865,7 +1887,7 @@ namespace Spectrum
             };
 
             CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
-            CollisionMesh mesh = GetCollisionMesh(0x32);
+            BgMesh mesh = GetCollisionMesh(0x32);
 
 
             N64Ptr colsecAddr = ctx.GetColSecDataPtr(colsec);
@@ -2020,7 +2042,7 @@ namespace Spectrum
             if (!TryEvaluate((string)args[1], out long addr))
                 return;
 
-            CollisionMesh mesh = GetCollisionMesh(id);
+            BgMesh mesh = GetCollisionMesh(id);
             if (mesh == null)
                 return;
             Console.WriteLine(mesh.GetPolyFormattedInfo(addr));
@@ -2033,7 +2055,7 @@ namespace Spectrum
             return GlobalContext.RelOff(colctxOff);
         }
 
-        private static CollisionMesh GetCollisionMesh(int id)
+        private static BgMesh GetCollisionMesh(int id)
         {
             if (id < 0 || id > 0x32)
                 return null;
@@ -2046,7 +2068,7 @@ namespace Spectrum
             else
                 MeshPtr = ColContext.RelOff(0x58).Deref(0x64 * id);
 
-            return new CollisionMesh(MeshPtr);
+            return new BgMesh(MeshPtr);
         }
 
         [SpectrumCommand(
@@ -2081,7 +2103,7 @@ namespace Spectrum
                 Console.WriteLine($"{name}: {polyPtr} {source:X2}");
                 if (polyPtr != 0)
                 {
-                    CollisionMesh mesh = GetCollisionMesh(source);
+                    BgMesh mesh = GetCollisionMesh(source);
                     var poly = mesh.GetPolyFormattedInfo(polyPtr);
                     Console.WriteLine(poly);
                 }
@@ -2442,6 +2464,12 @@ namespace Spectrum
                 short equip = SaveContext.ReadInt16(0x9C);
                 OItems.SetEquipment(item, true, ref equip);
                 SaveContext.Write(0x9C, equip);
+            }
+            else if (item <= OItems.Item.StoneOfAgony)
+            {
+                int quest = SaveContext.ReadInt32(0xA4);
+                OItems.SetQuestItem(item, true, ref quest);
+                SaveContext.Write(0xA4, quest);
             }
         }
         #endregion

@@ -4,7 +4,7 @@ using mzxrules.Helper;
 
 namespace Spectrum
 {
-    class CollisionMesh
+    class BgMesh
     {
         /* 0x00 */ Vector3<short> BoundsMin = new Vector3<short>();
         /* 0x06 */ Vector3<short> BoundsMax = new Vector3<short>();
@@ -17,7 +17,7 @@ namespace Spectrum
         /* 0x24 */ public short WaterBoxes;
         /* 0x28 */ public Ptr WaterBoxesArray;
 
-        public CollisionMesh(Ptr ptr)
+        public BgMesh(Ptr ptr)
         {
             BoundsMin = new Vector3<short>(
                 ptr.ReadInt16(0x00),
@@ -51,27 +51,27 @@ namespace Spectrum
 
         public string GetPolyFormattedInfo(N64Ptr ptr)
         {
-            CollisionPoly poly = new CollisionPoly(this, SPtr.New(ptr));
+            BgPoly poly = new BgPoly(this, SPtr.New(ptr));
             return poly.ToString();
         }
 
-        public CollisionPoly GetPolyById(int id)
+        public BgPoly GetPolyById(int id)
         {
-            return new CollisionPoly(this, PolyArray.RelOff(id * 0x10));
+            return new BgPoly(this, PolyArray.RelOff(id * 0x10));
         }
     }
 
-    class CollisionPoly
+    class BgPoly
     {
         int Id;
-        CollisionPolyType Type;
-        CollisionVertex VertexA, VertexB, VertexC;
+        BgPolyType Type;
+        BgVertex VertexA, VertexB, VertexC;
         byte VertexFlagsA;
         byte VertexFlagsB;
         byte VertexFlagsC;
         Vector3<short> Normal;
         short D;
-        public CollisionPoly(CollisionMesh mesh, Ptr ptr)
+        public BgPoly(BgMesh mesh, Ptr ptr)
         {
             short type;
             ushort vA;
@@ -100,10 +100,10 @@ namespace Spectrum
                 ptr.ReadInt16(0x0C));
             D = ptr.ReadInt16(0x0E);
 
-            Type = CollisionPolyType.GetPolyType(mesh, type);
-            VertexA = CollisionVertex.GetVertex(mesh, vertexA);
-            VertexB = CollisionVertex.GetVertex(mesh, vertexB);
-            VertexC = CollisionVertex.GetVertex(mesh, vertexC);
+            Type = BgPolyType.GetPolyType(mesh, type);
+            VertexA = BgVertex.GetVertex(mesh, vertexA);
+            VertexB = BgVertex.GetVertex(mesh, vertexB);
+            VertexC = BgVertex.GetVertex(mesh, vertexC);
         }
         public string TSV()
         {

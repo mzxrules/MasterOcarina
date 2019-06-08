@@ -93,18 +93,17 @@ namespace Spectrum
 
             while (true)
             {
-                long patternIndex = BayerMooreScanForPattern(proc, s.Pattern, (IntPtr)next, end - next);
+                long patternIndex = BayerMooreScanForPattern(proc, s.PrimaryPattern.Pattern, (IntPtr)next, end - next);
 
                 if (patternIndex >= 0)
                 {
-                    long result = next + patternIndex - s.Address.Offset;
+                    long result = next + patternIndex - s.PrimaryPattern.Address.Offset;
                     next += patternIndex + 4;
 
                     bool verified = true;
-                    foreach (var (ptr, val) in s.Verification)
+                    foreach (var pattern in s.SecondaryPatterns)
                     {
-                        uint value = (uint)ReadProcessInt32(proc, (IntPtr)(result + ptr.Offset), out int r);
-                        if (value != val)
+                        if (!TestSecondaryPattern(proc, pattern, result))
                         {
                             verified = false;
                             break;
@@ -116,6 +115,21 @@ namespace Spectrum
                 else
                     return -1;
             }
+        }
+
+        private static bool TestSecondaryPattern(Process proc, PatternRecord pattern, long rdramStart)
+        {
+            var ptr = pattern.Address;
+
+            for (int i = 0; i < pattern.Length; i += 4)
+            {
+                uint value = (uint)ReadProcessInt32(proc, (IntPtr)(rdramStart + ptr.Offset + i), out _);
+                if (value != pattern.Pattern[i/4])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private static long BayerMooreScanForPattern(Process proc, uint[] p, IntPtr baseAddr, long size)
@@ -160,6 +174,7 @@ namespace Spectrum
             IntPtr baseAddr = m.BaseAddress;
 
             int loop = m.ModuleMemorySize - (searchString.Length * 4);
+
             int matchIndex = 0;
             int j = 0;
             for (int i = 0; i < loop; i+= 4)

@@ -351,23 +351,62 @@ namespace Spectrum
         struct QuestInfo
         {
             public int Mask;
-            public int Value;
 
-            public QuestInfo(int mask, int value)
+            public QuestInfo(int mask)
             {
                 Mask = mask;
-                Value = value;
             }
         }
 
-        //static readonly Dictionary<Item, QuestInfo> QuestItems = new Dictionary<Item, QuestInfo>()
-        //{
-        //    { }
-        //};
-
-        public static void SetQuestItem(Item item, int value, ref int  var)
+        static readonly Dictionary<Item, QuestInfo> QuestItems = new Dictionary<Item, QuestInfo>()
         {
+            { Item.ForestMedallion, new QuestInfo(0x00_0001) },
+            { Item.FireMedallion,   new QuestInfo(0x00_0002) },
+            { Item.WaterMedallion, new QuestInfo(0x00_0004) },
+            { Item.SpiritMedallion, new QuestInfo(0x00_0008) },
+            { Item.ShadowMedallion, new QuestInfo(0x00_0010) },
+            { Item.LightMedallion, new QuestInfo(0x00_0020) },
+            { Item.Minuet, new QuestInfo(0x00_0040) },
+            { Item.Bolero, new QuestInfo(0x00_0080) },
 
+            { Item.Serenade, new QuestInfo(0x00_0100) },
+            { Item.Requiem, new QuestInfo(0x00_0200) },
+            { Item.Nocturne, new QuestInfo(0x00_0400) },
+            { Item.Prelude, new QuestInfo(0x00_0800) },
+            { Item.Lullaby, new QuestInfo(0x00_1000) },
+            { Item.EponasSong, new QuestInfo(0x00_2000) },
+            { Item.SariasSong, new QuestInfo(0x00_4000) },
+            { Item.SunsSong, new QuestInfo(0x00_8000) },
+
+            { Item.SongOfTime, new QuestInfo(0x01_0000) },
+            { Item.SongOfStorms, new QuestInfo(0x02_0000) },
+            { Item.Emerald, new QuestInfo(0x04_0000) },
+            { Item.Ruby, new QuestInfo(0x08_0000) },
+            { Item.Sapphire, new QuestInfo(0x10_0000) },
+            { Item.StoneOfAgony, new QuestInfo(0x20_0000) },
+            //{ Item.GerudoCard, new QuestInfo(0x40_0000) },
+            //{ Item.GoldSkulltula, new QuestInfo(0x80_0000) },
+
+        };
+
+        public static bool SetQuestItem(Item item, bool setOn, ref int var)
+        {
+            if (!QuestItems.ContainsKey(item))
+            {
+                return false;
+            }
+            var info = QuestItems[item];
+
+            if (setOn == true)
+            {
+                var |= info.Mask;
+            }
+            else
+            {
+                int mask = -1 ^ info.Mask;
+                var &= mask;
+            }
+            return true;
         }
     }
 }
