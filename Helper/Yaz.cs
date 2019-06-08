@@ -33,9 +33,9 @@ namespace mzxrules.Helper
         /// Decompresses a block compressed with the Yaz algorithm with respect to a little endian machine
         /// </summary>
         /// <param name="sr"></param>
-        /// <param name="yazBlockSize">The size of the block without header?</param>
+        /// <param name="blockSize">The size of the block, including the header</param>
         /// <returns></returns>
-        public static byte[] Decode(Stream sr, int yazBlockSize)
+        public static byte[] Decode(Stream sr, int blockSize)
         {
             byte[] buf;
             int[] size;
@@ -49,8 +49,9 @@ namespace mzxrules.Helper
             Buffer.BlockCopy(buf, 0, size, 0, sizeof(int));
             sr.Position += 8;
 
-            buf = new byte[yazBlockSize];
-            sr.Read(buf, 0, yazBlockSize);
+            blockSize -= 0x10;
+            buf = new byte[blockSize];
+            sr.Read(buf, 0, blockSize);
 
             Decode(buf, out byte[] result, size[0]);
             return result;
@@ -158,12 +159,6 @@ namespace mzxrules.Helper
             return numBytes;
         }
 
-        class SimpleEncodeResult
-        {
-            public int Length;
-            public int matchPos;
-            public bool UseResult;
-        }
 
         /// <summary>
         /// a lookahead encoding scheme for Yaz
@@ -179,34 +174,34 @@ namespace mzxrules.Helper
 
             // if UseResult is set, it means that the previous position was determined by look-ahead try,
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
-            if (prev.UseResult == true)
+            if (prev.SkipByte == true)
             {
-                matchPos = prev.matchPos;
-                prev.matchPos = 0;
-                prev.UseResult = false;
+                matchPos = prev.MatchPos;
+                prev.MatchPos = 0;
+                prev.SkipByte = false;
                 return prev.Length;
             }
-            prev.UseResult = false;
-            numBytes = SimpleEnc(src, size, pos, ref prev.matchPos); 
-            matchPos = prev.matchPos;
+            prev.SkipByte = false;
+            numBytes = SimpleEnc(src, size, pos, ref prev.MatchPos); 
+            matchPos = prev.MatchPos;
 
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
             if (numBytes >= 3)
             {
-                prev.Length = SimpleEnc(src, size, pos + 1, ref prev.matchPos);
+                prev.Length = SimpleEnc(src, size, pos + 1, ref prev.MatchPos);
                 // if the next position encoding is +2 longer than current position, choose it.
                 // this does not guarantee the best optimization, but fairly good optimization with speed.
                 if (prev.Length >= numBytes + 2)
                 {
                     numBytes = 1;
-                    prev.UseResult = true;
+                    prev.SkipByte = true;
                 }
             }
             return numBytes;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static EncodeResult NintendoEnc(YazText src, int size, int pos)
+        static EncodeResult NintendoEnc(YazText src, int pos)
         {
             // if UseResult is set, it means that the previous position was determined by look-ahead try,
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
@@ -216,7 +211,7 @@ namespace mzxrules.Helper
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
             if (resultA.Length >= 3)
             {
-                EncodeResult resultB = src.MatchNext(pos + 1); //SimpleEnc(src, size, pos + 1, ref prev.matchPos);
+                EncodeResult resultB = src.MatchNext(pos + 1);
                 // if the next position encoding is +2 longer than current position, choose it.
                 // this does not guarantee the best optimization, but fairly good optimization with speed.
                 if (resultB.Length >= resultA.Length + 2)
@@ -312,10 +307,6 @@ namespace mzxrules.Helper
                 dstFile.WriteByte(curCodeByte);
                 dstFile.Write(dst, 0, dstPos);
                 dstSize += dstPos + 1;
-
-                curCodeByte = 0;
-                validBitCount = 0;
-                dstPos = 0;
             }
             return dstSize;
         }
@@ -344,9 +335,6 @@ namespace mzxrules.Helper
 
             int validBitCount = 0; //number of valid bits left in "code" byte
             byte curCode = 0;
-            
-
-            //SimpleEncodeResult prev = new SimpleEncodeResult();
 
             //Write Header
             byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
@@ -362,10 +350,8 @@ namespace mzxrules.Helper
             EncodeResult result = new EncodeResult();
             while (srcPos < srcSize)
             {
-                //int numBytes = NintendoEnc(src, srcSize, srcPos, ref matchPos, prev); //matchPos passed ref &matchpos
-
                 if (result.Length == 0)
-                    result = NintendoEnc(yazText, srcSize, srcPos);
+                    result = NintendoEnc(yazText, srcPos);
                 int numBytes;
                 if (result.SkipByte)
                 {
@@ -411,7 +397,7 @@ namespace mzxrules.Helper
                 //write eight codes
                 if (validBitCount == 8)
                 {
-                    bool success = FlushToDest(dstFile);//dstFile, ref dstPos, dst, ref dstSize, ref curCode);
+                    bool success = FlushToDest(dstFile);
                     if (!success)
                         return -1;
                     validBitCount = 0;
@@ -419,13 +405,13 @@ namespace mzxrules.Helper
             }
             if (validBitCount > 0)
             {
-                bool success = FlushToDest(dstFile);//dstFile, ref dstPos, dst, ref dstSize, ref curCode);
+                bool success = FlushToDest(dstFile);
                 if (!success)
                     return -1;
             }
             return Align.To16(dstSize);
 
-            bool FlushToDest(byte[] dFile)//byte[] dstFile, ref int dstPos, byte[] dst, ref int dstSize, ref byte curCode)
+            bool FlushToDest(byte[] dFile)
             {
                 int dstSizeNext = dstSize + dstPos + 1;
                 if (dstSizeNext > dFile.Length)
@@ -618,6 +604,14 @@ namespace mzxrules.Helper
         }
 
         sealed class EncodeResult
+        {
+            public int MatchPos;
+            public int Length;
+            public bool SkipByte;
+        }
+
+        class SimpleEncodeResult 
+            //Todo: Replace with EncodeResult when rewriting with .net core 3.0 optimizations
         {
             public int MatchPos;
             public int Length;
