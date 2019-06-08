@@ -93,5 +93,16 @@ namespace mzxrules.Helper
         {
             return ((uint)value).CompareTo((uint)other.value);
         }
+
+        public bool IsNull()
+        {
+            return value == 0;
+        }
+
+        public bool IsInRDRAM()
+        {
+            uint value = (uint)(this.value & 0x7FFF_FFFF);
+            return !IsNull() && value < 0x80_0000;
+        }
     }
 }
