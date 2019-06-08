@@ -709,7 +709,9 @@ namespace Spectrum
         
         [SpectrumCommand(
             Name = "beta_v",
-            Description = "sets version")]
+            Description = "sets version",
+            Cat = SpectrumCommand.Category.Proto,
+            Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.LITERAL })]
         private static void SetBetaQuestVersion(Arguments args)
@@ -723,13 +725,20 @@ namespace Spectrum
             if (Enum.TryParse(ver, out BetaQuest.Ver result))
             {
                 BetaQuest.Version = result;
+                Console.WriteLine("Version updated.");
+            }
+            else
+            {
+                Console.WriteLine("1.0 or 1.6 supported");
             }
         }
 
 
         [SpectrumCommand(
             Name = "beta_s",
-            Description = "Checks for repeats in beta quest shuffle group")]
+            Description = "Checks for repeats in beta quest shuffle group",
+            Cat = SpectrumCommand.Category.Proto,
+            Sup = SpectrumCommand.Supported.OoT)]
         private static void TestBetaQuestShuffleData(Arguments args)
         {
             if (Options.Version != ORom.Build.N0)
@@ -765,7 +774,9 @@ namespace Spectrum
 
         [SpectrumCommand(
             Name = "beta_ent",
-            Description = "Locates Beta Quest entrance")]
+            Description = "Locates Beta Quest entrance",
+            Cat = SpectrumCommand.Category.Proto,
+            Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.HEX_S16 })]
         private static void LocateBetaQuestEntrance(Arguments args)
