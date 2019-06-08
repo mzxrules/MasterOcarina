@@ -4,7 +4,7 @@ using mzxrules.Helper;
 namespace Spectrum
 {
 
-    class CollisionActor
+    class BgActor
     {
         class Moment
         {
@@ -36,7 +36,7 @@ namespace Spectrum
         Moment First;  //0x14
         Moment Second; //0x34
 
-        public CollisionActor(Ptr pointer)
+        public BgActor(Ptr pointer)
         {
             Address = (int)pointer;
             ActorInstance = pointer.ReadInt32(0);

@@ -64,7 +64,7 @@ namespace Spectrum
                 Other = 3
             }
 
-            public Record(CollisionActor actor, IFile file, RomVersion version)
+            public Record(BgActor actor, IFile file, RomVersion version)
             {
                 Initialize();
                 int ramStart = 0;
@@ -120,7 +120,7 @@ namespace Spectrum
             }
         }
 
-        public void AddNewRecord(CollisionActor actor, IFile obj, RomVersion version)
+        public void AddNewRecord(BgActor actor, IFile obj, RomVersion version)
         {
             try
             {

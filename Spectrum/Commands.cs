@@ -1713,7 +1713,7 @@ namespace Spectrum
                 for (int i = 0; i < 50; i++)
                 {
                     var ptr = GetColCtxPtr().RelOff(0x54 + (0x64 * i));
-                    CollisionActor actor = new CollisionActor(ptr);
+                    BgActor actor = new BgActor(ptr);
                     if (actor.ActorInstance != 0)
                     {
                         IFile obj = GetIFile(actor.MeshPtr);

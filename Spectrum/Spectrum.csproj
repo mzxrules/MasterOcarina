@@ -63,11 +63,19 @@
     <Compile Include="BuildTime.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="datastruct\CollisionBody.cs" />
+    <Compile Include="datastruct\collision_check\ColliderBody.cs" />
+    <Compile Include="datastruct\collision_check\ColliderBump.cs" />
+    <Compile Include="datastruct\collision_check\ColliderCylinders.cs" />
+    <Compile Include="datastruct\collision_check\ColliderQuad.cs" />
+    <Compile Include="datastruct\collision_check\ColliderTouch.cs" />
+    <Compile Include="datastruct\collision_check\ColliderTris.cs" />
+    <Compile Include="datastruct\collision_check\ColliderCylinder.cs" />
     <Compile Include="datastruct\CollisionCtx.cs" />
-    <Compile Include="datastruct\CollisionMesh.cs" />
-    <Compile Include="datastruct\CollisionPolyType.cs" />
-    <Compile Include="datastruct\CollisionVertex.cs" />
+    <Compile Include="datastruct\bgcheck\BgMesh.cs" />
+    <Compile Include="datastruct\bgcheck\BgPolyType.cs" />
+    <Compile Include="datastruct\bgcheck\BgVertex.cs" />
+    <Compile Include="datastruct\collision_check\Collider.cs" />
+    <Compile Include="datastruct\collision_check\CollisionShape.cs" />
     <Compile Include="datastruct\GfxDList.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="mem\EmulatorProcess.cs" />
@@ -110,7 +118,7 @@
     <Compile Include="Spawn.cs" />
     <Compile Include="SpectrumOptions.cs" />
     <Compile Include="mem\Zpr.cs" />
-    <Compile Include="datastruct\CollisionActor.cs" />
+    <Compile Include="datastruct\bgcheck\BgActor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
