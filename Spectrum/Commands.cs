@@ -57,7 +57,7 @@ namespace Spectrum
         private static void Help()
         {
             var commandNotes = new List<(SpectrumCommand.Category cat, string Id, string Support, string Description, string args, bool hide)>();
-            
+
             foreach (var (attr, args, method) in CommandDictionary.Values)
             {
                 int l = 0;
@@ -124,7 +124,7 @@ namespace Spectrum
             }
 
         }
-        
+
         #endregion
 
         #region Spectrum
@@ -184,11 +184,11 @@ namespace Spectrum
                     ChangeVersion(v);
             }
         }
-        
+
         [SpectrumCommand(
             Name = "trainer",
             Cat = SpectrumCommand.Category.Spectrum,
-            Description = "Runs a trainer script for configuring an emulator" )]
+            Description = "Runs a trainer script for configuring an emulator")]
         private static void MupenTrainer(Arguments args)
         {
             Console.WriteLine("Launch a mupen64plus or pj64 based emulator, and open Ocarina of Time V1.0.");
@@ -500,7 +500,7 @@ namespace Spectrum
             SaveSettings();
         }
 
-#endregion
+        #endregion
 
         #region Actor
         [SpectrumCommand(
@@ -602,7 +602,7 @@ namespace Spectrum
         {
             if (!TryEvaluate((string)args[0], out long addr))
                 return;
-            
+
             addr |= 0x80000000;
             N64Ptr address = addr;
 
@@ -618,7 +618,7 @@ namespace Spectrum
             SetActorCoordinates(ptr, a.x, a.y, a.z);
         }
 
-#endregion
+        #endregion
 
         #region Ram
         [SpectrumCommand(
@@ -716,7 +716,7 @@ namespace Spectrum
         {
             Ptr p = SPtr.New(a);
             string[] v = new string[8];
-            
+
             for (int i = 0; i < 8; i++)
             {
                 ushort value = p.ReadUInt16(i * 2);
@@ -781,10 +781,12 @@ namespace Spectrum
             N64Ptr addr = inAddr;
 
             //if virtual address
-            if (inAddr.Offset>= 0x800000)
+            if (inAddr.Offset >= 0x800000)
             {
                 vItems = from x in GetRamMap(true).OfType<IVRamItem>()
-                         where (x.VRam.Start & 0xFFFFFF) <= inAddr.Offset                         && (x.VRam.End & 0xFFFFFF) > inAddr.Offset                         select x;
+                         where (x.VRam.Start & 0xFFFFFF) <= inAddr.Offset
+                            && (x.VRam.End & 0xFFFFFF) > inAddr.Offset
+                         select x;
                 items = vItems.Cast<IRamItem>();
                 var temp = vItems.ToList();
                 if (temp.Count == 0)
@@ -808,14 +810,14 @@ namespace Spectrum
             {
                 Console.WriteLine($"{addr:X8}:");
                 items = from x in GetRamMap(true)
-                        where (x.Ram.Start & 0xFFFFFF) <= addr.Offset                        && (x.Ram.End & 0xFFFFFF) > addr.Offset                        select x;
+                        where (x.Ram.Start & 0xFFFFFF) <= addr.Offset && (x.Ram.End & 0xFFFFFF) > addr.Offset select x;
             }
 
             //var debug = items.ToArray();
             foreach (var item in items)
             {
                 Console.WriteLine(item.ToString());
-                int offset = addr.Offset- item.Ram.Start.Offset;
+                int offset = addr.Offset - item.Ram.Start.Offset;
                 string line = $"Start {(int)item.Ram.Start:X8} Off: {offset:X6} ";
 
                 if (item is IFile iFile)
@@ -1157,7 +1159,7 @@ namespace Spectrum
             SetActorCoordinates(linkInstance, a.x, a.y, a.z);
         }
 
-#endregion
+        #endregion
 
         #region Graphics
         [SpectrumCommand(
@@ -1170,7 +1172,7 @@ namespace Spectrum
 
             if (Gfx != 0)
             {
-                dlists= GetFrameDlists(Gfx);
+                dlists = GetFrameDlists(Gfx);
             }
             Console.Clear();
             PrintGraphicsContext(dlists);
@@ -1521,7 +1523,7 @@ namespace Spectrum
             PrintGraphicsContext(frameDlist);
             Console.WriteLine();
 
-            (GfxDList ds, GfxDList de, int startDelta, int endDelta)[] result = new(GfxDList, GfxDList, int, int)[frameDlist.Length];
+            (GfxDList ds, GfxDList de, int startDelta, int endDelta)[] result = new (GfxDList, GfxDList, int, int)[frameDlist.Length];
             for (int i = 0; i < frameDlist.Length; i++)
             {
                 result[i] =
@@ -1599,7 +1601,8 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "gbibinload",
             Cat = SpectrumCommand.Category.Gbi_bin,
-            Description = "Restores gbi buffer for frame from file 'dump/frame.bin'")]
+            Description = "Restores gbi buffer for frame from file 'dump/frame.bin'",
+            Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.S8 },
             Help = "{0} = -1, 0, 1")]
@@ -1610,7 +1613,9 @@ namespace Spectrum
             N64Ptr frameContextPtr1 = 0x8016A648;
             N64Ptr frameContextPtr2 = 0x8017CA58;
 
-            var (buffer0, buffer1) = Constants.GetFramebuffers(Options.Version);
+            var ptrs = Constants.GetFramebufferPointers(Options.Version);
+            int buffer0 = ptrs[0];
+            int buffer1 = ptrs[1];
 
             // Constants.  
             N64Ptr frameBufferPtr1 = buffer0; //0x803B5000;
@@ -1671,7 +1676,7 @@ namespace Spectrum
 
         }
 
-#endregion
+        #endregion
 
         #region Collision
 
@@ -1745,7 +1750,7 @@ namespace Spectrum
             Ptr colPtr = GlobalContext.RelOff(colaOffset);
             var pools = GetActorCollisionPools(colPtr);
             Console.Clear();
-            foreach(var (desc, shapes) in pools)
+            foreach (var (desc, shapes) in pools)
             {
                 Console.WriteLine(desc);
                 foreach (var shape in shapes)
@@ -1909,7 +1914,7 @@ namespace Spectrum
                     int depthLimit = 1000;
                     short topLinkId = colsecPtr.ReadInt16(off);
                     short linkId = topLinkId;
-                    
+
                     while (depthLimit > 0 && linkId != -1)
                     {
                         depthLimit--;
@@ -1960,12 +1965,12 @@ namespace Spectrum
                 (int)xyz.y,
                 (int)xyz.z
             };
-            
+
 
             CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
             if (!ctx.ColSecInBounds(colsec))
                 return;
-            
+
             string[] type = new string[3]
             {
                 "Floor",
@@ -2076,7 +2081,7 @@ namespace Spectrum
             Cat = SpectrumCommand.Category.Collision,
             Description = "Prints Actor's Poly Collision info")]
         [SpectrumCommandSignature(
-            Sig = new Tokens[] { Tokens.EXPRESSION_S } )]
+            Sig = new Tokens[] { Tokens.EXPRESSION_S })]
         private static void GetActorPolyInfo(Arguments args)
         {
             if (!TryEvaluate((string)args[0], out long addr))
@@ -2090,7 +2095,7 @@ namespace Spectrum
             byte wallPolySource = actor.ReadByte(0x7C);
             byte floorPolySource = actor.ReadByte(0x7D);
 
-            var list = new(string, N64Ptr, byte)[] 
+            var list = new (string, N64Ptr, byte)[]
             {
                 ("Wall", wallPoly, wallPolySource),
                 ("Floor", floorPoly, floorPolySource)
@@ -2110,7 +2115,7 @@ namespace Spectrum
             }
         }
 
-#endregion
+        #endregion
 
         #region Conversion
 
@@ -2167,7 +2172,7 @@ namespace Spectrum
             Console.WriteLine(args[0]);
         }
 
-#endregion
+        #endregion
 
         #region Write
         [SpectrumCommand(
@@ -2211,7 +2216,7 @@ namespace Spectrum
         {
             WriteRam((string)args[0], (float)args[1]);
         }
-#endregion
+        #endregion
 
         [SpectrumCommand(
             Name = "age",
@@ -2244,7 +2249,7 @@ namespace Spectrum
             Sup = SpectrumCommand.Supported.OoT,
             Description = "Sets event flag state")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.U8, Tokens.HEX_S16, Tokens.U8 },
-            Help = 
+            Help =
             "{0} = Value to write (0 or 1);" +
             "{1} = flag address, relative to the start of the Save Context;" +
             "{2} = number of the bit to flip (0-7)")]
@@ -2315,7 +2320,7 @@ namespace Spectrum
             Console.Clear();
             thread.PrintState();
         }
-        
+
         private static void ViewThreads(Arguments args)
         {
             Console.Clear();
@@ -2354,15 +2359,64 @@ namespace Spectrum
             Description = "View framebuffer in console window live")]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { },
-            Help = "When command is running, press down to advance to the next framebuffer")]
+            Help = "When command is running, press up and down to flip between buffers")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.EXPRESSION_S },
+            Help = "{0} = address to view")]
         private static void ViewFrameBuffer(Arguments args)
         {
-            var (buffer0, buffer1) = Constants.GetFramebuffers(Options.Version);
-            ShitBit.ViewFrameBuffer(buffer0);
-            ShitBit.ViewFrameBuffer(buffer1);
-            Console.Clear();
+            if (args.Length == 0)
+            {
+                var ptrs = Constants.GetFramebufferPointers(Options.Version);
+                int index = 0;
+                while (index < ptrs.Count)
+                {
+                    var key = FramebufferUtil.ViewFrameBuffer(ptrs[index]);
+
+                    switch (key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            index = Math.Max(index - 1, 0); break;
+                        case ConsoleKey.DownArrow:
+                            index++; break;
+                        default:
+                            index = ptrs.Count; break;
+                    }
+                }
+                Console.Clear();
+                Console.WriteLine("Done");
+            }
+            else
+            {
+                if (!TryEvaluate((string)args[0], out long address))
+                    return;
+
+                FramebufferUtil.ViewFrameBuffer((int)address);
+                Console.Clear();
+                Console.WriteLine("Done");
+            }
+        }
+
+
+        [SpectrumCommand(
+            Name = "viewram",
+            Cat = SpectrumCommand.Category.Framebuffer,
+            Description = "View rdram as a RBG5A1 320x240 texture in console window live")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { },
+            Help = "When command is running, press down to advance to the next framebuffer")]
+        private static void ViewRdram(Arguments args)
+        {
+            for (int address = 0; address < GetRamSize(); address += 0x25800)
+            {
+                FramebufferUtil.ViewFrameBuffer(address);
+                Console.Clear();
+            }
             Console.WriteLine("Done");
         }
+
+
+
 
         [SpectrumCommand(
             Name = "framepng",
@@ -2370,10 +2424,12 @@ namespace Spectrum
             Description = "Dumps framebuffer to .png")]
         private static void GetFrameBufferPng(Arguments args)
         {
-            var (buffer0, buffer1) = Constants.GetFramebuffers(Options.Version);
-            ShitBit.ViewFrameBuffer(buffer0);
-            ShitBit.ViewFrameBuffer(buffer1);
+            throw new NotImplementedException();
 
+            foreach (var ptr in Constants.GetFramebufferPointers(Options.Version))
+            {
+                FramebufferUtil.ViewFrameBuffer(ptr);
+            }
         }
         #endregion
 

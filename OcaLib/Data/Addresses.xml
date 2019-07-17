@@ -811,7 +811,7 @@
       <Identifier id="QUEUE_THREAD">
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0"></Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">80098D80</Data>
           <Data ver="U0">80097E10</Data>
           <Data ver="P0"></Data>
           <Data ver="P1"></Data>

@@ -1,31 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using mzxrules.Helper;
-using System.Collections.Concurrent;
 using System.Threading;
 
 namespace Spectrum
 {
-    static class ShitBit
+    static class FramebufferUtil
     {
         const int BUFFER_SIZE = 320 * 240 * 2;
 
-        public static void SaveFrameBufferBitmap(int frameBuffer)
+        public static void SaveFrameBufferBitmap(N64Ptr frameBuffer)
         {
             Bitmap frame = GetFrameBufferBitmap(frameBuffer);
             frame.Save($"dump/frame{frameBuffer:X6}.png", System.Drawing.Imaging.ImageFormat.Png);
         }
         
 
-        static Bitmap GetFrameBufferBitmap(int frameBuffer)
+        static Bitmap GetFrameBufferBitmap(N64Ptr framebuffer)
         {
-            byte[] pixelData = Zpr.ReadRam(frameBuffer, BUFFER_SIZE);
-            //pixelData.Reverse32();
-            frameBuffer &= 0xFFFFFF;
+            byte[] pixelData = Zpr.ReadRam(framebuffer, BUFFER_SIZE);
             return DrawRGB5A1(pixelData, 320, 240);
         }
 
@@ -49,70 +43,56 @@ namespace Spectrum
             return image;
         }
 
-        public static void ViewFrameBuffer(int addr)
+        public static ConsoleKey ViewFrameBuffer(N64Ptr addr)
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            Console.Write($"{addr:X8}");
+            Console.Write($"{addr}");
             
-            Point location = new Point(0, 2);
+            var cancellationTokenSource = new CancellationTokenSource();
 
-            Size fontSize = NativeMethods.GetConsoleFontSize();
-            //Size imageSize = new Size(320*2/fontSize.Width, 240*2/fontSize.Height); // desired image size in characters
-            Size imageSize = new Size(320 * 2, 240 * 2);
-
-            var tokenSource = new CancellationTokenSource();
-            Task task;
-            
-
-            //Console.SetCursorPosition(0, imageSize.Height);
-
-            //// draw some placeholders
-            //Console.SetCursorPosition(location.X - 1, location.Y);
-            //Console.Write(">");
-            //Console.SetCursorPosition(location.X + imageSize.Width, location.Y);
-            //Console.Write("<");
-            //Console.SetCursorPosition(location.X - 1, location.Y + imageSize.Height - 1);
-            //Console.Write(">");
-            //Console.SetCursorPosition(location.X + imageSize.Width, location.Y + imageSize.Height - 1);
-            //Console.WriteLine("<");
-
-            //string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures), @"Sample Pictures\tulips.jpg");
-
-            task = Task.Factory.StartNew(() =>
+            void _draw_loop()
             {
-                while (!tokenSource.IsCancellationRequested)
+                Point location = new Point(0, 2);
+
+                Size fontSize = NativeMethods.GetConsoleFontSize();
+                Size imageSize = new Size(320 * 2, 240 * 2); // desired image size
+
+                while (!cancellationTokenSource.IsCancellationRequested)
                 {
                     Thread.Sleep(100);
                     using (Graphics g = Graphics.FromHwnd(NativeMethods.GetConsoleWindow()))
                     {
-                        Image image = GetFrameBufferBitmap(addr); //bitmap;
-                        //using (Image image = bitmap)//Image.FromFile(path))
-                        {
-                            // translating the character positions to pixels
-                            Rectangle imageRect = new Rectangle(
+                        Image image = GetFrameBufferBitmap(addr); 
+
+                        // translating the character positions to pixels
+                        Rectangle imageRect = new Rectangle(
                                 location.X * fontSize.Width,
                                 location.Y * fontSize.Height,
-                                imageSize.Width, //* fontSize.Width,
-                                imageSize.Height);// * fontSize.Height);
-                            g.DrawImage(image, imageRect);
-                        }
+                                imageSize.Width,
+                                imageSize.Height);
+                        g.DrawImage(image, imageRect);
                     }
                 }
-            }, tokenSource.Token);
+            }
 
-            ConsoleKey key = ConsoleKey.Q;
+            Task task = Task.Factory.StartNew(_draw_loop, cancellationTokenSource.Token);
 
-            while (key != ConsoleKey.DownArrow)
+            ConsoleKey key;
+            do
             {
                 key = Console.ReadKey().Key;
             }
+            while (!(key == ConsoleKey.DownArrow
+                    || key == ConsoleKey.UpArrow));
 
-            tokenSource.Cancel();
+            cancellationTokenSource.Cancel();
 
 
             try
-            { Task.WaitAll(task); }
+            {
+                Task.WaitAll(task);
+            }
             catch (AggregateException e)
             {
                 Console.WriteLine("\nAggregateException thrown with the following inner exceptions:");
@@ -129,9 +109,9 @@ namespace Spectrum
             }
             finally
             {
-                tokenSource.Dispose();
+                cancellationTokenSource.Dispose();
             }
-
+            return key;
         }
     }
 }
