@@ -3,7 +3,6 @@
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace mzxrules.Helper
 {
@@ -170,8 +169,6 @@ namespace mzxrules.Helper
         /// <returns></returns>
         static int NintendoEnc(byte[] src, int size, int pos, ref int matchPos, SimpleEncodeResult prev)
         {
-            int numBytes = 1;
-
             // if UseResult is set, it means that the previous position was determined by look-ahead try,
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
             if (prev.SkipByte == true)
@@ -182,7 +179,7 @@ namespace mzxrules.Helper
                 return prev.Length;
             }
             prev.SkipByte = false;
-            numBytes = SimpleEnc(src, size, pos, ref prev.MatchPos); 
+            int numBytes = SimpleEnc(src, size, pos, ref prev.MatchPos);
             matchPos = prev.MatchPos;
 
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
