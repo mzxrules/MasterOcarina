@@ -1735,20 +1735,29 @@ namespace Spectrum
             Name = "cola",
             Cat = SpectrumCommand.Category.Collision,
             Description = "Gets 'simple body' collision data")]
-        private static void GetActorBodyCollision(Arguments args)
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { },
+            Help = "Print hitbox list")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.EXPRESSION_S },
+            Help = "{0} = Collision Body")]
+        private static void CommandCola(Arguments args)
         {
-            int colaOffset;
-
-            if (Options.Version.Game == Game.OcarinaOfTime)
-                colaOffset = 0x11E60;
-            else if (Options.Version == MRom.Build.J0
-                || Options.Version == MRom.Build.J1)
-                colaOffset = 0x18864;
+            if (args.Length == 0)
+            {
+                GetActorBodyCollisionLists();
+            }
             else
-                colaOffset = 0x18884;
+            {
+                if (!TryEvaluate((string)args[0], out long addr))
+                    return;
 
-            Ptr colPtr = GlobalContext.RelOff(colaOffset);
-            var pools = GetActorCollisionPools(colPtr);
+                Console.WriteLine(CollisionShape.Initialize(SPtr.New(addr)));
+            }
+        }
+        private static void GetActorBodyCollisionLists()
+        {
+            var pools = GetActorCollisionPools();
             Console.Clear();
             foreach (var (desc, shapes) in pools)
             {
@@ -1761,9 +1770,21 @@ namespace Spectrum
             }
         }
 
-        private static List<(string description, List<CollisionShape>)> GetActorCollisionPools(Ptr colPtr)
+        private static List<(string description, List<CollisionShape>)> GetActorCollisionPools()
         {
             var result = new List<(string, List<CollisionShape>)>();
+
+            int colaOffset;
+
+            if (Options.Version.Game == Game.OcarinaOfTime)
+                colaOffset = 0x11E60;
+            else if (Options.Version == MRom.Build.J0
+                || Options.Version == MRom.Build.J1)
+                colaOffset = 0x18864;
+            else
+                colaOffset = 0x18884;
+
+            Ptr colPtr = GlobalContext.RelOff(colaOffset);
 
             //get AT collection
             short colAtCount = colPtr.ReadInt16(0);

@@ -22,7 +22,7 @@ namespace Spectrum
                 int loop = Math.Min(count, 0x40); //prevent malformed data hanging program
                 for (int i = 0; i < loop; i++)
                 {
-                    items.Add(new ColliderCylinderElement(ptr.RelOff(i * 0x5C)));
+                    items.Add(new ColliderCylinderElement(ptr.RelOff(i * 0x40)));
                 }
             }
         }
