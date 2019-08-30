@@ -167,11 +167,10 @@ namespace Spectrum
             fp18 = new __OSfp(ptr.RelOff(0x158));
             fp20 = new __OSfp(ptr.RelOff(0x160));
             fp22 = new __OSfp(ptr.RelOff(0x168));
-            fp22 = new __OSfp(ptr.RelOff(0x170));
-            fp24 = new __OSfp(ptr.RelOff(0x178));
-            fp26 = new __OSfp(ptr.RelOff(0x180));
-            fp28 = new __OSfp(ptr.RelOff(0x188));
-            fp30 = new __OSfp(ptr.RelOff(0x190));
+            fp24 = new __OSfp(ptr.RelOff(0x170));
+            fp26 = new __OSfp(ptr.RelOff(0x178));
+            fp28 = new __OSfp(ptr.RelOff(0x180));
+            fp30 = new __OSfp(ptr.RelOff(0x188));
         }
 
         public class __OSfp
