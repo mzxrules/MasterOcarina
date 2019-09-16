@@ -1,10 +1,10 @@
-Actor Table
-|
+name = Actor Table;
+game = oot;
 build = n0, 		DBGMQ,		MQP;
 start = 0xB5E490, 	0xB8D440,	0xB5C480;
 loop = 0x1D7;
 i=0;
-format = csv, wiki;
+format = tsv, wiki;
 |
 index:X4,	u32:X8, u32:X8, u32:X8, u32:X8,
 			go 4, u32:X8, go 4, go 4

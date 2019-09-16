@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,14 @@ namespace Z64Tables
 {
     class ParserSettings
     {
-        public static List<ParserTask> GetParserTasks(string[] settings)
+        public static List<ParserTask> GetParserTasks(IEnumerable<string> settings)
         {
-            List<SettingsToken> settingsTokens;
-            List<ParserTask> parserTasks;
-
-            settingsTokens = GenerateSettingsTokens(settings);
-            parserTasks = GetParserTasks(settingsTokens);
+            List<SettingsToken> settingsTokens = GenerateSettingsTokens(settings);
+            List<ParserTask> parserTasks = GetParserTasks(settingsTokens);
             return parserTasks;
         }
 
-        private static List<SettingsToken> GenerateSettingsTokens(string[] settings)
+        private static List<SettingsToken> GenerateSettingsTokens(IEnumerable<string> settings)
         {
             List<SettingsToken> tokens = new List<SettingsToken>();
 
@@ -25,18 +23,16 @@ namespace Z64Tables
             {
                 var spl = setting.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim()).ToArray();
-                SettingsTokensEnum token;
                 var settingId = spl[0].ToLower();
-                if (Enum.TryParse(settingId, out token))
+                if (!Enum.TryParse(settingId, out SettingsTokens token))
                 {
-                    tokens.Add(new SettingsToken(token, (spl.Length == 1) ? "" : spl[1]));
+                    if (settingId == "i")
+                        token = SettingsTokens.iterator;
+                    else
+                        throw new InvalidOperationException($"Invalid setting option: {spl[0]}");
                 }
-                else if (settingId == "i")
-                {
-                    tokens.Add(new SettingsToken(SettingsTokensEnum.iterator, (spl.Length == 1) ? "" : spl[1]));
-                }
-                else
-                    throw new InvalidOperationException(string.Format("Invalid setting option: {0}", spl[0]));
+
+                tokens.Add(new SettingsToken(token, (spl.Length == 1) ? "" : spl[1]));
             }
 
             return tokens;
@@ -45,30 +41,33 @@ namespace Z64Tables
         private static List<ParserTask> GetParserTasks(List<SettingsToken> settings)
         {
             List<ParserTask> tasks = new List<ParserTask>();
-            List<string> builds = (List<string>)Get(settings, SettingsTokensEnum.build);
+            List<string> builds = (List<string>)Get(settings, SettingsTokens.build);
             List<FormatTypesEnum> outputFormats =
-                (List<FormatTypesEnum>)Get(settings, SettingsTokensEnum.format);
+                (List<FormatTypesEnum>)Get(settings, SettingsTokens.format);
 
-            int i = -1;
-            foreach (var build in builds)
+            for (int i = 0; i < builds.Count; i++) 
             {
-                i++;
+                var build = builds[i];
                 foreach (var format in outputFormats)
                 {
-                    ParserTask task = new ParserTask();
-                    task.FileLocationToken = build;
-                    task.Format = format;
-                    task.StartAddress = (long)GetSingle(settings, SettingsTokensEnum.start, i);
-                    task.LoopFor = (long)GetSingle(settings, SettingsTokensEnum.loop, i);
-                    task.Inc = (long)GetSingle(settings, SettingsTokensEnum.inc, i);
-                    task.Index = (long)GetSingle(settings, SettingsTokensEnum.iterator, i);
+                    var game = (string)GetSingle(settings, SettingsTokens.game, i);
+                    ParserTask task = new ParserTask
+                    {
+                        Name = (string)GetSingle(settings, SettingsTokens.name, i),
+                        Version = new RomVersion(game, build),
+                        Format = format,
+                        StartAddress = (long)GetSingle(settings, SettingsTokens.start, i),
+                        LoopFor = (long)GetSingle(settings, SettingsTokens.loop, i),
+                        Inc = (long)GetSingle(settings, SettingsTokens.inc, i),
+                        Index = (long)GetSingle(settings, SettingsTokens.iterator, i)
+                    };
                     tasks.Add(task);
                 }
             }
             return tasks;
         }
 
-        private static object GetSingle(List<SettingsToken> settings, SettingsTokensEnum type, int i)
+        private static object GetSingle(List<SettingsToken> settings, SettingsTokens type, int i)
         {
             IList list = Get(settings, type);
             object result;
@@ -80,16 +79,16 @@ namespace Z64Tables
             return result;
         }
 
-        private static IList Get(List<SettingsToken> settings, SettingsTokensEnum t)
+        private static IList Get(List<SettingsToken> settings, SettingsTokens t)
         {
             var a = settings.SingleOrDefault(x => x.Type == t);
             if (a == null)
             {
                 switch (t)
                 {
-                    case SettingsTokensEnum.format: return new List<FormatTypesEnum>() { FormatTypesEnum.csv };
-                    case SettingsTokensEnum.iterator: return new List<long>() { 0L };
-                    case SettingsTokensEnum.inc: return new List<long>() { 1L };
+                    case SettingsTokens.format: return new List<FormatTypesEnum>() { FormatTypesEnum.tsv };
+                    case SettingsTokens.iterator: return new List<long>() { 0L };
+                    case SettingsTokens.inc: return new List<long>() { 1L };
                     default: return null;
                 }
             }

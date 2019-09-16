@@ -1,5 +1,5 @@
-Overlays A
-|
+name = Overlays A;
+game = oot;
 build = DBGMQ,		n0, 		MQP;
 start = 0xB969D0,	0xB672A0, 	0xB65290;
 loop = 6;

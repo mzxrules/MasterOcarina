@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace Z64Tables
 {
-    enum SettingsTokensEnum
+    enum SettingsTokens
     {
+        name,
+        game,
         format,
         iterator,
         inc,
@@ -26,45 +28,47 @@ namespace Z64Tables
 
     class SettingsToken
     {
-        public SettingsTokensEnum Type { get; set; }
+        public SettingsTokens Type { get; set; }
         public IList Data { get; set; }
 
-        public SettingsToken(SettingsTokensEnum t, string d)
+        public SettingsToken(SettingsTokens t, string d)
         {
             Type = t;
 
             switch (Type)
             {
-                case SettingsTokensEnum.build: Data = GetBuildData(d); break;
-                case SettingsTokensEnum.format: Data = GetOutputTypes(d); break;
-                case SettingsTokensEnum.start: goto case SettingsTokensEnum.loop;
-                case SettingsTokensEnum.end: goto case SettingsTokensEnum.loop;
-                case SettingsTokensEnum.size: goto case SettingsTokensEnum.loop;
-                case SettingsTokensEnum.loop: Data = GetNumericalData(d); break;
-                case SettingsTokensEnum.iterator: goto case SettingsTokensEnum.loop;
-                case SettingsTokensEnum.inc: goto case SettingsTokensEnum.loop;
+                case SettingsTokens.name: Data = GetName(d); break;
+                case SettingsTokens.game: Data = GetName(d); break;
+                case SettingsTokens.build: Data = GetBuildData(d); break;
+                case SettingsTokens.format: Data = GetOutputTypes(d); break;
+                case SettingsTokens.start: goto case SettingsTokens.loop;
+                case SettingsTokens.end: goto case SettingsTokens.loop;
+                case SettingsTokens.size: goto case SettingsTokens.loop;
+                case SettingsTokens.loop: Data = GetNumericalData(d); break;
+                case SettingsTokens.iterator: goto case SettingsTokens.loop;
+                case SettingsTokens.inc: goto case SettingsTokens.loop;
                 default:
                     Data = null; break;
             }
         }
 
+        private List<string> GetName(string s)
+        {
+            return SplitArguments(s).ToList();
+        }
+
         private static List<FormatTypesEnum> GetOutputTypes(string s)
         {
-            string[] stringItems;
             List<FormatTypesEnum> resultItems = new List<FormatTypesEnum>();
 
-            stringItems = s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim().ToLower()).ToArray();
-
-            foreach (string d in stringItems)
+            foreach (string d in SplitArguments(s))
             {
-                FormatTypesEnum outputType;
-                if (Enum.TryParse(d, out outputType))
+                if (Enum.TryParse(d.ToLower(), out FormatTypesEnum outputType))
                 {
                     resultItems.Add(outputType);
                 }
                 else
-                    throw new InvalidOperationException(string.Format("Invalid output code: {0}", s));
+                    throw new InvalidOperationException($"Invalid output code: {s}");
             }
             return resultItems;
         }
@@ -72,57 +76,25 @@ namespace Z64Tables
 
         private static List<string> GetBuildData(string s)
         {
-            List<string> stringItems;
-
-
-            stringItems = s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim().ToUpper()).ToList();
-
-            
-            return stringItems;
+            return SplitArguments(s).ToList();
         }
 
-        //private static List<RomVersion> GetBuildData(string s)
-        //{
-        //    string[] stringItems;
-        //    List<RomVersion> resultItems = new List<RomVersion>();
-
-        //    stringItems = s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-        //        .Select(x => x.Trim().ToUpper()).ToArray();
-
-        //    foreach (string d in stringItems)
-        //    {
-        //        ORom.Build ocarinaBuild;
-        //        MRom.Build maskBuild;
-        //        if (Enum.TryParse(d, out ocarinaBuild))
-        //        {
-        //            resultItems.Add(ocarinaBuild);
-        //        }
-        //        else if (Enum.TryParse(d, out maskBuild))
-        //        {
-        //            resultItems.Add(maskBuild);
-        //        }
-        //        else
-        //            throw new InvalidOperationException(string.Format("Invalid version code: {0}", s));
-        //    }
-        //    return resultItems;
-        //}
+        private static IEnumerable<string> SplitArguments(string s)
+        {
+            return s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => x.Trim());
+        }
 
         private static List<long> GetNumericalData(string s)
         {
-            string[] stringItems;
             List<long> resultItems = new List<long>();
 
-            stringItems = s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim()).ToArray();
-
-            foreach (string d in stringItems)
+            foreach (string d in SplitArguments(s))
             {
-                long i;
-                if (Program.TryParseNum(d, out i))
+                if (Program.TryParseNum(d, out long i))
                     resultItems.Add(i);
                 else
-                    throw new InvalidOperationException(string.Format("Failed Cast: {0}", s));
+                    throw new InvalidOperationException($"Failed Cast: {s}");
             }
             return resultItems;
         }

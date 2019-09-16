@@ -16,9 +16,9 @@ namespace Z64Tables
         go,
 
         //Standard captures
-        i8, u8,
-        i16, u16,
-        i32, u32,
+        s8, u8,
+        s16, u16,
+        s32, u32,
         i64, u64,
         f32,
 
@@ -41,9 +41,9 @@ namespace Z64Tables
         {
             get
             {
-                return (Type != OutputTokensEnum.align
+                return Type != OutputTokensEnum.align
                     && Type != OutputTokensEnum.back
-                    && Type != OutputTokensEnum.go);
+                    && Type != OutputTokensEnum.go;
             }
         }
         long Parameter;
@@ -70,15 +70,15 @@ namespace Z64Tables
                     br.BaseStream.Position += Parameter;
                     break;
                 //Standard Captures
-                case OutputTokensEnum.i8:
-                    return string.Format("{0:" + Format + "}", (br.ReadSByte()));
+                case OutputTokensEnum.s8:
+                    return string.Format("{0:" + Format + "}", br.ReadSByte());
                 case OutputTokensEnum.u8:
-                    return string.Format("{0:" + Format + "}", (br.ReadByte()));
-                case OutputTokensEnum.i16:
+                    return string.Format("{0:" + Format + "}", br.ReadByte());
+                case OutputTokensEnum.s16:
                     return string.Format("{0:" + Format + "}", br.ReadBigInt16());
                 case OutputTokensEnum.u16:
                     return string.Format("{0:" + Format + "}", br.ReadBigUInt16());
-                case OutputTokensEnum.i32:
+                case OutputTokensEnum.s32:
                     return string.Format("{0:" + Format + "}", br.ReadBigInt32());
                 case OutputTokensEnum.u32:
                     return string.Format("{0:" + Format + "}", br.ReadBigUInt32());
@@ -87,27 +87,27 @@ namespace Z64Tables
                 case OutputTokensEnum.c8:
                     result = CaptureShift(br.ReadByte());
                     br.BaseStream.Position -= 1;
-                    return string.Format("{0:" + Format + "}", (UInt16)result);
+                    return string.Format("{0:" + Format + "}", (ushort)result);
                 case OutputTokensEnum.sc8:
                     result = CaptureShift(br.ReadByte());
                     br.BaseStream.Position -= 1;
-                    return string.Format("{0:" + Format + "}", (UInt16)result);
+                    return string.Format("{0:" + Format + "}", (ushort)result);
                 case OutputTokensEnum.c16:
                     result = CaptureShift(br.ReadBigUInt16());
                     br.BaseStream.Position -= 2;
-                    return string.Format("{0:" + Format + "}", (UInt16)result);
+                    return string.Format("{0:" + Format + "}", (ushort)result);
                 case OutputTokensEnum.sc16:
                     result = CaptureShift(br.ReadBigUInt16());
                     br.BaseStream.Position -= 2;
-                    return string.Format("{0:" + Format + "}", (UInt16)result);
+                    return string.Format("{0:" + Format + "}", (ushort)result);
                 case OutputTokensEnum.c32:
                     result = CaptureShift(br.ReadBigUInt32());
                     br.BaseStream.Position -= 4;
-                    return string.Format("{0:" + Format + "}", (UInt32)result);
+                    return string.Format("{0:" + Format + "}", (uint)result);
                 case OutputTokensEnum.sc32:
                     result = CaptureShift(br.ReadBigUInt32());
                     br.BaseStream.Position -= 4;
-                    return string.Format("{0:" + Format + "}", (UInt32)result);
+                    return string.Format("{0:" + Format + "}", (uint)result);
                 case OutputTokensEnum.index:
                     return string.Format("{0:" + Format + "}", v.Index);
             }

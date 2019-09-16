@@ -1,0 +1,14 @@
+name = Audio Settings;
+game = oot;
+build =	n0;
+start = 0xB7A6D8;
+loop = 0x12;
+i=0x80104778;
+inc=0x38;
+format = tsv, wiki;
+|
+index:X2, 
+	s32:X8,  u8:X2, u8:X2, u8:X2, u8:X2,  u32:X8, u32:X8, 
+	u16:X4, u16:X4,  u32:X8,  s32:X8, s32:X8, 
+	s32:X8, s32:X8, s32:X8, s32:X8, 
+	u32:X8, u32:X8

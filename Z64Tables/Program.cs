@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using mzxrules.OcaLib.PathUtil;
 
 namespace Z64Tables
 {
@@ -11,23 +12,23 @@ namespace Z64Tables
     {
         static void Main(string[] args)
         {
+            PathUtil.Initialize();
             string readline;
             readline = Console.ReadLine();
             while (readline.Trim() != string.Empty)
             {
                 try
                 {
-                    List<ParserTask> tasks;
-                    List<OutputToken> output;
-
                     string fileIn = "../../scripts/" + readline;
 
-
                     ParseResult result;
+                    string script = "";
                     using (StreamReader sr = new StreamReader(fileIn))
                     {
-                        result = ParseScript(sr, out tasks, out output); // out sbOut, out fileOut);
+                        script = sr.ReadToEnd();
                     }
+                    result = ParseScript(script, out List<ParserTask> tasks, out List<OutputToken> output);
+
                     if (result == ParseResult.Success)
                     {
                         WriteTasks(tasks, output);
@@ -47,10 +48,9 @@ namespace Z64Tables
         {
             foreach (var task in tasks)
             {
-                string romLoc;
-                if (!RomLocation.TryGetRomLocation(task.FileLocationToken, out romLoc))
+                if (!PathUtil.TryGetRomLocation(task.Version, out string romLoc))
                 {
-                    Console.WriteLine(string.Format("Can't find {0} rom", task.FileLocationToken));
+                    Console.WriteLine($"Can't find {task.Version} rom");
                     continue;
                 }
 
@@ -61,7 +61,7 @@ namespace Z64Tables
                     case FormatTypesEnum.tsv: WriteCsvTask(task, output, WriteTsvRow); break;
                     case FormatTypesEnum.wiki: WriteCsvTask(task, output, WriteWikiRow); break;
                     default:
-                        Console.Write("{0} Format not supported.", task.Format); break;
+                        Console.Write($"{task.Format} format not supported."); break;
                 }
             }
             
@@ -76,27 +76,11 @@ namespace Z64Tables
             NoRom,
         }
 
-        static ParseResult ParseScript(StreamReader scriptStream,
-            out List<ParserTask> tasks, out List<OutputToken> outputFormat) //out StringBuilder sb, out string fileOut)
+        static ParseResult ParseScript(string script,
+            out List<ParserTask> tasks, out List<OutputToken> outputFormat)
         {
             tasks = new List<ParserTask>();
             outputFormat = new List<OutputToken>();
-            
-            string script;
-
-            string fileOut = scriptStream.ReadLine().Trim();
-
-            {
-                StringBuilder scriptBuild = new StringBuilder();
-
-                while (scriptStream.Peek() >= 0)
-                {
-                    scriptBuild.Append(scriptStream.ReadLine());
-                }
-
-                script = scriptBuild.ToString();
-            }
-
 
             if (!script.Contains('|'))
                 return ParseResult.Malformed;
@@ -107,24 +91,21 @@ namespace Z64Tables
             if (topParams.Length != 2)
                 return ParseResult.Malformed;
 
-
             var settings = topParams[0].Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim()).ToArray();
+                .Select(x => x.Trim()).ToList();
             var output = topParams[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim()).ToArray();
-           
+                .Select(x => x.Trim());
+
             tasks = ParserSettings.GetParserTasks(settings);
             outputFormat = CreateOutputTokens(output);
 
             foreach (var task in tasks)
-                task.FileOut = string.Format("{0} ({2}).{1}.txt", fileOut, task.Format, task.FileLocationToken);
+                task.FileOut = $"{task.Name} ({task.Version}).{task.Format}.txt";
 
             return ParseResult.Success;
         }
 
         delegate void WriteRow(StringBuilder sb, List<string> outlist);
-
-       
 
         private static void WriteCsvTask(ParserTask task, List<OutputToken> OutputFormat, WriteRow writeRow)
         {
@@ -148,9 +129,7 @@ namespace Z64Tables
             using (StreamWriter sw = new StreamWriter(task.FileOut))
             {
                 sw.Write(sb.ToString());
-                Console.Write("{0} created", task.FileOut);
-                Console.WriteLine();
-                    
+                Console.WriteLine($"{task.FileOut} created");
             }
         }
 
@@ -177,14 +156,13 @@ namespace Z64Tables
         /// </summary>
         /// <param name="outputTextTokens"></param>
         /// <returns></returns>
-        private static List<OutputToken> CreateOutputTokens(string[] outputTextTokens)
+        private static List<OutputToken> CreateOutputTokens(IEnumerable<string> outputTextTokens)
         {
             List<OutputToken> tokens = new List<OutputToken>();
             foreach (string item in outputTextTokens)
             {
                 //Token is of the following form atm:
                 //<tokenName>:<format> <parameter>
-                OutputTokensEnum tokenName;
                 string format = string.Empty;
                 long parameter = 0;
 
@@ -202,7 +180,7 @@ namespace Z64Tables
                 if (tokenNameFormatSplit.Length == 2)
                     format = tokenNameFormatSplit[1];
 
-                if (Enum.TryParse(tokenNameFormatSplit[0], out tokenName))
+                if (Enum.TryParse(tokenNameFormatSplit[0], out OutputTokensEnum tokenName))
                 {
                     tokens.Add(new OutputToken(tokenName, format, parameter));
                 }
@@ -212,17 +190,13 @@ namespace Z64Tables
 
         public static bool TryParseNum(string num, out long result)
         {
-            result = 0;
-            System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer;
+            var style = System.Globalization.NumberStyles.Integer;
             if (num.StartsWith("0x"))
             {
                 style = System.Globalization.NumberStyles.HexNumber;
                 num = num.Substring(2);
             }
-            if (!long.TryParse(num, style, null, out result))
-                return false;
-            else
-                return true;
+            return long.TryParse(num, style, null, out result);
         }
     }
 }
