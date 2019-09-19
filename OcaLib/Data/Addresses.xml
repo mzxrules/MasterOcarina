@@ -743,14 +743,14 @@
       <Identifier id="TransitionTable_Start">
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C82CD0</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">C82FA0</Data>
           <Data ver="U0">C670F0</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P0">DAD390</Data>
+          <Data ver="P1">DAD4B0</Data>
+          <Data ver="GCJ">C6EA00</Data>
+          <Data ver="GCU">C749F0</Data>
+          <Data ver="GCP">DBA4B0</Data>
+          <Data ver="DBG">DF0600</Data>
         </Address>
       </Identifier>
     </Block>
