@@ -44,7 +44,7 @@ namespace mzxrules.OcaLib
                     new BuildInformation { _CRC = 0x1D4136F3AF63EEA9, _Version = Build.MQP, _Name = "PAL Master Quest", _Localization = Localization.PAL },
                     new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBGMQ, _Name = "Debug Master Quest", _Localization = Localization.PAL },
                     new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUEC, _Name = "Chinese iQue", _Localization = Localization.CHI },
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUET, _Name = "Taiwanese iQue", _Localization = Localization.CHI }
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUET, _Name = "Traditional Chinese iQue", _Localization = Localization.CHI }
                 };
             }
 
@@ -65,7 +65,6 @@ namespace mzxrules.OcaLib
             }
         }
 
-
         internal enum Bank
         {
             unknown0 = 0,
@@ -73,12 +72,6 @@ namespace mzxrules.OcaLib
             scene = 2,
             map = 3
         }
-
-        //private static Language[] SupportedLanguages = new Language[] {
-        //    Language.Japanese,
-        //    Language.English,
-        //    Language.German,
-        //    Language.French, };
 
         public enum Build
         {
@@ -196,6 +189,17 @@ namespace mzxrules.OcaLib
         public IEnumerable<Language> GetSupportedLanguages()
         {
             return GetSupportedLanguages(Version);
+        }
+
+        public static void ConsolePrintSupportedVersions()
+        {
+            Console.WriteLine("Ocarina of Time: use GameId \"oot\"");
+            Console.WriteLine("Version:");
+            foreach (var item in GetSupportedBuilds())
+            {
+                var info = BuildInformation.Get(item);
+                Console.WriteLine($" {info.Version + ":",-5} {info.Name}");
+            }
         }
     }
 }

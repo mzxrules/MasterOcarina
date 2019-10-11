@@ -110,8 +110,6 @@ namespace Atom
 
         private static void GetActorSymbolNames(DisassemblyTask task, Rom rom, ActorOverlayRecord ovlRec)
         {
-            ActorInit actorInfo = new ActorInit();
-
             if (ovlRec.VRamActorInfo == 0)
                 return;
 
@@ -121,7 +119,7 @@ namespace Atom
             {
                 file = rom.Files.GetFile(ORom.FileList.code);
                 Addresser.TryGetRam(ORom.FileList.code, rom.Version, out int code_start);
-                startAddr = (code_start | 0x80000000);
+                startAddr = code_start | 0x80000000;
             }
             else
             {
@@ -130,7 +128,7 @@ namespace Atom
             }
             
             file.Stream.Position = ovlRec.VRamActorInfo - startAddr;
-            actorInfo = new ActorInit(new BinaryReader(file));
+            ActorInit actorInfo = new ActorInit(new BinaryReader(file));
             
             BindSymbol(ovlRec.VRamActorInfo, Label.Type.VAR, "InitVars");
             BindSymbol(actorInfo.init_func, Label.Type.FUNC, "Init");
@@ -154,15 +152,15 @@ namespace Atom
         public static List<DisassemblyTask> CreateTaskList(Rom rom)
         {
             List<DisassemblyTask> taskList = new List<DisassemblyTask>();
-            List<JOcaBase.JDmaData> DmaData;
+            List<JOcaBase.JDmaData> dmadata;
             
             if (rom.Version.Game == Game.OcarinaOfTime)
             {
-                DmaData = JOcaBase.JQuery.GetOcaDmaData(rom.Version.ToString());
+                dmadata = JOcaBase.JQuery.GetOcaDmaData(rom.Version.ToString());
             }
             else if (rom.Version.Game == Game.MajorasMask)
             {
-                DmaData = JOcaBase.JQuery.GetMaskDmaData(rom.Version.ToString());
+                dmadata = JOcaBase.JQuery.GetMaskDmaData(rom.Version.ToString());
             }
             else
             {
@@ -174,7 +172,7 @@ namespace Atom
             for (int i = 0; i < tables.Actors.Records; i++)
             {
                 var ovlRec = rom.Files.GetActorOverlayRecord(i);
-                var task = New(DmaData, rom, i, ovlRec, OvlType.Actor);
+                var task = New(dmadata, rom, i, ovlRec, OvlType.Actor);
 
                 //set functions
                 GetActorSymbolNames(task, rom, ovlRec);
@@ -185,25 +183,25 @@ namespace Atom
             for (int i = 0; i < tables.Particles.Records; i++)
             {
                 var ovlRec = rom.Files.GetParticleOverlayRecord(i);
-                taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.Particle));
+                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Particle));
             }
 
             for (int i = 0; i < tables.GameOvls.Records; i++)
             {
                 var ovlRec = rom.Files.GetGameContextRecord(i);
-                taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.Game));
+                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Game));
             }
 
             for (int i = 0; i < tables.PlayerPause.Records; i++)
             {
                 var ovlRec = rom.Files.GetPlayPauseOverlayRecord(i);
-                taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.PlayPause));
+                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.PlayPause));
             }
 
             for (int i = 0; i < tables.Transitions.Records; i++)
             {
                 var ovlRec = rom.Files.GetOverlayRecord(i, TableInfo.Type.Transitions);
-                taskList.Add(New(DmaData, rom, i, ovlRec, OvlType.Transition));
+                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Transition));
             }
 
             List<JFileInfo> fileInfo = JQuery.Deserialize<List<JFileInfo>>("data/fileinfo.json");

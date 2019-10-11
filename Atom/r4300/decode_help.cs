@@ -110,11 +110,11 @@ namespace Atom
         }
         static string rs_branch(uint iw, N64Ptr pc)
         {
-            return $"{gpr_rn[RS(iw)]}, {GetLabel(iw, pc)}";
+            return $"{gpr_rn[RS(iw)]}, {GetBranchLabel(iw, pc)}";
         }
         static string rs_rt_branch(uint iw, N64Ptr pc)
         {
-            return $"{gpr_rn[RS(iw)]}, {gpr_rn[RT(iw)]}, {GetLabel(iw, pc)}";
+            return $"{gpr_rn[RS(iw)]}, {gpr_rn[RT(iw)]}, {GetBranchLabel(iw, pc)}";
         }
         static string rd_rs(uint iw)
         {

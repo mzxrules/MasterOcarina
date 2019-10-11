@@ -86,9 +86,9 @@ namespace Atom
         }
         
 
-        static string GetLabel(uint iw, N64Ptr pc)
+        static string GetBranchLabel(uint iw, N64Ptr pc)
         {
-            N64Ptr addr = OFFSET(iw) + (pc | 0x80000000) + 4;
+            N64Ptr addr = pc + 4 + OFFSET(iw);
             Label label = AddLabel(addr);
             return $"{label}";
         }
@@ -96,7 +96,7 @@ namespace Atom
         //mips
         static string PrintJump(uint iw, string opcode)
         {
-            N64Ptr addr = TARGET(iw) | 0x80000000;
+            N64Ptr addr = (pc & 0xFC000000) | TARGET(iw);
 
             if (Symbols.TryGetValue(addr, out Label label)
                 && label.Kind == Label.Type.FUNC)

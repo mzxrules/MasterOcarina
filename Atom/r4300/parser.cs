@@ -314,7 +314,7 @@ namespace Atom
                 opId = (word >> 26) & 0x3F;
                 if (opId == 2 || opId == 3)
                 {
-                    var addr = TARGET((uint)word) | 0x80000000;
+                    var addr = (pc & 0xFC000000) | TARGET((uint)word);
                     AddFunction(addr, true);
                 }
 
@@ -437,8 +437,6 @@ namespace Atom
         /// <returns></returns>
         static void AddFunction(N64Ptr addr, bool confirmed)
         {
-            addr = addr | 0x80000000;
-
             // Label already mapped?
             if (Symbols.TryGetValue(addr, out Label lbl))
             {

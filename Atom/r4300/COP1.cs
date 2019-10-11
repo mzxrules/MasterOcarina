@@ -450,22 +450,22 @@ namespace Atom
         
         static string BC1F(uint iw)
         {
-            return $"bc1f\t{GetLabel(iw, pc)}";
+            return $"bc1f\t{GetBranchLabel(iw, pc)}";
         }
 
         static string BC1T(uint iw)
         {
-            return $"bc1t\t{GetLabel(iw, pc)}";
+            return $"bc1t\t{GetBranchLabel(iw, pc)}";
         }
 
         static string BC1FL(uint iw)
         {
-            return $"bc1fl\t{GetLabel(iw, pc)}";
+            return $"bc1fl\t{GetBranchLabel(iw, pc)}";
         }
 
         static string BC1TL(uint iw)
         {
-            return $"bc1tl\t{GetLabel(iw, pc)}";
+            return $"bc1tl\t{GetBranchLabel(iw, pc)}";
         }
         #endregion
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace mzxrules.OcaLib
@@ -119,28 +120,6 @@ namespace mzxrules.OcaLib
         public static Localization GetLocalization(RomVersion v)
         {
             return BuildInformation.GetLocalization(v);
-
-            //switch (v)
-            //{
-            //    case Build.N0: return Localization.NTSC; //NTSC 1.0
-            //    case Build.N1: return Localization.NTSC; //NTSC 1.1
-            //    case Build.N2: return Localization.NTSC; //NTSC 1.2
-
-            //    case Build.P0: return Localization.PAL; //PAL 1.0 
-            //    case Build.P1: return Localization.PAL; //PAL 1.1
-
-            //    case Build.GCNJ: return Localization.NTSC;
-            //    case Build.GCNP: return Localization.PAL;
-
-            //    case Build.MQP: return Localization.PAL;
-            //    case Build.MQJ: return Localization.NTSC;
-            //    case Build.DBGMQ: return Localization.PAL;
-
-            //    //non-official builds
-            //    //case Build.DUNGRUSH: return Localization.NTSC;
-            //    //case Build.DUNGRUSH2: return Localization.NTSC;
-            //    default: return Localization.UNKNOWN;
-            //}
         }
 
         public static ulong GetCrc(RomVersion v)
@@ -184,6 +163,17 @@ namespace mzxrules.OcaLib
         public IEnumerable<Language> GetSupportedLanguages()
         {
             return GetSupportedLanguages(Version);
+        }
+
+        public static void ConsolePrintSupportedVersions()
+        {
+            Console.WriteLine("Majora's Mask: use GameId \"mm\"");
+            Console.WriteLine("Version:");
+            foreach (var item in MRom.GetSupportedBuilds())
+            {
+                var info = MRom.BuildInformation.Get(item);
+                Console.WriteLine($" {info.Version + ":",-5} {info.Name}");
+            }
         }
     }
 }

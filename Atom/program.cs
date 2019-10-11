@@ -7,150 +7,116 @@ using System.Linq;
 using System.Globalization;
 using mzxrules.OcaLib.Elf;
 using PathUtil = mzxrules.OcaLib.PathUtil.PathUtil;
+using CommandLine;
 
 namespace Atom
 {
+    // prototype: 
+    // adis o stalfo.s 2 ZELOOTMA.z64 
+    //80A44CD0 80A46710
+    //int NAMETABLE_ADD = 0xA771A0;
     public partial class Atom
     {
-        /* prototype:
-         adis o stalfo.s 2 ZELOOTMA.z64
-        */
-
-        //80A44CD0 80A46710
-
-        //int NAMETABLE_ADD = 0xA771A0;
-        
-
-        static void Main(string[] a)
+        static void Main(string[] args)
         {
             PathUtil.Initialize();
-            
-            if (a.Length == 0)
             {
-                Console.WriteLine("Help:");
-                Console.WriteLine("path [gameid] [versionid] [path] //sets a path to a rom");
-                Console.WriteLine("all [gameid] [versionid] //creates a gcc compatible disassembly of the entire rom");
-                Console.WriteLine("all_r [gameid] [versionid] //creates a more readable disassembly of the entire rom");
-                Console.WriteLine("df [gameid] [versionid] [name] //creates a disassembly of a specific overlay file");
-                //Console.WriteLine("daf [gameid] [versionid] [id] //creates a disassembly of a specific actor file, using the actor");
-                Console.WriteLine("script [path] //converts elf (.o) files to overlay form, and injects into the rom");
-                Console.WriteLine("newscript //creates a file called dummy.xml for easy templating");
-                Console.WriteLine("ovl [vram] [path] //creates an overlay file named [path].ovl from an elf (.o) file");
-                Console.WriteLine("dcust [pc] [path]");
-                Console.WriteLine();
-                Console.WriteLine("Enter a command:");
-                var read = Console.ReadLine();
-                a = ParseArguments(read);
-                if (a.Length == 0)
-                {
-                    Console.WriteLine("Terminated!");
-                    return;
-                }
-            }
-            if (a[0] == "path" && (a.Length == 3 || a.Length == 4))
-            {
-                string path = "";
-                if (!RomVersion.TryGet(a[1], a[2], out RomVersion ver))
-                {
-                    Console.WriteLine($"Unrecognized version {a[1]} {a[2]}");
-                    return;
-                }
-                if (a.Length == 4)
-                {
-                    path = a[3];
-                }
-                else
-                {
-                    Console.Write("Enter a path: ");
-                    path = Console.ReadLine();
-                }
-                if (!File.Exists(path))
-                {
-                    Console.WriteLine($"Cannot find file {path}");
-                    return;
-                }
-                PathUtil.SetRomLocation(ver, path);
-                Console.WriteLine($"Path updated! Re-run program to continue");
-            }
-            else if (a.Length == 3 && a[0] == "all")
-            {
-                if (!RomVersion.TryGet(a[1], a[2], out RomVersion version))
-                {
-                    Console.WriteLine($"Unrecognized version {a[1]} {a[2]}");
-                    return;
-                }
-                if (PathUtil.TryGetRomLocation(version, out string path))
-                {
-                    Disassemble.GccOutput = true;
-                    Disassemble.PrintRelocations = true;
-                    DisassembleRom(version, path);
-                }
-            }
-            else if (a.Length == 3 && a[0] == "all_r")
-            {
-                if (!RomVersion.TryGet(a[1], a[2], out RomVersion version))
-                {
-                    Console.WriteLine($"Unrecognized version {a[1]} {a[2]}");
-                    return;
-                }
-                if (PathUtil.TryGetRomLocation(version, out string path))
-                {
-                    Disassemble.GccOutput = false;
-                    Disassemble.PrintRelocations = true;
-                    DisassembleRom(version, path);
-                }
-            }
-            else if (a.Length == 3 && a[0] == "ovl")
-            {
-                if (!int.TryParse(a[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int addr))
-                {
-                    Console.WriteLine("Cannot parse address given");
-                    return;
-                }
-                ElfToOverlay(a[2], addr);
-            }
-            else if (a.Length == 2 && a[0] == "script")
-            {
-                ElfUtil.ProcessInjectScript(a[1]);
-            }
-            else if (a[0] == "newscript")
-            {
-                ElfUtil.CreateDummyScript("dummy.xml");
-            }
-            else if (a[0] == "df" && a.Length == 4)
-            {
-                if (!RomVersion.TryGet(a[1], a[2], out RomVersion version))
-                {
-                    Console.WriteLine($"Unrecognized version {a[1]} {a[2]}");
-                    return;
-                }
-                OverlayTest(version, a[3]); //ovl_Boss_Fd // "ovl_Fishing"; 
-            }
-            else if (a[0] == "elftest")
-            {
-                ElfToOverlayTest();
+                var result = Parser.Default.ParseArguments(args, VerbTypes)
+                    .WithParsed<PathOptions>(
+                        a => UpdateRomPath(a))
+                    .WithParsed<AllOptions>(
+                        a => DisassembleAll(a))
+                    .WithParsed<DisassembleFileOptions>(
+                        a => DisassembleFile(a))
+                    .WithParsed<DisassembleOverlayOptions>(
+                        a => DisassembleOverlayFile(a))
+                    .WithParsed<ScriptOptions>(
+                        a => HandleInjectionScript(a))
+                    .WithParsed<OvlOptions>(
+                        a => ElfToOverlay(a))
+                    .WithParsed<VersionOptions>(
+                        a => ListSupportedVersions());
             }
         }
 
-        static string[] ParseArguments(string commandLine)
+        private static void DisassembleFile(DisassembleFileOptions a)
         {
-            char[] parmChars = commandLine.ToCharArray();
-            bool inQuote = false;
-            for (int index = 0; index < parmChars.Length; index++)
-            {
-                if (parmChars[index] == '"')
-                {
-                    inQuote = !inQuote;
-                    parmChars[index] = '\n';
-                }
-                if (!inQuote && parmChars[index] == ' ')
-                    parmChars[index] = '\n';
-            }
-            return (new string(parmChars)).Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            throw new NotImplementedException();
         }
 
-        private static void ElfToOverlay(string file, N64Ptr addr)
+        private static void HandleInjectionScript(ScriptOptions a)
         {
+            if (a.GenerateNewScript)
+            {
+                if (File.Exists(a.ScriptPath))
+                {
+                    Console.WriteLine($"A file already exists at the given location, no script created!");
+                    return;
+                }
+                ElfUtil.CreateDummyScript(a.ScriptPath);
+            }
+            else
+            {
+                ElfUtil.ProcessInjectScript(a.ScriptPath);
+            }
+        }
+
+        private static void ListSupportedVersions()
+        {
+            ORom.ConsolePrintSupportedVersions();
+            MRom.ConsolePrintSupportedVersions();
+        }
+
+        private static int UpdateRomPath(PathOptions a)
+        {
+            if (!RomVersion.TryGet(a.GameId, a.VersionId, out RomVersion ver))
+            {
+                Console.WriteLine($"Unrecognized version {a.GameId} {a.VersionId}");
+                return -1;
+            }
+            string path = a.RomPath;
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Cannot find file {path}");
+                return -1;
+            }
+            PathUtil.SetRomLocation(ver, path);
+            Console.WriteLine($"Path updated! Re-run program to continue");
+            return 0;
+        }
+
+        private static int DisassembleAll(AllOptions opts)
+        {
+            string path;
+            if (!RomVersion.TryGet(opts.GameId, opts.VersionId, out RomVersion version))
+            {
+                Console.WriteLine($"Unrecognized version {opts.GameId} {opts.VersionId}");
+                return -1;
+            }
+            if (opts.RomPath != null )
+            {
+                path = opts.RomPath;
+            }
+            else if (!PathUtil.TryGetRomLocation(version, out path))
+            {
+                Console.WriteLine($"Cannot find path for {opts.GameId} {opts.VersionId}");
+                return -1;
+            }
+            Disassemble.GccOutput = opts.ReadableOutput;
+            Disassemble.PrintRelocations = true;
+            Console.WriteLine($"{version} {path}");
+            DisassembleRom(version, path);
+            return 0;
+        }
+
+        private static void ElfToOverlay(OvlOptions a)
+        {
+            string file = a.Path;
+            if (!int.TryParse(a.VRam, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int addr))
+            {
+                Console.WriteLine("Cannot parse address given");
+                return;
+            }
             if (!File.Exists(file))
             {
                 Console.WriteLine($"Cannot find file {Path.GetFullPath(file)}");
@@ -168,13 +134,6 @@ namespace Atom
             }
         }
 
-        private static void ElfToOverlayTest()
-        {
-            string file = "basm.o";
-            N64Ptr addr = 0x80948F60;
-
-            ElfToOverlay(file, addr);
-        }
 
         static void MMDebugTest()
         {
@@ -184,57 +143,71 @@ namespace Atom
             DisassemblyTask task = null;
             Disassemble.PrintRelocations = true;
 
-            var reader = new BinaryReader(rom.Files.GetFile(task.VRom));
-
             using (StreamWriter sw = new StreamWriter("__code.txt"))
             {
-                BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom));
-                Disassemble.FirstParse(br, task);
-                Disassemble.Task(sw, br, task);
+                using (BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom)))
+                {
+                    Disassemble.FirstParse(br, task);
+                    Disassemble.Task(sw, br, task);
+                }
             }
         }
 
-        static void OverlayTest(RomVersion ver, string testOvl)
+        static void DisassembleOverlayFile(DisassembleOverlayOptions a)
         {
-            PathUtil.TryGetRomLocation(ver, out string path);
+            if (!RomVersion.TryGet(a.GameId, a.VersionId, out RomVersion ver))
+            {
+                Console.WriteLine($"Unrecognized version {a.GameId} {a.VersionId}");
+                return;
+            }
+            string path = a.RomPath;
+            if (path == null)
+            {
+                PathUtil.TryGetRomLocation(ver, out path);
+            }
+            
             Rom rom = Rom.New(path, ver);
             var tasks = DisassemblyTask.CreateTaskList(rom);
             Disassemble.PrintRelocations = true;
             Disassemble.GccOutput = true;
 
-            var task = tasks.SingleOrDefault(x => x.Name == testOvl || x.Name == $"ovl_{testOvl}");
+            var task = tasks.SingleOrDefault(x => x.Name == a.File || x.Name == $"ovl_{a.File}");
             if (task == null)
             {
                 Console.WriteLine("Cannot find overlay");
                 return;
             }
-            //var taskbss = tasks.Where(x => x.Sections["bss"]?.Size > 0).ToList();
-            
-            var reader = new BinaryReader(rom.Files.GetFile(task.VRom));
-            //using (StreamWriter sw = new StreamWriter("__test.txt"))
+            //var taskbss = tasks.Where(x => x.Sections.Values.SingleOrDefault(y => y.Name == "bss")?.Size > 0).ToList();
+
+            //using (var reader = new BinaryReader(rom.Files.GetFile(task.VRom)))
             //{
-            //    foreach (var rel in task.Map.Relocations.Where(x => x.SectionId == Overlay.RelocationWord.Section.text))
+            //    using (StreamWriter sw = new StreamWriter("__test.txt"))
             //    {
-            //        reader.BaseStream.Position = rel.Offset;
-            //        sw.WriteLine($"{rel.Offset:X6}: {rel.RelocType}  {GetOP(reader.ReadBigInt32())}");
+            //        foreach (var rel in task.Relocations.Where(x => x.SectionId == Overlay.Section.text))
+            //        {
+            //            reader.BaseStream.Position = rel.Offset;
+            //            sw.WriteLine($"{rel.Offset:X6}: {rel.RelocType}  {Disassemble.GetOP(reader.ReadBigInt32())}");
+            //        }
             //    }
             //}
 
-            using (StreamWriter sw = new StreamWriter($"__{testOvl}.txt"))
+            using (StreamWriter sw = new StreamWriter($"__{a.File}.txt"))
             {
-                BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom));
-                Disassemble.FirstParse(br, task);
-                if (Disassemble.GccOutput)
+                using (BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom)))
                 {
-                    sw.WriteLine("#include <mips.h>");
-                    sw.WriteLine(".set noreorder");
-                    sw.WriteLine(".set noat");
-                    sw.WriteLine();
+                    Disassemble.FirstParse(br, task);
+                    if (Disassemble.GccOutput)
+                    {
+                        sw.WriteLine("#include <mips.h>");
+                        sw.WriteLine(".set noreorder");
+                        sw.WriteLine(".set noat");
+                        sw.WriteLine();
+                    }
+                    Disassemble.Task(sw, br, task);
                 }
-                Disassemble.Task(sw, br, task);
             }
             
-            using (StreamWriter sw = new StreamWriter($"__{testOvl}_f.txt"))
+            using (StreamWriter sw = new StreamWriter($"__{a.File}_f.txt"))
             {
                 foreach (var item in Disassemble.Symbols.OrderBy(x => x.Key))
                 {
@@ -245,17 +218,8 @@ namespace Atom
 
         static void DisassembleRom(RomVersion ver, string path)
         {
-            Rom rom;
-
             Console.Write("Initializing task list:  ");
-            if (ver.Game == Game.OcarinaOfTime)
-            {
-                rom = new ORom(path, ver);
-            }
-            else
-            {
-                rom = new MRom(path, ver);
-            }
+            Rom rom = Rom.New(path, ver);
             
             List<DisassemblyTask> taskList = DisassemblyTask.CreateTaskList(rom);
             taskList = taskList.Where(x => x.VRom.End > 0).ToList();
@@ -264,7 +228,7 @@ namespace Atom
             Stream getFile(FileAddress x) => rom.Files.GetFile(x);
 
             LoadFunctionDatabase(ver);
-            GetSymbols(taskList, rom.Version, getFile);
+            GetSymbols(taskList, getFile);
 
             Console.WriteLine("DONE!");
             Console.WriteLine("Disassembling files: ");
@@ -273,17 +237,18 @@ namespace Atom
             DumpFoundFunctions(rom.Version, Disassemble.GetFunctions());
         }
 
-        private static void GetSymbols(List<DisassemblyTask> tasks, RomVersion ver, Func<FileAddress, Stream> getFile)
+        private static void GetSymbols(List<DisassemblyTask> tasks, Func<FileAddress, Stream> getFile)
         {
             foreach (var task in tasks)
             {
-                BinaryReader FileReader = new BinaryReader(getFile(task.VRom));
-
                 foreach (var item in task.Functions)
                     Disassemble.AddFunction(item);
 
-                //Get a list of function names
-                Disassemble.FirstParse(FileReader, task);
+                using (BinaryReader br = new BinaryReader(getFile(task.VRom)))
+                {
+                    //Get a list of function names
+                    Disassemble.FirstParse(br, task);
+                }
             }
         }
 
@@ -298,15 +263,17 @@ namespace Atom
 
                 using (StreamWriter sw = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write)))
                 {
-                    var reader = new BinaryReader(getFile(task.VRom));
-                    if (Disassemble.GccOutput)
+                    using (var reader = new BinaryReader(getFile(task.VRom)))
                     {
-                        sw.WriteLine("#include <mips.h>");
-                        sw.WriteLine(".set noreorder");
-                        sw.WriteLine(".set noat");
-                        sw.WriteLine();
+                        if (Disassemble.GccOutput)
+                        {
+                            sw.WriteLine("#include <mips.h>");
+                            sw.WriteLine(".set noreorder");
+                            sw.WriteLine(".set noat");
+                            sw.WriteLine();
+                        }
+                        Disassemble.Task(sw, reader, task);
                     }
-                    Disassemble.Task(sw, reader, task);
                 }
             }
             Console.CursorVisible = true;
