@@ -1,5 +1,4 @@
 ﻿using mzxrules.Helper;
-
 using System.Collections.Generic;
 using System.IO;
 
@@ -19,7 +18,7 @@ namespace mzxrules.OcaLib
         public int DataSize;
         public int RodataSize;
         public int BssSize;
-        public int RelCount;
+        public int RelCount => Relocations.Count;
         
         public List<RelocationWord> Relocations = new List<RelocationWord>();
 
@@ -40,11 +39,11 @@ namespace mzxrules.OcaLib
             DataSize = br.ReadBigInt32();
             RodataSize = br.ReadBigInt32();
             BssSize = br.ReadBigInt32();
-            RelCount = br.ReadBigInt32();
+            int relCount = br.ReadBigInt32();
 
             int virtualSize = physicalSize + BssSize;
 
-            for (int i = 0; i < RelCount; i++)
+            for (int i = 0; i < relCount; i++)
             {
                 var rel = new RelocationWord(this, br.ReadBigInt32());
                 Relocations.Add(rel);
@@ -67,10 +66,10 @@ namespace mzxrules.OcaLib
         public struct RelocationWord
         {
             public int Word;
-            public Section SectionId { get { return (Section)Shift.AsByte((uint)Word, 0xC0000000); } }
-            public Reloc RelocType { get { return (Reloc)Shift.AsByte((uint)Word, 0x3F000000); } }
-            public int SectionOffset { get { return Word & 0xFFFFFF; } }
-            public int Offset { get { return Parent.GetRelocationOffset(this); } }
+            public Section SectionId => (Section)Shift.AsByte((uint)Word, 0xC0000000);
+            public Reloc RelocType => (Reloc)Shift.AsByte((uint)Word, 0x3F000000);
+            public int SectionOffset => Word & 0xFFFFFF;
+            public int Offset => Parent.GetRelocationOffset(this);
             private Overlay Parent;
 
             public RelocationWord(Overlay parent, int word)

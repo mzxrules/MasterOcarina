@@ -196,13 +196,6 @@ namespace Atom
                 using (BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom)))
                 {
                     Disassemble.FirstParse(br, task);
-                    if (Disassemble.GccOutput)
-                    {
-                        sw.WriteLine("#include <mips.h>");
-                        sw.WriteLine(".set noreorder");
-                        sw.WriteLine(".set noat");
-                        sw.WriteLine();
-                    }
                     Disassemble.Task(sw, br, task);
                 }
             }
@@ -220,7 +213,7 @@ namespace Atom
         {
             Console.Write("Initializing task list:  ");
             Rom rom = Rom.New(path, ver);
-            
+
             List<DisassemblyTask> taskList = DisassemblyTask.CreateTaskList(rom);
             taskList = taskList.Where(x => x.VRom.End > 0).ToList();
             Console.WriteLine("DONE!");
@@ -235,6 +228,48 @@ namespace Atom
 
             DisassembleTasks(rom.Version, taskList, getFile);
             DumpFoundFunctions(rom.Version, Disassemble.GetFunctions());
+        }
+
+        private static void TestSymbolGeneration(RomVersion ver)
+        {
+            Dictionary<string, bool> __last_symbol = File
+                .ReadAllLines($"__{ver.GetGameAbbr()}_{ver.GetVerAbbr()}_last_symbol.txt")
+                .ToDictionary(v => v, v => true);
+            List<string> __next_symbol = new List<string>();
+
+            using (var sw = File.CreateText("__last_symbol.txt"))
+            {
+                foreach (var symbol in Disassemble.Symbols.Values.OrderBy(x => x.Addr))
+                {
+                    string symbolInfo = $"{symbol.Kind.ToString().ToLowerInvariant(),4}_{symbol.Addr} => {symbol.Confirmed,-5} {symbol.Name}";
+                    if (__last_symbol.ContainsKey(symbolInfo))
+                    {
+                        __last_symbol.Remove(symbolInfo);
+                    }
+                    else
+                    {
+                        __next_symbol.Add(symbolInfo);
+                    }
+                    sw.WriteLine(symbolInfo);
+                }
+            }
+            SortedList<string, string> errors = new SortedList<string, string>();
+            foreach(var sym in __last_symbol.Keys)
+            {
+                errors.Add(sym, "o");
+            }
+            foreach(var sym in __next_symbol)
+            {
+                errors.Add(sym, "n");
+            }
+
+            using (var sw = File.CreateText("__last_symbol_compare.txt"))
+            {
+                foreach (var item in errors)
+                {
+                    sw.WriteLine($"{item.Value} {item.Key}");
+                }
+            }
         }
 
         private static void GetSymbols(List<DisassemblyTask> tasks, Func<FileAddress, Stream> getFile)
@@ -261,18 +296,11 @@ namespace Atom
                 string filename = $"{folder}/{task.Name}.txt";
                 Console.Write($"\r{filename.PadRight(Console.BufferWidth)}");
 
-                using (StreamWriter sw = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write)))
+                using (var sw = File.CreateText(filename))
                 {
-                    using (var reader = new BinaryReader(getFile(task.VRom)))
+                    using (var br = new BinaryReader(getFile(task.VRom)))
                     {
-                        if (Disassemble.GccOutput)
-                        {
-                            sw.WriteLine("#include <mips.h>");
-                            sw.WriteLine(".set noreorder");
-                            sw.WriteLine(".set noat");
-                            sw.WriteLine();
-                        }
-                        Disassemble.Task(sw, reader, task);
+                        Disassemble.Task(sw, br, task);
                     }
                 }
             }

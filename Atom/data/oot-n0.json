@@ -2899,10 +2899,10 @@
   },
   {
     "Addr": "80027EF4",
-    "Name": null,
-    "Desc": "Store A0, A1 on stack",
-    "Desc2": null,
-    "Args": "A0 = ?;A1 = ?"
+    "Name": "actor_do_nothing",
+    "Desc": null,
+    "Desc2": "Store A0, A1 on stack",
+    "Args": "A0 = Actor Instance;A1 = Global Context"
   },
   {
     "Addr": "80027F04",

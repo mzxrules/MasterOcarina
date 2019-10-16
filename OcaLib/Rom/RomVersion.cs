@@ -154,6 +154,16 @@ namespace mzxrules.OcaLib
             }
         }
 
+        public string GetVerAbbr()
+        {
+            switch(Game)
+            {
+                case Game.OcarinaOfTime: return OVer.ToString().ToLowerInvariant();
+                case Game.MajorasMask: return MVer.ToString().ToLowerInvariant();
+                default: return "n/a";
+            }
+        }
+
         public override string ToString()
         {
             switch (Game)

@@ -24,6 +24,7 @@ namespace Atom
         public int hits;
 
         public bool Confirmed = false;
+        public bool HasDescription = false;
 
         public Label() { }
 
@@ -36,13 +37,16 @@ namespace Atom
         
         public Label(FunctionInfo info) : this(Type.FUNC, info.Address, true)
         {
-            Addr = info.Address;
             Name = info.Name ?? "";
-
             Desc = info.Desc ?? "";
             Desc2 = info.Desc2 ?? "";
             Args = info.Args ?? "";
-            
+
+            if (!string.IsNullOrWhiteSpace(Name + Desc + Desc2 + Args))
+            {
+                HasDescription = true;
+            }
+
             InlineDesc = Name;
 
             if (string.IsNullOrWhiteSpace(info.Name))
@@ -75,7 +79,7 @@ namespace Atom
         [DataMember]
         public string Args { get; set; }
 
-        public N64Ptr Address { get { return int.Parse(Addr, System.Globalization.NumberStyles.HexNumber); } }
-        
+        public N64Ptr Address => int.Parse(Addr, System.Globalization.NumberStyles.HexNumber);
+
     }
 }

@@ -71,9 +71,7 @@ namespace Atom
             OverlayRecord ovlInfo, OvlType nameClass)
         {
             RomFile file; //what we're going to disassemble 
-            BinaryReader FileReader;
-            ActorInit actorInfo = new ActorInit();
-            
+
             var overlay = new Overlay();
             var dmaRecord = dmadata.SingleOrDefault(x => x.VRomStart == ovlInfo.VRom.Start && ovlInfo.VRom.Start != 0);
             string name = (dmaRecord != null)? dmaRecord.Filename : $"{nameClass}_{index:X4}";
@@ -81,8 +79,8 @@ namespace Atom
             if (ovlInfo.VRom.Size != 0)
             {
                 file = rom.Files.GetFile(ovlInfo.VRom);
-                FileReader = new BinaryReader(file);
-                overlay = new Overlay(FileReader);
+                BinaryReader br = new BinaryReader(file);
+                overlay = new Overlay(br);
             }
 
             DisassemblyTask task = new DisassemblyTask()

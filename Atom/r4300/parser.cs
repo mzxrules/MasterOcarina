@@ -12,7 +12,14 @@ namespace Atom
     {
         internal static void Task(StreamWriter sw, BinaryReader br, DisassemblyTask task)
         {
-            foreach(Section section in task.Sections.Values.OrderBy(x => x.VRam))
+            if (GccOutput)
+            {
+                sw.WriteLine("#include <mips.h>");
+                sw.WriteLine(".set noreorder");
+                sw.WriteLine(".set noat");
+                sw.WriteLine();
+            }
+            foreach (Section section in task.Sections.Values.OrderBy(x => x.VRam))
             {
                 if (section.IsCode)
                 {
@@ -419,14 +426,24 @@ namespace Atom
         {
             foreach(var f in funcs)
             {
-                AddFunction(new Label(f));
+                AddFunction(new Label(f), true);
             }
         }
 
-        internal static void AddFunction(Label f)
+        internal static void AddFunction(Label f, bool force = false)
         {
             if (!Symbols.ContainsKey(f.Addr))
+            {
                 Symbols.Add(f.Addr, f);
+            }
+            else if (force && f.HasDescription)
+            {
+                Symbols[f.Addr] = f;
+            }
+            else if (force)
+            {
+                Symbols[f.Addr].Confirmed = true;
+            }
         }
         
         /// <summary>
