@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 
 namespace JOcaBase
 {
@@ -16,9 +15,9 @@ namespace JOcaBase
         public static List<JActor> MActors;
         static JQuery()
         {
-            OScenes = (List<JScene>)Deserialize(typeof(List<JScene>), @"base/OOT/Scenes.json");
-            OFiles = (List<JFiles>)Deserialize(typeof(List<JFiles>), @"base/OOT/Files.json");
-            OActors = (List<JActor>)Deserialize(typeof(List<JActor>), @"base/OOT/Actors.json");
+            OScenes = Deserialize<List<JScene>>(@"base/OOT/Scenes.json");
+            OFiles = Deserialize<List<JFiles>>(@"base/OOT/Files.json");
+            OActors = Deserialize<List<JActor>>(@"base/OOT/Actors.json");
             MScenes = Deserialize<List<JScene>>(@"base/MM/Scenes.json");
             MFiles = Deserialize<List<JFiles>>(@"base/MM/Files.json");
             MActors = Deserialize<List<JActor>>(@"base/MM/Actors.json");
@@ -48,32 +47,9 @@ namespace JOcaBase
 
         private static T Deserialize<T>(string path)
         {
-            DataContractJsonSerializer serializer;
+            var data = File.ReadAllText(path);
 
-            serializer = new DataContractJsonSerializer(typeof(T));
-
-            T result;
-
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                result = (T)serializer.ReadObject(fs);
-            }
-            return result;
-        }
-        
-        private static object Deserialize(Type type, string path)
-        {
-            DataContractJsonSerializer serializer;
-
-            serializer = new DataContractJsonSerializer(type);
-            object result;
-
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                result = serializer.ReadObject(fs);
-            }
-            return result;
-
+            return JsonConvert.DeserializeObject<T>(data);
         }
     }
 }
