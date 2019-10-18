@@ -56,6 +56,23 @@ namespace Atom
 
             [Value(3, HelpText = ROM_HT_STR, MetaName = ROM_MT_STR, Required = false)]
             public string RomPath { get; set; }
+
+            [Usage()]
+            public static IEnumerable<Example> Examples => new List<Example>
+            {
+                new Example("Dissemble ROM (gcc compatible)", new AllOptions
+                {
+                     GameId = $"oot",
+                     VersionId = $"{ORom.Build.N0}",
+                }),
+
+                new Example("Dissemble ROM (readable output)", new AllOptions
+                {
+                     GameId = $"oot",
+                     VersionId = $"{ORom.Build.N0}",
+                     ReadableOutput = true,
+                })
+            };
         }
 
         [Verb("df", Hidden = true)]

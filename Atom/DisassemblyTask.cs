@@ -4,6 +4,8 @@ using mzxrules.OcaLib.Actor;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using JOcaBase;
+using System;
 
 namespace Atom
 {
@@ -31,6 +33,8 @@ namespace Atom
 
         public List<Overlay.RelocationWord> Relocations = new List<Overlay.RelocationWord>();
         public List<Label> Functions = new List<Label>();
+        public List<Action<Stream>> PreparseActions = new List<Action<Stream>>();
+
         
         public enum OvlType
         {
@@ -67,43 +71,52 @@ namespace Atom
             return task;
         }
 
-        private static DisassemblyTask New(List<JOcaBase.JDmaData> dmadata, Rom rom, int index,
-            OverlayRecord ovlInfo, OvlType nameClass)
+        private static DisassemblyTask New(List<JDmaData> dmadata, int index, OverlayRecord ovlInfo,
+            OvlType nameClass)
         {
-            RomFile file; //what we're going to disassemble 
-
-            var overlay = new Overlay();
-            var dmaRecord = dmadata.SingleOrDefault(x => x.VRomStart == ovlInfo.VRom.Start && ovlInfo.VRom.Start != 0);
-            string name = (dmaRecord != null)? dmaRecord.Filename : $"{nameClass}_{index:X4}";
-
-            if (ovlInfo.VRom.Size != 0)
-            {
-                file = rom.Files.GetFile(ovlInfo.VRom);
-                BinaryReader br = new BinaryReader(file);
-                overlay = new Overlay(br);
-            }
+            string name = GetTaskName(dmadata, index, ovlInfo, nameClass);
 
             DisassemblyTask task = new DisassemblyTask()
             {
                 Name = name,
                 VRam = ovlInfo.VRam,
                 VRom = ovlInfo.VRom,
-                Relocations = overlay.Relocations
             };
+            task.PreparseActions.Add(input => {
+                OverlayPreprocess(task, input, ovlInfo); 
+            });
+            return task;
+        }
+
+        private static void OverlayPreprocess(DisassemblyTask task, Stream file, OverlayRecord ovlInfo)
+        {
+            var overlay = new Overlay();
+            if (ovlInfo.VRom.Size != 0)
+            {
+                BinaryReader br = new BinaryReader(file);
+                overlay = new Overlay(br);
+            }
+            task.Relocations = overlay.Relocations;
 
             N64Ptr fstart = task.VRam.Start;
 
             Section text = new Section("text", fstart, fstart, overlay.TextSize, 0, true);
             Section data = new Section("data", fstart, text.VRam + text.Size, overlay.DataSize, 0);
             Section rodata = new Section("rodata", fstart, data.VRam + data.Size, overlay.RodataSize, 0);
-            long off = ovlInfo.VRam.Start + ovlInfo.VRom.Size;
+            long off = task.VRam.Start + task.VRom.Size;
             Section bss = new Section("bss", fstart, off, overlay.BssSize, 0);
 
             task.Sections.Values.Add(text);
             task.Sections.Values.Add(data);
             task.Sections.Values.Add(rodata);
             task.Sections.Values.Add(bss);
-            return task;
+        }
+
+        private static string GetTaskName(List<JDmaData> dmadata, int index, OverlayRecord ovlInfo, OvlType nameClass)
+        {
+            var dmaRecord = dmadata.SingleOrDefault(x => x.VRomStart == ovlInfo.VRom.Start && ovlInfo.VRom.Start != 0);
+            string name = (dmaRecord != null) ? dmaRecord.Filename : $"{nameClass}_{index:X4}";
+            return name;
         }
 
         private static void GetActorSymbolNames(DisassemblyTask task, Rom rom, ActorOverlayRecord ovlRec)
@@ -111,29 +124,34 @@ namespace Atom
             if (ovlRec.VRamActorInfo == 0)
                 return;
 
-            N64Ptr startAddr;
-            RomFile file;
             if (ovlRec.VRom.Size == 0)
             {
-                file = rom.Files.GetFile(ORom.FileList.code);
+                RomFile file = rom.Files.GetFile(ORom.FileList.code);
                 Addresser.TryGetRam(ORom.FileList.code, rom.Version, out int code_start);
-                startAddr = code_start | 0x80000000;
+                N64Ptr startAddr = code_start | 0x80000000;
+
+                GetActorInfoSymbols(task, startAddr, ovlRec.VRamActorInfo, file);
             }
             else
             {
-                file = rom.Files.GetFile(ovlRec.VRom);
-                startAddr = ovlRec.VRam.Start;
+                task.PreparseActions.Add(file => {
+                    GetActorInfoSymbols(task, ovlRec.VRam.Start, ovlRec.VRamActorInfo, file);
+                });
             }
-            
-            file.Stream.Position = ovlRec.VRamActorInfo - startAddr;
+
+        }
+
+        private static void GetActorInfoSymbols(DisassemblyTask task, N64Ptr startAddr, N64Ptr vramActorInfo, Stream file)
+        {
+            file.Position = vramActorInfo - startAddr;
             ActorInit actorInfo = new ActorInit(new BinaryReader(file));
-            
-            BindSymbol(ovlRec.VRamActorInfo, Label.Type.VAR, "InitVars");
+
+            BindSymbol(vramActorInfo, Label.Type.VAR, "InitVars");
             BindSymbol(actorInfo.init_func, Label.Type.FUNC, "Init");
             BindSymbol(actorInfo.draw_func, Label.Type.FUNC, "Draw");
             BindSymbol(actorInfo.update_func, Label.Type.FUNC, "Update");
             BindSymbol(actorInfo.dest_func, Label.Type.FUNC, "Destructor");
-            
+
             void BindSymbol(N64Ptr ptr, Label.Type type, string name)
             {
                 if (ptr != 0)
@@ -150,7 +168,7 @@ namespace Atom
         public static List<DisassemblyTask> CreateTaskList(Rom rom)
         {
             List<DisassemblyTask> taskList = new List<DisassemblyTask>();
-            List<JOcaBase.JDmaData> dmadata;
+            List<JDmaData> dmadata;
             
             if (rom.Version.Game == Game.OcarinaOfTime)
             {
@@ -170,7 +188,7 @@ namespace Atom
             for (int i = 0; i < tables.Actors.Records; i++)
             {
                 var ovlRec = rom.Files.GetActorOverlayRecord(i);
-                var task = New(dmadata, rom, i, ovlRec, OvlType.Actor);
+                var task = New(dmadata, i, ovlRec, OvlType.Actor);
 
                 //set functions
                 GetActorSymbolNames(task, rom, ovlRec);
@@ -181,25 +199,25 @@ namespace Atom
             for (int i = 0; i < tables.Particles.Records; i++)
             {
                 var ovlRec = rom.Files.GetParticleOverlayRecord(i);
-                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Particle));
+                taskList.Add(New(dmadata, i, ovlRec, OvlType.Particle));
             }
 
             for (int i = 0; i < tables.GameOvls.Records; i++)
             {
                 var ovlRec = rom.Files.GetGameContextRecord(i);
-                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Game));
+                taskList.Add(New(dmadata, i, ovlRec, OvlType.Game));
             }
 
             for (int i = 0; i < tables.PlayerPause.Records; i++)
             {
                 var ovlRec = rom.Files.GetPlayPauseOverlayRecord(i);
-                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.PlayPause));
+                taskList.Add(New(dmadata, i, ovlRec, OvlType.PlayPause));
             }
 
             for (int i = 0; i < tables.Transitions.Records; i++)
             {
                 var ovlRec = rom.Files.GetOverlayRecord(i, TableInfo.Type.Transitions);
-                taskList.Add(New(dmadata, rom, i, ovlRec, OvlType.Transition));
+                taskList.Add(New(dmadata, i, ovlRec, OvlType.Transition));
             }
 
             List<JFileInfo> fileInfo = JQuery.Deserialize<List<JFileInfo>>("data/fileinfo.json");

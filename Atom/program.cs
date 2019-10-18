@@ -20,23 +20,22 @@ namespace Atom
         static void Main(string[] args)
         {
             PathUtil.Initialize();
-            {
-                var result = Parser.Default.ParseArguments(args, VerbTypes)
-                    .WithParsed<PathOptions>(
-                        a => UpdateRomPath(a))
-                    .WithParsed<AllOptions>(
-                        a => DisassembleAll(a))
-                    .WithParsed<DisassembleFileOptions>(
-                        a => DisassembleFile(a))
-                    .WithParsed<DisassembleOverlayOptions>(
-                        a => DisassembleOverlayFile(a))
-                    .WithParsed<ScriptOptions>(
-                        a => HandleInjectionScript(a))
-                    .WithParsed<OvlOptions>(
-                        a => ElfToOverlay(a))
-                    .WithParsed<VersionOptions>(
-                        a => ListSupportedVersions());
-            }
+
+            var result = Parser.Default.ParseArguments(args, VerbTypes)
+                .WithParsed<PathOptions>(
+                    a => UpdateRomPath(a))
+                .WithParsed<AllOptions>(
+                    a => DisassembleAll(a))
+                .WithParsed<DisassembleFileOptions>(
+                    a => DisassembleFile(a))
+                .WithParsed<DisassembleOverlayOptions>(
+                    a => DisassembleOverlayFile(a))
+                .WithParsed<ScriptOptions>(
+                    a => HandleInjectionScript(a))
+                .WithParsed<OvlOptions>(
+                    a => ElfToOverlay(a))
+                .WithParsed<VersionOptions>(
+                    a => ListSupportedVersions());
         }
 
         private static void DisassembleFile(DisassembleFileOptions a)
@@ -102,7 +101,7 @@ namespace Atom
                 Console.WriteLine($"Cannot find path for {opts.GameId} {opts.VersionId}");
                 return -1;
             }
-            Disassemble.GccOutput = opts.ReadableOutput;
+            Disassemble.GccOutput = !opts.ReadableOutput;
             Disassemble.PrintRelocations = true;
             Console.WriteLine($"{version} {path}");
             DisassembleRom(version, path);
@@ -217,11 +216,10 @@ namespace Atom
             List<DisassemblyTask> taskList = DisassemblyTask.CreateTaskList(rom);
             taskList = taskList.Where(x => x.VRom.End > 0).ToList();
             Console.WriteLine("DONE!");
-            Console.Write($"Building symbol table: ");
+            Console.Write($"Loading symbol table from file: ");
             Stream getFile(FileAddress x) => rom.Files.GetFile(x);
 
             LoadFunctionDatabase(ver);
-            GetSymbols(taskList, getFile);
 
             Console.WriteLine("DONE!");
             Console.WriteLine("Disassembling files: ");
@@ -272,21 +270,6 @@ namespace Atom
             }
         }
 
-        private static void GetSymbols(List<DisassemblyTask> tasks, Func<FileAddress, Stream> getFile)
-        {
-            foreach (var task in tasks)
-            {
-                foreach (var item in task.Functions)
-                    Disassemble.AddFunction(item);
-
-                using (BinaryReader br = new BinaryReader(getFile(task.VRom)))
-                {
-                    //Get a list of function names
-                    Disassemble.FirstParse(br, task);
-                }
-            }
-        }
-
         private static void DisassembleTasks(RomVersion ver, List<DisassemblyTask> taskList, Func<FileAddress, Stream> getFile)
         {
             var folder = GetFolder(ver);
@@ -296,13 +279,22 @@ namespace Atom
                 string filename = $"{folder}/{task.Name}.txt";
                 Console.Write($"\r{filename.PadRight(Console.BufferWidth)}");
 
-                using (var sw = File.CreateText(filename))
+
+                var file = getFile(task.VRom);
+
+                foreach (var action in task.PreparseActions)
                 {
-                    using (var br = new BinaryReader(getFile(task.VRom)))
-                    {
-                        Disassemble.Task(sw, br, task);
-                    }
+                    action(file);
                 }
+
+                foreach (var item in task.Functions)
+                    Disassemble.AddFunction(item);
+
+                using var br = new BinaryReader(file);
+                Disassemble.FirstParse(br, task);
+
+                using var sw = File.CreateText(filename);
+                Disassemble.Task(sw, br, task);
             }
             Console.CursorVisible = true;
         }
