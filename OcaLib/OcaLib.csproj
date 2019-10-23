@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,19 +22,14 @@
     <Content Include="Elf\Test.xml" />
     <Content Include="PathUtil\Test.xml" />
     <Content Include="SceneRoom\Notes.txt" />
-    <Content Include="Data\ActorVars.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\MMActorVars.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="XSLTFile1.xslt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Data\Addresses.xml">
+    <None Update="Data\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

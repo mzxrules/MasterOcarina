@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
@@ -17,7 +14,8 @@ namespace mzxrules.OcaLib
             Scenes,
             TitleCards,
             HyruleSkybox,
-            Transitions
+            Transitions,
+            MapMarkData
         }
         public class Table
         {
@@ -36,6 +34,7 @@ namespace mzxrules.OcaLib
         public Table TitleCards = new Table();
         public Table HyruleSkybox = new Table();
         public Table Transitions = new Table();
+        public Table MapMarkData = new Table();
 
         public TableInfo()
         {
@@ -55,6 +54,7 @@ namespace mzxrules.OcaLib
                 Scenes = new Table      { Id = "SceneTable_Start",              Length = 0x14, StartOff = 0, Records = scenes };
                 TitleCards = new Table  { Id = "SceneTable_Start",              Length = 0x14, StartOff = 8, Records = scenes };
                 HyruleSkybox = new Table{ Id = "HyruleSkyboxTable_Start",       Length = 0x08, StartOff = 0, Records = 18 };
+                MapMarkData = new Table { Id = "MapMarkDataTable_Start",        Length = 0x18, StartOff = 4, Records = 1 };
             }
             else if (version == Game.MajorasMask)
             {
@@ -81,6 +81,7 @@ namespace mzxrules.OcaLib
                 case Type.Scenes: return Scenes;
                 case Type.TitleCards: return TitleCards;
                 case Type.Transitions: return Transitions;
+                case Type.MapMarkData: return MapMarkData;
                 default:
                     throw new IndexOutOfRangeException();
             }

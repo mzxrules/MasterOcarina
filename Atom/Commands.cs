@@ -10,8 +10,7 @@ namespace Atom
     {
         //path [gameid] [versionid] [path]  //sets a path to a rom
         //all [gameid] [versionid]          //creates a gcc compatible disassembly of the entire rom
-        //df [gameid] [versionid]
-        //dovl [gameid] [versionid] [name]  //creates a disassembly of a specific overlay file
+        //df [gameid] [versionid]           //creates a disassembly of a specific file, defined in the /base database
         //script [path]                     //converts elf (.o) files to overlay form, and injects into the rom
         //script --new [path]               //creates a dummy script file
         //ovl [vram] [path]                 //creates an overlay file named [path].ovl from an elf (.o) file
@@ -20,7 +19,6 @@ namespace Atom
             typeof(PathOptions),
             typeof(AllOptions),
             typeof(DisassembleFileOptions),
-            typeof(DisassembleOverlayOptions),
             typeof(ScriptOptions),
             typeof(OvlOptions),
             typeof(VersionOptions),
@@ -46,17 +44,20 @@ namespace Atom
             public string VersionId { get; set; }
         }
 
-        [Verb("all", HelpText = "creates a disassembly of the entire rom")]
-        public class AllOptions : GameVersionOptions
+        public class DisassemblyOptions : GameVersionOptions
         {
             [Option('r', "readable",
                 Default = false,
                 HelpText = "Generates more readable, but uncompilable code")]
             public bool ReadableOutput { get; set; }
 
-            [Value(3, HelpText = ROM_HT_STR, MetaName = ROM_MT_STR, Required = false)]
+            [Value(3, HelpText = ROM_HT_STR + ". optional", MetaName = ROM_MT_STR, Required = false)]
             public string RomPath { get; set; }
+        }
 
+        [Verb("all", HelpText = "creates a disassembly of the entire rom")]
+        public class AllOptions : DisassemblyOptions
+        {
             [Usage()]
             public static IEnumerable<Example> Examples => new List<Example>
             {
@@ -75,43 +76,44 @@ namespace Atom
             };
         }
 
-        [Verb("df", Hidden = true)]
+        [Verb("df", HelpText = "creates a disassembly of a file. dependent on the /base folder definitions")]
         public class DisassembleFileOptions : FileLookupOptions { }
 
-        [Verb("dovl")]
-        public class DisassembleOverlayOptions : FileLookupOptions { }
-
-        public class FileLookupOptions : GameVersionOptions
+        public class FileLookupOptions : DisassemblyOptions
         {
-            [Option('s', "start", HelpText = "file start", Required = false, Hidden = true)]
+            [Option('s', "start", HelpText = "file start", Required = false, SetName = "pick addr")]
             public string FileStart { get; set; }
 
-            [Option('e', "end", HelpText = "file end", Required = false, Hidden = true)]
-            public string FileEnd { get; set; }
+            //[Option('e', "end", HelpText = "file end", Required = false, Hidden = true)]
+            //public string FileEnd { get; set; }
 
-            [Value(3, HelpText = "the internal name of the file to be decompiled", MetaName = "file")]
+            [Option('f', "file", HelpText = "the internal name of the file to be decompiled", Required = false, SetName = "pick file")]
             public string File { get; set; }
 
-            [Value(4, HelpText = "optional. " + ROM_HT_STR, MetaName = ROM_MT_STR, Required = false)]
-            public string RomPath { get; set; }
+            [Option('a', "af", HelpText = "the actor id of the file to be decompiled", Required = false, SetName = "pick actor")]
+            public string ActorIndex { get; set; }
 
             [Usage()]
             public static IEnumerable<Example> Examples => new List<Example>()
             {
-                new Example("Auto-lookup file using the /base folder database", new FileLookupOptions
+                new Example("Auto-lookup file by filename", new FileLookupOptions
                 {
                     GameId = $"oot",
                     VersionId = $"{ORom.Build.N0}",
-                    File = "code"
+                    File = "ovl_player_actor"
                 }),
-                //new Example("Specify file's location in rom", new FileLookupOptions
-                //{
-                //    GameId = $"oot",
-                //    VersionId = $"{ORom.Build.N0}",
-                //    File = "code",
-                //    FileStart = "A87000",
-                //    FileEnd = "B8AD30",
-                //}),
+                new Example("Auto-lookup file by actor index", new FileLookupOptions
+                {
+                    GameId = "oot",
+                    VersionId = $"{ORom.Build.DBGMQ}",
+                    ActorIndex = "66",
+                }),
+                new Example("Auto-lookup file by file start", new FileLookupOptions
+                {
+                    GameId = "oot",
+                    VersionId = $"{ORom.Build.N0}",
+                    FileStart = "A87000",
+                }),
             };
         }
 
@@ -129,7 +131,7 @@ namespace Atom
                 Default = false, Required = false)]
             public bool GenerateNewScript { get; set; }
 
-            [Value(1, HelpText = "path to the script .xml file")]
+            [Value(1, HelpText = "path to the script .xml file", MetaName = "path", Required = true)]
             public string ScriptPath { get; set; }
         }
 

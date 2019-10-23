@@ -42,7 +42,8 @@ namespace Atom
             Particle,
             PlayPause,
             Game,
-            Transition
+            Transition,
+            MapMarkData
         }
 
         
@@ -218,6 +219,15 @@ namespace Atom
             {
                 var ovlRec = rom.Files.GetOverlayRecord(i, TableInfo.Type.Transitions);
                 taskList.Add(New(dmadata, i, ovlRec, OvlType.Transition));
+            }
+
+            for (int i = 0; i < tables.MapMarkData.Records; i++)
+            {
+                var ovlRec = rom.Files.GetOverlayRecord(i, TableInfo.Type.MapMarkData);
+                if (ovlRec != null)
+                {
+                    taskList.Add(New(dmadata, i, ovlRec, OvlType.MapMarkData));
+                }
             }
 
             List<JFileInfo> fileInfo = JQuery.Deserialize<List<JFileInfo>>("data/fileinfo.json");

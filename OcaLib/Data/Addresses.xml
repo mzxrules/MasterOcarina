@@ -220,6 +220,22 @@
           <Data ver="DBGMQ">B96EDC</Data>
         </Address>
       </Identifier>
+      <Identifier id="MapMarkDataTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="N0">B67B58</Data>
+          <Data ver="N1"></Data>
+          <Data ver="N2"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="MQJ"></Data>
+          <Data ver="MQU">B661E8</Data>
+          <Data ver="MQP">B65B48</Data>
+          <Data ver="DBGMQ">B97298</Data>
+        </Address>
+      </Identifier>
       <Identifier id="ObjectTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!-- Object count = 0x192;-->

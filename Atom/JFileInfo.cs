@@ -1,30 +1,29 @@
 ﻿using mzxrules.Helper;
 using mzxrules.OcaLib;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace Atom
 {
-    [DataContract]
     public class JFileInfo
     {
-        [DataMember(Order = 1)]
+        [JsonProperty(Order = 1)]
         public string File;
 
-        [DataMember(Order = 2)]
+        [JsonProperty(Order = 2)]
         public string Game;
 
-        [DataMember(Order = 3)]
+        [JsonProperty(Order = 3)]
         public string Version;
 
-        [DataMember(Order = 4)]
+        [JsonProperty(Order = 4)]
         public JFileAddress Rom;
 
-        [DataMember(Order = 5)]
+        [JsonProperty(Order = 5)]
         public JFileAddress Ram;
 
-        [DataMember(Order = 6)]
+        [JsonProperty(Order = 6)]
         public List<JSectionInfo> Sections = new List<JSectionInfo>();
 
         public JFileInfo() { }
@@ -40,19 +39,18 @@ namespace Atom
         }
     }
 
-    [DataContract]
     public class JSectionInfo
     {
-        [DataMember(Order = 1)]
+        [JsonProperty(Order = 1)]
         public string Name;
 
-        [DataMember(Order = 2)]
+        [JsonProperty(Order = 2)]
         public int Subsection;
 
-        [DataMember(Order = 3)]
+        [JsonProperty(Order = 3)]
         public bool IsCode;
 
-        [DataMember(Order = 4)]
+        [JsonProperty(Order = 4)]
         public JFileAddress Ram;
 
 
@@ -67,12 +65,11 @@ namespace Atom
         }
     }
 
-    [DataContract]
     public class JFileAddress
     {
-        [DataMember(Order = 1)]
+        [JsonProperty(Order = 1)]
         public string Start;
-        [DataMember(Order = 2)]
+        [JsonProperty(Order = 2)]
         public string End;
 
         public JFileAddress() { }

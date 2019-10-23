@@ -317,6 +317,7 @@ namespace mzxrules.OcaLib
                 case TableInfo.Type.Particles: return new ParticleOverlayRecord(index, new BinaryReader(code));
                 case TableInfo.Type.PlayerPause: return new PlayPauseOverlayRecord(index, new BinaryReader(code));
                 case TableInfo.Type.Transitions: return new TransitionOverlayRecord(index, new BinaryReader(code));
+                case TableInfo.Type.MapMarkData: return new MapMarkDataOverlayRecord(new BinaryReader(code));
                 default: return null;
             }
         }

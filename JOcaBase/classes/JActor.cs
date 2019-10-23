@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Globalization;
 
 namespace JOcaBase
 {
@@ -11,6 +12,6 @@ namespace JOcaBase
         [DataMember]
         public string Name { get; set; }
 
-        public int Int_Id { get { return int.Parse(Id, System.Globalization.NumberStyles.HexNumber); } }
+        public int Int_Id => int.Parse(Id, NumberStyles.HexNumber);
     }
 }

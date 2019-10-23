@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 
 namespace Atom
 {
@@ -38,30 +39,17 @@ namespace Atom
 
         public static T Deserialize<T>(string path)
         {
-            DataContractJsonSerializer serializer;
+            var data = File.ReadAllText(path);
 
-            serializer = new DataContractJsonSerializer(typeof(T));
-
-            T result;
-
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                result = (T)serializer.ReadObject(fs);
-            }
-            return result;
+            return JsonConvert.DeserializeObject<T>(data);
         }
 
 
         public static void Serialize<T>(string path, T obj)
         {
-            DataContractJsonSerializer serializer;
-
-            serializer = new DataContractJsonSerializer(typeof(T));
-
-            using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-            {
-                serializer.WriteObject(fs, obj);
-            }
+            JsonSerializer serializer = new JsonSerializer();
+            using var fs = File.CreateText(path);
+            serializer.Serialize(fs, obj, typeof(T));
         }
     }
 }
