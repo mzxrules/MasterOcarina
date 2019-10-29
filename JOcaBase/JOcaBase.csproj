@@ -11,20 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="base\OOT\GCJ\" />
-    <Folder Include="base\OOT\GCP\" />
-    <Folder Include="base\OOT\GCU\" />
-    <Folder Include="base\OOT\MQJ\" />
-    <Folder Include="base\OOT\MQP\" />
-    <Folder Include="base\OOT\MQU\" />
-    <Folder Include="base\OOT\N1\" />
-    <Folder Include="base\OOT\N2\" />
-    <Folder Include="base\OOT\P0\" />
-    <Folder Include="base\OOT\P1\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="base\*">
+    <None Update="base\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </None>
