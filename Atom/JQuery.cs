@@ -9,9 +9,10 @@ namespace Atom
 {
     public static class JQuery
     {
-        public static List<FunctionInfo> GetFunctionInfo(RomVersion ver)
+        public static List<FunctionInfo> GetFunctionInfo(RomVersion version)
         {
-            string game = ver.GetGameAbbr();
+            string game = version.GetGameAbbr();
+            string ver = version.GetVerAbbr();
 
             string filepath = $"data/{game}-{ver}.json";
             if (File.Exists(filepath))

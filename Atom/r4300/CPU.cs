@@ -12,7 +12,7 @@ namespace Atom
     {
         #region Main op types
 
-        static Func<uint, string>[] MAIN_T = new Func<uint, string>[64]
+        static readonly Func<uint, string>[] MAIN_T = new Func<uint, string>[64]
         {
             SPECIAL,REGIMM, J,      JAL,    BEQ,    BNE,    BLEZ,   BGTZ,
             ADDI,   ADDIU,  SLTI,   SLTIU,  ANDI,   ORI,    XORI,   LUI,
@@ -164,7 +164,7 @@ namespace Atom
 
         #region SPECIAL op types
 
-        static Func<uint, string>[] SPECIAL_T = new Func<uint, string>[64]
+        static readonly Func<uint, string>[] SPECIAL_T = new Func<uint, string>[64]
         {
             SLL,    NONE,   SRL,    SRA,    SLLV,   NONE,   SRLV,   SRAV,
             JR,     JALR,   NONE,   NONE,   SYSCALL,BREAK,  NONE,   SYNC,
@@ -298,7 +298,7 @@ namespace Atom
         #endregion
         
         #region REGIMM op types
-        static Func<uint, string>[] REGIMM_T = new Func<uint, string>[32]
+        static readonly Func<uint, string>[] REGIMM_T = new Func<uint, string>[32]
         {
             BLTZ,   BGEZ,   BLTZL,  BGEZL,  NONE,   NONE,   NONE,   NONE,
             TGEI,   TGEIU,  TLTI,   TLTIU,  TEQI,   NONE,   TNEI,   NONE,

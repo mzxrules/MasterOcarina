@@ -239,14 +239,10 @@ namespace Atom
             DisassemblyTask task = null;
             Disassemble.PrintRelocations = true;
 
-            using (StreamWriter sw = new StreamWriter("__code.txt"))
-            {
-                using (BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom)))
-                {
-                    Disassemble.FirstParse(br, task);
-                    Disassemble.Task(sw, br, task);
-                }
-            }
+            using StreamWriter sw = File.CreateText("__code.txt");
+            using BinaryReader br = new BinaryReader(rom.Files.GetFile(task.VRom));
+            Disassemble.FirstParse(br, task);
+            Disassemble.Task(sw, br, task);
         }
 
 

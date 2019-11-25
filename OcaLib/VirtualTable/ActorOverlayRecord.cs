@@ -19,7 +19,7 @@ namespace mzxrules.OcaLib
         //public FileAddress VRom;
         //public FileAddress VRam;
         //N64Ptr RamStart;
-        public N64Ptr VRamActorInfo;
+        public N64Ptr VRamActorInit;
         public N64Ptr RamFileName;
         public ushort AllocationType;
         public sbyte NumSpawned;
@@ -59,7 +59,7 @@ namespace mzxrules.OcaLib
             VRam = new N64PtrRange(br.ReadBigUInt32(), br.ReadBigUInt32());
 
             RamStart = br.ReadBigUInt32();
-            VRamActorInfo = br.ReadBigUInt32();
+            VRamActorInit = br.ReadBigUInt32();
             RamFileName = br.ReadBigUInt32();
             AllocationType = br.ReadBigUInt16();
             NumSpawned = br.ReadSByte();
@@ -72,7 +72,7 @@ namespace mzxrules.OcaLib
             VRam = new N64PtrRange(recordPtr.ReadUInt32(0x08), recordPtr.ReadUInt32(0x0C));
 
             RamStart = recordPtr.ReadUInt32(0x10);
-            VRamActorInfo = recordPtr.ReadUInt32(0x14);
+            VRamActorInit = recordPtr.ReadUInt32(0x14);
             RamFileName = recordPtr.ReadUInt32(0x18);
             AllocationType = recordPtr.ReadUInt16(0x1C);
             NumSpawned = (sbyte)recordPtr.ReadByte(0x1E);

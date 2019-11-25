@@ -1,0 +1,3848 @@
+[
+
+  {
+    "Addr": "8001F548",
+    "Name": null,
+    "Desc": "Drops a collectible",
+    "Desc2": null,
+    "Args": "a0 = global context | a1 = actor instance + 0x24 | a2 = drop ID"
+  },
+  {
+    "Addr": "8001F77C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8001F940",
+    "Name": null,
+    "Desc": "Randomized item spawn",
+    "Desc2": null,
+    "Args": "a0 = global context | a1 = actor instance | a2 = position array | a3 = drop table ID"
+  },
+  {
+    "Addr": "8001FDF0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80020120",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80026230",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80026608",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80026B0C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80026CD4",
+    "Name": "EffectAdd",
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002709C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800274E0",
+    "Name": null,
+    "Desc": "Kill Particle",
+    "Desc2": null,
+    "Args": "A0 = Particle Instance Ptr"
+  },
+  {
+    "Addr": "80027704",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80027DD4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80027F80",
+    "Name": null,
+    "Desc": "Draw Splash? (Particle 0x0A)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002829C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002836C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 0 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002843C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 2 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002865C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 4 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800286CC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 5 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002873C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 4 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800287AC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x00 Type 5 (Wrapper for 8001BCE0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028990",
+    "Name": null,
+    "Desc": "Spawn 20 Particle 0x00 (Calls 8001C234)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028A54",
+    "Name": null,
+    "Desc": "Spawn 20 Particle 0x00 (Calls 8001C2A4)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028B18",
+    "Name": null,
+    "Desc": "Spawn Particle 0x01 (Wrapper for 8001C6A8)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028B74",
+    "Name": null,
+    "Desc": "Spawn Particle 0x01 (Wrapper for 8001C6A8)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028BB0",
+    "Name": null,
+    "Desc": "Spawn Particle 0x01 (Fairy Sparkle)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028CEC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x01 (?, First Visit ToT as Adult)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028E84",
+    "Name": null,
+    "Desc": "Spawn Particle 0x03",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80028F84",
+    "Name": null,
+    "Desc": "Spawn Particle 0x04 (Wrapper for 8001C9EC)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029024",
+    "Name": null,
+    "Desc": "Spawn Particle 0x04 (Wrapper for 8001CAD0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029184",
+    "Name": null,
+    "Desc": "Spawn Particle 0x05 (Wrapper for 8001CDD4)",
+    "Desc2": null,
+    "Args": "Bomb Spark"
+  },
+  {
+    "Addr": "800293A0",
+    "Name": null,
+    "Desc": "Spawn Particle 0x06 (Wrapper for 8001CE18)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800293E4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x07",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029444",
+    "Name": null,
+    "Desc": "Spawn Particle 0x09",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002949C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0A",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029530",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0B",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800295A0",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0D",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029618",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0E",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029694",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0E",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029724",
+    "Name": null,
+    "Desc": "Spawn Particle 0x0F",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800297A4",
+    "Name": null,
+    "Desc": "Spawn N Particle 0x0F (Wrapper for 8001D21C)",
+    "Desc2": null,
+    "Args": "SP+0x18 = s16 Particles to Spawn"
+  },
+  {
+    "Addr": "800299AC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x11 (Wrapper for 8001D438)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029B90",
+    "Name": null,
+    "Desc": "Spawn Particle 0x13",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029C00",
+    "Name": null,
+    "Desc": "Spawn Particle 0x14",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029CA4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x15 (Wrapper for 8001D750)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029CC8",
+    "Name": null,
+    "Desc": "Spawn Particle 0x15 (Wrapper for 8001D750)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029CF0",
+    "Name": null,
+    "Desc": "Spawn Particle 0x16",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029D5C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x16",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029DBC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x17",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80029E8C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x19",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A140",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1B",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A1DC",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1B",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A2A4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1B",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A3C4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1C (Wrapper for 8001DE40)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A4D4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1D",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A5F4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1E",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A65C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x1F",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A6B8",
+    "Name": null,
+    "Desc": "Spawn Particle 0x20",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A770",
+    "Name": null,
+    "Desc": "Spawn Particle 0x21",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A90C",
+    "Name": null,
+    "Desc": "Spawn Particle 0x22 (Wrapper for 8001E3B0)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002A9F4",
+    "Name": null,
+    "Desc": "Spawn Particle 0x23 (Wrapper for 8001E478)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002AA44",
+    "Name": null,
+    "Desc": "Spawn Particle 0x24",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002B1E0",
+    "Name": null,
+    "Desc": "Draws circular shadow until instance is destroyed (use in constructor)",
+    "Desc2": null,
+    "Args": "a0 - actor instance + 0xB4  | a1 - float unknown (will be stored at a0 + 0x08)  | a2 - 8002B5EC (draw function of shadow, will be stored at a0 + 0x0C)  | a3 - float unknown (will be stored at a0 + 0x10)"
+  },
+  {
+    "Addr": "8002BDB0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002CB40",
+    "Name": null,
+    "Desc": "Tests if Switch Flag is Set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Switch Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CB74",
+    "Name": null,
+    "Desc": "Sets Switch Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Switch Flag Value"
+  },
+  {
+    "Addr": "8002CBB4",
+    "Name": null,
+    "Desc": "Sets Switch Flag to 0",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Switch Flag Value"
+  },
+  {
+    "Addr": "8002CBF8",
+    "Name": null,
+    "Desc": "Tests if Unused Scene Flag is Set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CC2C",
+    "Name": null,
+    "Desc": "Sets Unused Scene Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CC6C",
+    "Name": null,
+    "Desc": "Sets Unused Scene Flag to 0",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CCB0",
+    "Name": null,
+    "Desc": "Tests if a Chest Flag is set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CCC4",
+    "Name": null,
+    "Desc": "Sets Chest Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CCDC",
+    "Name": null,
+    "Desc": "Test if a Room Clear Flag is set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CCF0",
+    "Name": null,
+    "Desc": "Sets Room Clear Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CD24",
+    "Name": null,
+    "Desc": "Tests if Global Context + 0x1D40 Flag is set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CD38",
+    "Name": null,
+    "Desc": "Sets Global Context + 0x1D40 Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CD6C",
+    "Name": null,
+    "Desc": "Tests if Scene Collectible Flag is set",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value | V0 = 0 if not set, or the flag bit if set"
+  },
+  {
+    "Addr": "8002CDA0",
+    "Name": null,
+    "Desc": "Sets Scene Collectible Flag to 1",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Flag Value"
+  },
+  {
+    "Addr": "8002CE00",
+    "Name": null,
+    "Desc": "Boss Title",
+    "Desc2": null,
+    "Args": "A0 - global context | A1 - A0 + 0x1D4C | A2 - (object pointer + texture offset inside the object)"
+  },
+  {
+    "Addr": "8002D570",
+    "Name": null,
+    "Desc": "Kill Actor (nulls draw/update, but does not deallocate)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance ptr"
+  },
+  {
+    "Addr": "8002D5B8",
+    "Name": null,
+    "Desc": "Sets the actor height (used by navi, target arrows, camera face when an npc is talking, etc)",
+    "Desc2": null,
+    "Args": "a0 - actor instance | a1 - float Y position from actor origin"
+  },
+  {
+    "Addr": "8002D62C",
+    "Name": null,
+    "Desc": "Scale Actor",
+    "Desc2": null,
+    "Args": "A0 - actor context | A1 - float value"
+  },
+  {
+    "Addr": "8002D644",
+    "Name": null,
+    "Desc": "Update CPU Segment 0x06 to point to actor's defined object dependency",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Actor Instance ptr"
+  },
+  {
+    "Addr": "8002D7EC",
+    "Name": null,
+    "Desc": "Physics, updates XYZ coordinates of actor",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance ptr"
+  },
+  {
+    "Addr": "8002D868",
+    "Name": null,
+    "Desc": "Physics, updates XYZ velocity vectors (+0x5C) of an actor",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance ptr"
+  },
+  {
+    "Addr": "8002D8E0",
+    "Name": null,
+    "Desc": "Function to move in direction (0x32) at set velocity (0x68)",
+    "Desc2": null,
+    "Args": "a0 = pointer to start address of actor instance"
+  },
+  {
+    "Addr": "8002D908",
+    "Name": null,
+    "Desc": "Physics, updates XYZ velocity vectors (+0x5C) of an actor",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002D97C",
+    "Name": null,
+    "Desc": "Physics, updates XYZ velocity and XYZ coordinates of actor | (Wrapper for 80021248 and 80021124)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance ptr"
+  },
+  {
+    "Addr": "8002D9A4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DA78",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DAC0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DAE0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DB28",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DB48",
+    "Name": null,
+    "Desc": "Calculates XYZ between two actors (+0x24) | Wrapper for 80063E18",
+    "Desc2": null,
+    "Args": "A0 = Actor A | A1 = Actor B | F0 = Result"
+  },
+  {
+    "Addr": "8002DB6C",
+    "Name": null,
+    "Desc": "Calculates XYZ between actor (+0x24) and a point  | Wrapper fo 80063E18",
+    "Desc2": null,
+    "Args": "A0 = Actor | A1 = Coordinate ptr | F0 = Result"
+  },
+  {
+    "Addr": "8002DB8C",
+    "Name": null,
+    "Desc": "Calculates XZ distance between two actors (+0x24) | Wrapper for 80063EB8",
+    "Desc2": null,
+    "Args": "A0 = Actor A | A1 = Actor B | F0 = Result"
+  },
+  {
+    "Addr": "8002DBB0",
+    "Name": null,
+    "Desc": "Calculates XZ distance between actor (+0x24) and a Point  | Wrapper for 80063EB8",
+    "Desc2": null,
+    "Args": "A0 = Actor | A1 = Coordinate ptr | F0 = Result"
+  },
+  {
+    "Addr": "8002DBD0",
+    "Name": null,
+    "Desc": "Returns vertical, horizontal and front distance between 2 points taking rotation of instance into account",
+    "Desc2": null,
+    "Args": "a0 - actor instance | a1 - $sp + offset to store an array of 3 floats | a2 - array position of Link (and other stuff?)"
+  },
+  {
+    "Addr": "8002DD78",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DDE4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DDF4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DE04",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DEEC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DF38",
+    "Name": null,
+    "Desc": "Sets cutscene action for Link, and sets Link + 0x046A to 1",
+    "Desc2": null,
+    "Args": "a0 = global context | a1 = actor instance (unknown usage) | a2 = action ID (check var_80854B18 in link action)"
+  },
+  {
+    "Addr": "8002DF54",
+    "Name": null,
+    "Desc": "Sets cutscene action for Link, and sets Link + 0x046A to 0",
+    "Desc2": null,
+    "Args": "a0 = global context | a1 = actor instance (unknown usage) | a2 = action ID (check var_80854B18 in link action)"
+  },
+  {
+    "Addr": "8002DF90",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002DFC8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002E084",
+    "Name": null,
+    "Desc": "Detects if the angle to face Link is inside a1 range",
+    "Desc2": null,
+    "Args": "a0 = actor context | a1 = short angle value | v0 = 0 if false"
+  },
+  {
+    "Addr": "8002E12C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002E1A8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002E4B4",
+    "Name": null,
+    "Desc": "Possibly primary actor collision call",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Actor Instance | A2 = float wallCheckHeight? (26f for Link) | A3 = float wallPushback? (18f/14f for Adult/Child Link) | SP+0x10 float ? (56f/40f for Adult/Child Link) | SP+0x14 int (type?)"
+  },
+  {
+    "Addr": "8002EBCC",
+    "Name": null,
+    "Desc": "Sets lighting angles for shiny things or something.",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002ED80",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F194",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F1C4",
+    "Name": null,
+    "Desc": "NPC Request Trade Item",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context | A2 = float (distance 1?) | A3 = float (disstance 2?) | SP+0x10 = Trade Item Index"
+  },
+  {
+    "Addr": "8002F298",
+    "Name": null,
+    "Desc": "NPC Request Trade Item | (Wrapper for 80022960)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context | A2 = float distance? | A3 = Trade Item Index"
+  },
+  {
+    "Addr": "8002F2CC",
+    "Name": null,
+    "Desc": "NPC Request Trade Item? | (Wrapper for 80022A34)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context | A2 = float distance?"
+  },
+  {
+    "Addr": "8002F2F4",
+    "Name": null,
+    "Desc": "NPC Request Trade Item? | (Wrapper for 80022A68)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context"
+  },
+  {
+    "Addr": "8002F334",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F368",
+    "Name": null,
+    "Desc": "Get Trade Item Link is holding",
+    "Desc2": null,
+    "Args": "Returns Link Instance + 0x0683"
+  },
+  {
+    "Addr": "8002F374",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F410",
+    "Name": null,
+    "Desc": "Is Actor Held? Or Interacting?",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | V0 = 0 if Instance + 0x118 is null, else 1"
+  },
+  {
+    "Addr": "8002F434",
+    "Name": null,
+    "Desc": "Give Item",
+    "Desc2": null,
+    "Args": "A0 = Actor instance //Actor giving item | A1 = Global Context | A2 = Get Item ID | A3 = float, max xz distance from actor to Link that item will be given | SP+10 = float, max y distance from actor to Link that item will be given"
+  },
+  {
+    "Addr": "8002F554",
+    "Name": null,
+    "Desc": "Give Item Wrapper (80022BD4) | Sets A3 to 50.0f, SP+0x10 to 10.0f",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context | A2 = Get Item Id"
+  },
+  {
+    "Addr": "8002F580",
+    "Name": null,
+    "Desc": "Give Item Wrapper (80022CF4) | Sets A2 to 0",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Global Context"
+  },
+  {
+    "Addr": "8002F5A0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F5C4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F5F0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F618",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F63C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F674",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F6D4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F71C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F7A0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F7DC",
+    "Name": null,
+    "Desc": "Play Sound Effect (Actor)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Sfx Id"
+  },
+  {
+    "Addr": "8002F828",
+    "Name": null,
+    "Desc": "Play Sound Effect (Actor)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Sfx Id"
+  },
+  {
+    "Addr": "8002F850",
+    "Name": null,
+    "Desc": "Play Surface Sound Effect",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Actor Instance"
+  },
+  {
+    "Addr": "8002F8F0",
+    "Name": null,
+    "Desc": "Play Sound Effect (Actor)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Sfx Id"
+  },
+  {
+    "Addr": "8002F948",
+    "Name": null,
+    "Desc": "Play sound in a loop?",
+    "Desc2": null,
+    "Args": "a0 - actor instance | a1 = sfx id"
+  },
+  {
+    "Addr": "8002F974",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F994",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8002F9EC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800314D4",
+    "Name": null,
+    "Desc": "Possibly tests if actor should be drawn",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = actor instance | A2 = actor instance + 0xE4 | A3 = float at actor instance + 0xF0"
+  },
+  {
+    "Addr": "80031F50",
+    "Name": "ActorSpawn",
+    "Desc": "Spawn Actor",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x1C24 | A1 = Global Context | A2 = s16 Actor Id | A3 = float x | SP+0x10 = float y | SP+0x14 = float z | SP+0x18 = rotx | SP+0x1C = roty | SP+0x20 = rotz | SP+0x24 = s16 var | V0 = Pointer to new actor, or null"
+  },
+  {
+    "Addr": "80032458",
+    "Name": null,
+    "Desc": "Spawn Attached Actor",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x1C24 | A1 = Actor* attachToInstance | A2 = Global Context | A3 = s16 Actor Id | SP + 0x10 = float x | SP + 0x14 = float y | SP + 0x18 = float z | SP + 0x1C = s16 rotx | SP + 0x20 = s16 roty | SP + 0x24 = s16 rotz | SP + 0x28 = s16 var | V0 = Pointer to new actor, or null if allocation failed"
+  },
+  {
+    "Addr": "80032C3C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80032C7C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80032E24",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80032F54",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003305C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033260",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033480",
+    "Name": null,
+    "Desc": "Dust particle?",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033640",
+    "Name": null,
+    "Desc": "Collision, Test if entity is being bombed",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Actor Collision Struct | V0 = Null or Pointer to Explosive-type actor that collided"
+  },
+  {
+    "Addr": "80033684",
+    "Name": null,
+    "Desc": "Unknown, collision detection related",
+    "Desc2": null,
+    "Args": "a0 = global context | a1 = actor instance | v0 = unknown"
+  },
+  {
+    "Addr": "80033748",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033780",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033940",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800339B8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033A84",
+    "Name": null,
+    "Desc": "? Same code as 80026950",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = ?"
+  },
+  {
+    "Addr": "80033AB8",
+    "Name": null,
+    "Desc": "? Same code as 8002691C",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = ?"
+  },
+  {
+    "Addr": "80033AEC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033C30",
+    "Name": null,
+    "Desc": "Draw circular shadow",
+    "Desc2": null,
+    "Args": "a0 actor pointer + 0x24 (position array) | a1  scale, 12 byte array | a2 0x00FF | a3 global context"
+  },
+  {
+    "Addr": "80033E88",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80033EF8",
+    "Name": null,
+    "Desc": "Generates a random floating point between 0 and N exclusive",
+    "Desc2": null,
+    "Args": "F12 = N, exclusive upper bound | F0 = result"
+  },
+  {
+    "Addr": "80033F20",
+    "Name": null,
+    "Desc": "Multiplies value by a random scalar between -0.5 and 0.5 exclusive",
+    "Desc2": null,
+    "Args": "F12 = N | F0 = result"
+  },
+  {
+    "Addr": "8003424C",
+    "Name": null,
+    "Desc": "Wrapper for 800511B8",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003426C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800343CC",
+    "Name": null,
+    "Desc": "Set NPC Dialog Response",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Actor Instance | A2 = ? | A3 = ?"
+  },
+  {
+    "Addr": "800347E8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": "A0 = s16 unk | v0 = unk"
+  },
+  {
+    "Addr": "80034A14",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80034DD4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80034EC0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80034F54",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80035260",
+    "Name": null,
+    "Desc": "Draws Opaque Dlist",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - DList segment offset"
+  },
+  {
+    "Addr": "80035324",
+    "Name": null,
+    "Desc": "Draws Translucent Dlist",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - DList segment offset | a2 - Unknown, set to 0"
+  },
+  {
+    "Addr": "800353F4",
+    "Name": null,
+    "Desc": "Find actor instance of certain ID / category / distance",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance | a2 - actor id (0xFFFF = any) | a3 - category | 0x10($sp) distance (float)"
+  },
+  {
+    "Addr": "800354B4",
+    "Name": null,
+    "Desc": "Checks if link is at certain distance, and if link is attacking, doesn't check jumpslashes",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance | a2 - float value | a3 - ???? | 0x10($sp) - rotation value? | 0x14($sp) - rotation value 0xB6(s0)? | v0 - returns true/false"
+  },
+  {
+    "Addr": "8003555C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800355B8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800355E4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80035628",
+    "Name": null,
+    "Desc": "Subtracts damage amount (colliding damage source) from instance's health",
+    "Desc2": null,
+    "Args": "a0 - actor instance"
+  },
+  {
+    "Addr": "80035650",
+    "Name": null,
+    "Desc": "Attack Collision (sets redead-freeze variable in some cases)",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Actor hitbox struct + 0x18 | A2 = ? (0 this pass) | result stored at a0 + 0x116 "
+  },
+  {
+    "Addr": "8003573C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80035844",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800359B8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80035B4C",
+    "Name": null,
+    "Desc": "Tests if event_chk_inf flag is set",
+    "Desc2": null,
+    "Args": "A0 = event_chk_inf flag id | V0 = 0 if not set, non-zero if set"
+  },
+  {
+    "Addr": "80035B74",
+    "Name": null,
+    "Desc": "Sets event_chk_inf flag to 1",
+    "Desc2": null,
+    "Args": "A0 = event_chk_inf_flag id"
+  },
+  {
+    "Addr": "80037C30",
+    "Name": null,
+    "Desc": "Generic NPC Text Handler 7",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - 0xF (?) | v0 - (?)"
+  },
+  {
+    "Addr": "80037D98",
+    "Name": null,
+    "Desc": "Enables speak command, use in update",
+    "Desc2": null,
+    "Args": "a0 - global context  |  a1 - actor instance  | a2 - 0xF (??? related to what message to display)  | a3 - actor instance + 0x01A0 (not sure what this points to...)"
+  },
+  {
+    "Addr": "80038290",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003C890",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003C940",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003C9A4",
+    "Name": null,
+    "Desc": "Raycast",
+    "Desc2": null,
+    "Args": "a0 = global context + 0x07C0 | a1 = actor instance + 0x78 (touching floor polygon, checked falling platform and magic bean) | a2 = some place in the current stack? | a3 = actor instance | 0x10 $sp = actor instance + 0x24 (position) | $f0 (return value) = Y position to place actor at"
+  },
+  {
+    "Addr": "8003CA0C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003CA64",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003D464",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003DE84",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003DF10",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003DFA0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003E02C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003E0B8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003E0FC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003E30C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003EA74",
+    "Name": "DynaPolyInfo_setActor",
+    "Desc": "Initializes Poly Collision Actor",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Global Context + 0x810 | A2 = Actor Index | A3 = result of func 80041880 | V0 = Mesh Collision Id"
+  },
+  {
+    "Addr": "8003EB84",
+    "Name": "DynaPolyInfo_getActor",
+    "Desc": "Get Poly Collision Actor reference",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Mesh Collision Id | V0 = Actor Instance or null"
+  },
+  {
+    "Addr": "8003EBF8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003EC50",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003ECA8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8003ED58",
+    "Name": "DynaPolyInfo_delReserve",
+    "Desc": "Removes Poly Collision Actor ",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Global Context + 0x810 | A2 = Mesh Collision Id"
+  },
+  {
+    "Addr": "8003EE6C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80041880",
+    "Name": null,
+    "Desc": "Convert Poly Collision Segment Addresses to real addresses",
+    "Desc2": null,
+    "Args": "A0 = Segment Offset to Collision Data | A1 = ptr to store result?"
+  },
+  {
+    "Addr": "80041D4C",
+    "Name": null,
+    "Desc": "Get PolyType High Word >> 0x0003 E000",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "80041DB8",
+    "Name": null,
+    "Desc": "Collision, poly surface",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "80041EA4",
+    "Name": null,
+    "Desc": "Collision, poly surface, return? ",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "80041EEC",
+    "Name": null,
+    "Desc": "Collision, poly surface, return? ",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "80041F34",
+    "Name": null,
+    "Desc": "Collision related",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Ptr to the polygon detected | A2 = Complex Mesh Id. 0x32 = Scene Mesh"
+  },
+  {
+    "Addr": "80041FE8",
+    "Name": null,
+    "Desc": "Collision, poly surface, return?",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "80042048",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800420C0",
+    "Name": null,
+    "Desc": "Collision, poly surface, return Conveyor Surface Speed",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "800420E4",
+    "Name": null,
+    "Desc": "Collision, poly surface, return Conveyor Surface Direction",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x7C0 | A1 = Polygon* | A2 = Mesh Collision Id | V0 = Result"
+  },
+  {
+    "Addr": "8004213C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80042244",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8004239C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800433A4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80043480",
+    "Name": null,
+    "Desc": "Set collision behaviour",
+    "Desc2": null,
+    "Args": "a0 - actor instance | a1 = if 1, updates the coordinates of actors on top of it"
+  },
+  {
+    "Addr": "800434A8",
+    "Name": null,
+    "Desc": "performs OR 0x0001 to the value at 0x0160(a0)",
+    "Desc2": null,
+    "Args": "a0 - actor instance"
+  },
+  {
+    "Addr": "80043538",
+    "Name": null,
+    "Desc": "performs OR 0x0008 to the value at 0x0160(a0)",
+    "Desc2": null,
+    "Args": "a0 - actor instance"
+  },
+  {
+    "Addr": "80043548",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8004356C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80043590",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800435B4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800435D8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005A77C",
+    "Name": null,
+    "Desc": "Camera related (Wrapper for 800493C8)",
+    "Desc2": null,
+    "Args": "A0 = Camera struct ptr (ref in Global Context + 0x0790) | A1 = Camera S (0x25 this pass)"
+  },
+  {
+    "Addr": "8005A948",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005A9F4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AA1C",
+    "Name": null,
+    "Desc": "Camera earthquake?",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AC60",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AC6C",
+    "Name": null,
+    "Desc": "Cutscene Camera?",
+    "Desc2": null,
+    "Args": "A0 = Cutscene Camera struct ptr | A1 = Focus Point Tween List | A2 = Camera Position Tween List | A3 = Actor Instance (tracked actor)"
+  },
+  {
+    "Addr": "8005ACFC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AD1C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AD40",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005AFD4",
+    "Name": "setCameraData",
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005B198",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005B1A4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005B200",
+    "Name": null,
+    "Desc": "retrieves damage chart table pointer, called by all actors that doesn't have their damage chart inside overlay",
+    "Desc2": null,
+    "Args": "a0 - entry ID of some table? varies between actors | v0 - returns pointer that's used in a1 of damage chart initializer (80061EFC)"
+  },
+  {
+    "Addr": "8005BBF8",
+    "Name": null,
+    "Desc": "Initializes hitbox structure (cylinder array)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) "
+  },
+  {
+    "Addr": "8005BC28",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005BCC8",
+    "Name": null,
+    "Desc": "Unloads hitbox structure (cylinder array)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x0150 (offset where you stored the hitbox struct)"
+  },
+  {
+    "Addr": "8005BE50",
+    "Name": "ClObjJntSph_set3",
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005C050",
+    "Name": null,
+    "Desc": "Loads hitbox variable array to hitbox structure  (cylinder array) ",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array "
+  },
+  {
+    "Addr": "8005C364",
+    "Name": null,
+    "Desc": "Initializes hitbox structure (cylinder)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance)"
+  },
+  {
+    "Addr": "8005C3AC",
+    "Name": null,
+    "Desc": "Unloads hitbox structure (cylinder)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct)"
+  },
+  {
+    "Addr": "8005C3F4",
+    "Name": null,
+    "Desc": "Loads hitbox variable array to hitbox structure (cylinder, 1 less argument)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) | a2 - hitbox variable array "
+  },
+  {
+    "Addr": "8005C450",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005C4AC",
+    "Name": null,
+    "Desc": "Loads hitbox variable array to hitbox structure (cylinder)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array"
+  },
+  {
+    "Addr": "8005C7E0",
+    "Name": null,
+    "Desc": "Initializes hitbox structure (tri array)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) "
+  },
+  {
+    "Addr": "8005C8C8",
+    "Name": null,
+    "Desc": "Possibly quad array unload",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8005CBAC",
+    "Name": null,
+    "Desc": "Loads hitbox variable array to hitbox structure (tri array)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) | a2 - actor instance | a3 - hitbox variable array"
+  },
+  {
+    "Addr": "8005D018",
+    "Name": null,
+    "Desc": "Initializes hitbox structure (quad)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) "
+  },
+  {
+    "Addr": "8005D060",
+    "Name": null,
+    "Desc": "Unloads hitbox structure (quad)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct)"
+  },
+  {
+    "Addr": "8005D104",
+    "Name": null,
+    "Desc": "Loads hitbox variable array to hitbox structure (quad)",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x???? (offset of hitbox struct in the instance) | a2 - hitbox variable array "
+  },
+  {
+    "Addr": "8005D79C",
+    "Name": "CollisionCheck_setAT",
+    "Desc": "Subscribe to collision pool 1, non-complex poly types | Called directly by actors",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?"
+  },
+  {
+    "Addr": "8005D9F4",
+    "Name": "CollisionCheck_setAC",
+    "Desc": "//Subscribe to collision pool 2, non-complex poly types | //Called directly by actors",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit?"
+  },
+  {
+    "Addr": "8005DC4C",
+    "Name": "CollisionCheck_setOT",
+    "Desc": "Subscribe to collision pool 3, non-complex poly types",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = 801DA300 //collision body groups | A2 = Collision Body Ptr | V0 = 0 or -1 based on 801DA302 lowest bit? | Called directly by actors"
+  },
+  {
+    "Addr": "80061ED4",
+    "Name": null,
+    "Desc": "initializes damage chart part of actor",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80061EFC",
+    "Name": null,
+    "Desc": "initializes damage chart part of actor",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800626DC",
+    "Name": null,
+    "Desc": "Move hitbox to actor position (cylinder)",
+    "Desc2": null,
+    "Args": "a0 - actor instance | a1 - actor instance + 0x???? 0x???? (offset of hitbox struct)"
+  },
+  {
+    "Addr": "80062734",
+    "Name": null,
+    "Desc": "Move hitbox (quad)",
+    "Desc2": null,
+    "Args": "A0 = actor instance + 0x???? (offset of hitbox struct)  | A1 = float pointA | A2 = float pointB | A3 = float pointC | SP+0x10 float pointD"
+  },
+  {
+    "Addr": "800627A0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800628A4",
+    "Name": null,
+    "Desc": "Move hitbox? (cylinder array?)",
+    "Desc2": null,
+    "Args": "a0 = 0? | a1 - actor instance + 0x???? (offset of hitbox struct)"
+  },
+  {
+    "Addr": "80062CD4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80062D60",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80062DF4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800635D0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80064520",
+    "Name": null,
+    "Desc": "Starts cutscene for link ",
+    "Desc2": null,
+    "Args": "A0 - global context | A1 - global context + 0x1D64"
+  },
+  {
+    "Addr": "80064534",
+    "Name": null,
+    "Desc": "Ends cutscene for link",
+    "Desc2": null,
+    "Args": "A0 - global context | A1 - global context + 0x1D64"
+  },
+  {
+    "Addr": "800693D8",
+    "Name": null,
+    "Desc": "Set Cutscene Pointer",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Segment Offset"
+  },
+  {
+    "Addr": "800694A0",
+    "Name": null,
+    "Desc": "Draw Get Item",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = s16 Get Item Model Id (0 = Bottle)"
+  },
+  {
+    "Addr": "8006BAD8",
+    "Name": null,
+    "Desc": "plays sound at position",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance + 0x24 (position array of the sound) | a2 - 0x3C (radius?) | a3 - sound ID"
+  },
+  {
+    "Addr": "8006C2B0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006C318",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006C360",
+    "Name": null,
+    "Desc": "Get NPC Mask Reaction",
+    "Desc2": null,
+    "Args": "A0 = ? | A1 = ? | V0 = Lookup result"
+  },
+  {
+    "Addr": "8006C4A4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006C85C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006C894",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006C8C4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006D074",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006DD9C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8006F93C",
+    "Name": null,
+    "Desc": "Compute Linear Tween",
+    "Desc2": null,
+    "Args": "A0 = s16 end frame | A1 = s16 start frame? | A2 = s16 current frame? | F2 = Value between 0.0 (current frame smaller than start frame) and 1.0 (current frame >= end frame)
+"
+  },
+  {
+    "Addr": "8006F9BC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80074CE8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800773A8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800775CC",
+    "Name": null,
+    "Desc": "Return s32 at 8011A5E8 (Event Days)",
+    "Desc2": null,
+    "Args": "V0 = s32 at 8011A5E8"
+  },
+  {
+    "Addr": "800775D8",
+    "Name": null,
+    "Desc": "Zero s32 at 8011A5E8 (Event Days)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800775F0",
+    "Name": null,
+    "Desc": "Update Background Music",
+    "Desc2": null,
+    "Args": "A0 = s32? value to write to 8011B9DE"
+  },
+  {
+    "Addr": "80077624",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80077684",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800777E0",
+    "Name": null,
+    "Desc": "memset byte",
+    "Desc2": null,
+    "Args": "A0 = Address | A1 = Size | A2 = u8 value"
+  },
+  {
+    "Addr": "80077834",
+    "Name": "coss?",
+    "Desc": "Math, Get cosine of short rotation angle",
+    "Desc2": null,
+    "Args": "A0 = s16 rotation | F0 = cosine of A0"
+  },
+  {
+    "Addr": "80077870",
+    "Name": "sins?",
+    "Desc": "Math, Get sine of short rotation angle",
+    "Desc2": null,
+    "Args": "A0 = s16 rotation | F0 = sine of A0"
+  },
+  {
+    "Addr": "800778AC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8007797C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80077A00",
+    "Name": null,
+    "Desc": "Float aproximator",
+    "Desc2": null,
+    "Args": "a0 - actor instance + 0x0198 (offset of stored float) | a1 - float value (target float) | a2 - float value (increments or decrements result by this until it reaches the target float) | v0 - returns 0 if it hasn't reached it, 1 if it does"
+  },
+  {
+    "Addr": "80077AF8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80077B58",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80077D90",
+    "Name": null,
+    "Desc": "Generates random s16 number",
+    "Desc2": null,
+    "Args": "A0 = s16 Offset | A1 = s16 Range | V0 = s16 Result"
+  },
+  {
+    "Addr": "80077E40",
+    "Name": "Vec3f_Copy",
+    "Desc": "Copy Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = out vector3_f32* result | A1 = vector3_f32* source"
+  },
+  {
+    "Addr": "80077E5C",
+    "Name": "Vec3f_CopyVec3s",
+    "Desc": "Convert s16 Coordinates to Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = out vector3_f32* result | A1 = vector3_s16* source"
+  },
+  {
+    "Addr": "80077E9C",
+    "Name": "Vec3f_Add",
+    "Desc": "Adds XYZ Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | A2 = Result ptr (A + B)"
+  },
+  {
+    "Addr": "80077ED0",
+    "Name": "Vec3f_Sub",
+    "Desc": "Calculates XYZ Difference Between Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | A2 = Result ptr (A - B)"
+  },
+  {
+    "Addr": "80077F04",
+    "Name": null,
+    "Desc": "Calculates XYZ Difference Between s16 Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Result Float Coord ptr (A - B) | A1 = s16 coord A ptr | A2 = s16 coord B ptr"
+  },
+  {
+    "Addr": "80077F5C",
+    "Name": null,
+    "Desc": "Multiply XYZ Float Coordinates By Scalar",
+    "Desc2": null,
+    "Args": "A0 = Coord ptr | A1 = Scalar Value"
+  },
+  {
+    "Addr": "80077F90",
+    "Name": null,
+    "Desc": "Calculates XYZ Distance Between Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | F0 = result"
+  },
+  {
+    "Addr": "80077FD0",
+    "Name": null,
+    "Desc": "Calculates XYZ Distance Between Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | A2 = Result B - A ptr | F0 = Distance"
+  },
+  {
+    "Addr": "80078028",
+    "Name": null,
+    "Desc": "Calculates XZ Distance Between Float Coordinates",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | F0 = Result"
+  },
+  {
+    "Addr": "80078068",
+    "Name": null,
+    "Desc": "Calculates Arctan2 (X,Z) of two coordinates (A-B) | Wrapper for 800AA4F8",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation"
+  },
+  {
+    "Addr": "8007809C",
+    "Name": null,
+    "Desc": "Calculates Arctan2 (distance(XZ), Y) of two coordinates | (A-B for Y coordinate)",
+    "Desc2": null,
+    "Args": "A0 = Coord A ptr | A1 = Coord B ptr | V0 = s16 rotation"
+  },
+  {
+    "Addr": "800780DC",
+    "Name": null,
+    "Desc": "Instance Init, Initialize Variable Chain",
+    "Desc2": null,
+    "Args": "A0 = Actor Instance | A1 = Variable Initializer List ptr"
+  },
+  {
+    "Addr": "80078310",
+    "Name": null,
+    "Desc": "unknown float func",
+    "Desc2": null,
+    "Args": "a0 - actor instance + xxxx (offset of the float that will change) | a1 - float | a2 - float  | a3 - float | 0x0010($sp) float"
+  },
+  {
+    "Addr": "8007841C",
+    "Name": null,
+    "Desc": "smoothly aproximates a0 to a1, commonly used for smooth movement",
+    "Desc2": null,
+    "Args": "a0 - actor instance + xxxx (offset of the float that will change) | a1 - float where you want a0 to be aproximated to | a2 - float (amount?)a3 - float (smaller than a2)"
+  },
+  {
+    "Addr": "8007848C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8007869C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": "A0 = s16 Rotation Pointer (Y this pass) | A1 = s16 ? | A2 = ? | A3 = ?"
+  },
+  {
+    "Addr": "800787BC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80078860",
+    "Name": null,
+    "Desc": "Copy u8[4] array",
+    "Desc2": null,
+    "Args": "A0 = Destination ptr | A1 = Source ptr"
+  },
+  {
+    "Addr": "80078884",
+    "Name": null,
+    "Desc": "Play SFX (limited set, identical to 80064738)",
+    "Desc2": null,
+    "Args": "A0 = SFX"
+  },
+  {
+    "Addr": "800788CC",
+    "Name": null,
+    "Desc": "Play SFX (limited set, Identical to 800646F0)",
+    "Desc2": null,
+    "Args": "A0 = SFX"
+  },
+  {
+    "Addr": "80078914",
+    "Name": null,
+    "Desc": "Play SFX (limited set)",
+    "Desc2": null,
+    "Args": "A0 = SFX"
+  },
+  {
+    "Addr": "80079D8C",
+    "Name": null,
+    "Desc": "Initialize Flame Light (Wrapper for 80065B70)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80079DF0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80079E58",
+    "Name": null,
+    "Desc": "Initialize Flame Color",
+    "Desc2": null,
+    "Args": "A0 = Blue Fire Instance + 0x19C | A1 = byte Red (0x9B this pass) | A2 = byte Green (0xD2 this pass) | A3 = byte Blue | SP + 0x10 = short Alpha?"
+  },
+  {
+    "Addr": "8007A764",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8007A7C4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8007C25C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8007C3F4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800800F8",
+    "Name": null,
+    "Desc": "Enters cutscene mode and plays actor cutscene",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 = actor cutscene ID | a2 = frame duration | a3 = actor | 0x10(sp) = ???"
+  },
+  {
+    "Addr": "800803F0",
+    "Name": null,
+    "Desc": "Camera related",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - s16 unknown"
+  },
+  {
+    "Addr": "80080480",
+    "Name": null,
+    "Desc": "Enters cutscene mode and focuses the actor for a short time",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance"
+  },
+  {
+    "Addr": "800806BC",
+    "Name": null,
+    "Desc": "Enters cutscene mode and focuses the actor for a short time, playing a sound?",
+    "Desc2": null,
+    "Args": "a0 - global context | a1 - actor instance | a2 - sound ID?"
+  },
+  {
+    "Addr": "80080728",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800825E0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800849EC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80084BF4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80084D10",
+    "Name": null,
+    "Desc": "Item Giving Routine",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Item Index"
+  },
+  {
+    "Addr": "80086388",
+    "Name": null,
+    "Desc": "? Check if player has item?",
+    "Desc2": null,
+    "Args": "A0 = Item Index | V0 = 0xFF if no Item?"
+  },
+  {
+    "Addr": "800869E4",
+    "Name": null,
+    "Desc": "Try Update Trade Quest Item |  (Egg -> Chicken/Pocket Cucco, Ruto's Letter -> Bottle)",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Old Item Index | A2 = New Item Index | V0 = 1 if successful, 0 otherwise"
+  },
+  {
+    "Addr": "80086ABC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80086B2C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80086F00",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008708C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80087174",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008730C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": "a0 rupees to substract"
+  },
+  {
+    "Addr": "80087330",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80087680",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800876C8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80087708",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80088AA0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80088B34",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008E4E0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008E520",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008E60C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008E8DC",
+    "Name": null,
+    "Desc": "Tests if Link is busy?",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Link Instance | V0 = 1 if true, 0 if false"
+  },
+  {
+    "Addr": "8008E988",
+    "Name": null,
+    "Desc": "Tests if Link is busy (Calls 8007938C, but also checks if talking?)",
+    "Desc2": null,
+    "Args": "A0 = Global Context | V0 = 1 if true, 0 if false"
+  },
+  {
+    "Addr": "8008EC04",
+    "Name": null,
+    "Desc": "? Related to updating Child Link's state if Hylian Shield is equipped",
+    "Desc2": null,
+    "Args": "A0 = Link Instance | A1 = 1 if 800794B0 returns 1, else 0"
+  },
+  {
+    "Addr": "8008ED9C",
+    "Name": null,
+    "Desc": "Update Bottle Contents, Link's Action State | //Calls 80071B7C",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Link Instance | A2 = Item Index (C-Item) | A3 = Action Parameter"
+  },
+  {
+    "Addr": "8008EEAC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008EF44",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008EF5C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8008F034",
+    "Name": null,
+    "Desc": "Get Strength Upgrade Power Level",
+    "Desc2": null,
+    "Args": "V0 = 0 if no upgrades, Highest Upgrade if Adult, or 1 if Child and Upgrade > 0"
+  },
+  {
+    "Addr": "8008F080",
+    "Name": null,
+    "Desc": "Get Link's Mask (Instance + 0x14F)",
+    "Desc2": null,
+    "Args": "A0 = Global Context | V0 = Id"
+  },
+  {
+    "Addr": "8008F08C",
+    "Name": null,
+    "Desc": "Set Link's Mask (Instance + 0x14F)",
+    "Desc2": null,
+    "Args": "A0 = Global Context"
+  },
+  {
+    "Addr": "8008F098",
+    "Name": null,
+    "Desc": "Test if Link is wearing the Mirror Shield (Instance + 0x13E)",
+    "Desc2": null,
+    "Args": "A0 = Global Context | V0 = 1 if true, 0 if false"
+  },
+  {
+    "Addr": "8008F104",
+    "Name": null,
+    "Desc": "Test if Link Item Action (Instance + 0x141) is Hookshot/Longshot",
+    "Desc2": null,
+    "Args": "A0 = Link Instance | V0 = 1 if true, 0 if false"
+  },
+  {
+    "Addr": "8008FCC8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80090480",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80090D20",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8009214C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80092DAC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80092DF0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80092E70",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80092F88",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80093D18",
+    "Name": null,
+    "Desc": "Write Jump to Display List 800F8200 on POLY_OPA_DISP",
+    "Desc2": null,
+    "Args": "A0 = Graphics Context"
+  },
+  {
+    "Addr": "80093D84",
+    "Name": null,
+    "Desc": "Write Jump to Display List 800F8200 on POLY_XLU_DISP",
+    "Desc2": null,
+    "Args": "A0 = Graphics Context"
+  },
+  {
+    "Addr": "800943C8",
+    "Name": null,
+    "Desc": "Write Jump to Display List 800F8440 on POLY_OPA_DISP",
+    "Desc2": null,
+    "Args": "A0 = Global Context"
+  },
+  {
+    "Addr": "80094F40",
+    "Name": null,
+    "Desc": "Animate Tile |  | Generates G_SETTILESIZE commands at the tail end of the POLY_OPA dlist | //E8, F2, E8, F2, DF command sequence",
+    "Desc2": null,
+    "Args": "A0 = Graphics Context | A1 = ? (tile descriptor one?) | A2 = upper left S-axis | A3 = upper left T-axis | SP+0x10 = width (whole units) | SP+0x14 = height (whole units) | SP+0x18 = Tile Descriptor Two | SP+0x1C = upper left S-axis 2 | SP+0x20 = Upper left T-axis 2 | SP+0x24 = width (whole units) | SP+0x28 = height (whole units)"
+  },
+  {
+    "Addr": "8009728C",
+    "Name": null,
+    "Desc": "Load Room",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Global Context + 0x11CBC (Room Context) | A2 = Room ID"
+  },
+  {
+    "Addr": "80097534",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8009812C",
+    "Name": "ObjectIndex",
+    "Desc": "Given its number, returns the object's index in the object table, or -1 if it isn't loaded.",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80098188",
+    "Name": null,
+    "Desc": "Test if object file dependency is loaded",
+    "Desc2": null,
+    "Args": "A0 = Global Context + 0x117A4 (Object Allocation Table) | A1 = Actor Instance + 0x1E | V0 = 1 if loaded, 0 if not"
+  },
+  {
+    "Addr": "800A15C8",
+    "Name": null,
+    "Desc": "Must be in draw even after initializing hirearchy without matrices",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A1AC8",
+    "Name": null,
+    "Desc": "Draw Matrix-Enabled Object",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Hierarchy Limb Index (in Object File, in RAM) | A2 = Pointer to Actor Drawing Table | A3 = Number of Limbs that use display lists. | 0x0010(SP) = 0 | 0x0014(SP) = 0 | 0x0018(SP) = Actor Instance Address"
+  },
+  {
+    "Addr": "800A2000",
+    "Name": null,
+    "Desc": "Count Animation Frames",
+    "Desc2": null,
+    "Args": "A0 = Animation Pointer (in Object File) V0 = result"
+  },
+  {
+    "Addr": "800A2E70",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A3548",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A3620",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A457C",
+    "Name": null,
+    "Desc": "Initializes hirearchy without matrices",
+    "Desc2": null,
+    "Args": "a0 = Global Context | a1 = Actor Instance + 0x???? (offset to store data) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)  0x10($sp) 0x14($sp) 0x18($sp)"
+  },
+  {
+    "Addr": "800A46F8",
+    "Name": null,
+    "Desc": "Initialize Matrix-Enabled Object with Animation",
+    "Desc2": null,
+    "Args": "a0 = Global Context | a1 = Actor Instance Address + 0x???? (Drawing Table) | a2 = Hierarchy Pointer (In Object) | a3 = Animation Pointer (In Object)"
+  },
+  {
+    "Addr": "800A49FC",
+    "Name": null,
+    "Desc": "Update Animation for Matrix-Enabled Object",
+    "Desc2": null,
+    "Args": "A0 = actor instance + 0x???? (Drawing Table) V0 = 1 if ?, else 0"
+  },
+  {
+    "Addr": "800A4FE4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A51A0",
+    "Name": null,
+    "Desc": "Change Animation",
+    "Desc2": null,
+    "Args": "A0 = actor instance + 0x???? (Drawing Table) | A1 = New Animation Pointer (in Object File) | A2 = Animation Speed (Floating Point) | A3 = ? | 0x0010(SP) = Number of Frames in Floating Point | 0x0014(SP) = some counter related to how long the animation should be played? | 0x0018(SP) = float transition rate, less than 1"
+  },
+  {
+    "Addr": "800A51E8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": "A0 = ? struct (Anju + 0x13C/ Archery Gerudo + 0x188) | A1 = Segment Offset"
+  },
+  {
+    "Addr": "800A5240",
+    "Name": null,
+    "Desc": "Change Animation",
+    "Desc2": null,
+    "Args": "A0 = actor instance + 0x???? (Drawing Table) | A1 = Animation Pointer (in Object File) | A2 = float? | A3 = ?"
+  },
+  {
+    "Addr": "800A529C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A52F8",
+    "Name": null,
+    "Desc": "Change Animation",
+    "Desc2": null,
+    "Args": "A0 = actor instance + 0x???? (Drawing Table) | A1 = Animation Pointer (in Object File)"
+  },
+  {
+    "Addr": "800A534C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A5384",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A5408",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A5428",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A56C8",
+    "Name": null,
+    "Desc": "Checks if the animation is at specific frame",
+    "Desc2": null,
+    "Args": "a0 = animation struct | a1 = frame (float) | v0 = true/false"
+  },
+  {
+    "Addr": "800A56F0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6330",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6360",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6408",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A663C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6888",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6E10",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A6EF4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A9CD4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800A9F6C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800AA000",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800AA148",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800AA278",
+    "Name": null,
+    "Desc": "Initializes the VIEW variables",
+    "Desc2": null,
+    "Args": "A0 = VIEW struct ptr | A1 = Graphics Context ptr"
+  },
+  {
+    "Addr": "800AA358",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800AAA50",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800B3840",
+    "Name": "letterbox_target_addr",
+    "Desc": "sw A0, 800FE474($zero)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800BC56C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800BFC84",
+    "Name": null,
+    "Desc": "Call 8007943C if Global Context + 0x1D6C (cutscene play state) is 0",
+    "Desc2": null,
+    "Args": "A0 = Global Context | V0 = 1 if ?, else 0"
+  },
+  {
+    "Addr": "800C0230",
+    "Name": null,
+    "Desc": "Starts actor cutscene camera",
+    "Desc2": null,
+    "Args": "A0 - global context"
+  },
+  {
+    "Addr": "800C0314",
+    "Name": null,
+    "Desc": "Camera related, use after 800C0230",
+    "Desc2": null,
+    "Args": "A0 - global context | A1 - unknown, set to 0 | A2 - unknown, set to 1"
+  },
+  {
+    "Addr": "800C0384",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0438",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C04A4",
+    "Name": null,
+    "Desc": "Cutscenes? Related to Cutscene Command 0x07",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Cutscene Struct + 0x16"
+  },
+  {
+    "Addr": "800C04D8",
+    "Name": null,
+    "Desc": "Updates actor camera",
+    "Desc2": null,
+    "Args": "a0 - global context, a1 - set to 1 to update the camera , a2 - float array, focus, a3 - float array, origin"
+  },
+  {
+    "Addr": "800C05E4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0704",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C078C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0808",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C08AC",
+    "Name": null,
+    "Desc": "Ends actor cutscene camera",
+    "Desc2": null,
+    "Args": "A0 - global context | A1 - unknown, set to 1"
+  },
+  {
+    "Addr": "800C0AF4",
+    "Name": null,
+    "Desc": "Set Void, Grotto, Farore's Wind Checkpoint",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Zoneout Type (0-2) | A2 = Link Spawn Variable"
+  },
+  {
+    "Addr": "800C0B60",
+    "Name": null,
+    "Desc": "Triggers a void out",
+    "Desc2": null,
+    "Args": "a0 - global context"
+  },
+  {
+    "Addr": "800C0C88",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0CB8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0D28",
+    "Name": null,
+    "Desc": "Check if Game Updates are Disabled",
+    "Desc2": null,
+    "Args": "V0 = 1 if Global Context + 0x7B8 > 0"
+  },
+  {
+    "Addr": "800C0DB4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C0F08",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800C3770",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80001FF0",
+    "Name": null,
+    "Desc": "Allocates to the tail end of the given heap (0x10 aligned)",
+    "Desc2": null,
+    "Args": "A0 = global context +0x74 | A1 = Size | V0 = ptr to free space"
+  },
+  {
+    "Addr": "800CA720",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CA774",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CAFEC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB010",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB0C0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB198",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB55C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB594",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB600",
+    "Name": null,
+    "Desc": "Return a^2 + b^2 + c^2",
+    "Desc2": null,
+    "Args": "A0 = pointer to float array | F0 = a^2 + b^2 + c^2"
+  },
+  {
+    "Addr": "800CB628",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CB650",
+    "Name": null,
+    "Desc": "Compute Distance Squared",
+    "Desc2": null,
+    "Args": "A0 = pointer to float array (xyz) | A1 = pointer to float array | F0 = define A2 = (A0 - A1), return (A2.a)^2 + (A2.b)^2 + (A2.c)^2"
+  },
+  {
+    "Addr": "800CB678",
+    "Name": null,
+    "Desc": "Unknown",
+    "Desc2": null,
+    "Args": "a0 - actor instance + 0x24 (position array) | a1 - actor instance + 0x100 (pos4?)"
+  },
+  {
+    "Addr": "800CB7B4",
+    "Name": null,
+    "Desc": "Unknown (something related to update rotation by velocity)",
+    "Desc2": null,
+    "Args": "a0 - 12 byte float array | a1 - actor instance + 0x5C (velocity) | a2 - $sp offset to store the results"
+  },
+  {
+    "Addr": "800CC824",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CCB0C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CCF48",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CE15C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800CE4B8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D0664",
+    "Name": null,
+    "Desc": "Arctan2",
+    "Desc2": null,
+    "Args": "F12 = x | F14 = y | V0 = s16 Rotation"
+  },
+  {
+    "Addr": "800D07D4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D0810",
+    "Name": null,
+    "Desc": "Allocates a 0x500 byte Float Matrix Stack | 80121200 stores start address, 80121204 stores top matrix",
+    "Desc2": null,
+    "Args": "A0 = Global Context"
+  },
+  {
+    "Addr": "800D084C",
+    "Name": null,
+    "Desc": "Clones the top level matrix in the Float Matrix Stack | (Increments Append Start by 0x40)",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D0884",
+    "Name": null,
+    "Desc": "Pops top level matrix in the Float Matrix Stack",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D08D8",
+    "Name": null,
+    "Desc": "Copies the top level matrix in the Float Matrix Stack",
+    "Desc2": null,
+    "Args": "A0 = Destination"
+  },
+  {
+    "Addr": "800D08FC",
+    "Name": null,
+    "Desc": "Overwrites top level matrix in the Float Matrix Stack",
+    "Desc2": null,
+    "Args": "A0 = Source Matrix"
+  },
+  {
+    "Addr": "800D0984",
+    "Name": null,
+    "Desc": "Create/Apply x,y,z transformation on Float Matrix Stack",
+    "Desc2": null,
+    "Args": "F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix"
+  },
+  {
+    "Addr": "800D0A8C",
+    "Name": null,
+    "Desc": "Create/Apply x,y,z scalar transformation on Float Matrix Stack",
+    "Desc2": null,
+    "Args": "F12 = x | F14 = y | A2 = float z | A3 = 0 initializes new matrix, 1 transforms stored matrix"
+  },
+  {
+    "Addr": "800D0B70",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D0D20",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D0ED4",
+    "Name": null,
+    "Desc": "Apply rotation transformation on float matrix?",
+    "Desc2": null,
+    "Args": "a1 = 1?"
+  },
+  {
+    "Addr": "800D1084",
+    "Name": null,
+    "Desc": "Create/Apply x,y,z rotation transformation on Float Matrix Stack",
+    "Desc2": null,
+    "Args": "A0 = u16 x rotation | A1 = u16 y rotation | A2 = u16 z rotation | A3 = 0 initializes new matrix, 1 transforms stored matrix"
+  },
+  {
+    "Addr": "800D1694",
+    "Name": null,
+    "Desc": "Create x,y,z transformation and apply rotation on Float Matrix Stack",
+    "Desc2": null,
+    "Args": "F12 = float x | F14 = float y | A2 = float z | A3 = ptr to u16 rotation"
+  },
+  {
+    "Addr": "800D1A54",
+    "Name": null,
+    "Desc": "Converts the Top in the Float Matrix Stack to a fixed point matrix",
+    "Desc2": null,
+    "Args": "A0 = Destination for the Fixed Point Matrix"
+  },
+  {
+    "Addr": "800D1A88",
+    "Name": null,
+    "Desc": "Converts and Appends the Float Matrix Stack's top matrix to POLY_OPA_DISP end",
+    "Desc2": null,
+    "Args": "A0 = Graphics Context"
+  },
+  {
+    "Addr": "800D1AF4",
+    "Name": null,
+    "Desc": "Multiply Float Matrix Stack's top matrix by float Vector3",
+    "Desc2": null,
+    "Args": "A0 = ptr to Vector3 | A1 = ptr to result"
+  },
+  {
+    "Addr": "800D1BA8",
+    "Name": null,
+    "Desc": "Float Matrix Copy",
+    "Desc2": null,
+    "Args": "A0 = Destination | A1 = Source"
+  },
+  {
+    "Addr": "800D20CC",
+    "Name": null,
+    "Desc": "Used to reflect projectiles",
+    "Desc2": null,
+    "Args": "a0 = Link instance + 0x0A20 | a1 = place in stack to store result | a2 = 0? | returns half containing reflected direction at a1 + 0x2"
+  },
+  {
+    "Addr": "800D2264",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800D23FC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80002130",
+    "Name": null,
+    "Desc": "Debug print function",
+    "Desc2": null,
+    "Args": "a0 = text array | a1+ = args?"
+  },
+  {
+    "Addr": "800ED858",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800ED93C",
+    "Name": null,
+    "Desc": "Song playback related.",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F3F3C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F41E0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F4254",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F436C",
+    "Name": null,
+    "Desc": "Sound Loop?",
+    "Desc2": null,
+    "Args": "a0 = actor instance + E4 | a1 = sfx id | a2 = unknown float"
+  },
+  {
+    "Addr": "800F4414",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F4524",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F4634",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F483C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F4870",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F4A54",
+    "Name": null,
+    "Desc": "Sound? Set u8 80121DFC to A0, u8 80121DFE to 1",
+    "Desc2": null,
+    "Args": "A0 = ?"
+  },
+  {
+    "Addr": "800F4BF4",
+    "Name": null,
+    "Desc": "Plays global sound with variable pitch",
+    "Desc2": null,
+    "Args": " (a0 = 0x801333D4 (global context?) | a1 = SFX ID | a2 = pitch)"
+  },
+  {
+    "Addr": "800F4E30",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F50EC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F52A0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5504",
+    "Name": null,
+    "Desc": "Zero u32? 8010195C",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5718",
+    "Name": null,
+    "Desc": "Plays windmill music",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F574C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5918",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5A58",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5ACC",
+    "Name": null,
+    "Desc": "Change background music until enemies are defeated?",
+    "Desc2": null,
+    "Args": "a0 - music ID"
+  },
+  {
+    "Addr": "800F5B58",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5BF0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5C2C",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F5C64",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F6584",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F67A0",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F6828",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F6FB4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F7260",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F738C",
+    "Name": null,
+    "Desc": "Global Play Sfx?",
+    "Desc2": null,
+    "Args": "A0 = SFX ID | A1 = ? | A2 = ? | A3 = 80104394 this pass"
+  },
+  {
+    "Addr": "800F89E8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F8A44",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F8D04",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800F8FF4",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "800FA00C",
+    "Name": null,
+    "Desc": "Change background music",
+    "Desc2": null,
+    "Args": "a0 - music ID"
+  },
+  {
+    "Addr": "800FB3AC",
+    "Name": null,
+    "Desc": "Set Debug Text RGBA color",
+    "Desc2": null,
+    "Args": "a0 - stack location, R, G, B, A"
+  },
+  {
+    "Addr": "800FB41C",
+    "Name": null,
+    "Desc": "Set Debug Text X Y",
+    "Desc2": null,
+    "Args": "a0 - stack location, X, Y"
+  },
+  {
+    "Addr": "800FBB8C",
+    "Name": null,
+    "Desc": "Initialize Debug Text Structure",
+    "Desc2": null,
+    "Args": "a0 - stack location"
+  },
+  {
+    "Addr": "800FBC14",
+    "Name": null,
+    "Desc": "Ending Debug Text stack 2?",
+    "Desc2": null,
+    "Args": "a0 - stack location"
+  },
+  {
+    "Addr": "800FBC1C",
+    "Name": null,
+    "Desc": "gfxprint_open (use after InitTxtStruct)",
+    "Desc2": null,
+    "Args": "a0 - stack location, a1 - graphic context +2C0"
+  },
+  {
+    "Addr": "800FBC64",
+    "Name": null,
+    "Desc": "Ending Debug Text stack?",
+    "Desc2": null,
+    "Args": "a0 - stack location"
+  },
+  {
+    "Addr": "800FBCB4",
+    "Name": null,
+    "Desc": "Set Debug Text String",
+    "Desc2": null,
+    "Args": "a0 - stack location, a1 - string to display, a2+ arguments"
+  },
+  {
+    "Addr": "800FD250",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": "F12 = ?  | F14 = SQRT(1 - F12^2) | F0 = result in radians. for convenience, they'll be reported in degrees"
+  },
+  {
+    "Addr": "800FD368",
+    "Name": null,
+    "Desc": "Wrapper for 800CD860 (subtracts result by 90 degrees)",
+    "Desc2": null,
+    "Args": "F12 = ? | F0 = radians"
+  },
+  {
+    "Addr": "800FD7B4",
+    "Name": null,
+    "Desc": "Deallocates memory on main heap",
+    "Desc2": null,
+    "Args": "A0 = ptr to block to free (not the node)"
+  },
+  {
+    "Addr": "800FD9AC",
+    "Name": "Rand.Next() float",
+    "Desc": "Generates a random number between 0 inclusive and 1 exclusive",
+    "Desc2": null,
+    "Args": "F0 = returned value"
+  },
+  {
+    "Addr": "80100290",
+    "Name": null,
+    "Desc": "Performs some calculation on angle of view/2 (rad)",
+    "Desc2": null,
+    "Args": "F12 = Angle of View/2 in radians | F0 = return value"
+  },
+  {
+    "Addr": "80104610",
+    "Name": null,
+    "Desc": "Performs some calculation on angle of view/2 (rad)",
+    "Desc2": null,
+    "Args": "12 = Angle of View/2 in radians | F0 = return value"
+  },
+  {
+    "Addr": "80106AA8",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "80106BC8",
+    "Name": null,
+    "Desc": "Dialog Related, potentially confirm yes/no",
+    "Desc2": null,
+    "Args": "a0 = global context | V0 = button pressed"
+  },
+  {
+    "Addr": "80106CCC",
+    "Name": null,
+    "Desc": null,
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8010B680",
+    "Name": null,
+    "Desc": "Message display-related",
+    "Desc2": null,
+    "Args": "a0 = Global Context | a1 = Text Id | a2 = Z-Targeted? Actor"
+  },
+  {
+    "Addr": "8010B720",
+    "Name": null,
+    "Desc": "Dialog yes/no response?",
+    "Desc2": null,
+    "Args": "a1 = Response Text ID"
+  },
+  {
+    "Addr": "8010BD58",
+    "Name": null,
+    "Desc": "Something related to song playback?",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8010BD88",
+    "Name": null,
+    "Desc": "Something related to song playback?",
+    "Desc2": null,
+    "Args": null
+  },
+  {
+    "Addr": "8010BDBC",
+    "Name": null,
+    "Desc": "Check if link is talking",
+    "Desc2": null,
+    "Args": "A0 = global context + 0x20D8 (VIEW struct ptr)"
+  },
+  {
+    "Addr": "80093F34",
+    "Name": null,
+    "Desc": "Used for appending stuff in the HUD?",
+    "Desc2": null,
+    "Args": "a0 - unk  | v0 - offset"
+  },
+  {
+    "Addr": "800846E0",
+    "Name": null,
+    "Desc": "Swap Link's Age Equipment",
+    "Desc2": null,
+    "Args": "(no args)"
+  },
+  {
+    "Addr": "8008ECAC",
+    "Name": null,
+    "Desc": "Update Link Instance's Equipment",
+    "Desc2": null,
+    "Args": "A0 = Global Context | A1 = Link Instance"
+  },
+  {
+    "Addr": "800C69CC",
+    "Name": null,
+    "Desc": "Allocates graphics memory",
+    "Desc2": null,
+    "Args": "a0 = graphics context  |  a1 = size"
+  },
+  {
+    "Addr": "80097C00",
+    "Name": null,
+    "Desc": "Spawn object",
+    "Desc2": null,
+    "Args": "a0 = global context + 0x0117A4  |  a1 = object index"
+  }
+
+]

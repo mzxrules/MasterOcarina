@@ -122,21 +122,21 @@ namespace Atom
 
         private static void GetActorSymbolNames(DisassemblyTask task, Rom rom, ActorOverlayRecord ovlRec)
         {
-            if (ovlRec.VRamActorInfo == 0)
+            if (ovlRec.VRamActorInit == 0)
                 return;
 
             if (ovlRec.VRom.Size == 0)
             {
                 RomFile file = rom.Files.GetFile(ORom.FileList.code);
-                Addresser.TryGetRam(ORom.FileList.code, rom.Version, out int code_start);
-                N64Ptr startAddr = code_start | 0x80000000;
+                Addresser.TryGetRam(ORom.FileList.code, rom.Version, out N64Ptr code_start);
+                N64Ptr startAddr = code_start;
 
-                GetActorInfoSymbols(task, startAddr, ovlRec.VRamActorInfo, file);
+                GetActorInfoSymbols(task, startAddr, ovlRec.VRamActorInit, file);
             }
             else
             {
                 task.PreparseActions.Add(file => {
-                    GetActorInfoSymbols(task, ovlRec.VRam.Start, ovlRec.VRamActorInfo, file);
+                    GetActorInfoSymbols(task, ovlRec.VRam.Start, ovlRec.VRamActorInit, file);
                 });
             }
 

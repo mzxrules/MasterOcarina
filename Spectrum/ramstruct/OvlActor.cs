@@ -108,14 +108,14 @@ namespace Spectrum
             uint offset;
 
 
-            if (VRamActorInfo.Offset < 0x800000)
+            if (VRamActorInit.Offset < 0x800000)
             {
                 //Read address 0C in the ovl file
-                readAddr = VRamActorInfo + 0x0C;
+                readAddr = VRamActorInit + 0x0C;
             }
             else if (IsFileLoaded)
             {
-                offset = (uint)(VRamActorInfo - VRam.Start) + 0x0C;
+                offset = (uint)(VRamActorInit - VRam.Start) + 0x0C;
                 readAddr = Ram.Start + offset;
             }
             else
@@ -126,7 +126,7 @@ namespace Spectrum
 
         public override string ToString()
         {
-            int dataOffset = VRamActorInfo - VRam.Start;
+            int dataOffset = VRamActorInit - VRam.Start;
             int initRam = Ram.Start + dataOffset;
             int initRom = VRom.Start + dataOffset;
             return $"AF {Actor:X4}:  {AllocationType:X4} {NumSpawned:X2} FILE: " +
