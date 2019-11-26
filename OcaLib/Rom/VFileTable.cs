@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 namespace mzxrules.OcaLib
@@ -79,7 +80,6 @@ namespace mzxrules.OcaLib
         protected RomFile GetFile(FileRecord record)
         {
             MemoryStream ms;
-            byte[] data;
             byte[] decompressedData;
 
             if (record.VRom == CachedFileAddress)
@@ -90,14 +90,21 @@ namespace mzxrules.OcaLib
 
             using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
             {
-                data = new byte[record.Data.Size];
+                byte[] data = new byte[record.Data.Size];
                 fs.Position = record.Data.Start;
                 fs.Read(data, 0, record.Data.Size);
 
                 if (record.IsCompressed)
                 {
                     ms = new MemoryStream(data);
-                    decompressedData = Yaz.Decode(ms, record.Data.Size);
+                    if (Version == ORom.Build.IQUEC || Version == ORom.Build.IQUET)
+                    {
+                        decompressedData = Deflate(ms, record.Data.Size);
+                    }
+                    else
+                    {
+                        decompressedData = Yaz.Decode(ms, record.Data.Size);
+                    }
                 }
                 else
                 {
@@ -108,6 +115,18 @@ namespace mzxrules.OcaLib
             ms = new MemoryStream(decompressedData);
             CachedFileAddress = record.VRom;
             return new RomFile(record, ms, Version);
+        }
+
+        private static byte[] Deflate(MemoryStream ms, int size)
+        {
+            using (DeflateStream deflate = new DeflateStream(ms, CompressionMode.Decompress))
+            {
+                using (MemoryStream decomp = new MemoryStream(size))
+                {
+                    deflate.CopyTo(decomp);
+                    return decomp.ToArray();
+                }
+            }
         }
 
 
