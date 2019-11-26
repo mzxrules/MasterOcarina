@@ -1,14 +1,14 @@
-﻿using mzxrules.OcaLib;
-using mzxrules.OcaLib.SceneRoom;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib;
 using mzxrules.OcaLib.Cutscenes;
+using mzxrules.OcaLib.PathUtil;
+using mzxrules.OcaLib.SceneRoom;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using mzxrules.Helper;
-using System.Linq;
-using System.Globalization;
-using mzxrules.OcaLib.PathUtil;
 
 namespace VerboseOcarina
 {
@@ -39,18 +39,27 @@ namespace VerboseOcarina
                 { v11PRadioButton, ORom.Build.P1 },
                 //GCN Vanilla
                 { gcnjRadioButton, ORom.Build.GCJ },
+                { gcnuRadioButton, ORom.Build.GCU },
                 { gcnpRadioButton, ORom.Build.GCP },
                 //MQ
                 { mqjRadioButton, ORom.Build.MQJ },
+                { mquRadioButton, ORom.Build.MQU },
                 { mqpRadioButton, ORom.Build.MQP },
                 //Special
                 { dbgRadioButton, ORom.Build.DBGMQ },
                 { chnRadioButton, ORom.Build.IQUEC },
-                { twnRadioButton, ORom.Build.IQUET },
+                { tChnRadioButton, ORom.Build.IQUET },
                 { customOoTRadioButton, ORom.Build.CUSTOM },
                 //Majora's Mask Versions
-                { mU10RadioButton, MRom.Build.U0 },
                 { mJ10RadioButton, MRom.Build.J0 },
+                { mJ11RadioButton, MRom.Build.J1 },
+                { mU10RadioButton, MRom.Build.U0 },
+                { mP10RadioButton, MRom.Build.P0 },
+                { mP11RadioButton, MRom.Build.P1 },
+                { mGCJRadioButton, MRom.Build.GCJ },
+                { mGCURadioButton, MRom.Build.GCU },
+                { mGCPRadioButton, MRom.Build.GCP },
+                { mDBGRadioButton, MRom.Build.DBG },
                 { customMMRadioButton, MRom.Build.CUSTOM },
 
             };
@@ -61,11 +70,11 @@ namespace VerboseOcarina
             OpenFileDialog openFile = new OpenFileDialog();
             DialogResult result = DialogResult.OK;
             RomVersion inputVersion = version;
-            string romLocation = "";
 
             //Set openFile title in case we need to look for a rom
             openFile.Title = $"Open {version} rom";
 
+            string romLocation;
             if (!version.IsCustomBuild())
             {
                 if (!PathUtil.TryGetRomLocation(version, out romLocation))
@@ -85,30 +94,24 @@ namespace VerboseOcarina
 
                 if (result == DialogResult.OK)
                 {
-                    VersionSelector vs = new VersionSelector()
+                    using (VersionSelector vs = new VersionSelector())
                     {
-                        Game = version.Game
-                    };
-                    result = vs.ShowDialog();
-                    version = vs.Version;
+                        vs.Game = version.Game;
+                        result = vs.ShowDialog();
+                        version = vs.Version;
+                    }
                 }
             }
+            openFile.Dispose();
 
-            if (result != DialogResult.OK)
-                rom = null;
-            else
-                rom = Rom.New(romLocation, version);
+            rom = result == DialogResult.OK ? Rom.New(romLocation, version) : null;
 
             //update
+            string romStats = rom == null ? 
+                $"Error: No Rom!" 
+                : $"{inputVersion.Game}, File Stats Mode: {version}{Environment.NewLine}{romLocation}";
+
             outputRichTextBox.Clear();
-
-            string romStats;
-
-            if (rom == null)
-                romStats = $"Error: No Rom!";
-            else
-                romStats = $"{inputVersion.Game}, File Stats Mode: {version}{Environment.NewLine}{romLocation}";
-
             outputRichTextBox.AppendText(romStats);
         }
 
@@ -292,14 +295,8 @@ namespace VerboseOcarina
 
         private void PrintScene(int sceneId, StringBuilder sb)
         {
-            Scene scene = null;
+            Scene scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneId), sceneId);
             List<Room> rooms = new List<Room>();
-
-            //try
-            //{
-                scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneId), sceneId);
-            //}
-            //catch { }
             if (scene == null)
             {
                 sb.AppendFormat("Exception: Scene not found");
@@ -346,10 +343,8 @@ namespace VerboseOcarina
 
             for (int i = 0; i < rom.Scenes; i++)
             {
-                //scene = SceneRoomReader.InitializeScene(i);
                 sb.AppendLine("-- SCENE " + i.ToString() + " --");
                 PrintScene(i, sb);
-                //sb.AppendLine(SceneRoomReader.ReadScene(scene));
             }
             outputRichTextBox.Text = sb.ToString();
         }
@@ -391,15 +386,10 @@ namespace VerboseOcarina
         {
             if (rom == null)
                 return;
-            Scene scene = null;
             StringBuilder sb = new StringBuilder();
-            Room room = null;
-
             for (int sceneNumber = 0; sceneNumber < rom.Scenes; sceneNumber++)
             {
-                scene = null;
-                room = null;
-
+                Scene scene = null;
                 var sceneFile = rom.Files.GetSceneFile(sceneNumber);
                 if (sceneFile == null)
                 {
@@ -426,7 +416,7 @@ namespace VerboseOcarina
                     try
                     {
                         roomFile = rom.Files.GetFile(addr);
-                        room = SceneRoomReader.InitializeRoom(roomFile);
+                        Room room = SceneRoomReader.InitializeRoom(roomFile);
                     }
                     catch //(Exception ex)
                     {
