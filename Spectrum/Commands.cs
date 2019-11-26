@@ -1,6 +1,7 @@
 ﻿using mzxrules.Helper;
 using mzxrules.OcaLib;
 using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using uCode;
+using System.Threading;
 
 namespace Spectrum
 {
@@ -461,22 +463,9 @@ namespace Spectrum
             if (args.Length == 0)
             {
                 Console.Clear();
-                Console.WriteLine("Ocarina of Time: use GameId \"oot\"");
-                Console.WriteLine("Version:");
-                foreach (var item in ORom.GetSupportedBuilds())
-                {
-                    var info = ORom.BuildInformation.Get(item);
-                    Console.WriteLine($" {info.Version + ":",-5} {info.Name}");
-                }
+                ORom.ConsolePrintSupportedVersions();
                 Console.WriteLine();
-
-                Console.WriteLine("Majora's Mask: use GameId \"mm\"");
-                Console.WriteLine("Version:");
-                foreach (var item in MRom.GetSupportedBuilds())
-                {
-                    var info = MRom.BuildInformation.Get(item);
-                    Console.WriteLine($" {info.Version + ":",-5} {info.Name}");
-                }
+                MRom.ConsolePrintSupportedVersions();
                 Console.WriteLine();
                 return;
             }
@@ -488,7 +477,7 @@ namespace Spectrum
             if (version.Game != Game.Undefined)
                 ChangeVersion(version);
             else
-                Console.WriteLine($"Invalid code for {Options.Version.Game} Run ver (no arguments) for correct version codes");
+                Console.WriteLine($"Invalid code for {Options.Version.Game}. Run ver (no arguments) for correct version codes");
         }
 
         [SpectrumCommand(
@@ -632,6 +621,58 @@ namespace Spectrum
                 return;
             Console.WriteLine($"{Zpr.GetEmulatedAddress(addr):X8}");
         }
+
+        [SpectrumCommand(
+            Name = "cram32",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Copies RDRAM starting at the given address in 32 bit chunks, and stores in clipboard" )]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S, Tokens.HEX_S32 },
+            Help = "{0} = RDRAM start;{1} = hexadecimal size in bytes")]
+        private static void CopyRam32(Arguments args)
+        {
+            if (!TryEvaluate((string)args[0], out long address))
+                return;
+
+            int size = (int)args[1];
+
+            if (address % 4 != 0)
+            {
+                Console.WriteLine($"Alignment Error: {address}");
+                return;
+            }
+            if (size <= 0)
+            {
+                Console.WriteLine("Invalid size");
+                return;
+            }
+            if (size > 0x2000)
+            {
+                Console.WriteLine($"Size capped at 0x2000 ");
+                return;
+            }
+
+            var end = (size + 3) & -4;
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int off = 0; off < end; off += 4)
+            {
+                stringBuilder.AppendLine($"{Zpr.ReadRamInt32(address + off):X8}");
+            }
+
+            string clipboardText = stringBuilder.ToString();
+
+            var t = new Thread(
+                (text) => { Clipboard.SetText((string)text); });
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start(clipboardText);
+            t.Join();
+
+            Console.Clear();
+            Console.WriteLine("Copied: ");
+            PrintRam(address, PrintRam_X8);
+        }
+
 
         [SpectrumCommand(
             Name = "ram",
@@ -1474,7 +1515,7 @@ namespace Spectrum
             Sig = new Tokens[] { })]
         private static void GbiStartLogging(Arguments args)
         {
-            GbiLogging(args, true);
+            GbiLogging(true);
         }
 
         [SpectrumCommand(
@@ -1485,10 +1526,10 @@ namespace Spectrum
             Sig = new Tokens[] { })]
         private static void GbiEndLogging(Arguments args)
         {
-            GbiLogging(args, false);
+            GbiLogging(false);
         }
 
-        private static void GbiLogging(Arguments args, bool isStart)
+        private static void GbiLogging(bool isStart)
         {
             if (Gfx == 0)
             {
@@ -2237,6 +2278,39 @@ namespace Spectrum
         {
             WriteRam((string)args[0], (float)args[1]);
         }
+
+        [SpectrumCommand(
+            Name = "w32t",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Write a series of 32 bit data")]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S },
+            Help = "{0} = Address; Values are \n separated, address must be 4 byte aligned")]
+        private static void WriteS32s(Arguments args)
+        {
+            if (!TryEvaluate((string)args[0], out long address))
+                return;
+
+            N64Ptr addr = address;
+            Console.WriteLine($"Overwriting {addr}:");
+            if (addr % 4 != 0)
+            {
+                Console.WriteLine("Alignment error");
+                return;
+            }
+
+            var data = Console.ReadLine();
+            var lines = data.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => int.Parse(x.Trim(), NumberStyles.HexNumber));
+
+            var cur = addr;
+            foreach (var item in lines)
+            {
+                Zpr.WriteRam32(cur, item);
+                cur += 4;
+            }
+
+            PrintRam(addr, PrintRam_X8, 1);
+        }
         #endregion
 
         [SpectrumCommand(
@@ -2563,7 +2637,7 @@ namespace Spectrum
                 return;
 
             var data = Zpr.ReadRam(address, 0x100);
-            string result = CStr.Get(data, Encoding.GetEncoding("EUC-JP"));
+            string result = CStr.Get(data, "EUC-JP");
             Console.WriteLine(result);
         }
         
@@ -2756,6 +2830,37 @@ namespace Spectrum
                 var op = Zpr.ReadRamInt32((int)(address + i));
                 var decodedOp = "PrintMipsAsm not supported";//Atom.Atom.GetOP(op);
                 Console.WriteLine($"{address + i:X8}: {op:X8} {decodedOp}");
+            }
+        }
+
+        [SpectrumCommand(
+            Name = "tsv",
+            Cat = SpectrumCommand.Category.Proto,
+            Description = "Generates a tab separated values table on the clipboard.")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.EXPRESSION_S, Tokens.EXPRESSION_S, Tokens.EXPRESSION_S },
+            Help = 
+            "{0} = address;" +
+            "{1} = record size" +
+            "{2} = count")]
+        private static void GenerateTSVFromRam(Arguments args)
+        {
+            if (!TryEvaluate((string)args[0], out long address))
+                return;
+
+            if (!TryEvaluate((string)args[1], out long recsize))
+                return;
+
+            if (!TryEvaluate((string)args[1], out long count))
+                return;
+
+            if (count * recsize > 0x6000)
+            {
+                Console.WriteLine($"Table is 0x{count * recsize:X8} bytes, continue?");
+                Console.Write("Type 'yes' to confirm: ");
+                string line = Console.ReadLine().Trim().ToLowerInvariant();
+                if (line != "yes")
+                    return;
             }
         }
 
