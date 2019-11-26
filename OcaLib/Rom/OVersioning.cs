@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
@@ -9,59 +8,51 @@ namespace mzxrules.OcaLib
     {
         public class BuildInformation
         {
-            public static BuildInformation[] builds;
+            public static readonly BuildInformation[] builds = new BuildInformation[]
+            {
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.UNKNOWN, Name = "Unknown", Localization = Localization.UNKNOWN},
 
-            public Build Version { get { return _Version; } }
-            public string Name { get { return _Name; } }
-            public Localization Localization { get { return _Localization; } }
-            public ulong CRC { get { return _CRC; } }
+                new BuildInformation { CRC = 0xEC7011B77616D72B, Version = Build.N0, Name = "NTSC 1.0", Localization = Localization.NTSC },
+                new BuildInformation { CRC = 0xD43DA81F021E1E19, Version = Build.N1, Name = "NTSC 1.1", Localization = Localization.NTSC },
+                new BuildInformation { CRC = 0x693BA2AEB7F14E9F, Version = Build.N2, Name = "NTSC 1.2", Localization = Localization.NTSC },
 
-            Build _Version;
-            string _Name;
-            Localization _Localization;
-            ulong _CRC;
+                new BuildInformation { CRC = 0xB044B569373C1985, Version = Build.P0, Name = "PAL 1.0", Localization = Localization.PAL },
+                new BuildInformation { CRC = 0xB2055FBD0BAB4E0C, Version = Build.P1, Name = "PAL 1.1", Localization = Localization.PAL },
+
+                new BuildInformation { CRC = 0xF611F4BAC584135C, Version = Build.GCJ, Name = "NTSC-J GCN", Localization = Localization.NTSC },
+                new BuildInformation { CRC = 0xF7F52DB82195E636, Version = Build.GCJC,Name = "NTSC-J GCN (Zelda Collection)", Localization = Localization.NTSC },
+                new BuildInformation { CRC = 0xF3DD35BA4152E075, Version = Build.GCU, Name = "NTSC-U GCN", Localization = Localization.NTSC },
+                new BuildInformation { CRC = 0x09465AC3F8CB501B, Version = Build.GCP, Name = "PAL GCN", Localization = Localization.PAL },
+
+                new BuildInformation { CRC = 0xF43B45BA2F0E9B6F, Version = Build.MQJ, Name = "JPN Master Quest", Localization = Localization.NTSC},
+                new BuildInformation { CRC = 0xF034001AAE47ED06, Version = Build.MQU, Name = "USA Master Quest", Localization = Localization.NTSC},
+                new BuildInformation { CRC = 0x1D4136F3AF63EEA9, Version = Build.MQP, Name = "PAL Master Quest", Localization = Localization.PAL },
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.DBGMQ, Name = "Debug Master Quest", Localization = Localization.PAL },
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUEC, Name = "Chinese iQue", Localization = Localization.CHI },
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUET, Name = "Traditional Chinese iQue", Localization = Localization.CHI }
+            };
+
+            public Build Version { get; private set; }
+            public string Name { get; private set; }
+            public Localization Localization { get; private set; }
+            public ulong CRC { get; private set; }
 
             BuildInformation() { }
 
-            static BuildInformation()
-            {
-                builds = new BuildInformation[] {
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = Localization.UNKNOWN},
-
-                    new BuildInformation { _CRC = 0xEC7011B77616D72B, _Version = Build.N0, _Name = "NTSC 1.0", _Localization = Localization.NTSC },
-                    new BuildInformation { _CRC = 0xD43DA81F021E1E19, _Version = Build.N1, _Name = "NTSC 1.1", _Localization = Localization.NTSC },
-                    new BuildInformation { _CRC = 0x693BA2AEB7F14E9F, _Version = Build.N2, _Name = "NTSC 1.2", _Localization = Localization.NTSC },
-
-                    new BuildInformation { _CRC = 0xB044B569373C1985, _Version = Build.P0, _Name = "PAL 1.0", _Localization = Localization.PAL },
-                    new BuildInformation { _CRC = 0xB2055FBD0BAB4E0C, _Version = Build.P1, _Name = "PAL 1.1", _Localization = Localization.PAL },
-
-                    new BuildInformation { _CRC = 0xF611F4BAC584135C, _Version = Build.GCJ, _Name = "NTSC-J GCN", _Localization = Localization.NTSC },
-                    new BuildInformation { _CRC = 0xF3DD35BA4152E075, _Version = Build.GCU, _Name = "NTSC-U GCN", _Localization = Localization.NTSC },
-                    new BuildInformation { _CRC = 0x09465AC3F8CB501B, _Version = Build.GCP, _Name = "PAL GCN", _Localization = Localization.PAL },
-            
-                    new BuildInformation { _CRC = 0xF43B45BA2F0E9B6F, _Version = Build.MQJ, _Name = "JPN Master Quest", _Localization = Localization.NTSC},
-                    new BuildInformation { _CRC = 0xF034001AAE47ED06, _Version = Build.MQU, _Name = "USA Master Quest", _Localization = Localization.NTSC},
-                    new BuildInformation { _CRC = 0x1D4136F3AF63EEA9, _Version = Build.MQP, _Name = "PAL Master Quest", _Localization = Localization.PAL },
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBGMQ, _Name = "Debug Master Quest", _Localization = Localization.PAL },
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUEC, _Name = "Chinese iQue", _Localization = Localization.CHI },
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUET, _Name = "Traditional Chinese iQue", _Localization = Localization.CHI }
-                };
-            }
-
             public static BuildInformation Get(Build v)
             {
-                return builds.SingleOrDefault(x => x._Version == v);
+                return builds.SingleOrDefault(x => x.Version == v);
             }
             public static Localization GetLocalization(Build v)
             {
-                BuildInformation stats = builds.SingleOrDefault(x => x._Version == v);
-                return (stats != null) ? stats._Localization : Localization.UNKNOWN;
+                BuildInformation stats = builds.SingleOrDefault(x => x.Version == v);
+                return (stats != null) ? stats.Localization : Localization.UNKNOWN;
             }
 
             internal static ulong GetCrc(Build v)
             {
-                BuildInformation stats = builds.SingleOrDefault(x => x._Version == v);
-                return (stats != null) ? stats._CRC : 0;
+                BuildInformation stats = builds.SingleOrDefault(x => x.Version == v);
+                return (stats != null) ? stats.CRC : 0;
             }
         }
 
@@ -85,6 +76,7 @@ namespace mzxrules.OcaLib
             P1, //PAL 1.1
 
             GCJ, //NTSC-J GCN
+            GCJC,//NTSC-J GCN, Zelda Collection
             GCU, //NTSC-U GCN
             GCP, //PAL GCN
 
@@ -96,26 +88,6 @@ namespace mzxrules.OcaLib
             IQUEC, //Chinese Ocarina of Time
             IQUET, //Taiwanese Ocarina of Time
         }
-
-        private static Build[] SupportedBuilds = new Build[] {
-
-            Build.N0, //NTSC 1.0
-            Build.N1, //NTSC 1.1
-            Build.N2, //NTSC 1.2
-
-            Build.P0, //PAL 1.0 
-            Build.P1, //PAL 1.1
-
-            Build.GCJ,
-            Build.GCP,
-            Build.GCP,
-
-            Build.MQJ,
-            Build.MQU,
-            Build.MQP,
-
-            Build.DBGMQ,
-        };
 
         public enum Localization
         {
@@ -135,7 +107,7 @@ namespace mzxrules.OcaLib
             yield return Build.P1; //PAL 1.1
 
             yield return Build.GCJ;
-            yield return Build.GCP;
+            yield return Build.GCU;
             yield return Build.GCP;
 
             yield return Build.MQJ;
@@ -193,7 +165,7 @@ namespace mzxrules.OcaLib
 
         public static void ConsolePrintSupportedVersions()
         {
-            Console.WriteLine("Ocarina of Time: use GameId \"oot\"");
+            Console.WriteLine("Ocarina of Time: use GameId 'oot'");
             Console.WriteLine("Version:");
             foreach (var item in GetSupportedBuilds())
             {

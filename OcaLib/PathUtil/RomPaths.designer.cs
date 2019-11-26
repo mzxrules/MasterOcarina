@@ -203,10 +203,6 @@ namespace mzxrules.OcaLib.PathUtil {
         
         private string keyField;
         
-        private string gameField;
-        
-        private string versionField;
-        
         private string valueField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
@@ -218,26 +214,6 @@ namespace mzxrules.OcaLib.PathUtil {
             }
             set {
                 this.keyField = value;
-            }
-        }
-        
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string game {
-            get {
-                return this.gameField;
-            }
-            set {
-                this.gameField = value;
-            }
-        }
-        
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
             }
         }
         

@@ -40,10 +40,6 @@ namespace mzxrules.Helper
         /// <returns>True if the copy was created. No copy will be created if inO == outO</returns>
         private static bool ConvertData(Stream inFile, Endian.Order inO, Stream outFile, Endian.Order outO)
         {
-            Endian.Order outWord;
-
-            outWord = (Endian.Order)((int)outO & 0x7F);
-
             if (inO == outO)
                 return false;
 
@@ -60,12 +56,16 @@ namespace mzxrules.Helper
             }
             else
             {
-                switch (outWord)
+                if ((outO & Endian.Order.Size16) == Endian.Order.Size16)
                 {
-                    case Endian.Order.Big16: FlipData(inFile, outFile, 2); break;
-                    case Endian.Order.Big32: FlipData(inFile, outFile, 4); break;
-                    default: return false;
+                    FlipData(inFile, outFile, 2);
                 }
+                else if ((outO & Endian.Order.Size32) == Endian.Order.Size32)
+                {
+                    FlipData(inFile, outFile, 4);
+                }
+                else 
+                    return false;
                 return true;
             }
         }
@@ -94,7 +94,6 @@ namespace mzxrules.Helper
         private static bool FlipData(Stream source, Stream write, int size)
         {
             byte[] word = new byte[size];
-            byte[] temp = new byte[size];
             byte[] buffer = new byte[BUFFER_SIZE];
 
 
@@ -104,8 +103,8 @@ namespace mzxrules.Helper
             while ((count = source.Read(buffer, offset, buffer.Length - offset)) != 0)
             {
                 int inBuffer = count + offset;
-                length = (inBuffer / size) * size;
-                offset = (inBuffer % size);
+                length = inBuffer / size * size;
+                offset = inBuffer % size;
 
                 //flip
                 for (int j = 0; j < length; j += size)

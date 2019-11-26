@@ -12,8 +12,6 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="key" use="required" type="xs:string"/>
-        <xs:attribute name="game" use="required" type="xs:string"/>
-        <xs:attribute name="version" use="required" type="xs:string"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

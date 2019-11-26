@@ -109,7 +109,7 @@ namespace Spectrum
         public static int Segment_Table;
 
         [ViewVariable ("code")]
-        public static int Code_Addr;
+        public static N64Ptr Code_Addr;
         public static int Code_VRom;
 
         [ViewVariable("dmadata")]
@@ -168,21 +168,21 @@ namespace Spectrum
             RomFileToken fileToken;
 
             //dma data
-            fileToken = (version == Game.OcarinaOfTime) ?
-                (RomFileToken)ORom.FileList.dmadata : (RomFileToken)MRom.FileList.dmadata;
-            Addresser.TryGetRam(fileToken, version, out int temp);
-            Dmadata_Addr = SPtr.New(temp);
+            fileToken = RomFileToken.Select(version, ORom.FileList.dmadata, MRom.FileList.dmadata);
+            Addresser.TryGetRam(fileToken, version, out N64Ptr dmadataStart);
+            Dmadata_Addr = SPtr.New(dmadataStart);
 
             //code
-            fileToken = (version == Game.OcarinaOfTime) ?
-                (RomFileToken)ORom.FileList.code : (RomFileToken)MRom.FileList.code;
+            fileToken = RomFileToken.Select(version, ORom.FileList.code, MRom.FileList.code);
             Addresser.TryGetRam(fileToken, version, out Code_Addr);
-            Addresser.TryGetRom(fileToken, version, (uint)Code_Addr, out Code_VRom);
+            Addresser.TryGetRom(fileToken, version, Code_Addr.Offset, out Code_VRom);
 
+
+            int temp;
             //Global Context
             if (setGctx)
             {
-                Addresser.TryGetRam("RAM_GLOBAL_CONTEXT", version, out temp);
+                Addresser.TryGetRam(AddressToken.RAM_GLOBAL_CONTEXT, version, out temp);
                 if (version == ORom.Build.IQUEC || version == ORom.Build.IQUET)
                 {
                     GlobalContext = SPtr.New(temp);
@@ -196,62 +196,62 @@ namespace Spectrum
             SetGfxContext(version);
 
             //Heap
-            Addresser.TryGetRam("RAM_ARENA_MAIN", version, out temp);
+            Addresser.TryGetRam(AddressToken.RAM_ARENA_MAIN, version, out temp);
             Main_Heap_Ptr = SPtr.New(temp).Deref(); 
 
-            Addresser.TryGetRam("RAM_ARENA_SCENES", version, out temp);
+            Addresser.TryGetRam(AddressToken.RAM_ARENA_SCENES, version, out temp);
             Scene_Heap_Ptr = SPtr.New(temp).Deref();
             
-            Addresser.TryGetRam("RAM_ARENA_DEBUG", version, out temp);
+            Addresser.TryGetRam(AddressToken.RAM_ARENA_DEBUG, version, out temp);
             if (temp == 0)
                 Debug_Heap_Ptr = SPtr.New(0);
             else
                 Debug_Heap_Ptr = SPtr.New(temp).Deref();
 
 
-            Addresser.TryGetOffset("ACTOR_CAT_LL_Start", version, out temp);
+            Addresser.TryGetOffset(AddressToken.ACTOR_CAT_LL_Start, version, out temp);
             Actor_Category_Table = GlobalContext.RelOff(temp);
 
             //Overlay Tables
-            Addresser.TryGetRam("ActorTable_Start", ORom.FileList.code, version, out Actor_Ovl_Table);
-            Addresser.TryGetRam("PlayerPauseOverlayTable_Start", ORom.FileList.code, version, out Player_Pause_Ovl_Table);
-            Addresser.TryGetRam("ParticleTable_Start", ORom.FileList.code, version, out ParticleEffect_Ovl_Table);
-            Addresser.TryGetRam("ObjectTable_Start", ORom.FileList.code, version, out Object_File_Table);
+            Addresser.TryGetRam(AddressToken.ActorTable_Start, ORom.FileList.code, version, out Actor_Ovl_Table);
+            Addresser.TryGetRam(AddressToken.PlayerPauseOverlayTable_Start, ORom.FileList.code, version, out Player_Pause_Ovl_Table);
+            Addresser.TryGetRam(AddressToken.ParticleTable_Start, ORom.FileList.code, version, out ParticleEffect_Ovl_Table);
+            Addresser.TryGetRam(AddressToken.ObjectTable_Start, ORom.FileList.code, version, out Object_File_Table);
 
 
-            Addresser.TryGetOffset("OBJ_ALLOC_TABLE", version, out temp);
+            Addresser.TryGetOffset(AddressToken.OBJ_ALLOC_TABLE, version, out temp);
             Object_Allocation_Table = GlobalContext.RelOff(temp);
 
-            Addresser.TryGetOffset("ROOM_ALLOC_ADDR", version, out temp);
+            Addresser.TryGetOffset(AddressToken.ROOM_ALLOC_ADDR, version, out temp);
             Room_Allocation_Table = GlobalContext.RelOff(temp);
 
 
-            Addresser.TryGetRam("SRAM_START", version, out temp);
+            Addresser.TryGetRam(AddressToken.SRAM_START, version, out temp);
             SaveContext = SPtr.New(temp);
 
-            Addresser.TryGetRam("RAM_SEGMENT_TABLE", version, out temp);
+            Addresser.TryGetRam(AddressToken.RAM_SEGMENT_TABLE, version, out temp);
             Segment_Table = temp;
 
-            if (Addresser.TryGetRam("SceneTable_Start", version, out temp))
+            if (Addresser.TryGetRam(AddressToken.SceneTable_Start, version, out temp))
                 SceneTable = SPtr.New(temp);
             else
                 SceneTable = null;
 
-            if (Addresser.TryGetRam("EntranceIndexTable_Start", version, out temp))
+            if (Addresser.TryGetRam(AddressToken.EntranceIndexTable_Start, version, out temp))
                 EntranceTable = SPtr.New(temp);
             else
                 EntranceTable = null;
 
-            Addresser.TryGetRam("QUEUE_THREAD", version, out temp);
+            Addresser.TryGetRam(AddressToken.QUEUE_THREAD, version, out temp);
             Queue_Thread_Ptr = SPtr.New(temp);
 
-            Addresser.TryGetRam("STACK_LIST", version, out temp);
+            Addresser.TryGetRam(AddressToken.STACK_LIST, version, out temp);
             Stack_List_Ptr = SPtr.New(temp);
         }
 
         public static void SetGfxContext(RomVersion version)
         {
-            if (!Addresser.TryGetRam("GFX_START", version, out int temp))
+            if (!Addresser.TryGetRam(AddressToken.GFX_START, version, out int temp))
             {
                 if (GlobalContext != 0)
                     Gfx = GlobalContext.Deref();

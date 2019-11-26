@@ -11,7 +11,7 @@ namespace mzxrules.OcaLib.Elf
 {
     public class ElfUtil
     {
-        static string[] ovlSectionsStr = { ".text", ".data", ".rodata", ".bss" };
+        static readonly string[] ovlSectionsStr = { ".text", ".data", ".rodata", ".bss" };
         
         internal class Ovl
         {
@@ -151,9 +151,8 @@ namespace mzxrules.OcaLib.Elf
                         BindingSymbolName = { { "init", actor.InitBinding } }
                     };
                     byte[] data = new byte[0];
-                    using (FileStream elf = new FileStream(actor.Path, FileMode.Open))
+                    using (BinaryReader br = new BinaryReader(File.Open(actor.Path, FileMode.Open)))
                     {
-                        BinaryReader br = new BinaryReader(elf);
                         if (!TryConvertToOverlay(br, odata, out data))
                         {
                             Console.WriteLine($"Conversion of {actor.Path} failed!");
@@ -175,26 +174,29 @@ namespace mzxrules.OcaLib.Elf
             Ovl odata = new Ovl
             {
                 start = rpoint,
-                BindingSymbolName = { {"init", "initVars" } }
+                BindingSymbolName = { { "init", "initVars" } }
             };
 
-            bool result = false;
-
-            MemoryStream ms = new MemoryStream();
-
-            using (FileStream elfFile = new FileStream(elfpath, FileMode.Open))
+            using (MemoryStream ms = new MemoryStream())
             {
-                elfFile.CopyTo(ms);
-                ms.Position = 0;
-            }
-            result = TryConvertToOverlay(new BinaryReader(ms), odata, out byte[] ovlByte);
+                byte[] ovlByte;
+                bool result;
+                using (FileStream elfFile = new FileStream(elfpath, FileMode.Open))
+                {
+                    elfFile.CopyTo(ms);
+                    ms.Position = 0;
+                }
+                using (BinaryReader br = new BinaryReader(ms))
+                {
+                     result = TryConvertToOverlay(br, odata, out ovlByte);
+                }
+                using (FileStream fs = new FileStream(ovlpath, FileMode.Create))
+                {
+                    fs.Write(ovlByte, 0, ovlByte.Length);
+                }
 
-            using (FileStream fs = new FileStream(ovlpath, FileMode.Create))
-            {
-                fs.Write(ovlByte, 0, ovlByte.Length);
+                return result;
             }
-
-            return result;
         }
 
         private static bool TryConvertToOverlay(BinaryReader elf, Ovl odata, out byte[] ovlByte)
@@ -454,16 +456,18 @@ namespace mzxrules.OcaLib.Elf
                 var section = new SectionHeader(elf);
                 sections.Add(section);
             }
-            
+
             //set section names
             var shstr = sections[header.e_shstrndx];
 
             elf.BaseStream.Position = shstr.sh_offset;
-            MemoryStream ms = new MemoryStream(elf.ReadBytes(shstr.sh_size));
-            foreach (var section in sections)
+            using (MemoryStream ms = new MemoryStream(elf.ReadBytes(shstr.sh_size)))
             {
-                ms.Position = section.sh_name;
-                section.Name = CStr.Get(ms);
+                foreach (var section in sections)
+                {
+                    ms.Position = section.sh_name;
+                    section.Name = CStr.Get(ms);
+                }
             }
 
             return sections;
@@ -500,22 +504,24 @@ namespace mzxrules.OcaLib.Elf
             }
 
             elf.BaseStream.Position = strtab.sh_offset;
-            MemoryStream ms = new MemoryStream(elf.ReadBytes(strtab.sh_size));
-            foreach (var symbol in symbols)
+            using (MemoryStream ms = new MemoryStream(elf.ReadBytes(strtab.sh_size)))
             {
-                ms.Position = symbol.st_name;
-                symbol.Name = CStr.Get(ms);
-                
-                //if (symbol.st_shndx > 0 && symbol.st_shndx < sections.Count)
-                //{
-                //    var section = sections[symbol.st_shndx];
-                //    if (section.NS == null)
-                //        continue;
+                foreach (var symbol in symbols)
+                {
+                    ms.Position = symbol.st_name;
+                    symbol.Name = CStr.Get(ms);
 
-                //    symbol.st_value += section.NS.Addr;
-                //    symbol.st_shndx = Elf32_Sym.ABS;
-                //}
+                    //if (symbol.st_shndx > 0 && symbol.st_shndx < sections.Count)
+                    //{
+                    //    var section = sections[symbol.st_shndx];
+                    //    if (section.NS == null)
+                    //        continue;
 
+                    //    symbol.st_value += section.NS.Addr;
+                    //    symbol.st_shndx = Elf32_Sym.ABS;
+                    //}
+
+                }
             }
             return symbols;
         }

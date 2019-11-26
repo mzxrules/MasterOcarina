@@ -176,7 +176,7 @@ namespace mzxrules.OcaLib.SceneRoom
             int foundIndex;
             StringBuilder result = new StringBuilder();
 
-            sr.Seek(Addresser.GetRom(ORom.FileList.code, ORom.Build.DBGMQ, "EntranceIndexTable_Start"),
+            sr.Seek(Addresser.GetRom(ORom.FileList.code, ORom.Build.DBGMQ, AddressToken.EntranceIndexTable_Start),
                 SeekOrigin.Begin);
             for (int i = 0; i < 0x614; i++)
             {

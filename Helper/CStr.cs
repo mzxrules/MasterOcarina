@@ -15,10 +15,9 @@ namespace mzxrules.Helper
                 maxSeek = int.MaxValue;
             maxSeek = Math.Min(maxSeek, stream.Length - stream.Position);
 
-            char c;
             for (int i = 0; i < maxSeek; i++)
             {
-                c = (char)sw.Read();
+                char c = (char)sw.Read();
                 if (c == '\0')
                     break;
 
@@ -33,15 +32,16 @@ namespace mzxrules.Helper
             return Get(stream, Encoding.UTF8, maxSeek);
         }
 
-        public static string Get(Stream stream, string encoding, long maxSeek = 0)
-        {
-            return Get(stream, Encoding.GetEncoding(encoding), maxSeek);
-        }
-
         public static string Get(byte[] buffer, Encoding encoding, long maxSeek = 0)
         {
-            MemoryStream ms = new MemoryStream(buffer);
-            return Get(ms, encoding, maxSeek);
+            using (var ms = new MemoryStream(buffer))
+            {
+                return Get(ms, encoding, maxSeek);
+            }
+        }
+        public static string Get(byte[] buffer, string encoding, long maxSeek = 0)
+        {
+            return Get(buffer, Encoding.GetEncoding(encoding), maxSeek);
         }
     }
 }

@@ -41,14 +41,17 @@ namespace mzxrules.OcaLib
 
         public override RomFile GetSceneFile(int i)
         {
-            if (!(Version == ORom.Build.DBGMQ
-                && i < 110
-                || i < 101))
+            if (!(0 <= i && i < Tables.Scenes.Records))
+            {
                 return null;
+            }
 
             var sceneFile = GetSceneVirtualAddress(i);
             if (sceneFile.Start == 0)
+            {
                 return null;
+            }
+
             return GetFile(sceneFile);
         }
         #endregion

@@ -28,14 +28,14 @@ namespace mzxrules.OcaLib
         }
 
 
-        public static bool TryGetOffset(string addrVar, RomVersion version, out int v)
+        public static bool TryGetOffset(AddressToken token, RomVersion version, out int v)
         {
             v = 0;
 
-            if (!TryGetBlock(version, addrVar, out Block block))
+            if (!TryGetBlock(version, token, out Block block))
                 return false;
 
-            var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == addrVar);
+            var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == token.ToString());
 
             if (!(lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Offset))
                 return false;
@@ -62,32 +62,35 @@ namespace mzxrules.OcaLib
 
         #region (Try)GetRam
 
-        public static bool TryGetRam(RomFileToken file, RomVersion version, out int v)
+        public static bool TryGetRam(RomFileToken file, RomVersion version, out N64Ptr v)
+        {
+            var block = GetBlock(version, file.ToString());
+            if (TryGetStart(block, version, Domain.RAM, out int value))
+            {
+                v = value | 0x8000_0000;
+                return true;
+            }
+            v = 0;
+            return false;
+        }
+
+        public static bool TryGetRam(AddressToken token, RomFileToken file, RomVersion version, out int v)
         {
             var block = GetBlock(version, file.ToString());
 
-            return TryGetStart(block, version, Domain.RAM, out v);
+            return TryMagicConverter(block, token, version, Domain.RAM, out v);
         }
 
-        public static bool TryGetRam(string addrVar, RomFileToken file, RomVersion version, out int v)
-        {
-            var block = GetBlock(version, file.ToString());
-
-            return TryMagicConverter(block, addrVar, version, Domain.RAM, out v);
-        }
-
-        public static bool TryGetRam(string addrVar, RomVersion version, out int v)
+        public static bool TryGetRam(AddressToken token, RomVersion version, out int v)
         {
             v = 0;
-            if (!TryGetBlock(version, addrVar, out Block block))
+            if (!TryGetBlock(version, token, out Block block))
                 return false;
 
-            if (!TryMagicConverter(block, addrVar, version, Domain.RAM, out v))
+            if (!TryMagicConverter(block, token, version, Domain.RAM, out v))
                 return false;
 
             return true;
-
-            //return TryGetAddress("ram", version, addrVar, out v);
         }
 
         #endregion
@@ -109,11 +112,11 @@ namespace mzxrules.OcaLib
             return true;
         }
 
-        public static bool TryGetRom(RomFileToken file, RomVersion version, string addrVar, out int v)
+        public static bool TryGetRom(RomFileToken file, RomVersion version, AddressToken token, out int v)
         {
             var block = GetBlock(version, file.ToString());
 
-            if (TryMagicConverter(block, addrVar, version, Domain.ROM, out v))
+            if (TryMagicConverter(block, token, version, Domain.ROM, out v))
                 return true;
 
             return false;
@@ -127,15 +130,15 @@ namespace mzxrules.OcaLib
             return addr;
         }
 
-        public static int GetRom(RomFileToken file, RomVersion version, string addrVar)
+        public static int GetRom(RomFileToken file, RomVersion version, AddressToken token)
         {
             int addr;
             var block = GetBlock(version, file.ToString());
 
-            if (addrVar == "__Start")
+            if (token == AddressToken.__Start)
                 TryGetStart(block, version, Domain.ROM, out addr);
             else
-                TryMagicConverter(block, addrVar, version, Domain.ROM, out addr);
+                TryMagicConverter(block, token, version, Domain.ROM, out addr);
             return addr;
         }
 
@@ -152,14 +155,15 @@ namespace mzxrules.OcaLib
             return true;
         }
 
-        private static bool TryGetBlock(RomVersion version, string addressIdentifier, out Block block)
+        private static bool TryGetBlock(RomVersion version, AddressToken token, out Block block)
         {
+            string ident = token.ToString();
             var game = (from a in AddressDoc.Game
                        where a.name.ToString() == version.Game.ToString()
                        select a).Single();
 
             block = (from b in game.Block
-                     where b.Identifier.Any(x => x.id == addressIdentifier)
+                     where b.Identifier.Any(x => x.id == ident)
                      select b).SingleOrDefault();
             if (block != null)
                 return true;
@@ -179,59 +183,59 @@ namespace mzxrules.OcaLib
             return block;
         }
 
-        private static bool TryMagicConverter(Block block, string ident, RomVersion version, Domain domain, out int result)
+        private static bool TryMagicConverter(Block block, AddressToken token, RomVersion version, Domain domain, out int result)
         {
-            int lookup;
+            string ident = token.ToString();
             result = 0;
-            lookup = 0;
+            int lookup = 0;
 
             var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == ident);
 
             if (lookupAddr == null)
                 return false;
 
-            if (lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Addr)
+            if (lookupAddr.Item.Count > 0)
             {
-                Addr addr = (Addr)lookupAddr.Item[0];
-
-                if (!TryGetAddrValue(addr, version, out lookup))
-                    return false;
-
-                //if lookup is absolute, and in the same space, we have it
-
-                if (addr.reftype == AddressType.absolute
-                    && addr.domain == domain)
+                if (lookupAddr.Item[0] is Addr addr)
                 {
-                    result = lookup;
-                    return true;
-                }
-
-                //if lookup is absolute, but not in the same space, convert to offset
-                if (addr.reftype == AddressType.absolute && addr.domain != domain)
-                {
-                    Addr altStartAddr;
-
-                    altStartAddr = block.Start.SingleOrDefault(x => x.domain == addr.domain);
-
-                    if (altStartAddr == null
-                        || !TryGetAddrValue(altStartAddr, version, out int altStart))
+                    if (!TryGetAddrValue(addr, version, out lookup))
                         return false;
 
-                    lookup -= altStart;
+                    //if lookup is absolute, and in the same space, we have it
+
+                    if (addr.reftype == AddressType.absolute
+                        && addr.domain == domain)
+                    {
+                        result = lookup;
+                        return true;
+                    }
+
+                    //if lookup is absolute, but not in the same space, convert to offset
+                    if (addr.reftype == AddressType.absolute && addr.domain != domain)
+                    {
+                        Addr altStartAddr;
+
+                        altStartAddr = block.Start.SingleOrDefault(x => x.domain == addr.domain);
+
+                        if (altStartAddr == null
+                            || !TryGetAddrValue(altStartAddr, version, out int altStart))
+                            return false;
+
+                        lookup -= altStart;
+                    }
                 }
-            }
-            else if (lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Offset)
-            {
+                else if (lookupAddr.Item[0] is Offset)
+                {
+                    var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
 
-                var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
+                    Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
 
-                Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
+                    if (offset == null)
+                        return false;
 
-                if (offset == null)
-                    return false;
-                
-                if (!TryGetOffsetValue(offset, out lookup))
-                    return false;
+                    if (!TryGetOffsetValue(offset, out lookup))
+                        return false;
+                }
             }
 
             if (!TryGetStart(block, version, domain, out int start))
@@ -256,7 +260,7 @@ namespace mzxrules.OcaLib
             }
         }
 
-        private static bool TryGetAddrValue(Addr2.Address addr, RomVersion version, out int result)
+        private static bool TryGetAddrValue(Addr addr, RomVersion version, out int result)
         {
             try
             {

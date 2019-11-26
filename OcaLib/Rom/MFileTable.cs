@@ -36,8 +36,7 @@ namespace mzxrules.OcaLib
         
         public override RomFile GetSceneFile(int i)
         {
-            byte? sceneIndex;
-            sceneIndex = (byte)i; //GetInternalSceneIndex(i);
+            byte? sceneIndex = (byte)i; //GetInternalSceneIndex(i);
 
             if (sceneIndex == null)
                 return null;
@@ -55,7 +54,7 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public byte? GetInternalSceneIndex(int entranceSceneIndex)
         {
-            var entranceTableBase = Addresser.GetRom(MRom.FileList.code, Version, "EntranceIndexTable_Start");
+            var entranceTableBase = Addresser.GetRom(MRom.FileList.code, Version, AddressToken.EntranceIndexTable_Start);
             var entranceTableAddr = entranceTableBase + (sizeof(int) * 3) * entranceSceneIndex + 4;
 
             //Capture pointer

@@ -116,7 +116,7 @@ namespace mzxrules.OcaLib
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public RomFile GetFile(RomFileToken file) => GetFile(Addresser.GetRom(file, Version, "__Start"));
+        public RomFile GetFile(RomFileToken file) => GetFile(Addresser.GetRom(file, Version, AddressToken.__Start));
         
         #endregion
 
@@ -266,11 +266,7 @@ namespace mzxrules.OcaLib
 
         protected FileAddress GetFileByTable(TableInfo.Table refTable, int index)
         {
-            RomFileToken token = ORom.FileList.invalid;
-            if (Version.Game == Game.OcarinaOfTime)
-                token = ORom.FileList.code;
-            if (Version.Game == Game.MajorasMask)
-                token = MRom.FileList.code;
+            RomFileToken token = GetCodeFileToken();
             
             int size = refTable.Length;
             int offset = refTable.StartOff;
@@ -324,50 +320,22 @@ namespace mzxrules.OcaLib
 
         public ActorOverlayRecord GetActorOverlayRecord(int actor)
         {
-            RomFileToken token = GetCodeFileToken();
-            RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, Tables.Actors.Id, out int addr))
-            {
-                return null;
-            }
-            code.Stream.Position = code.Record.GetRelativeAddress(addr + (actor * 0x20));
-            return new ActorOverlayRecord(actor, new BinaryReader(code));
+            return (ActorOverlayRecord)GetOverlayRecord(actor, TableInfo.Type.Actors);
         }
 
         public GameStateRecord GetGameContextRecord(int index)
         {
-            RomFileToken token = GetCodeFileToken();
-            RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, Tables.GameOvls.Id, out int addr))
-            {
-                return null;
-            }
-            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x30));
-            return new GameStateRecord(index, new BinaryReader(code));
+            return (GameStateRecord)GetOverlayRecord(index, TableInfo.Type.GameOvls);
         }
 
         public ParticleOverlayRecord GetParticleOverlayRecord(int index)
         {
-            RomFileToken token = GetCodeFileToken();
-            RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, Tables.Particles.Id, out int addr))
-            {
-                return null;
-            }
-            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x1C));
-            return new ParticleOverlayRecord(index, new BinaryReader(code));
+            return (ParticleOverlayRecord)GetOverlayRecord(index, TableInfo.Type.Particles);
         }
 
         public PlayPauseOverlayRecord GetPlayPauseOverlayRecord(int index)
         {
-            RomFileToken token = GetCodeFileToken();
-            RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, Tables.PlayerPause.Id, out int addr))
-            {
-                return null;
-            }
-            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x1C));
-            return new PlayPauseOverlayRecord(index, new BinaryReader(code));
+            return (PlayPauseOverlayRecord)GetOverlayRecord(index, TableInfo.Type.PlayerPause);
         }
 
         #endregion

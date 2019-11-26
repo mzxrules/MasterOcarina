@@ -70,6 +70,40 @@ namespace mzxrules.OcaLib
 
         public RomVersion(string game, string build) : this(ResolveGame(game), build) { }
 
+        public RomVersion(string key)
+        {
+            MVer = MRom.Build.UNKNOWN;
+            OVer = ORom.Build.UNKNOWN;
+            Game = Game.Undefined;
+
+            if (!key.Contains("."))
+            {
+                return;
+            }
+
+            var game_ver = key.Split(new char[] { '.' }, 1);
+            if (Enum.TryParse(game_ver[0], out Game game))
+            {
+                Game = game;
+            }
+
+            switch (Game)
+            {
+                case Game.OcarinaOfTime:
+                    if (Enum.TryParse(game_ver[1], out ORom.Build oV))
+                    {
+                        OVer = oV;
+                    }
+                    return;
+                case Game.MajorasMask:
+                    if (Enum.TryParse(game_ver[1], out MRom.Build mV))
+                    {
+                        MVer = mV;
+                    }
+                    return;
+            }
+        }
+
         private static Game ResolveGame(string game)
         {
             if (game.ToLowerInvariant() == "oot"
@@ -163,6 +197,10 @@ namespace mzxrules.OcaLib
                 default: return "n/a";
             }
         }
+
+        public string UniqueKey => $"{Game.ToString()}.{ToString()}";
+
+        public string ShortUniqueKey => $"{GetGameAbbr()}_{GetVerAbbr()}";
 
         public override string ToString()
         {

@@ -8,60 +8,51 @@ namespace mzxrules.OcaLib
     {
         public class BuildInformation
         {
-            public static BuildInformation[] builds;
+            public static readonly BuildInformation[] builds = new BuildInformation[]
+            {
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.UNKNOWN, Name = "Unknown", Localization = Localization.UNKNOWN},
 
-            public Build Version { get { return _Version; } }
-            public string Name { get { return _Name; } }
-            public Localization Localization { get { return _Localization; } }
-            public ulong CRC { get { return _CRC; } }
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.J0, Name = "NTSC-J 1.0", Localization = Localization.NTSCJ},
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.J1, Name = "NTSC-J 1.1", Localization = Localization.NTSCJ},
 
-            Build _Version;
-            string _Name;
-            Localization _Localization;
-            ulong _CRC;
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.U0, Name = "NTSC-U 1.0", Localization = Localization.NTSCU},
+
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.P0, Name = "PAL 1.0", Localization = Localization.PAL},
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.P1, Name = "PAL 1.1", Localization = Localization.PAL},
+
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.GCJ, Name = "GCJ 1.0", Localization = Localization.NTSCJ},
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.GCU, Name = "GCU 1.0", Localization = Localization.NTSCU},
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.GCP, Name = "GCP 1.0", Localization = Localization.PAL},
+
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.DBG, Name = "PAL DBG", Localization = Localization.PAL},
+
+            };
+
+            public Build Version { get; private set; }
+            public string Name { get; private set; }
+            public Localization Localization { get; private set; }
+            public ulong CRC { get; private set; }
 
             BuildInformation() { }
 
-            static BuildInformation()
-            {
-                builds = new BuildInformation[] {
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = Localization.UNKNOWN},
-
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.J0, _Name = "NTSC-J 1.0", _Localization = Localization.NTSCJ},
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.J1, _Name = "NTSC-J 1.1", _Localization = Localization.NTSCJ},
-
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.U0, _Name = "NTSC-U 1.0", _Localization = Localization.NTSCU},
-
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P0, _Name = "PAL 1.0", _Localization = Localization.PAL},
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P1, _Name = "PAL 1.1", _Localization = Localization.PAL},
-
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCJ, _Name = "GCJ 1.0", _Localization = Localization.NTSCJ},
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCU, _Name = "GCU 1.0", _Localization = Localization.NTSCU},
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCP, _Name = "GCP 1.0", _Localization = Localization.PAL},
-
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBG, _Name = "PAL DBG", _Localization = Localization.PAL},
-                    
-                };
-            }
-
             public static BuildInformation Get(Build v)
             {
-                return builds.SingleOrDefault(x => x._Version == v);
+                return builds.SingleOrDefault(x => x.Version == v);
             }
             public static Localization GetLocalization(Build v)
             {
-                BuildInformation stats = builds.SingleOrDefault(x => x._Version == v);
-                return (stats != null) ? stats._Localization : Localization.UNKNOWN;
+                BuildInformation stats = builds.SingleOrDefault(x => x.Version == v);
+                return (stats != null) ? stats.Localization : Localization.UNKNOWN;
             }
 
             internal static ulong GetCrc(Build v)
             {
-                BuildInformation stats = builds.SingleOrDefault(x => x._Version == v);
-                return (stats != null) ? stats._CRC : 0;
+                BuildInformation stats = builds.SingleOrDefault(x => x.Version == v);
+                return (stats != null) ? stats.CRC : 0;
             }
         }
 
-        private static Language[] SupportedLanguages = new Language[] { 
+        private static readonly Language[] SupportedLanguages = new Language[] {
             Language.Japanese,
             Language.English,
             Language.German,
@@ -79,21 +70,8 @@ namespace mzxrules.OcaLib
             GCJ,
             GCU,
             GCP,
-            DBG, 
-
+            DBG,
         }
-
-        private static List<RomVersion> SupportedBuilds = new List<RomVersion> {
-             Build.J0,
-             Build.J1,
-             Build.U0,
-             Build.P0,
-             Build.P1,
-             Build.GCJ,
-             Build.GCU,
-             Build.GCP,
-             Build.DBG,
-        };
 
         public enum Localization
         {
@@ -167,7 +145,7 @@ namespace mzxrules.OcaLib
 
         public static void ConsolePrintSupportedVersions()
         {
-            Console.WriteLine("Majora's Mask: use GameId \"mm\"");
+            Console.WriteLine("Majora's Mask: use GameId 'mm'");
             Console.WriteLine("Version:");
             foreach (var item in MRom.GetSupportedBuilds())
             {

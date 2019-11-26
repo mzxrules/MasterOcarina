@@ -13,7 +13,7 @@ namespace Gen
     {
         public delegate Stream GetFileDelegate(string f);
 
-        static string processedFiles = "\rFile {0:D4} of {1:D4} processed";
+        static readonly string processedFiles = "\rFile {0:D4} of {1:D4} processed";
 
         public static void CompressRom(Stream rom, RomVersion version, List<int> exclusions, Stream sw)
         {
@@ -22,10 +22,10 @@ namespace Gen
         }
 
         private static void CompressRom_new(Stream rom, DmaData dmadata, List<int> exclusions, Stream sw)
-        { 
+        {
             BinaryReader br = new BinaryReader(rom);
             MemoryStream outRom = new MemoryStream(0x200_0000);
-            
+
             List<FileRecord> newDmaTable = new List<FileRecord>();
             Console.WriteLine();
 
@@ -40,7 +40,7 @@ namespace Gen
                     newDmaTable.Add(r);
                     break;
                 }
-                
+
                 br.BaseStream.Position = record.Rom.Start;
 
                 byte[] data = br.ReadBytes(record.VRom.Size);
@@ -67,7 +67,7 @@ namespace Gen
                 cur += dstsize;
                 outRom.Position = cur;
             }
-            
+            br.Close();
             WriteFileTable(outRom, dmadata.Address.VRom, newDmaTable);
             CRC.Write(outRom);
             outRom.Position = 0;
@@ -164,10 +164,9 @@ namespace Gen
         private static Stream GetFile_CompressedOptimized(ORom uncompressedRom, ORom refRom,
             FileRecord record, out bool IsCompressed)
         {
-            FileRecord refRecord;
 
             //If a matching file record can't be found, assume that the file should be compressed
-            if (!refRom.Files.TryGetFileRecord(record.VRom, out refRecord))
+            if (!refRom.Files.TryGetFileRecord(record.VRom, out FileRecord refRecord))
             {
                 IsCompressed = true;
                 return CompressFile(uncompressedRom, record);

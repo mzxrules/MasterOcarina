@@ -8,7 +8,7 @@ namespace mzxrules.Helper
     {
         public static void Write(string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.ReadWrite))
+            using (var fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite))
             {
                 Write(fs);
             }
@@ -47,20 +47,19 @@ namespace mzxrules.Helper
 
             if (BitConverter.IsLittleEndian)
             {
-                crc[0] = (crc[0] >> 24) | ((crc[0] >> 8) & 0xFF00) | ((crc[0] << 8) & 0xFF0000) | ((crc[0] << 24) & 0xFF000000);
-                crc[1] = (crc[1] >> 24) | ((crc[1] >> 8) & 0xFF00) | ((crc[1] << 8) & 0xFF0000) | ((crc[1] << 24) & 0xFF000000);
+                crc[0] = Endian.ConvertUInt32(crc[0]);
+                crc[1] = Endian.ConvertUInt32(crc[1]);
             }
             
             //Seek to 0x10 from rom start
             sw.Position = 0x10;
-            BinaryWriter br = new BinaryWriter(sw);
-            br.Write(crc[0]);
-            br.Write(crc[1]);
+            sw.Write(BitConverter.GetBytes(crc[0]), 0, sizeof(uint));
+            sw.Write(BitConverter.GetBytes(crc[1]), 0, sizeof(uint));
         }
 
-        public static FileEncoding VerifyRom(Stream rom, UInt64 TargetCrc)
+        public static FileEncoding VerifyRom(Stream rom, ulong targetCrc)
         {
-            UInt64 crc_File;
+            ulong crc_File;
             using (BinaryReader br = new BinaryReader(rom))
             {
                 br.BaseStream.Position = 0x10;
@@ -70,44 +69,43 @@ namespace mzxrules.Helper
             //crc_File now contains the crc from file with proper endianness
 
             //if big endian
-            if (TargetCrc == crc_File)
+            if (targetCrc == crc_File)
                 return FileEncoding.BigEndian32;
 
             //if rom is Little Endian (32 bit)
-            if (TargetCrc == ConvertToLittleEndian32(crc_File))
+            if (targetCrc == ConvertToLittleEndian32(crc_File))
             {
                 return FileEncoding.LittleEndian32;
             }
 
             //if rom is Little Endian 16 bit
-            else if (TargetCrc == ConvertToLittleEndian16(crc_File))
+            else if (targetCrc == ConvertToLittleEndian16(crc_File))
             {
                 return FileEncoding.LittleEndian16;
             }
             return FileEncoding.Error;
         }
 
-        private static UInt64 ConvertToLittleEndian32(UInt64 crc)
+        private static ulong ConvertToLittleEndian32(ulong crc)
         {
             byte[] crcLeft;
             byte[] crcRight;
-            crcLeft = BitConverter.GetBytes((UInt32)(crc >> 32));
-            crcRight = BitConverter.GetBytes((UInt32)crc);
+            crcLeft = BitConverter.GetBytes((uint)(crc >> 32));
+            crcRight = BitConverter.GetBytes((uint)crc);
 
             crcLeft = crcLeft.Reverse().ToArray();
             crcRight = crcRight.Reverse().ToArray();
 
-            return (((UInt64)BitConverter.ToUInt32(crcLeft, 0)) << 32 | BitConverter.ToUInt32(crcRight, 0));
+            return ((ulong)BitConverter.ToUInt32(crcLeft, 0)) << 32 | BitConverter.ToUInt32(crcRight, 0);
         }
 
-        private static UInt64 ConvertToLittleEndian16(UInt64 crc)
+        private static ulong ConvertToLittleEndian16(ulong crc)
         {
-            UInt64 resultCrc = 0;
-            UInt16 intermediate;
+            ulong resultCrc = 0;
             for (int i = 3; i >= 0; i--)
             {
-                intermediate = Endian.ConvertUShort((ushort)(crc >> (16 * i)));
-                resultCrc |= ((UInt64)(intermediate)) << (16 * i);
+                ushort intermediate = Endian.ConvertUShort((ushort)(crc >> (16 * i)));
+                resultCrc |= ((ulong)(intermediate)) << (16 * i);
 
             }
             return resultCrc;

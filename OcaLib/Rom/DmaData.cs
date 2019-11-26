@@ -22,7 +22,7 @@ namespace mzxrules.OcaLib
             else if (version.Game == Game.MajorasMask)
                 token = MRom.FileList.dmadata;
             
-            int address = Addresser.GetRom(token, version, "__Start");
+            int address = Addresser.GetRom(token, version, AddressToken.__Start);
             InitializeTable(s, address);
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Address = mzxrules.Helper.N64Ptr; //System.Int32;
+using Address = mzxrules.Helper.N64Ptr;
 
 namespace mzxrules.Helper
 {
@@ -156,7 +156,7 @@ namespace mzxrules.Helper
                 }
                 else if (item is ushort)
                 {
-                    Mem.WriteInt16(this + offset, (short)((ushort)item));
+                    Mem.WriteInt16(this + offset, (short)(ushort)item);
                 }
                 else if (item is byte)
                 {

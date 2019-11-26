@@ -1,5 +1,7 @@
 ﻿using System;
 
+using static mzxrules.OcaLib.AddressToken;
+
 namespace mzxrules.OcaLib
 {
     public class TableInfo
@@ -19,9 +21,24 @@ namespace mzxrules.OcaLib
         }
         public class Table
         {
-            public string Id { get; set; }
+            /// <summary>
+            /// Key used to look up info from Addresses.xml
+            /// </summary>
+            public AddressToken Id { get; set; }
+
+            /// <summary>
+            /// Length of each record in bytes
+            /// </summary>
             public int Length { get; set; }
+
+            /// <summary>
+            /// Number of records within the table
+            /// </summary>
             public int Records { get; set; }
+
+            /// <summary>
+            /// Start offset of dlf data or something
+            /// </summary>
             public int StartOff { get; set; }
         }
 
@@ -45,26 +62,26 @@ namespace mzxrules.OcaLib
         {
             if (version == Game.OcarinaOfTime)
             {
-                int scenes = (version == ORom.Build.DBGMQ) ? 110 : 102;
-                GameOvls = new Table    { Id = "GameContextTable_Start",        Length = 0x30, StartOff = 4, Records = 6 };
-                PlayerPause = new Table { Id = "PlayerPauseOverlayTable_Start", Length = 0x1C, StartOff = 4, Records = 2 };
-                Actors = new Table      { Id = "ActorTable_Start",              Length = 0x20, StartOff = 0, Records = 0x1D7 };
-                Particles = new Table   { Id = "ParticleTable_Start",           Length = 0x1C, StartOff = 0, Records = 0x25 };
-                Objects = new Table     { Id = "ObjectTable_Start",             Length = 0x08, StartOff = 0, Records = 0x192 };
-                Scenes = new Table      { Id = "SceneTable_Start",              Length = 0x14, StartOff = 0, Records = scenes };
-                TitleCards = new Table  { Id = "SceneTable_Start",              Length = 0x14, StartOff = 8, Records = scenes };
-                HyruleSkybox = new Table{ Id = "HyruleSkyboxTable_Start",       Length = 0x08, StartOff = 0, Records = 18 };
-                MapMarkData = new Table { Id = "MapMarkDataTable_Start",        Length = 0x18, StartOff = 4, Records = 1 };
+                int scenes = (version == ORom.Build.DBGMQ) ? 110 : 101;
+                GameOvls = new Table    { Id = GameContextTable_Start,        Length = 0x30, StartOff = 4, Records = 6 };
+                PlayerPause = new Table { Id = PlayerPauseOverlayTable_Start, Length = 0x1C, StartOff = 4, Records = 2 };
+                Actors = new Table      { Id = ActorTable_Start,              Length = 0x20, StartOff = 0, Records = 0x1D7 };
+                Particles = new Table   { Id = ParticleTable_Start,           Length = 0x1C, StartOff = 0, Records = 0x25 };
+                Objects = new Table     { Id = ObjectTable_Start,             Length = 0x08, StartOff = 0, Records = 0x192 };
+                Scenes = new Table      { Id = SceneTable_Start,              Length = 0x14, StartOff = 0, Records = scenes };
+                TitleCards = new Table  { Id = SceneTable_Start,              Length = 0x14, StartOff = 8, Records = scenes };
+                HyruleSkybox = new Table{ Id = HyruleSkyboxTable_Start,       Length = 0x08, StartOff = 0, Records = 18 };
+                MapMarkData = new Table { Id = MapMarkDataTable_Start,        Length = 0x18, StartOff = 4, Records = 1 };
             }
             else if (version == Game.MajorasMask)
             {
-                GameOvls = new Table    { Id = "GameContextTable_Start",        Length = 0x30, StartOff = 0, Records = 7 };
-                PlayerPause = new Table { Id = "PlayerPauseOverlayTable_Start", Length = 0x1C, StartOff = 4, Records = 2 };
-                Actors = new Table      { Id = "ActorTable_Start",              Length = 0x20, StartOff = 0, Records = 0x2B2 };
-                Particles = new Table   { Id = "ParticleTable_Start",           Length = 0x1C, StartOff = 0, Records = 0x027 };
-                Objects = new Table     { Id = "ObjectTable_Start",             Length = 0x08, StartOff = 0, Records = 0x283 };
-                Scenes = new Table      { Id = "SceneTable_Start",              Length = 0x10, StartOff = 0, Records = 0x071 };
-                Transitions = new Table { Id = "TransitionTable_Start",         Length = 0x1C, StartOff = 0xC, Records = 7};
+                GameOvls = new Table    { Id = GameContextTable_Start,        Length = 0x30, StartOff = 0, Records = 7 };
+                PlayerPause = new Table { Id = PlayerPauseOverlayTable_Start, Length = 0x1C, StartOff = 4, Records = 2 };
+                Actors = new Table      { Id = ActorTable_Start,              Length = 0x20, StartOff = 0, Records = 0x2B2 };
+                Particles = new Table   { Id = ParticleTable_Start,           Length = 0x1C, StartOff = 0, Records = 0x027 };
+                Objects = new Table     { Id = ObjectTable_Start,             Length = 0x08, StartOff = 0, Records = 0x283 };
+                Scenes = new Table      { Id = SceneTable_Start,              Length = 0x10, StartOff = 0, Records = 0x071 };
+                Transitions = new Table { Id = TransitionTable_Start,         Length = 0x1C, StartOff = 0xC, Records = 7};
             }
         }
 

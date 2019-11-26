@@ -70,7 +70,7 @@ namespace mzxrules.OcaLib
             public Reloc RelocType => (Reloc)Shift.AsByte((uint)Word, 0x3F000000);
             public int SectionOffset => Word & 0xFFFFFF;
             public int Offset => Parent.GetRelocationOffset(this);
-            private Overlay Parent;
+            private readonly Overlay Parent;
 
             public RelocationWord(Overlay parent, int word)
             {

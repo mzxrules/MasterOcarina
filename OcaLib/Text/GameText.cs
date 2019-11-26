@@ -25,7 +25,7 @@ namespace mzxrules.OcaLib
         {
             Dialogs = new Dictionary<Rom.Language, Dictionary<ushort, TextboxMessage>>();
 
-            if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, "TextbankTable", out int textbank))
+            if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, AddressToken.TextbankTable, out int textbank))
             {
                 RomFile codefile = rom.Files.GetFile(ORom.FileList.code);
                 using (BinaryReader file = new BinaryReader(codefile.Stream))
@@ -69,7 +69,7 @@ namespace mzxrules.OcaLib
         {
             Dialogs = new Dictionary<ORom.Language, Dictionary<ushort, TextboxMessage>>();
 
-            if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, "TextbankTable", out int textbank))
+            if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, AddressToken.TextbankTable, out int textbank))
             {
                 using (BinaryReader file = new BinaryReader(rom.Files.GetFile(ORom.FileList.code)))
                 {

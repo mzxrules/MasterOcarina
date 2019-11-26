@@ -34,8 +34,8 @@ namespace Gen
         /// <param name="importScenes">the scenes to import</param>
         public static void ImportToUncompressedRom(string romfile, RomVersion version, string sceneFilesLocation, List<int> importScenes)
         {
-            FileTable_Off = Addresser.GetRom(ORom.FileList.dmadata, version, "Scenes_Start");
-            SceneTable_Start = Addresser.GetRom(ORom.FileList.code, version, "SceneTable_Start");
+            FileTable_Off = Addresser.GetRom(ORom.FileList.dmadata, version, AddressToken.Scenes_Start);
+            SceneTable_Start = Addresser.GetRom(ORom.FileList.code, version, AddressToken.SceneTable_Start);
 
             int NextWriteAddress;
 

@@ -4,14 +4,23 @@ namespace mzxrules.Helper
 {
     public static class Endian
     {
+        [Flags]
         public enum Order
         {
-            Big16 = 0,
-            Big32 = 1,
-            Big64 = 2,
-            Little16 = 128,
-            Little32 = 129,
-            Little64 = 130,
+            Big = 0,
+            Little = 0x80,
+
+            Size16 = 2,
+            Size32 = 4, 
+            Size64 = 8,
+
+            Big16 = Big | Size16,
+            Big32 = Big | Size32,
+            Big64 = Big | Size64,
+
+            Little16 = Little | Size16,
+            Little32 = Little | Size32,
+            Little64 = Little | Size64,
         }
 
         /// <summary>

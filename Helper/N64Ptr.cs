@@ -3,7 +3,7 @@ namespace mzxrules.Helper
 {
     public struct N64Ptr : IEquatable<N64Ptr>, IComparable<N64Ptr>
     {
-        private long value;
+        private readonly long value;
 
         public byte Segment => (byte)(value >> 24);
 

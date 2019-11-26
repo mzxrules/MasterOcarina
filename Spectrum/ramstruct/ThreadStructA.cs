@@ -260,7 +260,7 @@ namespace Spectrum
             Unknown2 = ptr.ReadInt32(0x1C);
 
             byte[] nameBuff = ptr.Deref(0x18).ReadBytes(0, 0x20);
-            Name = CStr.Get(nameBuff, Encoding.GetEncoding("EUC-JP"), 0x20);
+            Name = CStr.Get(nameBuff, "EUC-JP", 0x20);
             StackAddr = new NamedBuffer(new N64PtrRange(StartPtr, EndPtr), $"{Name,-13} STACK");
         }
 

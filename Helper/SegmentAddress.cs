@@ -2,7 +2,7 @@
 {
     public struct SegmentAddress
     {
-        private int value;
+        private readonly int value;
 
         public byte Segment => (byte)(value >> 24);
 
