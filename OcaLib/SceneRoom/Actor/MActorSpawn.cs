@@ -10,14 +10,12 @@ namespace mzxrules.OcaLib.Actor
         
         public MActorSpawn(short[] record)
         {
-            //Endian.Convert(out ushort actor, record, 0);
-            //Actor = actor;
             Actor = (ushort)record[0];
 
             NoRotation = new Vector3<bool>
                 (
-                    (Actor & 0x8000) > 0,
                     (Actor & 0x4000) > 0,
+                    (Actor & 0x8000) > 0,
                     (Actor & 0x2000) > 0
                 );
             Actor &= 0xFFF;
