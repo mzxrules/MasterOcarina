@@ -2021,8 +2021,7 @@
     "Name": null,
     "Desc": "Compute Linear Tween",
     "Desc2": null,
-    "Args": "A0 = s16 end frame | A1 = s16 start frame? | A2 = s16 current frame? | F2 = Value between 0.0 (current frame smaller than start frame) and 1.0 (current frame >= end frame)
-"
+    "Args": "A0 = s16 end frame | A1 = s16 start frame? | A2 = s16 current frame? | F2 = Value between 0.0 (current frame smaller than start frame) and 1.0 (current frame >= end frame)"
   },
   {
     "Addr": "8006F9BC",
