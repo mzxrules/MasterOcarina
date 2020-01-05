@@ -32,6 +32,10 @@ namespace Atom
         public SectionList Sections = new SectionList();
 
         public List<Overlay.RelocationWord> Relocations = new List<Overlay.RelocationWord>();
+        
+        //used for oot decomp
+        public N64PtrRange HeaderAndReloc { get; protected set; }
+
         public List<Label> Functions = new List<Label>();
         public List<Action<Stream>> PreparseActions = new List<Action<Stream>>();
 
@@ -98,6 +102,7 @@ namespace Atom
                 overlay = new Overlay(br);
             }
             task.Relocations = overlay.Relocations;
+            task.HeaderAndReloc = new N64PtrRange(task.VRam.Start + overlay.header_offset, task.VRam.End);
 
             N64Ptr fstart = task.VRam.Start;
 

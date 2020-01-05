@@ -116,8 +116,10 @@ namespace Atom
                 return -1;
             }
 
-            Disassemble.GccOutput = !opts.ReadableOutput;
+            Disassemble.MipsToC = opts.MipsToCOutput;
+            Disassemble.GccOutput = Disassemble.MipsToC || !opts.ReadableOutput;
             Disassemble.PrintRelocations = true;
+            Disassemble.SetGprNames();
             Func<DisassemblyTask, bool> filter = getFilter(version, path);
             if (filter == null)
             {

@@ -51,6 +51,11 @@ namespace Atom
                 HelpText = "Generates more readable, but uncompilable code")]
             public bool ReadableOutput { get; set; }
 
+            [Option("mips-to-c",
+                Default = false,
+                HelpText = "Generates mips to c compatible output")]
+            public bool MipsToCOutput { get; set; }
+
             [Value(3, HelpText = ROM_HT_STR + ". optional", MetaName = ROM_MT_STR, Required = false)]
             public string RomPath { get; set; }
         }

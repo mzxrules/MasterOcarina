@@ -12,7 +12,24 @@ namespace Atom
     {
         internal static void Task(StreamWriter sw, BinaryReader br, DisassemblyTask task)
         {
-            if (GccOutput)
+            if (MipsToC)
+            {
+                var header = new string[]
+                    {
+                        ".include \"macro.inc\"",
+                        "",
+                        "# assembler directives",
+                        ".set noat      # allow manual use of $at",
+                        ".set noreorder # don't insert nops after branches",
+                        ".set gp=64     # allow use of 64-bit general purposee registers",
+                        ""
+                    };
+                foreach(var item in header)
+                {
+                    sw.WriteLine(item);
+                }
+            }
+            else if (GccOutput)
             {
                 sw.WriteLine("#include <mips.h>");
                 sw.WriteLine(".set noreorder");
@@ -33,6 +50,12 @@ namespace Atom
                 {
                     DataDisassembly(sw, br, section, task.Relocations.Where(x => x.RelocType == Reloc.R_MIPS32));
                 }
+            }
+            if (MipsToC && task.HeaderAndReloc != null)
+            {
+                sw.WriteLine();
+                sw.WriteLine($"D_{task.HeaderAndReloc.Start}:");
+                sw.WriteLine($".incbin \"baserom/{task.Name}\", 0x{task.HeaderAndReloc.Start - task.VRam.Start:X}, 0x{task.HeaderAndReloc.Size:X}");
             }
         }
 
@@ -82,7 +105,18 @@ namespace Atom
 
                 //read and write opcode
                 int word = br.ReadBigInt32();
-                sw.WriteLine($"\t{FormatOp(GetOP(word))}");
+                string line;
+                if (MipsToC)
+                {
+                    int offset = (int)br.BaseStream.Position - 4;
+
+                    line = $"/* {offset:X5} {pc} {word:X8} */  {FormatOp(GetOP(word))}";
+                }
+                else
+                {
+                    line = $"\t{FormatOp(GetOP(word))}";
+                }
+                sw.WriteLine(line);
 
                 if (jaltaken != 0)
                 {
@@ -180,7 +214,7 @@ namespace Atom
                 return;
 
             bool printWords = bytes.Count % 4 == 0;
-            string type = (printWords) ? "word" : "byte";
+            string type = printWords ? "word" : "byte";
 
             if (bytes.Count > width)
             {
@@ -201,8 +235,8 @@ namespace Atom
             }
             outputf.WriteLine();
             bytes.Clear();
-            
-            string GetLineByte(List<byte> chain, int index, int count)
+
+            static string GetLineByte(List<byte> chain, int index, int count)
             {
                 List<string> values = new List<string>();
                 foreach (var item in chain.GetRange(index, count))
@@ -211,7 +245,8 @@ namespace Atom
                 }
                 return string.Join(", ", values);
             }
-            string GetLineWord(List<byte> chain, int index, int count)
+
+            static string GetLineWord(List<byte> chain, int index, int count)
             {
                 List<string> values = new List<string>();
                 List<byte> items = chain.GetRange(index, count);

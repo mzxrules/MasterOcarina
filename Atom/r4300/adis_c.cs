@@ -25,19 +25,44 @@ namespace Atom
         static N64Ptr Rel_Label_Addr = 0;
         internal static bool PrintRelocations = false;
         internal static bool GccOutput = false;
+        internal static bool MipsToC = false; 
 
         static N64Ptr pc = 0x80000000;
         static int EndOfFunction = -1;
         static int jaltaken = 0;
         static int[] gpr_regs = new int[32];
+
+        public static string[] gpr_rn = new string[32];
         
-        public static string[] gpr_rn = new string[32]
+        
+        private static readonly string[] gpr_names = new string[32]
         {
-            "$zero","$at",   "v0",   "v1",   "a0",   "a1",   "a2",   "a3",
-            "t0",   "t1",   "t2",   "t3",   "t4",   "t5",   "t6",   "t7",
-            "s0",   "s1",   "s2",   "s3",   "s4",   "s5",   "s6",   "s7",
-            "t8",   "t9",   "k0",   "k1",   "gp",   "$sp",  "s8",   "$ra"
+            "zero", "at",  "v0",  "v1",  "a0",  "a1",  "a2",  "a3",
+            "t0",   "t1",  "t2",  "t3",  "t4",  "t5",  "t6",  "t7",
+            "s0",   "s1",  "s2",  "s3",  "s4",  "s5",  "s6",  "s7",
+            "t8",   "t9",  "k0",  "k1",  "gp",  "sp",  "s8",  "ra"
         };
+
+        public static void SetGprNames()
+        {
+            string[] names = new string[32];
+            gpr_names.CopyTo(names, 0);
+            if (MipsToC) //legacy
+            {
+                for (int i = 0; i < 32; i++)
+                {
+                    names[i] = "$" + names[i];
+                }
+            }
+            else
+            {
+                foreach (int index in new int[] { 0, 1, 29, 31 })
+                {
+                    names[index] = "$" + names[index];
+                }
+            }
+            gpr_rn = names;
+        }
 
         static string[] cop_rn = new string[32]
         {
