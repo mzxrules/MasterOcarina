@@ -18,6 +18,7 @@ namespace mzxrules.OcaLib
         public int DataSize;
         public int RodataSize;
         public int BssSize;
+        public int header_offset;
         public int RelCount => Relocations.Count;
         
         public List<RelocationWord> Relocations = new List<RelocationWord>();
@@ -33,7 +34,8 @@ namespace mzxrules.OcaLib
             br.BaseStream.Position = size - 4;
 
             int header_inset = br.ReadBigInt32();
-            br.BaseStream.Position = size - header_inset;
+            header_offset = size - header_inset;
+            br.BaseStream.Position = header_offset;
 
             TextSize = br.ReadBigInt32();
             DataSize = br.ReadBigInt32();
@@ -41,7 +43,7 @@ namespace mzxrules.OcaLib
             BssSize = br.ReadBigInt32();
             int relCount = br.ReadBigInt32();
 
-            int virtualSize = physicalSize + BssSize;
+            //int virtualSize = physicalSize + BssSize;
 
             for (int i = 0; i < relCount; i++)
             {
