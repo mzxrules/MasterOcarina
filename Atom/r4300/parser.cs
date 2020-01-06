@@ -54,6 +54,7 @@ namespace Atom
             if (MipsToC && task.HeaderAndReloc != null)
             {
                 sw.WriteLine();
+                sw.WriteLine($".section .rodata");
                 sw.WriteLine($"D_{task.HeaderAndReloc.Start}:");
                 sw.WriteLine($".incbin \"baserom/{task.Name}\", 0x{task.HeaderAndReloc.Start - task.VRam.Start:X}, 0x{task.HeaderAndReloc.Size:X}");
             }
@@ -189,7 +190,7 @@ namespace Atom
             if (bssLabels.Count == 0)
                 return;
 
-            bssLabels.Add(new Label(Label.Type.VAR, bssEnd, false));
+            bssLabels.Add(new Label(Label.Type.VAR, bssEnd, false, mips_to_c: Disassemble.MipsToC));
             sw.WriteLine(".bss");
             sw.WriteLine();
             var firstBss = bssLabels[0];
@@ -281,11 +282,18 @@ namespace Atom
         {
             Label curFunc = Symbols[pc];
 
-            sw.WriteLine($"{curFunc}:");
-            PrintCommentLines(curFunc.Name);
-            PrintCommentLines(curFunc.Desc);
-            PrintCommentLines(curFunc.Desc2);
-            PrintCommentLines(curFunc.Args);
+            if (!Disassemble.MipsToC)
+            {
+                sw.WriteLine($"{curFunc}:");
+                PrintCommentLines(curFunc.Name);
+                PrintCommentLines(curFunc.Desc);
+                PrintCommentLines(curFunc.Desc2);
+                PrintCommentLines(curFunc.Args);
+            }
+            else
+            {
+                sw.WriteLine($"glabel {curFunc}:");
+            }
             //
             void PrintCommentLines(string v)
             {
@@ -309,18 +317,18 @@ namespace Atom
             //complete the label list
             RemoveFalseFunctions();
 
-            List<(N64Ptr start, N64Ptr end)> textSections = GetTextSectionRanges(task);
+            List<N64PtrRange> textSections = GetTextSectionRanges(task);
             foreach (var addr in RelocationLabels.Values)
             {
                 if (!Symbols.ContainsKey(addr))
                 {
-                    if (textSections.Exists(x => x.start >= addr && addr < x.end))
+                    if (textSections.Exists(x => x.IsInRange(addr)))
                     {
-                        Symbols[addr] = new Label(Label.Type.LBL, addr);
+                        Symbols[addr] = new Label(Label.Type.LBL, addr, false, mips_to_c:Disassemble.MipsToC);
                     }
                     else
                     {
-                        Symbols[addr] = new Label(Label.Type.VAR, addr);
+                        Symbols[addr] = new Label(Label.Type.VAR, addr, false, mips_to_c: Disassemble.MipsToC);
                     }
                 }
             }
@@ -393,7 +401,7 @@ namespace Atom
             Rel_Parse = true;
 
             N64Ptr start = task.VRam.Start;
-            List<(N64Ptr start, N64Ptr end)> textSections = GetTextSectionRanges(task);
+            List<N64PtrRange> textSections = GetTextSectionRanges(task);
 
             foreach (var reloc in task.Relocations)
             {
@@ -424,12 +432,12 @@ namespace Atom
                 {
                     N64Ptr ptr = br.ReadBigInt32();
 
-                    if (textSections.Exists(x => x.start >= ptr && ptr < x.end))
+                    if (textSections.Exists(x => x.IsInRange(ptr)))
                     {
                         AddLabel(ptr, false);
                     }
                     else
-                        Symbols[ptr] = new Label(Label.Type.VAR, ptr);
+                        Symbols[ptr] = new Label(Label.Type.VAR, ptr, false, mips_to_c: Disassemble.MipsToC);
                 }
             }
 
@@ -437,15 +445,12 @@ namespace Atom
             br.BaseStream.Position = 0;
         }
 
-        private static List<(N64Ptr start, N64Ptr end)> GetTextSectionRanges(DisassemblyTask task)
+        private static List<N64PtrRange> GetTextSectionRanges(DisassemblyTask task)
         {
-            List<(N64Ptr start, N64Ptr end)> textSections = new List<(N64Ptr start, N64Ptr end)>();
-            foreach (var section in task.Sections.Values)
+            List<N64PtrRange> textSections = new List<N64PtrRange>();
+            foreach (var section in task.Sections.Values.Where(x => x.IsCode))
             {
-                if (section.IsCode)
-                {
-                    textSections.Add((section.VRam, section.Size));
-                }
+                textSections.Add(new N64PtrRange(section.VRam, section.VRam + section.Size));
             }
 
             return textSections;
@@ -461,7 +466,7 @@ namespace Atom
         {
             foreach(var f in funcs)
             {
-                AddFunction(new Label(f), true);
+                AddFunction(new Label(f, Disassemble.MipsToC), true);
             }
         }
 
@@ -508,7 +513,7 @@ namespace Atom
             }
             else
             {
-                Symbols.Add(addr, new Label(Label.Type.FUNC, addr, confirmed));
+                Symbols.Add(addr, new Label(Label.Type.FUNC, addr, confirmed, mips_to_c: Disassemble.MipsToC));
             }
         }
 
@@ -517,7 +522,7 @@ namespace Atom
             if (!Symbols.TryGetValue(addr, out Label label)
                 || (label.Confirmed == false && confirmed == true))
             {
-                label = new Label(Label.Type.LBL, addr, confirmed);
+                label = new Label(Label.Type.LBL, addr, confirmed, mips_to_c: Disassemble.MipsToC);
                 Symbols[addr] = label;
             }
 

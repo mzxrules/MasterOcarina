@@ -134,7 +134,7 @@ namespace Atom
             }
             else
             {
-                label = new Label(Label.Type.FUNC, addr, false);
+                label = new Label(Label.Type.FUNC, addr, false, Disassemble.MipsToC);
                 return $"{opcode}\t{label}\t## NO_FUNCTION_DOCUMENTED {TARGET(iw):X8}";
             }
         }

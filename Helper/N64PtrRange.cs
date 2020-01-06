@@ -35,5 +35,23 @@ namespace mzxrules.Helper
         {
             return $"{Start:X8}:{End:X8}";
         }
+
+        public bool IsInRange(N64Ptr value)
+        {
+            N64Ptr start; 
+            N64Ptr end;
+
+            if (Start < End)
+            {
+                start = Start;
+                end = End;
+            }
+            else
+            {
+                end = Start;
+                start = End;
+            }
+            return start <= value && value < end;
+        }
     }
 }

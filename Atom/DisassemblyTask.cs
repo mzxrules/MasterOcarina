@@ -102,7 +102,6 @@ namespace Atom
                 overlay = new Overlay(br);
             }
             task.Relocations = overlay.Relocations;
-            task.HeaderAndReloc = new N64PtrRange(task.VRam.Start + overlay.header_offset, task.VRam.End);
 
             N64Ptr fstart = task.VRam.Start;
 
@@ -110,6 +109,8 @@ namespace Atom
             Section data = new Section("data", fstart, text.VRam + text.Size, overlay.DataSize, 0);
             Section rodata = new Section("rodata", fstart, data.VRam + data.Size, overlay.RodataSize, 0);
             long off = task.VRam.Start + task.VRom.Size;
+
+            task.HeaderAndReloc = new N64PtrRange(task.VRam.Start + overlay.header_offset, off);
             Section bss = new Section("bss", fstart, off, overlay.BssSize, 0);
 
             task.Sections.Values.Add(text);
@@ -162,7 +163,7 @@ namespace Atom
             {
                 if (ptr != 0)
                 {
-                    var func = new Label(type, ptr, true)
+                    var func = new Label(type, ptr, true, Disassemble.MipsToC)
                     {
                         Name = $"{task.Name}_{name}"
                     };

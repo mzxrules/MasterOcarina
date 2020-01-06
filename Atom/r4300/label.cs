@@ -25,17 +25,19 @@ namespace Atom
 
         public bool Confirmed = false;
         public bool HasDescription = false;
+        readonly bool PrintMipsToC;
 
         public Label() { }
 
-        public Label(Type kind, N64Ptr addr, bool confirmed = false)
+        public Label(Type kind, N64Ptr addr, bool confirmed/* = false*/, bool mips_to_c = false)
         {
             Addr = addr;
             Kind = kind;
             Confirmed = confirmed;
+            PrintMipsToC = mips_to_c;
         }
         
-        public Label(FunctionInfo info) : this(Type.FUNC, info.Address, true)
+        public Label(FunctionInfo info, bool mips_to_c) : this(Type.FUNC, info.Address, true, mips_to_c)
         {
             Name = info.Name ?? "";
             Desc = info.Desc ?? "";
@@ -54,10 +56,21 @@ namespace Atom
                 InlineDesc = (string.IsNullOrWhiteSpace(info.Desc)) ? ToString() : Desc;
             }
         }
-        
+
         public override string ToString()
         {
-            return $"{Kind.ToString().ToLower()}_{(int)(Addr | 0x80000000):X8}";
+            if (!PrintMipsToC)
+            {
+                return $"{Kind.ToString().ToLower()}_{(int)(Addr | 0x80000000):X8}";
+            }
+
+            return Kind switch
+            {
+                Type.FUNC => $"func_{(int)(Addr | 0x80000000):X8}",
+                Type.LBL => $".L{(int)(Addr | 0x80000000):X8}",
+                Type.VAR => $"D_{(int)(Addr | 0x80000000):X8}",
+                _ => "bad label",
+            };
         }
     }
 
