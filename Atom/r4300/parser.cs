@@ -292,7 +292,7 @@ namespace Atom
             }
             else
             {
-                sw.WriteLine($"glabel {curFunc}:");
+                sw.WriteLine($"glabel {curFunc}");
             }
             //
             void PrintCommentLines(string v)
