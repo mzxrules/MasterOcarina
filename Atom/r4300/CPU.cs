@@ -46,13 +46,13 @@ namespace Atom
 
         static string ADDI(uint iw)
         {       //08(08)
-            gpr_regs[RT(iw)] = (gpr_regs[RS(iw)] + IMM(iw));
+            gpr_regs[RT(iw)] = gpr_regs[RS(iw)] + IMM(iw);
             return $"addi\t{rt_rs_imm(iw)}\t## {gpr_rn[RT(iw)]} = {gpr_regs[RT(iw)]:X8}";
         }
 
         static string ADDIU(uint iw)
         {   //09(09)
-            gpr_regs[RT(iw)] = (gpr_regs[RS(iw)] + IMM(iw));
+            gpr_regs[RT(iw)] = gpr_regs[RS(iw)] + IMM(iw);
             return $"addiu\t{rt_rs_imm(iw)}\t## {gpr_rn[RT(iw)]} = {gpr_regs[RT(iw)]:X8}";
         }
 
@@ -205,7 +205,17 @@ namespace Atom
 
         static string SYSCALL(uint iw) => $"syscall\t{IMM_P(iw)}";
 
-        static string BREAK(uint iw) => $"break\t## 0x{CODE(iw):X5}";
+        static string BREAK(uint iw)
+        {
+            if (MipsToC) 
+            {
+                return $"break {CODE(iw)}";
+            } 
+            else
+            {
+                return $"break\t## 0x{CODE(iw):X5}";
+            }
+        }
 
         static string SYNC(uint iw) => $"sync";
 
