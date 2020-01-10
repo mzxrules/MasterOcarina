@@ -209,7 +209,7 @@ namespace Atom
         {
             if (MipsToC) 
             {
-                return $"break {CODE(iw)}";
+                return $"break {CODE(iw)>>0xA}";
             } 
             else
             {

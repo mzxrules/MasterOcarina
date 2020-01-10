@@ -42,6 +42,15 @@
         "IsCode": true,
         "Ram": {
           "Start": "80000460",
+          "End": "80009320"
+        }
+      },
+      {
+        "Name": "data",
+        "Subsection": 0,
+        "IsCode": false,
+        "Ram": {
+          "Start": "80009320",
           "End": "80012370"
         }
       }

@@ -148,20 +148,22 @@ namespace Atom
 
             List<byte> byteChain = new List<byte>();
             N64Ptr end = section.VRam + section.Size;
-
+            N64Ptr chainStart = pc;
             while (pc < end)
             {
                 if (Symbols.ContainsKey(pc))
                 {
-                    DumpByteChain(sw, ref byteChain);
+                    DumpByteChain(sw, chainStart, ref byteChain);
+                    chainStart = pc;
                     sw.Write($"{Symbols[pc]}: ");
                 }
 
                 if (rel.Any(x => x.Offset == br.BaseStream.Position))
                 {
-                    DumpByteChain(sw, ref byteChain);
+                    DumpByteChain(sw, chainStart, ref byteChain);
                     N64Ptr lbl = br.ReadBigInt32();
                     pc += 4;
+                    chainStart = pc;
                     sw.WriteLine($".word {Symbols[lbl]}");
                 }
                 else
@@ -170,7 +172,7 @@ namespace Atom
                     pc += 1;
                 }
             }
-            DumpByteChain(sw, ref byteChain);
+            DumpByteChain(sw, chainStart, ref byteChain);
             sw.WriteLine();
         }
 
@@ -207,14 +209,14 @@ namespace Atom
             }
         }
 
-        private static void DumpByteChain(StreamWriter outputf, ref List<byte> bytes)
+        private static void DumpByteChain(StreamWriter outputf, N64Ptr chainStart, ref List<byte> bytes)
         {
             const int width = 16;
 
             if (bytes.Count == 0)
                 return;
 
-            bool printWords = bytes.Count % 4 == 0;
+            bool printWords = (chainStart % 4 == 0) && (bytes.Count % 4 == 0);
             string type = printWords ? "word" : "byte";
 
             if (bytes.Count > width)
