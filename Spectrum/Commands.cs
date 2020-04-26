@@ -173,8 +173,8 @@ namespace Spectrum
             {
                 switch (((string)args[0]).ToLower())
                 {
-                    case "oot": ChangeVersion(ORom.Build.N0); break;
-                    case "mm": ChangeVersion(MRom.Build.U0); break;
+                    case "oot": ChangeVersion((ORom.Build.N0, true)); break;
+                    case "mm": ChangeVersion((MRom.Build.U0, true)); break;
                 }
             }
             else if (args.Length == 2)
@@ -183,7 +183,7 @@ namespace Spectrum
                 if (v.Game == Game.Undefined)
                     Console.WriteLine("Unknown version code");
                 else
-                    ChangeVersion(v);
+                    ChangeVersion((v,true));
             }
         }
 
@@ -410,7 +410,7 @@ namespace Spectrum
                 }
             }
             if (Zpr.TryMountEmulator(emulatorsToMount))
-                ChangeVersion(Options.Version);
+                ChangeVersion((Options.Version, true));
             else
                 Console.WriteLine("Emulator selection failed.");
 
@@ -475,7 +475,7 @@ namespace Spectrum
             var version = new RomVersion(Options.Version.Game, build);
 
             if (version.Game != Game.Undefined)
-                ChangeVersion(version);
+                ChangeVersion((version,true));
             else
                 Console.WriteLine($"Invalid code for {Options.Version.Game}. Run ver (no arguments) for correct version codes");
         }
@@ -978,8 +978,7 @@ namespace Spectrum
         {
             if (args.Length > 0)
             {
-                SearchFuncs str;
-                if (!Enum.TryParse((string)args[0], true, out str))
+                if (!Enum.TryParse((string)args[0], true, out SearchFuncs str))
                 {
                     Console.WriteLine("Invalid Operation");
                     return;
@@ -1792,8 +1791,8 @@ namespace Spectrum
             {
                 if (!TryEvaluate((string)args[0], out long addr))
                     return;
-
-                Console.WriteLine(CollisionShape.Initialize(SPtr.New(addr)));
+                Console.Clear();
+                Console.WriteLine(ColliderShape.Initialize(SPtr.New(addr)));
             }
         }
         private static void GetActorBodyCollisionLists()
@@ -1805,15 +1804,15 @@ namespace Spectrum
                 Console.WriteLine(desc);
                 foreach (var shape in shapes)
                 {
-                    Console.WriteLine(shape.collider);
+                    Console.WriteLine($" {shape.collider}");
                 }
                 Console.WriteLine();
             }
         }
 
-        private static List<(string description, List<CollisionShape>)> GetActorCollisionPools()
+        private static List<(string description, List<ColliderShape>)> GetActorCollisionPools()
         {
-            var result = new List<(string, List<CollisionShape>)>();
+            var result = new List<(string, List<ColliderShape>)>();
 
             int colaOffset;
 
@@ -1832,7 +1831,7 @@ namespace Spectrum
             ushort colAtUnk = colPtr.ReadUInt16(2);
 
             string colAt = $"{colPtr}: colAT, {colAtCount:D2} elements, {colAtUnk:X4}";
-            List<CollisionShape> shapes = new List<CollisionShape>();
+            List<ColliderShape> shapes = new List<ColliderShape>();
 
             result.Add((colAt, shapes));
 
@@ -1841,7 +1840,7 @@ namespace Spectrum
                 var curPtr = colPtr.RelOff(4);
                 for (int i = 0; i < (colAtCount * 4); i += 4)
                 {
-                    var shape = CollisionShape.Initialize(curPtr.RelOff(i).Deref());
+                    var shape = ColliderShape.Initialize(curPtr.RelOff(i).Deref());
                     shapes.Add(shape);
                 }
             }
@@ -1851,19 +1850,19 @@ namespace Spectrum
             return result;
         }
 
-        private static (string, List<CollisionShape>) ColB_GetGroup(string name, Ptr colPtr)
+        private static (string, List<ColliderShape>) ColB_GetGroup(string name, Ptr colPtr)
         {
             int count = colPtr.ReadInt32(0);
 
             string description = $"{colPtr}: col{name}, {count:D2} elements";
-            List<CollisionShape> shapes = new List<CollisionShape>();
+            List<ColliderShape> shapes = new List<ColliderShape>();
 
             if (count <= 70)
             {
                 colPtr = colPtr.RelOff(4);
                 for (int i = 0; i < (count * 4); i += 4)
                 {
-                    var shape = CollisionShape.Initialize(colPtr.RelOff(i).Deref());
+                    var shape = ColliderShape.Initialize(colPtr.RelOff(i).Deref());
                     shapes.Add(shape);
                 }
             }
@@ -2377,7 +2376,7 @@ namespace Spectrum
             Name = "time",
             Description = "Gets world time")]
         [SpectrumCommandSignature(Sig = new Tokens[] { })]
-        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.HEX_S16 },
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.HEX_U16 },
             Help = "{0} = Custom Time")]
         private static void GetTime(Arguments args)
         {
@@ -2385,7 +2384,7 @@ namespace Spectrum
             if (args.Length == 0)
                 time = SaveContext.ReadUInt16(0xC);
             else
-                time = (ushort)(short)args[0];
+                time = (ushort)args[0];
 
             float f_time = ((float)time * 24) / 0x10000;
             int hour = (int)(f_time);
@@ -2466,7 +2465,7 @@ namespace Spectrum
                 int index = 0;
                 while (index < ptrs.Count)
                 {
-                    var key = FramebufferUtil.ViewFrameBuffer(ptrs[index]);
+                    var key = ColorBufferUtil.ViewFrameBuffer(ptrs[index]);
 
                     switch (key)
                     {
@@ -2486,10 +2485,46 @@ namespace Spectrum
                 if (!TryEvaluate((string)args[0], out long address))
                     return;
 
-                FramebufferUtil.ViewFrameBuffer((int)address);
+                ColorBufferUtil.ViewFrameBuffer((int)address);
                 Console.Clear();
                 Console.WriteLine("Done");
             }
+        }
+
+
+        [SpectrumCommand(
+            Name = "viewf",
+            Cat = SpectrumCommand.Category.Framebuffer,
+            Description = "View data as ia8 texture")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.EXPRESSION_S, Tokens.S16, Tokens.S16 },
+            Help = "{0} = address to view")]
+        private static void ViewIA8Buffer(Arguments args)
+        {
+            string inFormat = (string)args[0];
+            if (!TryEvaluate((string)args[1], out long address))
+                return;
+
+            if (!Enum.TryParse(inFormat, true, out TextureFormat format))
+                return;
+
+            if (!ColorBufferUtil.IsSupported(format))
+            {
+                Console.WriteLine($"{inFormat} not supported");
+                return;
+            }
+
+            ColorBufferRequest request = new ColorBufferRequest()
+            {
+                Format = format,
+                PixelPtr = address,
+                Width = (short)args[2],
+                Height = (short)args[3],
+                Scale = 3
+            };
+            ColorBufferUtil.ViewColorBuffer(request);
+            Console.Clear();
+            Console.WriteLine("Done");
         }
 
 
@@ -2504,7 +2539,7 @@ namespace Spectrum
         {
             for (int address = 0; address < GetRamSize(); address += 0x25800)
             {
-                FramebufferUtil.ViewFrameBuffer(address);
+                ColorBufferUtil.ViewFrameBuffer(address);
                 Console.Clear();
             }
             Console.WriteLine("Done");
@@ -2523,7 +2558,7 @@ namespace Spectrum
 
             foreach (var ptr in Constants.GetFramebufferPointers(Options.Version))
             {
-                FramebufferUtil.ViewFrameBuffer(ptr);
+                ColorBufferUtil.ViewFrameBuffer(ptr);
             }
         }
         #endregion
@@ -2640,7 +2675,19 @@ namespace Spectrum
             string result = CStr.Get(data, "EUC-JP");
             Console.WriteLine(result);
         }
-        
+
+
+        [SpectrumCommand(
+            Name = "reg",
+            Description = "Get Static Context reg name")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.HEX_S32 })]
+        private static void GetStaticContextReg(Arguments args)
+        {
+            int off = (int)args[0];
+            Console.WriteLine(StaticCtx.GetRegFromOffset(off));
+        }
+
 
 
         [SpectrumCommand(
@@ -2877,7 +2924,7 @@ namespace Spectrum
                 return;
 
             SpectrumVariables.GlobalContext = SPtr.New(address);
-            ChangeVersion(Options.Version, false);
+            ChangeVersion((Options.Version, false));
         }
 
         [SpectrumCommand(

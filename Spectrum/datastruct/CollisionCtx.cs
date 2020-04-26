@@ -195,5 +195,47 @@ namespace Spectrum
                 yield return (polyId, linkId);
             }
         }
+
+        public List<SimpleRamItem> GetRamMap()
+        {
+            List<SimpleRamItem> items = new List<SimpleRamItem>();
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(Table, Table + (max.x * max.y * max.z * 6)),
+                Description = "COLCTX Table"
+            });
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(Links, Links + LinksMax * 4),
+                Description = "COLCTX Links"
+            });
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(Checks, Links),
+                Description = "COLCTX Checks"
+            });
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(dyn_poly, dyn_poly + dyn_poly_max * 0x10),
+                Description = "COLCTX dyn_poly"
+            });
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(dyn_vtx, dyn_vtx + dyn_vtx_max * 6),
+                Description = "COLCTX dyn_vtx",
+            });
+
+            items.Add(new SimpleRamItem()
+            {
+                Ram = new N64PtrRange(dyn_list, dyn_list + dyn_list_max * 4),
+                Description = "COLCTX dyn_list"
+            });
+            return items;
+        }
     }
 }

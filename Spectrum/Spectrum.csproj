@@ -66,7 +66,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="datastruct\collision_check\ColliderBody.cs" />
     <Compile Include="datastruct\collision_check\ColliderBump.cs" />
-    <Compile Include="datastruct\collision_check\ColliderCylinders.cs" />
+    <Compile Include="datastruct\collision_check\ColliderJntSph.cs" />
     <Compile Include="datastruct\collision_check\ColliderQuad.cs" />
     <Compile Include="datastruct\collision_check\ColliderTouch.cs" />
     <Compile Include="datastruct\collision_check\ColliderTris.cs" />
@@ -76,8 +76,10 @@
     <Compile Include="datastruct\bgcheck\BgPolyType.cs" />
     <Compile Include="datastruct\bgcheck\BgVertex.cs" />
     <Compile Include="datastruct\collision_check\Collider.cs" />
-    <Compile Include="datastruct\collision_check\CollisionShape.cs" />
+    <Compile Include="datastruct\collision_check\ColliderShape.cs" />
     <Compile Include="datastruct\GfxDList.cs" />
+    <Compile Include="datastruct\RoomCtx.cs" />
+    <Compile Include="datastruct\StaticCtx.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="mem\EmulatorProcess.cs" />
     <Compile Include="mem\ProcessBuffer.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ramstruct\OvlParticleEffect.cs" />
     <Compile Include="ramstruct\OvlPause.cs" />
+    <Compile Include="ramstruct\SimpleFile.cs" />
     <Compile Include="ramstruct\ThreadStructA.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="shitbit\ShitBit.cs" />
@@ -123,7 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="data\trainer\n0_signature.bin" />
+    <None Include="data\trainer\n0_signature.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="data\settings-default.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

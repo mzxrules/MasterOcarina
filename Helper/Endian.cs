@@ -7,8 +7,12 @@ namespace mzxrules.Helper
         [Flags]
         public enum Order
         {
-            Big = 0,
-            Little = 0x80,
+            Error = 0,
+
+            Big = 0x10,
+            Little = 0x20,
+
+            SizeMask = 0x0F,
 
             Size16 = 2,
             Size32 = 4, 

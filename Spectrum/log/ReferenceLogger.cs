@@ -57,7 +57,7 @@ namespace Spectrum
                 }
 
                 // If one is null, but not both, return false.
-                if (((object)a == null) || ((object)b == null))
+                if (a is null || b is null)
                 {
                     return false;
                 }

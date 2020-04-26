@@ -16,7 +16,7 @@ namespace Spectrum
     {
         const string TITLE = "Spectrum - Time never really passes in Hyrule... does it?";
         static SpectrumOptions Options = new SpectrumOptions();
-        public delegate void SetVersionEventHandler(RomVersion v, bool b = true);
+        public delegate void SetVersionEventHandler((RomVersion version, bool setGctx) args);
         public static event SetVersionEventHandler ChangeVersion;
         static List<BlockNode> LastActorLL = new List<BlockNode>();
         static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
@@ -291,8 +291,9 @@ namespace Spectrum
             return null;
         }
 
-        private static void UpdateSetVersion(RomVersion v, bool g)
+        private static void UpdateSetVersion((RomVersion v, bool g) args)
         {
+            var v = args.v;
             string gameStr = "?";
             string buildStr = "?";
             Options.Version = v;
@@ -319,8 +320,10 @@ namespace Spectrum
             SaveSettings();
         }
 
-        private static void SetBlockNodeLength(RomVersion v, bool g)
+        private static void SetBlockNodeLength((RomVersion v, bool g) args)
         {
+            var v = args.v;
+
             if (v.Game == Game.OcarinaOfTime)
             {
                 if (v == ORom.Build.GCJ
@@ -701,7 +704,7 @@ namespace Spectrum
 
             ramItems.Add(RamScene.GetSceneInfo(Options.Version, GlobalContext, SpectrumVariables.SceneTable));
 
-            ramItems.Add(RamRoom.GetRoomInfo());
+            ramItems.AddRange(RamRoom.GetRoomInfo());
 
             //Heap Blocklists
             ramItems.AddRange(BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr));
@@ -709,7 +712,6 @@ namespace Spectrum
                 ramItems.AddRange(BlockNode.GetBlockList(SpectrumVariables.Debug_Heap_Ptr));
             if (fetchAll || Options.ShowLinkedList)
                 ramItems.AddRange(GetActorLinkedList(ramItems));
-
 
             if (fetchAll || Options.ShowActors)
             {
@@ -719,6 +721,9 @@ namespace Spectrum
 
             if (fetchAll || Options.ShowThreadingStructs)
                 ramItems.AddRange(ThreadStack.GetIRamItems());
+
+            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
+            ramItems.AddRange(ctx.GetRamMap());
 
             return ramItems;
         }

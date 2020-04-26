@@ -217,9 +217,21 @@ namespace mzxrules.Helper
         {
             return Mem.ReadByte(this + offset);
         }
+        public sbyte ReadSByte(int offset)
+        {
+            return (sbyte)ReadByte(offset);
+        }
         public byte[] ReadBytes(int offset, int count)
         {
             return Mem.ReadBytes(this + offset, count);
+        }
+        public Vector3<float> ReadVec3f(int offset)
+        {
+            return new Vector3<float>(ReadFloat(offset), ReadFloat(offset + 4), ReadFloat(offset + 8));
+        }
+        public Vector3<short> ReadVec3s(int offset)
+        {
+            return new Vector3<short>(ReadInt16(offset), ReadInt16(offset + 2), ReadInt16(offset + 4));
         }
     }
 }

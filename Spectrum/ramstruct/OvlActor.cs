@@ -18,8 +18,9 @@ namespace Spectrum
 
         static RomVersion version;
 
-        internal static void ChangeVersion(RomVersion v, bool gctx)
+        internal static void ChangeVersion((RomVersion v, bool gctx) args)
         {
+            var v = args.v;
             TOTAL_ACTORS = (v.Game == Game.OcarinaOfTime) ? 0x1D7 : 0x2B2;
             InstanceSize = new ushort[TOTAL_ACTORS];
 

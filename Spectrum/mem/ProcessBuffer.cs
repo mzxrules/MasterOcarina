@@ -8,16 +8,16 @@ namespace Spectrum
         class ProcessBuffer
         {
             const int BUFFER_SIZE = 0x10000;
-            byte[][] buffer = new byte[2][];
-            long[] addr = new long[3];
+            readonly byte[][] buffer = new byte[2][];
+            readonly long[] addr = new long[3];
 
             public void Initialize(Process proc, IntPtr address)
             {
                 addr[0] = (long)address + BUFFER_SIZE + BUFFER_SIZE;
                 addr[1] = (long)address + BUFFER_SIZE;
                 addr[2] = (long)address;
-                buffer[0] = ReadProcess(proc, (IntPtr)addr[1], BUFFER_SIZE, out int r);
-                buffer[1] = ReadProcess(proc, (IntPtr)addr[2], BUFFER_SIZE, out r);
+                buffer[0] = ReadProcess(proc, (IntPtr)addr[1], BUFFER_SIZE, out _);
+                buffer[1] = ReadProcess(proc, (IntPtr)addr[2], BUFFER_SIZE, out _);
             }
 
             public int ReadInt32(Process proc, IntPtr address)
@@ -39,7 +39,7 @@ namespace Spectrum
                     addr[2] = addr[1];
                     addr[1] = addr[0];
                     addr[0] += BUFFER_SIZE;
-                    buffer[0] = ReadProcess(proc, (IntPtr)addr[1], BUFFER_SIZE, out int r);
+                    buffer[0] = ReadProcess(proc, (IntPtr)addr[1], BUFFER_SIZE, out _);
                     return ReadInt32(proc, address);
                 }
                 else

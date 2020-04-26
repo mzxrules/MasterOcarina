@@ -36,12 +36,6 @@ namespace mzxrules.OcaLib
             return dmadata.Address.VRom;
         }
 
-        private void ResetFileCache()
-        {
-            CachedFile = null;
-            CachedFileAddress = new FileAddress();
-        }
-
         #region GetFile
 
         /// <summary>

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Spectrum
 {
-    class ColliderTris : CollisionShape
+    class ColliderTris : ColliderShape
     {
         int count;
         N64Ptr listPtr;
@@ -31,12 +31,15 @@ namespace Spectrum
         {
             string tris = string.Join(
                 Environment.NewLine, items.Select(i => i.ToString()));
-            return $"{collider}{Environment.NewLine}Tri Collection: count {count}, {listPtr}{Environment.NewLine}{tris}";
+            return $"ColliderTris{Environment.NewLine}" +
+                $"{collider}{Environment.NewLine}" +
+                $"Count: {count} List: {listPtr}{Environment.NewLine}{tris}";
         }
     }
 
     class ColliderTriElement
     {
+        N64Ptr address;
         public ColliderBody body;
         public Vector3<float> pointA;
         public Vector3<float> pointB;
@@ -46,25 +49,23 @@ namespace Spectrum
 
         public ColliderTriElement(Ptr p)
         {
+            address = p;
             body = new ColliderBody(p);
-            pointA = new Vector3<float>
-                (p.ReadFloat(0x28), p.ReadFloat(0x2C), p.ReadFloat(0x30));
-            pointB = new Vector3<float>
-                (p.ReadFloat(0x34), p.ReadFloat(0x38), p.ReadFloat(0x3C));
-            pointC = new Vector3<float>
-                (p.ReadFloat(0x40), p.ReadFloat(0x44), p.ReadFloat(0x48));
-            unit_normal = new Vector3<float>
-                (p.ReadFloat(0x4C), p.ReadFloat(0x50), p.ReadFloat(0x54));
+            pointA = p.ReadVec3f(0x28);
+            pointB = p.ReadVec3f(0x34);
+            pointC = p.ReadVec3f(0x40);
+            unit_normal = p.ReadVec3f(0x4C);
             normal_dist = p.ReadFloat(0x58);
         }
 
         public override string ToString()
         {
-            return $"{body}{Environment.NewLine}" +
-                $"A: {pointA}{Environment.NewLine}" +
-                $"B: {pointB}{Environment.NewLine}" +
-                $"C: {pointC}{Environment.NewLine}" +
-                $"Normal: {unit_normal} {normal_dist}";
+            return $"=== {address}" +
+                $"{body}{Environment.NewLine}" +
+                $" A: {pointA}{Environment.NewLine}" +
+                $" B: {pointB}{Environment.NewLine}" +
+                $" C: {pointC}{Environment.NewLine}" +
+                $" Normal: {unit_normal} {normal_dist}";
         }
     }
 

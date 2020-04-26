@@ -23,9 +23,11 @@ namespace mzxrules.Helper
             Endian.Order outEndian;
             switch (sourceEncoding)
             {
+                case FileEncoding.BigEndian32: sourceEndian = Endian.Order.Big32; outEndian = Endian.Order.Big32; break;
+                case FileEncoding.HalfwordSwap: sourceEndian = Endian.Order.Big16; outEndian = Endian.Order.Big32; break;
                 case FileEncoding.LittleEndian16: sourceEndian = Endian.Order.Little16; outEndian = Endian.Order.Big16; break;
                 case FileEncoding.LittleEndian32: sourceEndian = Endian.Order.Little32; outEndian = Endian.Order.Big32; break;
-                default: throw new NotImplementedException();
+                default: throw new ArgumentOutOfRangeException();
             }
             ConvertData(source, sourceEndian, output, outEndian);
         }
@@ -40,6 +42,7 @@ namespace mzxrules.Helper
         /// <returns>True if the copy was created. No copy will be created if inO == outO</returns>
         private static bool ConvertData(Stream inFile, Endian.Order inO, Stream outFile, Endian.Order outO)
         {
+            const int sizeMask = (int)Endian.Order.SizeMask;
             if (inO == outO)
                 return false;
 
@@ -50,7 +53,7 @@ namespace mzxrules.Helper
             }
 
             //if word size does not match
-            else if (((int)inO & 0x7F) != ((int)outO & 0x7F))
+            else if (((int)inO & sizeMask) != ((int)outO & sizeMask))
             {
                 return false;
             }

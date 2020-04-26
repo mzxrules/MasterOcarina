@@ -40,7 +40,7 @@ namespace Spectrum
             }
 
             if (showAllSegments)
-                return addrs.Where(x => x.Ram.Start != 0).ToList();
+                return addrs.Where(x => !x.Ram.Start.IsNull()).ToList();
             else
                 return addrs.Where(x => new int[] { 0x03 }.Contains(x.segment)).ToList();
         }

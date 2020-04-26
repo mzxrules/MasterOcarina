@@ -94,7 +94,13 @@ namespace Spectrum
         public static Ptr Object_Allocation_Table;// = 0x1D9C44;
 
         [ViewVariable]
+        public static Ptr Room_Context; 
+
+        [ViewVariable]
         public static Ptr Room_Allocation_Table;
+
+        [ViewVariable]
+        public static Ptr Room_List_Ptr;
 
         [ViewVariable("Graphics Context")]
         public static Ptr Gfx;
@@ -163,8 +169,9 @@ namespace Spectrum
             SaveContext =  SPtr.New(0);
         }
 
-        internal static void ChangeVersion(RomVersion version, bool setGctx = true)
+        internal static void ChangeVersion((RomVersion version, bool setGctx) args)
         {
+            var (version, setGctx) = args;
             RomFileToken fileToken;
 
             //dma data
@@ -222,9 +229,14 @@ namespace Spectrum
             Addresser.TryGetOffset(AddressToken.OBJ_ALLOC_TABLE, version, out temp);
             Object_Allocation_Table = GlobalContext.RelOff(temp);
 
+            Addresser.TryGetOffset(AddressToken.ROOM_CONTEXT, version, out temp);
+            Room_Context = GlobalContext.RelOff(temp);
+
             Addresser.TryGetOffset(AddressToken.ROOM_ALLOC_ADDR, version, out temp);
             Room_Allocation_Table = GlobalContext.RelOff(temp);
 
+            Addresser.TryGetOffset(AddressToken.ROOM_LIST_PTR, version, out temp);
+            Room_List_Ptr = GlobalContext.Deref(temp);
 
             Addresser.TryGetRam(AddressToken.SRAM_START, version, out temp);
             SaveContext = SPtr.New(temp);

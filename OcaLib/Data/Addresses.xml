@@ -400,13 +400,22 @@
       <!--Address containing the start of the table for loaded obj files-->
       <!--0x08 = num loaded object files "OBJ_COUNT_ADDR"-->
       <!--0x0C = start of table "OBJ_LIST_START_ADDR"-->
-      <Identifier id ="OBJ_ALLOC_TABLE">
+      <Identifier id="OBJ_ALLOC_TABLE">
         <Offset>117A4</Offset>
+      </Identifier>
+      
+      <!--Address to struct that manages rooms-->
+      <Identifier id="ROOM_CONTEXT">
+        <Offset>11CBC</Offset>
       </Identifier>
 
       <!--Address to struct that manages room allocation-->
-      <Identifier id ="ROOM_ALLOC_ADDR">
+      <Identifier id="ROOM_ALLOC_ADDR">
         <Offset>11CE4</Offset>
+      </Identifier>
+      
+      <Identifier id="ROOM_LIST_PTR">
+        <Offset>11DF0</Offset>
       </Identifier>
 
       <!--Start pointer to actor linked list-->

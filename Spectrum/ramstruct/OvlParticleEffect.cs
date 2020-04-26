@@ -8,7 +8,7 @@ namespace Spectrum
     class OvlParticle : ParticleOverlayRecord, IRamItem, IVRamItem, IFile, IActorItem
     {
         static int TOTAL_PARTICLE_EFFECTS; //
-        static int LENGTH = 0x1C;
+        static readonly int LENGTH = 0x1C;
         public static int OVL_TABLE_ADDR { get { return SpectrumVariables.ParticleEffect_Ovl_Table; } }// = 0x0E8530;
         public bool IsFileLoaded { get { return Ram.Start != 0; } }
 
@@ -20,8 +20,9 @@ namespace Spectrum
             }
         }
 
-        internal static void ChangeVersion(RomVersion v, bool g)
+        internal static void ChangeVersion((RomVersion v, bool g) args)
         {
+            var v = args.v;
             if (v.Game == Game.OcarinaOfTime)
                 TOTAL_PARTICLE_EFFECTS = 0x19;
             else

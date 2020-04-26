@@ -2,6 +2,11 @@
 {
     public static class Align
     {
+        public static int To4(int value)
+        {
+            return (value + 0x3) & -0x4;
+        }
+
         public static int To8(int value)
         {
             return (value + 0x7) & -0x8;

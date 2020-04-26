@@ -56,11 +56,11 @@ namespace Spectrum
         public void Initialize()
         {
             Data = new List<Record>();
-            Ptr ptr = SPtr.New(Options.StartPtr);
+            byte[] data = SPtr.New(Options.StartPtr).ReadBytes(0, Align.To4(Options.Size));
+
             for (int i = 0; i < Options.Size; i += 4)
             {
-                var addr = Options.StartPtr + i;
-                int v = ptr.ReadInt32(i);
+                int v = Endian.ConvertInt32(data, i);
                 var rec = new Record()
                 {
                     off = i,
@@ -101,11 +101,11 @@ namespace Spectrum
 
         private void Update()
         {
-            Ptr ptr = SPtr.New(Options.StartPtr);
+            byte[] data = SPtr.New(Options.StartPtr).ReadBytes(0, Align.To4(Options.Size));
             foreach (var item in Data)
             {
                 item.prev = item.cur;
-                item.cur = ptr.ReadInt32(item.off);
+                item.cur = Endian.ConvertInt32(data, item.off);
             }
         }
 

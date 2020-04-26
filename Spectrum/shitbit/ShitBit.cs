@@ -3,51 +3,170 @@ using System.Drawing;
 using System.Threading.Tasks;
 using mzxrules.Helper;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace Spectrum
 {
-    static class FramebufferUtil
+    public enum TextureFormat
     {
-        const int BUFFER_SIZE = 320 * 240 * 2;
+        invalid,
+        IA4,
+        IA8,
+        IA16,
+        RGB5A1,
+        RGBA32
+    }
 
-        public static void SaveFrameBufferBitmap(N64Ptr frameBuffer)
+    public class ColorBufferRequest
+    {
+        public TextureFormat Format { get; set; }
+
+        public N64Ptr PixelPtr { get; set; }
+
+        public N64Ptr PalettePtr { get; set; }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public int Scale { get; set; }
+
+        public static ColorBufferRequest GetFramebufferRequest(N64Ptr ptr)
         {
-            Bitmap frame = GetFrameBufferBitmap(frameBuffer);
-            frame.Save($"dump/frame{frameBuffer:X6}.png", System.Drawing.Imaging.ImageFormat.Png);
+            return new ColorBufferRequest()
+            {
+                Format = TextureFormat.RGB5A1,
+                PixelPtr = ptr,
+                Width = 320,
+                Height = 240,
+                Scale = 2,
+            };
+        }
+    }
+
+    static class ColorBufferUtil
+    {
+
+        class TextureFormatInfo
+        {
+            public TextureFormat Format { get; set; }
+
+            public int BPP { get; set; }
+
+            public Func<byte[], int, int, Bitmap> CreateBitmap;
+        }
+
+        static Dictionary<TextureFormat, TextureFormatInfo> formatInfo = new Dictionary<TextureFormat, TextureFormatInfo>()
+        {
+            [TextureFormat.RGB5A1] = new TextureFormatInfo() 
+            {
+                Format = TextureFormat.RGB5A1, CreateBitmap = CreateRGB5A1, BPP = 16
+            },
+            [TextureFormat.RGBA32] = new TextureFormatInfo()
+            {
+                Format = TextureFormat.RGBA32, CreateBitmap = CreateRGBA, BPP = 32
+            },
+            [TextureFormat.IA8] = new TextureFormatInfo()
+            {
+                Format = TextureFormat.IA8, CreateBitmap = CreateIA8, BPP = 8
+            }
+        };
+        public static bool IsSupported(TextureFormat format)
+        {
+            return formatInfo.ContainsKey(format);
+        }
+
+
+        //const int FRAMEBUFFER_SIZE = 320 * 240 * 2;
+
+        public static void SaveBufferBitmap(TextureFormat format, N64Ptr start, int width, int height)
+        {
+            using (Bitmap frame = GetBufferBitmap(format, start, width, height))
+            {
+                frame.Save($"dump/img_{start:X6}_{width}x{height}.png", System.Drawing.Imaging.ImageFormat.Png);
+            }
+        }
+
+        static Bitmap GetBufferBitmap(TextureFormat format, N64Ptr start, int width, int height)
+        {
+            byte[] pixelData = Zpr.ReadRam(start, GetSizeInBytes(format, width, height));
+            return formatInfo[format].CreateBitmap(pixelData, width, height);
         }
         
-
-        static Bitmap GetFrameBufferBitmap(N64Ptr framebuffer)
+        static int GetSizeInBytes(TextureFormat format, int width, int height)
         {
-            byte[] pixelData = Zpr.ReadRam(framebuffer, BUFFER_SIZE);
-            return DrawRGB5A1(pixelData, 320, 240);
+            var info = formatInfo[format];
+            return (width * height * info.BPP + 7) / 8;
         }
 
-        static Bitmap DrawRGB5A1(byte[] data, int width, int height)
+        static Bitmap CreateRGBA(byte[] data, int width, int height)
         {
             Bitmap image = new Bitmap(width, height);
 
-
             for (int h = 0; h < height; h++)
+            {
                 for (int w = 0; w < width; w++)
                 {
-                    short pix = Endian.ConvertInt16(BitConverter.ToInt16(data, (h * width + w) * 2));
-                    int r = ((pix >> 8) & 0xF8); r += (r >> 5);
-                    int g = ((pix >> 3) & 0xF8); g += (g >> 5);
-                    int b = ((pix << 2) & 0xF8); b += (b >> 5);
-                    int a = ((pix) & 1) * 255;
-                    Color c = Color.FromArgb(a, r, g, b);
-                    image.SetPixel(w, h, c);
+                    int o = (h * width + w) * 4;
+                    int r = data[o + 0];
+                    int g = data[o + 1];
+                    int b = data[o + 2];
+                    int a = data[o + 3];
+                    image.SetPixel(w, h, Color.FromArgb(a, r, g, b));
                 }
+            }
             image.MakeTransparent(Color.SkyBlue);
             return image;
         }
 
-        public static ConsoleKey ViewFrameBuffer(N64Ptr addr)
+        static Bitmap CreateRGB5A1(byte[] data, int width, int height)
+        {
+            Bitmap image = new Bitmap(width, height);
+
+            for (int h = 0; h < height; h++)
+            {
+                for (int w = 0; w < width; w++)
+                {
+                    short pix = Endian.ConvertInt16(data, (h * width + w) * 2);
+                    int r = (pix >> 8) & 0xF8; r += r >> 5;
+                    int g = (pix >> 3) & 0xF8; g += g >> 5;
+                    int b = (pix << 2) & 0xF8; b += (b >> 5);
+                    int a = ((pix) & 1) * 255;
+                    image.SetPixel(w, h, Color.FromArgb(a, r, g, b));
+                }
+            }
+
+            image.MakeTransparent(Color.SkyBlue);
+            return image;
+        }
+
+        static Bitmap CreateIA8(byte[] data, int width, int height)
+        {
+            Bitmap image = new Bitmap(width, height);
+
+            for (int h = 0; h < height; h++)
+            {
+                for (int w = 0; w < width; w++)
+                {
+                    byte pix = data[h * width + w];
+                    int i = (pix & 0xF0) + (pix >> 4);
+                    int a = (pix & 0x0F); a += a << 4;
+                    image.SetPixel(w, h, Color.FromArgb(a, i, i, i));
+                }
+            }
+            image.MakeTransparent(Color.DarkMagenta);
+            return image;
+        }
+
+        public static ConsoleKey ViewFrameBuffer(N64Ptr ptr)
+        {
+            return ViewColorBuffer(ColorBufferRequest.GetFramebufferRequest(ptr));
+        }
+        public static ConsoleKey ViewColorBuffer(ColorBufferRequest info)
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            Console.Write($"{addr}");
+            Console.Write($"{info.PixelPtr}");
             
             var cancellationTokenSource = new CancellationTokenSource();
 
@@ -56,21 +175,23 @@ namespace Spectrum
                 Point location = new Point(0, 2);
 
                 Size fontSize = NativeMethods.GetConsoleFontSize();
-                Size imageSize = new Size(320 * 2, 240 * 2); // desired image size
+                Size imageSize = new Size(info.Width * info.Scale, info.Height * info.Scale); // desired image size
+
+                // translate character positions to pixels
+                Rectangle imageRect = new Rectangle(
+                        location.X * fontSize.Width,
+                        location.Y * fontSize.Height,
+                        imageSize.Width,
+                        imageSize.Height);
 
                 while (!cancellationTokenSource.IsCancellationRequested)
                 {
                     Thread.Sleep(100);
                     using (Graphics g = Graphics.FromHwnd(NativeMethods.GetConsoleWindow()))
                     {
-                        Image image = GetFrameBufferBitmap(addr); 
+                        Image image = GetBufferBitmap(info.Format, info.PixelPtr, info.Width, info.Height);
 
-                        // translating the character positions to pixels
-                        Rectangle imageRect = new Rectangle(
-                                location.X * fontSize.Width,
-                                location.Y * fontSize.Height,
-                                imageSize.Width,
-                                imageSize.Height);
+                        //g.FillRectangle(new SolidBrush(Color.Black), imageRect);
                         g.DrawImage(image, imageRect);
                     }
                 }

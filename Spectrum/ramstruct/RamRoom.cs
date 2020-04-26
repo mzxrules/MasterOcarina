@@ -1,33 +1,58 @@
 ﻿using mzxrules.Helper;
 using System;
+using System.Collections.Generic;
 
 namespace Spectrum
 {
-    class RamRoom : IFile
+    class RamRoom // : IFile
     {
-        static int Room_Alloc_Table { get { return SpectrumVariables.Room_Allocation_Table; } }
-        public N64PtrRange Ram { get; }
-        public FileAddress VRom { get; set; }
+        //static int Room_Alloc_Table { get { return SpectrumVariables.Room_Allocation_Table; } }
+        //public N64PtrRange Ram { get; }
+        //public FileAddress VRom { get; set; }
 
-        public RamRoom(Ptr ptr)
+        //public RamRoom(Ptr ptr)
+        //{
+        //    Ram = new N64PtrRange(
+        //        ptr.ReadInt32(0x00),
+        //        ptr.ReadInt32(0x04));
+
+        //    int RoomFile = ptr.ReadInt32(0x10);
+        //    VRom = RamDmadata.GetFileAddress(RoomFile);
+        //}
+
+        //public static RamRoom GetRoomInfo()
+        //{
+        //    Ptr ptr = SPtr.New(Room_Alloc_Table);
+        //    return new RamRoom(ptr);
+        //}
+
+        public static List<SimpleFile> GetRoomInfo()
         {
-            Ram = new N64PtrRange(
-                ptr.ReadInt32(0x00),
-                ptr.ReadInt32(0x04));
+            RoomCtx roomCtx = new RoomCtx(SpectrumVariables.Room_Context);
+            var roomList = SpectrumVariables.Room_List_Ptr;
 
-            int RoomFile = ptr.ReadInt32(0x10);
-            VRom = RamDmadata.GetFileAddress(RoomFile);
-        }
+            List<SimpleFile> files = new List<SimpleFile>();
+           
+            foreach (var item in new RoomCtx.Room[] { roomCtx.CurRoom, roomCtx.PrevRoom })
+            {
+                if (item.Num == -1)
+                    continue;
 
-        public static RamRoom GetRoomInfo()
-        {
-            Ptr ptr = SPtr.New(Room_Alloc_Table);
-            return new RamRoom(ptr);
-        }
+                if (roomList == 0)
+                    continue;
 
-        public override string ToString()
-        {
-            return $"ROOM {VRom.Start:X8}";
+                FileAddress vrom = RamDmadata.GetFileAddress(roomList.RelOff(item.Num * 8).ReadInt32(0));
+                N64PtrRange ram = new N64PtrRange(item.segment, item.segment + vrom.Size);
+
+                SimpleFile file = new SimpleFile()
+                {
+                    VRom = vrom,
+                    Ram = ram,
+                    Description = $"ROOM {item.Num}: {vrom}"
+                };
+                files.Add(file);
+            }
+            return files;
         }
     }
 }

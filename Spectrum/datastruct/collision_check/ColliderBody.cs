@@ -11,9 +11,9 @@ namespace Spectrum
         byte toucher_flags;
         byte bumper_flags;
         byte flags_2;
-        int unk_0x18;
+        N64Ptr unk_0x18;
         N64Ptr colliderPtr;
-        int unk_0x20;
+        N64Ptr unk_0x20;
         N64Ptr collidingPtr;
 
         public ColliderBody(Ptr p)
@@ -35,8 +35,8 @@ namespace Spectrum
             return $"Body: {Environment.NewLine}" +
                 $" {toucher}{Environment.NewLine}" +
                 $" {bumper}{Environment.NewLine}" +
-                $" {flags:X2} {toucher_flags:X2} {bumper_flags:X2} {flags_2:X2} {unk_0x18:X8}{Environment.NewLine}" +
-                $" {colliderPtr} {unk_0x20:X8} {collidingPtr}";
+                $" {flags:X2} {toucher_flags:X2} {bumper_flags:X2} {flags_2:X2}{Environment.NewLine}" +
+                $" AT? {unk_0x18:X8} AC? {colliderPtr} ATe? {unk_0x20:X8} ACe? {collidingPtr}";
         }
     }
 

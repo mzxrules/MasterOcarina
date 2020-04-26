@@ -127,6 +127,7 @@ namespace Spectrum
                 while (true)
                 {
                     var pattern = PatternRecord.Deserialize(br);
+                    patterns.Add(pattern);
                     if (pattern.IsPrimaryPattern)
                     {
                         break;

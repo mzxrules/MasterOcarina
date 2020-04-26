@@ -6,21 +6,21 @@ namespace Spectrum
     {
         public int flags;
         public byte effect;
-        public byte unk_0x05;
-        public int unk_0x08;
+        public byte defense;
+        public Vector3<short> unk_0x06;
 
-        public ColliderBump(Ptr pointer)
+        public ColliderBump(Ptr p)
         {
-            flags = pointer.ReadInt32(0);
-            effect = pointer.ReadByte(4);
-            unk_0x05 = pointer.ReadByte(5);
-            unk_0x08 = pointer.ReadInt32(8);
+            flags = p.ReadInt32(0);
+            effect = p.ReadByte(4);
+            defense = p.ReadByte(5);
+            unk_0x06 = new Vector3<short>(p.ReadInt16(0x06), p.ReadInt16(0x08), p.ReadInt16(0x0A));
 
         }
 
         public override string ToString()
         {
-            return $"Bump:  [Flags: {flags:X8} Effect: {effect:X2} unk_0x05: {unk_0x05:X2} unk_0x08: {unk_0x08:X8}]";
+            return $"Bump:  [Flags: {flags:X8} Effect: {effect:X2} Defense: {defense:X2} unk_0x06: {unk_0x06}]";
         }
     }
 

@@ -25,8 +25,9 @@ namespace Spectrum
         }
 
 
-        internal static void ChangeVersion(RomVersion v, bool g)
+        internal static void ChangeVersion((RomVersion v, bool g) args)
         {
+            var v = args.v;
             if (v.Game == Game.OcarinaOfTime)
                 OBJECT_FILE_COUNT = 0x192;
             else if (v.Game == Game.MajorasMask)
