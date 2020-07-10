@@ -11,8 +11,22 @@ namespace mzxrules.OcaLib
         public int Id { get; protected set; }
         public N64Ptr UnknownPtr { get; private set; }
         public uint Unknown1 { get; private set; }
+
+        public const int LENGTH = 0x1C;
+
         public ParticleOverlayRecord()
         { }
+
+        public ParticleOverlayRecord(ParticleOverlayRecord p)
+        {
+            Id = p.Id;
+            VRom = p.VRom;
+            VRam = p.VRam;
+
+            RamStart = p.RamStart;
+            UnknownPtr = p.UnknownPtr;
+            Unknown1 = p.Unknown1;
+        }
 
         public ParticleOverlayRecord(int index, BinaryReader br)
         {

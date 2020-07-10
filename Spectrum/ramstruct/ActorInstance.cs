@@ -3,7 +3,7 @@ using mzxrules.OcaLib;
 
 namespace Spectrum
 {
-    class ActorInstance : IRamItem, IActorItem
+    public class ActorInstance : IRamItem, IActorItem
     {
         public N64PtrRange Ram { get; }
 
@@ -14,22 +14,20 @@ namespace Spectrum
         }
 
         public ushort ActorId;
-        protected bool forcedActorId = false;
+        public bool forcedActorId = false;
         public byte Type;
         public byte Room;
         public int PrevActor;
         public int NextActor;
+        public N64Ptr Update;
         public ushort Variable;
 
         public byte ProcessInstance;
         public Vector3<float> Position = new Vector3<float>();
         public Vector3<short> Rotation;
 
-        public ActorInstance(RomVersion version, N64Ptr address)
+        public ActorInstance(RomVersion version, N64Ptr address, ActorMemoryMapper map)
         {
-            int instanceSize;
-            int off = 0;
-
             Ptr ptr = SPtr.New(address);
 
 
@@ -38,50 +36,31 @@ namespace Spectrum
             Room = ptr.ReadByte(3); 
             Address = address;
 
-            try
-            {
-                if (version.Game == Game.OcarinaOfTime)
-                {
-                    if (ActorId == 0 && Type == 4)
-                    {
-                        ActorId = 0x008F;
-                        forcedActorId = true;
-                    }
-                }
-                // & 0xFFF is hack to correct instances with no proper actor id
-                instanceSize = OvlActor.GetInstanceSize(ActorId & 0xFFF); 
-            }
-            catch
-            {
-                instanceSize = 0;
-            }
-
-            Ram = new N64PtrRange(Address, Address + instanceSize);
-
-
             Variable = ptr.ReadUInt16(0x1C); 
 
             Position = new Vector3<float>(
                 ptr.ReadFloat(0x24),
                 ptr.ReadFloat(0x28),
-                ptr.ReadFloat(0x2C)); 
+                ptr.ReadFloat(0x2C));
 
 
-            if (version.Game == Game.OcarinaOfTime)
-                off = 0;
-            else
-                off = 8;
+            int off = version.Game == Game.OcarinaOfTime ? 0 : 8;
 
             Rotation = new Vector3<short>(
                 ptr.ReadInt16(0xB4 + off),
                 ptr.ReadInt16(0xB6 + off),
-                ptr.ReadInt16(0xB8 + off)); 
-
+                ptr.ReadInt16(0xB8 + off));
 
             PrevActor = ptr.ReadInt32(0x120 + off); 
-            NextActor = ptr.ReadInt32(0x124 + off); 
+            NextActor = ptr.ReadInt32(0x124 + off);
+            Update = ptr.ReadInt32(0x130 + off);
+            ProcessInstance = ptr.ReadByte(0x115);
 
-            ProcessInstance = ptr.ReadByte(0x115); 
+
+            map.GetActorIdAndSize(this, out ushort actorId, out uint instanceSize);
+            ActorId = actorId;
+
+            Ram = new N64PtrRange(Address, Address + instanceSize);
         }
         public override string ToString()
         {

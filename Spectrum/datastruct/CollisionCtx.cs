@@ -111,7 +111,7 @@ namespace Spectrum
                 $"Bounding Box: ({boxmin.x},{boxmin.y},{boxmin.z}) ({boxmax.x}, {boxmax.y}, {boxmax.z}){Environment.NewLine}" +
                 $"Subdivisions: ({max.x}, {max.y}, {max.z}) Section Size: ({unitSize.x}, {unitSize.y}, {unitSize.z}){Environment.NewLine}" +
                 $"Max PolyLinks: {LinksMax:X4} Allocated: {LinksAlloc:X4}{Environment.NewLine}" +
-                $"Table: {Table} Links: {Links} Checks: {Checks}{Environment.NewLine}" +
+                $"Table: {Table} Links: {Links} Poly Check: {Checks}{Environment.NewLine}" +
                 $"dyn_poly = {dyn_poly}{Environment.NewLine}" +
                 $"dyn_vtx = {dyn_vtx}{Environment.NewLine}";
             if (version.Game == Game.MajorasMask)

@@ -69,6 +69,7 @@ namespace Spectrum
             Write,
             Item,
             Proto,
+            Deprecated,
             Unsorted = 0x1000
         }
 

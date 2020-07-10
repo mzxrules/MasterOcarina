@@ -1,59 +1,33 @@
 ﻿using mzxrules.Helper;
 using System;
 using System.Collections.Generic;
+using mzxrules.OcaLib;
 
 namespace Spectrum
 {
-    class OvlPause : IFile, IVRamItem
+    class OvlPause : PlayPauseOverlayRecord, IFile, IVRamItem
     {
-        public static int TABLE_ADDRESS { get { return SpectrumVariables.Player_Pause_Ovl_Table; } }
-        public const int LENGTH = 4 * 7;
-        public const int COUNT = 2;
 
-        public N64PtrRange Ram { get; }
-        int Item;
-
-        public FileAddress VRom { get; set; }
-        public N64PtrRange VRam { get; set; }
-        uint RamFileName;
-
-        public OvlPause(int i, Ptr ptr)
+        public OvlPause(int i, byte[] data) : base(i, data)
         {
-            uint ramFileStart;
-            Item = i;
-
-            ramFileStart = ptr.ReadUInt32(0x00);
-
-            VRom = new FileAddress(
-                ptr.ReadUInt32(0x04),
-                ptr.ReadUInt32(0x08));
-            VRam = new N64PtrRange(
-                ptr.ReadUInt32(0x0C),
-                ptr.ReadUInt32(0x10));
-            Ram = new N64PtrRange(ramFileStart, ramFileStart + VRam.Size);
-
-            RamFileName = ptr.ReadUInt32(0x18);
 
         }
 
-        internal static List<OvlPause> GetActive()
+        public OvlPause(PlayPauseOverlayRecord record) : base(record)
         {
-            List<OvlPause> ovlPause = new List<OvlPause>();
-            Ptr ovlPausePtr = SPtr.New(TABLE_ADDRESS);
-            
-            for (int i = 0; i < COUNT; i++)
-            {
-                Ptr ptr = ovlPausePtr.RelOff(LENGTH * i);
-                OvlPause working = new OvlPause(i, ptr);
-                if (working.Ram.Start != 0)
-                    ovlPause.Add(working);
-            }
-            return ovlPause;
+
         }
 
         public override string ToString()
         {
-            return $"OVL PAU:  {Item:X2}";
+            string name;
+            switch (Item)
+            {
+                case 0: name = $"{Item:X2} kaleido_scope"; break;
+                case 1: name = $"{Item:X2} player_actor"; break;
+                default: name = $"UNKNOWN {Item:X2}"; break;
+            }
+            return $"OVL KS:   {name}";
         }
     }
 }

@@ -55,14 +55,15 @@ namespace Spectrum
             else if (obj.RandTick == 0)
             {
                 List<ActorInstance> unlitTorches = new List<ActorInstance>();
+                var map = ActorMemoryMapper.FetchFilesAndInstances();
 
-                var allTorches = InfoPoll.GetAllActorInstances()
+                var allTorches = map.Instances
                     .Where(x => x.Actor == 0x5E).ToList();
 
 
                 foreach(var item in allTorches)
                 {
-                    Ptr localTorch = SPtr.New((int)item.Ram.Start & 0xFFFFFF);
+                    Ptr localTorch = SPtr.New(item.Ram.Start);
                     var time = localTorch.ReadInt16(TORCH_TIMER_OFFSET);
                     if (time <= 0)
                         unlitTorches.Add(item);
@@ -70,16 +71,16 @@ namespace Spectrum
 
                 if (unlitTorches.Count > 0)
                 {
-                    var torchOvl = OvlActor.GetActorFiles().Where(x => x.Actor == 0x5E).SingleOrDefault();
+                    var torchOvl = map.Files.Where(x => x.Actor == 0x5E).SingleOrDefault();
                     var select = Rand.Next(0, unlitTorches.Count);
 
-                    Ptr torch = SPtr.New((int)unlitTorches[select].Ram.Start & 0xFFFFFF);
+                    Ptr torch = SPtr.New(unlitTorches[select].Ram.Start);
 
                     torch.Write(TORCH_TIMER_OFFSET, TORCH_TIMER);
 
                     if (torchOvl != null)
                     {
-                        Ptr ovl = SPtr.New((int)torchOvl.Ram.Start);
+                        Ptr ovl = SPtr.New(torchOvl.Ram.Start);
                         int lit = ovl.ReadInt32(TORCHES_LIT_OFFSET);
                         lit++;
                         ovl.Write(TORCHES_LIT_OFFSET, lit);

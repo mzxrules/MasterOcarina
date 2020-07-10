@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spectrum
 {
-    class BlockNode : IRamItem
+    internal class BlockNode : IRamItem
     {
         public N64PtrRange Ram { get; protected set; }
         public bool IsFree { get; protected set; }
@@ -13,9 +13,9 @@ namespace Spectrum
 
         public static int LENGTH;
 
-        public IActorItem ActorItem;
+        public IRamItem RamItem;
 
-        BlockNode(N64Ptr addr)
+        public BlockNode(N64Ptr addr)
         {
             Ptr ptr = SPtr.New(addr);
             IsFree = (ptr.ReadInt32(0) & 1) == 1;
@@ -50,15 +50,15 @@ namespace Spectrum
             if (ReferenceEquals(v1, v2))
                 return true;
 
-            if ((object)v1 == null || (object)v2 == null)
+            if (v1 is null || v2 is null)
                 return false;
 
             if (v1.Size == v2.Size
                 && v1.IsFree == v2.IsFree)
             {
-                if (v1.ActorItem == null)
+                if (v1.RamItem == null)
                     return true;
-                else if (v1.ActorItem.Actor == v1.ActorItem.Actor)
+                else if (v1.RamItem == v2.RamItem)
                     return true;
             }
             return false;

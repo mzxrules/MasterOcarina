@@ -86,6 +86,7 @@
     <Compile Include="mem\SearchSignature.cs" />
     <Compile Include="mem\ValueSearch.cs" />
     <Compile Include="MItems.cs" />
+    <Compile Include="OFlags.cs" />
     <Compile Include="OItems.cs" />
     <Compile Include="mem\Emulator.cs" />
     <Compile Include="Express\Ev.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ModelViewer.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="ramstruct\IFile.cs" />
+    <Compile Include="ramstruct\MemoryMapper.cs" />
     <Compile Include="ramstruct\RamDmadata.cs" />
     <Compile Include="ramstruct\CodeFile.cs" />
     <Compile Include="ramstruct\RamRoom.cs" />
@@ -107,7 +109,6 @@
     <Compile Include="ramstruct\IAddressLookup.cs" />
     <Compile Include="ramstruct\OvlActor.cs" />
     <Compile Include="ramstruct\ActorInstance.cs" />
-    <Compile Include="InfoPoll.cs" />
     <Compile Include="ramstruct\IRamItem.cs" />
     <Compile Include="ramstruct\BlockList.cs" />
     <Compile Include="ramstruct\RamObject.cs" />

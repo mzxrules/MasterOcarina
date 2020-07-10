@@ -59,11 +59,8 @@ namespace Spectrum
             Console.Title = TITLE;
 
             ChangeVersion += SpectrumVariables.ChangeVersion;
-            ChangeVersion += OvlActor.ChangeVersion;
-            ChangeVersion += RamObject.ChangeVersion;
-            ChangeVersion += SetBlockNodeLength;
+            ChangeVersion += MemoryMapper.ChangeVersion;
             ChangeVersion += UpdateSetVersion;
-            ChangeVersion += OvlParticle.ChangeVersion;
             
             CommandDictionary = BuildCommands();
 
@@ -265,7 +262,7 @@ namespace Spectrum
 
         private static IFile GetIFile(N64Ptr address)
         {
-            return GetRamMap(true).Where(x =>
+            return MemoryMapper.GetRamMap(Options, true).Where(x =>
                 x.Ram.Start.Offset  <= address.Offset
                 && x.Ram.End.Offset  > address.Offset).OfType<IFile>().SingleOrDefault();
         }
@@ -318,37 +315,6 @@ namespace Spectrum
         {
             value = !value;
             SaveSettings();
-        }
-
-        private static void SetBlockNodeLength((RomVersion v, bool g) args)
-        {
-            var v = args.v;
-
-            if (v.Game == Game.OcarinaOfTime)
-            {
-                if (v == ORom.Build.GCJ
-                    || v == ORom.Build.GCU
-                    || v == ORom.Build.GCP
-                    || v == ORom.Build.MQJ
-                    || v == ORom.Build.MQU
-                    || v == ORom.Build.MQP
-                    || v == ORom.Build.IQUEC
-                    || v == ORom.Build.IQUET)
-                {
-                    BlockNode.LENGTH = 0x10;
-                }
-                else
-                    BlockNode.LENGTH = 0x30;
-            }
-            if (v.Game == Game.MajorasMask)
-            {
-                if (v == MRom.Build.J0
-                    || v == MRom.Build.J1
-                    || v == MRom.Build.DBG)
-                    BlockNode.LENGTH = 0x30;
-                else
-                    BlockNode.LENGTH = 0x10;
-            }
         }
 
         private static void SaveSettings()
@@ -650,10 +616,14 @@ namespace Spectrum
             BlockNode prev;
             List<IRamItem> actors = new List<IRamItem>();
 
-            actors.AddRange(OvlActor.GetActorFiles());
-            actors.AddRange(InfoPoll.GetAllActorInstances());
+            var map = ActorMemoryMapper.FetchFilesAndInstances();
 
-            currentActorLL = GetActorLinkedList(actors);
+            actors.AddRange(map.Files);
+            actors.AddRange(map.Instances);
+
+
+            List<BlockNode> actorLL = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
+            currentActorLL = GetActorLinkedList(actorLL, actors);
             foreach (BlockNode item in currentActorLL)
             {
                 prev = LastActorLL.SingleOrDefault(x => x.Ram == item.Ram);
@@ -664,12 +634,12 @@ namespace Spectrum
             foreach (BlockNode a in delta.OrderBy(x => (x.Ram.Start & 0xFFFFFF)))
             {
                 Console.WriteLine(a.ToString());
-                if (a.ActorItem != null)
-                    Console.WriteLine(a.ActorItem.ToString());
+                if (a.RamItem != null)
+                    Console.WriteLine(a.RamItem.ToString());
             }
 
-            Console.WriteLine("PRE: " + InfoPoll.GetMemory(LastActorLL));
-            Console.WriteLine("CUR: " + InfoPoll.GetMemory(currentActorLL));
+            Console.WriteLine("PRE: " + MemoryMapper.GetMemoryUsage(LastActorLL));
+            Console.WriteLine("CUR: " + MemoryMapper.GetMemoryUsage(currentActorLL));
             LastActorLL = currentActorLL;
         }
 
@@ -683,61 +653,14 @@ namespace Spectrum
                     item.ToString()));
         }
         
-        private static List<IRamItem> GetRamMap(bool fetchAll = false)
+
+        private static List<BlockNode> GetActorLinkedList(List<BlockNode> nodes, List<IRamItem> ramItems)
         {
-            List<IRamItem> ramItems = new List<IRamItem>
+            foreach (BlockNode item in nodes)
             {
-                new RamDmadata(),
-                new CodeFile()
-            };
-            if (fetchAll || Options.ShowObjects)
-                ramItems.AddRange(RamObject.GetObjects());
-
-            if (fetchAll || Options.ShowParticles)
-                ramItems.AddRange(OvlParticle.GetFiles());
-
-            ramItems.AddRange(OvlPause.GetActive());
-            if (Options.Version == Game.OcarinaOfTime)
-            {
-                ramItems.AddRange(SegmentAddress.GetSegmentAddressMap(Options.ShowAllSegments));
+                item.RamItem = ramItems.FirstOrDefault(x => x.Ram.Start == item.Ram.End);
             }
-
-            ramItems.Add(RamScene.GetSceneInfo(Options.Version, GlobalContext, SpectrumVariables.SceneTable));
-
-            ramItems.AddRange(RamRoom.GetRoomInfo());
-
-            //Heap Blocklists
-            ramItems.AddRange(BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr));
-            if (SpectrumVariables.Debug_Heap_Ptr != 0)
-                ramItems.AddRange(BlockNode.GetBlockList(SpectrumVariables.Debug_Heap_Ptr));
-            if (fetchAll || Options.ShowLinkedList)
-                ramItems.AddRange(GetActorLinkedList(ramItems));
-
-            if (fetchAll || Options.ShowActors)
-            {
-                ramItems.AddRange(OvlActor.GetActorFiles().Where(x => !Options.HiddenActors.Contains(x.Actor)));
-                ramItems.AddRange(InfoPoll.GetAllActorInstances().Where(x => !Options.HiddenActors.Contains(x.Actor)));
-            }
-
-            if (fetchAll || Options.ShowThreadingStructs)
-                ramItems.AddRange(ThreadStack.GetIRamItems());
-
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
-            ramItems.AddRange(ctx.GetRamMap());
-
-            return ramItems;
-        }
-        
-        private static List<BlockNode> GetActorLinkedList(List<IRamItem> ramItems)
-        {
-            List<BlockNode> actorLL;
-            actorLL = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
-
-            foreach (BlockNode item in actorLL)
-            {
-                item.ActorItem = (IActorItem)ramItems.SingleOrDefault(x => x.Ram.Start == item.Ram.End);
-            }
-            return actorLL;
+            return nodes;
         }
     }
 }

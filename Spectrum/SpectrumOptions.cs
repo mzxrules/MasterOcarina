@@ -79,6 +79,8 @@ namespace Spectrum
         public static int Player_Pause_Ovl_Table; // = 0x0FE480;
         [ViewVariable]
         public static int Actor_Ovl_Table;// = 0x0E8530;
+        [ViewVariable]
+        public static int Transition_Ovl_Table;
 
         //Global Context
         [ViewVariable("Global Context")]
@@ -110,7 +112,7 @@ namespace Spectrum
         [ViewVariable("Save Context")]
         public static Ptr SaveContext;
         [ViewVariable]
-        public static int ParticleEffect_Ovl_Table;
+        public static int ParticleEffect_Ovl_Table; // = 0x0E8530;
         [ViewVariable]
         public static int Segment_Table;
 
@@ -223,6 +225,7 @@ namespace Spectrum
             Addresser.TryGetRam(AddressToken.ActorTable_Start, ORom.FileList.code, version, out Actor_Ovl_Table);
             Addresser.TryGetRam(AddressToken.PlayerPauseOverlayTable_Start, ORom.FileList.code, version, out Player_Pause_Ovl_Table);
             Addresser.TryGetRam(AddressToken.ParticleTable_Start, ORom.FileList.code, version, out ParticleEffect_Ovl_Table);
+            Addresser.TryGetRam(AddressToken.TransitionTable_Start, ORom.FileList.code, version, out Transition_Ovl_Table);
             Addresser.TryGetRam(AddressToken.ObjectTable_Start, ORom.FileList.code, version, out Object_File_Table);
 
 

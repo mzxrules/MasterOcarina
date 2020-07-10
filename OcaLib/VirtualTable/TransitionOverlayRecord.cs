@@ -17,13 +17,22 @@ namespace mzxrules.OcaLib
         /* 0x18 */ public int AllocateSize;
 
         public int Index;
-        
+
         public const int LENGTH = 0x1C;
 
 
         public TransitionOverlayRecord(int index, BinaryReader br)
         {
             Initialize(index, br);
+        }
+        public TransitionOverlayRecord(TransitionOverlayRecord a)
+        {
+            Index = a.Index;
+            RamStart = a.RamStart;
+            VRam = a.VRam;
+            VRom = a.VRom;
+            unk = a.unk;
+            AllocateSize = a.AllocateSize;
         }
 
         private void Initialize(int index, BinaryReader br)
@@ -46,7 +55,5 @@ namespace mzxrules.OcaLib
             using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
                 Initialize(index, br);
         }
-
-
     }
 }

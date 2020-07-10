@@ -142,7 +142,7 @@ namespace Spectrum
 
         private static void Default()
         {
-            PrintAddresses(GetRamMap().OrderBy(x => x.Ram.Start.Offset));
+            PrintAddresses(MemoryMapper.GetRamMap(Options).OrderBy(x => x.Ram.Start.Offset));
         }
 
         [SpectrumCommand(
@@ -183,7 +183,7 @@ namespace Spectrum
                 if (v.Game == Game.Undefined)
                     Console.WriteLine("Unknown version code");
                 else
-                    ChangeVersion((v,true));
+                    ChangeVersion((v, true));
             }
         }
 
@@ -475,7 +475,7 @@ namespace Spectrum
             var version = new RomVersion(Options.Version.Game, build);
 
             if (version.Game != Game.Undefined)
-                ChangeVersion((version,true));
+                ChangeVersion((version, true));
             else
                 Console.WriteLine($"Invalid code for {Options.Version.Game}. Run ver (no arguments) for correct version codes");
         }
@@ -529,7 +529,7 @@ namespace Spectrum
         {
             Vector3<float> position;
 
-            var actors = InfoPoll.GetAllActorInstances();
+            var actors = ActorMemoryMapper.FetchInstances().Instances;
 
             if (args.Length == 0)
             {
@@ -562,7 +562,7 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long addr))
                 return;
             N64Ptr address = (addr & 0xFFFFFF) | 0x8000_0000;
-            var actors = from n in GetRamMap().OfType<ActorInstance>()
+            var actors = from n in ActorMemoryMapper.FetchInstances().Instances
                          where n.Ram.Start.Offset == address.Offset
                          select n;
 
@@ -595,7 +595,7 @@ namespace Spectrum
             addr |= 0x80000000;
             N64Ptr address = addr;
 
-            var instance = InfoPoll.GetAllActorInstances().Where(x => x.Address.Offset == address.Offset).SingleOrDefault();
+            var instance = ActorMemoryMapper.FetchInstances().Instances.Where(x => x.Address.Offset == address.Offset).SingleOrDefault();
 
             if (instance == null)
                 return;
@@ -625,7 +625,7 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "cram32",
             Cat = SpectrumCommand.Category.Proto,
-            Description = "Copies RDRAM starting at the given address in 32 bit chunks, and stores in clipboard" )]
+            Description = "Copies RDRAM starting at the given address in 32 bit chunks, and stores in clipboard")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.EXPRESSION_S, Tokens.HEX_S32 },
             Help = "{0} = RDRAM start;{1} = hexadecimal size in bytes")]
         private static void CopyRam32(Arguments args)
@@ -814,7 +814,6 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long a))
                 return;
 
-
             IEnumerable<IRamItem> items;
             IEnumerable<IVRamItem> vItems;
 
@@ -824,7 +823,7 @@ namespace Spectrum
             //if virtual address
             if (inAddr.Offset >= 0x800000)
             {
-                vItems = from x in GetRamMap(true).OfType<IVRamItem>()
+                vItems = from x in MemoryMapper.GetRamMap(Options, true).OfType<IVRamItem>()
                          where (x.VRam.Start & 0xFFFFFF) <= inAddr.Offset
                             && (x.VRam.End & 0xFFFFFF) > inAddr.Offset
                          select x;
@@ -850,7 +849,7 @@ namespace Spectrum
             else
             {
                 Console.WriteLine($"{addr:X8}:");
-                items = from x in GetRamMap(true)
+                items = from x in MemoryMapper.GetRamMap(Options, true)
                         where (x.Ram.Start & 0xFFFFFF) <= addr.Offset && (x.Ram.End & 0xFFFFFF) > addr.Offset select x;
             }
 
@@ -886,7 +885,7 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
-            var items = from x in GetRamMap(true).OfType<IFile>()
+            var items = from x in MemoryMapper.GetRamMap(Options, true).OfType<IFile>()
                         where x.VRom.Start <= address
                         && x.VRom.End > address
                         select x;
@@ -1353,7 +1352,7 @@ namespace Spectrum
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
-            var fileMap = GetRamMap(true).OfType<IFile>().ToList();
+            var fileMap = MemoryMapper.GetRamMap(Options, true).OfType<IFile>().ToList();
 
             var data = Zpr.ReadRam(0, GetRamSize());
 
@@ -1492,7 +1491,7 @@ namespace Spectrum
 
             var topDlist = GlobalContext.Deref().RelOff(0xB8).Deref();
 
-            var ramMap = GetRamMap(true).OfType<IFile>().ToList();
+            var ramMap = MemoryMapper.GetRamMap(Options, true).OfType<IFile>().ToList();
             var data = Zpr.ReadRam(0, GetRamSize());
 
             using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
@@ -1752,22 +1751,32 @@ namespace Spectrum
                 if (mesh != null)
                     Console.WriteLine(mesh);
             }
-
             else
             {
-                for (int i = 0; i < 50; i++)
+                PrintBgActorCollision();
+            }
+        }
+
+        private static void PrintBgActorCollision()
+        {
+            var ptr = GetColCtxPtr();
+            List<(int, BgActor)> bgActors = new List<(int, BgActor)>();
+            for (int i = 0; i < 50; i++)
+            {
+                BgActor actor = new BgActor(ptr.RelOff(0x54 + (0x64 * i)));
+                if (!actor.ActorInstance.IsNull())
                 {
-                    var ptr = GetColCtxPtr().RelOff(0x54 + (0x64 * i));
-                    BgActor actor = new BgActor(ptr);
-                    if (actor.ActorInstance != 0)
-                    {
-                        IFile obj = GetIFile(actor.MeshPtr);
-
-                        CollisionActorDoc.AddNewRecord(actor, obj, Options.Version);
-
-                        Console.WriteLine($"{i:X2} {actor}");
-                    }
+                    bgActors.Add((i, actor));
                 }
+            }
+
+            foreach (var (i, actor) in bgActors)
+            {
+                //IFile obj = GetIFile(actor.MeshPtr);
+
+                //CollisionActorDoc.AddNewRecord(actor, obj, Options.Version);
+
+                Console.WriteLine($"{i:X2} {actor}");
             }
         }
 
@@ -2114,7 +2123,7 @@ namespace Spectrum
             Console.WriteLine(mesh.GetPolyFormattedInfo(addr));
         }
 
-        private static Ptr GetColCtxPtr()
+        public static Ptr GetColCtxPtr()
         {
             int colctxOff = (Options.Version.Game == Game.OcarinaOfTime) ?
                 0x7C0 : 0x830;
@@ -2339,7 +2348,32 @@ namespace Spectrum
         }
 
         [SpectrumCommand(
+            Name = "flag",
+            Sup = SpectrumCommand.Supported.OoT,
+            Description = "Reads or modifies the state of various flags"
+            )]
+        [SpectrumCommandSignature(Help = "Displays options")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.LITERAL }
+        )]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.LITERAL, Tokens.HEX_S32 }
+        )]
+        private static void FlagCommand(Arguments args)
+        {
+            if (args.Length == 2)
+            {
+                OFlagsOperation.Process((string)args[0], (string)args[1], null);
+            }
+            else if (args.Length == 3)
+            {
+                OFlagsOperation.Process((string)args[0], (string)args[1], (int)args[2]);
+            }
+        }
+
+        [SpectrumCommand(
             Name = "ef",
+            Cat = SpectrumCommand.Category.Deprecated,
             Sup = SpectrumCommand.Supported.OoT,
             Description = "Sets event flag state")]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.U8, Tokens.HEX_S16, Tokens.U8 },
@@ -2386,11 +2420,53 @@ namespace Spectrum
             else
                 time = (ushort)args[0];
 
+            PrintTime(time);
+        }
+
+        private static void PrintTime(ushort time)
+        {
             float f_time = ((float)time * 24) / 0x10000;
             int hour = (int)(f_time);
             int min = (int)(f_time * 60) % 60;
             int sec = (int)(f_time * 3600) % 60;
             Console.WriteLine($"Time: {hour:D2}:{min:D2}:{sec:D2}");
+        }
+
+        [SpectrumCommand(
+            Name = "settime",
+            Description = "Gets world time")]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL },
+            Help = "{0} = Time;" +
+            "You can specify time using HH:MM, or with a hex literal")]
+        private static void SetTime(Arguments args)
+        {
+            string timeCode = (string)args[0];
+            ushort time;
+            if (timeCode.Contains(":"))
+            {
+                var code = timeCode.Split(new char[] { ':' });
+                if (!int.TryParse(code[0], out int hr)
+                    || !int.TryParse(code[1], out int min))
+                {
+                    Console.WriteLine("Invalid time code format. Expecting HH:MM");
+                    return;
+                }
+                const int mins_in_day = 24 * 60;
+                int totalMins = (hr * 60 + min) % mins_in_day;
+                time = (ushort)((float)totalMins * 0x10000 / mins_in_day);
+                
+            }
+            else if (!ushort.TryParse(timeCode, NumberStyles.HexNumber, new CultureInfo("en-US"), out time))
+            {
+                Console.WriteLine("Invalid hex code");
+            }
+
+            SaveContext.Write(0x0C, time);
+            if (Options.Version.Game == Game.OcarinaOfTime)
+            {
+                SaveContext.Write(0x141A, time);
+            }
+            PrintTime(time);
         }
 
         [SpectrumCommand(
@@ -2430,7 +2506,7 @@ namespace Spectrum
             List<OSThread> threads = new List<OSThread>();
             while (kill-- > 0
                 && threadCur != 0
-                && threadCur != (N64Ptr)threadStart)
+                && threadCur != threadStart)
             {
                 OSThread thread = new OSThread(SPtr.New(threadCur));
                 threads.Add(thread);
@@ -2688,7 +2764,22 @@ namespace Spectrum
             Console.WriteLine(StaticCtx.GetRegFromOffset(off));
         }
 
-
+        [SpectrumCommand(
+            Name = "setreg",
+            Description = "Get Static Context reg name")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S16 })]
+        private static void SetStaticContextReg(Arguments args)
+        {
+            string regStr = (string)args[0];
+            short val = (short)args[1];
+            if (!StaticCtx.TryGetOffsetFromReg(regStr, out int off))
+            {
+                Console.WriteLine("Invalid Reg");
+                return;
+            }
+            Console.WriteLine($"{off:X4}");
+        }
 
         [SpectrumCommand(
             Name = "rsp",

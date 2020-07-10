@@ -36,6 +36,19 @@ namespace mzxrules.OcaLib
 
         protected ActorOverlayRecord() { }
 
+        public ActorOverlayRecord(ActorOverlayRecord a)
+        {
+            Actor = a.Actor;
+            VRom = a.VRom;
+            VRam = a.VRam;
+
+            RamStart = a.RamStart;
+            VRamActorInit = a.VRamActorInit;
+            RamFileName = a.RamFileName;
+            AllocationType = a.AllocationType;
+            NumSpawned = a.NumSpawned;
+        }
+
         public ActorOverlayRecord(int index, BinaryReader br)
         {
             Initialize(index, br);
