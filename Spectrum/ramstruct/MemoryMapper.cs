@@ -382,6 +382,23 @@ namespace Spectrum
             return null;
         }
 
+        internal static bool TryGetStaticContext(out IRamItem staticCtx)
+        {
+            List<BlockNode> mainHeap = BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr);
+            staticCtx = null;
+            if (mainHeap.Count > 0)
+            {
+                var item = mainHeap[0];
+                staticCtx = new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
+                    Description = "STATIC CONTEXT"
+                };
+                return true;
+            }
+            return false;
+        }
+
         internal static List<IRamItem> GetRamMap(SpectrumOptions Options, bool fetchAll = false)
         {
             List<IRamItem> ramItems = new List<IRamItem>

@@ -21,9 +21,9 @@ namespace Spectrum
             int regGroup = off / 0x60;
             int regIndex = off % 0x60;
 
-            if (regGroup < 0 || regGroup >= 29)
+            if (off < 0 || regGroup < 0 || regGroup >= 29)
             {
-                return "ERROR";
+                return "ERROR: Offset out of range";
             }
 
             return $"{regChar[regGroup]}REG({regIndex})".TrimStart();

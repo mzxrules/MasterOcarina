@@ -853,7 +853,6 @@ namespace Spectrum
                         where (x.Ram.Start & 0xFFFFFF) <= addr.Offset && (x.Ram.End & 0xFFFFFF) > addr.Offset select x;
             }
 
-            //var debug = items.ToArray();
             foreach (var item in items)
             {
                 Console.WriteLine(item.ToString());
@@ -2454,7 +2453,7 @@ namespace Spectrum
                 const int mins_in_day = 24 * 60;
                 int totalMins = (hr * 60 + min) % mins_in_day;
                 time = (ushort)((float)totalMins * 0x10000 / mins_in_day);
-                
+
             }
             else if (!ushort.TryParse(timeCode, NumberStyles.HexNumber, new CultureInfo("en-US"), out time))
             {
@@ -2644,7 +2643,7 @@ namespace Spectrum
             Name = "items",
             Cat = SpectrumCommand.Category.Item,
             Description = "Lists all items")]
-        [SpectrumCommandSignature(Sig = new Tokens[] {},
+        [SpectrumCommandSignature(Sig = new Tokens[] { },
             Help = "")]
         private static void ListItems(Arguments args)
         {
@@ -2755,30 +2754,83 @@ namespace Spectrum
 
         [SpectrumCommand(
             Name = "reg",
-            Description = "Get Static Context reg name")]
+            Description = "Get Static Context REG information")]
         [SpectrumCommandSignature(
-            Sig = new Tokens[] { Tokens.HEX_S32 })]
+            Sig = new Tokens[] { Tokens.HEX_S32 },
+            Help = "{0} = Offset relative to the start of the Static Context")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL },
+            Help = "{0} = case sensitive REG() macro, as defined in the Memory Editor;" +
+            "e.g. reg REG(68)")]
         private static void GetStaticContextReg(Arguments args)
         {
-            int off = (int)args[0];
-            Console.WriteLine(StaticCtx.GetRegFromOffset(off));
+            if (args[0] is int off)
+            {
+                Console.WriteLine(StaticCtx.GetRegFromOffset(off));
+            }
+            else
+            {
+                string regStr = (string)args[0];
+                if (!StaticCtx.TryGetOffsetFromReg(regStr, out off))
+                {
+                    Console.WriteLine("Invalid Reg");
+                    return;
+                }
+                if (MemoryMapper.TryGetStaticContext(out IRamItem staticCtx))
+                {
+                    N64Ptr ctxStart = staticCtx.Ram.Start;
+                    Console.WriteLine($"{ctxStart + off:X8}:");
+                    Console.WriteLine($"Start {ctxStart} Off: {off:X6}");
+                }
+                else
+                {
+                    Console.WriteLine($"Start UNK Off: {off:X4}");
+                }
+            }
         }
 
         [SpectrumCommand(
             Name = "setreg",
-            Description = "Get Static Context reg name")]
+            Description = "Sets a Static Context REG's value by its macro")]
         [SpectrumCommandSignature(
-            Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S16 })]
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S16 },
+            Help =
+            "{0} = case sensitive REG() macro, as defined in the Memory Editor;" +
+            "{1} = hexadecimal value to assign")]
         private static void SetStaticContextReg(Arguments args)
         {
             string regStr = (string)args[0];
             short val = (short)args[1];
+            SetStaticContextReg(regStr, val);
+        }
+
+        [SpectrumCommand(
+            Name = "setregi",
+            Description = "Sets a Static Context REG's value by its macro")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.LITERAL, Tokens.S16 },
+            Help =
+            "{0} = case sensitive REG() macro, as defined in the Memory Editor;" +
+            "{1} = signed 16 bit integer value to assign")]
+        private static void SetStaticContextRegi(Arguments args)
+        {
+            string regStr = (string)args[0];
+            short val = (short)args[1];
+            SetStaticContextReg(regStr, val);
+        }
+
+        private static void SetStaticContextReg(string regStr, short val)
+        {
             if (!StaticCtx.TryGetOffsetFromReg(regStr, out int off))
             {
                 Console.WriteLine("Invalid Reg");
                 return;
             }
-            Console.WriteLine($"{off:X4}");
+            if (MemoryMapper.TryGetStaticContext(out IRamItem staticCtx))
+            {
+                N64Ptr writeAddr = staticCtx.Ram.Start + off;
+                WriteRam(writeAddr, val);
+            }
         }
 
         [SpectrumCommand(

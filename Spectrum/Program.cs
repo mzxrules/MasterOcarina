@@ -185,8 +185,11 @@ namespace Spectrum
                 return;
 
             N64Ptr addr = address;
+            WriteRam(addr, value);
+        }
 
-
+        private static void WriteRam(N64Ptr addr, object value)
+        {
             if (addr.Offset >= GetRamSize())
             {
                 return;
