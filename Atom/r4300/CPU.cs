@@ -134,7 +134,43 @@ namespace Atom
 
         static string SWR(uint iw) => $"swr\t{rt_base_imm(iw)}";
 
-        static string CACHE(uint iw) => $"cache\t0x{OP(iw):X2}, {IMM_P(iw)}({gpr_rn[BASE(iw)]})";
+        static readonly string[,] CACHE_OPERATION = new string[7, 2]
+        {
+            { "Index_Invalidate", "Index_Write_Back_Invalidate" },
+            { "Index_Load_Tag", "Index_Load_Tag" },
+            { "Index_Store_Tag", "Index_Store_Tag" },
+            { null, "Create_Dirty_Exclusive" },
+            { "Hit_Invalidate","Hit_Invalidate" },
+            { "Fill", "Hit_Write_Back_Invalidate" },
+            { "Hit_Write_Back", "Hit_Write_Back" }
+        };
+
+        static string CACHE(uint iw)
+        {
+            uint op = OP(iw);
+            uint subject = op & 3;
+            uint operation = (op >> 2) & 7;
+            string comment;
+            if (subject == 0 || subject == 1)
+            {
+                comment = subject == 0 ? "I" : "D";
+                string opStr = CACHE_OPERATION[operation, subject];
+
+                if (opStr is null)
+                {
+                    comment = "(Invalid Opcode)";
+                }
+                else
+                {
+                    comment = $"{comment} {opStr}";
+                }
+            }
+            else
+            {
+                comment = "(Invalid Opcode)";
+            }
+            return $"cache\t0x{op:X2}, {IMM_P(iw)}({gpr_rn[BASE(iw)]})\t## {comment}";
+        }
 
         static string LL(uint iw) => $"ll\t{rt_base_imm(iw)}";
 
