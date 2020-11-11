@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerboseOcarina", "VerboseOcarina\VerboseOcarina.csproj", "{957A3D9E-6B39-48BD-B547-0D91325261B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonRush", "DungeonRush\DungeonRush.csproj", "{EFBD6DC5-6B22-4C2A-A470-031A281EC462}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experimental", "Experimental\Experimental.csproj", "{9D79543F-A5DF-4920-B10D-85748BD9C91E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlActorBuilder", "XmlActorBuilder\XmlActorBuilder.csproj", "{49C50AF5-5B56-4021-8840-29EF693D5C29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcaBase", "OcaBase\OcaBase.csproj", "{5D256FB8-D7BE-4770-AB9F-1526CD2DE81A}"
@@ -17,15 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z64Compresser", "Z64Compres
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gen", "Gen\Gen.csproj", "{C90071EE-A4B3-474B-89A6-64C3835E07F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriesChallenge", "PetriesChallenge\PetriesChallenge.csproj", "{D4BBE3B9-26FC-4873-B7F3-EE399CB9BE75}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZCodec", "ZCodec\ZCodec.csproj", "{93BBB3B5-2766-4E96-9798-38CAA3C44528}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrum", "Spectrum\Spectrum.csproj", "{9B204764-7A39-437C-AB71-F1348200D8DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomWorkshop", "RomWorkshop\RomWorkshop.csproj", "{AB6CD6CB-4DB5-46A2-AC3C-3222B21AAAD7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatchShared", "PatchShared\PatchShared.csproj", "{E96A2B91-B9AE-4037-971B-25D6F8B46F83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XActorGui", "XActorGui\XActorGui.csproj", "{9A355746-4B45-449E-93DF-21F6DFD0896A}"
 EndProject
@@ -33,15 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z64Tables", "Z64Tables\Z64T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uCode", "uCode\uCode\uCode.csproj", "{FE0493C3-FF8E-4EED-A55F-0C30F33FD3D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerboseWPF", "VerboseWPF\VerboseWPF.csproj", "{0C039785-E08C-4BD3-8698-0FD66E5E1151}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomBlock", "RomBlock\RomBlock.csproj", "{0E8D017D-4663-4805-8F2B-7E0AA153975A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrum3D", "Spectrum3D\Spectrum3D.csproj", "{F1EDFAFB-53F9-48AF-9E88-A229DEFE8DB3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WadDisect", "WadDisect\WadDisect.csproj", "{38D2F651-A527-40E1-BFBC-7E708F86F779}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTest", "CoreTest\CoreTest.csproj", "{F3801DEA-EA65-4EDE-95C9-859B9496C1EE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{5AF4D836-00B5-43C2-8974-8AFFABD2DF90}"
 EndProject
