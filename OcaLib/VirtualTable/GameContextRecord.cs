@@ -10,12 +10,12 @@ namespace mzxrules.OcaLib
         /* 0x04 */ //FileRecord VRom; //if applicable
         /* 0x0C */ //FileRecord VRam;   //if applicable
         /* 0x14 */ uint unknown2;
-        /* 0x18 */ N64Ptr InitFunc; 
-        /* 0x1C */ N64Ptr DestFunc; 
+        /* 0x18 */ public N64Ptr InitFunc; 
+        /* 0x1C */ public N64Ptr DestFunc; 
 
         /* 0x20-0x2C */ //unknown
 
-        /* 0x2C */ int AllocateSize; //Think it's size of initialized instance of the overlay
+        /* 0x2C */ public int AllocateSize; //Think it's size of initialized instance of the overlay
 
         static string[] Files = new string[]
         {

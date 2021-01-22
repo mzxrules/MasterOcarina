@@ -23,6 +23,7 @@ namespace VerboseOcarina
             InitializeComponent();
             SetRadioButtonBindings();
             PathUtil.Initialize();
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
         private void SetRadioButtonBindings()

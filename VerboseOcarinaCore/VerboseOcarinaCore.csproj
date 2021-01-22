@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>VerboseOcarina</AssemblyName>
+    <RootNamespace>VerboseOcarina</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\VerboseOcarina\**\*.cs" />
+    <EmbeddedResource Include="..\VerboseOcarina\**\*.resx" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="..\VerboseOcarina\obj\x86\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Helper\Helper.csproj" />
+    <ProjectReference Include="..\OcaLib\OcaLib.csproj" />
+  </ItemGroup>
+</Project>

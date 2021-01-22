@@ -399,16 +399,168 @@ namespace Spectrum
             return false;
         }
 
+        enum GameState
+        {
+            NONE,
+            NA,
+            Select,
+            Title,
+            Game_Play,
+            Opening,
+            File_Choose
+        }
+
         internal static List<IRamItem> GetRamMap(SpectrumOptions Options, bool fetchAll = false)
         {
+            // Get core files
             List<IRamItem> ramItems = new List<IRamItem>
             {
                 new RamDmadata(),
                 new CodeFile()
             };
 
-            // Files mapped on ROM
+            //Map out the heap nodes
 
+            //Heap Blocklists
+            List<BlockNode> mainHeap = BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr);
+            List<BlockNode> gameHeap = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
+            List<BlockNode> debugHeap = BlockNode.GetBlockList(SpectrumVariables.Debug_Heap_Ptr);
+
+            //create a SimpleRamItem for the STATIC CONTEXT node
+            if (mainHeap.Count > 0)
+            {
+                var item = mainHeap[0];
+                var ramItem = new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
+                    Description = "STATIC CONTEXT"
+                };
+                item.RamItem = item;
+                ramItems.Add(ramItem);
+            }
+
+            //create a SimpleRamItem for the GAME STATE node
+            var globalCtx = mainHeap.SingleOrDefault(x => x.Ram.End == SpectrumVariables.GlobalContext);
+            if (globalCtx != null)
+            {
+                var ramItem = new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(globalCtx.Ram.End, globalCtx.Ram.End + globalCtx.Size),
+                    Description = "GAME STATE"
+                };
+                globalCtx.RamItem = ramItem;
+                ramItems.Add(ramItem);
+            }
+
+            //map code file data
+
+            if (fetchAll || Options.ShowThreadingStructs)
+                ramItems.AddRange(ThreadStack.GetIRamItems());
+
+            if (Options.Version == Game.OcarinaOfTime)
+            {
+                ramItems.AddRange(SegmentAddress.GetSegmentAddressMap(Options.ShowAllSegments));
+            }
+
+            OvlGamestate curOvlGamestate = null;
+            GameState gameState = GameState.NONE;
+            const int GAMESTATE_TOTAL_RECORDS = 6;
+            const int GAMESTATE_RECORD_LENGTH = 0x30;
+            //infer current gamestate
+            if (Options.Version == Game.OcarinaOfTime)
+            {
+                OvlGamestate[] table = new OvlGamestate[6];
+                GameState[] gamestateIds = { 
+                    GameState.NA, GameState.Select, GameState.Title, GameState.Game_Play, GameState.Opening, GameState.File_Choose };
+                string[] gamestateNames =
+                {
+                    "N/A",
+                    "ovl_select",
+                    "ovl_title",
+                    "game_play",
+                    "ovl_opening",
+                    "ovl_file_choose"
+                };
+                byte[] tableData;
+                byte[] recordData = new byte[GAMESTATE_RECORD_LENGTH];
+
+                tableData = Zpr.ReadRam(SpectrumVariables.Gamestate_Table, GAMESTATE_TOTAL_RECORDS * GAMESTATE_RECORD_LENGTH);
+
+                for (int i = 0; i < GAMESTATE_TOTAL_RECORDS; i++)
+                {
+                    Array.Copy(tableData, i * GAMESTATE_RECORD_LENGTH, recordData, 0, GAMESTATE_RECORD_LENGTH);
+                    table[i] = new OvlGamestate(i, recordData, Options.Version);
+                    table[i].Name = gamestateNames[i];
+                }
+                for (int i = 0; i < GAMESTATE_TOTAL_RECORDS; i++)
+                {
+                    if (!table[i].RamStart.IsNull())
+                    {
+                        curOvlGamestate = table[i];
+                        gameState = gamestateIds[i];
+                        break;
+                    }
+                }
+                if (gameState == GameState.NONE)
+                {
+                    for (int i = 0; i < GAMESTATE_TOTAL_RECORDS; i++)
+                    {
+                        if ((table[i].AllocateSize + 0xF & -0x10) == globalCtx.Size)
+                        {
+                            gameState = gamestateIds[i];
+                            break;
+                        }    
+                    }
+                }
+            }
+            else
+            {
+                gameState = GameState.Game_Play;
+            }
+
+            switch(gameState)
+            {
+                case GameState.Game_Play:
+                    MapGameplayState(Options, fetchAll, ramItems);
+                    break;
+            }
+            if (curOvlGamestate != null)
+            {
+                ramItems.Add(curOvlGamestate);
+            }
+
+            //create a SimpleRamItem for each non-named node
+            foreach (var heap in new List<List<BlockNode>>() { mainHeap, gameHeap, debugHeap })
+            {
+                foreach (var item in heap.Where(x => !x.IsFree && x.RamItem == null))
+                {
+                    //if the node is corrupted, don't create an item for it
+                    if (item.Size >= 0x100000)
+                        continue;
+
+                    item.RamItem = ramItems.FirstOrDefault(x => x.Ram.Start == item.Ram.End);
+                    if (item.RamItem == null)
+                    {
+                        ramItems.Add(new SimpleRamItem()
+                        {
+                            Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
+                            Description = "UNKNOWN"
+                        });
+                    }
+                }
+            }
+
+            ramItems.AddRange(mainHeap);
+            if (fetchAll || Options.ShowLinkedList)
+                ramItems.AddRange(gameHeap);
+
+            ramItems.AddRange(debugHeap);
+            return ramItems;
+        }
+
+        private static void MapGameplayState(SpectrumOptions Options, bool fetchAll, List<IRamItem> ramItems)
+        {
+            // Add files that are also mapped in ROM
             ActorMemoryMapper actorMap = null;
             if (fetchAll || Options.ShowActors)
             {
@@ -432,77 +584,13 @@ namespace Spectrum
             }
 
             // Files mapped in ram
-
-            if (Options.Version == Game.OcarinaOfTime)
-            {
-                ramItems.AddRange(SegmentAddress.GetSegmentAddressMap(Options.ShowAllSegments));
-            }
-
             if (fetchAll || Options.ShowActors)
             {
                 ramItems.AddRange(actorMap.Instances.Where(x => !Options.HiddenActors.Contains(x.Actor)));
             }
 
-            if (fetchAll || Options.ShowThreadingStructs)
-                ramItems.AddRange(ThreadStack.GetIRamItems());
-
             CollisionCtx ctx = new CollisionCtx(Program.GetColCtxPtr(), Options.Version);
             ramItems.AddRange(ctx.GetRamMap());
-
-            //Heap Blocklists
-            List<BlockNode> mainHeap = BlockNode.GetBlockList(SpectrumVariables.Main_Heap_Ptr);
-            List<BlockNode> gameHeap = BlockNode.GetBlockList(SpectrumVariables.Scene_Heap_Ptr);
-            List<BlockNode> debugHeap = BlockNode.GetBlockList(SpectrumVariables.Debug_Heap_Ptr);
-
-            if (mainHeap.Count > 0)
-            {
-                var item = mainHeap[0];
-                var ramItem = new SimpleRamItem()
-                {
-                    Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
-                    Description = "STATIC CONTEXT"
-                };
-                item.RamItem = item;
-                ramItems.Add(ramItem);
-            }
-
-            var globalCtx = mainHeap.SingleOrDefault(x => x.Ram.End == SpectrumVariables.GlobalContext);
-            if (globalCtx != null)
-            {
-                var ramItem = new SimpleRamItem()
-                {
-                    Ram = new N64PtrRange(globalCtx.Ram.End, globalCtx.Ram.End + globalCtx.Size),
-                    Description = "GAME STATE"
-                };
-                globalCtx.RamItem = ramItem;
-                ramItems.Add(ramItem);
-            }
-
-            foreach (var heap in new List<List<BlockNode>>() { mainHeap, gameHeap, debugHeap })
-            {
-                foreach (var item in heap.Where(x => !x.IsFree && x.RamItem == null))
-                {
-                    if (item.Size >= 0x100000)
-                        continue;
-
-                    item.RamItem = ramItems.FirstOrDefault(x => x.Ram.Start == item.Ram.End);
-                    if (item.RamItem == null)
-                    {
-                        ramItems.Add(new SimpleRamItem()
-                        {
-                            Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
-                            Description = "UNKNOWN"
-                        });
-                    }
-                }
-            }
-
-            ramItems.AddRange(mainHeap);
-            if (fetchAll || Options.ShowLinkedList)
-                ramItems.AddRange(gameHeap);
-
-            ramItems.AddRange(debugHeap);
-            return ramItems;
         }
     }
 }

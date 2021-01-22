@@ -21,7 +21,7 @@ namespace Atom
                         "# assembler directives",
                         ".set noat      # allow manual use of $at",
                         ".set noreorder # don't insert nops after branches",
-                        ".set gp=64     # allow use of 64-bit general purposee registers",
+                        ".set gp=64     # allow use of 64-bit general purpose registers",
                         ""
                     };
                 foreach(var item in header)
@@ -105,7 +105,7 @@ namespace Atom
                 }
 
                 //read and write opcode
-                int word = br.ReadBigInt32();
+                uint word = br.ReadBigUInt32();
                 string line;
                 if (MipsToC)
                 {
@@ -346,8 +346,8 @@ namespace Atom
             br.BaseStream.Position = section.Offset;
             pc = section.VRam;
 
-            int word;
-            int opId;
+            uint word;
+            uint opId;
 
             int text_size = section.Size;
 
@@ -361,12 +361,12 @@ namespace Atom
             // First scan - just to map out branches/jumps 
             for (int i = 0; i < text_size; i += 4)
             {
-                word = br.ReadBigInt32();
+                word = br.ReadBigUInt32();
                 GetOP(word);
                 opId = (word >> 26) & 0x3F;
                 if (opId == 2 || opId == 3)
                 {
-                    var addr = (pc & 0xFC000000) | TARGET((uint)word);
+                    var addr = (pc & 0xFC000000) | TARGET(word);
                     AddFunction(addr, true);
                 }
 
@@ -413,7 +413,7 @@ namespace Atom
                 if (reloc.RelocType == Reloc.R_MIPS_HI16
                     || reloc.RelocType == Reloc.R_MIPS_LO16)
                 {
-                    GetOP(br.ReadBigInt32());
+                    GetOP(br.ReadBigUInt32());
                     if (reloc.RelocType == Reloc.R_MIPS_HI16)
                     {
                         hi_addr = relAddr;

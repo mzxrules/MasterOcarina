@@ -36,6 +36,8 @@ namespace Atom
         //used for oot decomp
         public N64PtrRange HeaderAndReloc { get; protected set; }
 
+        public bool SplitFunctions { get; protected set; }
+
         public List<Label> Functions = new List<Label>();
         public List<Action<Stream>> PreparseActions = new List<Action<Stream>>();
 

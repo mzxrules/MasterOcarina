@@ -1,0 +1,11 @@
+name = Sequence Table;
+game = oot;
+build =	n0;
+start = 0x00B89AE0;
+loop = 0x12;
+i=0;
+inc=1;
+format = tsv, wiki;
+|
+index:X2, 
+	u32:X8,  u32:X8, u8:X2, u8:X2, u16:X4,  u32:X8

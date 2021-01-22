@@ -139,11 +139,11 @@ namespace Atom
             }
         }
 
-        public static string GetOP(int iw)
+        public static string GetOP(uint iw)
         {
             if (iw == 0)
                 return "nop";
-            var result = MAIN_T[(iw >> 26) & 0x3F]((uint)iw);
+            var result = MAIN_T[(iw >> 26) & 0x3F](iw);
             gpr_regs[0] = 0; //Just in case anything tries to change $zero
             return result;
         }

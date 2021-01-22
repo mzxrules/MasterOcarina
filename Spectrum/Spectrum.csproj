@@ -1,172 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9B204764-7A39-437C-AB71-F1348200D8DA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Spectrum</RootNamespace>
-    <AssemblyName>Spectrum</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Experiment|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Experiment\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Arguments.cs" />
-    <Compile Include="BetaQuest.cs" />
-    <Compile Include="BuildTime.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="datastruct\collision_check\ColliderBody.cs" />
-    <Compile Include="datastruct\collision_check\ColliderBump.cs" />
-    <Compile Include="datastruct\collision_check\ColliderJntSph.cs" />
-    <Compile Include="datastruct\collision_check\ColliderQuad.cs" />
-    <Compile Include="datastruct\collision_check\ColliderTouch.cs" />
-    <Compile Include="datastruct\collision_check\ColliderTris.cs" />
-    <Compile Include="datastruct\collision_check\ColliderCylinder.cs" />
-    <Compile Include="datastruct\CollisionCtx.cs" />
-    <Compile Include="datastruct\bgcheck\BgMesh.cs" />
-    <Compile Include="datastruct\bgcheck\BgPolyType.cs" />
-    <Compile Include="datastruct\bgcheck\BgVertex.cs" />
-    <Compile Include="datastruct\collision_check\Collider.cs" />
-    <Compile Include="datastruct\collision_check\ColliderShape.cs" />
-    <Compile Include="datastruct\GfxDList.cs" />
-    <Compile Include="datastruct\RoomCtx.cs" />
-    <Compile Include="datastruct\StaticCtx.cs" />
-    <Compile Include="Help.cs" />
-    <Compile Include="mem\EmulatorProcess.cs" />
-    <Compile Include="mem\ProcessBuffer.cs" />
-    <Compile Include="mem\SearchSignature.cs" />
-    <Compile Include="mem\ValueSearch.cs" />
-    <Compile Include="MItems.cs" />
-    <Compile Include="OFlags.cs" />
-    <Compile Include="OItems.cs" />
-    <Compile Include="mem\Emulator.cs" />
-    <Compile Include="Express\Ev.cs" />
-    <Compile Include="log\CollisionAutoDoc.cs" />
-    <Compile Include="log\DisplayListRecord.cs" />
-    <Compile Include="log\ReferenceLogger.cs" />
-    <Compile Include="mem\NativeMethods.cs" />
-    <Compile Include="ModelViewer.cs" />
-    <Compile Include="Commands.cs" />
-    <Compile Include="ramstruct\IFile.cs" />
-    <Compile Include="ramstruct\MemoryMapper.cs" />
-    <Compile Include="ramstruct\RamDmadata.cs" />
-    <Compile Include="ramstruct\CodeFile.cs" />
-    <Compile Include="ramstruct\RamRoom.cs" />
-    <Compile Include="ramstruct\RamScene.cs" />
-    <Compile Include="ramstruct\SegmentAddress.cs" />
-    <Compile Include="joke\TorchLol.cs" />
-    <Compile Include="mem\SPtr.cs" />
-    <Compile Include="ramstruct\IActorItem.cs" />
-    <Compile Include="ramstruct\IAddressLookup.cs" />
-    <Compile Include="ramstruct\OvlActor.cs" />
-    <Compile Include="ramstruct\ActorInstance.cs" />
-    <Compile Include="ramstruct\IRamItem.cs" />
-    <Compile Include="ramstruct\BlockList.cs" />
-    <Compile Include="ramstruct\RamObject.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ramstruct\OvlParticleEffect.cs" />
-    <Compile Include="ramstruct\OvlPause.cs" />
-    <Compile Include="ramstruct\SimpleFile.cs" />
-    <Compile Include="ramstruct\ThreadStructA.cs" />
-    <Compile Include="Search.cs" />
-    <Compile Include="shitbit\ShitBit.cs" />
-    <Compile Include="Spawn.cs" />
-    <Compile Include="SpectrumOptions.cs" />
-    <Compile Include="mem\Zpr.cs" />
-    <Compile Include="datastruct\bgcheck\BgActor.cs" />
+    <ProjectReference Include="..\Helper\Helper.csproj" />
+    <ProjectReference Include="..\OcaLib\OcaLib.csproj" />
+    <ProjectReference Include="..\uCode\uCode.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="data\trainer\n0_signature.bin">
+    <None Update="data\Index.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\settings-default.json">
+    <None Update="data\settings-default.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Helper\Helper.csproj">
-      <Project>{5af4d836-00b5-43c2-8974-8affabd2df90}</Project>
-      <Name>Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OcaLib\OcaLib.csproj">
-      <Project>{fc18ebff-fa5c-4f92-a90c-fe14e29d9471}</Project>
-      <Name>OcaLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\uCode\uCode\uCode.csproj">
-      <Project>{fe0493c3-ff8e-4eed-a55f-0c30f33fd3d9}</Project>
-      <Name>uCode</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="data\Index.txt">
+    <None Update="data\Spawn.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\Spawn.txt">
+    </None>
+    <None Update="data\trainer\n0_signature.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>echo namespace Spectrum { partial class Program { public const string Timestamp = "%25DATE%25 %25TIME%25";}} &gt; "$(ProjectDir)\BuildTime.cs"</PreBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo namespace Spectrum { partial class Program { public const string Timestamp = &quot;%25DATE%25 %25TIME%25&quot;;}} &gt; &quot;$(ProjectDir)\BuildTime.cs&quot;" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

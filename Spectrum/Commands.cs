@@ -630,6 +630,7 @@ namespace Spectrum
             Help = "{0} = RDRAM start;{1} = hexadecimal size in bytes")]
         private static void CopyRam32(Arguments args)
         {
+            throw new NotImplementedException("FIXME");
             if (!TryEvaluate((string)args[0], out long address))
                 return;
 
@@ -661,12 +662,12 @@ namespace Spectrum
 
             string clipboardText = stringBuilder.ToString();
 
-            var t = new Thread(
-                (text) => { Clipboard.SetText((string)text); });
+            //var t = new Thread(
+            //    (text) => { Clipboard.SetText((string)text); });
 
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start(clipboardText);
-            t.Join();
+            //t.SetApartmentState(ApartmentState.STA);
+            //t.Start(clipboardText);
+            //t.Join();
 
             Console.Clear();
             Console.WriteLine("Copied: ");

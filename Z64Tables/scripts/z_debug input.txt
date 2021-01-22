@@ -1,0 +1,9 @@
+name = z_debug Input;
+game = oot;
+build = DBGMQ;
+start = 0xB95274;
+loop = 29;
+i=0;
+format = tsv;
+|
+	u16:X4, u16:X4

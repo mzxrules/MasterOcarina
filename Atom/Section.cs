@@ -17,7 +17,7 @@ namespace Atom
         public int Size { get; protected set; }
         public bool IsCode { get; protected set; }
 
-        public Section(string name, N64Ptr fileRam, N64Ptr vram,  int size,  int subsection, bool isCode = false)
+        public Section(string name, N64Ptr fileRam, N64Ptr vram, int size, int subsection, bool isCode = false)
         {
             Name = name;
             Subsection = subsection;

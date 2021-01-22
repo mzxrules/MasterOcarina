@@ -43,31 +43,19 @@ namespace ZCodec
 
         private static void DisplayHelp()
         {
-            Console.WriteLine("compress   \"inputRom\" \"outputRom\" \"GameId\" \"Version\"");
-            Console.WriteLine("decompress \"inputRom\" \"outputRom\" \"GameId\" \"Version\"");
-            Console.WriteLine("swap       \"inputRom\" \"outputRom\" \"SwapType\"");
+            Console.WriteLine("compress   'inputRom' 'outputRom' 'GameId' 'Version'");
+            Console.WriteLine("decompress 'inputRom' 'outputRom' 'GameId' 'Version'");
+            Console.WriteLine("swap       'inputRom' 'outputRom' 'SwapType'");
             Console.WriteLine();
 
             Console.Write("Press Enter to Continue...");
             Console.ReadLine();
             Console.Clear();
 
-            Console.WriteLine("Ocarina of Time: use GameId \"oot\"");
-            Console.WriteLine("Version:");
-            foreach (var item in ORom.GetSupportedBuilds())
-            {
-                var info = ORom.BuildInformation.Get(item);
-                Console.WriteLine(" {0,-5} {1}", info.Version + ":", info.Name);
-            }
+            ORom.ConsolePrintSupportedVersions();
             Console.WriteLine();
 
-            Console.WriteLine("Majora's Mask: use GameId \"mm\"");
-            Console.WriteLine("Version:");
-            foreach (var item in MRom.GetSupportedBuilds())
-            {
-                var info = MRom.BuildInformation.Get(item);
-                Console.WriteLine(" {0,-5} {1}", info.Version + ":", info.Name);
-            }
+            MRom.ConsolePrintSupportedVersions();
             Console.WriteLine();
 
             Console.Write("Press Enter to Continue...");
@@ -88,17 +76,15 @@ namespace ZCodec
         
         private static void SetCRC(string[] args)
         {
-            string inRom;
-
             if (args.Length != 1)
                 return;
 
-            inRom = args[0];
+            string inRom = args[0];
 
             if (!FileExists(inRom))
                 return;
 
-            using (FileStream fs = new FileStream(inRom, FileMode.Open))
+            using (FileStream fs = File.Open(inRom, FileMode.Open))
             {
                 CRC.Write(fs);
             }
@@ -111,19 +97,13 @@ namespace ZCodec
 
         private static void OptimizedCompressRom(string[] args)
         {
-            string inRom;
-            string outRom;
-            string inRefRom;
-            string enumStr;
-            ORom.Build build;
-
             if (args.Length != 4)
                 return;
 
-            inRom = args[0];
-            outRom = args[1];
-            inRefRom = args[2];
-            enumStr = args[3];
+            string inRom = args[0];
+            string outRom = args[1];
+            string inRefRom = args[2];
+            string enumStr = args[3];
 
             if (!FileExists(inRom))
                 return;
@@ -131,10 +111,10 @@ namespace ZCodec
             if (!FileExists(inRefRom))
                 return;
 
-            if (!TryGetBuild(enumStr, out build))
+            if (!TryGetBuild(enumStr, out ORom.Build build))
                 return;
 
-            using (FileStream fw = new FileStream(outRom, FileMode.Create))
+            using (var fw = File.Create(outRom))
             {
                 RomBuilder.CompressRomOptimized(new ORom(inRom, build), new ORom(inRefRom, build), fw);
             }
@@ -142,18 +122,13 @@ namespace ZCodec
 
         private static void CompressRom(string[] args)
         {
-            string inRom;
-            string outRom;
-            string gameId;
-            string build;
-
             if (args.Length != 5)
                 return;
-            
-            inRom = args[0];
-            outRom = args[1];
-            gameId = args[2];
-            build = args[3];
+
+            string inRom = args[0];
+            string outRom = args[1];
+            string gameId = args[2];
+            string build = args[3];
             string inRefRom = args[4];
 
             if (!FileExists(inRom))
@@ -169,40 +144,31 @@ namespace ZCodec
                 return;
             }
 
-            using (FileStream fw = new FileStream(outRom, FileMode.Create))
+            using (var fw = File.Create(outRom))
             {
                 RomBuilder.CompressRom(Rom.New(inRom, version), new ORom(inRefRom, version), fw);
-                //using (FileStream fs = new FileStream(inRom, FileMode.Open, FileAccess.Read))
-                //{
-                //    RomBuilder.CompressRom(fs, version, new ORom(inRefRom, version), fw);
-                //}
             }
         }
 
         private static void DecompressRom(string[] args)
         {
-            string inRom;
-            string outRom;
-            string gameStr;
-            string buildStr;
-            RomVersion version;
             if (args.Length != 4)
                 return;
 
-            inRom = args[0];
-            outRom = args[1];
-            gameStr = args[2];
-            buildStr = args[3];
+            string inRom = args[0];
+            string outRom = args[1];
+            string gameStr = args[2];
+            string buildStr = args[3];
 
             if (!FileExists(inRom))
                 return;
 
-            version = new RomVersion(gameStr, buildStr);
+            RomVersion version = new RomVersion(gameStr, buildStr);
 
             if (version.Game == Game.Undefined)
                 return;
 
-            using (FileStream fw = new FileStream(outRom, FileMode.Create))
+            using (FileStream fw = File.Create(outRom))
             {
                 Rom rom = Rom.New(inRom, version);
                 RomBuilder.DecompressRom(rom, fw);
@@ -211,7 +177,6 @@ namespace ZCodec
 
         private static bool TryGetBuild(string enumStr, out ORom.Build build)
         {
-            build = ORom.Build.UNKNOWN;
             if (!Enum.TryParse(enumStr, true, out build))
                 return false;
 
@@ -223,31 +188,26 @@ namespace ZCodec
 
         private static void SwapRom(string[] args)
         {
-            string inRom;
-            string outRom;
-            string swap;
-            FileEncoding fileEncoding = FileEncoding.Error;
-            
             if (args.Length != 3)
                 return;
 
-            inRom = args[0];
-            outRom = args[1];
-            swap = args[2];
+            string inRom = args[0];
+            string outRom = args[1];
+            string swap = args[2];
 
             if (!FileExists(inRom))
                 return;
 
+            FileEncoding fileEncoding;
             switch (swap.ToLower())
             {
                 case "little16": fileEncoding = FileEncoding.LittleEndian16; break;
                 case "little32": fileEncoding = FileEncoding.LittleEndian32; break;
-                //case "":
                 default: return;
             }
-            using (FileStream fs = new FileStream(inRom, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = File.OpenRead(inRom))
             {
-                using (FileStream fw = new FileStream(outRom, FileMode.Create))
+                using (FileStream fw = File.Create(outRom))
                 {
                     FileOrder.ToBigEndian32(fs, fw, fileEncoding);
                 }

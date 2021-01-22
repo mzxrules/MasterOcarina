@@ -76,6 +76,8 @@ namespace Spectrum
     static class SpectrumVariables
     {
         [ViewVariable]
+        public static int Gamestate_Table;
+        [ViewVariable]
         public static int Player_Pause_Ovl_Table; // = 0x0FE480;
         [ViewVariable]
         public static int Actor_Ovl_Table;// = 0x0E8530;
@@ -222,6 +224,7 @@ namespace Spectrum
             Actor_Category_Table = GlobalContext.RelOff(temp);
 
             //Overlay Tables
+            Addresser.TryGetRam(AddressToken.GameContextTable_Start, ORom.FileList.code, version, out Gamestate_Table);
             Addresser.TryGetRam(AddressToken.ActorTable_Start, ORom.FileList.code, version, out Actor_Ovl_Table);
             Addresser.TryGetRam(AddressToken.PlayerPauseOverlayTable_Start, ORom.FileList.code, version, out Player_Pause_Ovl_Table);
             Addresser.TryGetRam(AddressToken.ParticleTable_Start, ORom.FileList.code, version, out ParticleEffect_Ovl_Table);

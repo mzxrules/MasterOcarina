@@ -29,7 +29,7 @@ namespace Atom
 
         public Label() { }
 
-        public Label(Type kind, N64Ptr addr, bool confirmed/* = false*/, bool mips_to_c = false)
+        public Label(Type kind, N64Ptr addr, bool confirmed, bool mips_to_c = false)
         {
             Addr = addr;
             Kind = kind;
