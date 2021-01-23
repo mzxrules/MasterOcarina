@@ -244,6 +244,9 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
+Experimental/Data/RomLocations.xml
+Experimental/Patch/CutscenePatch (1).cs
+
 # ignore wip or dead projects
 CoreTest/
 WadDisect/
@@ -252,7 +255,6 @@ CutsceneEditor/
 DungeonRush/
 DungeonRushMQ/
 PetriesChallenge/
-Experimental/
 RomBlock/
 RomWorkshop/
 PatchShared/
