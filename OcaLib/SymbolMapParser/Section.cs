@@ -14,7 +14,7 @@ namespace mzxrules.OcaLib.SymbolMapParser
 
         public override string ToString()
         {
-            return $"{Name} {Address} {Size} {File}";
+            return $"{Name} {Address} 0x{Size:X} {File}";
         }
     }
 }

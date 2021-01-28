@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.SymbolMapParser
 
         public uint LoadAddress { get; set; }
 
-        public bool HasLoadAddress { get; set; } = false;
+        public bool HasLoadAddress => !Name.EndsWith(".bss");
 
         public List<Symbol> Symbols = new List<Symbol>();
 
@@ -21,7 +21,7 @@ namespace mzxrules.OcaLib.SymbolMapParser
 
         public override string ToString()
         {
-            return $"..{Name} {Address} {Size:X8} {HasLoadAddress} {LoadAddress:X}";
+            return $"..{Name} {Address} 0x{Size:X} {HasLoadAddress} {LoadAddress:X}";
         }
     }
 }

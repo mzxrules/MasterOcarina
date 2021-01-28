@@ -10,7 +10,7 @@ namespace Spectrum
 {
     public class ActorMemoryMapper
     {
-        static RomVersion version;
+        static RomVersion Version;
 
         //actors
         public static int TOTAL_ACTORS;// 0x1D7, 0x2B2
@@ -21,13 +21,11 @@ namespace Spectrum
         public List<ActorInstance> Instances = new List<ActorInstance>();
 
 
-        internal static void ChangeVersion((RomVersion v, bool gctx) args)
+        internal static void ChangeVersion(RomVersion version)
         {
-            var v = args.v;
-            version = v;
             //Actors
-
-            TOTAL_ACTORS = (v.Game == Game.OcarinaOfTime) ? 0x1D7 : 0x2B2;
+            Version = version;
+            TOTAL_ACTORS = (Version.Game == Game.OcarinaOfTime) ? 0x1D7 : 0x2B2;
             ActorInstanceSize = new uint[TOTAL_ACTORS];
         }
 
@@ -85,7 +83,7 @@ namespace Spectrum
 
             if (actorId == 0 && actor.Type != 2)
             {
-                if (version.Game == Game.OcarinaOfTime)
+                if (Version.Game == Game.OcarinaOfTime)
                 {
                     if (actorId == 0x28)
                     {
@@ -159,7 +157,7 @@ namespace Spectrum
             if (SpectrumVariables.GlobalContext == 0)
                 return new List<ActorInstance>();
 
-            int recordSize = (version.Game == Game.OcarinaOfTime) ? 0x08 : 0x0C;
+            int recordSize = (Version.Game == Game.OcarinaOfTime) ? 0x08 : 0x0C;
 
             Ptr p = SpectrumVariables.Actor_Category_Table;
             actors = p.ReadInt32(cat * recordSize);
@@ -169,7 +167,7 @@ namespace Spectrum
             {
                 for (int j = 0; j < actors; j++)
                 {
-                    ActorInstance ai = new ActorInstance(version, actorPtr, this);
+                    ActorInstance ai = new ActorInstance(Version, actorPtr, this);
                     result.Add(ai);
                     actorPtr = ai.NextActor;
                 }
@@ -190,26 +188,26 @@ namespace Spectrum
         public const int PLAY_PAUSE_RECORDS = 2;
 
 
-        internal static void ChangeVersion((RomVersion v, bool gctx) args)
+        internal static void ChangeVersion((SpectrumOptions options, bool gctx) args)
         {
-            ActorMemoryMapper.ChangeVersion(args);
-            var v = args.v;
-            version = v;
+            var (options, gctx) = args;
+            version = options.Version;
+            ActorMemoryMapper.ChangeVersion(version);
 
             SetBlockNodeLength(version);
 
             //Particles
 
-            if (v.Game == Game.OcarinaOfTime)
+            if (version.Game == Game.OcarinaOfTime)
                 TOTAL_PARTICLE_EFFECTS = 0x19;
             else
                 TOTAL_PARTICLE_EFFECTS = 0x27;
 
             //Objects
 
-            if (v.Game == Game.OcarinaOfTime)
+            if (version.Game == Game.OcarinaOfTime)
                 OBJECT_FILE_COUNT = 0x192;
-            else if (v.Game == Game.MajorasMask)
+            else if (version.Game == Game.MajorasMask)
                 OBJECT_FILE_COUNT = 0x283;
 
             ObjectFiles = new FileAddress[OBJECT_FILE_COUNT];

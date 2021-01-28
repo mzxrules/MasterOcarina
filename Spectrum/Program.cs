@@ -18,7 +18,7 @@ namespace Spectrum
         const string TITLE = "Spectrum - Time never really passes in Hyrule... does it?";
         static SpectrumOptions Options = new SpectrumOptions();
         static Rom curRom;
-        public delegate void SetVersionEventHandler((RomVersion version, bool setGctx) args);
+        public delegate void SetVersionEventHandler((SpectrumOptions options, bool setGctx) args);
         public static event SetVersionEventHandler ChangeVersion;
         static List<BlockNode> LastActorLL = new List<BlockNode>();
         static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
@@ -293,12 +293,11 @@ namespace Spectrum
             return null;
         }
 
-        private static void UpdateSetVersion((RomVersion v, bool g) args)
+        private static void UpdateSetVersion((SpectrumOptions options, bool g) args)
         {
-            var v = args.v;
+            var v = args.options.Version;
             string gameStr = "?";
             string buildStr = "?";
-            Options.Version = v;
             Console.WriteLine($"{v.Game}: version {v} set");
 
             if (v.Game == Game.OcarinaOfTime)

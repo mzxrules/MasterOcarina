@@ -29,7 +29,8 @@ namespace mzxrules.OcaLib
                 new BuildInformation { CRC = 0x1D4136F3AF63EEA9, Version = Build.MQP, Name = "PAL Master Quest", Localization = Localization.PAL },
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.DBGMQ, Name = "Debug Master Quest", Localization = Localization.PAL },
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUEC, Name = "Chinese iQue", Localization = Localization.CHI },
-                new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUET, Name = "Traditional Chinese iQue", Localization = Localization.CHI }
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUET, Name = "Traditional Chinese iQue", Localization = Localization.CHI },
+                new BuildInformation { CRC = 0x0000000000000000, Version = Build.NRC, Name = "NTSC RC 98-10-18 23:05:00", Localization = Localization.NTSC }
             };
 
             public Build Version { get; private set; }
@@ -87,6 +88,8 @@ namespace mzxrules.OcaLib
             DBGMQ, //PAL MQ Debug
             IQUEC, //Chinese Ocarina of Time
             IQUET, //Taiwanese Ocarina of Time
+
+            NRC, //NTSC RC 98-10-18 23:05:00
         }
 
         public enum Localization
@@ -117,6 +120,7 @@ namespace mzxrules.OcaLib
             yield return Build.DBGMQ;
             yield return Build.IQUEC;
             yield return Build.IQUET;
+            yield return Build.NRC;
         }
 
         public static Localization GetLocalization(Build v)

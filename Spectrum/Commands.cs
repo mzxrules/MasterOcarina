@@ -13,6 +13,7 @@ using System.Threading;
 using mzxrules.OcaLib.PathUtil;
 using mzxrules.OcaLib.SceneRoom;
 using mzxrules.XActor;
+using mzxrules.OcaLib.SymbolMapParser;
 
 namespace Spectrum
 {
@@ -176,8 +177,12 @@ namespace Spectrum
             {
                 switch (((string)args[0]).ToLower())
                 {
-                    case "oot": ChangeVersion((ORom.Build.N0, true)); break;
-                    case "mm": ChangeVersion((MRom.Build.U0, true)); break;
+                    case "oot":
+                        Options.Version = ORom.Build.N0;
+                        ChangeVersion((Options, true)); break;
+                    case "mm":
+                        Options.Version = MRom.Build.U0;
+                        ChangeVersion((Options, true)); break;
                 }
             }
             else if (args.Length == 2)
@@ -186,7 +191,10 @@ namespace Spectrum
                 if (v.Game == Game.Undefined)
                     Console.WriteLine("Unknown version code");
                 else
-                    ChangeVersion((v, true));
+                {
+                    Options.Version = v;
+                    ChangeVersion((Options, true));
+                }
             }
         }
 
@@ -413,7 +421,7 @@ namespace Spectrum
                 }
             }
             if (Zpr.TryMountEmulator(emulatorsToMount))
-                ChangeVersion((Options.Version, true));
+                ChangeVersion((Options, true));
             else
                 Console.WriteLine("Emulator selection failed.");
 
@@ -478,9 +486,57 @@ namespace Spectrum
             var version = new RomVersion(Options.Version.Game, build);
 
             if (version.Game != Game.Undefined)
-                ChangeVersion((version, true));
+            {
+                Options.Version = version;
+                ChangeVersion((Options, true));
+            }
             else
                 Console.WriteLine($"Invalid code for {Options.Version.Game}. Run ver (no arguments) for correct version codes");
+        }
+
+        [SpectrumCommand(
+            Name = "sympath",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Description = "Sets path location for decompilation symbol map file")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.PATH })]
+        private static void SetSymbolMapPath(Arguments args)
+        {
+            Options.MapfileOptions.Path = (string)args[0];
+        }
+
+        [SpectrumCommand(
+            Name = "symload",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Description = "Use symbol data from file to set up Spectrum's addresses. Overrides current version settings")]
+        private static void LoadSymbolMap(Arguments args)
+        {
+            string path = Options.MapfileOptions.Path;
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Cannot find symbol file: {Options.MapfileOptions.Path}");
+                return;
+            }
+            DateTime lastWrite = File.GetLastWriteTime(path);
+            if (Options.MapfileOptions.SymbolMap == null ||
+                lastWrite.CompareTo(Options.MapfileOptions.LastWrite) < 0)
+            {
+                Options.MapfileOptions.SymbolMap = SymbolMapParser.Parse(Options.MapfileOptions.Path);
+                Options.MapfileOptions.LastWrite = lastWrite;
+            }
+            Options.MapfileOptions.Version = Options.Version;
+            Options.MapfileOptions.UseMap = true;
+            ChangeVersion((Options, true));
+        }
+
+        [SpectrumCommand(
+            Name = "symunload",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Description = "Disable using symbol data for Spectrum's addresses")]
+        private static void UnloadSymbolMap(Arguments args)
+        {
+            Options.MapfileOptions.UseMap = false;
+            ChangeVersion((Options, true));
         }
 
         [SpectrumCommand(
@@ -1209,15 +1265,13 @@ namespace Spectrum
             Cat = SpectrumCommand.Category.Gfx,
             Description = "Displays variables related to the 'Graphics Context'")]
         private static void DisplayGraphicsContext(Arguments args)
-        {
-            GfxDList[] dlists = new GfxDList[0];
-
+        { 
             if (Gfx != 0)
             {
-                dlists = GetFrameDlists(Gfx);
+                GfxDList[] dlists = GetFrameDlists(Gfx);
+                Console.Clear();
+                PrintGraphicsContext(dlists);
             }
-            Console.Clear();
-            PrintGraphicsContext(dlists);
         }
 
         private static void PrintGraphicsContext(GfxDList[] DLists)
@@ -1228,9 +1282,9 @@ namespace Spectrum
             {
                 var freeSize = dlist.AppendEndPtr - dlist.AppendStartPtr;
                 Console.WriteLine("{6:X4} {0,-13}: {1:X5} {2:X6} {3:X6} {4:X6} Free: {5:X5}", dlist.Name, dlist.Size,
-                    dlist.StartPtr & 0xFFFFFF,
-                    dlist.AppendStartPtr & 0xFFFFFF,
-                    dlist.AppendEndPtr & 0xFFFFFF,
+                    dlist.StartPtr.Offset,
+                    dlist.AppendStartPtr.Offset,
+                    dlist.AppendEndPtr.Offset,
                     (freeSize >= 0) ? freeSize : 0xFFFFF,
                     (dlist.RecordPtr - (Gfx & 0xFFFFFF)) & 0xFFFFFF);
             }
@@ -1305,14 +1359,12 @@ namespace Spectrum
         {
             var data = Zpr.ReadRam((int)address, bytes);
 
-            using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
+            using BinaryReader br = new BinaryReader(new MemoryStream(data));
+            int i = 0;
+            foreach (var line in uCode.MicrocodeParser.SimpleParse(br, bytes / 8))
             {
-                int i = 0;
-                foreach (var line in uCode.MicrocodeParser.SimpleParse(br, bytes / 8))
-                {
-                    Console.WriteLine($"{address + i:X6}: {line}");
-                    i += 8;
-                }
+                Console.WriteLine($"{address + i:X6}: {line}");
+                i += 8;
             }
         }
 
@@ -1334,13 +1386,11 @@ namespace Spectrum
                 Options.Version.ToString());
 
 
-            using (StreamWriter sw = new StreamWriter("dump/" + gameStr))
-            using (BinaryReader memory = new BinaryReader(new MemoryStream(data)))
+            using StreamWriter sw = new StreamWriter("dump/" + gameStr);
+            using BinaryReader memory = new BinaryReader(new MemoryStream(data));
+            foreach (var line in MicrocodeParser.DeepParse(memory, address))
             {
-                foreach (var line in MicrocodeParser.DeepParse(memory, address))
-                {
-                    sw.WriteLine(line);
-                }
+                sw.WriteLine(line);
             }
         }
 
@@ -1497,13 +1547,11 @@ namespace Spectrum
             var ramMap = MemoryMapper.GetRamMap(Options, true).OfType<IFile>().ToList();
             var data = Zpr.ReadRam(0, GetRamSize());
 
-            using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
-            {
-                var traceEnumerable = MicrocodeParser.DeepTrace(br, (int)topDlist);
-                var traceEnumerator = traceEnumerable.GetEnumerator();
-                traceEnumerator.MoveNext();
-                TraceGbiRecursive(traceEnumerator, ramMap);
-            }
+            using BinaryReader br = new BinaryReader(new MemoryStream(data));
+            var traceEnumerable = MicrocodeParser.DeepTrace(br, (int)topDlist);
+            var traceEnumerator = traceEnumerable.GetEnumerator();
+            traceEnumerator.MoveNext();
+            TraceGbiRecursive(traceEnumerator, ramMap);
         }
 
 
@@ -1633,11 +1681,9 @@ namespace Spectrum
             var addr = Gfx.ReadInt32(0);
             addr += frameOffset;
 
-            using (BinaryWriter bw = new BinaryWriter(new FileStream("dump/frame.bin", FileMode.Create)))
-            {
-                byte[] frameData = Zpr.ReadRam(addr, 0x12400);
-                bw.Write(frameData);
-            }
+            using BinaryWriter bw = new BinaryWriter(new FileStream("dump/frame.bin", FileMode.Create));
+            byte[] frameData = Zpr.ReadRam(addr, 0x12400);
+            bw.Write(frameData);
         }
 
         [SpectrumCommand(
@@ -1693,29 +1739,26 @@ namespace Spectrum
                 return;
             }
 
-            using (BinaryReader br = new BinaryReader(new FileStream("dump/frame.bin", FileMode.Open)))
+            using BinaryReader br = new BinaryReader(new FileStream("dump/frame.bin", FileMode.Open));
+            for (int i = 0; i < 0x12400; i += 8)
             {
-                for (int i = 0; i < 0x12400; i += 8)
+                var input = new Microcode(br);
+
+                if (input.EncodingHigh == 0xDB06003C
+                    || input.EncodingHigh == 0xFF10013F
+                    && (input.EncodingLow == frameBufferPtr1 || input.EncodingLow == frameBufferPtr2))
                 {
-                    var input = new Microcode(br);
-
-                    if (input.EncodingHigh == 0xDB06003C
-                        || input.EncodingHigh == 0xFF10013F
-                        && (input.EncodingLow == frameBufferPtr1 || input.EncodingLow == frameBufferPtr2))
-                    {
-                        input = new Microcode(input.EncodingHigh, frameBuffer);
-                    }
-                    else if (convertFrameContext.Contains((byte)input.Name))
-                    {
-                        if (input.EncodingLow >= frame + delta && input.EncodingLow < frame + delta + 0x12400)
-                            input = new Microcode(input.EncodingHigh, input.EncodingLow - delta);
-                    }
-
-                    Zpr.WriteRam32(frame + i, (int)input.EncodingHigh);
-                    Zpr.WriteRam32(frame + i + 4, (int)input.EncodingLow);
+                    input = new Microcode(input.EncodingHigh, frameBuffer);
                 }
-            }
+                else if (convertFrameContext.Contains((byte)input.Name))
+                {
+                    if (input.EncodingLow >= frame + delta && input.EncodingLow < frame + delta + 0x12400)
+                        input = new Microcode(input.EncodingHigh, input.EncodingLow - delta);
+                }
 
+                Zpr.WriteRam32(frame + i, (int)input.EncodingHigh);
+                Zpr.WriteRam32(frame + i + 4, (int)input.EncodingLow);
+            }
         }
 
         #endregion
@@ -3266,7 +3309,7 @@ namespace Spectrum
                 return;
 
             SpectrumVariables.GlobalContext = SPtr.New(address);
-            ChangeVersion((Options.Version, false));
+            ChangeVersion((Options, false));
         }
 
         [SpectrumCommand(

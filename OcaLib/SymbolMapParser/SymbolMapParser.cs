@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 namespace mzxrules.OcaLib.SymbolMapParser
 {
 
-    public static class Parser
+    public static class SymbolMapParser
     {
         static Regex getSymbol = new Regex(@" {16}0x([0-9a-f]{16}) {16}(\w+)$", RegexOptions.Compiled);
         static Regex getSectionLine = new Regex(@" (\.[A-z\s]{13}) 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,}) (.{1,})", RegexOptions.Compiled);
         static Regex getSegmentLine = new Regex(@".{15} 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,})(?: load address 0x)?(.*)", RegexOptions.Compiled);
         //lines starting with .. denote file start
         //
-        public static List<Segment> Parse(string path)
+        public static SymbolMap Parse(string path)
         {
             var lines = File.ReadAllLines(path);
             bool GetSym = false;
@@ -59,7 +59,6 @@ namespace mzxrules.OcaLib.SymbolMapParser
                     string t = segLineMatch.Groups[3].Value;
                     if (t.Length > 0)
                     {
-                        curSegment.HasLoadAddress = true;
                         curSegment.LoadAddress = uint.Parse(segLineMatch.Groups[3].Value, System.Globalization.NumberStyles.HexNumber);
                     }
                     continue;
@@ -95,12 +94,16 @@ namespace mzxrules.OcaLib.SymbolMapParser
                     }
                 }
             }
-            return segments;
+            return new SymbolMap()
+            {
+                Path = path,
+                Map = segments
+            };  
         }
 
         private static string GetName(string line)
         {
-            string name = line.Substring(2);
+            string name = line[2..];
             var index = name.IndexOf(' ');
             if (index > 0)
             {

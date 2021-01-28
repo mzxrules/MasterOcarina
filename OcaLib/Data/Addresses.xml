@@ -5,6 +5,7 @@
       <Start>
         <!--<Identifier id="Template">-->
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC"></Data>
           <Data ver="N0"></Data>
           <Data ver="N1"></Data>
           <Data ver="N2"></Data>
@@ -17,6 +18,18 @@
           <Data ver="MQU"></Data>
           <Data ver="MQP"></Data>
           <Data ver="DBGMQ"></Data>
+          <Data ver="IQUEC"></Data>
+          <Data ver="IQUET"></Data>
+        </Address>
+      </Start>
+    </Block>
+    <Block name="boot">
+      <Start>
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="DBGMQ">1060</Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="DBGMQ">80000460</Data>
         </Address>
       </Start>
     </Block>
@@ -24,6 +37,7 @@
       <Start>
         <Address reftype="absolute" domain="ROM">
           <!--First record in the file table-->
+          <Data ver="NRC">7430</Data>
           <Data ver="N0">7430</Data>
           <Data ver="N1">7430</Data>
           <Data ver="N2">7960</Data>
@@ -40,6 +54,7 @@
           <Data ver="IQUET">B240</Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">B140</Data>
           <Data ver="N0">B140</Data>
           <Data ver="N1">B140</Data>
           <Data ver="N2">B780</Data>
@@ -100,6 +115,7 @@
     <Block name="code">
       <Start>
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC">A87000</Data>
           <Data ver="N0">A87000</Data>
           <Data ver="N1">A87000</Data>
           <Data ver="N2">A87000</Data>
@@ -116,6 +132,7 @@
           <Data ver="IQUET">AB0000</Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">110A0</Data>
           <Data ver="N0">110A0</Data>
           <Data ver="N1">110A0</Data>
           <Data ver="N2">116E0</Data>
@@ -133,7 +150,13 @@
         </Address>
       </Start>
       <Identifier id="TextbankTable">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/data/z_message_PAL.rodata.o</File>
+          <Symbol>D_8014B320</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC">B8069C</Data>
           <Data ver="N0">B808AC</Data>
           <Data ver="N1">B80A6C</Data>
           <Data ver="N2">B8091C</Data>
@@ -149,10 +172,16 @@
         </Address>
       </Identifier>
       <Identifier id="ParticleTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_effect_soft_sprite_dlftbls.o</File>
+          <Symbol>gEffectSsOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!--Length 0x1C:
         VA start, end, vram start, end-->
           <!--25 files, 0x26 records-->
+          <Data ver="NRC">B5D990</Data>
           <Data ver="N0">B5DBA0</Data>
           <Data ver="N1">B5DD60</Data>
           <Data ver="N2">B5DBA0</Data>
@@ -170,9 +199,15 @@
         </Address>
       </Identifier>
       <Identifier id="ActorTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_actor_dlftbls.o</File>
+          <Symbol>gActorOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!-- Length 0x20-->
           <!-- Actor count = 0x1D7;-->
+          <Data ver="NRC">B5E280</Data>
           <Data ver="N0">B5E490</Data>
           <Data ver="N1">B5E650</Data>
           <Data ver="N2">B5E490</Data>
@@ -190,8 +225,14 @@
         </Address>
       </Identifier>
       <Identifier id="GameContextTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_game_dlftbls.o</File>
+          <Symbol>gGameStateOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!-- Length 0x30-->
+          <Data ver="NRC">B67090</Data>
           <Data ver="N0">B672A0</Data>
           <Data ver="N1">B67460</Data>
           <Data ver="N2">B672A0</Data>
@@ -209,8 +250,14 @@
         </Address>
       </Identifier>
       <Identifier id="HyruleSkyboxTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/data/z_kankyo.data.o</File>
+          <Symbol>D_8011FD3C</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!--Hyrule Field Skybox. 9 Variations-->
+          <Data ver="NRC">B6759C</Data>
           <Data ver="N0">B677AC</Data>
           <Data ver="N1">B6796C</Data>
           <Data ver="N2">B677AC</Data>
@@ -228,7 +275,13 @@
         </Address>
       </Identifier>
       <Identifier id="MapMarkDataTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_map_mark.o</File>
+          <Symbol>sMapMarkDataOvl</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC">B67948</Data>
           <Data ver="N0">B67B58</Data>
           <Data ver="N1"></Data>
           <Data ver="N2"></Data>
@@ -246,8 +299,14 @@
         </Address>
       </Identifier>
       <Identifier id="ObjectTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_scene.o</File>
+          <Symbol>gObjectTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!-- Object count = 0x192;-->
+          <Data ver="NRC">B6ED48</Data>
           <Data ver="N0">B6EF58</Data>
           <Data ver="N1">B6F118</Data>
           <Data ver="N2">B6EF68</Data>
@@ -265,8 +324,14 @@
         </Address>
       </Identifier>
       <Identifier id="EntranceIndexTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_scene_table.o</File>
+          <Symbol>gEntranceTable</Symbol>
+        </MapBinding>        
         <Address reftype="absolute" domain="ROM">
           <!--Entrance Record Count = 0x614-->
+          <Data ver="NRC">B6F9E0</Data>
           <Data ver="N0">B6FBF0</Data>
           <Data ver="N1">B6FDB0</Data>
           <Data ver="N2">B6FC00</Data>
@@ -284,9 +349,15 @@
         </Address>
       </Identifier>
       <Identifier id="SceneTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_scene_table.o</File>
+          <Symbol>gSceneTable</Symbol>
+        </MapBinding>        
         <Address reftype="absolute" domain="ROM">
           <!-- Length 0x14-->
           <!-- scene count = 101 or 109 in debug-->
+          <Data ver="NRC">B71230</Data>
           <Data ver="N0">B71440</Data>
           <Data ver="N1">B71600</Data>
           <Data ver="N2">B71450</Data>
@@ -304,9 +375,15 @@
         </Address>
       </Identifier>
       <Identifier id="PlayerPauseOverlayTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_kaleido_manager.o</File>
+          <Symbol>gKaleidoMgrOverlayTable</Symbol>
+        </MapBinding>        
         <Address reftype="absolute" domain="ROM">
           <!-- Length 0x1C -->
           <!--Two records, then after both (0x1C * 2) is start addr for file in ram, and which one is loaded-->
+          <Data ver="NRC">B741D0</Data>
           <Data ver="N0">B743E0</Data>
           <Data ver="N1">B745A0</Data>
           <Data ver="N2">B743F0</Data>
@@ -327,6 +404,7 @@
     <Block name="jpn_message_data_static">
       <Start>
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC">8EB000</Data>
           <Data ver="N0">8EB000</Data>
           <Data ver="N1">8EB000</Data>
           <Data ver="N2">8F2000</Data>
@@ -340,6 +418,7 @@
     <Block name="nes_message_data_static">
       <Start>
         <Address reftype="absolute" domain="ROM">
+          <Data ver="NRC">92D000</Data>
           <Data ver="N0">92D000</Data>
           <Data ver="N1">92D000</Data>
           <Data ver="N2">92D000</Data>
@@ -435,6 +514,7 @@
       
       <Identifier id="STACK_LIST">
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC"></Data>
           <Data ver="N0">800062E0</Data>
           <Data ver="N1"></Data>
           <Data ver="N2"></Data>
@@ -452,10 +532,15 @@
         </Address>
       </Identifier>
       
-      
       <!--Address of the dummy "Queue" thread -->
       <Identifier id="QUEUE_THREAD">
+        <MapBinding>
+          <Segment>boot</Segment>
+          <File>build/src/libultra_boot_O1/osCreateThread.o</File>
+          <Symbol>__osThreadTail</Symbol>
+        </MapBinding>   
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC"></Data>
           <Data ver="N0">80006330</Data>
           <Data ver="N1"></Data>
           <Data ver="N2"></Data>
@@ -475,7 +560,13 @@
 
       <!--Address to in-game save ram and other variables-->
       <Identifier id="SRAM_START">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_common_data.o</File>
+          <Symbol>gSaveContext</Symbol>
+        </MapBinding>   
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">11A3C0</Data>
           <Data ver="N0">11A5D0</Data>
           <Data ver="N1">11A790</Data>
           <Data ver="N2">11AC80</Data>
@@ -495,6 +586,7 @@
 
       <Identifier id="GFX_START">
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC"></Data>
           <Data ver="N0">11F290</Data>
           <Data ver="N1"></Data>
           <Data ver="N2"></Data>
@@ -513,15 +605,27 @@
       </Identifier>
 
       <Identifier id="RAM_SEGMENT_TABLE">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/main.o</File>
+          <Symbol>gSegments</Symbol>
+        </MapBinding>   
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">120A28</Data>
           <Data ver="N0">120C38</Data>
           <Data ver="DBGMQ">166FA8</Data>
         </Address>
       </Identifier>
 
       <Identifier id="RAM_ARENA_MAIN">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/system_malloc.o</File>
+          <Symbol>gSystemArena</Symbol>
+        </MapBinding>   
         <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">12B890</Data>
           <Data ver="N0">12BAA0</Data>
           <Data ver="N1">12BC60</Data>
           <Data ver="N2">12C370</Data>
@@ -540,8 +644,14 @@
       </Identifier>
 
       <Identifier id ="RAM_ARENA_SCENES">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_malloc.o</File>
+          <Symbol>sZeldaArena</Symbol>
+        </MapBinding>   
         <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">11BCE0</Data>
           <Data ver="N0">11BEF0</Data>
           <Data ver="N1">11C0B0</Data>
           <Data ver="N2">11C5A0</Data>
@@ -559,8 +669,12 @@
         </Address>
       </Identifier>
 
-
       <Identifier id ="RAM_ARENA_DEBUG">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/debug_malloc.o</File>
+          <Symbol>sDebugArena</Symbol>
+        </MapBinding>   
         <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="DBGMQ">16A7D0</Data>
@@ -568,7 +682,13 @@
       </Identifier>
 
       <Identifier id ="RAM_GLOBAL_CONTEXT">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_effect.o</File>
+          <Symbol>sEffectContext</Symbol>
+        </MapBinding>   
         <Address reftype="absolute" domain="RAM">
+          <Data ver="NRC">114BD0</Data>
           <Data ver="N0">114DE0</Data>
           <Data ver="N1">114FA0</Data>
           <Data ver="N2">115490</Data>
@@ -591,6 +711,11 @@
       <!--Address to a Linked list that maps out certain memory blocks-->
       <!-- No longer used by Spectrum-->
       <Identifier id="RAM_LL_First">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/buffers/heaps.o</File>
+          <Symbol>gSystemHeap</Symbol>
+        </MapBinding> 
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">1C6E60</Data>
           <Data ver="N1" />

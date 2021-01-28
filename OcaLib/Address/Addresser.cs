@@ -16,17 +16,26 @@ namespace mzxrules.OcaLib
         static Addresses AddressDoc { get; set; }
         static Addresser()
         {
-            using (FileStream stream = File.OpenRead("Data/Addresses.xml"))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(Addresses));
+            using FileStream stream = File.OpenRead("Data/Addresses.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(Addresses));
 
-                using (XmlReader reader = XmlReader.Create(stream))
-                {
-                    AddressDoc = (Addresses)serializer.Deserialize(reader);
-                }
-            }
+            using XmlReader reader = XmlReader.Create(stream);
+            AddressDoc = (Addresses)serializer.Deserialize(reader);
         }
 
+        public static bool TryGetSymbolRef(AddressToken token, RomVersion version, out MapBinding o)
+        {
+            o = null;
+            if (!TryGetBlock(version, token, out Block block))
+                return false;
+
+            var identifier = block.Identifier.SingleOrDefault(x => x.id == token.ToString());
+            if (identifier == null)
+                return false;
+
+            o = identifier.MapBinding;
+            return true;
+        }
 
         public static bool TryGetOffset(AddressToken token, RomVersion version, out int v)
         {
@@ -37,10 +46,10 @@ namespace mzxrules.OcaLib
 
             var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == token.ToString());
 
-            if (!(lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Offset))
+            if (!(lookupAddr.Items.Count > 0 && lookupAddr.Items[0] is Offset))
                 return false;
 
-            var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
+            var lookupSet = lookupAddr.Items.Cast<Offset>().ToList();
 
             var group = version.GetGroup();
 
@@ -194,9 +203,9 @@ namespace mzxrules.OcaLib
             if (lookupAddr == null)
                 return false;
 
-            if (lookupAddr.Item.Count > 0)
+            if (lookupAddr.Items.Count > 0)
             {
-                if (lookupAddr.Item[0] is Addr addr)
+                if (lookupAddr.Items[0] is Addr addr)
                 {
                     if (!TryGetAddrValue(addr, version, out lookup))
                         return false;
@@ -224,9 +233,9 @@ namespace mzxrules.OcaLib
                         lookup -= altStart;
                     }
                 }
-                else if (lookupAddr.Item[0] is Offset)
+                else if (lookupAddr.Items[0] is Offset)
                 {
-                    var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
+                    var lookupSet = lookupAddr.Items.Cast<Offset>().ToList();
 
                     Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
 

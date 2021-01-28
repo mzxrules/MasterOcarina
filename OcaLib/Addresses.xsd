@@ -41,11 +41,22 @@
   </xs:complexType>
 
   <xs:complexType name="Identifier">
-    <xs:choice>
-      <xs:element name="Address" type="Address"/>
-      <xs:element name="Offset" type="Offset" maxOccurs="unbounded"/>
-    </xs:choice>
+    <xs:sequence>
+      <xs:element name="MapBinding" minOccurs="0" maxOccurs="1" type="MapBinding"/>
+      <xs:choice>
+        <xs:element name="Address" type="Address"/>
+        <xs:element name="Offset" type="Offset" maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:sequence>
     <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="MapBinding">
+    <xs:sequence>
+      <xs:element name="Segment" minOccurs="1" maxOccurs="1" type="xs:string"/>
+      <xs:element name="File" minOccurs="1" maxOccurs="1" type="xs:string"/>
+      <xs:element name="Symbol" minOccurs="1" maxOccurs="1" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Address">
