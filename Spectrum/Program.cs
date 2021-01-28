@@ -1,5 +1,6 @@
 ﻿using mzxrules.Helper;
 using mzxrules.OcaLib;
+using mzxrules.OcaLib.PathUtil;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Spectrum
     {
         const string TITLE = "Spectrum - Time never really passes in Hyrule... does it?";
         static SpectrumOptions Options = new SpectrumOptions();
+        static Rom curRom;
         public delegate void SetVersionEventHandler((RomVersion version, bool setGctx) args);
         public static event SetVersionEventHandler ChangeVersion;
         static List<BlockNode> LastActorLL = new List<BlockNode>();
@@ -63,13 +65,13 @@ namespace Spectrum
             ChangeVersion += UpdateSetVersion;
             
             CommandDictionary = BuildCommands();
-
             SpawnData.Load();
             LoadSettings();
+            PathUtil.Initialize();
 
             MountEmulator("");
 
-            Console.WriteLine($"Created by mzxrules 2014-2019, compiled {Timestamp}");
+            Console.WriteLine($"Created by mzxrules 2014-2021, compiled {Timestamp}");
             Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
             Console.WriteLine($"Data logging enabled? {Options.EnableDataLogging}");
         }
@@ -122,7 +124,7 @@ namespace Spectrum
                     };
                 }
                 var command = (CommandDelegate)method.CreateDelegate(typeof(CommandDelegate));
-#if !DEBUG
+#if DEBUG
                 if (commandAttr.Cat == SpectrumCommand.Category.Proto)
                     continue;
 #endif

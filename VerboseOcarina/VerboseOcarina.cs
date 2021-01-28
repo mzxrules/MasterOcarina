@@ -305,11 +305,8 @@ namespace VerboseOcarina
                 return;
             }
 
-            var roomAddrs = scene.Header.GetRoomAddresses();
-            for (int i = 0; i < roomAddrs.Count; i++)
+            foreach (FileAddress addr in scene.Header.GetRoomAddresses())
             {
-                FileAddress addr = roomAddrs[i];
-
                 //if (scene.ID == 6 && rom.Version == ORom.Build.N0)
                 //{
                 //    rooms.Add(SceneRoomReader.LoadSpiritRoom(addr, i));
@@ -325,7 +322,6 @@ namespace VerboseOcarina
                 {
                     sb.AppendLine($"Exception: room {addr.Start:X8} not found");
                 }
-
             }
             
             sb.Append(SceneRoomReader.ReadScene(scene));

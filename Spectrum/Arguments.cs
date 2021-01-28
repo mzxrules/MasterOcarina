@@ -13,6 +13,7 @@ namespace Spectrum
         INVALID,
         EXPRESSION_S,
         STRING,
+        PATH,
         LITERAL,
         HEX_U8,
         HEX_S8,
@@ -83,6 +84,10 @@ namespace Spectrum
                         if (!TryGetUnescapedString(argsStr, ref cur))
                             return false;
                         break;
+                    case Spectrum.Tokens.PATH:
+                        if (!TryGetPathString(argsStr, ref cur))
+                            return false;
+                        break;
                     case Spectrum.Tokens.LITERAL:
                         if (!TryGetLITERAL(argsStr, ref cur))
                             return false;
@@ -151,12 +156,40 @@ namespace Spectrum
             return true;
         }
 
+        private bool TryGetPathString(string argsStr, ref int cur)
+        {
+            int start, end;
+            if (cur == argsStr.Length)
+                return false;
+            if (argsStr[cur] == '"')
+            {
+                cur++;
+                start = cur;
+                ParseSeekNextChar(argsStr, '"', ref cur);
+                end = cur;
+                if (cur == argsStr.Length)
+                    return false;
+                cur++;
+            }
+            else
+            {
+                start = cur;
+                ParseSeekNextChar(argsStr, ' ', ref cur);
+                end = cur;
+            }
+            if (start == end)
+                return false;
+            string path = argsStr.Substring(start, end - start);
+            argObjects.Add(path);
+            return true;
+        }
+
         private bool TryGetLITERAL(string argsStr, ref int cur)
         {
-            string test = GetTokenWithNextSpace(argsStr, ref cur);
-            if (string.IsNullOrWhiteSpace(test))
+            string literal = GetTokenWithNextSpace(argsStr, ref cur);
+            if (string.IsNullOrWhiteSpace(literal))
                 return false;
-            argObjects.Add(test);
+            argObjects.Add(literal);
             return true;
         }
 
@@ -376,6 +409,16 @@ namespace Spectrum
                     return;
                 cur++;
             }
+        }
+
+        private void ParseSeekNextChar(string argsStr, char chr, ref int cur)
+        {
+            while (cur != argsStr.Length)
+            {
+                if (argsStr[cur] == chr)
+                    return;
+                cur++;
+            }    
         }
 
     }

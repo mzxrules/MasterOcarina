@@ -1,5 +1,3 @@
-C:\Users\liz\rom\N64\Games\Ocarina\Ocarina (U10)\Ocarina (U10) (d).z64
-|
 build = n0,
 start = 0xB7D4DC,
 loop = 0x90,

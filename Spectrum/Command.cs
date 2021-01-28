@@ -60,6 +60,7 @@ namespace Spectrum
             Ram,
             Spawn,
             Actor,
+            VerboseOcarina,
             Gfx,
             Gbi,
             Gbi_bin,

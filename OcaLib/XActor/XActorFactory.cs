@@ -3,20 +3,23 @@ using System.Globalization;
 using mzxrules.OcaLib.Actor;
 using mzxrules.OcaLib;
 using mzxrules.Helper;
+using System.Linq;
 
 namespace mzxrules.XActor
 {
     public class XActorFactory
     {
+        static XActors OcarinaDoc;
         static Dictionary<short, XActorParser> OcarinaActorParsers;
+        static XActors MaskDoc;
         static Dictionary<short, XActorParser> MaskActorParsers;
         static XActorFactory()
         {
-            var Document = XActors.LoadFromFile(XActors.OcaXmlPath);
-            OcarinaActorParsers = GetXActorParsers(Document, Game.OcarinaOfTime);
+            OcarinaDoc = XActors.LoadFromFile(XActors.OcaXmlPath);
+            OcarinaActorParsers = GetXActorParsers(OcarinaDoc, Game.OcarinaOfTime);
 
-            Document = XActors.LoadFromFile(XActors.MaskXmlPath);
-            MaskActorParsers = GetXActorParsers(Document, Game.MajorasMask);
+            MaskDoc = XActors.LoadFromFile(XActors.MaskXmlPath);
+            MaskActorParsers = GetXActorParsers(MaskDoc, Game.MajorasMask);
         }
 
         static Dictionary<short, XActorParser> GetXActorParsers(XActors root, Game game)
@@ -29,6 +32,25 @@ namespace mzxrules.XActor
             }
             return result;
         }
+
+        public static List<XActor> GetXActorList(RomVersion version)
+        {
+            List<XActor> result = new();
+
+            if(version.Game == Game.OcarinaOfTime)
+            {
+                return OcarinaDoc.Actor;
+            }    
+            else if (version.Game == Game.MajorasMask)
+            {
+                return MaskDoc.Actor;
+            }    
+            else
+            {
+                return result;
+            }    
+        }
+
 
         public static ActorSpawn NewOcaActor(short[] record)
         {

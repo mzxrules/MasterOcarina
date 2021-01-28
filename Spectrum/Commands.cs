@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using uCode;
 using System.Threading;
+using mzxrules.OcaLib.PathUtil;
+using mzxrules.OcaLib.SceneRoom;
+using mzxrules.XActor;
 
 namespace Spectrum
 {
@@ -2321,6 +2324,201 @@ namespace Spectrum
         }
         #endregion
 
+        #region VerboseOcarina
+        [SpectrumCommand(
+            Name = "romloc",
+            Sup = SpectrumCommand.Supported.OoT | SpectrumCommand.Supported.MM,
+            Description = "Sets the rom location for the currently assigned version",
+            Cat = SpectrumCommand.Category.VerboseOcarina)]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.PATH },
+            Help = "{0} = Path to rom location")]
+        private static void GetRomLoc(Arguments args)
+        {
+            string path = (string)args[0];
+            if (File.Exists(path))
+            {
+                PathUtil.SetRomLocation(Options.Version, path);
+            }
+        }
+
+        [SpectrumCommand(
+            Name = "vo",
+            Sup = SpectrumCommand.Supported.OoT | SpectrumCommand.Supported.MM,
+            Description = "Runs VerboseOcarina command",
+            Cat = SpectrumCommand.Category.VerboseOcarina)]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL, Tokens.STRING },
+            Help = "{0} = Command. Currently supported commands:;" +
+            " scene;" +
+            " actor;" +
+            "{1} = Command args")]
+        private static void GetVerboseOcarinaOutput(Arguments args)
+        {
+            string literal = ((string)args[0]).ToLowerInvariant();
+            string p = (string)args[1];
+
+            switch(literal)
+            {
+                case "scene":
+                    int sceneId = -1;
+                    int roomId = -1;
+
+                    var split = p.Split('.', StringSplitOptions.TrimEntries);
+                    if (int.TryParse(split[0], NumberStyles.Integer, CultureInfo.InvariantCulture, out int parse))
+                    {
+                        sceneId = parse;
+                    }
+                    if (split.Length > 1 && int.TryParse(split[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out parse))
+                    {
+                        roomId = parse;
+                    }
+
+                    if (sceneId < 0)
+                    {
+                        Console.WriteLine($"Invalid scene id: {sceneId}");
+                        return;
+                    }
+
+                    if (!TryGetCurRom())
+                    {
+                        Console.WriteLine($"Path invalid for {Options.Version}");
+                        return;
+                    }
+
+                    StringBuilder sb = new StringBuilder();
+                    VerboseOcarinaGetScene(sceneId, roomId, sb);
+                    Console.Clear();
+                    Console.WriteLine(sb.ToString());
+                    break;
+                case "actor":
+                    if (!int.TryParse(p, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int actorId))
+                    {
+                        Console.WriteLine($"Invalid actor id {actorId}");
+                        return;
+                    }
+
+                    if (!TryGetCurRom())
+                    {
+                        Console.WriteLine($"Path invalid for {Options.Version}");
+                        return;
+                    }
+                    Console.Clear();
+                    Console.Write(SceneRoomReader.GetActorsById(curRom, actorId));
+                    break;
+            }
+        }
+
+        private static void VerboseOcarinaGetScene(int sceneId, int roomId, StringBuilder sb)
+        {
+            Scene scene = SceneRoomReader.InitializeScene(curRom.Files.GetSceneFile(sceneId), sceneId);
+            List<Room> rooms = new List<Room>();
+            if (scene == null)
+            {
+                sb.AppendFormat("Exception: Scene not found");
+                sb.AppendLine();
+                return;
+            }
+
+            List<FileAddress> roomAddr = scene.Header.GetRoomAddresses();
+
+            if (roomId >= 0 && roomAddr.Count > roomId)
+            {
+                var temp = roomAddr;
+                roomAddr = new List<FileAddress>
+                {
+                    temp[roomId]
+                };
+            }
+            else
+            {
+                roomAddr = scene.Header.GetRoomAddresses();
+            }
+
+            foreach (FileAddress addr in roomAddr)
+            {
+                try
+                {
+                    RomFile file = curRom.Files.GetFile(addr);
+                    rooms.Add(SceneRoomReader.InitializeRoom(file));
+                }
+                catch
+                {
+                    sb.AppendLine($"Exception: room {addr.Start:X8} not found");
+                }
+            }
+
+            sb.Append(SceneRoomReader.ReadScene(scene));
+
+            if (roomId < 0)
+            {
+                for (int i = 0; i < rooms.Count; i++)
+                {
+                    sb.AppendLine($"Room {i}");
+                    sb.Append(SceneRoomReader.ReadRoom(rooms[i]));
+                }
+            }
+            else
+            {
+                sb.AppendLine($"Room {roomId}");
+                sb.Append(SceneRoomReader.ReadRoom(rooms[0]));
+            }    
+        }
+
+        private static bool TryGetCurRom()
+        {
+            if (curRom == null || curRom.Version != Options.Version)
+            {
+                if (!PathUtil.TryGetRomLocation(Options.Version, out string romPath))
+                {
+                    return false;
+                }
+                curRom = Rom.New(romPath, Options.Version);
+            }
+            return true;
+        }
+        #endregion
+
+
+        [SpectrumCommand(
+            Name = "name",
+            Cat = SpectrumCommand.Category.Actor,
+            Description = "Displays a list of actor names and their associated ids",
+            Sup = SpectrumCommand.Supported.OoT | SpectrumCommand.Supported.MM)]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL })]
+        [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.LITERAL, Tokens.HEX_S32 })]
+        private static void PrintActorNames(Arguments args)
+        {
+            string nameType = (string)args[0];
+            int index = (args.Length == 2) ? (int)args[1] : -1;
+
+            Console.Clear();
+            switch (nameType.ToLowerInvariant())
+            {
+                case "actor":
+                    var info = XActorFactory.GetXActorList(Options.Version);
+                    if (index != -1)
+                    {
+                        var actor = info.SingleOrDefault(x => short.Parse(x.id, NumberStyles.HexNumber) == index);
+                        if (actor == null)
+                        {
+                            Console.WriteLine($"Invalid actor id {index}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{short.Parse(actor.id, NumberStyles.HexNumber):X4}: {actor.name}, {actor.Description}");
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in info)
+                        {
+                            Console.WriteLine($"{short.Parse(item.id, NumberStyles.HexNumber):X4}: {item.name}, {item.Description}");
+                        }
+                    }
+                    break;
+            }
+
+        }
+
         [SpectrumCommand(
             Name = "age",
             Sup = SpectrumCommand.Supported.OoT,
@@ -3057,7 +3255,7 @@ namespace Spectrum
 
 
         [SpectrumCommand(
-            Name = "gct",
+            Name = "gctx",
             Cat = SpectrumCommand.Category.Proto,
             Description = "Sets Global Context Pointer")]
         [SpectrumCommandSignature(
