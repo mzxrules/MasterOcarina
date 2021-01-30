@@ -179,7 +179,7 @@ namespace Spectrum
             }
             if (start == end)
                 return false;
-            string path = argsStr.Substring(start, end - start);
+            string path = argsStr[start..end];
             argObjects.Add(path);
             return true;
         }

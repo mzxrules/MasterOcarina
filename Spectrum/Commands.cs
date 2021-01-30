@@ -497,12 +497,24 @@ namespace Spectrum
         [SpectrumCommand(
             Name = "sympath",
             Cat = SpectrumCommand.Category.Spectrum,
-            Description = "Sets path location for decompilation symbol map file")]
+            Description = "Sets the path location of a decompilation symbol map file")]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.PATH })]
         private static void SetSymbolMapPath(Arguments args)
         {
-            Options.MapfileOptions.Path = (string)args[0];
+            string path = (string)args[0];
+            Options.MapfileOptions.Path = path; 
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Cannot find symbol file: {path}");
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"Path: {path}");
+                Console.WriteLine($"Path saved. Run symload with the correct version selected to load the symbol map");
+            }
+            SaveSettings();
         }
 
         [SpectrumCommand(
@@ -517,13 +529,8 @@ namespace Spectrum
                 Console.WriteLine($"Cannot find symbol file: {Options.MapfileOptions.Path}");
                 return;
             }
-            DateTime lastWrite = File.GetLastWriteTime(path);
-            if (Options.MapfileOptions.SymbolMap == null ||
-                lastWrite.CompareTo(Options.MapfileOptions.LastWrite) < 0)
-            {
-                Options.MapfileOptions.SymbolMap = SymbolMapParser.Parse(Options.MapfileOptions.Path);
-                Options.MapfileOptions.LastWrite = lastWrite;
-            }
+
+            Options.MapfileOptions.SymbolMap = SymbolMapParser.Parse(Options.MapfileOptions.Path);
             Options.MapfileOptions.Version = Options.Version;
             Options.MapfileOptions.UseMap = true;
             ChangeVersion((Options, true));
@@ -2369,18 +2376,24 @@ namespace Spectrum
 
         #region VerboseOcarina
         [SpectrumCommand(
-            Name = "romloc",
+            Name = "rompath",
             Sup = SpectrumCommand.Supported.OoT | SpectrumCommand.Supported.MM,
             Description = "Sets the rom location for the currently assigned version",
             Cat = SpectrumCommand.Category.VerboseOcarina)]
         [SpectrumCommandSignature(Sig = new Tokens[] { Tokens.PATH },
-            Help = "{0} = Path to rom location")]
-        private static void GetRomLoc(Arguments args)
+            Help = "{0} = Path to rom")]
+        private static void SetRomPath(Arguments args)
         {
             string path = (string)args[0];
-            if (File.Exists(path))
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Cannot find rom file: {path}");
+                return;
+            }
+            else
             {
                 PathUtil.SetRomLocation(Options.Version, path);
+                Console.WriteLine($"Saved path to {Options.Version}: {path}");
             }
         }
 

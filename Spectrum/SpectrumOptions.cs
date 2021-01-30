@@ -24,8 +24,6 @@ namespace Spectrum
 
         public SymbolMap SymbolMap { get; set; }
 
-        public DateTime LastWrite { get; set; }
-
         public bool CanUseMap(RomVersion version)
         {
             return UseMap && Version == version && SymbolMap != null;
