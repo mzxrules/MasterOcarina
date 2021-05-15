@@ -7,7 +7,7 @@ namespace Spectrum
     /// </summary>
     static class SPtr
     {
-        static MemoryModel mem = new MemoryModel()
+        static readonly MemoryModel mem = new()
         {
             ReadInt64 = Zpr.ReadRamInt64,
             ReadInt32 = Zpr.ReadRamInt32,

@@ -8,33 +8,117 @@ using System.Threading.Tasks;
 
 namespace Spectrum
 {
+    class DynaCollisionContext
+    {
+        /* O 0x0000          */ public byte bitFlag;
+        /* O 0x0004          */ public BgActor[] bgActors = new BgActor[50];
+        /* O 0x138C          */ public ushort[] bgActorFlags = new ushort[50]; // & 0x0008 = no dyna ceiling
+        /* O 0x13F0          */ public Ptr polyList; //dyn_poly
+        /* O 0x13F4          */ public Ptr vtxList; //dyn_vtx
+        /*          M 0x13F8 */ public int mm_0x1448;
+        /*          M 0x13FC */ public int mm_0x144C;
+        /* O 0x13F8 M 0x1400 */ public Ptr polyNodes_tbl; //DynaSSNodeList, dyn_list, dyn_count, dyn_max
+        /* O 0x13FC M 0x1404 */ public int polyNodes_count;
+        /* O 0x1400 M 0x1408 */ public int polyNodes_max;
+        /* O 0x1404 M 0x140C */ public int polyNodesMax; //dyn_list_max
+        /* O 0x1408 M 0x1410 */ public int polyListMax; //dyn_poly_max
+        /* O 0x140C M 0x1414 */ public int vtxListMax; //dyn_vtx_max
+
+        RomVersion version;
+
+        public DynaCollisionContext(Ptr ctx, RomVersion version)
+        {
+            polyList = ctx.Deref(0x1440);
+            vtxList = ctx.Deref(0x1444);
+
+            if (version.Game == Game.OcarinaOfTime)
+            {
+                polyNodes_tbl = ctx.Deref(0x1448);
+                polyNodes_count = ctx.ReadInt32(0x144C);
+                polyNodes_max = ctx.ReadInt32(0x1450);
+                polyNodesMax = ctx.ReadInt32(0x1454);
+                polyListMax = ctx.ReadInt32(0x1458);
+                vtxListMax = ctx.ReadInt32(0x145C);
+            }
+            else if (version.Game == Game.MajorasMask)
+            {
+                mm_0x1448 = ctx.ReadInt32(0x1448);
+                mm_0x144C = ctx.Deref(0x144C);
+                polyNodes_tbl = ctx.Deref(0x1450);
+                polyNodes_count = ctx.ReadInt32(0x1454);
+                polyNodes_max = ctx.ReadInt32(0x1458);
+                polyNodesMax = ctx.ReadInt32(0x145C);
+                polyListMax = ctx.ReadInt32(0x1460);
+                vtxListMax = ctx.ReadInt32(0x1464);
+            }
+            this.version = version;
+        }
+        public override string ToString()
+        {
+            string result = $"DynaPolyContext:{Environment.NewLine}";
+            result +=
+                $" polyList        {polyList}{Environment.NewLine}" +
+                $" vtxList         {vtxList}{Environment.NewLine}";
+            if (version.Game == Game.MajorasMask)
+            {
+                result +=
+                    $" mm_0x1448       {mm_0x1448:X8}{Environment.NewLine}" +
+                    $" mm_0x144C       {mm_0x144C}{Environment.NewLine}";
+            }
+            result +=
+                $" PolyNodes:{Environment.NewLine}" +
+                $"  tbl            {polyNodes_tbl}{Environment.NewLine}" +
+                $"  count          {polyNodes_count,6}{Environment.NewLine}" +
+                $"  max            {polyNodes_max,6}{Environment.NewLine}" +
+                $" polyNodesMax    {polyNodesMax,6}{Environment.NewLine}" +
+                $" polyListMax     {polyListMax,6}{Environment.NewLine}" +
+                $" vtxListMax      {vtxListMax,6}";
+            return result;
+        }
+    }
     class CollisionCtx
     {
         RomVersion version;
-        /* 0x00 */ public N64Ptr SceneMeshPtr;
-        /* 0x04 */ public Vector3<float> boxmin;
-        /* 0x10 */ public Vector3<float> boxmax;
-        /* 0x1C */ public Vector3<int> max;
-        /* 0x28 */ public Vector3<float> unitSize;
-        /* 0x34 */ public Vector3<float> factor;
-        /* 0x40 */ public Ptr Table;
-        /* 0x44 */ public short LinksMax;
-        /* 0x46 */ public short LinksAlloc;
-        /* 0x48 */ public Ptr Links;
-        /* 0x4C */ public Ptr Checks;
-
-        /* 0x1440 */ public Ptr dyn_poly;
-        public Ptr dyn_vtx;
-        public int mm_0x1448;
-        public Ptr mm_0x144C;
-        public Ptr dyn_list;
-        public int dyn_count;
-        public int dyn_max;
-        public int dyn_list_max;
-        public int dyn_poly_max;
-        public int dyn_vtx_max;
+        /* 0x00 */
+        public N64Ptr SceneMeshPtr;
+        /* 0x04 */
+        public Vector3<float> boxmin;
+        /* 0x10 */
+        public Vector3<float> boxmax;
+        /* 0x1C */
+        public Vector3<int> max;
+        /* 0x28 */
+        public Vector3<float> unitSize;
+        /* 0x34 */
+        public Vector3<float> factor;
+        /* 0x40 */
+        public Ptr Table;
+        /* 0x44 */
+        public short SSNodeMax;
+        /* 0x46 */
+        public short SSNodeCount;
+        /* 0x48 */
+        public Ptr SSNodeTbl;
+        /* 0x4C */
+        public Ptr polyCheckTbl;
+        /* 0x50 */
+        DynaCollisionContext dyna;
         public int mem_size;
         public int mm_0x146C;
+
+        public static readonly string[] StaticLookupTypes =
+        {
+            "Floor",
+            "Wall",
+            "Ceil"
+        };
+
+        public static readonly string[] DynaLookupTypes =
+        {
+            "Ceil",
+            "Wall",
+            "Floor"
+        };
 
         public CollisionCtx(Ptr ctx, RomVersion version)
         {
@@ -72,62 +156,39 @@ namespace Spectrum
             );
 
             Table = ctx.Deref(0x40);
-            LinksMax = ctx.ReadInt16(0x44);
-            LinksAlloc = ctx.ReadInt16(0x46);
-            Links = ctx.Deref(0x48);
-            Checks = ctx.Deref(0x4C);
-
-            dyn_poly = ctx.Deref(0x1440);
-            dyn_vtx = ctx.Deref(0x1444);
+            SSNodeMax = ctx.ReadInt16(0x44);
+            SSNodeCount = ctx.ReadInt16(0x46);
+            SSNodeTbl = ctx.Deref(0x48);
+            polyCheckTbl = ctx.Deref(0x4C);
+            dyna = new DynaCollisionContext(ctx, version);
 
             if (version.Game == Game.OcarinaOfTime)
             {
-                dyn_list = ctx.Deref(0x1448);
-                dyn_count = ctx.ReadInt32(0x144C);
-                dyn_max = ctx.ReadInt32(0x1450);
-                dyn_list_max = ctx.ReadInt32(0x1454);
-                dyn_poly_max = ctx.ReadInt32(0x1458);
-                dyn_vtx_max = ctx.ReadInt32(0x145C);
                 mem_size = ctx.ReadInt32(0x1460);
             }
             else if (version.Game == Game.MajorasMask)
             {
-                mm_0x1448 = ctx.ReadInt32(0x1448);
-                mm_0x144C = ctx.Deref(0x144C);
-                dyn_list = ctx.Deref(0x1450);
-                dyn_count = ctx.ReadInt32(0x1454);
-                dyn_max = ctx.ReadInt32(0x1458);
-                dyn_list_max = ctx.ReadInt32(0x145C);
-                dyn_poly_max = ctx.ReadInt32(0x1460);
-                dyn_vtx_max = ctx.ReadInt32(0x1464);
                 mem_size = ctx.ReadInt32(0x1468);
-                mm_0x146C = ctx.ReadInt32(0x1468);
+                mm_0x146C = ctx.ReadInt32(0x146C);
             }
         }
 
         public override string ToString()
         {
-            string result = $"Scene Mesh: {SceneMeshPtr}{Environment.NewLine}" +
-                $"Bounding Box: ({boxmin.x},{boxmin.y},{boxmin.z}) ({boxmax.x}, {boxmax.y}, {boxmax.z}){Environment.NewLine}" +
-                $"Subdivisions: ({max.x}, {max.y}, {max.z}) Section Size: ({unitSize.x}, {unitSize.y}, {unitSize.z}){Environment.NewLine}" +
-                $"Max PolyLinks: {LinksMax:X4} Allocated: {LinksAlloc:X4}{Environment.NewLine}" +
-                $"Table: {Table} Links: {Links} Poly Check: {Checks}{Environment.NewLine}" +
-                $"dyn_poly = {dyn_poly}{Environment.NewLine}" +
-                $"dyn_vtx = {dyn_vtx}{Environment.NewLine}";
-            if (version.Game == Game.MajorasMask)
-            {
-                result +=
-                    $"mm_0x1448 = {mm_0x1448:X8}{Environment.NewLine}" +
-                    $"mm_0x144C = {mm_0x144C}{Environment.NewLine}";
-            }
-            result +=
-                $"dyn_list = {dyn_list}{Environment.NewLine}" +
-                $"dyn_count = {dyn_count}{Environment.NewLine}" +
-                $"dyn_max = {dyn_max}{Environment.NewLine}" +
-                $"dyn_list_max = {dyn_list_max}{Environment.NewLine}" +
-                $"dyn_poly_max = {dyn_poly_max}{Environment.NewLine}" +
-                $"dyn_vtx_max = {dyn_vtx_max}{Environment.NewLine}" +
-                $"mem_size = {mem_size:X6}";
+            string result = $"CollisionContext:{Environment.NewLine}" +
+                $" CollisionHeader {SceneMeshPtr}{Environment.NewLine}" +
+                $" Bounding Box:{Environment.NewLine}" +
+                $"  minBounds      ({boxmin.x,6}, {boxmin.y,6}, {boxmin.z,6}){Environment.NewLine}" +
+                $"  maxBounds      ({boxmax.x,6}, {boxmax.y,6}, {boxmax.z,6}){Environment.NewLine}" +
+                $"  Subdivs        ({max.x}, {max.y}, {max.z}){Environment.NewLine}" +
+                $"  Subdiv len     ({unitSize.x}, {unitSize.y}, {unitSize.z}){Environment.NewLine}" +
+                $"  Subdiv SSLists {Table} {Environment.NewLine}" +
+                $" SSNode Max      {SSNodeMax, 6}  {SSNodeMax:X4}{Environment.NewLine}" +
+                $" SSNode Count    {SSNodeCount, 6}  {SSNodeCount:X4}{Environment.NewLine}" +
+                $" SSNode Tbl      {SSNodeTbl}{Environment.NewLine}" +
+                $" polyCheckTbl    {polyCheckTbl}{Environment.NewLine}" +
+                $"{dyna}{Environment.NewLine}" +
+                $" mem_size        {mem_size:X8}";
 
             if (version.Game == Game.MajorasMask)
             {
@@ -136,7 +197,7 @@ namespace Spectrum
             return result;
         }
 
-        public int[] ComputeColSec(Vector3<float> xyz)
+        public Vector3<int> ComputeColSec(Vector3<float> xyz)
         {
             int[] colsec = new int[3];
 
@@ -150,21 +211,21 @@ namespace Spectrum
                 if (colsec[i] >= max.Index(i))
                     colsec[i] = max.Index(i) - 1;
             }
-            return colsec;
+            return new(colsec[0], colsec[1], colsec[2]);
         }
 
-        public bool ColSecInBounds(int[] colsec)
+        public bool ColSecInBounds(Vector3<int> colsec)
         {
-            return !(colsec[0] < 0 || colsec[0] >= max.x
-                || colsec[1] < 0 || colsec[1] >= max.y
-                || colsec[2] < 0 || colsec[2] >= max.z);
+            return !(colsec.x < 0 || colsec.x >= max.x
+                || colsec.y < 0 || colsec.y >= max.y
+                || colsec.z < 0 || colsec.z >= max.z);
         }
 
-        public N64Ptr GetColSecDataPtr(int[] colsec)
+        public N64Ptr GetColSecDataPtr(Vector3<int> colsec)
         {
-            int addr = colsec[2] * max.y * max.x;
-            addr += colsec[1] * max.x;
-            addr += colsec[0];
+            int addr = colsec.z * max.y * max.x;
+            addr += colsec.y * max.x;
+            addr += colsec.x;
             addr *= 6;
             addr += Table;
 
@@ -173,10 +234,10 @@ namespace Spectrum
 
         public N64Ptr GetLinkDataPtr(int index)
         {
-            return index * 4 + Links;
+            return index * 4 + SSNodeTbl;
         }
 
-        public IEnumerable<(short, short)> YieldPolyChain(int[] colsec, int index)
+        public IEnumerable<(short, short)> YieldPolyChain(Vector3<int> colsec, int index)
         {
             N64Ptr colsecAddr = GetColSecDataPtr(colsec);
             Ptr colsecPtr = SPtr.New(colsecAddr);
@@ -190,52 +251,52 @@ namespace Spectrum
                 depthLimit--;
 
                 //Get Next Link Record
-                short polyId = Links.ReadInt16(linkId * 4);
-                linkId = Links.ReadInt16(linkId * 4 + 2);
+                short polyId = SSNodeTbl.ReadInt16(linkId * 4);
+                linkId = SSNodeTbl.ReadInt16(linkId * 4 + 2);
                 yield return (polyId, linkId);
             }
         }
 
         public List<SimpleRamItem> GetRamMap()
         {
-            List<SimpleRamItem> items = new List<SimpleRamItem>();
-
-            items.Add(new SimpleRamItem()
+            return new List<SimpleRamItem>
             {
-                Ram = new N64PtrRange(Table, Table + (max.x * max.y * max.z * 6)),
-                Description = "COLCTX Table"
-            });
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(Table, Table + (max.x * max.y * max.z * 6)),
+                    Description = "COLCTX Table"
+                },
 
-            items.Add(new SimpleRamItem()
-            {
-                Ram = new N64PtrRange(Links, Links + LinksMax * 4),
-                Description = "COLCTX Links"
-            });
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(SSNodeTbl, SSNodeTbl + SSNodeMax * 4),
+                    Description = "COLCTX Links"
+                },
 
-            items.Add(new SimpleRamItem()
-            {
-                Ram = new N64PtrRange(Checks, Links),
-                Description = "COLCTX Checks"
-            });
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(polyCheckTbl, SSNodeTbl),
+                    Description = "COLCTX Checks"
+                },
 
-            items.Add(new SimpleRamItem()
-            {
-                Ram = new N64PtrRange(dyn_poly, dyn_poly + dyn_poly_max * 0x10),
-                Description = "COLCTX dyn_poly"
-            });
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(dyna.polyList, dyna.polyList + dyna.polyListMax * 0x10),
+                    Description = "COLCTX dyn_poly"
+                },
 
-            items.Add(new SimpleRamItem()
-            {
-                Ram = new N64PtrRange(dyn_vtx, dyn_vtx + dyn_vtx_max * 6),
-                Description = "COLCTX dyn_vtx",
-            });
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(dyna.vtxList, dyna.vtxList + dyna.vtxListMax * 6),
+                    Description = "COLCTX dyn_vtx",
+                },
 
-            items.Add(new SimpleRamItem()
-            {
-                Ram = new N64PtrRange(dyn_list, dyn_list + dyn_list_max * 4),
-                Description = "COLCTX dyn_list"
-            });
-            return items;
+                new SimpleRamItem()
+                {
+                    Ram = new N64PtrRange(dyna.polyNodes_tbl, dyna.polyNodes_tbl + dyna.polyNodesMax * 4),
+                    Description = "COLCTX dyn_list"
+                }
+            };
         }
     }
 }

@@ -59,6 +59,15 @@ namespace mzxrules.Helper
 
         public static bool operator ==(Vector3<T1> a, Vector3<T1> b)
         {
+            if (ReferenceEquals(a, b))
+                return true;
+
+            if (ReferenceEquals(a, null))
+                return false;
+
+            if (ReferenceEquals(b, null))
+                return false;
+
             return a.x.Equals(b.x)
                 && a.y.Equals(b.y)
                 && a.z.Equals(b.z);
@@ -105,6 +114,11 @@ namespace mzxrules.Helper
         public override string ToString()
         {
             return $"({x}, {y}, {z})";
+        }
+
+        public T1[] ToArray()
+        {
+            return new T1[] { x, y, z };
         }
     }
     public class Vector3<T1, T2, T3>

@@ -3,10 +3,24 @@ using mzxrules.Helper;
 
 namespace Spectrum
 {
-
     class BgActor
     {
-        class Moment
+        public class DynaLookup
+        {
+            public ushort polyStartIndex;
+            public ushort floor;
+            public ushort wall;
+            public ushort ceiling;
+
+            public DynaLookup(Ptr ptr)
+            {
+                polyStartIndex = ptr.ReadUInt16(0);
+                floor = ptr.ReadUInt16(2);
+                wall = ptr.ReadUInt16(4);
+                ceiling = ptr.ReadUInt16(6);
+            }
+        }
+        public class Moment
         {
             Vector3<float> Scale;
             Vector3<short> Rotation;
@@ -30,11 +44,16 @@ namespace Spectrum
         }
 
         public N64Ptr Address;
-        public N64Ptr ActorInstance;
+        /* 0x00 */ public N64Ptr ActorInstance; 
         public short ActorId;
-        public N64Ptr MeshPtr;
-        Moment First;  //0x14
-        Moment Second; //0x34
+        /* 0x04 */ public N64Ptr MeshPtr;
+        /* 0x08 */ public DynaLookup dynaLookup;
+        /* 0x10 */ public ushort vtxStartIndex;
+        /* 0x14 */ public Moment Prev;
+        /* 0x34 */ public Moment Current;
+        /* 0x54 */ public Sphere16 boundingSphere;
+        /* 0x5C */ public float minY;
+        /* 0x60 */ public float maxY;
 
         public BgActor(Ptr pointer)
         {
@@ -42,15 +61,23 @@ namespace Spectrum
             ActorInstance = pointer.ReadInt32(0);
             ActorId = pointer.Deref().ReadInt16(0);
             MeshPtr = pointer.ReadInt32(4);
-            First = new Moment(pointer.RelOff(0x14));
-            Second = new Moment(pointer.RelOff(0x34));
+            dynaLookup = new DynaLookup(pointer.RelOff(0x08));
+            vtxStartIndex = pointer.ReadUInt16(0x10);
+            Prev = new Moment(pointer.RelOff(0x14));
+            Current = new Moment(pointer.RelOff(0x34));
+            boundingSphere = new Sphere16(pointer.RelOff(0x54));
+            minY = pointer.ReadFloat(0x5C);
+            maxY = pointer.ReadFloat(0x60);
         }
 
         public override string ToString()
         {
-            return $"{Address.Offset:X6}: AI {ActorId:X4} - {(int)ActorInstance:X8}   MESH {(int)MeshPtr:X8} {Environment.NewLine}"
-                + $"         {First}{Environment.NewLine}"
-                + $"         {Second}";
+            return $"{Address.Offset:X6}: AI {ActorId:X4} - {ActorInstance}   MESH {MeshPtr} {Environment.NewLine}"
+                + $"         Dyna:      Poly: {dynaLookup.polyStartIndex:X4}  Vert: {vtxStartIndex:X4}  Floor: {dynaLookup.floor:X4}  Wall: {dynaLookup.wall:X4}  Ceil: {dynaLookup.ceiling:X4}{Environment.NewLine}"
+                + $"         Prev:      {Prev}{Environment.NewLine}"
+                + $"         Cur:       {Current}{Environment.NewLine}" 
+                + $"         Sphere:    {boundingSphere}{Environment.NewLine}"
+                + $"         Min/Max Y: {minY} {maxY}";
         }
     }
 }

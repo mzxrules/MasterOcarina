@@ -39,35 +39,18 @@ namespace Spectrum
 
     class ColliderJntSphElement
     {
-        public class Sphere
-        {
-            public Vector3<short> position;
-            public short radius;
-
-            public Sphere(Ptr p)
-            {
-                position = new Vector3<short>(
-                    p.ReadInt16(0), p.ReadInt16(2), p.ReadInt16(4));
-                radius = p.ReadInt16(6);
-            }
-            public override string ToString()
-            {
-                return $"{position} Radius: {radius}";
-            }
-        }
-
         N64Ptr address;
         public ColliderBody body;
-        public Sphere modelSphere;
-        public Sphere worldSphere;
+        public Sphere16 modelSphere;
+        public Sphere16 worldSphere;
         public float scale;
         public byte unk_0x3C;
         public ColliderJntSphElement(Ptr p)
         {
             address = p;
             body = new ColliderBody(p);
-            modelSphere = new Sphere(p.RelOff(0x28));
-            worldSphere = new Sphere(p.RelOff(0x30));
+            modelSphere = new Sphere16(p.RelOff(0x28));
+            worldSphere = new Sphere16(p.RelOff(0x30));
             scale = p.ReadFloat(0x38);
             unk_0x3C = p.ReadByte(0x3C);
         }

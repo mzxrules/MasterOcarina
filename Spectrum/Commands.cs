@@ -187,7 +187,7 @@ namespace Spectrum
             }
             else if (args.Length == 2)
             {
-                RomVersion v = new RomVersion(((string)args[0]).ToLowerInvariant(), ((string)args[1]).ToLowerInvariant());
+                RomVersion v = new(((string)args[0]).ToLowerInvariant(), ((string)args[1]).ToLowerInvariant());
                 if (v.Game == Game.Undefined)
                     Console.WriteLine("Unknown version code");
                 else
@@ -297,7 +297,7 @@ namespace Spectrum
                 (Tokens.STRING, (a)=>true, "Enter a description for the emulator"),
             };
 
-            List<object> arguments = new List<object>();
+            List<object> arguments = new();
 
             foreach (var (token, validate, request) in inputChain)
             {
@@ -306,7 +306,7 @@ namespace Spectrum
                 {
                     Console.WriteLine(request);
                     var readline = Console.ReadLine();
-                    Arguments arg = new Arguments(readline, token);
+                    Arguments arg = new(readline, token);
 
                     if (arg.Valid && validate(arg[0]))
                     {
@@ -403,7 +403,7 @@ namespace Spectrum
 
         private static void MountEmulator(string emu)
         {
-            List<Emulator> emulatorsToMount = new List<Emulator>();
+            List<Emulator> emulatorsToMount = new();
 
             if (emu == "")
             {
@@ -483,7 +483,7 @@ namespace Spectrum
 
             string build = (string)args[0];
 
-            var version = new RomVersion(Options.Version.Game, build);
+            RomVersion version = new(Options.Version.Game, build);
 
             if (version.Game != Game.Undefined)
             {
@@ -636,7 +636,7 @@ namespace Spectrum
             {
                 Ptr ptr = SPtr.New(a.Ram.Start);
                 string path = $"dump/AI{a.Actor:X3}_{ptr}.z64";
-                using (BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Create)))
+                using (BinaryWriter bw = new(new FileStream(path, FileMode.Create)))
                 {
                     for (int i = 0; i < a.Ram.Size; i += 4)
                     {
@@ -720,7 +720,7 @@ namespace Spectrum
 
             var end = (size + 3) & -4;
 
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             for (int off = 0; off < end; off += 4)
             {
                 stringBuilder.AppendLine($"{Zpr.ReadRamInt32(address + off):X8}");
@@ -1029,7 +1029,7 @@ namespace Spectrum
             Console.WriteLine($"{heap:,-11‬} Size: {size:X6} Alloc: {heapAlloc:X6} Free: {heapFree:X6} ({largestFree:X6})");
         }
 
-        static ValueSearch search = new ValueSearch();
+        static ValueSearch search = new();
 
         [SpectrumCommand(
             Name = "s",
@@ -1068,7 +1068,7 @@ namespace Spectrum
                                 Console.WriteLine("Invalid Range");
                                 return;
                             }
-                            var options = new SearchOptions(addr, size);
+                            SearchOptions options = new(addr, size);
                             search = new ValueSearch(options);
                             search.Initialize();
 
@@ -1133,6 +1133,11 @@ namespace Spectrum
             int scene = (byte)args[0];
             int ent = (args.Length == 2) ? (byte)args[1] : 0;
 
+            SpawnToEntrance(scene, ent);
+        }
+
+        private static void SpawnToEntrance(int scene, int ent = 0)
+        {
             if (Options.Version == Game.MajorasMask)
             {
                 scene = GetExternalSceneId_Mask((byte)scene);
@@ -1207,7 +1212,7 @@ namespace Spectrum
             if (!TryGetEntranceIndex(s, 0, out EntranceIndex index))
                 return;
 
-            Spawn spawn = new Spawn(-1, -1, -1, r, (short)c.x, (short)c.y, (short)c.z, 0);
+            Spawn spawn = new(-1, -1, -1, r, (short)c.x, (short)c.y, (short)c.z, 0);
 
             if (Options.Version.Game == Game.OcarinaOfTime)
                 SetZoneoutSpawn_Ocarina(index.id, ref spawn);
@@ -1226,7 +1231,7 @@ namespace Spectrum
             byte r = (byte)args[0];
             Vector3<float> a = (Vector3<float>)args[1];
 
-            Spawn spawn = new Spawn(-1, -1, -1, r, (short)a.x, (short)a.y, (short)a.z, 0);
+            Spawn spawn = new(-1, -1, -1, r, (short)a.x, (short)a.y, (short)a.z, 0);
 
             if (Options.Version.Game == Game.OcarinaOfTime)
                 SetZoneoutSpawn_Ocarina(null, ref spawn);
@@ -1366,7 +1371,7 @@ namespace Spectrum
         {
             var data = Zpr.ReadRam((int)address, bytes);
 
-            using BinaryReader br = new BinaryReader(new MemoryStream(data));
+            using BinaryReader br = new(new MemoryStream(data));
             int i = 0;
             foreach (var line in uCode.MicrocodeParser.SimpleParse(br, bytes / 8))
             {
@@ -1393,8 +1398,8 @@ namespace Spectrum
                 Options.Version.ToString());
 
 
-            using StreamWriter sw = new StreamWriter("dump/" + gameStr);
-            using BinaryReader memory = new BinaryReader(new MemoryStream(data));
+            using StreamWriter sw = new("dump/" + gameStr);
+            using BinaryReader memory = new(new MemoryStream(data));
             foreach (var line in MicrocodeParser.DeepParse(memory, address))
             {
                 sw.WriteLine(line);
@@ -1421,8 +1426,8 @@ namespace Spectrum
                 Options.Version.ToString());
 
 
-            using (StreamWriter sw = new StreamWriter("dump/" + gameStr))
-            using (BinaryReader memory = new BinaryReader(new MemoryStream(data)))
+            using (StreamWriter sw = new("dump/" + gameStr))
+            using (BinaryReader memory = new(new MemoryStream(data)))
             {
                 Queue<string> writeBuffer = new Queue<string>();
                 Queue<G_> gbiQueue = new Queue<G_>();
@@ -1554,7 +1559,7 @@ namespace Spectrum
             var ramMap = MemoryMapper.GetRamMap(Options, true).OfType<IFile>().ToList();
             var data = Zpr.ReadRam(0, GetRamSize());
 
-            using BinaryReader br = new BinaryReader(new MemoryStream(data));
+            using BinaryReader br = new(new MemoryStream(data));
             var traceEnumerable = MicrocodeParser.DeepTrace(br, (int)topDlist);
             var traceEnumerator = traceEnumerable.GetEnumerator();
             traceEnumerator.MoveNext();
@@ -1688,7 +1693,7 @@ namespace Spectrum
             var addr = Gfx.ReadInt32(0);
             addr += frameOffset;
 
-            using BinaryWriter bw = new BinaryWriter(new FileStream("dump/frame.bin", FileMode.Create));
+            using BinaryWriter bw = new(new FileStream("dump/frame.bin", FileMode.Create));
             byte[] frameData = Zpr.ReadRam(addr, 0x12400);
             bw.Write(frameData);
         }
@@ -1746,7 +1751,7 @@ namespace Spectrum
                 return;
             }
 
-            using BinaryReader br = new BinaryReader(new FileStream("dump/frame.bin", FileMode.Open));
+            using BinaryReader br = new(new FileStream("dump/frame.bin", FileMode.Open));
             for (int i = 0; i < 0x12400; i += 8)
             {
                 var input = new Microcode(br);
@@ -1781,7 +1786,7 @@ namespace Spectrum
         private static void PrintCollisionContext(Arguments args)
         {
             Console.Clear();
-            CollisionCtx cctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
+            CollisionCtx cctx = new(GetColCtxPtr(), Options.Version);
             Console.WriteLine(cctx);
         }
 
@@ -1813,10 +1818,10 @@ namespace Spectrum
         private static void PrintBgActorCollision()
         {
             var ptr = GetColCtxPtr();
-            List<(int, BgActor)> bgActors = new List<(int, BgActor)>();
+            List<(int, BgActor)> bgActors = new();
             for (int i = 0; i < 50; i++)
             {
-                BgActor actor = new BgActor(ptr.RelOff(0x54 + (0x64 * i)));
+                BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));
                 if (!actor.ActorInstance.IsNull())
                 {
                     bgActors.Add((i, actor));
@@ -1857,6 +1862,24 @@ namespace Spectrum
                 Console.WriteLine(ColliderShape.Initialize(SPtr.New(addr)));
             }
         }
+
+        [SpectrumCommand(
+            Name = "coldyna",
+            Cat = SpectrumCommand.Category.Collision,
+            Description = "Gets dynamic collision data")]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { },
+            Help = "Dump dynamic poly and vtx data")]
+        private static void CommandColDyna(Arguments args)
+        {
+            Ptr ptr = GetColCtxPtr();
+            List<(int, BgActor)> bgActors = new();
+            for (int i = 0; i < 50; i++)
+            {
+                BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));   
+            }    
+        }
+
         private static void GetActorBodyCollisionLists()
         {
             var pools = GetActorCollisionPools();
@@ -1874,7 +1897,7 @@ namespace Spectrum
 
         private static List<(string description, List<ColliderShape>)> GetActorCollisionPools()
         {
-            var result = new List<(string, List<ColliderShape>)>();
+            List<(string, List<ColliderShape>)> result = new();
 
             int colaOffset;
 
@@ -1893,7 +1916,7 @@ namespace Spectrum
             ushort colAtUnk = colPtr.ReadUInt16(2);
 
             string colAt = $"{colPtr}: colAT, {colAtCount:D2} elements, {colAtUnk:X4}";
-            List<ColliderShape> shapes = new List<ColliderShape>();
+            List<ColliderShape> shapes = new();
 
             result.Add((colAt, shapes));
 
@@ -1917,7 +1940,7 @@ namespace Spectrum
             int count = colPtr.ReadInt32(0);
 
             string description = $"{colPtr}: col{name}, {count:D2} elements";
-            List<ColliderShape> shapes = new List<ColliderShape>();
+            List<ColliderShape> shapes = new();
 
             if (count <= 70)
             {
@@ -1959,18 +1982,16 @@ namespace Spectrum
 
         private static void GetColInfo(Vector3<float> xyz, bool coordsAreColSec)
         {
-            CollisionCtx colctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
-
-            int[] colsec;
+            CollisionCtx colctx = new(GetColCtxPtr(), Options.Version);
+            Vector3<int> colsec;
 
             if (coordsAreColSec)
             {
-                colsec = new int[3]
-                {
+                colsec = new(
                     (int)xyz.x,
                     (int)xyz.y,
                     (int)xyz.z
-                };
+                );
             }
             else //compute colsec
             {
@@ -1981,21 +2002,21 @@ namespace Spectrum
 
             float[] blockMin = new float[3];
             float[] blockMax = new float[3];
+            int[] colsecArr = colsec.ToArray();
 
             for (int i = 0, off = 0; i < 3; i++, off += 4)
             {
-                blockMin[i] = colsec[i] * colctx.unitSize.Index(i) + colctx.boxmin.Index(i);
-                blockMax[i] = (colsec[i] + 1) * colctx.unitSize.Index(i) + colctx.boxmin.Index(i);
+                blockMin[i] = colsecArr[i] * colctx.unitSize.Index(i) + colctx.boxmin.Index(i);
+                blockMax[i] = (colsecArr[i] + 1) * colctx.unitSize.Index(i) + colctx.boxmin.Index(i);
             }
 
             Console.WriteLine($"Collision Unit Max: ({colctx.max.x}, {colctx.max.y}, {colctx.max.z})");
             Console.WriteLine($"Unit Size: ({colctx.unitSize.x}, {colctx.unitSize.y}, {colctx.unitSize.z})");
-            Console.WriteLine($"Sector: {sectorDataAddr:X8} ({colsec[0]}, {colsec[1]}, {colsec[2]})");
+            Console.WriteLine($"Sector: {sectorDataAddr:X8} ({colsecArr[0]}, {colsecArr[1]}, {colsecArr[2]})");
             Console.WriteLine($"Sector Min: ({blockMin[0]}, {blockMin[1]}, {blockMin[2]})");
             Console.WriteLine($"Sector Max: ({blockMax[0]}, {blockMax[1]}, {blockMax[2]})");
             Console.WriteLine();
         }
-
 
         [SpectrumCommand(
             Name = "dumpcolsec",
@@ -2007,52 +2028,127 @@ namespace Spectrum
         private static void GetColSecPoly(Arguments args)
         {
             Vector3<float> xyz = (Vector3<float>)args[0];
-            int[] colsec = new int[3]
-            {
+            Vector3<int> colsec = new(
                 (int)xyz.x,
                 (int)xyz.y,
                 (int)xyz.z
-            };
+                );
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
+            string gameStr = $"{Options.Version.GetGameAbbr()}_{Options.Version}_colsec_{colsec.x}_{colsec.y}_{colsec.z}.txt";
+
+            using (StreamWriter sw = new("dump/" + gameStr))
+            {
+                Console.WriteLine($"{colsec.x},{colsec.y},{colsec.z}");
+                sw.Write(DumpStaticCollisionTable(colsec));
+            }
+            Console.WriteLine($"{gameStr} created.");
+        }
+
+        [SpectrumCommand(
+            Name = "dumpallstaticcol",
+            Cat = SpectrumCommand.Category.Collision,
+            Description = "Assists in the automation of dumping all scene collision data",
+            Sup = SpectrumCommand.Supported.OoT)]
+        private static void AutoDumpSceneCollision(Arguments args) 
+        {
+            string result = "";
+            List<Action> setupChange = new()
+            {
+                () => { SetAge(1); SetTime(10, 0); },
+                () => { SetAge(1); SetTime(23, 50); },
+                () => { SetAge(0); SetTime(10, 0); },
+                () => { SetAge(0); SetTime(23, 50); },
+            };
+            int scene = 80;
+            int setup = 0;
+
+            Console.WriteLine("Press Enter when Link has spawned to continue, or type q and press enter to prematurely dump and quit");
+
+            while (scene != 100+1)
+            {
+                SpawnToEntrance(scene);
+                Console.Write(">");
+                var input = Console.ReadLine();
+                if (input.ToLowerInvariant().Contains("q"))
+                {
+                    break;
+                }
+                int curScene = GlobalContext.ReadInt16(0x00A4);
+                if (scene != curScene)
+                {
+                    setup++;
+                    setup %= 4;
+                    setupChange[setup]();
+                    continue;
+                }
+                Zpr.StartRamPrefetch(GetRamSize());
+                result += DumpStaticCollisionTable();
+                Zpr.EndRamPrefetch();
+                scene++;
+            }
+            using StreamWriter sw = new($"dump/{Options.Version.GetGameAbbr()}_{Options.Version}_static_col.txt");
+            sw.Write(result);
+        } 
+
+        private static string DumpStaticCollisionTable(Vector3<int> colsec = null)
+        {
+            TextWriter console = Console.Out;
+            StringWriter stringWriter = new();
+            CollisionCtx ctx = new(GetColCtxPtr(), Options.Version);
             BgMesh mesh = GetCollisionMesh(0x32);
 
-
-            N64Ptr colsecAddr = ctx.GetColSecDataPtr(colsec);
-            Ptr colsecPtr = SPtr.New(colsecAddr);
-
-            TextWriter console = Console.Out;
-
-            string gameStr = string.Format("{0}_{1}_colsec.txt",
-                (Options.Version == Game.OcarinaOfTime) ? "oot" : (Options.Version == Game.MajorasMask) ? "mm" : "unk",
-                Options.Version.ToString());
-
-
-            using (StreamWriter sw = new StreamWriter("dump/" + gameStr))
+            Console.SetOut(stringWriter);
+            try
             {
-                Console.SetOut(sw);
-                Console.WriteLine($"{colsec[0]},{colsec[1]},{colsec[2]}");
-                for (int off = 0; off < 0x06; off += 2)
+                if (colsec != null)
                 {
-                    int depthLimit = 1000;
-                    short topLinkId = colsecPtr.ReadInt16(off);
-                    short linkId = topLinkId;
-
-                    while (depthLimit > 0 && linkId != -1)
+                    GetStaticCollisionSector(ctx, mesh, colsec);
+                }
+                else
+                {
+                    for (int x = 0; x <  ctx.max.x; x++)
                     {
-                        depthLimit--;
-
-                        //Get Next Link Record
-                        short polyId = ctx.Links.ReadInt16(linkId * 4);
-                        linkId = ctx.Links.ReadInt16(linkId * 4 + 2);
-
-                        var polyInfo = mesh.GetPolyById(polyId);
-                        Console.WriteLine($"{off:X2}\t{topLinkId:X4}\t{polyId:X4}\t{linkId:X4}\t{polyInfo.TSV()}");
+                        for (int y = 0; y < ctx.max.y; y++)
+                        {
+                            for (int z = 0; z < ctx.max.z; z++)
+                            {
+                                colsec = new Vector3<int>(x, y, z);
+                                GetStaticCollisionSector(ctx, mesh, colsec);
+                            }
+                        }
                     }
                 }
-                Console.SetOut(console);
             }
-            console.WriteLine($"{gameStr} created.");
+            catch { }
+
+            Console.SetOut(console);
+            return stringWriter.ToString();
+        }
+
+        private static void GetStaticCollisionSector(CollisionCtx ctx, BgMesh mesh, Vector3<int> colsec)
+        {
+            N64Ptr colsecAddr = ctx.GetColSecDataPtr(colsec);
+            Ptr colsecPtr = SPtr.New(colsecAddr);
+            int scene = GlobalContext.ReadInt16(0x00A4);
+
+            for (int i = 0; i < 3; i++)
+            {
+                int off = i * 2;
+                int depthLimit = -1;
+                short linkId = colsecPtr.ReadInt16(off);
+
+                while (++depthLimit < 1000 && linkId != -1)
+                {
+                    //Get Next Link Record
+                    short polyId = ctx.SSNodeTbl.ReadInt16(linkId * 4);
+                    short nextId = ctx.SSNodeTbl.ReadInt16(linkId * 4 + 2);
+
+                    var polyInfo = mesh.GetPolyById(polyId);
+                    Console.WriteLine($"{scene}\t{colsec.x}\t{colsec.y}\t{colsec.z}\t{depthLimit}\t" +
+                        $"{CollisionCtx.StaticLookupTypes[i]}\t{linkId:X4}\t{polyId:X4}\t{nextId:X4}\t{polyInfo.TSV()}");
+                    linkId = nextId;
+                }
+            }
         }
 
         [SpectrumCommand(
@@ -2082,28 +2178,20 @@ namespace Spectrum
                 xyz = (Vector3<float>)args[1];
             }
 
-            int[] colsec = new int[3]
-            {
+            Vector3<int> colsec = new (
                 (int)xyz.x,
                 (int)xyz.y,
                 (int)xyz.z
-            };
+            );
 
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
+            CollisionCtx ctx = new(GetColCtxPtr(), Options.Version);
             if (!ctx.ColSecInBounds(colsec))
                 return;
 
-            string[] type = new string[3]
-            {
-                "Floor",
-                "Wall",
-                "Ceiling"
-            };
-
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine(type[i]);
+                Console.WriteLine(CollisionCtx.StaticLookupTypes[i]);
                 foreach (var item in ctx.YieldPolyChain(colsec, i))
                 {
                     var (polyId, linkId) = item;
@@ -2126,20 +2214,13 @@ namespace Spectrum
         private static void FindColSecPoly(Arguments args)
         {
             short searchPolyId = (short)args[0];
-            int[] colsec = new int[3];
+            CollisionCtx ctx = new(GetColCtxPtr(), Options.Version);
 
-            CollisionCtx ctx = new CollisionCtx(GetColCtxPtr(), Options.Version);
-
-            string[] type = new string[3]
-            {
-                "Floor",
-                "Wall",
-                "Ceiling"
-            };
-
-            for (colsec[0] = 0; colsec[0] < ctx.max.x; colsec[0]++)
-                for (colsec[1] = 0; colsec[1] < ctx.max.y; colsec[1]++)
-                    for (colsec[2] = 0; colsec[2] < ctx.max.z; colsec[2]++)
+            for (int x = 0; x < ctx.max.x; x++)
+                for (int y = 0; y < ctx.max.y; y++)
+                    for (int z = 0; z < ctx.max.z; z++)
+                    {
+                        Vector3<int> colsec = new(x, y, z);
                         for (int i = 0; i < 3; i++)
                         {
                             foreach (var item in ctx.YieldPolyChain(colsec, i))
@@ -2147,11 +2228,12 @@ namespace Spectrum
                                 var (polyId, linkId) = item;
                                 if (polyId == searchPolyId)
                                 {
-                                    Console.WriteLine($"{colsec[0]},{colsec[1]},{colsec[2]}");
-                                    Console.WriteLine($"{type[i]}: {polyId:X4}:{linkId:X4}");
+                                    Console.WriteLine($"{colsec.x},{colsec.y},{colsec.z}");
+                                    Console.WriteLine($"{CollisionCtx.StaticLookupTypes[i]}: {polyId:X4}:{linkId:X4}");
                                 }
                             }
                         }
+                    }
         }
 
 
@@ -2440,7 +2522,7 @@ namespace Spectrum
                         return;
                     }
 
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new();
                     VerboseOcarinaGetScene(sceneId, roomId, sb);
                     Console.Clear();
                     Console.WriteLine(sb.ToString());
@@ -2466,7 +2548,7 @@ namespace Spectrum
         private static void VerboseOcarinaGetScene(int sceneId, int roomId, StringBuilder sb)
         {
             Scene scene = SceneRoomReader.InitializeScene(curRom.Files.GetSceneFile(sceneId), sceneId);
-            List<Room> rooms = new List<Room>();
+            List<Room> rooms = new();
             if (scene == null)
             {
                 sb.AppendFormat("Exception: Scene not found");
@@ -2583,7 +2665,11 @@ namespace Spectrum
             Help = "{0} = 0 for Adult Link, 1 for Child Link, 2+ to kill the game :)")]
         private static void SetAge(Arguments args)
         {
-            GlobalContext.Write(0x11DE8, (byte)args[0]);
+            SetAge((byte)args[0]);
+        }
+        private static void SetAge(byte age)
+        {
+            GlobalContext.Write(0x11DE8, age);
         }
 
         [SpectrumCommand(
@@ -2597,8 +2683,9 @@ namespace Spectrum
 
             scene = GlobalContext.ReadInt16(0x00A4);
             room = GlobalContext.ReadByte(0x11CBF);//1DA15F
+            var pos = GetActorCoordinates(GetLinkInstance());
 
-            Console.WriteLine($"Scene {scene} Room {room}");
+            Console.WriteLine($"Scene {scene} Room {room} Pos {pos}");
         }
 
         [SpectrumCommand(
@@ -2695,26 +2782,44 @@ namespace Spectrum
         private static void SetTime(Arguments args)
         {
             string timeCode = (string)args[0];
-            ushort time;
-            if (timeCode.Contains(":"))
+            SetTime(timeCode);
+        }
+
+        private static void SetTime(string timeStr)
+        {
+            if (timeStr.Contains(":"))
             {
-                var code = timeCode.Split(new char[] { ':' });
+                var code = timeStr.Split(new char[] { ':' });
                 if (!int.TryParse(code[0], out int hr)
                     || !int.TryParse(code[1], out int min))
                 {
                     Console.WriteLine("Invalid time code format. Expecting HH:MM");
                     return;
                 }
-                const int mins_in_day = 24 * 60;
-                int totalMins = (hr * 60 + min) % mins_in_day;
-                time = (ushort)((float)totalMins * 0x10000 / mins_in_day);
-
+                SetTime(hr, min);
             }
-            else if (!ushort.TryParse(timeCode, NumberStyles.HexNumber, new CultureInfo("en-US"), out time))
+            else
             {
-                Console.WriteLine("Invalid hex code");
+                if (!ushort.TryParse(timeStr, NumberStyles.HexNumber, new CultureInfo("en-US"), out ushort time))
+                {
+                    Console.WriteLine("Invalid hex code");
+                    return;
+                }
+                SetTime(time);
             }
+        }
 
+        private static void SetTime(int hr, int min)
+        {
+            ushort time;
+            const int mins_in_day = 24 * 60;
+            int totalMins = (hr * 60 + min) % mins_in_day;
+            time = (ushort)((float)totalMins * 0x10000 / mins_in_day);
+            SetTime(time);
+        }
+
+        private static void SetTime(ushort time)
+        {
             SaveContext.Write(0x0C, time);
             if (Options.Version.Game == Game.OcarinaOfTime)
             {
@@ -2739,7 +2844,7 @@ namespace Spectrum
             }
             if (!TryEvaluate((string)args[0], out long address))
                 return;
-            OSThread thread = new OSThread(SPtr.New((int)address));
+            OSThread thread = new(SPtr.New((int)address));
 
             Console.Clear();
             thread.PrintState();
@@ -2757,12 +2862,12 @@ namespace Spectrum
             int kill = 40;
 
 
-            List<OSThread> threads = new List<OSThread>();
+            List<OSThread> threads = new();
             while (kill-- > 0
                 && threadCur != 0
                 && threadCur != threadStart)
             {
-                OSThread thread = new OSThread(SPtr.New(threadCur));
+                OSThread thread = new(SPtr.New(threadCur));
                 threads.Add(thread);
                 threadCur = thread.OSThread_tlnext;
             }
@@ -2844,7 +2949,7 @@ namespace Spectrum
                 return;
             }
 
-            ColorBufferRequest request = new ColorBufferRequest()
+            ColorBufferRequest request = new()
             {
                 Format = format,
                 PixelPtr = address,
@@ -2874,9 +2979,6 @@ namespace Spectrum
             }
             Console.WriteLine("Done");
         }
-
-
-
 
         [SpectrumCommand(
             Name = "framepng",
@@ -2990,7 +3092,6 @@ namespace Spectrum
         }
         #endregion
 
-
         [SpectrumCommand(
             Name = "txt",
             Description = "Displays data at address as a null terminated string")]
@@ -3005,7 +3106,6 @@ namespace Spectrum
             string result = CStr.Get(data, "EUC-JP");
             Console.WriteLine(result);
         }
-
 
         [SpectrumCommand(
             Name = "reg",
@@ -3210,7 +3310,7 @@ namespace Spectrum
             //}
         }
 
-        static List<int> Stored = new List<int>();
+        static List<int> Stored = new();
         static long StoredAddress = 0;
         
         [SpectrumCommand(
@@ -3388,7 +3488,7 @@ namespace Spectrum
 
             for (short dist = 0; dist < 8000; dist++)
             {
-                Vector3<float> point = new Vector3<float>(0, dist, 0);
+                Vector3<float> point = new(0, dist, 0);
                 float rA = (point.x * normX) + (point.y * normY) + (point.z * normZ);
                 var bytes = BitConverter.GetBytes(rA);
                 int rA_i = BitConverter.ToInt32(bytes, 0);
@@ -3442,7 +3542,6 @@ namespace Spectrum
                 GlobalContext.Write(4, EXECUTE_PTR);
                 return;
             }
-
         }
 
         public static ModelViewerOoT ModelViewer;
@@ -3467,7 +3566,7 @@ namespace Spectrum
             if (pauseFlag.ReadInt32(0) == 0)
             {
                 pauseFlag.Write(0, 1);
-                System.Threading.CancellationToken token = new System.Threading.CancellationToken();
+                CancellationToken token = new();
                 //Action syncToEmu = 
                 Task.Run(async () => 
                 {

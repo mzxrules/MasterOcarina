@@ -17,8 +17,8 @@ namespace Spectrum
         static int ACTOR_CATEGORY_TABLE_LENGTH = 12;
         static uint[] ActorInstanceSize;
 
-        public List<OvlActor> Files = new List<OvlActor>();
-        public List<ActorInstance> Instances = new List<ActorInstance>();
+        public List<OvlActor> Files = new();
+        public List<ActorInstance> Instances = new();
 
 
         internal static void ChangeVersion(RomVersion version)
@@ -31,7 +31,7 @@ namespace Spectrum
 
         public static ActorMemoryMapper FetchFiles()
         {
-            ActorMemoryMapper map = new ActorMemoryMapper();
+            ActorMemoryMapper map = new();
             map.GetFiles();
             map.GetInstances();
             return map;
@@ -106,7 +106,7 @@ namespace Spectrum
         internal void InferActorIdAndSize(Ptr actor, out ushort actorId, out uint size)
         {
             actorId = 0;
-            BlockNode node = new BlockNode(actor - BlockNode.LENGTH);
+            BlockNode node = new(actor - BlockNode.LENGTH);
             size = node.Size;
 
             N64Ptr update = actor.Deref(0x130);
@@ -131,7 +131,7 @@ namespace Spectrum
             for (int i = 0; i < TOTAL_ACTORS; i++)
             {
                 Array.Copy(tableData, i * length, recordData, 0, length);
-                var working = new OvlActor(i, recordData);
+                OvlActor working = new(i, recordData);
                 SetActorInstanceSize(working);
                 if (working.IsFileLoaded)
                     Files.Add(working);
@@ -150,7 +150,7 @@ namespace Spectrum
 
         private List<ActorInstance> GetActorsInCategory(int cat)
         {
-            List<ActorInstance> result = new List<ActorInstance>();
+            List<ActorInstance> result = new();
             int actors;
             N64Ptr actorPtr;
 
@@ -167,7 +167,7 @@ namespace Spectrum
             {
                 for (int j = 0; j < actors; j++)
                 {
-                    ActorInstance ai = new ActorInstance(Version, actorPtr, this);
+                    ActorInstance ai = new(Version, actorPtr, this);
                     result.Add(ai);
                     actorPtr = ai.NextActor;
                 }
@@ -282,7 +282,7 @@ namespace Spectrum
 
         internal static List<RamObject> GetObjectFiles()
         {
-            List<RamObject> ovlObjects = new List<RamObject>();
+            List<RamObject> ovlObjects = new();
 
             if (SpectrumVariables.GlobalContext == 0)
                 return ovlObjects;
@@ -295,7 +295,7 @@ namespace Spectrum
 
             for (int i = 0; i < objCount; i++)
             {
-                RamObject working = new RamObject(ptr);
+                RamObject working = new(ptr);
                 ovlObjects.Add(working);
 
                 ptr = ptr.RelOff(RamObject.LENGTH);
@@ -307,7 +307,7 @@ namespace Spectrum
 
         public static List<ParticleOverlayRecord> GetParticleOverlayRecords()
         {
-            List<ParticleOverlayRecord> records = new List<ParticleOverlayRecord>();
+            List<ParticleOverlayRecord> records = new();
             int length = ParticleOverlayRecord.LENGTH;
             byte[] tableData;
             byte[] recordData = new byte[length];
@@ -320,7 +320,7 @@ namespace Spectrum
                 Array.Copy(tableData, i * length, recordData, 0, length);
                 Endian.Reverse32(recordData);
 
-                var item = new ParticleOverlayRecord(i, recordData);
+                ParticleOverlayRecord item = new(i, recordData);
                 records.Add(item);
             }
             return records;
@@ -328,11 +328,11 @@ namespace Spectrum
 
         public static List<OvlParticle> GetParticleFiles()
         {
-            List<OvlParticle> particleFiles = new List<OvlParticle>();
+            List<OvlParticle> particleFiles = new();
 
             foreach (var record in GetParticleOverlayRecords())
             {
-                OvlParticle working = new OvlParticle(record);
+                OvlParticle working = new(record);
                 if (working.IsFileLoaded)
                     particleFiles.Add(working);
             }
@@ -342,7 +342,7 @@ namespace Spectrum
 
         public static List<PlayPauseOverlayRecord> GetPlayPauseOverlayRecords()
         {
-            var records = new List<PlayPauseOverlayRecord>();
+            List<PlayPauseOverlayRecord> records = new();
             int length = PlayPauseOverlayRecord.LENGTH;
             byte[] tableData = Zpr.ReadRam(SpectrumVariables.Player_Pause_Ovl_Table, PLAY_PAUSE_RECORDS * length);
             tableData.Reverse32();
@@ -353,7 +353,7 @@ namespace Spectrum
                 Array.Copy(tableData, i * length, recordData, 0, length);
                 Endian.Reverse32(recordData);
 
-                var item = new PlayPauseOverlayRecord(i, recordData);
+                PlayPauseOverlayRecord item = new(i, recordData);
                 records.Add(item);
             }
             return records;
@@ -362,11 +362,11 @@ namespace Spectrum
 
         internal static List<OvlPause> GetActivePlayPause()
         {
-            List<OvlPause> ovlPause = new List<OvlPause>();
+            List<OvlPause> ovlPause = new();
 
             foreach (var item in GetPlayPauseOverlayRecords())
             {
-                OvlPause working = new OvlPause(item);
+                OvlPause working = new(item);
                 if (!working.Ram.Start.IsNull())
                 {
                     ovlPause.Add(working);
@@ -428,7 +428,7 @@ namespace Spectrum
             if (mainHeap.Count > 0)
             {
                 var item = mainHeap[0];
-                var ramItem = new SimpleRamItem()
+                SimpleRamItem ramItem = new()
                 {
                     Ram = new N64PtrRange(item.Ram.End, item.Ram.End + item.Size),
                     Description = "STATIC CONTEXT"
@@ -441,7 +441,7 @@ namespace Spectrum
             var globalCtx = mainHeap.SingleOrDefault(x => x.Ram.End == SpectrumVariables.GlobalContext);
             if (globalCtx != null)
             {
-                var ramItem = new SimpleRamItem()
+                SimpleRamItem ramItem = new()
                 {
                     Ram = new N64PtrRange(globalCtx.Ram.End, globalCtx.Ram.End + globalCtx.Size),
                     Description = "GAME STATE"
@@ -587,7 +587,7 @@ namespace Spectrum
                 ramItems.AddRange(actorMap.Instances.Where(x => !Options.HiddenActors.Contains(x.Actor)));
             }
 
-            CollisionCtx ctx = new CollisionCtx(Program.GetColCtxPtr(), Options.Version);
+            CollisionCtx ctx = new (Program.GetColCtxPtr(), Options.Version);
             ramItems.AddRange(ctx.GetRamMap());
         }
     }

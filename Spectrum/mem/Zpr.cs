@@ -9,6 +9,8 @@ namespace Spectrum
     {
         static EmulatorProcess Emulator;
         static IntPtr RamPointer;
+        static bool usePrefetchedRam;
+        static byte[] prefetchedRam = new byte[0];
 
         public static bool IsEmulatorSet { get { return Emulator != null; } }
 
@@ -28,7 +30,7 @@ namespace Spectrum
 
         public static Emulator Trainer(SearchSignature sig)
         {
-            HashSet<string> emuDlls = new HashSet<string>() {
+            HashSet<string> emuDlls = new() {
                 "mupen64plus.dll",
                 "parallel_n64_libretro.dll"
             };
@@ -148,13 +150,13 @@ namespace Spectrum
 
         private static long BayerMooreScanForPattern(Process proc, uint[] p, IntPtr baseAddr, long size)
         {
-            Pattern<uint> pattern = new Pattern<uint>(p);
+            Pattern<uint> pattern = new(p);
             
             long ti = 0; //text index 
             int pi = (pattern.Length - 1); //pattern index
             int patternSize = pattern.Length * sizeof(uint);
 
-            ProcessBuffer buffer = new ProcessBuffer();
+            ProcessBuffer buffer = new();
             //buffer.Initialize(proc, baseAddr);
 
             while (ti + patternSize <= size)
@@ -185,7 +187,7 @@ namespace Spectrum
 
         private static EmulatorProcess SelectEmulator(List<Emulator> emulators)
         {
-            List<EmulatorProcess> foundEmulators = new List<EmulatorProcess>();
+            List<EmulatorProcess> foundEmulators = new();
 
             foreach (var item in emulators)
             {
@@ -240,7 +242,6 @@ namespace Spectrum
                 string moduleName = "`" + item.ModuleName.ToLowerInvariant() + "`";
                 if (ramStartExpression.Contains(moduleName))
                 {
-                    //if (baseAddress.
                     ramStartExpression = ramStartExpression.Replace
                         (moduleName, baseAddress.ToString("X"));
                     emu.WatchedModules.Add(item);
@@ -312,7 +313,7 @@ namespace Spectrum
             return ReadN64Rdram(addr, numOfBytes, out _, true);
         }
 
-        public static Int64 ReadRamInt64(N64Ptr addr)
+        public static long ReadRamInt64(N64Ptr addr)
         {
             ulong left = ((ulong)ReadRamInt32(addr)) << 32;
             uint right = (uint)ReadRamInt32(addr + 4);
@@ -329,7 +330,7 @@ namespace Spectrum
         public static float ReadRamFloat(N64Ptr addr)
         {
             var v = ReadN64Rdram(addr, sizeof(float), out _, false);
-            return System.BitConverter.ToSingle(v, 0);
+            return BitConverter.ToSingle(v, 0);
         }
 
         public static short ReadRamInt16(N64Ptr addr)
@@ -373,7 +374,10 @@ namespace Spectrum
                 return addr + 2;
             else if (addr % 4 == 2)
                 return addr - 2;
-            else throw new ArgumentOutOfRangeException("End16 must end in 0 or 2");
+            else
+            {
+                throw new ArgumentOutOfRangeException(nameof(addr), "End16 must end in 0 or 2");
+            }
         }
 
         private static int End8(int addr)
@@ -391,6 +395,18 @@ namespace Spectrum
 
         #region K32 Functions
 
+        public static void StartRamPrefetch(int memSize)
+        {
+            usePrefetchedRam = false;
+            prefetchedRam = ReadN64Rdram(0, memSize, out _, true);
+            usePrefetchedRam = true;
+        }
+
+        public static void EndRamPrefetch()
+        {
+            usePrefetchedRam = false;
+        }
+
         /// <summary>
         /// Reads a 4 byte aligned block of emulated ram
         /// </summary>
@@ -402,31 +418,57 @@ namespace Spectrum
         /// <returns></returns>
         private static byte[] ReadN64Rdram(N64Ptr pointer, int bytes, out int bytesRead, bool BigEndian)
         {
-            Process process = Emulator.Process;
-            IntPtr address = IntPtr.Add(RamPointer, pointer.Offset);
-
-            var addrStart = address.ToInt64();
-            int off = (int)(addrStart & 0x3);
-            addrStart >>= 2;
-            addrStart <<= 2;
-            int numOfBytes = (off + bytes + 3) & -4;
-            IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
-
-            byte[] buffer = new byte[numOfBytes];
-            NativeMethods.ReadProcessMemory(hProc, (IntPtr)addrStart, buffer, (IntPtr)numOfBytes, out bytesRead);
-            NativeMethods.CloseHandle(hProc);
-
-            var bigEndian = Emulator.Stats.BigEndian > 0;
-
-            if (bigEndian != BigEndian)
+            if (usePrefetchedRam)
             {
-                buffer.Reverse32();
+                bytesRead = bytes;
+                if (BigEndian == true)
+                {
+                    byte[] buffer = new byte[bytes];
+                    Array.Copy(prefetchedRam, pointer.Offset, buffer, 0, bytes);
+                    return buffer;
+                }
+                else
+                {
+                    if ((pointer.Offset & 3) != 0)
+                    {
+                        throw new NotImplementedException("can't prefetch misaligned address");
+                    }
+                    int numBytes = (bytes + 3) & -4;
+                    byte[] buffer = new byte[numBytes];
+                    Array.Copy(prefetchedRam, pointer.Offset, buffer, 0, numBytes);
+                    buffer.Reverse32();
+                    return buffer;
+                }
             }
-            if (off != 0)
+            else
             {
-                Array.Copy(buffer, off, buffer, 0, bytes);
+                Process process = Emulator.Process;
+
+                //addr read start
+                long addrStart = IntPtr.Add(RamPointer, pointer.Offset).ToInt64();
+                int off = (int)(addrStart & 0x3);
+                //addr read start clamped to address divisible by 4
+                addrStart &= -4;
+                // read a number of bytes divisible by 4
+                int numOfBytes = (off + bytes + 3) & -4;
+                IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
+
+                byte[] buffer = new byte[numOfBytes];
+                NativeMethods.ReadProcessMemory(hProc, (IntPtr)addrStart, buffer, (IntPtr)numOfBytes, out bytesRead);
+                NativeMethods.CloseHandle(hProc);
+
+                var bigEndian = Emulator.Stats.BigEndian > 0;
+
+                if (bigEndian != BigEndian)
+                {
+                    buffer.Reverse32();
+                }
+                if (off != 0)
+                {
+                    Array.Copy(buffer, off, buffer, 0, bytes);
+                }
+                return buffer;
             }
-            return buffer;
         }
 
         private static byte[] ReadProcess(Process process, IntPtr address, int bytes, out int bytesRead)
@@ -459,7 +501,7 @@ namespace Spectrum
         private static bool WriteN64RDRAM(N64Ptr pointer, byte[] data)
         {
             Process process = Emulator.Process;
-            int ptr = (pointer & 0xFFFFFF);
+            int ptr = pointer.Offset;
 
             if (Emulator.Stats.BigEndian > 0)
             {
@@ -527,7 +569,7 @@ namespace Spectrum
                 }
                 else
                 {
-                    IntPtr address = IntPtr.Add(RamPointer, (int)(pointer & 0xFFFFFF));
+                    IntPtr address = IntPtr.Add(RamPointer, pointer.Offset);
                     data.Reverse32();
                     IntPtr hProc = NativeMethods.OpenProcess(ProcessAccessFlags.All, false, process.Id);
                     bool worked = NativeMethods.WriteProcessMemory(hProc, address, data, (IntPtr)data.LongLength, out _);

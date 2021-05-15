@@ -36,6 +36,11 @@ namespace Spectrum
 
         static void Main(string[] args)
         {
+            EncodingExtension.RegisterCodePagesEncodingProvider();
+            if(!Directory.Exists("dump"))
+            {
+                Directory.CreateDirectory("dump");
+            }    
             string readLine;
             Console.OutputEncoding = Encoding.Unicode;
             Initialize();
@@ -161,7 +166,7 @@ namespace Spectrum
 
         private static double CalculateDistance3D(Vector3<float> position1, Vector3<float> position2)
         {
-            Vector3<float> delta = new Vector3<float>(position2.x - position1.x, position2.y - position1.y, position2.z - position1.z);
+            Vector3<float> delta = new(position2.x - position1.x, position2.y - position1.y, position2.z - position1.z);
             double result = Math.Sqrt((double)delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
             return result;
         }
@@ -333,17 +338,15 @@ namespace Spectrum
 
         private static void SaveSettingsFile(Type jsonType, object graph, string savePath)
         {
-            using (StreamWriter sw = new StreamWriter(savePath))
-            using (MemoryStream ms = new MemoryStream())
-            {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(jsonType);
+            using StreamWriter sw = new(savePath);
+            using MemoryStream ms = new();
+            DataContractJsonSerializer serializer = new(jsonType);
 
-                serializer.WriteObject(ms, graph);
+            serializer.WriteObject(ms, graph);
 
-                StreamReader sr = new StreamReader(ms);
-                sr.BaseStream.Position = 0;
-                sw.Write(FormatJson(sr.ReadToEnd()));
-            }
+            StreamReader sr = new(ms);
+            sr.BaseStream.Position = 0;
+            sw.Write(FormatJson(sr.ReadToEnd()));
         }
 
         private static void LoadSettings()
@@ -368,7 +371,7 @@ namespace Spectrum
                 return false;
             try
             {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
+                using (FileStream fs = new(path, FileMode.Open))
                 {
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
                     data = (T)serializer.ReadObject(fs);
@@ -592,6 +595,12 @@ namespace Spectrum
             }
         }
 
+        private static Vector3<float> GetActorCoordinates(Ptr actorInstance)
+        {
+            if (SpectrumVariables.Actor_Category_Table == 0)
+                return new(float.MaxValue, float.MaxValue, float.MaxValue);
+            return actorInstance.ReadVec3f(0x24);
+        }
 
         private static bool TryEvaluate(string[] args, out long value)
         {
@@ -616,9 +625,9 @@ namespace Spectrum
         private static void PrintActorDelta()
         {
             List<BlockNode> currentActorLL;
-            List<IRamItem> delta = new List<IRamItem>();
+            List<IRamItem> delta = new();
             BlockNode prev;
-            List<IRamItem> actors = new List<IRamItem>();
+            List<IRamItem> actors = new();
 
             var map = ActorMemoryMapper.FetchFilesAndInstances();
 
@@ -635,7 +644,7 @@ namespace Spectrum
                     delta.Add(item);
             }
             Console.Clear();
-            foreach (BlockNode a in delta.OrderBy(x => (x.Ram.Start & 0xFFFFFF)))
+            foreach (BlockNode a in delta.OrderBy(x => x.Ram.Start.Offset))
             {
                 Console.WriteLine(a.ToString());
                 if (a.RamItem != null)
