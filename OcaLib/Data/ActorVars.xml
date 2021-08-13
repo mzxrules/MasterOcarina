@@ -150,7 +150,8 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Dissipating Flames</Description>
+    <Description>Body Parts</Description>
+    <Comment>FIXME: Get more info from decomp</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2356,8 +2357,7 @@
       <Object>0001</Object>
     </Objects>
     <Description>Shutter Door</Description>
-    <Comment-Other>object dependencies change depending on scene
-    Doors with Room Clear or Switch Flag are barred on the side stated</Comment-Other>
+    <Comment>Design and object dependencies change depending on scene</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
@@ -2380,17 +2380,17 @@
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Front Room Clear</Description>
+          <Description>Front side attached to Room Clear</Description>
           <Meta />
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>Front Switch Flag</Description>
+          <Description>Front side attached to Switch Flag</Description>
           <Meta />
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>Back permanently locked</Description>
+          <Description>Back side permanently locked</Description>
           <Meta />
         </Value>
         <Value>
@@ -2410,7 +2410,7 @@
         </Value>
         <Value>
           <Data>07</Data>
-          <Description>Front Switch Flag, Back Room Clear</Description>
+          <Description>Front attached to Switch Flag, Back to Room Clear</Description>
           <Meta />
         </Value>
         <Value>
@@ -2578,16 +2578,19 @@
         <Value>
           <Data>00</Data>
           <Description>Small grey stone block</Description>
+          <Comment>oversized collision</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>01</Data>
           <Description>Large grey stone block</Description>
+          <Comment>oversized collision</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>02</Data>
           <Description>Huge grey stone block</Description>
+          <Comment>oversized collision</Comment>
           <Meta />
         </Value>
         <Value>
@@ -2622,7 +2625,7 @@
         </Value>
         <Value>
           <Data>09</Data>
-          <Description>Oblong Signpost (unbreakable)</Description>
+          <Description>Square Signpost (unbreakable)</Description>
           <Meta />
         </Value>
         <Value>
@@ -4934,56 +4937,55 @@
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Unknown</Description>
-          <Comment>FIXME: Spawned in Cutscene Map 71 (0,4,6,8,11)</Comment>
+          <Description>Blue rain effect used in Goddess/Triforce cutscenes</Description>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Unknown</Description>
-          <Comment>FIXME: Spawned in Temple of Time</Comment>
+          <Description>Blue rain effect used in Goddess/Triforce cutscenes</Description>
+          <Comment>Spawned in Temple of Time, why?</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Unknown</Description>
-          <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Description>Giant Rock 1</Description>
+          <Comment>used in Dins Creation of Hyrule cutscene</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Unknown</Description>
-          <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Description>Giant Rock 2</Description>
+          <Comment>used in Dins Creation of Hyrule cutscene</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Unknown</Description>
-          <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Description>Giant Rock 3</Description>
+          <Comment>used in Dins Creation of Hyrule cutscene</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Unknown</Description>
-          <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Description>Giant Rock 4</Description>
+          <Comment>used in Dins Creation of Hyrule cutscene</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0006</Data>
-          <Description>Unknown</Description>
-          <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Description>Giant Rock 5</Description>
+          <Comment>used in Dins Creation of Hyrule cutscene</Comment>
           <Meta>
             <Object>0092</Object>
           </Meta>
@@ -7164,23 +7166,17 @@
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
         <Description>Type</Description>
-        <Comment>FIXME: Probably picks which one?</Comment>
         <UI>
             <Select/>
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>?</Description>
+          <Description>Koume</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>?</Description>
-          <Meta />
-        </Value>
-        <Value uihide="true" repeat="+">
-          <Data>0002</Data>
-          <Description>Crashes</Description>
+          <Description>Kotake</Description>
           <Meta />
         </Value>
       </Variable>
@@ -7897,8 +7893,8 @@
         </Value>
         <Value repeat="+" uihide="true">
           <Data>0001</Data>
-          <Description>Does not open</Description>
-          <Comment>possibly waiting for some trap to spring?</Comment>
+          <Description>Always in "rock" form</Description>
+          <Comment>Can't take damage or die</Comment>
           <Meta />
         </Value>
       </Variable>
@@ -10632,7 +10628,7 @@
     <Comment>FIXME</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x1C00</Capture>
+        <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
         <Description>Spot Type</Description>
         <UI>
             <Default/>
@@ -10674,7 +10670,7 @@
         </Value>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x3C0</Capture>
+        <Capture>v &amp;&gt;&gt; 0x03C0</Capture>
         <Description>Song to play</Description>
         <Comment>Puzzle Spot only?</Comment>
         <UI>
@@ -12911,18 +12907,28 @@
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
-        <Description>#N/A</Description>
+        <Description>Type</Description>
         <UI>
-            <Default/>
+          <Select/>
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Time teller</Description>
+          <Description>Stands at entrance of Kakariko Village, tells time</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>0001</Data>
-          <Description>Crash</Description>
+        <Value>
+          <Data>0004</Data>
+          <Description>Stands by Impa's House, tells time</Description>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>0007</Data>
+          <Description>Dying guard in Market Town</Description>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>0008</Data>
+          <Description>Stands in Market Town at night</Description>
           <Meta />
         </Value>
       </Variable>
@@ -14716,41 +14722,36 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Tower of Rupees</Description>
-    <Comment>FIXME: Test things</Comment>
+    <Description>Rupee Patterns</Description>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xF000</Capture>
+        <Capture>v &amp;&gt;&gt; 0xE000</Capture>
         <Description>Type</Description>
         <UI>
             <Select/>
         </UI>
-        <Value repeat="+">
+        <Value>
           <Data>0</Data>
           <Description>Five blue rupees stacked vertically</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>3</Data>
+        <Value>
+          <Data>1</Data>
           <Description>Five green rupees in a row</Description>
           <Meta />
         </Value>
         <Value>
-          <Data>4</Data>
-          <Description>Five green rupees in a row?</Description>
-          <Comment>FIXME: Test</Comment>
+          <Data>2</Data>
+          <Description>Six green rupees in a circle with a red rupee in the center</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
-          <Data>5</Data>
-          <Description>Six green rupees in diamond formation with a red rupee in the center (think medallion screen)</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>6</Data>
-          <Description>Crashes</Description>
-          <Meta />
-        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
       </Variable>
     </Variables>
   </Actor>
@@ -15788,7 +15789,7 @@
         </UI>
       </Variable>
       <Variable>
-        <Capture>rz &amp;&gt;&gt; 0xFFFF </Capture>
+        <Capture>rz &amp;&gt;&gt; 0xFFFF</Capture>
         <Description>Spawn Range Y</Description>
         <UI>
           <NumberUpDown>
