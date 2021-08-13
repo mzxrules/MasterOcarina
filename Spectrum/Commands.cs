@@ -2767,7 +2767,7 @@ namespace Spectrum
         private static void PrintTime(ushort time)
         {
             float f_time = ((float)time * 24) / 0x10000;
-            int hour = (int)(f_time);
+            int hour = (int)f_time;
             int min = (int)(f_time * 60) % 60;
             int sec = (int)(f_time * 3600) % 60;
             Console.WriteLine($"Time: {hour:D2}:{min:D2}:{sec:D2}");

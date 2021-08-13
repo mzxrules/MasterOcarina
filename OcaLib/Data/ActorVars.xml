@@ -402,7 +402,7 @@
     <Objects>
       <Object>000E</Object>
     </Objects>
-    <Description>Treasure chest</Description>
+    <Description>Treasure Chest</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xF000</Capture>
@@ -1227,7 +1227,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Proximity activated flame wall</Description>
+    <Description>Proximity activated Fire Wall</Description>
     <Variables>
       <Variable default="00FF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -1391,7 +1391,8 @@
     <Objects>
       <Object>000B</Object>
     </Objects>
-    <Description>Wallmaster (Ceiling monster)</Description>
+    <Description>Wallmaster</Description>
+    <Comment>Ceiling monster</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -1524,7 +1525,7 @@
     <Objects>
       <Object>001A</Object>
     </Objects>
-    <Description>Epona</Description>
+    <Description>Rideable Horse</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -1727,7 +1728,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Arrows</Description>
+    <Description>Arrow</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -1752,7 +1753,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Fairies</Description>
+    <Description>Fairy</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2143,7 +2144,7 @@
     <Objects>
       <Object>0076</Object>
     </Objects>
-    <Description>Wooden post with red cloth</Description>
+    <Description>Wooden Flagpole with Red Cloth</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2189,6 +2190,7 @@
       <Object>001D</Object>
     </Objects>
     <Description>Child Princess Zelda (at window)</Description>
+    <Comment>Unused</Comment>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2204,7 +2206,7 @@
       <Object>0001</Object>
     </Objects>
     <Description>Cutscene Actors</Description>
-    <Comment>FIXME: Need their own objects</Comment>
+    <Comment>Ocarina of Time and Zelda Cutscenes</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2329,7 +2331,7 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Cube Copy</Description>
+    <Description>Cube</Description>
     <Comment>Unused</Comment>
     <Variables />
   </Actor>
@@ -2337,7 +2339,8 @@
     <Objects>
       <Object>0012</Object>
     </Objects>
-    <Description>Shabom (bouncing bubble enemy)</Description>
+    <Description>Shabom</Description>
+    <Comment>bouncing bubble enemy</Comment>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2461,7 +2464,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Returning Boomerang</Description>
+    <Description>Boomerang</Description>
     <Variables />
   </Actor>
   <Actor id="0033" name="En_Torch2">
@@ -2483,7 +2486,8 @@
     <Objects>
       <Object>0021</Object>
     </Objects>
-    <Description>Biri (Floating Jellyfish)</Description>
+    <Description>Biri</Description>
+    <Comment>Floating Jellyfish</Comment>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -2867,6 +2871,7 @@
       <Object>0027</Object>
     </Objects>
     <Description>Horse</Description>
+    <Comment>Non-rideable</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3011,7 +3016,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Megaton Statue</Description>
+    <Description>Megaton Hammer Statue</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -3077,14 +3082,14 @@
     <Objects>
       <Object>002D</Object>
     </Objects>
-    <Description>Ganondorf's horse</Description>
+    <Description>Ganondorf's Horse</Description>
     <Variables />
   </Actor>
   <Actor id="0043" name="Bg_Hidan_Rock">
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Stone blocks (Fire Temple)</Description>
+    <Description>Stone Blocks (Fire Temple)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3111,14 +3116,14 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Spinning Stone flamethrower (Fire Temple)</Description>
+    <Description>Spinning Stone Flamethrower (Fire Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="0045" name="Bg_Hidan_Sekizou">
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Stationary flame thrower statue (Fire Temple)</Description>
+    <Description>Stationary Flamethrower Statue (Fire Temple)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3143,7 +3148,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Stone platform (Fire Temple)</Description>
+    <Description>Stone Platform (Fire Temple)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3169,6 +3174,7 @@
       <Object>002C</Object>
     </Objects>
     <Description>Stone Elevator (Fire Temple)</Description>
+    <Comment>Used in Flare Dancer rooms</Comment>
     <Variables />
   </Actor>
   <Actor id="0048" name="En_Xc">
@@ -3182,7 +3188,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Flame circle</Description>
+    <Description>Flame Circle</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xF000</Capture>
@@ -3310,7 +3316,7 @@
     <Objects>
       <Object>0031</Object>
     </Objects>
-    <Description>Bombflower Bomb</Description>
+    <Description>Bombflower</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3342,14 +3348,15 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Rising Elevator Platform with Hookshot Target</Description>
+    <Description>Hookshot Elevator Platform (Fire Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="004F" name="En_OE2">
     <Objects>
       <Object>0035</Object>
     </Objects>
-    <Description>Lock on blue spot</Description>
+    <Description>Unused NPC</Description>
+    <Comment>Lock-on blue spot</Comment>
     <Variables />
   </Actor>
   <Actor id="0050" name="Bg_Ydan_Hasi">
@@ -3399,7 +3406,7 @@
     <Objects>
       <Object>0036</Object>
     </Objects>
-    <Description>Rotating spike cylinder (Deku Tree)</Description>
+    <Description>Rotating Spiked Log (Deku Tree)</Description>
     <Variables />
   </Actor>
   <Actor id="0052" name="Boss_Ganondrof">
@@ -3413,7 +3420,7 @@
     <Objects>
       <Object>0038</Object>
     </Objects>
-    <Description>Armos statue</Description>
+    <Description>Armos Statue</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3444,7 +3451,8 @@
     <Objects>
       <Object>0039</Object>
     </Objects>
-    <Description>Deku Baba (Snapping)</Description>
+    <Description>Deku Baba</Description>
+    <Comment>Snapping</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3474,7 +3482,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Deku Nut (Tossed by Link)</Description>
+    <Description>Thrown Deku Nut</Description>
     <Variables />
   </Actor>
   <Actor id="0057" name="En_M_Thunder">
@@ -3488,7 +3496,7 @@
     <Objects>
       <Object>002B</Object>
     </Objects>
-    <Description>Rising stone platform (Dodongo's Cavern)</Description>
+    <Description>Rising Stone Platform (Dodongo's Cavern)</Description>
     <Variables />
   </Actor>
   <Actor id="0059" name="Bg_Breakwall">
@@ -3580,7 +3588,7 @@
     <Objects>
       <Object>002B</Object>
     </Objects>
-    <Description>Stone stairs</Description>
+    <Description>Stone Stairs (Dodongo's Cavern)</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -3595,7 +3603,7 @@
     <Objects>
       <Object>0048</Object>
     </Objects>
-    <Description>Warp portals</Description>
+    <Description>Warp Portal</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -3761,7 +3769,7 @@
     <Objects>
       <Object>004D</Object>
     </Objects>
-    <Description>Large rotating stone ring</Description>
+    <Description>Rotating Stone Ring Platform</Description>
     <Comment>Gerudo Training Grounds and Forest Temple</Comment>
     <Variables>
       <Variable default="003F" nullable="true">
@@ -3777,7 +3785,8 @@
     <Objects>
       <Object>004D</Object>
     </Objects>
-    <Description>Eye platform eye switches</Description>
+    <Description>Eye Statue</Description>
+    <Comment>Gerudo Training Grounds</Comment>
     <Variables>
       <Variable default="003F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -3792,7 +3801,8 @@
     <Objects>
       <Object>0056</Object>
     </Objects>
-    <Description>Bari (Big Jellyfish)</Description>
+    <Description>Bari</Description>
+    <Comment>Big Jellyfish</Comment>
     <Variables />
   </Actor>
   <Actor id="0064" name="Bg_Mizu_Movebg">
@@ -3885,7 +3895,7 @@
     <Objects>
       <Object>0059</Object>
     </Objects>
-    <Description>Large square of water (Water Temple)</Description>
+    <Description>Water Plane (Water Temple)</Description>
     <Comment>used for the main pool of water</Comment>
     <Variables>
       <Variable>
@@ -3946,14 +3956,16 @@
       <Object>0001</Object>
       <Object>006F</Object>
     </Objects>
-    <Description>Twisted Hallway Room</Description>
+    <Description>Twisted Hallway Rooms</Description>
+    <Comment>Forest Temple</Comment>
     <Variables />
   </Actor>
   <Actor id="0069" name="En_Bb">
     <Objects>
       <Object>005D</Object>
     </Objects>
-    <Description>Bubble (Flying Skull Enemy)</Description>
+    <Description>Bubble</Description>
+    <Comment>Flying Skull Enemy</Comment>
     <Variables>
       <Variable default="F">
         <Capture>v &amp;&gt;&gt; 0xF0</Capture>
@@ -4013,7 +4025,7 @@
     <Objects>
       <Object>005E</Object>
     </Objects>
-    <Description>Temple of Time windows</Description>
+    <Description>Windows (Temple of Time)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -4043,7 +4055,7 @@
     <Objects>
       <Object>005F</Object>
     </Objects>
-    <Description>Flying floor tile</Description>
+    <Description>Flying Floor Tile</Description>
     <Comment-Other>Variable is first incremented by 1, then time until tile rises is calculated as 
     T * 0x10 + 0x14 frames. For example: 
     
@@ -4075,7 +4087,7 @@
       <Object>0061</Object>
       <Object>????</Object>
     </Objects>
-    <Description>Warp Pad</Description>
+    <Description>Warp Song Pad</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -4140,7 +4152,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Metal gate</Description>
+    <Description>Sliding Metal Gate</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
@@ -4192,8 +4204,8 @@
     <Objects>
       <Object>005E</Object>
     </Objects>
-    <Description>Door of Time Collision (No model)</Description>
-    <Comment>Spawned by actor 008C</Comment>
+    <Description>Door of Time Collision</Description>
+    <Comment>No model, spawned by actor 008C</Comment>
     <Variables />
   </Actor>
   <Actor id="0071" name="Bg_Hidan_Hamstep">
@@ -4241,7 +4253,7 @@
       <Object>007C</Object>
       <Object>0002</Object>
     </Objects>
-    <Description>Trees &amp; Bushes</Description>
+    <Description>Trees and Bushes</Description>
     <Comment-Other>When spawning a Skulltula, the Skulltula type is always forced to 0x0E</Comment-Other>
     <Variables>
       <Variable>
@@ -4652,7 +4664,7 @@
     <Objects>
       <Object>0089</Object>
     </Objects>
-    <Description>Dampe (Grave Digging Game)</Description>
+    <Description>Dampe (Alive)</Description>
     <Variables />
   </Actor>
   <Actor id="0086" name="Bg_Mori_Bigst">
@@ -4660,7 +4672,7 @@
       <Object>0072</Object>
       <Object>0073</Object>
     </Objects>
-    <Description>Forest Temple, large, round platform</Description>
+    <Description>Large Round Platform (Forest Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="0087" name="Bg_Mori_Elevator">
@@ -4668,7 +4680,7 @@
       <Object>0072</Object>
       <Object>0073</Object>
     </Objects>
-    <Description>Forest Temple elevator</Description>
+    <Description>Elevator (Forest Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="0088" name="Bg_Mori_Kaitenkabe">
@@ -4676,7 +4688,8 @@
       <Object>0072</Object>
       <Object>0073</Object>
     </Objects>
-    <Description>Forest Temple rotating walls from room before boss</Description>
+    <Description>Rotatable Walls (Forest Temple)</Description>
+    <Comment>Room before Forest Temple boss</Comment>
     <Variables />
   </Actor>
   <Actor id="0089" name="Bg_Mori_Rakkatenjo">
@@ -4684,7 +4697,7 @@
       <Object>0072</Object>
       <Object>0073</Object>
     </Objects>
-    <Description>Forest Temple falling ceiling</Description>
+    <Description>Falling Ceiling (Forest Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="008A" name="En_Vm">
@@ -5065,7 +5078,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Large flame wall</Description>
+    <Description>Large Fire Wall (Fire Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="008E" name="En_Floormas">
@@ -5129,7 +5142,7 @@
     <Objects>
       <Object>0098</Object>
     </Objects>
-    <Description>Redead &amp; Gibdo</Description>
+    <Description>Redead and Gibdo</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;>> 0x0080</Capture>
@@ -5279,7 +5292,7 @@
     <Objects>
       <Object>009A</Object>
     </Objects>
-    <Description>Golden Gauntlets rock</Description>
+    <Description>Golden Gauntlets Pillar</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;>> 0x000F</Capture>
@@ -5309,7 +5322,7 @@
     <Objects>
       <Object>0099</Object>
     </Objects>
-    <Description>Poe Sisters Puzzle Actor</Description>
+    <Description>Poe Sisters' Paintings and Puzzle Block</Description>
     <Comment>FIXME</Comment>
     <Variables>
       <Variable default="3F" nullable="true">
@@ -5357,7 +5370,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Fish, Bugs, Butterflies</Description>
+    <Description>Fish, Bugs, Butterflies Group Spawner</Description>
     <Comment>FIXME</Comment>
     <Variables>
       <Variable>
@@ -5384,14 +5397,13 @@
       </Variable>
       <Variable default="1">
         <Capture>v &amp;&gt;&gt; 0x0060</Capture>
-        <Description>?</Description>
-        <Comment>FIXME: Changes spawn behavior?</Comment>
+        <Description>Spawn Pattern</Description>
         <UI>
             <Select/>
         </UI>
         <Value>
           <Data>0</Data>
-          <Description>?</Description>
+          <Description>0</Description>
           <Meta />
         </Value>
         <Value>
@@ -5668,7 +5680,7 @@
     <Objects>
       <Object>009C</Object>
     </Objects>
-    <Description>Flying Volvagia</Description>
+    <Description>Volvagia (Flying)</Description>
     <Variables />
   </Actor>
   <Actor id="0097" name="Object_Kankyo">
@@ -5752,7 +5764,7 @@
     <Objects>
       <Object>0002</Object>
     </Objects>
-    <Description>Grotto</Description>
+    <Description>Grotto Entrance</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xF000</Capture>
@@ -6078,7 +6090,7 @@
     <Objects>
       <Object>00A3</Object>
     </Objects>
-    <Description>Child Princess Ruto</Description>
+    <Description>Ruto (Child)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -6120,14 +6132,15 @@
     <Objects>
       <Object>00A5</Object>
     </Objects>
-    <Description>Hole Volvagia</Description>
+    <Description>Volvagia (Hole Form)</Description>
+    <Comment>Spawn actor 0096 instead</Comment>
     <Variables />
   </Actor>
   <Actor id="00A3" name="En_Fd_Fire">
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Fireball</Description>
+    <Description>Flare Dancer Fire Attack</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -6177,11 +6190,11 @@
       <Object>0001</Object>
       <Object>????</Object>
     </Objects>
-    <Description>Enemy spawner</Description>
+    <Description>Enemy Spawner</Description>
     <Comment>The object file for the enemy being spawned must also be loaded</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
+        <Capture>v &amp;&gt;&gt; 0xF800</Capture>
         <Description>Type of Enemy</Description>
         <UI>
             <Default/>
@@ -6189,48 +6202,51 @@
         <Value>
           <Data>00</Data>
           <Description>Leever</Description>
-          <Comment>Must on sand for them to appear? Not sure about object number</Comment>
+          <Comment>Must on sand for them to appear. Not sure about object number</Comment>
           <Meta>
             <Object>0017</Object>
           </Meta>
         </Value>
         <Value>
-          <Data>0A</Data>
+          <Data>01</Data>
           <Description>Red Tektite</Description>
           <Meta>
             <Object>0016</Object>
           </Meta>
         </Value>
         <Value>
-          <Data>10</Data>
+          <Data>02</Data>
           <Description>Stalchildren</Description>
           <Comment>Must stand on dirt to appear?</Comment>
           <Meta>
             <Object>0184</Object>
           </Meta>
         </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Wolfos</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
+        </Value>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF</Capture>
-        <Description>Enemies to Spawn</Description>
+        <Capture>v &amp;&gt;&gt; 0x07C0</Capture>
+        <Description>Max Concurrent Spawns</Description>
         <UI>
-            <Default/>
+          <Number>
+            <Display>int</Display>
+          </Number>
         </UI>
-        <Value>
-          <Data>88</Data>
-          <Description>When spawning Leevers, 88 is used in Haunted Wasteland</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>A4</Data>
-          <Description>When spawning Stalchildren, loads two at a time. Used in Hyrule Field</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>F2</Data>
-          <Description>When spawning Leevers, F2 is used in Desert Colossus</Description>
-          <Meta />
-        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Max Total Spawns</Description>
+        <UI>
+          <Number>
+            <Display>int</Display>
+          </Number>
+        </UI>
       </Variable>
     </Variables>
   </Actor>
@@ -6238,14 +6254,14 @@
     <Objects>
       <Object>009D</Object>
     </Objects>
-    <Description>Sage Darunia (Cutscene)</Description>
+    <Description>Darunia (Cutscenes)</Description>
     <Variables />
   </Actor>
   <Actor id="00A9" name="Demo_Im">
     <Objects>
       <Object>0087</Object>
     </Objects>
-    <Description>Impa</Description>
+    <Description>Impa (Cutscenes)</Description>
     <Variables />
   </Actor>
   <Actor id="00AA" name="Demo_Tre_Lgt">
@@ -6259,7 +6275,7 @@
     <Objects>
       <Object>009E</Object>
     </Objects>
-    <Description>Core Flare Dancer creature</Description>
+    <Description>Flare Dancer Core</Description>
     <Comment>Has trouble running? Tends to stay in one place or run in one direction; if it jumps up, it'll disappear</Comment>
     <Variables>
       <Variable>
@@ -6285,7 +6301,7 @@
     <Objects>
       <Object>009C</Object>
     </Objects>
-    <Description>Volvagia Objects?</Description>
+    <Description>Volvagia Platform</Description>
     <Comment>Spawned by Volvagia</Comment>
     <Variables />
   </Actor>
@@ -6293,7 +6309,7 @@
     <Objects>
       <Object>009C</Object>
     </Objects>
-    <Description>Volvagia rocks</Description>
+    <Description>Volvagia Rocks and Bones</Description>
     <Comment>Spawned by Volvagia</Comment>
     <Variables />
   </Actor>
@@ -6426,7 +6442,7 @@
     <Objects>
       <Object>0069</Object>
     </Objects>
-    <Description>Shadow Temple Ship</Description>
+    <Description>River Boat (Shadow Temple)</Description>
     <Comment-Other>
       old notes
       0000 = Normal, doesn't react to Zelda’s Lullaby
@@ -6483,7 +6499,7 @@
     <Objects>
       <Object>0097</Object>
     </Objects>
-    <Description>Hyrulian guards</Description>
+    <Description>Hyrulian Guards</Description>
     <Comment>FIXME: Variable</Comment>
     <Variables>
       <Variable>
@@ -6536,14 +6552,13 @@
       <Object>0092</Object>
     </Objects>
     <Description>Falling Rock Spawner</Description>
-    <Comment>FIXME: Variables</Comment>
     <Variables />
   </Actor>
   <Actor id="00B5" name="En_Fire_Rock">
     <Objects>
       <Object>0092</Object>
     </Objects>
-    <Description>Flying Rubble</Description>
+    <Description>Falling Burning Rocks</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -6663,7 +6678,35 @@
       <Object>00AE</Object>
     </Objects>
     <Description>Gerudo Valley Objects</Description>
-    <Variables />
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
+        <Description>Type</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>00</Data>
+          <Description>FIXME</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>FIXME</Description>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>FIXME</Description>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>FIXME</Description>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>FIXME</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00B9" name="Bg_Spot18_Obj">
     <Objects>
@@ -6753,18 +6796,25 @@
     <Objects>
       <Object>0069</Object>
     </Objects>
-    <Description>Giant Skull Jar</Description>
+    <Description>Giant Skull Jar (Shadow Temple)</Description>
     <Comment>
-      blue flames on top, ejects key when destroyed?
-      FIXME: Room spawns collectible key, probably just bombable
+      Blue flames on top. Ejects key when destroyed if room != 12
     </Comment>
-    <Variables />
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Key Collectible Flag</Description>
+        <UI>
+          <CollectFlag/>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00BC" name="Bg_Haka_Trap">
     <Objects>
       <Object>0069</Object>
     </Objects>
-    <Description>Shadow Temple Objects</Description>
+    <Description>Shadow Temple Traps</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -6784,29 +6834,22 @@
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Spiked Wooden Wall, moving</Description>
-          <Comment>FIXME: moves in wrong direction?</Comment>
+          <Description>Spiked Wooden Wall 1</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Opposite Spiked Wooden Wall, moving</Description>
-          <Comment>FIXME: moves in wrong direction?</Comment>
+          <Description>Spiked Wooden Wall 2</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Propeller, blows wind</Description>
+          <Description>Fan</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0005</Data>
           <Description>Guillotine Blade (Fast)</Description>
-          <Meta />
-        </Value>
-        <Value uihide="true" repeat="+">
-          <Data>0006</Data>
-          <Description>Graphical glitches, same as 2 or 3 (unsure)</Description>
           <Meta />
         </Value>
       </Variable>
@@ -6850,7 +6893,7 @@
     <Objects>
       <Object>0069</Object>
     </Objects>
-    <Description>Statue and Wall (Shadow Temple)</Description>
+    <Description>Bird Statue and Wall (Shadow Temple)</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
@@ -6899,7 +6942,7 @@
     <Objects>
       <Object>00B1</Object>
     </Objects>
-    <Description>Crater Smoke Cone</Description>
+    <Description>Smoke Cone (Death Mountain Crater)</Description>
     <Variables />
   </Actor>
   <Actor id="00C0" name="En_Syateki_Itm">
@@ -7022,10 +7065,10 @@
     <Objects>
       <Object>0096</Object>
     </Objects>
-    <Description>Lord Jabu-Jabu objects</Description>
+    <Description>Inside Jabu-Jabu's Belly Objects</Description>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF</Capture>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
         <Description>Type</Description>
         <UI>
             <Select/>
@@ -7052,15 +7095,10 @@
           <Comment>Lowers into place when stepped on, sets Switch Flag</Comment>
           <Meta />
         </Value>
-        <Value uihide="true" repeat="+">
-          <Data>04</Data>
-          <Description>Graphical glitch, unknown</Description>
-          <Meta />
-        </Value>
       </Variable>
       <Variable default="FF" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
-        <Description>Nullable Switch Flag</Description>
+        <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
+        <Description>Switch Flag</Description>
         <UI>
             <SwitchFlag/>
         </UI>
@@ -7152,7 +7190,7 @@
     <Objects>
       <Object>00C2</Object>
     </Objects>
-    <Description>Dodongo Cavern Entrance Rock</Description>
+    <Description>Dodongo's Cavern Entrance Blocking Rock</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
@@ -7203,7 +7241,7 @@
     <Objects>
       <Object>002C</Object>
     </Objects>
-    <Description>Bombable walls (Fire Temple)</Description>
+    <Description>Bombable Walls (Fire Temple)</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
@@ -7273,33 +7311,77 @@
       <Object>0074</Object>
     </Objects>
     <Description>Ice Platform (Zora's Fountain)</Description>
-    <Comment>FIXME: Solve Variable</Comment>
+    <Comment-Other>Actor checks v &amp; 0xFF for the following values, and forces v = 0x0010 if none match: 
+        0x01
+        0x04
+        0x10
+        0x11
+        0x12
+        0x14
+        0x20
+        0x23
+        0x24
+    </Comment-Other>
     <Variables>
       <Variable>
-        <Capture>v &amp;>> 0xFFFF</Capture>
-        <Description>?</Description>
+        <Capture>v &amp;>> 0x0200</Capture>
+        <Description>Type</Description>
         <UI>
-          <Default/>
+          <Select/>
         </UI>
         <Value>
-          <Data>0001</Data>
-          <Description>Huge</Description>
+          <Data>0</Data>
+          <Description>Iceberg</Description>
         </Value>
         <Value>
-          <Data>0010</Data>
-          <Description>Big</Description>
+          <Data>1</Data>
+          <Description>Ice Ramp</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x000F</Capture>
+        <Description>Action</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>0</Data>
+          <Description>Floating</Description>
         </Value>
         <Value>
-          <Data>0012</Data>
-          <Description>Big, Spinning</Description>
+          <Data>1</Data>
+          <Description>Floating</Description>
         </Value>
         <Value>
-          <Data>0020</Data>
-          <Description>Small</Description>
+          <Data>2</Data>
+          <Description>Floating, Rotating</Description>
         </Value>
         <Value>
-          <Data>0023</Data>
-          <Description>Two small ones, spinning around</Description>
+          <Data>3</Data>
+          <Description>Twin Floating in circle</Description>
+        </Value>
+        <Value>
+          <Data>4</Data>
+          <Description>Stationary</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x00F0</Capture>
+        <Description>Size and Sink Speed</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>0</Data>
+          <Description>Large, 0.15f</Description>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>Regular, 0.2f</Description>
+        </Value>
+        <Value>
+          <Data>2</Data>
+          <Description>Small, 0.4f</Description>
         </Value>
       </Variable>
     </Variables>
@@ -7308,7 +7390,7 @@
     <Objects>
       <Object>00CA</Object>
     </Objects>
-    <Description>Adult Ruto</Description>
+    <Description>Ruto (Adult)</Description>
     <Variables />
   </Actor>
   <Actor id="00D3" name="Obj_Dekujr">
@@ -7322,8 +7404,8 @@
     <Objects>
       <Object>0059</Object>
     </Objects>
-    <Description>Water Noise</Description>
-    <Comment>FIXME: Apparently this actor has invisible/moving walls for pushing Link when not wearing iron boots?</Comment>
+    <Description>Water Vortex Effect (Water Temple)</Description>
+    <Comment>SFX and collision to suck you in, no model</Comment>
     <Variables />
   </Actor>
   <Actor id="00D5" name="Bg_Spot06_Objects">
@@ -7378,14 +7460,14 @@
     <Objects>
       <Object>006B</Object>
     </Objects>
-    <Description>Movable ice block</Description>
+    <Description>Pushable Ice Block (Ice Cavern)</Description>
     <Variables />
   </Actor>
   <Actor id="00D7" name="Bg_Haka_Water">
     <Objects>
       <Object>008D</Object>
     </Objects>
-    <Description>Bottom of the Well water level changer</Description>
+    <Description>Bottom of the Well Water Level Changer</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -7401,7 +7483,7 @@
     <Objects>
       <Object>00D0</Object>
     </Objects>
-    <Description>Adult Malon</Description>
+    <Description>Malon (Adult, Ingo's Ranch)</Description>
     <Variables />
   </Actor>
   <Actor id="00DA" name="En_Bom_Chu">
@@ -7475,7 +7557,7 @@
     <Objects>
       <Object>00D5</Object>
     </Objects>
-    <Description>Tentacle from inside Lord Jabu-Jabu</Description>
+    <Description>Tentacle (Inside Jabu-Jabu's Belly)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -7510,7 +7592,7 @@
     <Objects>
       <Object>00D5</Object>
     </Objects>
-    <Description>Jabu-Jabu Electrified Tentacle</Description>
+    <Description>Electrified Tentacle (Inside Jabu-Jabu's Belly)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -7555,7 +7637,7 @@
     <Objects>
       <Object>00D6</Object>
     </Objects>
-    <Description>Anubis Body</Description>
+    <Description>Anubis (Body)</Description>
     <Variables />
   </Actor>
   <Actor id="00E1" name="En_Anubice_Fire">
@@ -7591,7 +7673,7 @@
       <Object>0072</Object>
       <Object>0073</Object>
     </Objects>
-    <Description>Forest Temple objects</Description>
+    <Description>Forest Temple Objects</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -7624,7 +7706,7 @@
     <Objects>
       <Object>0072</Object>
     </Objects>
-    <Description>Forest Temple Well Water</Description>
+    <Description>Well Water (Forest Temple)</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -7733,7 +7815,7 @@
     <Objects>
       <Object>00E0</Object>
     </Objects>
-    <Description>Child Malon</Description>
+    <Description>Malon (Child)</Description>
     <Variables />
   </Actor>
   <Actor id="00E8" name="Boss_Ganon">
@@ -7742,7 +7824,7 @@
       <Object>017C</Object>
       <Object>017D</Object>
     </Objects>
-    <Description>Ganondorf Boss</Description>
+    <Description>Ganondorf</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -7771,14 +7853,18 @@
     <Objects>
       <Object>00E2</Object>
     </Objects>
-    <Description>Bongo Bongo's Hand</Description>
+    <Description>Bongo Bongo</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
         <Description>Type</Description>
         <UI>
-            <Select/>
+          <Select/>
         </UI>
+        <Value>
+          <Data>FFFF</Data>
+          <Description>Head</Description>
+        </Value>
         <Value>
           <Data>0000</Data>
           <Description>Left hand</Description>
@@ -7789,111 +7875,6 @@
           <Description>Right hand</Description>
           <Meta />
         </Value>
-        <Value>
-          <Data>0002</Data>
-          <Description>Not sure which hand it is, but all the fingers are mashed together</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0003</Data>
-          <Description>Flat right hand</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0004</Data>
-          <Description>Looks like left hand, fingers mashed together, slightly leaning up</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0005</Data>
-          <Description>Flat right hand, slightly leaning up</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0006</Data>
-          <Description>Right hand, looks like its grabbing tightly</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0007</Data>
-          <Description>Similar to 6</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0008</Data>
-          <Description>Similar to 7, fingers moving a little</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0009</Data>
-          <Description>Similar to 8</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000A</Data>
-          <Description>Very bizarre finger arrangement</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000B</Data>
-          <Description>Crouching right hand</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000C</Data>
-          <Description>Finger-walking right hand, thumb doing an awkward sidestep (no movement, of course)</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000D</Data>
-          <Description>Similar to C, thumb corrected</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000E</Data>
-          <Description>Limp right hand, thumb awkward</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>000F</Data>
-          <Description>Similar to E, thumb corrected</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0010</Data>
-          <Description>Jumping all over the place, glitchy</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0011</Data>
-          <Description>Same</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0012</Data>
-          <Description>Slightly under floor, completely flat, likely dead position</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0013</Data>
-          <Description>Same</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0014</Data>
-          <Description>Same</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0015</Data>
-          <Description>Invisible, only large shadow is present (Lens of Truth reveal nothing)</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0016</Data>
-          <Description>Same as 12</Description>
-          <Meta />
-        </Value>
       </Variable>
     </Variables>
   </Actor>
@@ -7901,7 +7882,7 @@
     <Objects>
       <Object>00E5</Object>
     </Objects>
-    <Description>Spike Enemy (Water Temple)</Description>
+    <Description>Spike (Enemy)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -8211,7 +8192,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Anubis</Description>
+    <Description>Anubis Spawn</Description>
     <Variables />
   </Actor>
   <Actor id="00F7" name="Bg_Haka_Gate">
@@ -8283,7 +8264,7 @@
     <Objects>
       <Object>011F</Object>
     </Objects>
-    <Description>Giant Rolling Boulder</Description>
+    <Description>Rolling Boulder (Spirit Temple)</Description>
     <Comment>moves very slowly in some cases</Comment>
     <Variables />
   </Actor>
@@ -8298,7 +8279,7 @@
     <Objects>
       <Object>00F1</Object>
     </Objects>
-    <Description>Rotating Cobra Mirror</Description>
+    <Description>Rotatable Cobra Mirror (Spirit Temple)</Description>
     <Variables>
       <Variable default="0">
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -8342,9 +8323,17 @@
     <Objects>
       <Object>00F1</Object>
     </Objects>
-    <Description>Climbable Metal Grating (Fire Temple)</Description>
-    <Comment>FIXME: Variables</Comment>
-    <Variables />
+    <Description>Climbable Metal Grating Bridge (Spirit Temple)</Description>
+    <Comment>Starts as climbable surface, falls over on switch flag</Comment>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;>> 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00FE" name="Fishing">
     <Objects>
@@ -8390,7 +8379,7 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Movable Block</Description>
+    <Description>Pushable Block</Description>
     <Variables>
       <Variable default="FF" nullable="true">
         <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
@@ -8486,7 +8475,7 @@
     <Objects>
       <Object>0181</Object>
     </Objects>
-    <Description>Death Mountain Trail Gate</Description>
+    <Description>Gate to Death Mountain Trail</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture> v &amp;>> 0xFFFF</Capture>
@@ -8537,21 +8526,21 @@
     <Objects>
       <Object>00F9</Object>
     </Objects>
-    <Description>Windmill Sails</Description>
+    <Description>Windmill Sails (Kakariko Village)</Description>
     <Variables />
   </Actor>
   <Actor id="0103" name="Bg_Spot01_Idohashira">
     <Objects>
       <Object>00F9</Object>
     </Objects>
-    <Description>Kakariko Village Well Crossbeam</Description>
+    <Description>Well Crossbeam (Kakariko Village)</Description>
     <Variables />
   </Actor>
   <Actor id="0104" name="Bg_Spot01_Idomizu">
     <Objects>
       <Object>00F9</Object>
     </Objects>
-    <Description>Kakariko Village Well Water</Description>
+    <Description>Well Water (Kakariko Village)</Description>
     <Variables>
       <Variable default="">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -8571,7 +8560,7 @@
     <Objects>
       <Object>00A4</Object>
     </Objects>
-    <Description>Golden Torch Stand (Poe Sisters)</Description>
+    <Description>Golden Torch (Poe Sisters)</Description>
     <Comment>
       In room 2 of Forest Temple:
       If switch flags 1C-1F are not all 1 and 1B is 0, the poe light stealing cutscene will play. The cutscene will fail if at least one of the Poes can't spawn. If the cutscene plays, 1B is set to 1.
@@ -8766,7 +8755,7 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Small, Liftable Crate</Description>
+    <Description>Small Liftable Crate</Description>
     <Comment>Can also appear as a giant, liftable fish</Comment>
     <Variables>
       <Variable default="FFFF" nullable="true">
@@ -8788,7 +8777,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Breakable pot</Description>
+    <Description>Breakable Pot</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x7E00</Capture>
@@ -9126,7 +9115,7 @@
     <Objects>
       <Object>0168</Object>
     </Objects>
-    <Description>Deku Salesman</Description>
+    <Description>Business Scrub</Description>
     <Variables>
       <Variable default="">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -10068,7 +10057,8 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Stone Eye (Fire Trap)</Description>
+    <Description>Stone Eye (Fire Trap) and Flame</Description>
+    <Comment>Dampe's Fire Attack</Comment>
     <Variables>
       <Variable default="0000">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -10250,7 +10240,7 @@
     <Objects>
       <Object>006C</Object>
     </Objects>
-    <Description>Windmill Setpieces</Description>
+    <Description>Windmill Objects</Description>
     <Comment>FIXME</Comment>
     <Comment-Other>
       Thick Stone Door behavior:
@@ -10299,7 +10289,7 @@
       <Object>0001</Object>
       <Object>????</Object>
     </Objects>
-    <Description>Single Bush/Grass</Description>
+    <Description>Bush/Grass</Description>
     <Comment>Liftable &amp; cut-able</Comment>
     <Variables>
       <Variable>
@@ -10409,7 +10399,7 @@
     <Objects>
       <Object>0163</Object>
     </Objects>
-    <Description>Brown Boulder</Description>
+    <Description>Brown Bombable Boulder</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x8000</Capture>
@@ -10571,7 +10561,7 @@
     <Objects>
       <Object>011D</Object>
     </Objects>
-    <Description>Square, collapsing platform</Description>
+    <Description>Square Collapsing Platform</Description>
     <Comment>
       FIXME: new notation
       xxyy - xx controls delay, yy controls size
@@ -10596,7 +10586,7 @@
     <Objects>
       <Object>011C</Object>
     </Objects>
-    <Description>Stone Hookshot target</Description>
+    <Description>Stone Hookshot Target</Description>
     <Comment>FIXME</Comment>
     <Variables>
       <Variable>
@@ -10638,7 +10628,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Music Staff (Ocarina) spot</Description>
+    <Description>Ocarina Music Staff Spot</Description>
     <Comment>FIXME</Comment>
     <Variables>
       <Variable>
@@ -10759,7 +10749,8 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Horseback Archery Target (arrow hitbox)</Description>
+    <Description>Horseback Archery Target</Description>
+    <Comment>Arrow Hitbox</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -10851,6 +10842,7 @@
       <Object>0001</Object>
     </Objects>
     <Description>Sparkling Rupee</Description>
+    <Comment>Diving Game</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -10944,7 +10936,7 @@
       <Object>0124</Object>
     </Objects>
     <Description>Cucco Chick</Description>
-    <Comment>Unused, not solid</Comment>
+    <Comment>Unused, incomplete</Comment>
     <Variables />
   </Actor>
   <Actor id="0136" name="En_Blkobj">
@@ -11199,7 +11191,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Pushblock Stop Actor</Description>
+    <Description>Pushblock Stop</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -11250,7 +11242,7 @@
     <Objects>
       <Object>0110</Object>
     </Objects>
-    <Description>Kakariko Cucco lady</Description>
+    <Description>Cucco Lady</Description>
     <Variables />
   </Actor>
   <Actor id="013D" name="En_Gm">
@@ -11289,7 +11281,6 @@
       <Object>0128</Object>
     </Objects>
     <Description>Carpenter's Son</Description>
-    <Comment>FIXME: (ignores you?)</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -11743,7 +11734,7 @@
     <Objects>
       <Object>0013</Object>
     </Objects>
-    <Description>Hopping Cucco, not solid</Description>
+    <Description>Cucco (Minigames)</Description>
     <Variables>
       <Variable default="0001">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -11753,22 +11744,12 @@
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Non-solid cucco, hops oddly every once in awhile and only goes in one direction</Description>
+          <Description>Shooting Gallery</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Invisible, solid cucco, doesn’t move, can be attacked but will only smoke and molt</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0002</Data>
-          <Description>Invisible cucco, cannot be attacked it seems, no idea what it does, but you can hear it</Description>
-          <Meta />
-        </Value>
-        <Value uihide="true" repeat="+">
-          <Data>8000</Data>
-          <Description>Same as 0</Description>
+          <Description>Bombchu Bowling</Description>
           <Meta />
         </Value>
       </Variable>
@@ -11778,14 +11759,14 @@
     <Objects>
       <Object>0013</Object>
     </Objects>
-    <Description>Attacking Cucco, not solid</Description>
+    <Description>Cucco (Attacking)</Description>
     <Variables />
   </Actor>
   <Actor id="0145" name="Bg_Spot01_Idosoko">
     <Objects>
       <Object>0180</Object>
     </Objects>
-    <Description>Stone blocking entrance to Bottom of the Well</Description>
+    <Description>Stone Blocking Entrance to Bottom of the Well</Description>
     <Variables>
       <Variable default="FFFF">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -11816,7 +11797,7 @@
       <Object>0001</Object>
       <Object>????</Object>
     </Objects>
-    <Description>Checkable spot (Green Navi)</Description>
+    <Description>Checkable Spot (Green Navi)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xF800</Capture>
@@ -11893,7 +11874,7 @@
     <Objects>
       <Object>010F</Object>
     </Objects>
-    <Description>Potion Shop hag</Description>
+    <Description>Potion Shop Granny</Description>
     <Variables />
   </Actor>
   <Actor id="014A" name="En_Mk">
@@ -11907,14 +11888,14 @@
     <Objects>
       <Object>0160</Object>
     </Objects>
-    <Description>Bombchu Bowling Alley lady</Description>
+    <Description>Bombchu Bowling Alley Lady</Description>
     <Variables />
   </Actor>
   <Actor id="014C" name="En_Bom_Bowl_Pit">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Bombchu Bowling Alley pit</Description>
+    <Description>Bombchu Bowling Alley Final Target</Description>
     <Variables />
   </Actor>
   <Actor id="014D" name="En_Owl">
@@ -12096,7 +12077,7 @@
     <Objects>
       <Object>0002</Object>
     </Objects>
-    <Description>Grave flower</Description>
+    <Description>Uninteractable Flowers, Rocks, Grass</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x3</Capture>
@@ -12106,22 +12087,17 @@
         </UI>
         <Value>
           <Data>00</Data>
-          <Description>Flower for grave</Description>
+          <Description>Flower</Description>
           <Meta />
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Non-liftable small rock</Description>
+          <Description>Small Rock</Description>
           <Meta />
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>Uncuttable small shrub</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>03</Data>
-          <Description>Erratic collision data</Description>
+          <Description>Grass Shrub</Description>
           <Meta />
         </Value>
       </Variable>
@@ -12131,8 +12107,7 @@
     <Objects>
       <Object>012A</Object>
     </Objects>
-    <Description>Sun Emblem Trigger (Spirit Temple)</Description>
-    <Comment>FIXME: Switch Flag variable</Comment>
+    <Description>Sun Emblem Switch (Spirit Temple)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x1</Capture>
@@ -12142,14 +12117,44 @@
         </UI>
         <Value>
           <Data>00</Data>
-          <Description>Sun emblem</Description>
+          <Description>Sun Emblem</Description>
           <Meta />
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Block with sun emblem</Description>
+          <Description>Block with Sun Emblem</Description>
           <Meta />
         </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x0030</Capture>
+        <Description>Effect</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>0</Data>
+          <Description>Stay On</Description>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>Chest</Description>
+        </Value>
+        <Value>
+          <Data>2</Data>
+          <Description>Need Constant Light</Description>
+        </Value>
+        <Value>
+          <Data>3</Data>
+          <Description>Burn</Description>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;>> 0x3F00</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
       </Variable>
     </Variables>
   </Actor>
@@ -12208,28 +12213,28 @@
     <Objects>
       <Object>00C9</Object>
     </Objects>
-    <Description>Goron (cutscenes)</Description>
+    <Description>Gorons 1</Description>
     <Variables />
   </Actor>
   <Actor id="0153" name="En_Fu">
     <Objects>
       <Object>0133</Object>
     </Objects>
-    <Description>Windmill man</Description>
+    <Description>Windmill Man</Description>
     <Variables />
   </Actor>
   <Actor id="0155" name="En_Changer">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Treasure Box Shop Chest</Description>
+    <Description>Treasure Box Shop Minigame</Description>
     <Variables />
   </Actor>
   <Actor id="0156" name="Bg_Jya_Megami">
     <Objects>
       <Object>00F1</Object>
     </Objects>
-    <Description>Large stone face (Spirit Temple)</Description>
+    <Description>Statue Face (Spirit Temple)</Description>
     <Variables />
   </Actor>
   <Actor id="0157" name="Bg_Jya_Lift">
@@ -12250,7 +12255,7 @@
     <Objects>
       <Object>00F1</Object>
     </Objects>
-    <Description>Light blocking rock (Spirit Temple)</Description>
+    <Description>Light Blocking Rock (Spirit Temple)</Description>
     <Comment>bombable, targetable</Comment>
     <Variables />
   </Actor>
@@ -12258,7 +12263,7 @@
     <Objects>
       <Object>00F1</Object>
     </Objects>
-    <Description>Circular Metal Grate (Spirit Temple)</Description>
+    <Description>Sliding Circular Metal Grate (Spirit Temple)</Description>
     <Comment>Hookable, automatically rises as you approach it</Comment>
     <Variables />
   </Actor>
@@ -12282,7 +12287,7 @@
     <Objects>
       <Object>00AF</Object>
     </Objects>
-    <Description>Giant Goron Pot</Description>
+    <Description>Big Goron Pot</Description>
     <Comment>Gives heart piece when bomb is dropped inside</Comment>
     <Variables>
       <Variable>
@@ -12371,7 +12376,7 @@
     <Objects>
       <Object>013C</Object>
     </Objects>
-    <Description>Running man (Child version)</Description>
+    <Description>Running Man (Child Era)</Description>
     <Comment>FIXME: Variables</Comment>
     <Variables>
       <Variable>
@@ -12467,19 +12472,66 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Proximity Rain/Weather Effects</Description>
-    <Comment>
-      FIXME: New notation
-      - 0008+ = Crashes
-      - 0607 = Rain
-      - X402* Snow, use object number 0003, needs actor number 0097 with variable 0003
-      - X403* Rain
-      - X404* Clouds
-      - X406* Fog
-      - X407* Rain with no sky change
-      X= Size of area effected, use 0-7
-    </Comment>
-    <Variables />
+    <Description>Proximity Weather Effects</Description>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;>> 0x000F</Capture>
+        <Description>Type</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>0</Data>
+          <Description>Cloudy, always persists</Description>
+          <Comment>Hyrule Market, Market Entrance</Comment>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>Cloudy, active before obtaining Epona</Description>
+          <Comment>Hyrule Field, Lon Lon Ranch</Comment>
+        </Value>
+        <Value>
+          <Data>2</Data>
+          <Description>Snow, active before beating Water Temple</Description>
+          <Comment>Zora's River/Domain object 0003, needs actor number 0097 with variable 0003</Comment>
+        </Value>
+        <Value>
+          <Data>3</Data>
+          <Description>Rain, active before beating Water Temple</Description>
+          <Comment>Lake Hylia</Comment>
+        </Value>
+        <Value>
+          <Data>4</Data>
+          <Description>Cloudy, active before beating Fire Temple</Description>
+          <Comment>Kakariko Village, Death Mountain Crater</Comment>
+        </Value>
+        <Value>
+          <Data>5</Data>
+          <Description>Thunderstorm, active after getting first 3 medallions, but haven't gotten Shadow Medallion</Description>
+          <Comment>Kakariko Village, Kakariko Graveyard</Comment>
+        </Value>
+        <Value>
+          <Data>6</Data>
+          <Description>Increase Sandstorm Intensity</Description>
+        </Value>
+        <Value>
+          <Data>7</Data>
+          <Description>Heavy rain, thunder strikes</Description>
+          <Comment>Kakariko Graveyard</Comment>
+        </Value>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
+        <Description>Effect Proximity (per 100 units)</Description>
+        <UI>
+          <NumberUpDown>
+            <Unit>Units</Unit>
+            <Increment>100</Increment>
+            <Min>0</Min>
+          </NumberUpDown>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0166" name="Bg_Sst_Floor">
     <Objects>
@@ -12492,14 +12544,14 @@
     <Objects>
       <Object>00EC</Object>
     </Objects>
-    <Description>Kakariko village rooftop man</Description>
+    <Description>Kakariko Village Rooftop Man</Description>
     <Variables />
   </Actor>
   <Actor id="0168" name="En_Ex_Item">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Minigame Items</Description>
+    <Description>Minigame Displayed Items</Description>
     <Comment>
       Displays an item that will be won by completing Bombchu Bowling/Slingshot minigames
       //FIXME: Variable
@@ -12535,21 +12587,21 @@
     <Objects>
       <Object>0144</Object>
     </Objects>
-    <Description>Magic carpet man</Description>
+    <Description>Magic Carpet Man</Description>
     <Variables />
   </Actor>
   <Actor id="016B" name="En_Jsjutan">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Displays GI objects / Lost Woods Slingshot Game?</Description>
+    <Description>Magic Carpet Man Carpet</Description>
     <Variables />
   </Actor>
   <Actor id="016C" name="En_Cs">
     <Objects>
       <Object>0145</Object>
     </Objects>
-    <Description>Graveyard boy</Description>
+    <Description>Graveyard Boy</Description>
     <Comment>FIXME: Path</Comment>
     <Variables>
       <Variable>
@@ -12751,30 +12803,46 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Ganon's Cape</Description>
+    <Description>Ganondorf's Cape</Description>
     <Variables />
   </Actor>
   <Actor id="0170" name="En_Okarina_Effect">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Rain and lightning</Description>
+    <Description>Song of Storms Storm Manager</Description>
     <Variables />
   </Actor>
   <Actor id="0171" name="En_Mag">
     <Objects>
       <Object>014A</Object>
     </Objects>
-    <Description>Title Screen Actor</Description>
+    <Description>Title Screen Manager</Description>
     <Variables />
   </Actor>
   <Actor id="0172" name="Door_Gerudo">
     <Objects>
       <Object>014B</Object>
     </Objects>
-    <Description>Metal grate door</Description>
-    <Comment>Navi says you have the wrong kind of key, boss door?</Comment>
-    <Variables />
+    <Description>Cell Door (Gerudo Fortress)</Description>
+    <Comment>Requires specific key to unlock door</Comment>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x1F00</Capture>
+        <Description>Key Collectable Flag</Description>
+        <Comment>Flag must be set to open door</Comment>
+        <UI>
+          <CollectFlag/>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0173" name="Elf_Msg2">
     <Objects>
@@ -12788,7 +12856,7 @@
     <Objects>
       <Object>014C</Object>
     </Objects>
-    <Description>Ganon's Tower Collapsing (Cutscene set pieces)</Description>
+    <Description>Ganon's Tower Collapsing (Cutscene Objects)</Description>
     <Variables />
   </Actor>
   <Actor id="0175" name="En_Po_Field">
@@ -12816,14 +12884,14 @@
     <Objects>
       <Object>014D</Object>
     </Objects>
-    <Description>Lava particle fountain (Death Mountain panorama)</Description>
+    <Description>Lava Particle Fountain (Death Mountain panorama)</Description>
     <Variables />
   </Actor>
   <Actor id="0177" name="Bg_Zg">
     <Objects>
       <Object>0156</Object>
     </Objects>
-    <Description>Metal bars (Ganon's Castle)</Description>
+    <Description>Metal Bars (Ganon's Castle)</Description>
     <Comment>FIXME: variable</Comment>
     <Variables>
       <Variable default="3F" nullable="true">
@@ -12839,7 +12907,7 @@
     <Objects>
       <Object>0097</Object>
     </Objects>
-    <Description>Hyrule guard</Description>
+    <Description>Hyrule Guard</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -12905,14 +12973,15 @@
     <Objects>
       <Object>0155</Object>
     </Objects>
-    <Description>Treasure Chest game man</Description>
+    <Description>Treasure Box Shop Man</Description>
     <Variables />
   </Actor>
   <Actor id="017D" name="Obj_Makeoshihiki">
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Push Block (Hardcoded)</Description>
+    <Description>Push Block Puzzles</Description>
+    <Comment>Hardcoded Positions</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x4000</Capture>
@@ -12959,13 +13028,12 @@
         </Value>
       </Variable>
     </Variables>
-    <Variables />
   </Actor>
   <Actor id="017E" name="Oceff_Spot">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Sun's Song effect</Description>
+    <Description>Sun's Song Effect</Description>
     <Variables />
   </Actor>
   <Actor id="017F" name="End_Title">
@@ -12988,7 +13056,7 @@
       <Object>015A</Object>
       <Object>????</Object>
     </Objects>
-    <Description>Credits Revelers from Lon Lon</Description>
+    <Description>Credits Revelers in Lon Lon</Description>
     <Comment>Each variable requires it's own object</Comment>
     <Variables>
       <Variable>
@@ -13249,9 +13317,28 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Song of Storms Fairy</Description>
-    <Comment>FIXME</Comment>
-    <Variables />
+    <Description>Lake Hylia Sun Hitbox, Big Fairy Spawner</Description>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
+        <Description>Type</Description>
+        <UI>
+          <Select/>
+        </UI>
+        <Value>
+          <Data>01</Data>
+          <Description>Sun Hitbox</Description>
+        </Value>
+        <Value>
+          <Data>40</Data>
+          <Description>Big Fairy</Description>
+        </Value>
+        <Value>
+          <Data>41</Data>
+          <Description>Big Fairy</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0184" name="En_Dy_Extra">
     <Objects>
@@ -13719,7 +13806,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Timer</Description>
+    <Description>Room Timer</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0xFC00</Capture>
@@ -13749,7 +13836,7 @@
     <Objects>
       <Object>015E</Object>
     </Objects>
-    <Description>Cursed Skulltula people</Description>
+    <Description>Cursed Skulltula People</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -13835,14 +13922,14 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Uncursed Skulltula people</Description>
+    <Description>Uncursed Skulltula People</Description>
     <Variables />
   </Actor>
   <Actor id="018A" name="Oceff_Wipe">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Zelda's Lullaby effect</Description>
+    <Description>Zelda's Lullaby and Song of Time Ocarina Effect</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -13852,12 +13939,12 @@
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Purple wormhole</Description>
+          <Description>Zelda's Lullaby Purple Wormhole</Description>
           <Meta />
         </Value>
-        <Value repeat="+">
+        <Value>
           <Data>0001</Data>
-          <Description>Blue wormhole</Description>
+          <Description>Song of Time Blue Wormhole</Description>
           <Meta />
         </Value>
       </Variable>
@@ -13867,7 +13954,7 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Song of Storm's effect</Description>
+    <Description>Song of Storm Ocarina Effect</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -13912,7 +13999,7 @@
     <Objects>
       <Object>0161</Object>
     </Objects>
-    <Description>Sacred Forest Meadow Entities</Description>
+    <Description>Sacred Forest Meadow Objects</Description>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F00</Capture>
@@ -13959,7 +14046,7 @@
       <Object>00F1</Object>
     </Objects>
     <Description>Stone Elevator (Spirit Temple)</Description>
-    <Comment>Sets switch flag/activates when stepped on iirc</Comment>
+    <Comment>Sets switch flag and activates when stood on</Comment>
     <Variables>
       <Variable default="3F" nullable="true">
         <Capture>v &amp;&gt;&gt; 0x3F</Capture>
@@ -13975,32 +14062,26 @@
       <Object>016C</Object>
     </Objects>
     <Description>Chunks of Iron Knucle Chair and Pillar</Description>
-    <Comment>FIXME: Spawned when actor ? is destroyed by Iron Knuckle</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
-        <Description>#N/A</Description>
+        <Description>Type</Description>
         <UI>
           <Select/>
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Black particles?</Description>
+          <Description>Chair Crumble</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Black particles?</Description>
+          <Description>Pillar Crumble</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0002</Data>
           <Description>Round stone thing, explodes as soon as area loads</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0003</Data>
-          <Description>Crashes</Description>
           <Meta />
         </Value>
       </Variable>
@@ -14010,7 +14091,7 @@
     <Objects>
       <Object>0162</Object>
     </Objects>
-    <Description>Gerudo Fortress wooden gate</Description>
+    <Description>Gerudo Fortress Wooden Gate</Description>
     <Variables>
       <Variable default="00FF" nullable="true">
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -14025,7 +14106,7 @@
     <Objects>
       <Object>0162</Object>
     </Objects>
-    <Description>Gerudo Fortress training area gate</Description>
+    <Description>Gerudo Fortress Training Area Gate</Description>
     <Variables>
       <Variable default="00FF" nullable="true">
         <Capture>v &amp;&gt;&gt; 0xFF</Capture>
@@ -14107,7 +14188,7 @@
     <Objects>
       <Object>0166</Object>
     </Objects>
-    <Description>Broken Drawbridge, Fencing</Description>
+    <Description>Broken Drawbridge, Fences</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -14241,21 +14322,21 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Epona's Song effect</Description>
+    <Description>Epona's Song Ocarina Effect</Description>
     <Variables />
   </Actor>
   <Actor id="0199" name="Oceff_Wipe3">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Saria's Song effect</Description>
+    <Description>Saria's Song Ocarina Effect</Description>
     <Variables />
   </Actor>
   <Actor id="019A" name="En_Niw_Girl">
     <Objects>
       <Object>016A</Object>
     </Objects>
-    <Description>Girl chasing Cucco</Description>
+    <Description>Girl Chasing Cucco</Description>
     <Variables />
   </Actor>
   <Actor id="019B" name="En_Dog">
@@ -14374,14 +14455,14 @@
     <Objects>
       <Object>0024</Object>
     </Objects>
-    <Description>Golden Skulltula token</Description>
+    <Description>Gold Skulltula Token</Description>
     <Variables />
   </Actor>
   <Actor id="019D" name="Bg_Spot01_Objects2">
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Kakariko Village Set Pieces</Description>
+    <Description>Kakariko Village Objects</Description>
     <Comment>FIXME: Objects</Comment>
     <Variables>
       <Variable>
@@ -14527,22 +14608,22 @@
     <Objects>
       <Object>0111</Object>
     </Objects>
-    <Description>Man in white top, purple pants</Description>
-    <Comment>may cause crashes in some areas</Comment>
+    <Description>Happy Mask Shop Customer</Description>
+    <Comment>Man in white top, purple pants</Comment>
     <Variables />
   </Actor>
   <Actor id="01A5" name="Bg_Bom_Guard">
     <Objects>
       <Object>0178</Object>
     </Objects>
-    <Description>Bombchu Bowling Alley game</Description>
+    <Description>Bombchu Bowling Alley Aiming Area</Description>
     <Variables />
   </Actor>
   <Actor id="01A6" name="En_Hs2">
     <Objects>
       <Object>0128</Object>
     </Objects>
-    <Description>Carpenter's Son (Child Link version)</Description>
+    <Description>Carpenter's Son (Child Era)</Description>
     <Variables />
   </Actor>
   <Actor id="01A7" name="Demo_Kekkai">
@@ -14677,14 +14758,14 @@
     <Objects>
       <Object>0182</Object>
     </Objects>
-    <Description>Entwined lovers (Honey &amp; Darling)</Description>
+    <Description>Entwined Lovers (Honey &amp; Darling)</Description>
     <Variables />
   </Actor>
   <Actor id="01AD" name="En_Mu">
     <Objects>
       <Object>0182</Object>
     </Objects>
-    <Description>Haggling townspeople</Description>
+    <Description>Haggling Townspeople</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -14745,7 +14826,7 @@
     <Objects>
       <Object>00C9</Object>
     </Objects>
-    <Description>Gorons</Description>
+    <Description>Gorons 2</Description>
     <Comment>FIXME: Variables</Comment>
     <Variables>
       <Variable>
@@ -14863,7 +14944,7 @@
     <Objects>
       <Object>0184</Object>
     </Objects>
-    <Description>Hyrule Field Stalchild</Description>
+    <Description>Stalchild</Description>
     <Comment>
       FIXME:
       0000 to 1098 controls the size, where 0000 is normal size and 1098 is as large as is possible for the machine to handle (may vary depending on the level).
@@ -14876,7 +14957,7 @@
     <Objects>
       <Object>0185</Object>
     </Objects>
-    <Description>Ganon Battle rubble</Description>
+    <Description>Ganon Battle Rubble</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -14971,8 +15052,7 @@
     <Objects>
       <Object>0186</Object>
     </Objects>
-    <Description>Chunk of stone</Description>
-    <Comment>non-solid, possibly Ganon's Tower rubble</Comment>
+    <Description>Ganon's Tower Rubble Fragment</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -15010,7 +15090,7 @@
     <Objects>
       <Object>0179</Object>
     </Objects>
-    <Description>Sinking lava platform (Ganon's Castle)</Description>
+    <Description>Sinking Lava Platform (Ganon's Castle)</Description>
     <Comment>Narrow, maze-like platform (sinks)</Comment>
     <Variables>
       <Variable>
@@ -15128,7 +15208,7 @@
     <Objects>
       <Object>0179</Object>
     </Objects>
-    <Description>2D Stone Wall</Description>
+    <Description>Ganon's Castle Fake Walls</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -15139,21 +15219,19 @@
         <Value>
           <Data>0000</Data>
           <Description>Square Stone</Description>
+          <Comment>Light Trial Fake Wall</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Stone Brick</Description>
+          <Description>Stone Brick 1</Description>
+          <Comment>Unused</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Similar to 1, but looks like a different texture</Description>
-          <Meta />
-        </Value>
-        <Value uihide="true" repeat="+">
-          <Data>0003</Data>
-          <Description>Graphics glitchy</Description>
+          <Description>Stone Brick 2</Description>
+          <Comment>Deku Scrub Fake Wall</Comment>
           <Meta />
         </Value>
       </Variable>
@@ -15163,7 +15241,7 @@
     <Objects>
       <Object>0179</Object>
     </Objects>
-    <Description>Pushable large square ice block (Inside Ganon's Castle)</Description>
+    <Description>Pushable Square Ice Block (Inside Ganon's Castle)</Description>
     <Comment>Actor 00D6 is used in Ice Cavern</Comment>
     <Variables />
   </Actor>
@@ -15171,14 +15249,14 @@
     <Objects>
       <Object>0189</Object>
     </Objects>
-    <Description>Poe Collector and surroundings</Description>
+    <Description>Poe Collector and Surroundings</Description>
     <Variables />
   </Actor>
   <Actor id="01B9" name="En_Gs">
     <Objects>
       <Object>0188</Object>
     </Objects>
-    <Description>Gossip stone</Description>
+    <Description>Gossip Stone</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
@@ -15481,7 +15559,7 @@
     <Objects>
       <Object>0178</Object>
     </Objects>
-    <Description>Bombchu Bowling alley wall</Description>
+    <Description>Bombchu Bowling Alley Wall</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -15511,14 +15589,14 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Bombchu Bowling Alley Wall 2</Description>
+    <Description>Bombchu Bowling Alley Bullseyes</Description>
     <Variables />
   </Actor>
   <Actor id="01BF" name="En_Po_Desert">
     <Objects>
       <Object>006D</Object>
     </Objects>
-    <Description>Guide Poe (Desert Wasteland)</Description>
+    <Description>Poe Guide (Desert Wasteland)</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFF00</Capture>
@@ -15540,7 +15618,7 @@
     <Objects>
       <Object>018E</Object>
     </Objects>
-    <Description>Fake door</Description>
+    <Description>Fake Door</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
@@ -15585,29 +15663,28 @@
     <Objects>
       <Object>016F</Object>
     </Objects>
-    <Description>Refilling Oasis (Desert Colossus)</Description>
-    <Comment>FIXME: Switch Flag</Comment>
+    <Description>Oasis (Desert Colossus)</Description>
     <Variables />
   </Actor>
   <Actor id="01C3" name="Bg_Spot18_Futa">
     <Objects>
       <Object>00AF</Object>
     </Objects>
-    <Description>Lid to Goron Jar</Description>
+    <Description>Goron Jar Lid</Description>
     <Variables />
   </Actor>
   <Actor id="01C4" name="Bg_Spot18_Shutter">
     <Objects>
       <Object>00AF</Object>
     </Objects>
-    <Description>Goron room door</Description>
+    <Description>Sliding Doors (Goron City)</Description>
     <Variables />
   </Actor>
   <Actor id="01C5" name="En_Ma3">
     <Objects>
       <Object>00D0</Object>
     </Objects>
-    <Description>Adult Malon (Ranch)</Description>
+    <Description>Malon (Adult, Lon Lon Ranch)</Description>
     <Variables />
   </Actor>
   <Actor id="01C6" name="En_Cow">
@@ -15682,7 +15759,7 @@
     <Objects>
       <Object>006B</Object>
     </Objects>
-    <Description>2D Ice bars (for a door?)</Description>
+    <Description>Vertical Ice Bars (Ice Cavern)</Description>
     <Variables />
   </Actor>
   <Actor id="01C9" name="En_Kakasi2">
@@ -15690,11 +15767,38 @@
       <Object>0154</Object>
     </Objects>
     <Description>Pierre the Scarecrow Spawn</Description>
-    <Comment>
-      Green Navi spot
-      FIXME: Switch Flag
-    </Comment>
-    <Variables />
+    <Comment>Green Navi spot</Comment>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
+        <Description>Switch Flag</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x3FC0</Capture>
+        <Description>Spawn Range XZ</Description>
+        <UI>
+          <NumberUpDown>
+            <Unit>Units</Unit>
+            <Increment>40</Increment>
+            <Min>40</Min>
+          </NumberUpDown>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>rz &amp;&gt;&gt; 0xFFFF </Capture>
+        <Description>Spawn Range Y</Description>
+        <UI>
+          <NumberUpDown>
+            <Unit>Units</Unit>
+            <Increment>40</Increment>
+            <Min>40</Min>
+          </NumberUpDown>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="01CA" name="En_Kakasi3">
     <Objects>
@@ -15707,28 +15811,23 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Song of Time effect</Description>
-    <Comment>FIXME: Scarecrow's song?</Comment>
+    <Description>Scarecrow's Song Ocarina Effect</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
-        <Description>#N/A</Description>
+        <Description>Type</Description>
         <UI>
             <Default/>
         </UI>
         <Value>
           <Data>0000</Data>
-          <Description>Scarecrow song effect?</Description>
+          <Description>Scarecrow Song</Description>
           <Meta />
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>purple</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0002</Data>
-          <Description>Same as 0000</Description>
+          <Description>Purple</Description>
+          <Comment>Unused</Comment>
           <Meta />
         </Value>
       </Variable>
@@ -15738,8 +15837,7 @@
     <Objects>
       <Object>0060</Object>
     </Objects>
-    <Description>Zelda's Path in Ganon Castle Escape?</Description>
-    <Comment>FIXME: What?</Comment>
+    <Description>Void-out Trigger (Tower Collapse)</Description>
     <Variables />
   </Actor>
   <Actor id="01CD" name="Bg_Menkuri_Nisekabe">
@@ -15789,7 +15887,8 @@
     <Objects>
       <Object>0169</Object>
     </Objects>
-    <Description>Gerudo giving you membership card</Description>
+    <Description>Gerudo Fortress Leader</Description>
+    <Comment>Gives Gerudo Membership Guard</Comment>
     <Variables />
   </Actor>
   <Actor id="01D1" name="Obj_Timeblock">
@@ -15797,7 +15896,7 @@
       <Object>0190</Object>
       <Object>00A8</Object>
     </Objects>
-    <Description>Time block</Description>
+    <Description>Time Block</Description>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x8000</Capture>
@@ -15973,29 +16072,29 @@
     <Objects>
       <Object>0002</Object>
     </Objects>
-    <Description>Bronze boulder</Description>
+    <Description>Bronze Boulder</Description>
     <Variables />
   </Actor>
   <Actor id="01D3" name="En_Zl4">
     <Objects>
       <Object>0191</Object>
     </Objects>
-    <Description>Child Princess Zelda</Description>
+    <Description>Zelda (Child)</Description>
     <Variables />
   </Actor>
   <Actor id="01D4" name="En_Mm2">
     <Objects>
       <Object>013C</Object>
     </Objects>
-    <Description>Running Man (Adult)</Description>
+    <Description>Running Man (Adult Era)</Description>
     <Variables />
   </Actor>
   <Actor id="01D5" name="Bg_Jya_Block">
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Silver Block (Child Link)</Description>
-    <Comment>Only spawns as child link</Comment>
+    <Description>Silver Block (Child Era)</Description>
+    <Comment>Only spawns when Child Link</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;>> 0x003F</Capture>
