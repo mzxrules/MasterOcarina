@@ -43,7 +43,7 @@ namespace mzxrules.XActor
 
         private void SCRIPT_Select_Width_Test()
         {
-            List<string> Descriptions = new List<string>();
+            List<string> Descriptions = new();
 
             foreach (var actor in Document.Actor)
             {
@@ -55,7 +55,7 @@ namespace mzxrules.XActor
             }
             Descriptions = Descriptions.OrderBy(x => x.Length).ToList();
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             foreach (string s in Descriptions)
                 sb.AppendLine(s);
 
@@ -64,7 +64,7 @@ namespace mzxrules.XActor
 
         private void SCRIPT_Ui_Test()
         {
-            List<string> Descriptions = new List<string>();
+            List<string> Descriptions = new();
 
             foreach (var actor in Document.Actor)
             {
@@ -77,7 +77,7 @@ namespace mzxrules.XActor
             }
             Descriptions = Descriptions.OrderBy(x => x.Length).ToList();
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             foreach (string s in Descriptions)
                 sb.AppendLine(s);
 
@@ -87,12 +87,12 @@ namespace mzxrules.XActor
         private void SetBitflagParam()
         {
             XActors actors;
-            Int16[] bitDictionary = new Int16[16];
+            short[] bitDictionary = new short[16];
             actors = XActors.LoadFromFile(XActors.OcaXmlPath);
 
             for (int i = 0; i < 16; i++)
             {
-                bitDictionary[i] = (Int16)(1 << i);
+                bitDictionary[i] = (short)(1 << i);
             }
 
             foreach (XActor actor in actors.Actor)
@@ -119,17 +119,17 @@ namespace mzxrules.XActor
         {
             string[] Lines;
             XActors resultXActors;
-            ParseOldFormat oldFormat = new ParseOldFormat();
+            ParseOldFormat oldFormat = new();
 
             Lines = dataInRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             resultXActors = oldFormat.ParseLines(Lines);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(XActors));
-            XmlWriterSettings xmlOutSettings = new XmlWriterSettings()
+            XmlSerializer serializer = new(typeof(XActors));
+            XmlWriterSettings xmlOutSettings = new()
             {
                 Indent = true
             };
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             using (XmlWriter writer = XmlWriter.Create(sb, xmlOutSettings))
             {
@@ -148,12 +148,12 @@ namespace mzxrules.XActor
             Lines = dataInRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             resultXActors = ParseGBFormat.ParseLines(Lines);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(XActors));
-            XmlWriterSettings xmlOutSettings = new XmlWriterSettings()
+            XmlSerializer serializer = new(typeof(XActors));
+            XmlWriterSettings xmlOutSettings = new()
             {
                 Indent = true
             };
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             using (XmlWriter writer = XmlWriter.Create(sb, xmlOutSettings))
             {
@@ -172,7 +172,7 @@ namespace mzxrules.XActor
             Lines = dataInRichTextBox.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
 
-            Regex TestRegex = new Regex(""); //new Regex(IdLine + Comment);
+            Regex TestRegex = new(""); //new Regex(IdLine + Comment);
 
 
             MatchCollection matches = TestRegex.Matches(Lines[0].Trim());

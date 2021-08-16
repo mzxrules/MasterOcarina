@@ -1900,12 +1900,17 @@
     </Objects>
     <Description>Peahat and Larva</Description>
     <Variables>
-      <Variable default="FFFF">
+      <Variable default="FFFF" setDesc="true">
         <Capture>v &amp;&gt;&gt; 0xFFFF</Capture>
         <Description>Type</Description>
         <UI>
           <Select/>
         </UI>
+        <Value>
+          <Data>FFFF</Data>
+          <Description>Ground Peahat</Description>
+          <Meta />
+        </Value>
         <Value>
           <Data>0000</Data>
           <Description>Flying Peahat</Description>
@@ -1915,16 +1920,6 @@
         <Value>
           <Data>0001</Data>
           <Description>Peahat Larva</Description>
-          <Meta />
-        </Value>
-        <Value uihide="true" repeat="+">
-          <Data>0002</Data>
-          <Description>[Crash]</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>FFFF</Data>
-          <Description>Burrowed Peahat</Description>
           <Meta />
         </Value>
       </Variable>
@@ -2106,13 +2101,13 @@
         <Value>
           <Data>00</Data>
           <Description>Lizalfos mini-boss, drops from ceiling</Description>
-          <Comment>Partner to 01, in order to be killed</Comment>
+          <Comment>Partner to 01 in order to be killed</Comment>
           <Meta />
         </Value>
         <Value repeat="+">
           <Data>01</Data>
           <Description>Lizalfos mini-boss, no mini-boss music</Description>
-          <Comment>Partner to 00, in order to be killed</Comment>
+          <Comment>Partner to 00 in order to be killed</Comment>
           <Meta />
         </Value>
         <Value repeat="+">
@@ -3689,9 +3684,8 @@
       <Object>00A4</Object>
     </Objects>
     <Description>Torch</Description>
-    <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
+      <Variable setDesc="true">
         <Capture>v &amp;&gt;&gt; 0xF000</Capture>
         <Description>Type</Description>
         <UI>
@@ -3722,7 +3716,8 @@
       </Variable>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x03C0</Capture>
-        <Description>Torches to light to solve puzzle (Timed Torch)</Description>
+        <Description>Torches to light</Description>
+        <Comment>10 -> 24</Comment>
         <UI>
           <Number>
             <Display>int</Display>
@@ -3742,7 +3737,7 @@
     <Objects>
       <Object>00BD</Object>
     </Objects>
-    <Description>Heart container</Description>
+    <Description>Heart Container</Description>
     <Variables />
   </Actor>
   <Actor id="0060" name="En_Dekunuts">
@@ -4539,7 +4534,7 @@
     <Description>Metal Spike Trap</Description>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x30</Capture>
+        <Capture>v &amp;&gt;&gt; 0x0030</Capture>
         <Description>Pattern</Description>
         <UI>
             <Select/>
@@ -4558,37 +4553,29 @@
           <Description>Circle Loop</Description>
           <Meta />
         </Value>
-        <Value uihide="true">
-          <Data>3</Data>
-          <Description>Vertical</Description>
-          <Comment>Unintended Behavior?</Comment>
-          <Meta />
-        </Value>
-      </Variable>
-      <Variable>
-        <Capture>v &amp;&gt;&gt; 0xF000</Capture>
-        <Condition>v &amp;&gt;&gt; 0x0030 == 2</Condition>
-        <Description>Radius</Description>
-        <Comment>v &amp;>> 0x0F00 + 1 * 20</Comment>
-        <UI>
-          <NumberUpDown>
-            <Unit>Unit</Unit>
-            <Increment>20</Increment>
-            <Min>20</Min>
-          </NumberUpDown>
-        </UI>
       </Variable>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xF000</Capture>
         <Condition>v &amp;&gt;&gt; 0x0030 == 0</Condition>
         <Description>Trap Range</Description>
-        <Comment>Distance = v * 40 units (Type 0 and 1)</Comment>
+        <Comment>Type 0. Distance = v * 40 units</Comment>
         <UI>
           <NumberUpDown>
             <Unit>Units</Unit>
             <Increment>40</Increment>
             <Min>0</Min>
           </NumberUpDown>
+        </UI>
+      </Variable>
+      <Variable default="F">
+        <Capture>v &amp;&gt;&gt; 0x0F00</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0030 == 0</Condition>
+        <Description>Attack Speed (Units)</Description>
+        <Comment>Type 0</Comment>
+        <UI>
+          <Number>
+            <Display>int</Display>
+          </Number>
         </UI>
       </Variable>
       <Variable>
@@ -4629,15 +4616,41 @@
       </Variable>
       <Variable default="F">
         <Capture>v &amp;&gt;&gt; 0x0F00</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0030 == 1</Condition>
         <Description>Attack Speed (Units)</Description>
-        <Comment>4-Way Attack glitches if speed != 0xF</Comment>
+        <Comment>Type 1</Comment>
         <UI>
           <Number>
             <Display>int</Display>
           </Number>
         </UI>
       </Variable>
-  
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0xF000</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0030 == 2</Condition>
+        <Description>Angular Velocity</Description>
+        <Comment>Type 2. Angular Velocity = (v + 1) * 0x200</Comment>
+        <UI>
+          <NumberUpDown>
+            <Unit>Rot</Unit>
+            <Increment>512</Increment>
+            <Min>512</Min>
+          </NumberUpDown>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x0F00</Capture>
+        <Condition>v &amp;&gt;&gt; 0x0030 == 2</Condition>
+        <Description>Radius</Description>
+        <Comment>Type 2. Radius = value * 40f</Comment>
+        <UI>
+          <NumberUpDown>
+            <Unit>Units</Unit>
+            <Increment>40</Increment>
+            <Min>00</Min>
+          </NumberUpDown>
+        </UI>
+      </Variable>
     </Variables>
   </Actor>
   <Actor id="0081" name="En_Arow_Trap">
@@ -5146,7 +5159,7 @@
     </Objects>
     <Description>Redead and Gibdo</Description>
     <Variables>
-      <Variable>
+      <Variable setDesc="true">
         <Capture>v &amp;>> 0x0080</Capture>
         <Description>Type</Description>
         <UI>
@@ -5373,7 +5386,6 @@
       <Object>0001</Object>
     </Objects>
     <Description>Fish, Bugs, Butterflies Group Spawner</Description>
-    <Comment>FIXME</Comment>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x1F</Capture>
@@ -5463,26 +5475,6 @@
       <Object>0024</Object>
     </Objects>
     <Description>Skullwalltula and Gold Skulltulas</Description>
-    <Comment-Other>
-      FFFF - FIXME
-      - 0000+ [0000] = Skullwalltula
-      - 2000+ [2000] = Golden Skulltula on ground, damaged, discovery sound, Navi can target it and thinks it’s a Skullwalltula
-      - 2100+ [2100] = Golden Skulltula
-      - 4000+ [4000] = Same as 2000
-      - 4100+ [4100] = Same as 2100
-      - 6000+ [6000] = Same as 2000
-      - 6100+ [6100] = Golden Skulltula jumps out and lands on ground, discovery sound
-      - 8000+ [8000] = Same as 2000
-      - 8100+ [8100] = Same as 2100
-      - A000+ [A000] = Same as 2000
-      - A100+ [A100] = Same as 2100
-      - C000+ [C000] = Same as 2000
-      - C100+ [C100] = Same as 2100
-      - D000+ [D000] = Same as 6100
-      - E000+ [E000] = Same as 2000
-      - E100+ [E100] = Same as 2100
-      - F000+ [F000] = Same as 6100
-    </Comment-Other>
     <Variables>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0xE000</Capture>
@@ -5496,13 +5488,45 @@
           <Meta />
         </Value>
         <Value>
+          <Data>01</Data>
+          <Description>Gold Skulltula, Always Spawns</Description>
+          <Comment>Type 1, Unused</Comment>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>Gold Skulltula, Spawns at night</Description>
+          <Comment>Type 2 Unused</Comment>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Gold Skulltula, Spawn from dirt</Description>
+          <Comment>Type 3</Comment>
+          <Meta />
+        </Value>
+        <Value>
           <Data>04</Data>
           <Description>Gold Skulltula, Always Spawns</Description>
+          <Comment>Type 1</Comment>
           <Meta />
         </Value>
         <Value>
           <Data>05</Data>
           <Description>Gold Skulltula, Spawns at night</Description>
+          <Comment>Type 2</Comment>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>06</Data>
+          <Description>Gold Skulltula, Spawn from dirt</Description>
+          <Comment>Type 3</Comment>
+          <Meta />
+        </Value>
+        <Value>
+          <Data>07</Data>
+          <Description>Gold Skulltula, Spawn from dirt</Description>
+          <Comment>Type 4</Comment>
           <Meta />
         </Value>
       </Variable>

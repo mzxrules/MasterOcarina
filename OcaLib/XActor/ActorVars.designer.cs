@@ -3558,6 +3558,8 @@ namespace mzxrules.XActor
         
         private bool nullableField;
         
+        private bool setDescField;
+        
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public XVariable() {
@@ -3566,6 +3568,7 @@ namespace mzxrules.XActor
             this.idField = "-1";
             this.defaultField = "0000";
             this.nullableField = false;
+            this.setDescField = false;
         }
         
         public string Capture {
@@ -3653,6 +3656,17 @@ namespace mzxrules.XActor
             }
             set {
                 this.nullableField = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool setDesc {
+            get {
+                return this.setDescField;
+            }
+            set {
+                this.setDescField = value;
             }
         }
         

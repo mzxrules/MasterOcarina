@@ -9,7 +9,7 @@ namespace mzxrules.XActor
         static Game SetGame;
         public static StringBuilder Output(XActors root, Game game)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             SetGame = game;
             sb.AppendLine("== Actors ==");
             sb.AppendLine("<div style=\"font-family: monospace, Consolas, DejaVu Sans Mono, Droid Sans Mono, Lucida Console, Courier New;\">");
@@ -54,17 +54,12 @@ namespace mzxrules.XActor
         /// <param name="var"></param>
         private static void PrintVariable(StringBuilder sb, XVariable var, Game game)
         {
-            //sb.AppendFormat(" {0} {1} - {2} ",
-            //    (var.maskType == MaskType.And) ? "&" : "|",
-            //    var.mask,
-            //    var.Description);
             sb.Append($";{var.Capture} = {var.Description}");
-            //sb.Append($" {GetCaptureCatch(var.Capture)} - {var.Description} ");
 
             PrintComments(sb, var.Comment, true);
             sb.AppendLine();
 
-            CaptureExpression capture = new CaptureExpression(var.Capture);
+            CaptureExpression capture = new(var.Capture);
             foreach (XVariableValue value in var.Value)
             {
                 PrintVariableValue(sb, value, capture);

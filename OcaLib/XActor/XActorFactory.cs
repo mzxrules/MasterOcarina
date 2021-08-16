@@ -24,7 +24,7 @@ namespace mzxrules.XActor
 
         static Dictionary<short, XActorParser> GetXActorParsers(XActors root, Game game)
         {
-            Dictionary<short, XActorParser> result = new Dictionary<short, XActorParser>();
+            Dictionary<short, XActorParser> result = new();
             foreach (var item in root.Actor)
             {
                 short id = short.Parse(item.id, NumberStyles.HexNumber);
@@ -55,11 +55,14 @@ namespace mzxrules.XActor
         public static ActorSpawn NewOcaActor(short[] record)
         {
             var actor = record[0];
-            if (!OcarinaActorParsers.TryGetValue(actor, out XActorParser xactorParser))
+            if (!OcarinaActorParsers.TryGetValue(actor, out XActorParser xActorParser))
             {
                 return new ActorSpawn(record);
             }
-            return new XActorSpawn(record, xactorParser.Description, xactorParser.GetVariables(record, CaptureExpression.GetOcaActorValue));
+            CaptureExpression.GetValueDelegate capExpr = CaptureExpression.GetOcaActorValue;
+            string desc = xActorParser.GetDescription(record, capExpr);
+            string vars = xActorParser.GetVariables(record, capExpr);
+            return new XActorSpawn(record, desc, vars);
         }
 
         public static ActorSpawn NewMaskActor(short[] record)
@@ -69,29 +72,38 @@ namespace mzxrules.XActor
             {
                 return new MActorSpawn(record);
             }
-            return new XMActorSpawn(record, xActorParser.Description, xActorParser.GetVariables(record, CaptureExpression.GetMMActorValue));
+            CaptureExpression.GetValueDelegate capExpr = CaptureExpression.GetMMActorValue;
+            string desc = xActorParser.GetDescription(record, capExpr);
+            string vars = xActorParser.GetVariables(record, capExpr);
+            return new XMActorSpawn(record, desc, vars);
         }
 
         public static TransitionActorSpawn NewOcaTransitionActor(byte[] record)
         {
             short[] rec = Endian.BytesToBigShorts(record);
             var actor = rec[2];
-            if (!OcarinaActorParsers.TryGetValue(actor, out XActorParser xactorParser))
+            if (!OcarinaActorParsers.TryGetValue(actor, out XActorParser xActorParser))
             {
                 return new TransitionActorSpawn(record);
             }
-            return new XTransitionActorSpawn(rec, xactorParser.Description, xactorParser.GetVariables(rec, CaptureExpression.GetOcaActorValue));
+            CaptureExpression.GetValueDelegate capExpr = CaptureExpression.GetOcaActorValue;
+            string desc = xActorParser.GetDescription(rec, capExpr);
+            string vars = xActorParser.GetVariables(rec, capExpr);
+            return new XTransitionActorSpawn(rec, desc, vars);
         }
 
         public static TransitionActorSpawn NewMaskTransitionActor(byte[] record)
         {
             short[] rec = Endian.BytesToBigShorts(record);
             var actor = rec[2];
-            if (!MaskActorParsers.TryGetValue(actor, out XActorParser xactorParser))
+            if (!MaskActorParsers.TryGetValue(actor, out XActorParser xActorParser))
             {
                 return new TransitionActorSpawn(record);
             }
-            return new XTransitionActorSpawn(rec, xactorParser.Description, xactorParser.GetVariables(rec, CaptureExpression.GetOcaActorValue));
+            CaptureExpression.GetValueDelegate capExpr = CaptureExpression.GetOcaActorValue;
+            string desc = xActorParser.GetDescription(rec, capExpr);
+            string vars = xActorParser.GetVariables(rec, capExpr);
+            return new XTransitionActorSpawn(rec, desc, vars);
         }
 
         public class XActorSpawn : ActorSpawn

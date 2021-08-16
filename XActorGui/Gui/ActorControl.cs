@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace mzxrules.XActor.Gui
@@ -50,16 +46,16 @@ namespace mzxrules.XActor.Gui
             foreach (var item in Actor.Variables) 
             {
                 //actor.Variables
-                if (! (item.UI.Item is UINone)) // UITypes.none
+                if (!(item.UI.Item is UINone))
                 {
                     BaseControl control;
 
                     switch (item.UI.Item)
                     {
-                        case UISelect c/*UITypes.select*/: control = new SelectControl(); break;
-                        case UISwitchFlag c/*UITypes.switchflag*/: control = new FlagsControl(); break;
-                        case UICollectFlag c/*UITypes.collectflag*/: control = new FlagsControl(); break;
-                        case UIChestFlag c /*UITypes.chestflag*/: control = new FlagsControl(); break;
+                        case UISelect: control = new SelectControl(); break;
+                        case UISwitchFlag: control = new FlagsControl(); break;
+                        case UICollectFlag: control = new FlagsControl(); break;
+                        case UIChestFlag: control = new FlagsControl(); break;
                         default: control = new NumControl(); break;
                     }
                     control.Dock = DockStyle.Fill;
@@ -72,7 +68,7 @@ namespace mzxrules.XActor.Gui
                 }
                 if (item.Comment != null)
                 {
-                    Label comment = new Label();
+                    Label comment = new();
                     comment.MinimumSize = new Size(350, 0);
                     comment.Text = item.Comment;
                     flowLayoutPanel.Controls.Add(comment);
@@ -85,7 +81,7 @@ namespace mzxrules.XActor.Gui
 
         private string SetComment(string comment, string commentOther = null)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             sb.Append(Helper.TrimComment(Actor.Comment));
 
@@ -102,18 +98,18 @@ namespace mzxrules.XActor.Gui
         {
             if (lines < 3)
             {
-                Label l = new Label();
+                Label l = new();
                 l.AutoSize = true;
                 l.MinimumSize = new Size(390, 0);
                 return l;
             }
             else
             {
-                RichTextBox rtx = new RichTextBox();
+                RichTextBox rtx = new();
                 rtx.MinimumSize = new Size(350, 0);
                 rtx.Size = new Size(flowLayoutPanel.Size.Width-30, 40);
-                rtx.BackColor = System.Drawing.SystemColors.Control;
-                rtx.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                rtx.BackColor = SystemColors.Control;
+                rtx.BorderStyle = BorderStyle.None;
                 return rtx;
             }
         }

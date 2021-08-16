@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public SegmentAddress SegmentAddress { get; set; }
 
         public int Actors { get; set; }
-        public List<IActor> ActorList = new List<IActor>();
+        public List<IActor> ActorList = new();
         private delegate ActorSpawn GetActorRecord(short[] data);
 
         readonly GetActorRecord NewActor;

@@ -66,6 +66,7 @@
     <xs:attribute name="id" default="-1"/>
     <xs:attribute name="default" type="xs:string" use="optional" default="0000" />
     <xs:attribute name="nullable" type="xs:boolean" default="false"/>
+    <xs:attribute name="setDesc" type="xs:boolean" default="false"/>
   </xs:complexType>
 
   <xs:complexType name="XValueGlobal">

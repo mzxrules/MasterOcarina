@@ -8,11 +8,12 @@ namespace mzxrules.XActor
     internal class XVariableParser
     {
         private XVariable item;
-        private Game game;
+        private readonly Game game;
 
         public CaptureExpression capture;
         public ConditionExpression condition;
         public bool hidden;
+        public bool isDescriptionOverride;
 
         internal delegate string PrintVariableDelegate(short[] actorRecord, CaptureExpression.GetValueDelegate getValDelegate);
         internal PrintVariableDelegate PrintVariable;
@@ -24,7 +25,8 @@ namespace mzxrules.XActor
         {
             this.item = var;
             this.game = game;
-            this.hidden = (var.UI.Item is UIHidden);
+            this.hidden = var.UI.Item is UIHidden;
+            this.isDescriptionOverride = var.setDesc;
 
             foreach (var v in var.Value)
             {
@@ -53,6 +55,20 @@ namespace mzxrules.XActor
                     PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x):X2}"; }; break;
                 case UIBitFlag bf:
                     PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x) > 0}"; }; break;
+                case UINumber nb:
+                    if (nb.Display == "int")
+                        PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x)}"; };
+                    else
+                        PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x):X4}"; };
+                    break;
+                case UINumberUpDown nbUD:
+                    if (nbUD.Unit == "Rot")
+                    {
+                        PrintVariable = (x, get) => { return $"{item.Description}: {(short)(get(capture)(x) * nbUD.Increment + nbUD.Min):X4}"; };
+                    }
+                    else
+                        PrintVariable = (x, get) => { return $"{item.Description}: {get(capture)(x) * nbUD.Increment + nbUD.Min} {nbUD.Unit}"; };
+                    break;
                 default:
                     PrintVariable = (x, get) =>
                     {
