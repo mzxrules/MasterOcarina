@@ -146,7 +146,7 @@ namespace Atom
             br.BaseStream.Position = section.Offset;
             pc = section.VRam;
 
-            List<byte> byteChain = new List<byte>();
+            List<byte> byteChain = new();
             N64Ptr end = section.VRam + section.Size;
             N64Ptr chainStart = pc;
             while (pc < end)
@@ -241,7 +241,7 @@ namespace Atom
 
             static string GetLineByte(List<byte> chain, int index, int count)
             {
-                List<string> values = new List<string>();
+                List<string> values = new();
                 foreach (var item in chain.GetRange(index, count))
                 {
                     values.Add($"0x{item:X2}");
@@ -251,7 +251,7 @@ namespace Atom
 
             static string GetLineWord(List<byte> chain, int index, int count)
             {
-                List<string> values = new List<string>();
+                List<string> values = new();
                 List<byte> items = chain.GetRange(index, count);
                 for (int i = 0; i < count; i += 4)
                 {
@@ -449,7 +449,7 @@ namespace Atom
 
         private static List<N64PtrRange> GetTextSectionRanges(DisassemblyTask task)
         {
-            List<N64PtrRange> textSections = new List<N64PtrRange>();
+            List<N64PtrRange> textSections = new();
             foreach (var section in task.Sections.Values.Where(x => x.IsCode))
             {
                 textSections.Add(new N64PtrRange(section.VRam, section.VRam + section.Size));

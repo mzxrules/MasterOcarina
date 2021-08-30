@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
@@ -27,7 +23,7 @@ namespace XmlActorBuilder
 
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ActorDatabase));
+            XmlSerializer xmlSerializer = new(typeof(ActorDatabase));
             using (XmlReader reader = XmlReader.Create(openFileDialog.FileName))
             {
                 db = (ActorDatabase)xmlSerializer.Deserialize(reader);
@@ -42,9 +38,9 @@ namespace XmlActorBuilder
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
+            XmlWriterSettings settings = new();
             settings.Indent = true;
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ActorDatabase));
+            XmlSerializer xmlSerializer = new(typeof(ActorDatabase));
             using (XmlWriter writer = XmlWriter.Create(saveFileDialog.FileName, settings))
             {
 
@@ -83,7 +79,7 @@ namespace XmlActorBuilder
             if (db == null)
                 return;
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ActorDatabase));
+            XmlSerializer xmlSerializer = new(typeof(ActorDatabase));
             using (XmlReader reader = XmlReader.Create("Default.xml"))
             {
                  template = (ActorDatabase)xmlSerializer.Deserialize(reader);

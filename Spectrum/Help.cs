@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
@@ -10,7 +7,7 @@ namespace Spectrum
     {
         public static string GetArguments(IEnumerable<string> test)
         {
-            return (test.Count() > 0) ? "<" + string.Join("> <", test) + ">" : "";
+            return test.Any() ? "<" + string.Join("> <", test) + ">" : "";
         }
         public static IEnumerable<string> ConvertTokensToString(Tokens[] signature)
         {
@@ -19,11 +16,11 @@ namespace Spectrum
         }
         public static string ConvertTokenToString(Tokens t)
         {
-            switch (t)
+            return t switch
             {
-                case Tokens.COORDS_FLOAT: return "x,y,z";
-                default: return t.ToString().ToLowerInvariant();
-            }
+                Tokens.COORDS_FLOAT => "x,y,z",
+                _ => t.ToString().ToLowerInvariant(),
+            };
         }
     }
 }

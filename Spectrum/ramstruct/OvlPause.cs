@@ -20,13 +20,12 @@ namespace Spectrum
 
         public override string ToString()
         {
-            string name;
-            switch (Item)
+            string name = Item switch
             {
-                case 0: name = $"{Item:X2} kaleido_scope"; break;
-                case 1: name = $"{Item:X2} player_actor"; break;
-                default: name = $"UNKNOWN {Item:X2}"; break;
-            }
+                0 => $"{Item:X2} kaleido_scope",
+                1 => $"{Item:X2} player_actor",
+                _ => $"UNKNOWN {Item:X2}",
+            };
             return $"OVL KS:   {name}";
         }
     }

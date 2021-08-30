@@ -13,7 +13,7 @@ namespace Atom
     {
         public class SectionList
         {
-            public List<Section> Values = new List<Section>();
+            public List<Section> Values = new();
             
             public bool IsWithinCode(N64Ptr ptr)
             {
@@ -29,17 +29,17 @@ namespace Atom
         public N64PtrRange VRam { get; protected set; }
         public FileAddress VRom { get; protected set; }
 
-        public SectionList Sections = new SectionList();
+        public SectionList Sections = new();
 
-        public List<Overlay.RelocationWord> Relocations = new List<Overlay.RelocationWord>();
+        public List<Overlay.RelocationWord> Relocations = new();
         
         //used for oot decomp
         public N64PtrRange HeaderAndReloc { get; protected set; }
 
         public bool SplitFunctions { get; protected set; }
 
-        public List<Label> Functions = new List<Label>();
-        public List<Action<Stream>> PreparseActions = new List<Action<Stream>>();
+        public List<Label> Functions = new();
+        public List<Action<Stream>> PreparseActions = new();
 
         
         public enum OvlType
@@ -72,7 +72,7 @@ namespace Atom
             foreach(var item in file.Sections)
             {
                 var ram = item.Ram.Convert();
-                Section section = new Section(item.Name, task.VRam.Start, ram.Start, ram.Size, item.Subsection, item.IsCode);
+                Section section = new(item.Name, task.VRam.Start, ram.Start, ram.Size, item.Subsection, item.IsCode);
                 task.Sections.Values.Add(section);
             }
             return task;
@@ -83,7 +83,7 @@ namespace Atom
         {
             string name = GetTaskName(dmadata, index, ovlInfo, nameClass);
 
-            DisassemblyTask task = new DisassemblyTask()
+            DisassemblyTask task = new()
             {
                 Name = name,
                 VRam = ovlInfo.VRam,
@@ -100,20 +100,20 @@ namespace Atom
             var overlay = new Overlay();
             if (ovlInfo.VRom.Size != 0)
             {
-                BinaryReader br = new BinaryReader(file);
+                BinaryReader br = new(file);
                 overlay = new Overlay(br);
             }
             task.Relocations = overlay.Relocations;
 
             N64Ptr fstart = task.VRam.Start;
 
-            Section text = new Section("text", fstart, fstart, overlay.TextSize, 0, true);
-            Section data = new Section("data", fstart, text.VRam + text.Size, overlay.DataSize, 0);
-            Section rodata = new Section("rodata", fstart, data.VRam + data.Size, overlay.RodataSize, 0);
+            Section text = new("text", fstart, fstart, overlay.TextSize, 0, true);
+            Section data = new("data", fstart, text.VRam + text.Size, overlay.DataSize, 0);
+            Section rodata = new("rodata", fstart, data.VRam + data.Size, overlay.RodataSize, 0);
             long off = task.VRam.Start + task.VRom.Size;
 
             task.HeaderAndReloc = new N64PtrRange(task.VRam.Start + overlay.header_offset, off);
-            Section bss = new Section("bss", fstart, off, overlay.BssSize, 0);
+            Section bss = new("bss", fstart, off, overlay.BssSize, 0);
 
             task.Sections.Values.Add(text);
             task.Sections.Values.Add(data);
@@ -153,7 +153,7 @@ namespace Atom
         private static void GetActorInfoSymbols(DisassemblyTask task, N64Ptr startAddr, N64Ptr vramActorInfo, Stream file)
         {
             file.Position = vramActorInfo - startAddr;
-            ActorInit actorInfo = new ActorInit(new BinaryReader(file));
+            ActorInit actorInfo = new(new BinaryReader(file));
 
             BindSymbol(vramActorInfo, Label.Type.VAR, "InitVars");
             BindSymbol(actorInfo.init_func, Label.Type.FUNC, "Init");
@@ -176,7 +176,7 @@ namespace Atom
 
         public static List<DisassemblyTask> CreateTaskList(Rom rom)
         {
-            List<DisassemblyTask> taskList = new List<DisassemblyTask>();
+            List<DisassemblyTask> taskList = new();
             List<JDmaData> dmadata;
             
             if (rom.Version.Game == Game.OcarinaOfTime)

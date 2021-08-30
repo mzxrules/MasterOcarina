@@ -18,8 +18,7 @@ namespace mzxrules.XActor
         internal delegate string PrintVariableDelegate(short[] actorRecord, CaptureExpression.GetValueDelegate getValDelegate);
         internal PrintVariableDelegate PrintVariable;
 
-        Dictionary<short, XVariableValue> valueDefinitions = new Dictionary<short, XVariableValue>();
-
+        Dictionary<short, XVariableValue> valueDefinitions = new();
 
         public XVariableParser(XVariable var, Game game)
         {

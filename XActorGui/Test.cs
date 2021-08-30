@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using XActors1 = mzxrules.XActor.XActors;
@@ -12,30 +8,26 @@ namespace mzxrules.XActor
     {
         public static void Test1()
         {
-            XActors1 root = new XActors1();
-            root.Actor = new List<XActor>();
+            XActors1 root = new();
+            root.Actor = new List<XActor>
+            {
+                new XActor()
+            };
 
-            root.Actor.Add(new XActor());
+            XmlWriterSettings xout = new()
+            {
+                Indent = true
+            };
 
-            XmlWriterSettings xout = new XmlWriterSettings();
-
-            xout.Indent = true;
-
-            XmlSerializer serializer = new XmlSerializer(typeof(XActors1));
+            XmlSerializer serializer = new(typeof(XActors1));
 
             using (XmlWriter writer = XmlWriter.Create("testNew.txt", xout))
             {
                 serializer.Serialize(writer, root);
             }
 
-
-            XActors1 test;
-
-            using (XmlReader reader = XmlReader.Create("testNew.txt"))
-            {
-                test = (XActors1) serializer.Deserialize(reader);
-            }
-
+            using XmlReader reader = XmlReader.Create("testNew.txt");
+            XActors1 test = (XActors1)serializer.Deserialize(reader);
         }
 
         public static void Serialize()
@@ -46,12 +38,6 @@ namespace mzxrules.XActor
         public static string ParseActorVariables(string[] lines)
         {
             return string.Empty;
-
-
-            //XmlSerializer test = new XmlSerializer(typeof(XActors1));
-
-            //test.Serialize(
-            
         }
     }
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Buffers.Binary;
 using mzxrules.Helper;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ZCodecCore
@@ -17,7 +15,7 @@ namespace ZCodecCore
     public class CompressTask
     {
         public int Dmadata;
-        public List<int> Exclusions = new List<int>();
+        public List<int> Exclusions = new();
 
         public CompressTask()
         {
@@ -47,7 +45,7 @@ namespace ZCodecCore
             DmadataRecord rec = GetDmadataRec(read, dmadata);
             var records = GetDmadataRecords(read.Slice(rec.Rom.Start, rec.VRom.Size));
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine($"{dmadata:X8}");
 
             for (int i = 0; i < records.Count; i++)
@@ -86,7 +84,7 @@ namespace ZCodecCore
                     int size = Yaz.Encode(file.ToArray(), vrom.Size, out byte[] comp);
                     if (size > 0)
                     {
-                        Span<byte> c = new Span<byte>(comp, 0, size);
+                        Span<byte> c = new(comp, 0, size);
                         c.CopyTo(w.Slice(cur, size));
                         dmarec.Rom = new FileAddress(cur, cur + size);
                         cur += size;
@@ -124,7 +122,7 @@ namespace ZCodecCore
 
         static List<DmadataRecord> GetDmadataRecords(ReadOnlySpan<byte> read)
         {
-            List<DmadataRecord> result = new List<DmadataRecord>();
+            List<DmadataRecord> result = new();
             DmadataRecord record;
 
             for (int i = 0; i < read.Length; i+= 0x10)

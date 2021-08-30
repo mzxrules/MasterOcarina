@@ -17,7 +17,7 @@ namespace mzxrules.OcaLib
         static Addresser()
         {
             using FileStream stream = File.OpenRead("Data/Addresses.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(Addresses));
+            XmlSerializer serializer = new(typeof(Addresses));
 
             using XmlReader reader = XmlReader.Create(stream);
             AddressDoc = (Addresses)serializer.Deserialize(reader);

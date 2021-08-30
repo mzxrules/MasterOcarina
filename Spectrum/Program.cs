@@ -16,22 +16,22 @@ namespace Spectrum
     partial class Program
     {
         const string TITLE = "Spectrum - Time never really passes in Hyrule... does it?";
-        static SpectrumOptions Options = new SpectrumOptions();
+        static SpectrumOptions Options = new();
         static Rom curRom;
         public delegate void SetVersionEventHandler((SpectrumOptions options, bool setGctx) args);
         public static event SetVersionEventHandler ChangeVersion;
-        static List<BlockNode> LastActorLL = new List<BlockNode>();
-        static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
+        static List<BlockNode> LastActorLL = new();
+        static readonly ExpressTest.ExpressionEvaluator Evaluator = new((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
         static Dictionary<string, (SpectrumCommand attr, SpectrumCommandSignature[] args, CommandDelegate method)> CommandDictionary;
 
-        static CollisionAutoDoc CollisionActorDoc = new CollisionAutoDoc();
-        static ReferenceLogger<DisplayListRecord> DisplayListLogger = new ReferenceLogger<DisplayListRecord>();
+        static CollisionAutoDoc CollisionActorDoc = new();
+        static ReferenceLogger<DisplayListRecord> DisplayListLogger = new();
 
         public static Ptr SaveContext { get { return SpectrumVariables.SaveContext; } }
         public static Ptr GlobalContext { get { return SpectrumVariables.GlobalContext; } }
         public static Ptr Gfx { get { return SpectrumVariables.Gfx; } }
 
-        public static FrameHalt FrameHaltVars = new FrameHalt(0, 0);
+        public static FrameHalt FrameHaltVars = new(0, 0);
         const int EXECUTE_PTR = unchecked((int)0x80000490);
 
         static void Main(string[] args)
@@ -96,7 +96,7 @@ namespace Spectrum
 
             foreach (var signature in value.args)
             {
-                Arguments args = new Arguments(request.Arguments, signature.Sig);
+                Arguments args = new(request.Arguments, signature.Sig);
                 if (args.Valid)
                 {
                     value.method(args);
@@ -124,7 +124,7 @@ namespace Spectrum
                     {
                         new SpectrumCommandSignature()
                         {
-                            Sig = new Tokens[] { }
+                            Sig = Array.Empty<Tokens>()
                         }
                     };
                 }
@@ -241,23 +241,19 @@ namespace Spectrum
 
         private static void DumpCollisionData()
         {
-            using (StreamWriter sw = new StreamWriter("dump/collision.txt"))
+            using StreamWriter sw = new("dump/collision.txt");
+            foreach (var item in CollisionActorDoc.Meshes.Values)
             {
-                foreach (var item in CollisionActorDoc.Meshes.Values)
-                {
-                    sw.WriteLine(item.ToString());
-                }
+                sw.WriteLine(item.ToString());
             }
         }
 
         private static void DumpReferenceLogger<T>(ReferenceLogger<T> logger, string path)
         {
-            using (StreamWriter sw = new StreamWriter(path))
+            using StreamWriter sw = new(path);
+            foreach (var item in logger.LoggedReferences)
             {
-                foreach (var item in logger.LoggedReferences)
-                {
-                    sw.WriteLine(item.ToString());
-                }
+                sw.WriteLine(item.ToString());
             }
         }
 
@@ -281,18 +277,18 @@ namespace Spectrum
         {
             if (Options.Version == Game.OcarinaOfTime)
             {
-                GfxDList Work_Disp = new GfxDList("WORK_DISP", Gfx.RelOff(0x1B4));
-                GfxDList Overlay_Disp = new GfxDList("OVERLAY_DISP", Gfx.RelOff(0x2A8));
-                GfxDList Poly_Opa_Disp = new GfxDList("POLY_OPA_DISP", Gfx.RelOff(0x2B8));
-                GfxDList Poly_Xlu_Disp = new GfxDList("POLY_XLU_DISP", Gfx.RelOff(0x2C8));
+                GfxDList Work_Disp = new("WORK_DISP", Gfx.RelOff(0x1B4));
+                GfxDList Overlay_Disp = new("OVERLAY_DISP", Gfx.RelOff(0x2A8));
+                GfxDList Poly_Opa_Disp = new("POLY_OPA_DISP", Gfx.RelOff(0x2B8));
+                GfxDList Poly_Xlu_Disp = new("POLY_XLU_DISP", Gfx.RelOff(0x2C8));
                 return new GfxDList[] { Work_Disp, Poly_Opa_Disp, Poly_Xlu_Disp, Overlay_Disp };
             }
             else if(Options.Version == Game.MajorasMask)
             {
-                GfxDList Work_Disp = new GfxDList("WORK_DISP", Gfx.RelOff(0x1A4));
-                GfxDList Overlay_Disp = new GfxDList("OVERLAY_DISP", Gfx.RelOff(0x298));
-                GfxDList Poly_Opa_Disp = new GfxDList("POLY_OPA_DISP", Gfx.RelOff(0x2A8));
-                GfxDList Poly_Xlu_Disp = new GfxDList("POLY_XLU_DISP", Gfx.RelOff(0x2B8));
+                GfxDList Work_Disp = new("WORK_DISP", Gfx.RelOff(0x1A4));
+                GfxDList Overlay_Disp = new("OVERLAY_DISP", Gfx.RelOff(0x298));
+                GfxDList Poly_Opa_Disp = new("POLY_OPA_DISP", Gfx.RelOff(0x2A8));
+                GfxDList Poly_Xlu_Disp = new("POLY_XLU_DISP", Gfx.RelOff(0x2B8));
                 return new GfxDList[] { Work_Disp, Poly_Opa_Disp, Poly_Xlu_Disp, Overlay_Disp };
             }
             return null;
@@ -373,7 +369,7 @@ namespace Spectrum
             {
                 using (FileStream fs = new(path, FileMode.Open))
                 {
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+                    DataContractJsonSerializer serializer = new(typeof(T));
                     data = (T)serializer.ReadObject(fs);
                 }
                 result = true;
@@ -442,16 +438,12 @@ namespace Spectrum
         {
             //MM J0 start addr 801F33C4, off 0x3F64
             //MM U0 start addr 801F3324, off 0x3CB4
-
-            int zoneoutOff;
-
-            switch((MRom.Build)Options.Version)
+            var zoneoutOff = (MRom.Build)Options.Version switch
             {
-                case MRom.Build.J0: zoneoutOff = 0x3F68; break;
-                case MRom.Build.J1: zoneoutOff = 0x3F68; break;
-                default: zoneoutOff = 0x3CB4; break;
-            }
-            
+                MRom.Build.J0 => 0x3F68,
+                MRom.Build.J1 => 0x3F68,
+                _ => 0x3CB4,
+            };
             Ptr zoneoutRecord = SaveContext.RelOff(zoneoutOff);
             Ptr linkAddr;
             if (SpectrumVariables.Actor_Category_Table == 0)
@@ -665,7 +657,6 @@ namespace Spectrum
                     (!Options.ShowSize) ? item.Ram.End.Offset : item.Ram.Size.Offset,
                     item.ToString()));
         }
-        
 
         private static List<BlockNode> GetActorLinkedList(List<BlockNode> nodes, List<IRamItem> ramItems)
         {

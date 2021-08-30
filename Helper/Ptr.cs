@@ -138,33 +138,29 @@ namespace mzxrules.Helper
                 int offset = (int)p[i * 2];
                 object item = p[i * 2 + 1];
 
-                if (item is int)
+                switch (item)
                 {
-                    Mem.WriteInt32(this + offset, (int)item);
-                }
-                else if (item is uint)
-                {
-                    Mem.WriteInt32(this + offset, (int)(uint)item);
-                }
-                else if (item is float)
-                {
-                    Mem.WriteFloat32(this + offset, (float)item);
-                }
-                else if (item is short)
-                {
-                    Mem.WriteInt16(this + offset, (short)item);
-                }
-                else if (item is ushort)
-                {
-                    Mem.WriteInt16(this + offset, (short)(ushort)item);
-                }
-                else if (item is byte)
-                {
-                    Mem.WriteByte(this + offset, (byte)item);
-                }
-                else
-                {
-                    Console.WriteLine($"Invalid SPtr Write Type: {item.GetType()}");
+                    case int @int:
+                        Mem.WriteInt32(this + offset, @int);
+                        break;
+                    case uint @uint:
+                        Mem.WriteInt32(this + offset, (int)@uint);
+                        break;
+                    case float @float:
+                        Mem.WriteFloat32(this + offset, @float);
+                        break;
+                    case short @short:
+                        Mem.WriteInt16(this + offset, @short);
+                        break;
+                    case ushort @ushort:
+                        Mem.WriteInt16(this + offset, (short)@ushort);
+                        break;
+                    case byte @byte:
+                        Mem.WriteByte(this + offset, @byte);
+                        break;
+                    default:
+                        Console.WriteLine($"Invalid SPtr Write Type: {item.GetType()}");
+                        break;
                 }
             }
         }

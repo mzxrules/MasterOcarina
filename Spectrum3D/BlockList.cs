@@ -17,8 +17,6 @@ namespace Spectrum3D
 
         public static int LENGTH = 0x10;
 
-        //public IActorItem ActorItem;
-
         public BlockNode(int Addr, byte[] data)
         {
             Data = new int[LENGTH / 4];
@@ -38,7 +36,7 @@ namespace Spectrum3D
 
         public static List<BlockNode> GetBlockList(int address)
         {
-            List<BlockNode> list = new List<BlockNode>();
+            List<BlockNode> list = new();
             BlockNode working;
 
             if (address == 0)
@@ -59,19 +57,19 @@ namespace Spectrum3D
         public static bool operator ==(BlockNode v1, BlockNode v2)
         {
             if (ReferenceEquals(v1, v2))
+            {
                 return true;
+            }
 
-            if ((object)v1 == null || (object)v2 == null)
+            if (v1 is null || v2 is null)
+            {
                 return false;
+            }
 
             if (v1.Size == v2.Size
                 && v1.IsFree == v2.IsFree)
             {
                 return true;
-                //if (v1.ActorItem == null)
-                //    return true;
-                //else if (v1.ActorItem.Actor == v1.ActorItem.Actor)
-                //    return true;
             }
             return false;
         }

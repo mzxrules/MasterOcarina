@@ -10,7 +10,7 @@ namespace Spectrum
         static EmulatorProcess Emulator;
         static IntPtr RamPointer;
         static bool usePrefetchedRam;
-        static byte[] prefetchedRam = new byte[0];
+        static byte[] prefetchedRam = Array.Empty<byte>();
 
         public static bool IsEmulatorSet { get { return Emulator != null; } }
 
@@ -89,7 +89,7 @@ namespace Spectrum
 
                     }
                 }
-                catch (Exception e)
+                catch
                 {
                 }
             }

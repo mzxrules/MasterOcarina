@@ -32,7 +32,7 @@ namespace XmlActorBuilder
                     optionsField = value.ToList();
             }
         }
-        private List<ItemOptions> optionsField = new List<ItemOptions>();
+        private List<ItemOptions> optionsField = new();
         public OptionsForm()
         {
             InitializeComponent();
@@ -40,11 +40,10 @@ namespace XmlActorBuilder
 
         private void OptionsForm_Load(object sender, EventArgs e)
         {
-            StringBuilder text = new StringBuilder();
+            StringBuilder text = new();
             if (Item != null)
             {
-                Text = String.Format("Edit Options: {0}",
-                    String.IsNullOrEmpty(Item.Description) ? "" : Item.Description);
+                Text = $"Edit Options: {(string.IsNullOrEmpty(Item.Description) ? "" : Item.Description)}";
             }
 
             if (Options != null)
@@ -59,11 +58,11 @@ namespace XmlActorBuilder
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            List<ItemOptions> newOptions = new List<ItemOptions>();
+            List<ItemOptions> newOptions = new();
             if (UpdateList(ref newOptions))
             {
                 optionsField = newOptions;
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
@@ -111,7 +110,7 @@ namespace XmlActorBuilder
         {
             Item item;
             ItemOptions[] itemOptions;
-            OptionsForm optionsForm = new OptionsForm();
+            OptionsForm optionsForm = new();
             DialogResult result;
 
             item = (Item)context.Instance;

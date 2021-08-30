@@ -2,15 +2,12 @@
 using mzxrules.OcaLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
     class DynaCollisionContext
     {
-        /* O 0x0000          */ public byte bitFlag;
+        /* O 0x0000          */ public byte bitFlag = 0;
         /* O 0x0004          */ public BgActor[] bgActors = new BgActor[50];
         /* O 0x138C          */ public ushort[] bgActorFlags = new ushort[50]; // & 0x0008 = no dyna ceiling
         /* O 0x13F0          */ public Ptr polyList; //dyn_poly

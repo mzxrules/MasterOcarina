@@ -30,13 +30,12 @@ namespace Experimental.Data
 
             private int GetRamAddress()
             {
-                _Scene s;
-                if (GetSceneDelegate == null ||
-                    !GetSceneDelegate(scene, out s))
+                if (GetSceneDelegate != null &&
+                    GetSceneDelegate(scene, out _Scene s))
                 {
-                    return 0;
+                    return s.RamStart + offset;
                 }
-                return s.RamStart + offset;
+                return 0;
             }
             public InCutsceneData(int scene, int setup, int offset)
             {
@@ -91,7 +90,7 @@ namespace Experimental.Data
         {
             List<InCutsceneData> cutsceneData;
             Dictionary<int, _Scene> sceneInfo;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             ORom rom;
             string romLoc = file[0];
 
@@ -129,7 +128,7 @@ namespace Experimental.Data
         {
             List<InCutsceneData> cutsceneData;
             Dictionary<int, _Scene> sceneInfo;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             ORom rom;
             string romLoc = string.Empty;
 
@@ -146,11 +145,10 @@ namespace Experimental.Data
 
             InCutsceneData.GetSceneDelegate = sceneInfo.TryGetValue;
 
-            for (int sceneId = 0; sceneId < 101; sceneId++)// in sceneIdList)
+            for (int sceneId = 0; sceneId < 101; sceneId++)
             {
-                _Scene scene;
                 RomFile file;
-                sceneInfo.TryGetValue(sceneId, out scene);
+                sceneInfo.TryGetValue(sceneId, out _Scene scene);
                 file = rom.Files.GetSceneFile(sceneId);
 
                 foreach (InCutsceneData inData in cutsceneData)
@@ -176,10 +174,9 @@ namespace Experimental.Data
 
         private static ResultData GetData(_Scene scene, RomFile file, InCutsceneData inData)
         {
-            ResultData outdata = new ResultData(scene, inData);
-            int romAddr;
+            ResultData outdata = new(scene, inData);
 
-            if (!scene.TryConvertToRom(inData.RamStart, out romAddr))
+            if (!scene.TryConvertToRom(inData.RamStart, out int romAddr))
             {
                 outdata.result = ResultData.ResultType.Limit_UnallocatedSpace;
                 return outdata;
@@ -190,7 +187,7 @@ namespace Experimental.Data
 
             try
             {
-                Cutscene cs = new Cutscene(file);
+                Cutscene cs = new(file);
 
                 if (cs.CommandCount < 0 || cs.Frames < 0)
                     outdata.result = ResultData.ResultType.Success_InvalidCutscene;
@@ -211,8 +208,8 @@ namespace Experimental.Data
 
         private static List<InCutsceneData> GetCutsceneOffsetData()
         {
-            List<string> cutsceneStr = new List<string>();
-            List<InCutsceneData> cutsceneData = new List<InCutsceneData>();
+            List<string> cutsceneStr = new();
+            List<InCutsceneData> cutsceneData = new();
 
             using (TextReader reader = System.IO.File.OpenText(CUTSCENE_OFFSET_DATA_LOC))
             {
@@ -239,12 +236,14 @@ namespace Experimental.Data
 
         private static Dictionary<int, _Scene> GetSceneInfo(ORom rom)
         {
-            Dictionary<int, _Scene> result = new Dictionary<int, _Scene>();
-            for (int sceneId = 0; sceneId < 101; sceneId++)// in sceneIdList)
+            Dictionary<int, _Scene> result = new();
+            for (int sceneId = 0; sceneId < 101; sceneId++)
             {
-                _Scene s = new _Scene();
-                s.Id = sceneId;
-                s.Address = rom.Files.GetSceneVirtualAddress(sceneId);
+                _Scene s = new()
+                {
+                    Id = sceneId,
+                    Address = rom.Files.GetSceneVirtualAddress(sceneId)
+                };
                 result.Add(sceneId, s);
             }
             return result;
@@ -334,21 +333,20 @@ namespace Experimental.Data
             {
                 Scene = int.Parse(columns[0]),
                 Setup = int.Parse(columns[1]),
-                Offset = (int.Parse(columns[2], NumberStyles.HexNumber, new CultureInfo("en-US")) & 0xFFFFFF)
+                Offset = int.Parse(columns[2], NumberStyles.HexNumber, new CultureInfo("en-US")) & 0xFFFFFF
             };
 
-            Dictionary<int, SceneData> stuff = new Dictionary<int, SceneData>();
+            Dictionary<int, SceneData> stuff = new();
 
 
             foreach(var item in csvData)
             {
                 if (!stuff.ContainsKey(item.Scene))
                 {
-                    stuff.Add(item.Scene, new SceneData(item.Scene));
+                    stuff.Add(item.Scene, new(item.Scene));
                 }
 
                 stuff[item.Scene].Cutscenes.Add(new CutsceneData(item.Offset, item.Setup, "?"));
-                
             }
 
             //DataContractJsonSerializer dmaSerializer =
@@ -356,7 +354,7 @@ namespace Experimental.Data
 
 
             DataContractJsonSerializer dmaNewSerializer =
-                new DataContractJsonSerializer(typeof(List<SceneData>));
+                new(typeof(List<SceneData>));
 
             //List<DmaData_Wiki> dmaOld;
             //List<DmaData> dma;
@@ -377,11 +375,9 @@ namespace Experimental.Data
             //    dma.Add(d);
             //}
 
-            using (FileStream sw = new FileStream("sceneCs.json", FileMode.OpenOrCreate))
-            {
-                dmaNewSerializer.WriteObject(sw, stuff.Values.ToList());
-                //filesNewSerializer.WriteObject(sw, newItems);
-            }
+            using FileStream sw = new("sceneCs.json", FileMode.OpenOrCreate);
+            dmaNewSerializer.WriteObject(sw, stuff.Values.ToList());
+            //filesNewSerializer.WriteObject(sw, newItems);
         }
 
     }

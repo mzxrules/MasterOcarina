@@ -12,7 +12,6 @@ namespace mzxrules.XActor
 
     public class CaptureExpression
     {
-        //public Func<short[], ushort> GetValue { get; private set; }
         private string Value;
         public CaptureVar VarType;
         public int Mask;
@@ -64,34 +63,25 @@ namespace mzxrules.XActor
         private static Func<short[], ushort> GetActorValue(Game game, CaptureExpression capture)
         {
             int shift = (game == Game.OcarinaOfTime) ? 0 : 7;
-            switch (capture.VarType)
+            return capture.VarType switch
             {
-                case CaptureVar.v:
-                    return (x) => { return Shift.AsUInt16((ushort)x[7], (uint)capture.Mask); };
-                case CaptureVar.rx:
-                    return (x) => { return Shift.AsUInt16((ushort)x[4], (uint)capture.Mask << shift); };
-                case CaptureVar.ry:
-                    return (x) => { return Shift.AsUInt16((ushort)x[5], (uint)capture.Mask << shift); };
-                case CaptureVar.rz:
-                    return (x) => { return Shift.AsUInt16((ushort)x[6], (uint)capture.Mask << shift); };
-
-                default:
-                    throw new NotImplementedException();
-            }
+                CaptureVar.v => (x) => { return Shift.AsUInt16((ushort)x[7], (uint)capture.Mask); },
+                CaptureVar.rx => (x) => { return Shift.AsUInt16((ushort)x[4], (uint)capture.Mask << shift); },
+                CaptureVar.ry => (x) => { return Shift.AsUInt16((ushort)x[5], (uint)capture.Mask << shift); },
+                CaptureVar.rz => (x) => { return Shift.AsUInt16((ushort)x[6], (uint)capture.Mask << shift); },
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public static Func<short[], ushort> GetTransitionActorValue(Game game, CaptureExpression capture)
         {
             int shift = (game == Game.OcarinaOfTime) ? 0 : 7;
-            switch (capture.VarType)
+            return capture.VarType switch
             {
-                case CaptureVar.v:
-                    return (x) => { return Shift.AsUInt16((ushort)x[7], (uint)capture.Mask); };
-                case CaptureVar.ry:
-                    return (x) => { return Shift.AsUInt16((ushort)x[6], (uint)capture.Mask << shift); };
-                default:
-                    throw new NotImplementedException();
-            }
+                CaptureVar.v => (x) => { return Shift.AsUInt16((ushort)x[7], (uint)capture.Mask); },
+                CaptureVar.ry => (x) => { return Shift.AsUInt16((ushort)x[6], (uint)capture.Mask << shift); },
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

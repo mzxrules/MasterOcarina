@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using mzxrules.Helper;
 
 namespace Spectrum
 {
     class BgMesh
     {
-        /* 0x00 */ Vector3<short> BoundsMin = new Vector3<short>();
-        /* 0x06 */ Vector3<short> BoundsMax = new Vector3<short>();
+        /* 0x00 */ Vector3<short> BoundsMin = new();
+        /* 0x06 */ Vector3<short> BoundsMax = new();
         /* 0x0C */ public int Vertices;
         /* 0x10 */ public Ptr VertexArray;
         /* 0x14 */ public int Polys;
@@ -51,7 +50,7 @@ namespace Spectrum
 
         public string GetPolyFormattedInfo(N64Ptr ptr)
         {
-            BgPoly poly = new BgPoly(this, SPtr.New(ptr));
+            BgPoly poly = new(this, SPtr.New(ptr));
             return poly.ToString();
         }
 
@@ -115,7 +114,7 @@ namespace Spectrum
         }
         public override string ToString()
         {
-            Vector3<float> unit = new Vector3<float>(
+            Vector3<float> unit = new(
                 (float)Normal.x / 32767,
                 (float)Normal.y / 32767,
                 (float)Normal.z / 32767

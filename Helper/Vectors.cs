@@ -47,14 +47,13 @@ namespace mzxrules.Helper
         }
         public T1 Index(int i)
         {
-            switch (i)
+            return i switch
             {
-                case 0: return x;
-                case 1: return y;
-                case 2: return z;
-                default:
-                    throw new ArgumentOutOfRangeException("Expected range between 0 and 2");
-            }
+                0 => x,
+                1 => y,
+                2 => z,
+                _ => throw new ArgumentOutOfRangeException(nameof(i), "Expected range between 0 and 2"),
+            };
         }
 
         public static bool operator ==(Vector3<T1> a, Vector3<T1> b)
@@ -62,10 +61,10 @@ namespace mzxrules.Helper
             if (ReferenceEquals(a, b))
                 return true;
 
-            if (ReferenceEquals(a, null))
+            if (a is null)
                 return false;
 
-            if (ReferenceEquals(b, null))
+            if (b is null)
                 return false;
 
             return a.x.Equals(b.x)
@@ -100,12 +99,8 @@ namespace mzxrules.Helper
 
         public string ToString(string format, IFormatProvider provider)
         {
-            if (x is IFormattable)
+            if (x is IFormattable a && y is IFormattable b && z is IFormattable c)
             {
-                IFormattable a = (IFormattable)x;
-                IFormattable b = (IFormattable)y;
-                IFormattable c = (IFormattable)z;
-
                 return $"({a.ToString(format, provider)}, {b.ToString(format, provider)}, {c.ToString(format, provider)})";
             }
             return ToString();

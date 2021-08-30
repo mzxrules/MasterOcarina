@@ -82,7 +82,7 @@ namespace mzxrules.OcaLib
                 return new RomFile(record, ms, Version);
             }
 
-            using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new(RomLocation, FileMode.Open, FileAccess.Read))
             {
                 byte[] data = new byte[record.Data.Size];
                 fs.Position = record.Data.Start;
@@ -113,14 +113,10 @@ namespace mzxrules.OcaLib
 
         private static byte[] Deflate(MemoryStream ms, int size)
         {
-            using (DeflateStream deflate = new DeflateStream(ms, CompressionMode.Decompress))
-            {
-                using (MemoryStream decomp = new MemoryStream(size))
-                {
-                    deflate.CopyTo(decomp);
-                    return decomp.ToArray();
-                }
-            }
+            using DeflateStream deflate = new(ms, CompressionMode.Decompress);
+            using MemoryStream decomp = new(size);
+            deflate.CopyTo(decomp);
+            return decomp.ToArray();
         }
 
 
@@ -152,16 +148,14 @@ namespace mzxrules.OcaLib
             if (!dmadata.TryGetFileRecord(vromStart, out FileRecord tableRecord))
                 throw new Exception();
 
-            using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new(RomLocation, FileMode.Open, FileAccess.Read))
             {
                 data = new byte[tableRecord.Data.Size];
                 fs.Position = tableRecord.Data.Start;
                 fs.Read(data, 0, tableRecord.Data.Size);
-
             }
             return new MemoryStream(data);
         }
-
 
         /// <summary>
         /// Returns the full FileRecord for a file that contains the given address
@@ -230,11 +224,9 @@ namespace mzxrules.OcaLib
         protected int ReadInt32(int addr)
         {
             FileRecord record = GetFileStart(addr);
-            using (BinaryReader reader = new BinaryReader(GetFile(record)))
-            {
-                reader.BaseStream.Position = record.GetRelativeAddress(addr);
-                return reader.ReadBigInt32();
-            }
+            using BinaryReader reader = new(GetFile(record));
+            reader.BaseStream.Position = record.GetRelativeAddress(addr);
+            return reader.ReadBigInt32();
         }
 
 
@@ -319,16 +311,16 @@ namespace mzxrules.OcaLib
             }
             code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * table.Length));
 
-            switch (type)
+            return type switch
             {
-                case TableInfo.Type.Actors: return new ActorOverlayRecord(index, new BinaryReader(code));
-                case TableInfo.Type.GameOvls: return new GameStateRecord(index, new BinaryReader(code));
-                case TableInfo.Type.Particles: return new ParticleOverlayRecord(index, new BinaryReader(code));
-                case TableInfo.Type.PlayerPause: return new PlayPauseOverlayRecord(index, new BinaryReader(code));
-                case TableInfo.Type.Transitions: return new TransitionOverlayRecord(index, new BinaryReader(code));
-                case TableInfo.Type.MapMarkData: return new MapMarkDataOverlayRecord(new BinaryReader(code));
-                default: return null;
-            }
+                TableInfo.Type.Actors => new ActorOverlayRecord(index, new BinaryReader(code)),
+                TableInfo.Type.GameOvls => new GameStateRecord(index, new BinaryReader(code)),
+                TableInfo.Type.Particles => new ParticleOverlayRecord(index, new BinaryReader(code)),
+                TableInfo.Type.PlayerPause => new PlayPauseOverlayRecord(index, new BinaryReader(code)),
+                TableInfo.Type.Transitions => new TransitionOverlayRecord(index, new BinaryReader(code)),
+                TableInfo.Type.MapMarkData => new MapMarkDataOverlayRecord(new BinaryReader(code)),
+                _ => null,
+            };
         }
 
         public ActorOverlayRecord GetActorOverlayRecord(int actor)

@@ -13,15 +13,15 @@ namespace Experimental.Data
     {
         public static void MMEntranceTable(IExperimentFace face, List<string> file)
         {
-            MRom rom = new MRom(file[0], MRom.Build.U0);
+            MRom rom = new(file[0], MRom.Build.U0);
 
             //scenes (7 bits, 0x6E max)
             //entrance sets (5 bits, 32 max)
 
             //entrance setups(32 max)
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             RomFile code = rom.Files.GetFile(MRom.FileList.code);
-            BinaryReader br = new BinaryReader(code);
+            BinaryReader br = new(code);
             int sceneBase;
 
             //Sets of entrance records per scene
@@ -41,7 +41,7 @@ namespace Experimental.Data
             for (int scene = 0; scene < 0x6E; scene++)
             {
                 //get offset of pointer to the entrance sets
-                entranceSetsPointerAddr = sceneBase + (sizeof(Int32) * 3) * scene + 4;
+                entranceSetsPointerAddr = sceneBase + (sizeof(int) * 3) * scene + 4;
 
                 //move the stream to the entrance sets pointer
                 br.BaseStream.Position = code.Record.GetRelativeAddress(entranceSetsPointerAddr);

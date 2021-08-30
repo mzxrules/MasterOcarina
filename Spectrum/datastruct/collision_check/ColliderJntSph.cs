@@ -9,7 +9,7 @@ namespace Spectrum
     {
         public int count;
         public N64Ptr listPtr;
-        public List<ColliderJntSphElement> items = new List<ColliderJntSphElement>();
+        public List<ColliderJntSphElement> items = new();
         public ColliderJntSph(Ptr ptr, Collider col)
         {
             collider = col;

@@ -1429,8 +1429,8 @@ namespace Spectrum
             using (StreamWriter sw = new("dump/" + gameStr))
             using (BinaryReader memory = new(new MemoryStream(data)))
             {
-                Queue<string> writeBuffer = new Queue<string>();
-                Queue<G_> gbiQueue = new Queue<G_>();
+                Queue<string> writeBuffer = new();
+                Queue<G_> gbiQueue = new();
                 foreach (var line in MicrocodeParser.DeepTrace(memory, address))
                 {
                     var gbi = line.gbi;

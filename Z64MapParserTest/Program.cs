@@ -28,7 +28,7 @@ namespace Z64MapParserTest
                         continue;
                     }
 
-                    FileAddress fileAddr = new FileAddress(segment.LoadAddress, segment.LoadAddress + segment.Size);
+                    FileAddress fileAddr = new(segment.LoadAddress, segment.LoadAddress + segment.Size);
                     if (fileAddr.Start <= romAddr && romAddr < fileAddr.End)
                     {
                         int offset = romAddr - fileAddr.Start;
@@ -59,7 +59,7 @@ namespace Z64MapParserTest
 
         private static void PrintData(List<Segment> info)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             foreach (Segment segment in info)
             {
                 sb.Append($"{segment}\n");

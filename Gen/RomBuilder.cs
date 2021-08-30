@@ -17,16 +17,16 @@ namespace Gen
 
         public static void CompressRom(Stream rom, RomVersion version, List<int> exclusions, Stream sw)
         {
-            DmaData dmadata = new DmaData(rom, version);
+            DmaData dmadata = new(rom, version);
             CompressRom_new(rom, dmadata, exclusions, sw);
         }
 
         private static void CompressRom_new(Stream rom, DmaData dmadata, List<int> exclusions, Stream sw)
         {
-            BinaryReader br = new BinaryReader(rom);
-            MemoryStream outRom = new MemoryStream(0x200_0000);
+            BinaryReader br = new(rom);
+            MemoryStream outRom = new(0x200_0000);
+            List<FileRecord> newDmaTable = new();
 
-            List<FileRecord> newDmaTable = new List<FileRecord>();
             Console.WriteLine();
 
             int cur = 0;
@@ -76,7 +76,7 @@ namespace Gen
 
         public static void CompressRom(Rom uncompressedRom, Rom refRom, Stream sw)
         {
-            Dictionary<long, FileRecord> sourceRecords = new Dictionary<long, FileRecord>();
+            Dictionary<long, FileRecord> sourceRecords = new();
 
             foreach (FileRecord r in refRom.Files)
             {
@@ -85,7 +85,7 @@ namespace Gen
                 sourceRecords.Add(r.VRom.Start, r);
             }
 
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new();
             stopwatch.Start();
             CompressRom(uncompressedRom, sourceRecords, sw);
             stopwatch.Stop();
@@ -97,13 +97,13 @@ namespace Gen
         {
             int filesProcessed = 0;
             int filesTotal;
-            List<FileRecord> newDmaTable = new List<FileRecord>();
+            List<FileRecord> newDmaTable = new();
             Console.WriteLine();
             foreach (FileRecord record in rom.Files)
             {
                 Stream outstream;
                 bool IsCompressed = false;
-                filesTotal = rom.Files.Count();
+                filesTotal = rom.Files.Count;
 
                 //get file
                 outstream = rom.Files.GetFile(record.VRom.Start);
@@ -115,8 +115,8 @@ namespace Gen
                 {
                     //compress file
                     IsCompressed = true;
-                    MemoryStream ms = new MemoryStream();
-                    using (BinaryReader br = new BinaryReader(outstream))
+                    MemoryStream ms = new();
+                    using (BinaryReader br = new(outstream))
                     {
                         byte[] data = br.ReadBytes(record.VRom.Size);
                         Yaz.Encode(data, data.Length, ms);
@@ -141,8 +141,8 @@ namespace Gen
         {
             int filesProcessed = 0;
             int filesTotal;
-            List<FileRecord> newDmaTable = new List<FileRecord>();
-            filesTotal = uncompressedRom.Files.Count();
+            List<FileRecord> newDmaTable = new();
+            filesTotal = uncompressedRom.Files.Count;
 
             foreach (FileRecord record in uncompressedRom.Files)
             {
@@ -226,13 +226,13 @@ namespace Gen
         {
             byte[] data;
 
-            using (BinaryReader br = new BinaryReader(rom.Files.GetFile(record.VRom.Start)))
+            using (BinaryReader br = new(rom.Files.GetFile(record.VRom.Start)))
             {
                 data = br.ReadBytes(record.VRom.Size);
             }
 
             //compress file
-            MemoryStream ms = new MemoryStream();
+            MemoryStream ms = new();
             Yaz.Encode(data, data.Length, ms);
             ms.Position = 0;
 
@@ -241,11 +241,11 @@ namespace Gen
 
         public static void DecompressRom(Rom compressedRom, Stream sw)
         {
-            List<FileRecord> newDmaTable = new List<FileRecord>();
+            List<FileRecord> newDmaTable = new();
             int filesProcessed = 0;
             int filesTotal;
 
-            filesTotal = compressedRom.Files.Count();
+            filesTotal = compressedRom.Files.Count;
 
             //build the new dmadata table
             foreach (FileRecord record in compressedRom.Files)
@@ -254,7 +254,7 @@ namespace Gen
                 
                 //MM Check for empty file
                 int start = (record.Rom.Start == -1) ? -1 : vrom.Start;
-                FileRecord rec = new FileRecord(vrom, new FileAddress(start, 0));
+                FileRecord rec = new(vrom, new FileAddress(start, 0));
                 newDmaTable.Add(rec);
             }
 
@@ -300,7 +300,7 @@ namespace Gen
         private static void PatchFiles_SameVrom_Compressed(Stream output, ORom hostRom,
             Dictionary<long, string> UpdateFiles, GetFileDelegate GetFile)
         {
-            List<FileRecord> newDmaTable = new List<FileRecord>();
+            List<FileRecord> newDmaTable = new();
 
             foreach (FileRecord record in hostRom.Files)
             {
@@ -358,15 +358,13 @@ namespace Gen
         public static void SetLanguage(Stream rom, Rom.Language language)
         {
             long pos = rom.Position;
-            byte chr;
             rom.Position = 0x3E;
-
-            switch (language)
+            byte chr = language switch
             {
-                case Rom.Language.Japanese: chr = 0x4A; break;
-                case Rom.Language.English: chr = 0x45; break;
-                default: throw new NotImplementedException();
-            }
+                Rom.Language.Japanese => 0x4A,
+                Rom.Language.English => 0x45,
+                _ => throw new NotImplementedException(),
+            };
             rom.WriteByte(chr);
             rom.Position = pos;
         }
@@ -376,7 +374,7 @@ namespace Gen
             int fileTableLoc = dmaStart.Start;
             sw.Position = fileTableLoc;
 
-            BinaryWriter bw = new BinaryWriter(sw);
+            BinaryWriter bw = new(sw);
             foreach (FileRecord record in fileTable)
             {
                 bw.WriteBig(record.VRom.Start);

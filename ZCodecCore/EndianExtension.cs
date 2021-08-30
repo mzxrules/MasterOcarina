@@ -1,7 +1,5 @@
 ﻿//Extension Methods for Endian class that will be integrated when Helper moves to .net Core 3.0
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Buffers.Binary;
 
 namespace ZCodecCore

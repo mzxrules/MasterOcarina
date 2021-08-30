@@ -20,7 +20,7 @@ namespace Experimental.Data
             /// <summary>
             /// Contains a list of rom builds that byte for byte share the same message
             /// </summary>
-            public List<ORom.Build> Builds = new List<ORom.Build>();
+            public List<ORom.Build> Builds = new();
             public MesgBuildsPair(List<int> data, ORom.Build build)
             {
                 Data = data;
@@ -30,7 +30,7 @@ namespace Experimental.Data
 
         public static string TextDump(ORom rom, ORom.Language language)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             //sb.AppendLine("{|
             foreach (ushort mesgId in rom.Text.GetMessageEnumerator(language))
@@ -80,7 +80,7 @@ namespace Experimental.Data
 
                 rom = new ORom(romLoc, build);
                 
-                mzxrules.OcaLib.GameText textModule = new GameText(rom);
+                GameText textModule = new(rom);
 
                 //for all languages supported by the rom
                 foreach(Rom.Language lang in ORom.GetSupportedLanguages(build))
@@ -91,14 +91,15 @@ namespace Experimental.Data
                     foreach (ushort mesgId in textModule.GetMessageEnumerator(lang))
                     {
                         bool matchedItem = false;
-                        List<MesgBuildsPair> MessageSet;
                         var data = textModule.GetMessageData(mesgId, lang);
 
                         //If no data is stored yet for this mesgId, add it
-                        if (!LanguageSet.TryGetValue(mesgId, out MessageSet))
+                        if (!LanguageSet.TryGetValue(mesgId, out List<MesgBuildsPair> MessageSet))
                         {
-                            MessageSet = new List<MesgBuildsPair>();
-                            MessageSet.Add(new MesgBuildsPair(data, build));
+                            MessageSet = new List<MesgBuildsPair>
+                            {
+                                new MesgBuildsPair(data, build)
+                            };
                             LanguageSet.Add(mesgId, MessageSet);
                             continue;
                         }
@@ -128,7 +129,7 @@ namespace Experimental.Data
 
         private static void OutputTextDump_Wiki(Dictionary<ORom.Language, Dictionary<ushort, List<MesgBuildsPair>>> jesuschrist)
         {
-            Dictionary<ORom.Build, mzxrules.OcaLib.GameText> dialogBanks = new Dictionary<ORom.Build, GameText>();
+            Dictionary<ORom.Build, GameText> dialogBanks = new();
 
             foreach (ORom.Build b in ORom.GetSupportedBuilds())
             {
@@ -142,65 +143,63 @@ namespace Experimental.Data
                 dialogBanks.Add(b, new GameText(rom));
             }
 
-            using (StreamWriter sw = new StreamWriter("MasterTextDump.txt"))
+            using StreamWriter sw = new("MasterTextDump.txt");
+            foreach (var language_MessageSet in jesuschrist)
             {
-                foreach (var language_MessageSet in jesuschrist)
+                sw.WriteLine(string.Format("== {0} ==", language_MessageSet.Key));
+                foreach (var MessageSet_MessageIteration in language_MessageSet.Value.Where(x => x.Value.Count > 1))
                 {
-                    sw.WriteLine(String.Format("== {0} ==", language_MessageSet.Key));
-                    foreach (var MessageSet_MessageIteration in language_MessageSet.Value.Where(x => x.Value.Count > 1))
+                    sw.WriteLine("{|class=\"wikitable\"");
+                    sw.WriteLine(string.Format("! colspan=\"{0}\" |{1:X4}", MessageSet_MessageIteration.Value.Count,
+                        MessageSet_MessageIteration.Key));
+                    sw.WriteLine("|-");
+
+                    List<string> buildStrs = new();
+                    List<string> dialogStrs = new();
+
+                    foreach (var MessageIteration in MessageSet_MessageIteration.Value)
                     {
-                        sw.WriteLine("{|class=\"wikitable\"");
-                        sw.WriteLine(String.Format("! colspan=\"{0}\" |{1:X4}", MessageSet_MessageIteration.Value.Count,
-                            MessageSet_MessageIteration.Key));
-                        sw.WriteLine("|-");
+                        GameText textModule;
+                        ORom.Build b;
 
-                        List<string> buildStrs = new List<string>();
-                        List<string> dialogStrs = new List<string>();
+                        b = MessageIteration.Builds[0];
+                        textModule = dialogBanks[b];
 
-                        foreach (var MessageIteration in MessageSet_MessageIteration.Value)
+                        dialogStrs.Add(
+                            textModule.GetMessage(MessageSet_MessageIteration.Key, language_MessageSet.Key));
+
+                        string buildString = string.Empty;
+
+                        foreach (ORom.Build build in MessageIteration.Builds)
                         {
-                            mzxrules.OcaLib.GameText textModule;
-                            ORom.Build b;
-
-                            b = MessageIteration.Builds[0];
-                            textModule = dialogBanks[b];
-
-                            dialogStrs.Add(
-                                textModule.GetMessage(MessageSet_MessageIteration.Key, language_MessageSet.Key));
-
-                            string buildString = string.Empty;
-
-                            foreach (ORom.Build build in MessageIteration.Builds)
-                            {
-                                buildString += build.ToString() + ":";
-                            }
-                            buildStrs.Add(buildString);
+                            buildString += build.ToString() + ":";
                         }
-                        //write header row
-                        sw.Write("! ");
-                        for (int i = 0; i < buildStrs.Count; i++ )
-                        {
-                            sw.Write(buildStrs[i]);
-                            if (i < buildStrs.Count - 1)
-                                sw.Write("!!");
-                        }
-                        sw.WriteLine();
-                        sw.WriteLine("|-");
-
-                        //write data row
-
-                        sw.Write("| ");
-                        for (int i = 0; i < dialogStrs.Count; i++)
-                        {
-                            sw.Write(dialogStrs[i]);
-                            if (i < dialogStrs.Count - 1)
-                                sw.Write("||");
-                        }
-                        sw.WriteLine();
-                        sw.WriteLine("|}");
-
-                        sw.WriteLine();
+                        buildStrs.Add(buildString);
                     }
+                    //write header row
+                    sw.Write("! ");
+                    for (int i = 0; i < buildStrs.Count; i++)
+                    {
+                        sw.Write(buildStrs[i]);
+                        if (i < buildStrs.Count - 1)
+                            sw.Write("!!");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("|-");
+
+                    //write data row
+
+                    sw.Write("| ");
+                    for (int i = 0; i < dialogStrs.Count; i++)
+                    {
+                        sw.Write(dialogStrs[i]);
+                        if (i < dialogStrs.Count - 1)
+                            sw.Write("||");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("|}");
+
+                    sw.WriteLine();
                 }
             }
         }
@@ -214,8 +213,8 @@ namespace Experimental.Data
             if (start == null)
                 return;
 
-            using (StreamWriter fs = new StreamWriter($"{rom.Version}-{outFilename}.txt"))
-            using (BinaryReader file = new BinaryReader(rom.Files.GetFile(start.VRom)))
+            using (StreamWriter fs = new($"{rom.Version}-{outFilename}.txt"))
+            using (BinaryReader file = new(rom.Files.GetFile(start.VRom)))
             {
                 file.BaseStream.Position = start.GetRelativeAddress(tableStart);
                 DumpTable(rom, file, fs);

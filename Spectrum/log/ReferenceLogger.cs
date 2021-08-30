@@ -1,10 +1,7 @@
 ﻿using mzxrules.OcaLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
@@ -72,7 +69,7 @@ namespace Spectrum
 
             public override string ToString()
             {
-                return $"{Version.ToString()}\t{VRom:X8}\t{Offset:X6}\t{Data.ToString()}";
+                return $"{Version}\t{VRom:X8}\t{Offset:X6}\t{Data}";
             }
         }
 

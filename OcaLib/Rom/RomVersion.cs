@@ -153,7 +153,7 @@ namespace mzxrules.OcaLib
 
         public override bool Equals(object obj)
         {
-            return obj is RomVersion && this == (RomVersion)obj;
+            return obj is RomVersion version && this == version;
         }
 
         public override int GetHashCode()
@@ -180,36 +180,36 @@ namespace mzxrules.OcaLib
 
         public string GetGameAbbr()
         {
-            switch (Game)
+            return Game switch
             {
-                case Game.OcarinaOfTime: return "oot";
-                case Game.MajorasMask: return "mm" ;
-                default: return "invalid";
-            }
+                Game.OcarinaOfTime => "oot",
+                Game.MajorasMask => "mm",
+                _ => "invalid",
+            };
         }
 
         public string GetVerAbbr()
         {
-            switch(Game)
+            return Game switch
             {
-                case Game.OcarinaOfTime: return OVer.ToString().ToLowerInvariant();
-                case Game.MajorasMask: return MVer.ToString().ToLowerInvariant();
-                default: return "n/a";
-            }
+                Game.OcarinaOfTime => OVer.ToString().ToLowerInvariant(),
+                Game.MajorasMask => MVer.ToString().ToLowerInvariant(),
+                _ => "n/a",
+            };
         }
 
-        public string UniqueKey => $"{Game.ToString()}.{ToString()}";
+        public string UniqueKey => $"{Game}.{ToString()}";
 
         public string ShortUniqueKey => $"{GetGameAbbr()}_{GetVerAbbr()}";
 
         public override string ToString()
         {
-            switch (Game)
+            return Game switch
             {
-                case Game.OcarinaOfTime: return OVer.ToString();
-                case Game.MajorasMask: return MVer.ToString();
-                default: return base.ToString();
-            }
+                Game.OcarinaOfTime => OVer.ToString(),
+                Game.MajorasMask => MVer.ToString(),
+                _ => base.ToString(),
+            };
         }
 
         public Type GetInternalType()

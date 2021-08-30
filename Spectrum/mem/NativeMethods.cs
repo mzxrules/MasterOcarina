@@ -88,8 +88,6 @@ namespace Spectrum
         private const int INVALID_HANDLE_VALUE = -1;
         private const int OPEN_EXISTING = 3;
 
-
-
         internal static System.Drawing.Size GetConsoleFontSize()
         {
             // getting the console out buffer handle
@@ -105,7 +103,7 @@ namespace Spectrum
                 throw new System.IO.IOException("Unable to open CONOUT$", errorCode);
             }
 
-            ConsoleFontInfo cfi = new ConsoleFontInfo();
+            ConsoleFontInfo cfi = new();
             if (!GetCurrentConsoleFont(outHandle, false, cfi))
             {
                 throw new InvalidOperationException("Unable to get font information.");

@@ -18,18 +18,17 @@ namespace Spectrum
         }
         public override string ToString()
         {
-            switch (segment)
+            return segment switch
             {
-                case 02: return "02 SCENE";
-                case 03: return "03 ROOM";
-                default: return $"{segment:D2} SEGMENT";
-
-            }
+                02 => "02 SCENE",
+                03 => "03 ROOM",
+                _ => $"{segment:D2} SEGMENT",
+            };
         }
 
         public static List<SegmentAddress> GetSegmentAddressMap(bool showAllSegments)
         {
-            List<SegmentAddress> addrs = new List<SegmentAddress>();
+            List<SegmentAddress> addrs = new();
             if (SegmentAddressTable == 0)
                 return addrs;
 

@@ -16,7 +16,7 @@ namespace VerboseOcarina
     {
         Rom rom;
         RomVersion DefaultVersion = ORom.Build.N0;
-        Dictionary<RadioButton, RomVersion> RadioButtonBindings = new Dictionary<RadioButton, RomVersion>() {};
+        Dictionary<RadioButton, RomVersion> RadioButtonBindings = new() { };
 
         public VerboseOcarina()
         {
@@ -68,7 +68,7 @@ namespace VerboseOcarina
 
         private void SetRomTypeSettings(RomVersion version)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
+            OpenFileDialog openFile = new();
             DialogResult result = DialogResult.OK;
             RomVersion inputVersion = version;
 
@@ -95,12 +95,10 @@ namespace VerboseOcarina
 
                 if (result == DialogResult.OK)
                 {
-                    using (VersionSelector vs = new VersionSelector())
-                    {
-                        vs.Game = version.Game;
-                        result = vs.ShowDialog();
-                        version = vs.Version;
-                    }
+                    using VersionSelector vs = new();
+                    vs.Game = version.Game;
+                    result = vs.ShowDialog();
+                    version = vs.Version;
                 }
             }
             openFile.Dispose();
@@ -185,8 +183,8 @@ namespace VerboseOcarina
 
         private void FetchAllMessages()
         {
-            StringBuilder sb = new StringBuilder();
-            List<Rom.Language> languages = new List<Rom.Language>();
+            StringBuilder sb = new();
+            List<Rom.Language> languages = new();
 
             TryFetchAllMessages();
             outputRichTextBox.Text = sb.ToString();
@@ -279,7 +277,7 @@ namespace VerboseOcarina
 
         private void FetchScene()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             if (!int.TryParse(numberTextBox.Text, out int sceneNumber)
                 || sceneNumber < 0
@@ -297,7 +295,7 @@ namespace VerboseOcarina
         private void PrintScene(int sceneId, StringBuilder sb)
         {
             Scene scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneId), sceneId);
-            List<Room> rooms = new List<Room>();
+            List<Room> rooms = new();
             if (scene == null)
             {
                 sb.AppendFormat("Exception: Scene not found");
@@ -334,7 +332,7 @@ namespace VerboseOcarina
 
         private void FetchAllScenes()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             outputRichTextBox.Clear();
 
@@ -383,7 +381,7 @@ namespace VerboseOcarina
         {
             if (rom == null)
                 return;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for (int sceneNumber = 0; sceneNumber < rom.Scenes; sceneNumber++)
             {
                 Scene scene = null;

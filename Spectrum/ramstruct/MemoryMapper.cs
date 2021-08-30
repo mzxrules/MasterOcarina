@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mzxrules.OcaLib;
 using mzxrules.Helper;
 
@@ -47,12 +45,12 @@ namespace Spectrum
             return FetchFiles();
         }
 
-        public uint GetActorInstanceSize(int actor)
+        public static uint GetActorInstanceSize(int actor)
         {
             return ActorInstanceSize[actor];
         }
 
-        public void SetActorInstanceSize(OvlActor actor)
+        public static void SetActorInstanceSize(OvlActor actor)
         {
             N64Ptr readAddr;
             uint offset;
@@ -411,7 +409,7 @@ namespace Spectrum
         internal static List<IRamItem> GetRamMap(SpectrumOptions Options, bool fetchAll = false)
         {
             // Get core files
-            List<IRamItem> ramItems = new List<IRamItem>
+            List<IRamItem> ramItems = new()
             {
                 new RamDmadata(),
                 new CodeFile()
@@ -487,8 +485,10 @@ namespace Spectrum
                 for (int i = 0; i < GAMESTATE_TOTAL_RECORDS; i++)
                 {
                     Array.Copy(tableData, i * GAMESTATE_RECORD_LENGTH, recordData, 0, GAMESTATE_RECORD_LENGTH);
-                    table[i] = new OvlGamestate(i, recordData, Options.Version);
-                    table[i].Name = gamestateNames[i];
+                    table[i] = new OvlGamestate(i, recordData, Options.Version)
+                    {
+                        Name = gamestateNames[i]
+                    };
                 }
                 for (int i = 0; i < GAMESTATE_TOTAL_RECORDS; i++)
                 {

@@ -33,8 +33,6 @@ namespace Spectrum
     [DataContract]
     class SpectrumOptions
     {
-        static RomVersion DEFAULT_VERSION = ORom.Build.N0;
-
         [DataMember]
         public Dictionary<string, Emulator> Emulators { get; set; }
 
@@ -77,9 +75,6 @@ namespace Spectrum
         }
         private void Initialize()
         {
-            if (Version == null)
-                Version = DEFAULT_VERSION;
-
             if (Emulators == null)
                 Emulators = new Dictionary<string, Emulator>();
 
@@ -167,7 +162,7 @@ namespace Spectrum
 
         public static void GetVariables()
         {
-            List<(int addr, string desc)> Values = new List<(int, string)>();
+            List<(int addr, string desc)> Values = new();
             foreach (System.Reflection.FieldInfo field in typeof(SpectrumVariables).GetFields())
             {
                 ViewVariableAttribute attribute = (ViewVariableAttribute)Attribute.GetCustomAttribute(field, typeof(ViewVariableAttribute));
@@ -192,9 +187,9 @@ namespace Spectrum
                 }
             }
             Console.Clear();
-            foreach (var item in Values.OrderBy(x => x.addr))
+            foreach (var (addr, desc) in Values.OrderBy(x => x.addr))
             {
-                Console.WriteLine($"{item.addr:X8} - {item.desc}");
+                Console.WriteLine($"{addr:X8} - {desc}");
             }
         }
 

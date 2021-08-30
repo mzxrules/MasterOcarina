@@ -1,5 +1,4 @@
-﻿using mzxrules.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -9,9 +8,9 @@ namespace mzxrules.OcaLib.SymbolMapParser
 
     public static class SymbolMapParser
     {
-        static Regex getSymbol = new Regex(@" {16}0x([0-9a-f]{16}) {16}(\w+)$", RegexOptions.Compiled);
-        static Regex getSectionLine = new Regex(@" (\.[A-z\s]{13}) 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,}) (.{1,})", RegexOptions.Compiled);
-        static Regex getSegmentLine = new Regex(@".{15} 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,})(?: load address 0x)?(.*)", RegexOptions.Compiled);
+        static readonly Regex getSymbol = new(@" {16}0x([0-9a-f]{16}) {16}(\w+)$", RegexOptions.Compiled);
+        static readonly Regex getSectionLine = new(@" (\.[A-z\s]{13}) 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,}) (.{1,})", RegexOptions.Compiled);
+        static readonly Regex getSegmentLine = new(@".{15} 0x([0-9a-f]{16})\s{1,}0x([0-9a-f]{1,})(?: load address 0x)?(.*)", RegexOptions.Compiled);
         //lines starting with .. denote file start
         //
         public static SymbolMap Parse(string path)
@@ -20,9 +19,9 @@ namespace mzxrules.OcaLib.SymbolMapParser
             bool GetSym = false;
             bool parseSegmentLine = false;
 
-            List<Segment> segments = new List<Segment>();
-            Segment curSegment = new Segment();
-            Section curSection = new Section();
+            List<Segment> segments = new();
+            Segment curSegment = new();
+            Section curSection = new();
 
             foreach (var line in lines)
             {
@@ -86,7 +85,7 @@ namespace mzxrules.OcaLib.SymbolMapParser
                     var match = getSymbol.Match(line);
                     if (match.Success)
                     {
-                        Symbol symbol = new Symbol();
+                        Symbol symbol = new();
                         curSection.Symbols.Add(symbol);
 
                         symbol.Address = long.Parse(match.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);

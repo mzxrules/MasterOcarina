@@ -28,9 +28,9 @@ namespace Spectrum.ExpressTest
     public class ExpressionEvaluator : DynamicObject
     {
         public CultureInfo Culture { get; set; }
-        private readonly Stack<Expression> expressionStack = new Stack<Expression>();
-        private readonly Stack<Symbol> operatorStack = new Stack<Symbol>();
-        private readonly List<string> parameters = new List<string>();
+        private readonly Stack<Expression> expressionStack = new();
+        private readonly Stack<Symbol> operatorStack = new();
+        private readonly List<string> parameters = new();
         private readonly Func<long, long> ReadRam;
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Spectrum.ExpressTest
                     else
                     {
                         throw new ArgumentException(string.Format("Encountered invalid character {0}", next),
-                            "expression");
+                            nameof(expression));
                     }
                 }
             }
@@ -237,14 +237,14 @@ namespace Spectrum.ExpressTest
             var lambda = Expression.Lambda<Func<long[], long>>(ramExpression, arrayParameter);
             var compiled = lambda.Compile();
 
-            var value = compiled(new long[] { });
+            var value = compiled(Array.Empty<long>());
             long converted = ReadRam(value);
             var expression = Expression.Constant(converted);
 
             expressionStack.Push(expression);
         }
 
-        private Dictionary<string, long> ParseArguments(object argument)
+        private static Dictionary<string, long> ParseArguments(object argument)
         {
             if (argument == null)
             {
@@ -262,7 +262,7 @@ namespace Spectrum.ExpressTest
             return arguments;
         }
 
-        private long Execute(Func<long[], long> compiled, Dictionary<string, long> arguments, List<string> parameters)
+        private static long Execute(Func<long[], long> compiled, Dictionary<string, long> arguments, List<string> parameters)
         {
             arguments = arguments ?? new Dictionary<string, long>();
 
@@ -324,13 +324,12 @@ namespace Spectrum.ExpressTest
                     break;
                 }
             }
-            long v;
-            long.TryParse(operand, NumberStyles.HexNumber, Culture, out v);
+            long.TryParse(operand, NumberStyles.HexNumber, Culture, out long v);
 
             return Expression.Constant(v);
         }
 
-        private Operation ReadOperation(TextReader reader)
+        private static Operation ReadOperation(TextReader reader)
         {
             var operation = (char)reader.Read();
             return (Operation)operation.ToString();
@@ -366,7 +365,7 @@ namespace Spectrum.ExpressTest
         }
 
 
-        private bool IsNumeric(Type type)
+        private static bool IsNumeric(Type type)
         {
             switch (Type.GetTypeCode(type))
             {
@@ -392,19 +391,19 @@ namespace Spectrum.ExpressTest
         private readonly Func<Expression, Expression, Expression> operation;
         private readonly Func<Expression, Expression> unaryOperation;
 
-        public static readonly Operation Addition = new Operation(8, Expression.Add, "Addition");
-        public static readonly Operation Subtraction = new Operation(8, Expression.Subtract, "Subtraction");
-        public static readonly Operation Multiplication = new Operation(9, Expression.Multiply, "Multiplication");
-        public static readonly Operation Division = new Operation(9, Expression.Divide, "Division");
-        public static readonly Operation Modulus = new Operation(9, Expression.Modulo, "Modulo");
-        public static readonly Operation UnaryMinus = new Operation(10, Expression.Negate, "Negation");
-        public static readonly Operation And = new Operation(4, Expression.And, "And");
-        public static readonly Operation XOr = new Operation(3, Expression.ExclusiveOr, "XOr");
-        public static readonly Operation Or = new Operation(2, Expression.Or, "Or");
+        public static readonly Operation Addition = new(8, Expression.Add, "Addition");
+        public static readonly Operation Subtraction = new(8, Expression.Subtract, "Subtraction");
+        public static readonly Operation Multiplication = new(9, Expression.Multiply, "Multiplication");
+        public static readonly Operation Division = new(9, Expression.Divide, "Division");
+        public static readonly Operation Modulus = new(9, Expression.Modulo, "Modulo");
+        public static readonly Operation UnaryMinus = new(10, Expression.Negate, "Negation");
+        public static readonly Operation And = new(4, Expression.And, "And");
+        public static readonly Operation XOr = new(3, Expression.ExclusiveOr, "XOr");
+        public static readonly Operation Or = new(2, Expression.Or, "Or");
 
         //public static readonly Operation Test = new Operation(0, , "test");
 
-        private static readonly Dictionary<string, Operation> Operations = new Dictionary<string, Operation>
+        private static readonly Dictionary<string, Operation> Operations = new()
         {
             { "+", Addition },
             { "-", Subtraction },
@@ -493,8 +492,8 @@ namespace Spectrum.ExpressTest
 
     internal class Parentheses : Symbol
     {
-        public static readonly Parentheses Left = new Parentheses();
-        public static readonly Parentheses Right = new Parentheses();
+        public static readonly Parentheses Left = new();
+        public static readonly Parentheses Right = new();
 
         private Parentheses()
         {
@@ -503,8 +502,8 @@ namespace Spectrum.ExpressTest
     }
     internal class Brackets : Symbol
     {
-        public static readonly Brackets Left = new Brackets();
-        public static readonly Brackets Right = new Brackets();
+        public static readonly Brackets Left = new();
+        public static readonly Brackets Right = new();
     }
 
     internal class Symbol

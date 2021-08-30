@@ -32,7 +32,7 @@ namespace OcaBase
             return string.Format("{0}: {1}{2}",
                 FileId,
                 Filename,
-                (String.IsNullOrWhiteSpace(Description)) ? "" : "  " + Description);
+                string.IsNullOrWhiteSpace(Description) ? "" : "  " + Description);
         }
         public string PrintAddresses()
         {

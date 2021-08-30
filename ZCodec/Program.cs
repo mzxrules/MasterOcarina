@@ -137,7 +137,7 @@ namespace ZCodec
                 return;
             }
 
-            RomVersion version = new RomVersion(gameId, build);
+            RomVersion version = new(gameId, build);
             if (version.Game == Game.Undefined)
             {
                 Console.WriteLine($"Unrecognized game and version: {gameId} {build}");
@@ -163,7 +163,7 @@ namespace ZCodec
             if (!FileExists(inRom))
                 return;
 
-            RomVersion version = new RomVersion(gameStr, buildStr);
+            RomVersion version = new(gameStr, buildStr);
 
             if (version.Game == Game.Undefined)
                 return;

@@ -48,16 +48,14 @@ namespace mzxrules.XActor.Gui
                 //actor.Variables
                 if (!(item.UI.Item is UINone))
                 {
-                    BaseControl control;
-
-                    switch (item.UI.Item)
+                    BaseControl control = item.UI.Item switch
                     {
-                        case UISelect: control = new SelectControl(); break;
-                        case UISwitchFlag: control = new FlagsControl(); break;
-                        case UICollectFlag: control = new FlagsControl(); break;
-                        case UIChestFlag: control = new FlagsControl(); break;
-                        default: control = new NumControl(); break;
-                    }
+                        UISelect => new SelectControl(),
+                        UISwitchFlag => new FlagsControl(),
+                        UICollectFlag => new FlagsControl(),
+                        UIChestFlag => new FlagsControl(),
+                        _ => new NumControl(),
+                    };
                     control.Dock = DockStyle.Fill;
                     control.SetUi(item);
                     flowLayoutPanel.Controls.Add(control);

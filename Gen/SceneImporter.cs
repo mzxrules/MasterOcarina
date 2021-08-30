@@ -2,12 +2,8 @@
 using mzxrules.OcaLib;
 using mzxrules.OcaLib.SceneRoom;
 using mzxrules.OcaLib.SceneRoom.Commands;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gen
 {
@@ -39,21 +35,19 @@ namespace Gen
 
             int NextWriteAddress;
 
-            using (FileStream fs_r = new FileStream(romfile, FileMode.Open, FileAccess.ReadWrite))
+            using FileStream fs_r = new(romfile, FileMode.Open, FileAccess.ReadWrite);
+            BinaryReader addrReader = new(fs_r);
+            addrReader.BaseStream.Position = FileTable_Off;
+            NextWriteAddress = addrReader.ReadBigInt32();
+            BinaryWriter bw = new(fs_r);
+
+            //wipe the scene table
+            for (int i = 0; i < 101; i++)
+                UpdateSceneTable(bw, i, new FileAddress(0, 0));
+
+            foreach (int sceneIndex in importScenes)
             {
-                BinaryReader addrReader = new BinaryReader(fs_r);
-                addrReader.BaseStream.Position = FileTable_Off;
-                NextWriteAddress = addrReader.ReadBigInt32();
-                BinaryWriter bw = new BinaryWriter(fs_r);
-
-                //wipe the scene table
-                for (int i = 0; i < 101; i++)
-                    UpdateSceneTable(bw, i, new FileAddress(0,0));
-
-                foreach (int sceneIndex in importScenes)
-                {
-                    AddSceneAndRooms(sceneIndex, ref NextWriteAddress, sceneFilesLocation, bw);
-                }
+                AddSceneAndRooms(sceneIndex, ref NextWriteAddress, sceneFilesLocation, bw);
             }
         }
 
@@ -69,11 +63,11 @@ namespace Gen
         {
             Scene scene;
             int roomCount;
-            List<FileAddress> roomAddresses = new List<FileAddress>();
+            List<FileAddress> roomAddresses = new();
             FileAddress fileAddr;
 
             //get scene file from mqd folder
-            using (FileStream fs_s = new FileStream(string.Format("{0}/{1:D2}_h", fileLocation, sceneId),
+            using (FileStream fs_s = new($"{fileLocation}/{sceneId:D2}_h",
                 FileMode.Open, FileAccess.Read))
             {
                 scene = SceneRoomReader.InitializeScene(Game.OcarinaOfTime, sceneId, new BinaryReader(fs_s));
@@ -89,11 +83,9 @@ namespace Gen
 
             for (int i = 0; i < roomCount; i++)
             {
-                using (FileStream fs_m = new FileStream(string.Format("{0}/{1:D2}_{2:D2}",fileLocation, sceneId, i),
-                    FileMode.Open, FileAccess.Read))
-                {
-                    roomAddresses.Add(AddFile(bw, fs_m, ref NextWriteAddress));
-                }
+                using FileStream fs_m = new($"{fileLocation}/{sceneId:D2}_{i:D2}",
+                    FileMode.Open, FileAccess.Read);
+                roomAddresses.Add(AddFile(bw, fs_m, ref NextWriteAddress));
             }
             UpdateRoomList(bw, scene, roomAddresses);
         }

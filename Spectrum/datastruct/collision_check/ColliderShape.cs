@@ -10,18 +10,17 @@ namespace Spectrum
         {
             var collider = new Collider(ptr);
 
-            switch (collider.Shape)
+            return collider.Shape switch
             {
-                case 0: return new ColliderJntSph(ptr, collider);
-                case 1: return new ColliderCylinder(ptr, collider); 
-                case 2: return new ColliderTris(ptr, collider);
-                case 3: return new ColliderQuad(ptr, collider);
-                default:
-                    return new ColliderShape()
-                    {
-                        collider = collider
-                    };
-            }
+                0 => new ColliderJntSph(ptr, collider),
+                1 => new ColliderCylinder(ptr, collider),
+                2 => new ColliderTris(ptr, collider),
+                3 => new ColliderQuad(ptr, collider),
+                _ => new ColliderShape()
+                {
+                    collider = collider
+                },
+            };
         }
         public override string ToString()
         {

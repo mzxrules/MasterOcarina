@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectrum3D.memory;
-using mzxrules.Helper;
 
 namespace Spectrum3D
 {
     class Program
     {
 
-        static ExpressTest.ExpressionEvaluator Evaluator = new ExpressTest.ExpressionEvaluator((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
+        static ExpressTest.ExpressionEvaluator Evaluator = new((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
         static void Main(string[] args)
         {
             bool flip = true;
             bool dump = false;
             //091CFD80
             Mount();
-            string line = "";// = Console.ReadLine();
+            string line = "";
             while (line != "q")
             {
                 line = Console.ReadLine();
@@ -34,9 +31,7 @@ namespace Spectrum3D
                     case "mount": Mount(); break;
                     default:
                         {
-                            long addr;
-
-                            if (!TryEvaluate(line.Trim(), out addr))
+                            if (!TryEvaluate(line.Trim(), out long addr))
                                 continue;
 
                             //if (!int.TryParse(line.Trim(), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out addr))
@@ -58,7 +53,7 @@ namespace Spectrum3D
 
         private static void Mount()
         {
-            Emulator e = new Emulator("citra-qt", "Fuck", "`citra-qt.exe`");
+            Emulator e = new("citra-qt", "citra", "`citra-qt.exe`");
             Zpr.TryMountEmulator(new List<Emulator>() { e });
         }
 
@@ -108,32 +103,32 @@ namespace Spectrum3D
 
         private static void LinkListCircular(int addr)
         {
-            Test node = new Test(addr);
+            Test node = new(addr);
             Console.Clear();
-            List<Test> nodes = new List<Test>() { node };
+            List<Test> nodes = new() { node };
 
             Test cur = node;
             while (cur.Next != node.Address && cur.Next != 0)
             {
-                cur = new Test(cur.Next);
+                cur = new(cur.Next);
                 nodes.Add(cur);
             }
 
             foreach (var item in nodes.OrderBy(x => x.Address))
             {
-                Console.WriteLine($"{Zpr.GetEmulatedAddress(item.Address):X16}:{item.ToString()}");
+                Console.WriteLine($"{Zpr.GetEmulatedAddress(item.Address):X16}:{item}");
             }
         }
 
         private static void LinkList(int addr )
         {
-            BlockNode node = new BlockNode(addr, Zpr.ReadRam(addr, 0x10));
+            BlockNode node = new(addr, Zpr.ReadRam(addr, 0x10));
             Console.Clear();
-            List<BlockNode> nodes = new List<BlockNode>() { node };
+            List<BlockNode> nodes = new() { node };
             var cur = node;
             while (cur.Prev != 0)
             {
-                cur = new BlockNode(cur.Prev, Zpr.ReadRam(cur.Prev, 0x10));
+                cur = new(cur.Prev, Zpr.ReadRam(cur.Prev, 0x10));
                 nodes.Add(cur);
             }
 
@@ -146,7 +141,7 @@ namespace Spectrum3D
 
             foreach (var item in nodes.OrderBy(x => x.Ram.Start))
             {
-                Console.WriteLine($"{item.Ram.Start:X8}:{item.ToString()}");
+                Console.WriteLine($"{item.Ram.Start:X8}:{item}");
             }
 
         }

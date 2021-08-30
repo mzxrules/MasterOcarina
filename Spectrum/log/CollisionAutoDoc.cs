@@ -67,17 +67,15 @@ namespace Spectrum
             public Record(BgActor actor, IFile file, RomVersion version)
             {
                 Initialize();
-                int ramStart = 0;
-                if (file is RamObject)
+                int ramStart;
+                if (file is RamObject obj)
                 {
-                    var obj = (RamObject)file;
-                    ramStart = (int)obj.Ram.Start;
+                    ramStart = obj.Ram.Start;
                     File = new FileData(obj.Object, FileType.Object);
                 }
-                else if (file is OvlActor)
+                else if (file is OvlActor af)
                 {
-                    var af = (OvlActor)file;
-                    ramStart = (int)af.Ram.Start;
+                    ramStart = af.Ram.Start;
                     File = new FileData(af.Actor, FileType.Actor);
                 }
                 else
@@ -85,7 +83,7 @@ namespace Spectrum
                     throw new NotImplementedException();
                 }
 
-                Offset = ((int)actor.MeshPtr & 0xFFFFFF) - (ramStart & 0xFFFFFF);
+                Offset = actor.MeshPtr.Offset - (ramStart & 0xFFFFFF);
                 Versions.Add(version);
                 Actors.Add(actor.ActorId);
             }
@@ -105,18 +103,21 @@ namespace Spectrum
             public override bool Equals(object obj)
             {
                 if (obj == null)
+                {
                     return false;
+                }
 
-                Record e = obj as Record;
-                if ((object)e == null)
+                if (obj is not Record e)
+                {
                     return false;
+                }
 
                 return File.Type == e.File.Type && File.Index == e.File.Index && (Offset == e.Offset);
             }
 
             public override string ToString()
             {
-                return string.Format($"{File.Type.ToString()}\t{File.Index:X4}\t{Offset:X6}\t{Actors[0]:X4}");
+                return string.Format($"{File.Type}\t{File.Index:X4}\t{Offset:X6}\t{Actors[0]:X4}");
             }
         }
 

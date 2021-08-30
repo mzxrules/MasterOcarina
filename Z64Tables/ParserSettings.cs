@@ -17,7 +17,7 @@ namespace Z64Tables
 
         private static List<SettingsToken> GenerateSettingsTokens(IEnumerable<string> settings)
         {
-            List<SettingsToken> tokens = new List<SettingsToken>();
+            List<SettingsToken> tokens = new();
 
             foreach (string setting in settings)
             {
@@ -40,7 +40,7 @@ namespace Z64Tables
 
         private static List<ParserTask> GetParserTasks(List<SettingsToken> settings)
         {
-            List<ParserTask> tasks = new List<ParserTask>();
+            List<ParserTask> tasks = new();
             List<string> builds = (List<string>)Get(settings, SettingsTokens.build);
             List<FormatTypesEnum> outputFormats =
                 (List<FormatTypesEnum>)Get(settings, SettingsTokens.format);
@@ -51,7 +51,7 @@ namespace Z64Tables
                 foreach (var format in outputFormats)
                 {
                     var game = (string)GetSingle(settings, SettingsTokens.game, i);
-                    ParserTask task = new ParserTask
+                    ParserTask task = new()
                     {
                         Name = (string)GetSingle(settings, SettingsTokens.name, i),
                         Version = new RomVersion(game, build),
@@ -84,13 +84,13 @@ namespace Z64Tables
             var a = settings.SingleOrDefault(x => x.Type == t);
             if (a == null)
             {
-                switch (t)
+                return t switch
                 {
-                    case SettingsTokens.format: return new List<FormatTypesEnum>() { FormatTypesEnum.tsv };
-                    case SettingsTokens.iterator: return new List<long>() { 0L };
-                    case SettingsTokens.inc: return new List<long>() { 1L };
-                    default: return null;
-                }
+                    SettingsTokens.format => new List<FormatTypesEnum>() { FormatTypesEnum.tsv },
+                    SettingsTokens.iterator => new List<long>() { 0L },
+                    SettingsTokens.inc => new List<long>() { 1L },
+                    _ => null,
+                };
             }
             return a.Data;
         }

@@ -44,7 +44,7 @@ namespace mzxrules.XActor
                 var captureStr = condition.Substring(0, splitIndex).Trim();
                 var valueStr = condition.Substring(splitIndex + splitStr.Length).Trim();
 
-                CaptureExpression capture = new CaptureExpression(captureStr);
+                CaptureExpression capture = new(captureStr);
 
                 ushort value;
                 if (valueStr.StartsWith("0x"))

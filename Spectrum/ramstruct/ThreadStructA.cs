@@ -81,7 +81,7 @@ namespace Spectrum
                 WriteLine("FP UNUSED");
             }
 
-            string w(ulong val)
+            static string w(ulong val)
             {
                 return $"{(uint)val:X8}";
             }
@@ -93,7 +93,7 @@ namespace Spectrum
             WriteLine($"next: {OSThread_next} queue: {OSThread_queue} tlnext: {OSThread_tlnext}");
             WriteLine($"PC: {w(c.pc)}   SR: {w(c.sr)} VA: {w(c.badvaddr)}");
 
-            string w(ulong val)
+            static string w(ulong val)
             {
                 return $"{(uint)val:X8}";
             }
@@ -236,7 +236,7 @@ namespace Spectrum
             next = next.Deref();
             while (next != 0)
             {
-                ThreadStack stack = new ThreadStack(next);
+                ThreadStack stack = new(next);
                 if (stack.StackAddr.Ram.Size <= 0)
                     break;
                 result.Add(stack);

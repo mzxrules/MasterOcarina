@@ -10,7 +10,7 @@ namespace uCode
     public class MicrocodeParserTask
     {
         public N64Ptr[] SegmentTable = new N64Ptr[16];
-        public Stack<N64Ptr> DisplayListStack = new Stack<N64Ptr>();
+        public Stack<N64Ptr> DisplayListStack = new();
         public N64Ptr StartAddress { get; }
         public N64Ptr CurrentAddress { get; private set; }
 
@@ -35,13 +35,13 @@ namespace uCode
         public static IEnumerable<(N64Ptr ptr, Microcode gbi, MicrocodeParserTask task)> DeepTrace(BinaryReader memory, N64Ptr address)
         {
             bool keepParsing = true;
-            MicrocodeParserTask task = new MicrocodeParserTask(address);
+            MicrocodeParserTask task = new(address);
 
-            memory.BaseStream.Position = address & 0xFFFFFF;
+            memory.BaseStream.Position = address.Offset;
 
             while (keepParsing)
             {
-                var microcode = new Microcode(memory);
+                Microcode microcode = new(memory);
                 var addr = memory.BaseStream.Position - 8;
                 yield return (addr, microcode, task);
                 
@@ -52,9 +52,9 @@ namespace uCode
         public static IEnumerable<string> DeepParse(BinaryReader memory, N64Ptr address)
         {
             bool keepParsing = true;
-            MicrocodeParserTask task = new MicrocodeParserTask(address);
+            MicrocodeParserTask task = new(address);
 
-            memory.BaseStream.Position = address & 0xFFFFFF;
+            memory.BaseStream.Position = address.Offset;
 
             while (keepParsing)
             {
@@ -90,7 +90,7 @@ namespace uCode
                         task.DisplayListStack.Push(0x80000000 | br.BaseStream.Position);
 
                         //jump
-                        br.BaseStream.Position = addr & 0xFFFFFF;
+                        br.BaseStream.Position = addr.Offset;
                     }
                     
                     break;
@@ -113,7 +113,7 @@ namespace uCode
                             task.DisplayListStack.Push(0x80000000 | br.BaseStream.Position);
                         }
                         //jump
-                        br.BaseStream.Position = addr & 0xFFFFFF;
+                        br.BaseStream.Position = addr.Offset;
                     }
                     break;
                 case G_.G_ENDDL:
@@ -124,7 +124,7 @@ namespace uCode
                     else
                     {
                         N64Ptr jumpback = task.DisplayListStack.Pop();
-                        br.BaseStream.Position = jumpback & 0xFFFFFF;
+                        br.BaseStream.Position = jumpback.Offset;
                     }
                     break;
                 case G_.G_RDPHALF_1: task.G_RDPHALF_1 = microcode.EncodingLow;
@@ -149,7 +149,7 @@ namespace uCode
 
         delegate string ParseG(BinaryReader memory, Microcode microcode, bool simpleParse);
 
-        static readonly Dictionary<G_, ParseG> ParseFunc = new Dictionary<G_, ParseG>
+        static readonly Dictionary<G_, ParseG> ParseFunc = new()
         {
             {G_.G_NOOP, ParseG_NOOP },
             {G_.G_MTX, ParseG_MTX },
@@ -322,7 +322,7 @@ namespace uCode
         {
             Matrix m;
             string result;
-            List<string[]> Type = new List<string[]>()
+            List<string[]> Type = new()
             {
                 new string[] { nameof(G_MTX_.G_MTX_NOPUSH), nameof(G_MTX_.G_MTX_PUSH)},
                 new string[] { nameof(G_MTX_.G_MTX_MUL), nameof(G_MTX_.G_MTX_LOAD)},

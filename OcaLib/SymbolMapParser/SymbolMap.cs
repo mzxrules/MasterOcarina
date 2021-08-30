@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mzxrules.Helper;
 using mzxrules.OcaLib.Addr2;
 
@@ -11,7 +8,7 @@ namespace mzxrules.OcaLib.SymbolMapParser
     public class SymbolMap
     {
         public string Path { get; internal set; }
-        public List<Segment> Map = new List<Segment>();
+        public List<Segment> Map = new();
 
 
         public bool TryGetSymbolAddress(MapBinding binding, out N64Ptr ptr)

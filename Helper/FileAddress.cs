@@ -53,9 +53,6 @@ namespace mzxrules.Helper
 
         public static bool operator ==(FileAddress v1, FileAddress v2)
         {
-            if (ReferenceEquals(v1, v2))
-                return true;
-
             return v1.Start == v2.Start && v1.End == v2.End;
         }
         public static bool operator !=(FileAddress v1, FileAddress v2)
