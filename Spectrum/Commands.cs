@@ -3054,10 +3054,6 @@ namespace Spectrum
                 return;
             }
 
-            if (item >= MItems.Item.None)
-            {
-                return;
-            }
             MItems.SetInventoryItem(Options.Version, item, SaveContext);
         }
 
@@ -3067,28 +3063,7 @@ namespace Spectrum
             {
                 return;
             }
-
-            if (item >= OItems.Item.None)
-            {
-                return;
-            }
-
-            if (item <= OItems.Item.ClaimCheck)
-            {
-                OItems.SetInventoryItem(item, SaveContext);
-            }
-            else if (item <= OItems.Item.HoverBoots)
-            {
-                short equip = SaveContext.ReadInt16(0x9C);
-                OItems.SetEquipment(item, true, ref equip);
-                SaveContext.Write(0x9C, equip);
-            }
-            else if (item <= OItems.Item.StoneOfAgony)
-            {
-                int quest = SaveContext.ReadInt32(0xA4);
-                OItems.SetQuestItem(item, true, ref quest);
-                SaveContext.Write(0xA4, quest);
-            }
+            OItems.GiveItem(item, SaveContext);
         }
         #endregion
 

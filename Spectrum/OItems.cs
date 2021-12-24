@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mzxrules.Helper;
 
 namespace Spectrum
@@ -11,7 +8,6 @@ namespace Spectrum
     {
         public enum Item
         {
-            None = 0xFF,
             Sticks = 0x00,
             Nuts = 0x01,
             Bombs = 0x02,
@@ -113,20 +109,24 @@ namespace Spectrum
             Sapphire = 0x6E,
             StoneOfAgony = 0x6F,
 
+            None = 0xFF,
+
             //Pseudo items
-            Wallet = 0x100,
-            Strength = 0x101,
-            Scale = 0x102,
+            Magic,
+            DoubleMagic,
+            Wallet,
+            Strength,
+            Scale,
         }
 
-        const int MASK_NUTS         = 0x00700000; //Deku Nuts
-        const int MASK_STICKS       = 0x000E0000; //Deku Sticks
-        const int MASK_BULLET_BAG   = 0x0001C000; //Bullet Bag
-        const int MASK_WALLET       = 0x00003000; //wallet
-        const int MASK_SCALE        = 0x00000E00; //scale
-        const int MASK_STRENGTH     = 0x000001C0; //strength
-        const int MASK_BOMBS        = 0x00000038; //bombs
-        const int MASK_QUIVER       = 0x00000007; //quiver
+        const int MASK_NUTS         = 0x00700000;
+        const int MASK_STICKS       = 0x000E0000;
+        const int MASK_BULLET_BAG   = 0x0001C000;
+        const int MASK_WALLET       = 0x00003000;
+        const int MASK_SCALE        = 0x00000E00;
+        const int MASK_STRENGTH     = 0x000001C0;
+        const int MASK_BOMBS        = 0x00000038;
+        const int MASK_QUIVER       = 0x00000007;
 
         const int INVENTORY_SLOT_TOTAL = 24;
         const int ADULT_TRADE_SLOT = 22;
@@ -151,7 +151,7 @@ namespace Spectrum
                 return new InventoryInfo(slot);
             }
         }
-        static readonly Dictionary<Item, InventoryInfo> InventorySlot = new Dictionary<Item, InventoryInfo>()
+        static readonly Dictionary<Item, InventoryInfo> InventorySlot = new()
         {
             { Item.Sticks, new InventoryInfo(0, true, Item.Sticks) },
             { Item.Nuts, new InventoryInfo(1, true, Item.Nuts) },
@@ -198,31 +198,62 @@ namespace Spectrum
             { Item.ClaimCheck, ADULT_TRADE_SLOT },
         };
 
+        public static void GiveItem(Item item, Ptr saveCtx)
+        {
+            if (item <= Item.ClaimCheck)
+            {
+                SetInventoryItem(item, saveCtx);
+            }
+            else if (item <= Item.HoverBoots)
+            {
+                short equip = saveCtx.ReadInt16(0x9C);
+                SetEquipment(item, true, ref equip);
+                saveCtx.Write(0x9C, equip);
+            }
+            else if (item <= Item.StoneOfAgony)
+            {
+                int quest = saveCtx.ReadInt32(0xA4);
+                SetQuestItem(item, true, ref quest);
+                saveCtx.Write(0xA4, quest);
+            }
+            // Set Magic
+            else if (item is Item.Magic or Item.DoubleMagic)
+            {
+                byte magicNext = (byte)(item == Item.Magic ? 0x30 : 0x60);
+                byte magicNow = saveCtx.ReadByte(0x33);
+                magicNow = Math.Min(magicNow, magicNext);
+
+                saveCtx.Write(
+                    0x32, (byte)0,
+                    0x33, (byte)magicNow,
+                    0x13F6, (short)magicNext,
+                    0x3A, (byte)1,
+                    0x3C, (byte)(item == Item.Magic ? 0 : 1));
+            }
+        }
+
         public static void SetInventoryItem(Item item, Ptr saveCtx)
         {
             Ptr inventPtr = saveCtx.RelOff(0x74);
 
-            if (item >= Item.Bottle 
-                && item <= Item.Poe)
+            if (item is >= Item.Bottle and <= Item.Poe)
             {
                 inventPtr.Write(18, (byte)item);
-                return;
-            };
-
-            if (!InventorySlot.ContainsKey(item))
-                return;
-
-            InventoryInfo info = InventorySlot[item];
-
-            inventPtr.Write(info.Slot, (byte)item);
-
-            SetInventoryItemAmmo(item, 50, saveCtx);
-
-            if (info.Ammo && info.LeftEquipment != Item.None)
+            }
+            else if (InventorySlot.ContainsKey(item))
             {
-                int equipment = saveCtx.ReadInt32(0xA0);
-                SetLeftEquipmentItem(item, 1, ref equipment);
-                saveCtx.Write(0xA0, equipment);
+                InventoryInfo info = InventorySlot[item];
+
+                inventPtr.Write(info.Slot, (byte)item);
+
+                SetInventoryItemAmmo(item, 50, saveCtx);
+
+                if (info.Ammo && info.LeftEquipment != Item.None)
+                {
+                    int equipment = saveCtx.ReadInt32(0xA0);
+                    SetLeftEquipmentItem(item, 1, ref equipment);
+                    saveCtx.Write(0xA0, equipment);
+                }
             }
         }
 
@@ -249,7 +280,7 @@ namespace Spectrum
             }
         }
 
-        static readonly Dictionary<Item, LeftEquipmentInfo> LeftEquipment = new Dictionary<Item, LeftEquipmentInfo>()
+        static readonly Dictionary<Item, LeftEquipmentInfo> LeftEquipment = new()
         {
             { Item.Bombs, new LeftEquipmentInfo(MASK_BOMBS, 3) },
             { Item.Bow, new LeftEquipmentInfo(MASK_QUIVER, 3) },
@@ -313,7 +344,7 @@ namespace Spectrum
             }
         }
 
-        static readonly Dictionary<Item, EquipmentInfo> Equipment = new Dictionary<Item, EquipmentInfo>()
+        static readonly Dictionary<Item, EquipmentInfo> Equipment = new()
         {
             {  Item.KokiriSword, new EquipmentInfo(0x0001, 1) },
             {  Item.MasterSword, new EquipmentInfo(0x0002, 2) },

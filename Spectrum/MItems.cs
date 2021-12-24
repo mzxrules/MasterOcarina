@@ -1,10 +1,6 @@
 ﻿using mzxrules.Helper;
 using mzxrules.OcaLib;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
@@ -27,6 +23,8 @@ namespace Spectrum
             Lens,
             Longshot,
             GreatFairysSword,
+
+            // Bottle Items
             Bottle,
             RedPotion,
             GreenPotion,
@@ -47,6 +45,7 @@ namespace Spectrum
             MagicMushroom,
             Seahorse,
             ChateauRomani,
+
             MoonsTear,
             LandDeed,
             SwampDeed,
@@ -112,9 +111,12 @@ namespace Spectrum
             DungeonMap,
             StrayFairy,
             None,
+            //Non-standard items
+            Magic,
+            DoubleMagic
         }
 
-        public static Dictionary<Item, (int international, int jpn)> ItemIds = new Dictionary<Item, (int, int)>()
+        public static Dictionary<Item, (int international, int jpn)> ItemIds = new()
         {
             { Item.Ocarina, (0x00, 0x00) },
             { Item.Bow, (0x01, 0x01) },
@@ -216,8 +218,19 @@ namespace Spectrum
             { Item.DungeonMap, (0x76, 0x96) },
             { Item.StrayFairy, (0x77, 0x97) },
             { Item.None, (0xFF, 0xFF) },
+            //Non-standard items
+            { Item.Magic, (0xFF, 0xFF) },
+            { Item.DoubleMagic, (0xFF, 0xFF) },
         };
 
+        const int MASK_NUTS         = 0x00700000;
+        const int MASK_STICKS       = 0x000E0000;
+        const int MASK_BULLET_BAG   = 0x0001C000;
+        const int MASK_WALLET       = 0x00003000;
+        const int MASK_SCALE        = 0x00000E00;
+        const int MASK_STRENGTH     = 0x000001C0;
+        const int MASK_BOMBS        = 0x00000038;
+        const int MASK_QUIVER       = 0x00000007;
 
         struct InventoryInfo
         {
@@ -238,19 +251,19 @@ namespace Spectrum
             }
         }
 
-        static readonly Dictionary<Item, InventoryInfo> InventorySlot = new Dictionary<Item, InventoryInfo>()
+        static readonly Dictionary<Item, InventoryInfo> InventorySlot = new()
         {
             { Item.Ocarina, 0 },
-            { Item.Bow, 1 },
+            { Item.Bow, new InventoryInfo(1, true, Item.Bow) },
             { Item.FireArrow, 2 },
             { Item.IceArrow, 3 },
             { Item.LightArrow, 4 },
-            { Item.Bombs, 6 },
-            { Item.Bombchu, 7 },
-            { Item.Sticks, 8 },
-            { Item.Nuts, 9 },
-            { Item.Beans, 10 },
-            { Item.PowderKeg, 12 },
+            { Item.Bombs, new InventoryInfo(6, true, Item.Bombs) },
+            { Item.Bombchu, new InventoryInfo(7, true, Item.Bombchu) },
+            { Item.Sticks, new InventoryInfo(8, true, Item.Sticks) },
+            { Item.Nuts, new InventoryInfo(9, true, Item.Nuts) },
+            { Item.Beans, new InventoryInfo(10, true, Item.Beans) },
+            { Item.PowderKeg, new InventoryInfo(12, true, Item.PowderKeg) },
             { Item.Pictograph, 13 },
             { Item.Lens, 14 },
             { Item.Longshot, 15 },
@@ -290,37 +303,122 @@ namespace Spectrum
                 return idGroup.jpn;
             }
             else
+            {
                 return idGroup.international;
+            }
         }
 
         public static void SetInventoryItem(RomVersion ver, Item itemKey, Ptr saveCtx)
         {
             Ptr inventPtr = saveCtx.RelOff(0x70);
-
             int itemId = GetItemId(ver, itemKey);
 
-            if (itemKey >= Item.Bottle
-                && itemKey <= Item.ChateauRomani)
+            // Set Bottle
+            if (itemKey is >= Item.Bottle and <= Item.ChateauRomani)
             {
                 inventPtr.Write(18, (byte)itemId);
-                return;
-            };
-
-            if (!InventorySlot.ContainsKey(itemKey))
-                return;
-
-            InventoryInfo info = InventorySlot[itemKey];
-
-            inventPtr.Write(info.Slot, (byte)itemId);
-
-            //SetInventoryItemAmmo(item, 50, saveCtx);
-
-            if (info.Ammo && info.LeftEquipment != Item.None)
+            }
+            // Set Magic
+            else if (itemKey is Item.Magic or Item.DoubleMagic)
             {
-                //int equipment = saveCtx.ReadInt32(0xA0);
-                //SetLeftEquipmentItem(item, 1, ref equipment);
-                //saveCtx.Write(0xA0, equipment);
+                saveCtx.Write(
+                    0x38, (byte)0,
+                    0x39, (byte)(itemKey == Item.Magic ? 0x30 : 0x60),
+                    0x40, (byte)1,
+                    0x41, (byte)(itemKey == Item.Magic ? 0 : 1));
+            }
+            // Set Inventory Item
+            else if (InventorySlot.ContainsKey(itemKey))
+            {
+                InventoryInfo info = InventorySlot[itemKey];
+
+                inventPtr.Write(info.Slot, (byte)itemId);
+
+                SetInventoryItemAmmo(itemKey, 50, saveCtx);
+
+                if (info.Ammo && info.LeftEquipment != Item.None)
+                {
+                    int equipment = saveCtx.ReadInt32(0xB8);
+                    SetLeftEquipmentItem(itemKey, 1, ref equipment);
+                    saveCtx.Write(0xB8, equipment);
+                }
             }
         }
+
+        public static void SetInventoryItemAmmo(Item item, byte amount, Ptr saveCtx)
+        {
+            Ptr ammoPtr = saveCtx.RelOff(0xA0);
+            var info = InventorySlot[item];
+
+            if (info.Ammo)
+            {
+                ammoPtr.Write(info.Slot, amount);
+            }
+        }
+
+        struct LeftEquipmentInfo
+        {
+            public int Mask;
+            public int Max;
+
+            public LeftEquipmentInfo(int mask, int max)
+            {
+                Mask = mask;
+                Max = max;
+            }
+        }
+
+        static readonly Dictionary<Item, LeftEquipmentInfo> LeftEquipment = new()
+        {
+            { Item.Bombs, new LeftEquipmentInfo(MASK_BOMBS, 3) },
+            { Item.Bow, new LeftEquipmentInfo(MASK_QUIVER, 3) },
+            { Item.Nuts, new LeftEquipmentInfo(MASK_NUTS, 3) },
+            //{ Item.Slingshot, new LeftEquipmentInfo(MASK_BULLET_BAG, 3) },
+            { Item.Sticks, new LeftEquipmentInfo(MASK_STICKS, 3) },
+            //{ Item.Strength, new LeftEquipmentInfo(MASK_STRENGTH, 3) },
+            //{ Item.Scale, new LeftEquipmentInfo(MASK_SCALE, 2) },
+            //{ Item.Wallet, new LeftEquipmentInfo(MASK_WALLET, 3) },
+        };
+
+        public static bool SetLeftEquipmentItemMax(Item item, ref int var)
+        {
+            return SetLeftEquipmentItem(item, int.MaxValue, ref var);
+        }
+
+        public static void SetLeftEquipmentMax(ref int var)
+        {
+            foreach (var item in LeftEquipment.Keys)
+            {
+                SetLeftEquipmentItem(item, int.MaxValue, ref var);
+            }
+        }
+
+        public static void SetLeftEquipmentNone(ref int var)
+        {
+            foreach (var item in LeftEquipment.Keys)
+            {
+                SetLeftEquipmentItem(item, 0, ref var);
+            }
+        }
+
+        public static bool SetLeftEquipmentItem(Item item, int value, ref int var)
+        {
+            if (!LeftEquipment.ContainsKey(item))
+                return false;
+
+            var info = LeftEquipment[item];
+
+            if (value == int.MaxValue)
+            {
+                value = info.Max;
+            }
+
+            int leftshift = Shift.GetRight((uint)info.Mask);
+            int write = value << leftshift;
+            var &= -1 ^ info.Mask;
+            var |= write;
+            return true;
+        }
+
     }
 }
