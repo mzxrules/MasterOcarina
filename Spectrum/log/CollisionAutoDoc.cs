@@ -1,4 +1,5 @@
 ﻿using mzxrules.OcaLib;
+using mzxrules.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +84,7 @@ namespace Spectrum
                     throw new NotImplementedException();
                 }
 
-                Offset = actor.MeshPtr.Offset - (ramStart & 0xFFFFFF);
+                Offset = ((N64Ptr)actor.MeshPtr).Offset - (ramStart & 0xFFFFFF);
                 Versions.Add(version);
                 Actors.Add(actor.ActorId);
             }

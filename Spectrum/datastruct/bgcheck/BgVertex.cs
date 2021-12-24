@@ -19,6 +19,14 @@ namespace Spectrum
                 ptr.ReadInt16(2),
                 ptr.ReadInt16(4));
         }
+        public static BgVertex GetVertex(DynaCollisionContext dyna, BgActor bgActor, short id)
+        {
+            var ptr = dyna.vtxList.RelOff(id * 6);
+            return new BgVertex(id,
+                ptr.ReadInt16(0),
+                ptr.ReadInt16(2),
+                ptr.ReadInt16(4));
+        }
         public override string ToString()
         {
             return $"ID: {Id:X4} ({Value.x},{Value.y},{Value.z})";

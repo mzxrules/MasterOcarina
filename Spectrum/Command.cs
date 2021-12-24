@@ -1,10 +1,5 @@
 ﻿using mzxrules.OcaLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectrum
 {
@@ -51,7 +46,7 @@ namespace Spectrum
         public string Name;
         public Category Cat = Category.Unsorted;
         public string Description;
-        public Supported Sup = Supported.OoT | Supported.MM;
+        public Supported Sup = Supported.All;
 
         public enum Category
         {
@@ -77,21 +72,31 @@ namespace Spectrum
         [Flags]
         public enum Supported
         {
-            OoT = 1,
-            MM = 2
+            None = 0,
+            All = 1,
+            OoT = 2,
+            MM = 4,
         }
         public string PrintSupportedVersions()
         {
-            string o = (Sup & Supported.OoT) == Supported.OoT ? "O" : " ";
-            return o + ((Sup & Supported.MM) == Supported.MM ? "M" : " ");
+            string o = (Sup & (Supported.OoT | Supported.All)) != Supported.None ? "O" : " ";
+            return o + ((Sup & (Supported.MM | Supported.All)) != Supported.None ? "M" : " ");
         }
 
         public bool IsSupported(RomVersion version)
         {
+            if ((Sup & Supported.All) == Supported.All)
+            {
+                return true;
+            }
             if (version.Game == Game.OcarinaOfTime)
+            {
                 return (Sup & Supported.OoT) == Supported.OoT;
+            }
             if (version.Game == Game.MajorasMask)
+            {
                 return (Sup & Supported.MM) == Supported.MM;
+            }
             return false;
         }
     }
@@ -99,8 +104,8 @@ namespace Spectrum
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     class SpectrumCommandSignature : Attribute
     {
-        public Tokens[] Sig = new Tokens[0];
+        public Tokens[] Sig = Array.Empty<Tokens>();
         public int SigId = 0;
-        public string Help = null;
+        public string Help;
     }
 }

@@ -7,13 +7,14 @@ namespace Spectrum
 {
     class DynaCollisionContext
     {
+        const int BG_ACTOR_MAX = 50;
         /* O 0x0000          */ public byte bitFlag = 0;
-        /* O 0x0004          */ public BgActor[] bgActors = new BgActor[50];
-        /* O 0x138C          */ public ushort[] bgActorFlags = new ushort[50]; // & 0x0008 = no dyna ceiling
+        /* O 0x0004          */ public BgActor[] bgActors = new BgActor[BG_ACTOR_MAX];
+        /* O 0x138C          */ public ushort[] bgActorFlags = new ushort[BG_ACTOR_MAX]; // & 0x0008 = no dyna ceiling
         /* O 0x13F0          */ public Ptr polyList; //dyn_poly
         /* O 0x13F4          */ public Ptr vtxList; //dyn_vtx
         /*          M 0x13F8 */ public int mm_0x1448;
-        /*          M 0x13FC */ public int mm_0x144C;
+        /*          M 0x13FC */ public Ptr waterBoxList;
         /* O 0x13F8 M 0x1400 */ public Ptr polyNodes_tbl; //DynaSSNodeList, dyn_list, dyn_count, dyn_max
         /* O 0x13FC M 0x1404 */ public int polyNodes_count;
         /* O 0x1400 M 0x1408 */ public int polyNodes_max;
@@ -25,6 +26,11 @@ namespace Spectrum
 
         public DynaCollisionContext(Ptr ctx, RomVersion version)
         {
+            for (int i = 0; i < BG_ACTOR_MAX; i++)
+            {
+                bgActors[i] = new BgActor(ctx.RelOff(i * 0x64 + 0x54));
+            }
+
             polyList = ctx.Deref(0x1440);
             vtxList = ctx.Deref(0x1444);
 
@@ -40,7 +46,7 @@ namespace Spectrum
             else if (version.Game == Game.MajorasMask)
             {
                 mm_0x1448 = ctx.ReadInt32(0x1448);
-                mm_0x144C = ctx.Deref(0x144C);
+                waterBoxList = ctx.Deref(0x144C);
                 polyNodes_tbl = ctx.Deref(0x1450);
                 polyNodes_count = ctx.ReadInt32(0x1454);
                 polyNodes_max = ctx.ReadInt32(0x1458);
@@ -59,8 +65,8 @@ namespace Spectrum
             if (version.Game == Game.MajorasMask)
             {
                 result +=
-                    $" mm_0x1448       {mm_0x1448:X8}{Environment.NewLine}" +
-                    $" mm_0x144C       {mm_0x144C}{Environment.NewLine}";
+                    $" waterBox_0x1448 {mm_0x1448:X8}{Environment.NewLine}" +
+                    $" waterBoxList    {waterBoxList}{Environment.NewLine}";
             }
             result +=
                 $" PolyNodes:{Environment.NewLine}" +
@@ -76,32 +82,20 @@ namespace Spectrum
     class CollisionCtx
     {
         RomVersion version;
-        /* 0x00 */
-        public N64Ptr SceneMeshPtr;
-        /* 0x04 */
-        public Vector3<float> boxmin;
-        /* 0x10 */
-        public Vector3<float> boxmax;
-        /* 0x1C */
-        public Vector3<int> max;
-        /* 0x28 */
-        public Vector3<float> unitSize;
-        /* 0x34 */
-        public Vector3<float> factor;
-        /* 0x40 */
-        public Ptr Table;
-        /* 0x44 */
-        public short SSNodeMax;
-        /* 0x46 */
-        public short SSNodeCount;
-        /* 0x48 */
-        public Ptr SSNodeTbl;
-        /* 0x4C */
-        public Ptr polyCheckTbl;
-        /* 0x50 */
-        DynaCollisionContext dyna;
+        /* 0x00 */ public Ptr SceneMeshPtr;
+        /* 0x04 */ public Vector3<float> boxmin;
+        /* 0x10 */ public Vector3<float> boxmax;
+        /* 0x1C */ public Vector3<int> max;
+        /* 0x28 */ public Vector3<float> unitSize;
+        /* 0x34 */ public Vector3<float> factor;
+        /* 0x40 */ public Ptr Table;
+        /* 0x44 */ public short SSNodeMax;
+        /* 0x46 */ public short SSNodeCount;
+        /* 0x48 */ public Ptr SSNodeTbl;
+        /* 0x4C */ public Ptr polyCheckTbl;
+        /* 0x50 */ public DynaCollisionContext dyna;
         public int mem_size;
-        public int mm_0x146C;
+        public int flags; // MM only, stores water direction for Great Bay Temple
 
         public static readonly string[] StaticLookupTypes =
         {
@@ -120,7 +114,7 @@ namespace Spectrum
         public CollisionCtx(Ptr ctx, RomVersion version)
         {
             this.version = version;
-            SceneMeshPtr = ctx.ReadInt32(0);
+            SceneMeshPtr = ctx.Deref(0);
 
             boxmin = new Vector3<float>(
                 ctx.ReadFloat(0x04),
@@ -166,7 +160,7 @@ namespace Spectrum
             else if (version.Game == Game.MajorasMask)
             {
                 mem_size = ctx.ReadInt32(0x1468);
-                mm_0x146C = ctx.ReadInt32(0x146C);
+                flags = ctx.ReadInt32(0x146C);
             }
         }
 
@@ -189,7 +183,7 @@ namespace Spectrum
 
             if (version.Game == Game.MajorasMask)
             {
-                result += $"{Environment.NewLine}unk_0x146C = {mm_0x146C:X8}";
+                result += $"{Environment.NewLine}unk_0x146C = {flags:X8}";
             }
             return result;
         }
@@ -228,6 +222,22 @@ namespace Spectrum
 
             return addr;
         }
+
+        public BgMesh GetCollisionMesh(int id)
+        {
+            if (id < 0 || id > 0x32)
+                return null;
+
+            Ptr MeshPtr;
+
+            if (id == 0x32)
+                MeshPtr = SceneMeshPtr;
+            else
+                MeshPtr = dyna.bgActors[id].MeshPtr;
+
+            return new BgMesh(MeshPtr);
+        }
+
 
         public N64Ptr GetLinkDataPtr(int index)
         {

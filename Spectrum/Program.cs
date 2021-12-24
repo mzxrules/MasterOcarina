@@ -37,12 +37,8 @@ namespace Spectrum
         static void Main(string[] args)
         {
             EncodingExtension.RegisterCodePagesEncodingProvider();
-            if(!Directory.Exists("dump"))
-            {
-                Directory.CreateDirectory("dump");
-            }    
-            string readLine;
             Console.OutputEncoding = Encoding.Unicode;
+            string readLine;
             Initialize();
 
             do
@@ -73,6 +69,11 @@ namespace Spectrum
             SpawnData.Load();
             LoadSettings();
             PathUtil.Initialize();
+
+            if (!Directory.Exists("dump"))
+            {
+                Directory.CreateDirectory("dump");
+            }
 
             MountEmulator("");
 
@@ -431,8 +432,6 @@ namespace Spectrum
                 }
             }
         }
-
-
 
         private static void SetZoneoutSpawn_Mask(short? index, ref Spawn spawn)
         {

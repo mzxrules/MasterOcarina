@@ -124,6 +124,11 @@ namespace mzxrules.Helper
             return o + Offset;
         }
 
+        public bool IsNull()
+        {
+            return GetAddr() == 0;
+        }
+
         /// <summary>
         /// Writes a series of primitives to the SPtr address
         /// </summary>

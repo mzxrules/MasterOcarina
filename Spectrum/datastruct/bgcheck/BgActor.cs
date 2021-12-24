@@ -44,11 +44,12 @@ namespace Spectrum
         }
 
         public N64Ptr Address;
-        /* 0x00 */ public N64Ptr ActorInstance; 
+        /* 0x00 */ public Ptr ActorInstance; 
         public short ActorId;
-        /* 0x04 */ public N64Ptr MeshPtr;
+        /* 0x04 */ public Ptr MeshPtr;
         /* 0x08 */ public DynaLookup dynaLookup;
         /* 0x10 */ public ushort vtxStartIndex;
+        /* 0x12 */ public ushort waterBoxStartIndex; //MM only
         /* 0x14 */ public Moment Prev;
         /* 0x34 */ public Moment Current;
         /* 0x54 */ public Sphere16 boundingSphere;
@@ -58,11 +59,12 @@ namespace Spectrum
         public BgActor(Ptr pointer)
         {
             Address = (int)pointer;
-            ActorInstance = pointer.ReadInt32(0);
+            ActorInstance = pointer.Deref(0);
             ActorId = pointer.Deref().ReadInt16(0);
-            MeshPtr = pointer.ReadInt32(4);
+            MeshPtr = pointer.Deref(4);
             dynaLookup = new DynaLookup(pointer.RelOff(0x08));
             vtxStartIndex = pointer.ReadUInt16(0x10);
+            waterBoxStartIndex = pointer.ReadUInt16(0x12);
             Prev = new Moment(pointer.RelOff(0x14));
             Current = new Moment(pointer.RelOff(0x34));
             boundingSphere = new Sphere16(pointer.RelOff(0x54));

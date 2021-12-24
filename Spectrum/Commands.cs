@@ -1802,39 +1802,32 @@ namespace Spectrum
         private static void GetActorCollision(Arguments args)
         {
             Console.Clear();
-
+            CollisionCtx collisionCtx = new(GetColCtxPtr(), Options.Version);
             if (args.Length == 1)
             {
-                var mesh = GetCollisionMesh((short)args[0]);
+                var mesh = collisionCtx.GetCollisionMesh((short)args[0]);
                 if (mesh != null)
                     Console.WriteLine(mesh);
             }
             else
             {
-                PrintBgActorCollision();
+                PrintBgActorCollision(collisionCtx.dyna.bgActors);
             }
         }
 
-        private static void PrintBgActorCollision()
+        private static void PrintBgActorCollision(BgActor[] bgActors)
         {
-            var ptr = GetColCtxPtr();
-            List<(int, BgActor)> bgActors = new();
             for (int i = 0; i < 50; i++)
             {
-                BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));
+                BgActor actor = bgActors[i];
                 if (!actor.ActorInstance.IsNull())
                 {
-                    bgActors.Add((i, actor));
+                    //IFile obj = GetIFile(actor.MeshPtr);
+
+                    //CollisionActorDoc.AddNewRecord(actor, obj, Options.Version);
+
+                    Console.WriteLine($"{i:X2} {actor}");
                 }
-            }
-
-            foreach (var (i, actor) in bgActors)
-            {
-                //IFile obj = GetIFile(actor.MeshPtr);
-
-                //CollisionActorDoc.AddNewRecord(actor, obj, Options.Version);
-
-                Console.WriteLine($"{i:X2} {actor}");
             }
         }
 
@@ -2095,7 +2088,7 @@ namespace Spectrum
             TextWriter console = Console.Out;
             StringWriter stringWriter = new();
             CollisionCtx ctx = new(GetColCtxPtr(), Options.Version);
-            BgMesh mesh = GetCollisionMesh(0x32);
+            BgMesh mesh = ctx.GetCollisionMesh(0x32);
 
             Console.SetOut(stringWriter);
             try
@@ -2187,7 +2180,9 @@ namespace Spectrum
 
             CollisionCtx ctx = new(GetColCtxPtr(), Options.Version);
             if (!ctx.ColSecInBounds(colsec))
-                return;
+            {
+                Console.WriteLine("Collision Sector out of bounds");
+            }
 
             for (int i = 0; i < 3; i++)
             {
@@ -2252,10 +2247,54 @@ namespace Spectrum
             if (!TryEvaluate((string)args[1], out long addr))
                 return;
 
-            BgMesh mesh = GetCollisionMesh(id);
-            if (mesh == null)
-                return;
-            Console.WriteLine(mesh.GetPolyFormattedInfo(addr));
+            CollisionCtx collisionCtx = new(GetColCtxPtr(), Options.Version);
+            
+            if (id == 0x32)
+            {
+                BgMesh mesh = collisionCtx.GetCollisionMesh(id);
+                BgPoly poly = new(mesh, SPtr.New(addr));
+                Console.WriteLine(poly);
+            }
+            else if (id >= 0 && id < 0x32)
+            {
+                BgActor bgActor = collisionCtx.dyna.bgActors[id];
+                if (bgActor == null)
+                {
+                    Console.WriteLine("BgActor NULL");
+                    return;
+                }
+                if (bgActor.MeshPtr == null)
+                {
+                    Console.WriteLine("Invalid Mesh");
+                    return;
+                }
+                BgMesh mesh = new(bgActor.MeshPtr);
+
+                N64Ptr polyPtr = addr;
+                int polyId = (polyPtr - mesh.PolyArray) / 0x10;
+
+                if (!(polyId >= 0 && polyId < mesh.Polys))
+                {
+                    polyId = ((polyPtr - collisionCtx.dyna.polyList) / 0x10) - collisionCtx.dyna.bgActors[id].dynaLookup.polyStartIndex;
+                    if (!(polyId >= 0 && polyId < mesh.Polys))
+                    {
+                        Console.WriteLine("Poly probably unrelated or data corrupt");
+                        return;
+                    }
+                }
+                Console.Clear();
+
+                var dyna = collisionCtx.dyna;
+
+                BgPoly staticPoly = new(mesh, polyId);
+                BgPoly dynaPoly = new(dyna, bgActor, SPtr.New((bgActor.dynaLookup.polyStartIndex + polyId) * 0x10 + dyna.polyList));
+
+                Console.WriteLine("STATIC POLY");
+                Console.WriteLine(staticPoly);
+
+                Console.WriteLine("DYNA POLY");
+                Console.WriteLine(dynaPoly);
+            }
         }
 
         public static Ptr GetColCtxPtr()
@@ -2263,22 +2302,6 @@ namespace Spectrum
             int colctxOff = (Options.Version.Game == Game.OcarinaOfTime) ?
                 0x7C0 : 0x830;
             return GlobalContext.RelOff(colctxOff);
-        }
-
-        private static BgMesh GetCollisionMesh(int id)
-        {
-            if (id < 0 || id > 0x32)
-                return null;
-
-            Ptr MeshPtr;
-
-            Ptr ColContext = GetColCtxPtr();
-            if (id == 0x32)
-                MeshPtr = ColContext.Deref();
-            else
-                MeshPtr = ColContext.RelOff(0x58).Deref(0x64 * id);
-
-            return new BgMesh(MeshPtr);
         }
 
         [SpectrumCommand(
@@ -2295,12 +2318,14 @@ namespace Spectrum
             if (Options.Version.Game != Game.OcarinaOfTime)
                 return;
             Ptr actor = SPtr.New(new N64Ptr(addr));
-            N64Ptr wallPoly = actor.Deref(0x74);
-            N64Ptr floorPoly = actor.Deref(0x78);
+            Ptr wallPoly = actor.Deref(0x74);
+            Ptr floorPoly = actor.Deref(0x78);
             byte wallPolySource = actor.ReadByte(0x7C);
             byte floorPolySource = actor.ReadByte(0x7D);
 
-            var list = new (string, N64Ptr, byte)[]
+            CollisionCtx collisionCtx = new(GetColCtxPtr(), Options.Version);
+
+            var list = new (string, Ptr, byte)[]
             {
                 ("Wall", wallPoly, wallPolySource),
                 ("Floor", floorPoly, floorPolySource)
@@ -2311,11 +2336,31 @@ namespace Spectrum
             {
                 var (name, polyPtr, source) = item;
                 Console.WriteLine($"{name}: {polyPtr} {source:X2}");
-                if (polyPtr != 0)
+                if (!polyPtr.IsNull())
                 {
-                    BgMesh mesh = GetCollisionMesh(source);
-                    var poly = mesh.GetPolyFormattedInfo(polyPtr);
-                    Console.WriteLine(poly);
+                    if (source < 0 || source > 0x32)
+                    {
+                        Console.WriteLine("INVALID");
+                    }
+                    else if (source == 0x32)
+                    {
+                        BgMesh mesh = collisionCtx.GetCollisionMesh(source);
+                        if (mesh == null)
+                        {
+                            Console.WriteLine("INVALID SCENE MESH");
+                        }
+                        else
+                        {
+                            BgPoly poly = new(mesh, polyPtr);
+                            Console.WriteLine(poly);
+                        }
+                    }
+                    else
+                    {
+                        BgActor bgActor = collisionCtx.dyna.bgActors[source];
+                        BgPoly poly = new (collisionCtx.dyna, bgActor, polyPtr);
+                        Console.WriteLine(poly);
+                    }    
                 }
             }
         }

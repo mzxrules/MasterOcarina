@@ -48,12 +48,6 @@ namespace Spectrum
                 $"Water: {WaterBoxes,4}  {WaterBoxesArray}";
         }
 
-        public string GetPolyFormattedInfo(N64Ptr ptr)
-        {
-            BgPoly poly = new(this, SPtr.New(ptr));
-            return poly.ToString();
-        }
-
         public BgPoly GetPolyById(int id)
         {
             return new BgPoly(this, PolyArray.RelOff(id * 0x10));
@@ -63,32 +57,27 @@ namespace Spectrum
     class BgPoly
     {
         int Id;
+        short typeId;
         BgPolyType Type;
+        short vtxIdA, vtxIdB, vtxIdC;
         BgVertex VertexA, VertexB, VertexC;
         byte VertexFlagsA;
         byte VertexFlagsB;
         byte VertexFlagsC;
         Vector3<short> Normal;
         short D;
-        public BgPoly(BgMesh mesh, Ptr ptr)
+
+        private void ReadPoly(Ptr ptr)
         {
-            short type;
-            ushort vA;
-            ushort vB;
-            ushort vC;
-            short vertexA;
-            short vertexB;
-            short vertexC;
+            ushort vA, vB, vC;
 
-            Id = (ptr - mesh.PolyArray) / 0x10;
-
-            type = ptr.ReadInt16(0x00);
+            typeId = ptr.ReadInt16(0x00);
             vA = ptr.ReadUInt16(0x02);
             vB = ptr.ReadUInt16(0x04);
             vC = ptr.ReadUInt16(0x06);
-            vertexA = (short)(vA & 0x1FFF);
-            vertexB = (short)(vB & 0x1FFF);
-            vertexC = (short)(vC & 0x1FFF);
+            vtxIdA = (short)(vA & 0x1FFF);
+            vtxIdB = (short)(vB & 0x1FFF);
+            vtxIdC = (short)(vC & 0x1FFF);
             VertexFlagsA = Shift.AsByte(vA, 0xE000);
             VertexFlagsB = Shift.AsByte(vB, 0xE000);
             VertexFlagsC = Shift.AsByte(vC, 0xE000);
@@ -98,12 +87,43 @@ namespace Spectrum
                 ptr.ReadInt16(0x0A),
                 ptr.ReadInt16(0x0C));
             D = ptr.ReadInt16(0x0E);
-
-            Type = BgPolyType.GetPolyType(mesh, type);
-            VertexA = BgVertex.GetVertex(mesh, vertexA);
-            VertexB = BgVertex.GetVertex(mesh, vertexB);
-            VertexC = BgVertex.GetVertex(mesh, vertexC);
         }
+
+        public BgPoly(BgMesh mesh, int id)
+        {
+            Ptr ptr = mesh.PolyArray.Deref(0x10 * id);
+
+            ReadPoly(ptr);
+            Id = id;
+            Type = BgPolyType.GetPolyType(mesh, typeId);
+            VertexA = BgVertex.GetVertex(mesh, vtxIdA);
+            VertexB = BgVertex.GetVertex(mesh, vtxIdB);
+            VertexC = BgVertex.GetVertex(mesh, vtxIdC);
+        }
+
+        public BgPoly(BgMesh mesh, Ptr ptr)
+        {
+            ReadPoly(ptr);
+
+            Id = (ptr - mesh.PolyArray) / 0x10;
+            Type = BgPolyType.GetPolyType(mesh, typeId);
+            VertexA = BgVertex.GetVertex(mesh, vtxIdA);
+            VertexB = BgVertex.GetVertex(mesh, vtxIdB);
+            VertexC = BgVertex.GetVertex(mesh, vtxIdC);
+        }
+
+        public BgPoly(DynaCollisionContext dyna, BgActor bgActor, Ptr ptr)
+        {
+            BgMesh mesh = new(bgActor.MeshPtr);
+            ReadPoly(ptr);
+
+            Id = (ptr - dyna.polyList ) / 0x10 - bgActor.dynaLookup.polyStartIndex;
+            Type = BgPolyType.GetPolyType(mesh, typeId);
+            VertexA = BgVertex.GetVertex(dyna, bgActor, vtxIdA);
+            VertexB = BgVertex.GetVertex(dyna, bgActor, vtxIdB);
+            VertexC = BgVertex.GetVertex(dyna, bgActor, vtxIdC);
+        }
+
         public string TSV()
         {
             return $"{Type.Id:X4}\t{VertexFlagsA:X1}\t" +
@@ -120,9 +140,9 @@ namespace Spectrum
                 (float)Normal.z / 32767
             );
             return $"Id: {Id:X4} Type: {Type}{Environment.NewLine}" +
-                $"VertA: {VertexFlagsA:X1} {VertexA}{Environment.NewLine}" +
-                $"VertB: {VertexFlagsB:X1} {VertexB}{Environment.NewLine}" +
-                $"VertC: {VertexFlagsC:X1} {VertexC}{Environment.NewLine}" +
+                $"VertA: FLAG: {VertexFlagsA:X1} {VertexA}{Environment.NewLine}" +
+                $"VertB: FLAG: {VertexFlagsB:X1} {VertexB}{Environment.NewLine}" +
+                $"VertC: FLAG: {VertexFlagsC:X1} {VertexC}{Environment.NewLine}" +
                 $"Normal: ({Normal.x:X4},{Normal.y:X4},{Normal.z:X4}) : ({unit.x:F3},{unit.y:F3},{unit.z:F3}) + {D}";
         }
     }
