@@ -7,7 +7,6 @@ namespace Spectrum3D
 {
     class Program
     {
-
         static ExpressTest.ExpressionEvaluator Evaluator = new((x) => Zpr.ReadRamInt32((int)x) & 0xFFFFFFFF);
         static void Main(string[] args)
         {
