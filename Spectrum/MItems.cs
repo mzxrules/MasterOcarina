@@ -55,6 +55,7 @@ namespace Spectrum
             LetterMama,
             LetterKafei,
             PendentOfMemories,
+            
             DekuMask,
             GoronMask,
             ZoraMask,
@@ -79,6 +80,7 @@ namespace Spectrum
             BlastMask,
             MaskOfScents,
             GiantsMask,
+
             KokiriSword,
             RazorSword,
             GildedSword,
@@ -90,6 +92,7 @@ namespace Spectrum
             BombBag,
             BigBombBag,
             BiggestBombBag,
+
             OdalwaRemains,
             GohtRemains,
             GyorgRemains,
@@ -99,11 +102,13 @@ namespace Spectrum
             NewWaveBossaNova,
             ElegyOfEmptiness,
             OathToOrder,
+            SariasSong, //unused
             SongOfTime,
             SongOfHealing,
             EponasSong,
             SongOfSoaring,
             SongOfStorms,
+            SunsSong, //unused
             BombersNotebook,
             LullabyIntro,
             BossKey,
@@ -294,6 +299,29 @@ namespace Spectrum
             { Item.FDMask, 47 }
         };
 
+        public static void GiveItem(RomVersion ver, Item itemKey, Ptr saveCtx)
+        {
+            if (itemKey <= Item.GiantsMask)
+            {
+                SetInventoryItem(ver, itemKey, saveCtx);
+            }
+            else if (itemKey >= Item.OdalwaRemains && itemKey <= Item.LullabyIntro)
+            {
+                int quest = saveCtx.RelOff(0x70).ReadInt32(0x4C);
+                SetQuestItem(itemKey, true, ref quest);
+                saveCtx.RelOff(0x70).Write(0x4C, quest);
+            }
+            // Set Magic
+            else if (itemKey is Item.Magic or Item.DoubleMagic)
+            {
+                saveCtx.Write(
+                    0x38, (byte)0,
+                    0x39, (byte)(itemKey == Item.Magic ? 0x30 : 0x60),
+                    0x40, (byte)1,
+                    0x41, (byte)(itemKey == Item.Magic ? 0 : 1));
+            }
+        }
+
         public static int GetItemId(RomVersion ver, Item item)
         {
             var idGroup = ItemIds[item];
@@ -317,15 +345,6 @@ namespace Spectrum
             if (itemKey is >= Item.Bottle and <= Item.ChateauRomani)
             {
                 inventPtr.Write(18, (byte)itemId);
-            }
-            // Set Magic
-            else if (itemKey is Item.Magic or Item.DoubleMagic)
-            {
-                saveCtx.Write(
-                    0x38, (byte)0,
-                    0x39, (byte)(itemKey == Item.Magic ? 0x30 : 0x60),
-                    0x40, (byte)1,
-                    0x41, (byte)(itemKey == Item.Magic ? 0 : 1));
             }
             // Set Inventory Item
             else if (InventorySlot.ContainsKey(itemKey))
@@ -420,5 +439,67 @@ namespace Spectrum
             return true;
         }
 
+        struct QuestInfo
+        {
+            public int Mask;
+
+            public QuestInfo(int mask)
+            {
+                Mask = mask;
+            }
+        }
+
+        static readonly Dictionary<Item, QuestInfo> QuestItems = new()
+        {
+            { Item.OdalwaRemains, new QuestInfo(0x00_0001) },
+            { Item.GohtRemains, new QuestInfo(0x00_0002) },
+            { Item.GyorgRemains, new QuestInfo(0x00_0004) },
+            { Item.TwinmoldRemains, new QuestInfo(0x00_0008) },
+            //{ Item.ShadowMedallion, new QuestInfo(0x00_0010) },
+            //{ Item.LightMedallion, new QuestInfo(0x00_0020) },
+            { Item.SonataOfAwakening, new QuestInfo(0x00_0040) },
+            { Item.GoronLullaby, new QuestInfo(0x00_0080) },
+
+            { Item.NewWaveBossaNova, new QuestInfo(0x00_0100) },
+            { Item.ElegyOfEmptiness, new QuestInfo(0x00_0200) },
+            { Item.OathToOrder, new QuestInfo(0x00_0400) },
+            { Item.SariasSong, new QuestInfo(0x00_0800) },
+            { Item.SongOfTime, new QuestInfo(0x00_1000) },
+            { Item.SongOfHealing, new QuestInfo(0x00_2000) },
+            { Item.EponasSong, new QuestInfo(0x00_4000) },
+            { Item.SongOfSoaring, new QuestInfo(0x00_8000) },
+
+            { Item.SongOfStorms, new QuestInfo(0x01_0000) },
+            { Item.SunsSong, new QuestInfo(0x02_0000) },
+            { Item.BombersNotebook, new QuestInfo(0x04_0000) },
+            //{ Item.Ruby, new QuestInfo(0x08_0000) },
+            //{ Item.Sapphire, new QuestInfo(0x10_0000) },
+            //{ Item.StoneOfAgony, new QuestInfo(0x20_0000) },
+            //{ Item.GerudoCard, new QuestInfo(0x40_0000) },
+            //{ Item.GoldSkulltula, new QuestInfo(0x80_0000) },
+            
+            { Item.LullabyIntro, new QuestInfo(0x100_0000) }
+
+        };
+
+        public static bool SetQuestItem(Item item, bool setOn, ref int var)
+        {
+            if (!QuestItems.ContainsKey(item))
+            {
+                return false;
+            }
+            var info = QuestItems[item];
+
+            if (setOn == true)
+            {
+                var |= info.Mask;
+            }
+            else
+            {
+                int mask = -1 ^ info.Mask;
+                var &= mask;
+            }
+            return true;
+        }
     }
 }

@@ -3086,30 +3086,23 @@ namespace Spectrum
         {
             string arg = (string)args[0];
             if (Options.Version.Game == Game.OcarinaOfTime)
-                GiveOItem(arg);
-            else
-                GiveMItem(arg);
-
-        }
-
-        private static void GiveMItem(string arg)
-        {
-            if (!Enum.TryParse<MItems.Item>(arg, true, out var item))
             {
-                return;
+                if (!Enum.TryParse<OItems.Item>(arg, true, out var item))
+                {
+                    return;
+                }
+                OItems.GiveItem(item, SaveContext);
             }
-
-            MItems.SetInventoryItem(Options.Version, item, SaveContext);
-        }
-
-        private static void GiveOItem(string arg)
-        {
-            if (!Enum.TryParse<OItems.Item>(arg, true, out var item))
+            else if (Options.Version.Game == Game.MajorasMask)
             {
-                return;
+                if (!Enum.TryParse<MItems.Item>(arg, true, out var item))
+                {
+                    return;
+                }
+                MItems.GiveItem(Options.Version, item, SaveContext);
             }
-            OItems.GiveItem(item, SaveContext);
         }
+
         #endregion
 
         [SpectrumCommand(

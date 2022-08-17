@@ -389,7 +389,7 @@ namespace Spectrum
             }
         }
 
-        static readonly Dictionary<Item, QuestInfo> QuestItems = new Dictionary<Item, QuestInfo>()
+        static readonly Dictionary<Item, QuestInfo> QuestItems = new()
         {
             { Item.ForestMedallion, new QuestInfo(0x00_0001) },
             { Item.FireMedallion,   new QuestInfo(0x00_0002) },

@@ -56,7 +56,7 @@ namespace Spectrum
             public Func<byte[], int, int, Bitmap> CreateBitmap;
         }
 
-        static Dictionary<TextureFormat, TextureFormatInfo> formatInfo = new Dictionary<TextureFormat, TextureFormatInfo>()
+        static readonly Dictionary<TextureFormat, TextureFormatInfo> formatInfo = new()
         {
             [TextureFormat.RGB5A1] = new TextureFormatInfo() 
             {
@@ -75,7 +75,6 @@ namespace Spectrum
         {
             return formatInfo.ContainsKey(format);
         }
-
 
         //const int FRAMEBUFFER_SIZE = 320 * 240 * 2;
 

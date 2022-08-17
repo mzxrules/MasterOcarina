@@ -86,7 +86,7 @@ namespace Spectrum.ExpressTest
                 return base.TryInvokeMember(binder, args, out result);
             }
 
-            if (!(args[0] is string))
+            if (args[0] is not string)
             {
                 throw new ArgumentException("No expression specified for parsing");
             }
@@ -264,7 +264,7 @@ namespace Spectrum.ExpressTest
 
         private static long Execute(Func<long[], long> compiled, Dictionary<string, long> arguments, List<string> parameters)
         {
-            arguments = arguments ?? new Dictionary<string, long>();
+            arguments ??= new Dictionary<string, long>();
 
             if (parameters.Count != arguments.Count)
             {
@@ -381,6 +381,8 @@ namespace Spectrum.ExpressTest
                 case TypeCode.Double:
                 case TypeCode.Decimal:
                     return true;
+                default:
+                    break;
             }
             return false;
         }
@@ -447,9 +449,7 @@ namespace Spectrum.ExpressTest
 
         public static explicit operator Operation(string operation)
         {
-            Operation result;
-
-            if (Operations.TryGetValue(operation, out result))
+            if (Operations.TryGetValue(operation, out Operation result))
             {
                 return result;
             }
