@@ -61,9 +61,7 @@ namespace Spectrum
         {
             Console.Title = TITLE;
 
-            ChangeVersion += SpectrumVariables.ChangeVersion;
-            ChangeVersion += MemoryMapper.ChangeVersion;
-            ChangeVersion += UpdateSetVersion;
+            Console.WriteLine($"Created by mzxrules 2014-2022, compiled {Timestamp}");
             
             CommandDictionary = BuildCommands();
             SpawnData.Load();
@@ -75,11 +73,13 @@ namespace Spectrum
                 Directory.CreateDirectory("dump");
             }
 
-            MountEmulator("");
+            ChangeVersion += args => { Console.WriteLine($"Configuring game {args.options.Version.GameNiceName} version {args.options.Version}"); };
+            ChangeVersion += SpectrumVariables.ChangeVersion;
+            ChangeVersion += MemoryMapper.ChangeVersion;
+            ChangeVersion += UpdateSetVersion;
+            ChangeVersion += args => { Console.WriteLine("Game setup complete."); };
 
-            Console.WriteLine($"Created by mzxrules 2014-2021, compiled {Timestamp}");
-            Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
-            Console.WriteLine($"Data logging enabled? {Options.EnableDataLogging}");
+            MountEmulator("");
         }
 
         private static void ProcessCommand(CommandRequest request)
@@ -298,18 +298,15 @@ namespace Spectrum
         private static void UpdateSetVersion((SpectrumOptions options, bool g) args)
         {
             var v = args.options.Version;
-            string gameStr = "?";
+            string gameStr = v.GameNiceName;
             string buildStr = "?";
-            Console.WriteLine($"{v.Game}: version {v} set");
-
+            
             if (v.Game == Game.OcarinaOfTime)
             {
-                gameStr = "Ocarina of Time";
                 buildStr = ORom.BuildInformation.Get(v).Name;
             }
             else if (v.Game == Game.MajorasMask)
             {
-                gameStr = "Majora's Mask";
                 buildStr = MRom.BuildInformation.Get(v).Name;
             }
 

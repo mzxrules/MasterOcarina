@@ -430,6 +430,11 @@ namespace Spectrum
                 Console.WriteLine("Warning: No emulator is set up! Type mount while a recognized emulator is running");
                 Console.WriteLine("or use the emu command to create a new emulator definition.");
             }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Press Enter to perform a memory dump, or type help to see a list of commands");
+            }
         }
 
         [SpectrumCommand(
@@ -524,12 +529,13 @@ namespace Spectrum
         private static void LoadSymbolMap(Arguments args)
         {
             string path = Options.MapfileOptions.Path;
+
+            Console.WriteLine($"sympath {Options.MapfileOptions.Path}");
             if (!File.Exists(path))
             {
-                Console.WriteLine($"Cannot find symbol file: {Options.MapfileOptions.Path}");
+                Console.WriteLine($"Cannot find symbol file");
                 return;
             }
-
             Options.MapfileOptions.SymbolMap = SymbolMapParser.Parse(Options.MapfileOptions.Path);
             Options.MapfileOptions.Version = Options.Version;
             Options.MapfileOptions.UseMap = true;
@@ -1869,7 +1875,8 @@ namespace Spectrum
             List<(int, BgActor)> bgActors = new();
             for (int i = 0; i < 50; i++)
             {
-                BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));   
+                BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));
+                bgActors.Add((i, actor));
             }    
         }
 
@@ -2027,7 +2034,7 @@ namespace Spectrum
                 (int)xyz.z
                 );
 
-            string gameStr = $"{Options.Version.GetGameAbbr()}_{Options.Version}_colsec_{colsec.x}_{colsec.y}_{colsec.z}.txt";
+            string gameStr = $"{Options.Version.GameAbbr}_{Options.Version}_colsec_{colsec.x}_{colsec.y}_{colsec.z}.txt";
 
             using (StreamWriter sw = new("dump/" + gameStr))
             {
@@ -2079,7 +2086,7 @@ namespace Spectrum
                 Zpr.EndRamPrefetch();
                 scene++;
             }
-            using StreamWriter sw = new($"dump/{Options.Version.GetGameAbbr()}_{Options.Version}_static_col.txt");
+            using StreamWriter sw = new($"dump/{Options.Version.GameAbbr}_{Options.Version}_static_col.txt");
             sw.Write(result);
         } 
 

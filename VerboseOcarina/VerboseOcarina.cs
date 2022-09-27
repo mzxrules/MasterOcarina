@@ -76,7 +76,7 @@ namespace VerboseOcarina
             openFile.Title = $"Open {version} rom";
 
             string romLocation;
-            if (!version.IsCustomBuild())
+            if (!version.IsCustomBuild)
             {
                 if (!PathUtil.TryGetRomLocation(version, out romLocation))
                 {

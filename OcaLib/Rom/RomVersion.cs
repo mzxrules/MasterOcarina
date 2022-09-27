@@ -76,7 +76,7 @@ namespace mzxrules.OcaLib
             OVer = ORom.Build.UNKNOWN;
             Game = Game.Undefined;
 
-            if (!key.Contains("."))
+            if (!key.Contains('.'))
             {
                 return;
             }
@@ -161,65 +161,57 @@ namespace mzxrules.OcaLib
             return ((int)OVer << 16) + (int)MVer;
         }
 
-        public bool IsCustomBuild()
+        public bool IsCustomBuild => Game switch
         {
-            if (Game == Game.OcarinaOfTime)
-                return OVer == ORom.Build.CUSTOM;
-            else if (Game == Game.MajorasMask)
-                return MVer == MRom.Build.CUSTOM;
-            return false;
-        }
+            Game.OcarinaOfTime => OVer == ORom.Build.CUSTOM,
+            Game.MajorasMask => MVer == MRom.Build.CUSTOM,
+            _ => false,
+        };
 
-        public string GetGroup()
+        public string GetGroup() => MVer switch
         {
-            if (MVer == MRom.Build.J0
-                || MVer == MRom.Build.J1)
-                return "J";
-            return null;
-        }
+            MRom.Build.J0 or MRom.Build.J1 => "J",
+            _ => null
+        };
 
-        public string GetGameAbbr()
+        public string GameNiceName => Game switch
         {
-            return Game switch
-            {
-                Game.OcarinaOfTime => "oot",
-                Game.MajorasMask => "mm",
-                _ => "invalid",
-            };
-        }
+            Game.OcarinaOfTime => "Ocarina of Time",
+            Game.MajorasMask => "Majora's Mask",
+            _ => "Invalid",
+        };
 
-        public string GetVerAbbr()
+        public string GameAbbr => Game switch
         {
-            return Game switch
-            {
-                Game.OcarinaOfTime => OVer.ToString().ToLowerInvariant(),
-                Game.MajorasMask => MVer.ToString().ToLowerInvariant(),
-                _ => "n/a",
-            };
-        }
+            Game.OcarinaOfTime => "oot",
+            Game.MajorasMask => "mm",
+            _ => "invalid",
+        };
+
+        public string VerAbbr => Game switch
+        {
+            Game.OcarinaOfTime => OVer.ToString().ToLowerInvariant(),
+            Game.MajorasMask => MVer.ToString().ToLowerInvariant(),
+            _ => "n/a",
+        };
 
         public string UniqueKey => $"{Game}.{ToString()}";
 
-        public string ShortUniqueKey => $"{GetGameAbbr()}_{GetVerAbbr()}";
+        public string ShortUniqueKey => $"{GameAbbr}_{VerAbbr}";
 
-        public override string ToString()
+        public override string ToString() => Game switch
         {
-            return Game switch
-            {
-                Game.OcarinaOfTime => OVer.ToString(),
-                Game.MajorasMask => MVer.ToString(),
-                _ => base.ToString(),
-            };
-        }
+            Game.OcarinaOfTime => OVer.ToString(),
+            Game.MajorasMask => MVer.ToString(),
+            _ => base.ToString(),
+        };
 
-        public Type GetInternalType()
+        public Type GetInternalType() => Game switch
         {
-            if (Game == Game.OcarinaOfTime)
-                return OVer.GetType();
-            else if (Game == Game.MajorasMask)
-                return MVer.GetType();
-            else return GetType();
-        }
+            Game.OcarinaOfTime => OVer.GetType(),
+            Game.MajorasMask => MVer.GetType(),
+            _ => GetType()
+        };
 
         public static bool TryGet(string game, string version, out RomVersion value)
         {

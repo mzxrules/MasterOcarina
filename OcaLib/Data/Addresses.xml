@@ -564,7 +564,7 @@
           <Segment>code</Segment>
           <File>build/src/code/z_common_data.o</File>
           <Symbol>gSaveContext</Symbol>
-        </MapBinding>   
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="NRC">11A3C0</Data>
           <Data ver="N0">11A5D0</Data>
@@ -686,7 +686,7 @@
           <Segment>code</Segment>
           <File>build/src/code/z_effect.o</File>
           <Symbol>sEffectContext</Symbol>
-        </MapBinding>   
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="NRC">114BD0</Data>
           <Data ver="N0">114DE0</Data>
@@ -805,6 +805,11 @@
         </Address>
       </Start>
       <Identifier id="ParticleTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_effect_soft_sprite_dlftbls.o</File>
+          <Symbol>gParticleOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C60C90</Data>
           <Data ver="J1">C60F90</Data>
@@ -819,6 +824,11 @@
       </Identifier>
 
       <Identifier id="ActorTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_actor_dlftbls.o</File>
+          <Symbol>gActorOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!--Count = 0x2B2-->
           <Data ver="J0">C617C0</Data>
@@ -834,6 +844,11 @@
       </Identifier>
 
       <Identifier id="GameContextTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_game_dlftbls.o</File>
+          <Symbol>gGameStateOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C70100</Data>
           <Data ver="J1">C70400</Data>
@@ -848,6 +863,11 @@
       </Identifier>
 
       <Identifier id="ObjectTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/data/code/code_801C2730.data.o</File>
+          <Symbol>gObjectTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C74FB0</Data>
           <Data ver="J1">C75280</Data>
@@ -862,6 +882,11 @@
       </Identifier>
 
       <Identifier id="SceneTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_scene_table.o</File>
+          <Symbol>gSceneTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!-- scene count =?-->
           <Data ver="J0">C76510</Data>
@@ -877,6 +902,11 @@
       </Identifier>
 
       <Identifier id="EntranceIndexTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_scene_table.o</File>
+          <Symbol>sSceneEntranceTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <!--Record Count = 110?-->
           <Data ver ="J0">C77F84</Data>
@@ -891,6 +921,11 @@
         </Address>
       </Identifier>
       <Identifier id="PlayerPauseOverlayTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_kaleido_manager.o</File>
+          <Symbol>gKaleidoMgrOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C82C90</Data>
           <Data ver="J1">C82F60</Data>
@@ -904,6 +939,11 @@
         </Address>
       </Identifier>
       <Identifier id="TransitionTable_Start">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_fbdemo_dlftbls.o</File>
+          <Symbol>gTransitionOverlayTable</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">C82CD0</Data>
           <Data ver="J1">C82FA0</Data>
@@ -972,6 +1012,11 @@
       </Identifier>
 
       <Identifier id="QUEUE_THREAD">
+        <MapBinding>
+          <Segment>boot</Segment>
+          <File>build/src/libultra_boot_O1/osCreateThread.o</File>
+          <Symbol>__osThreadTail</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0"></Data>
           <Data ver="J1">80098D80</Data>
@@ -986,6 +1031,11 @@
       </Identifier>
           
       <Identifier id ="SRAM_START">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_common_data.o</File>
+          <Symbol>gSaveContext</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1EF460</Data>
           <Data ver="J1">1EF710</Data>
@@ -1000,6 +1050,11 @@
       </Identifier>
 
       <Identifier id="RAM_ARENA_MAIN">
+        <MapBinding>
+          <Segment>boot</Segment>
+          <File>build/src/boot_O2/system_malloc.o</File>
+          <Symbol>gSystemArena</Symbol>
+        </MapBinding>
         <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">9E920</Data>
@@ -1015,6 +1070,11 @@
       </Identifier>
 
       <Identifier id ="RAM_GLOBAL_CONTEXT">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_effect.o</File>
+          <Symbol>sEffectContext</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1E3DA0</Data>
           <Data ver="J1">1E4050</Data>
@@ -1031,6 +1091,11 @@
       </Identifier>
         
       <Identifier id ="RAM_ARENA_SCENES">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/z_malloc.o</File>
+          <Symbol>sZeldaArena</Symbol>
+        </MapBinding>
         <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1F5280</Data>
@@ -1046,6 +1111,11 @@
       </Identifier>
       
       <Identifier id="RAM_SEGMENT_TABLE">
+        <MapBinding>
+          <Segment>code</Segment>
+          <File>build/src/code/main.bss.o</File>
+          <Symbol>gSegments</Symbol>
+        </MapBinding>
         <Address reftype="absolute" domain="RAM">
           <Data ver="U0">1F8180</Data>
         </Address>

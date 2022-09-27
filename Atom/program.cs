@@ -251,7 +251,7 @@ namespace Atom
         private static void TestSymbolGeneration(RomVersion ver)
         {
             Dictionary<string, bool> __last_symbol = File
-                .ReadAllLines($"__{ver.GetGameAbbr()}_{ver.GetVerAbbr()}_last_symbol.txt")
+                .ReadAllLines($"__{ver.GameAbbr}_{ver.VerAbbr}_last_symbol.txt")
                 .ToDictionary(v => v, v => true);
             List<string> __next_symbol = new List<string>();
 

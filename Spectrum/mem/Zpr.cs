@@ -24,7 +24,7 @@ namespace Spectrum
 
             result = MountEmulator(emulator);
             if (result)
-                Console.WriteLine(emulator.Stats.ProcessDescription);
+                Console.WriteLine($"Detected Emulator: {emulator.Stats.ProcessDescription}");
             return result;
         }
 

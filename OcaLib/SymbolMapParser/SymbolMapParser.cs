@@ -44,6 +44,10 @@ namespace mzxrules.OcaLib.SymbolMapParser
                     if (!line.Contains(' '))
                         continue;
                 }
+                else if (line.StartsWith("."))
+                {
+                    GetSym = false;
+                }
                 if (parseSegmentLine)
                 {
                     parseSegmentLine = false;

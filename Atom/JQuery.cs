@@ -11,8 +11,8 @@ namespace Atom
     {
         public static List<FunctionInfo> GetFunctionInfo(RomVersion version)
         {
-            string game = version.GetGameAbbr();
-            string ver = version.GetVerAbbr();
+            string game = version.GameAbbr;
+            string ver = version.VerAbbr;
 
             string filepath = $"data/{game}-{ver}.json";
             if (File.Exists(filepath))

@@ -207,14 +207,13 @@ namespace Spectrum
                     && Options.MapfileOptions.SymbolMap.TryGetSymbolAddress(binding, out N64Ptr ptr))
                 {
                     return func(ptr);
-                }
-                Console.WriteLine($"{token} symbol not found");
-                return SPtr.New(0);    
+                } 
             }    
             else if (Addresser.TryGetRam(token, version, out int temp))
                 return func(temp);
-            else
-                return SPtr.New(0);
+
+            Console.WriteLine($"{token} symbol not found");
+            return SPtr.New(0);
         }
 
         static Ptr BindOff(AddressToken token, RomVersion version, Func<int, Ptr> func)
@@ -270,7 +269,7 @@ namespace Spectrum
             Actor_Ovl_Table = BindPtr(AddressToken.ActorTable_Start, version, x => SPtr.New(x));
             Player_Pause_Ovl_Table = BindPtr(AddressToken.PlayerPauseOverlayTable_Start, version, x => SPtr.New(x));
             ParticleEffect_Ovl_Table = BindPtr(AddressToken.ParticleTable_Start, version, x => SPtr.New(x));
-            Transition_Ovl_Table = BindPtr(AddressToken.TransitionTable_Start, version, x => SPtr.New(x));
+            Transition_Ovl_Table = (options.Version.Game == mzxrules.OcaLib.Game.MajorasMask) ? BindPtr(AddressToken.TransitionTable_Start, version, x => SPtr.New(x)): SPtr.New(0);
             Object_File_Table = BindPtr(AddressToken.ObjectTable_Start, version, x => SPtr.New(x));
 
             SaveContext = BindPtr(AddressToken.SRAM_START, version, x => SPtr.New(x));
