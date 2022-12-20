@@ -38,14 +38,14 @@ namespace Experimental.Data
             Cutscene theEnd;
             int csAddr = 0x2E8DC04;
 
-            theEnd = GetCutscene(file, csAddr);
+            theEnd = GetCutscene_N0(file, csAddr);
 
             var cmd = theEnd.Commands.OfType<ActionCommand>().Single(x => x.Command == 0x03
             && x.Entries[0].Action == 0x23);
 
             var entry = cmd.Entries[0];
 
-            ExitCommand exit = new ExitCommand(0x27, entry.StartFrame, entry.EndFrame);
+            DestinationCommand exit = new DestinationCommand(0x27, entry.StartFrame, entry.EndFrame);
 
             theEnd.Commands.Remove(theEnd.Commands.SingleOrDefault(x => x.Command == -1));
 
@@ -59,7 +59,7 @@ namespace Experimental.Data
         {
             Cutscene cutscene = GenerateCs(file);
 
-            using (BinaryWriter bw = new BinaryWriter(new FileStream(filename, FileMode.Create)))
+            using (BinaryWriter bw = new(new FileStream(filename, FileMode.Create)))
             {
                 cutscene.Save(bw);
             }
@@ -69,7 +69,7 @@ namespace Experimental.Data
         private static Cutscene Ganonlol(List<string> file)
         {
             int csAddr = 0x2AA1A60;
-            return GetCutscene(file, csAddr);
+            return GetCutscene_N0(file, csAddr);
         }
 
         private static Cutscene MeetSheikTempleTimeCs(List<string> file)
@@ -80,7 +80,7 @@ namespace Experimental.Data
             short endFrame = 0x2B5;
             short sheikCrossArms = 0x25F;
 
-            cs = GetCutscene(file, csAddr);
+            cs = GetCutscene_N0(file, csAddr);
 
             ActionCommand music = (ActionCommand)cs.Commands.Single(
                 x => (x is ActionCommand)
@@ -119,10 +119,10 @@ namespace Experimental.Data
 
             //not matching beta kwest because of camera command being truncated
 
-            stoneCs = GetCutscene(file, csAddr);
+            stoneCs = GetCutscene_N0(file, csAddr);
 
             stoneCs.Commands.OfType<TextCommand>().Single()
-                .Entries.RemoveAll(x => x.TextId != 0x80);
+                .Entries.RemoveAll(x => x.Action != 0x80);
 
             stoneCs.Commands.RemoveAll
                 (x => (x is CameraCommand)
@@ -131,7 +131,7 @@ namespace Experimental.Data
                 || ((CameraCommand)x).StartFrame >= endFrame));
 
 
-            var exit = stoneCs.Commands.OfType<ExitCommand>().Single();
+            var exit = stoneCs.Commands.OfType<DestinationCommand>().Single();
             short exitDur = 10;
             exit.StartFrame = (short)(endFrame-exitDur);
             exit.EndFrame = endFrame;
@@ -149,12 +149,12 @@ namespace Experimental.Data
             int csAddr = 0x22210B0;
             short endFrame = 0x430;
 
-            stoneCs = GetCutscene(file, csAddr);
+            stoneCs = GetCutscene_N0(file, csAddr);
 
             stoneCs.Commands.OfType<TextCommand>().Single()
-                .Entries.RemoveAll(x => x.TextId != 0x81);
+                .Entries.RemoveAll(x => x.Action != 0x81);
 
-            var exit = stoneCs.Commands.OfType<ExitCommand>().Single();
+            var exit = stoneCs.Commands.OfType<DestinationCommand>().Single();
             exit.StartFrame = (short)(endFrame - 1);
             exit.EndFrame = endFrame;
 
@@ -169,12 +169,12 @@ namespace Experimental.Data
             int csAddr = 0x2112D10;
             short endFrame = 0x403;
 
-            stoneCs = GetCutscene(file, csAddr);
+            stoneCs = GetCutscene_N0(file, csAddr);
 
             stoneCs.Commands.OfType<TextCommand>().Single()
-                .Entries.RemoveAll(x => x.TextId != 0x82);
+                .Entries.RemoveAll(x => x.Action != 0x82);
 
-            var exit = stoneCs.Commands.OfType<ExitCommand>().Single();
+            var exit = stoneCs.Commands.OfType<DestinationCommand>().Single();
             exit.StartFrame = (short)(endFrame - 1);
             exit.EndFrame = endFrame;
 
@@ -193,17 +193,17 @@ namespace Experimental.Data
             short endFrame = 0x442; //Exit command should be shifted to be 1 more than this
             short adjustedEndFrame = (short)(endFrame - startFrame);
 
-            waterMedallion = GetCutscene(file, csAddr);
+            waterMedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(waterMedallion, startFrame);
 
-            var exitCommand = waterMedallion.Commands.OfType<ExitCommand>().Single();
+            var exitCommand = waterMedallion.Commands.OfType<DestinationCommand>().Single();
             TrimExitCommand(exitCommand,
                 (short)(exitCommand.StartFrame - adjustedEndFrame));
             
-            exitCommand.Asm = 0x29;
+            exitCommand.Action = 0x29;
 
             var textCommand = waterMedallion.Commands.OfType<TextCommand>().Single();
-            textCommand.Entries = textCommand.Entries.Where(x => x.TextId == 0x3D).ToList();
+            textCommand.Entries = textCommand.Entries.Where(x => x.Action == 0x3D).ToList();
 
             CutScreenTransitions(waterMedallion, adjustedEndFrame);
 
@@ -218,10 +218,10 @@ namespace Experimental.Data
             short textTrimStart = (short)(0x1D1 - startFrame);
             Cutscene fireMedallion;
 
-            fireMedallion = GetCutscene(file, csAddr);
+            fireMedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(fireMedallion, startFrame);
 
-            var exitCommand = fireMedallion.Commands.OfType<ExitCommand>().Single();
+            var exitCommand = fireMedallion.Commands.OfType<DestinationCommand>().Single();
             TrimExitCommand(exitCommand, trimEnd);
 
             foreach (TextCommand t in fireMedallion.Commands.OfType<TextCommand>())
@@ -229,7 +229,7 @@ namespace Experimental.Data
                 t.Entries = t.Entries.Where(
                     x =>
                         x.StartFrame >= textTrimStart
-                        && x.TextId != 0x303D).ToList();
+                        && x.Action != 0x303D).ToList();
             }
 
             CutScreenTransitions(fireMedallion, trimEnd);
@@ -244,10 +244,10 @@ namespace Experimental.Data
             short startFrame = 0x12A;
             short trimEnd = 0x65;
 
-            spiritmedallion = GetCutscene(file, csAddr);
+            spiritmedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(spiritmedallion, startFrame);
 
-            var exit = spiritmedallion.Commands.OfType<ExitCommand>().Single();
+            var exit = spiritmedallion.Commands.OfType<DestinationCommand>().Single();
             TrimExitCommand(exit, trimEnd);
 
             var remove = new List<CutsceneCommand>(); 
@@ -264,8 +264,8 @@ namespace Experimental.Data
             {
                 t.Entries = t.Entries.Where(
                     x =>
-                        x.TextId == 0xFFFF
-                        || x.TextId == 0x003F).ToList();
+                        x.Action == 0xFFFF
+                        || x.Action == 0x003F).ToList();
             }
 
             CutScreenTransitions(spiritmedallion, trimEnd);
@@ -281,10 +281,10 @@ namespace Experimental.Data
             short startFrame = 0x1E2;
             short trimEnd = 0x65;
 
-            shadowmedallion = GetCutscene(file, csAddr);
+            shadowmedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(shadowmedallion, startFrame);
 
-            var exit = shadowmedallion.Commands.OfType<ExitCommand>().Single();
+            var exit = shadowmedallion.Commands.OfType<DestinationCommand>().Single();
             TrimExitCommand(exit, trimEnd);
 
             var remove = new List<CutsceneCommand>();
@@ -302,8 +302,8 @@ namespace Experimental.Data
             {
                 t.Entries = t.Entries.Where(
                     x =>
-                        x.TextId == 0xFFFF
-                        || x.TextId == 0x0041).ToList();
+                        x.Action == 0xFFFF
+                        || x.Action == 0x0041).ToList();
             }
 
             CutScreenTransitions(shadowmedallion, trimEnd);
@@ -319,9 +319,9 @@ namespace Experimental.Data
             short trimEnd = 0x44 + 0x1F;
             short textTrim = (short)(0x01D1 - startFrame);
 
-            forestmedallion = GetCutscene(file, csAddr);
+            forestmedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(forestmedallion, startFrame);
-            var exitCommand = forestmedallion.Commands.OfType<ExitCommand>().Single();
+            var exitCommand = forestmedallion.Commands.OfType<DestinationCommand>().Single();
 
             TrimExitCommand(exitCommand, trimEnd);
 
@@ -330,7 +330,7 @@ namespace Experimental.Data
 
             var screenFxTrim =
                 forestmedallion.Commands
-                .OfType<ScreenTransitionCommand>()
+                .OfType<TransitionCommand>()
                 .Where(x => x.StartFrame == endcutoff)
                 .Single();
 
@@ -341,12 +341,12 @@ namespace Experimental.Data
                 t.Entries = t.Entries.Where(
                     x =>
                         x.StartFrame >= textTrim
-                        && x.TextId != 0x106B).ToList();
+                        && x.Action != 0x106B).ToList();
             }
 
-            ExitCommand exit = forestmedallion.Commands.OfType<ExitCommand>().Single();
+            DestinationCommand exit = forestmedallion.Commands.OfType<DestinationCommand>().Single();
             //ExitCommand newExit = new ExitCommand(exit);
-            exit.Asm = 0x45;
+            exit.Action = 0x45;
             //forestmedallion.Commands.Add(newExit);
             return forestmedallion;
         }
@@ -358,17 +358,17 @@ namespace Experimental.Data
             short endFrame = (short)(0x171 + 0x42F - startFrame);
             Cutscene lightmedallion;
 
-            lightmedallion = GetCutscene(file, csAddr);
+            lightmedallion = GetCutscene_N0(file, csAddr);
             CutsceneTrimFromStart(lightmedallion, startFrame);
 
-            ExitCommand exit = lightmedallion.Commands.OfType<ExitCommand>().Single();
+            DestinationCommand exit = lightmedallion.Commands.OfType<DestinationCommand>().Single();
             short exitTrim = (short)(exit.StartFrame - endFrame-1);
             exit.StartFrame -= exitTrim;
             exit.EndFrame -= exitTrim;
 
             List<CutsceneCommand> remove = new List<CutsceneCommand>();
 
-            foreach (var item in  lightmedallion.Commands.OfType<ScreenTransitionCommand>())
+            foreach (var item in  lightmedallion.Commands.OfType<TransitionCommand>())
             {
                 if (!(item.StartFrame < endFrame))
                     remove.Add(item);
@@ -383,7 +383,7 @@ namespace Experimental.Data
                         x.StartFrame < endFrame).ToList();
             }
     
-            lightmedallion.Commands.Insert(lightmedallion.Commands.Count - 2, new ScreenTransitionCommand(9, 0x32, 0x9));
+            lightmedallion.Commands.Insert(lightmedallion.Commands.Count - 2, new TransitionCommand(9, 0x32, 0x9));
             return lightmedallion;
         }
 
@@ -406,7 +406,7 @@ namespace Experimental.Data
             {
                 Frames = 0xC00
             };
-            SheikCs = GetCutscene(file, SheikCsAddr);
+            SheikCs = GetCutscene_N0(file, SheikCsAddr);
 
             //LightArrowCsFull.Commands = SheikCs.Commands.Where
             //    (x => !(x is TextCommand) &&
@@ -420,7 +420,7 @@ namespace Experimental.Data
             short transformTrimStart = 0x12C;
             short transformTrimEnd = 0x302;
 
-            TransformCs = GetCutscene(file, TransformationCsAddr);
+            TransformCs = GetCutscene_N0(file, TransformationCsAddr);
 
             //TransformCs.Commands = TransformCs.Commands.Where
             //    (x => !(x is TextCommand)
@@ -454,11 +454,11 @@ namespace Experimental.Data
             short getLightArrowTrimStart = 0x122;
             short getLightArrowTrimEnd = 0x582;//0x488;
             curFrame += (short)(transformTrimEnd - transformTrimStart);
-            GetLightArrowCs = GetCutscene(file, GetLightArrowCsAddr);
+            GetLightArrowCs = GetCutscene_N0(file, GetLightArrowCsAddr);
             remove.Clear();
 
             {
-                var ExitCmd = GetLightArrowCs.Commands.OfType<ExitCommand>().Single();
+                var ExitCmd = GetLightArrowCs.Commands.OfType<DestinationCommand>().Single();
                 TrimExitCommand(ExitCmd, (short)(ExitCmd.EndFrame - getLightArrowTrimEnd+1));
             }
             
@@ -467,7 +467,7 @@ namespace Experimental.Data
                 .ToList();
             {
                 var TextCmd = GetLightArrowCs.Commands.OfType<TextCommand>().Single();
-                TextCmd.Entries = TextCmd.Entries.Where(x => x.TextId == 0x72).ToList();
+                TextCmd.Entries = TextCmd.Entries.Where(x => x.Action == 0x72).ToList();
             }
             //modify zeldo movement
             {
@@ -585,7 +585,7 @@ namespace Experimental.Data
         private static List<IFrameData> CutsceneDeleteSection
             (IEnumerable<IFrameData> iFrameDataEnumerable,  short cutStart, short cutEnd)
         {
-            List<IFrameData> remove = new List<IFrameData>();
+            List<IFrameData> remove = new();
             short shift = (short)(cutEnd - cutStart);
 
             foreach (var item in iFrameDataEnumerable)
@@ -676,11 +676,11 @@ namespace Experimental.Data
 
         private static void TrimFromStart(List<CutsceneCommand> Commands, short frame)
         {
-            List<CutsceneCommand> RemoveCommand = new List<CutsceneCommand>();
+            List<CutsceneCommand> RemoveCommand = new();
             foreach (var commandIFrameCollection in Commands.OfType<IFrameCollection>())
             {
                 var command = (CutsceneCommand)commandIFrameCollection;
-                List<IFrameData> RemoveIFrameData = new List<IFrameData>();
+                List<IFrameData> RemoveIFrameData = new();
                 //loop over individual items
                 foreach (var frameItem in commandIFrameCollection.IFrameDataEnum)
                 {
@@ -722,7 +722,7 @@ namespace Experimental.Data
             }
         }
 
-        private static void TrimExitCommand(ExitCommand exitCommand, short trimEnd)
+        private static void TrimExitCommand(DestinationCommand exitCommand, short trimEnd)
         {
             trimEnd--;
             exitCommand.StartFrame -= trimEnd;
@@ -731,31 +731,34 @@ namespace Experimental.Data
 
         private static void CutScreenTransitions(Cutscene cutscene, short endFrame)
         {
-            List<ScreenTransitionCommand> remove = new List<ScreenTransitionCommand>();
+            List<TransitionCommand> remove = new List<TransitionCommand>();
 
             remove = cutscene.Commands
-                .OfType<ScreenTransitionCommand>()
-                .Cast<ScreenTransitionCommand>()
+                .OfType<TransitionCommand>()
+                .Cast<TransitionCommand>()
                 .Where(x => !(x.StartFrame < endFrame))
                 .ToList();
 
             foreach (var item in remove)
                 cutscene.Commands.Remove(item);
         }
-        
-        private static Cutscene GetCutscene(List<string> file, int csAddr)
+
+        private static Cutscene GetCutscene_N0(List<string> file, int csAddr)
         {
-            Cutscene cs;
+            return GetCutscene(file, ORom.Build.N0, csAddr);
+        }
+
+        private static Cutscene GetCutscene(List<string> file, RomVersion version, int csAddr)
+        {
             FileRecord record;
-            ORom rom = new ORom(file[0], ORom.Build.N0);
+            ORom rom = new(file[0], version);
 
             record = rom.Files.GetFileStart(csAddr);
             RomFile f = rom.Files.GetFile(record.VRom);
 
             f.Stream.Position = f.Record.GetRelativeAddress(csAddr);
 
-            cs = new Cutscene(f);
-            return cs;
+            return new Cutscene(f);
         }
     }
 }

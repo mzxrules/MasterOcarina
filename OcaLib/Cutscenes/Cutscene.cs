@@ -16,8 +16,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public int Frames { get; set; }
         public int CommandCount { get { return Commands.Count; } }
         private int command_count_private = -1;
-
-        Dictionary<int, int> CommandMap = new Dictionary<int, int>()
+        readonly Dictionary<int, int> CommandMap = new()
         {
             { 0x01, 0x01 },
             { 0x02, 0x02 },
@@ -209,7 +208,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
                 if (commandId == 0x3E8)
                 {
-                    cmd = new ExitCommand(commandId, br);
+                    cmd = new DestinationCommand(commandId, br);
                 }
                 else if (commandId == -1)
                 {
@@ -228,7 +227,7 @@ namespace mzxrules.OcaLib.Cutscenes
                         case 0x06: goto case 1; //Camera Focus Points (Link)
                         case 0x07: goto default; //unknown 1
                         case 0x08: goto default; //unknown 2
-                        case 0x09: cmd = new Command09(commandId, br); break;
+                        case 0x09: cmd = new RumbleCommand(commandId, br); break;
                         case 0x0A: goto default; //Struct + 0x24, Link
                         case 0x0B: goto default; //No Command
                         case 0x0E: goto default; //Struct + 0x2C
@@ -239,7 +238,7 @@ namespace mzxrules.OcaLib.Cutscenes
                         case 0x1E: goto default; //Struct + 0x38
                         case 0x1F: goto default; //Struct + 0x40
                         case 0x2C: goto default; //Struct + 0x3C
-                        case 0x2D: cmd = new ScreenTransitionCommand(commandId, br); break;
+                        case 0x2D: cmd = new TransitionCommand(commandId, br); break;
                         case 0x31: goto default; //Struct + 0x44
                         case 0x3E: goto default; //Struct + 0x48
                         case 0x56: goto default; //Play Background Music

@@ -107,17 +107,17 @@ namespace Experimental.Data
             foreach (InCutsceneData item in cutsceneData)
             {
                 Cutscene cs;
-                ExitCommand exit;
+                DestinationCommand exit;
                 RomFile sceneFile;
                 sceneFile = rom.Files.GetSceneFile(item.scene);
                 sceneFile.Stream.Position += item.offset & 0xFFFFFF;
                 cs = new Cutscene(sceneFile);
 
-                exit = cs.Commands.OfType<ExitCommand>().SingleOrDefault();
+                exit = cs.Commands.OfType<DestinationCommand>().SingleOrDefault();
 
                 if (exit != null)
                 {
-                    sb.AppendFormat("{0:D3}\t{1:D2}\t{2:X2}", item.scene, item.setup, exit.Asm);
+                    sb.AppendFormat("{0:D3}\t{1:D2}\t{2:X2}", item.scene, item.setup, exit.Action);
                     sb.AppendLine();
                 }
             }

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class ScreenTransitionCommand : CutsceneCommand, IFrameData
+    public class TransitionCommand : CutsceneCommand, IFrameData
     {
         const int LENGTH = 0x10;
-        uint a;
+        uint Entries;
         public ushort Transition;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
@@ -20,13 +20,13 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         short EndFrameD;
 
-        public ScreenTransitionCommand(int command, BinaryReader br)
+        public TransitionCommand(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
         }
 
-        public ScreenTransitionCommand(short start, short end, ushort transition)
+        public TransitionCommand(short start, short end, ushort transition)
         {
             Command = 0x2D;
             Transition = transition;
@@ -41,7 +41,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             arr = br.ReadBytes(12);
 
-            Endian.Convert(out a, arr, 0);
+            Endian.Convert(out Entries, arr, 0);
             Endian.Convert(out Transition, arr, 4);
             Endian.Convert(out short startFrame, arr, 6);
             Endian.Convert(out short endFrame, arr, 8);
@@ -54,11 +54,11 @@ namespace mzxrules.OcaLib.Cutscenes
         public override void Save(BinaryWriter bw)
         {
             bw.WriteBig(Command);
-            bw.WriteBig(a);
+            bw.WriteBig(Entries);
             bw.WriteBig(Transition);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
-            bw.WriteBig(EndFrame);//EndframeD
+            bw.WriteBig(EndFrame); //EndframeD
         }
         public override string ReadCommand()
         {
@@ -66,17 +66,10 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         public override string ToString()
         {
-            StringBuilder sb;
+            StringBuilder sb = new();
 
-            sb = new StringBuilder();
-            sb.AppendLine(string.Format("{0:X4}: Screen Transition fx", Command));
-            sb.AppendLine(string.Format(
-                "{0:X8}, Transition: {1:X4}, Start: {2:X4} End: {3:X4} End: {4:X4}",
-                a,
-                Transition,
-                StartFrame,
-                EndFrame,
-                EndFrameD));
+            sb.AppendLine($"{Command:X4}: Transition, Entries {Entries}");
+            sb.AppendLine($"  Action: {Transition:X4}, Start: {StartFrame:X4} End: {EndFrame:X4} End: {EndFrameD:X4}");
             return sb.ToString();
         }
         public IEnumerable<IFrameData> GetIFrameDataEnumerator()

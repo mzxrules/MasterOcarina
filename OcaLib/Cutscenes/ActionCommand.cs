@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
     public class ActionCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
-        public List<ActionEntry> Entries = new List<ActionEntry>();
+        public List<ActionEntry> Entries = new();
 
         public IEnumerable<IFrameData> IFrameDataEnum => Entries;
 
@@ -28,10 +28,11 @@ namespace mzxrules.OcaLib.Cutscenes
         
         private void Load(BinaryReader br)
         {
-            int EntryCount;
-            EntryCount = br.ReadBigInt32();
+            int entryCount;
 
-            for (int i = 0; i < EntryCount; i++)
+            /* 0x04 */ entryCount = br.ReadBigInt32();
+
+            for (int i = 0; i < entryCount; i++)
             {
                 Entries.Add(new ActionEntry(this, br));
             }
@@ -52,7 +53,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return $"{Command:X4}: {GetName()}, Entries: {Entries.Count:X8}";
+            return $"{Command:X4}: {GetName()}, Entries: {Entries.Count}";
         }
 
         private string GetName()
@@ -80,12 +81,19 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ReadCommand()
         {
-            StringBuilder sb;
-            sb = new StringBuilder();
+            StringBuilder sb = new();
 
             sb.AppendLine(ToString());
-            foreach (ActionEntry e in Entries)
-                sb.AppendLine($"   {e}");
+            foreach (ActionEntry entry in Entries)
+            {
+                int i = 0;
+                foreach(var line in entry.ToString().Split(Environment.NewLine))
+                {
+                    i += 2;
+                    sb.AppendLine("".PadLeft(i) + line);
+                }
+            }
+
             return sb.ToString();
         }
 

@@ -7,41 +7,41 @@ using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class ExitCommand : CutsceneCommand, IFrameData
+    public class DestinationCommand : CutsceneCommand, IFrameData
     {
         const int LENGTH = 16;
         public CutsceneCommand RootCommand { get; set; }
 
-        int Unknown = 1;
+        int Entries = 1;
 
-        public ushort Asm;
+        public ushort Action;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
         short endFrame2;
 
-        public ExitCommand(ushort asm, short start, short end )
+        public DestinationCommand(ushort asm, short start, short end )
         {
             RootCommand = this;
             Command = 0x3E8;
 
-            Asm = asm;
+            Action = asm;
             StartFrame = start;
             EndFrame = end;
             endFrame2 = end;
         }
 
-        public ExitCommand(ExitCommand copy)
+        public DestinationCommand(DestinationCommand copy)
         {
             RootCommand = this; //root command should be self, not the copied instance
             Command = copy.Command;
-            Unknown = copy.Unknown;
-            Asm = copy.Asm;
+            Entries = copy.Entries;
+            Action = copy.Action;
             StartFrame = copy.StartFrame;
             EndFrame = copy.EndFrame;
             endFrame2 = copy.endFrame2;
         }
 
-        public ExitCommand(int command, BinaryReader br)
+        public DestinationCommand(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
@@ -49,24 +49,24 @@ namespace mzxrules.OcaLib.Cutscenes
 
         private void Load(BinaryReader br)
         {
-            RootCommand = this;
-            Unknown = br.ReadBigInt32();
+            /* 0x00 */ RootCommand = this;
+            /* 0x04 */ Entries = br.ReadBigInt32();
 
-            Asm = br.ReadBigUInt16();
-            StartFrame = br.ReadBigInt16();
-            EndFrame = br.ReadBigInt16();
-            endFrame2 = br.ReadBigInt16();
+            /* 0x08 */ Action = br.ReadBigUInt16();
+            /* 0x0A */ StartFrame = br.ReadBigInt16();
+            /* 0x0C */ EndFrame = br.ReadBigInt16();
+            /* 0x0E */ endFrame2 = br.ReadBigInt16();
 
-            if (Unknown != 1)
+            if (Entries != 1)
                 throw new ArgumentOutOfRangeException("Too many 3E8 command entries");
         }
 
         public override void Save(BinaryWriter bw)
         {
             bw.WriteBig(Command);
-            bw.WriteBig(Unknown);
+            bw.WriteBig(Entries);
 
-            bw.WriteBig(Asm);
+            bw.WriteBig(Action);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
             bw.WriteBig(EndFrame);//EndFrame2
@@ -83,8 +83,11 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return $"{Command:X4}: Exit Command, {Unknown} entries{Environment.NewLine}"
-                + $"   asm: {Asm:X4}, start: {StartFrame:X4}, end: {EndFrame:X4}, {endFrame2:X4}";
+            StringBuilder sb = new();
+
+            sb.AppendLine($"{Command:X4}: Destination, Entries: {Entries}");
+            sb.Append($"  Action: {Action:X4}, Start: {StartFrame:X4}, End: {EndFrame:X4}, {endFrame2:X4}");
+            return sb.ToString();
         }
 
         protected override int GetLength()

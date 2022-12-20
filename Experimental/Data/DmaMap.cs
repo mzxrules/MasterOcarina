@@ -35,8 +35,8 @@ namespace Experimental.Data
             
             VFileTable source; //rom containing the complete file list
             VFileTable target; //rom we're using to link to file names
-            Dictionary<long, FileRecord> unmatched = new Dictionary<long, FileRecord>(); //address pool
-            Dictionary<long, FOut> fOut = new Dictionary<long, FOut>();
+            Dictionary<long, FileRecord> unmatched = new(); //address pool
+            Dictionary<long, FOut> fOut = new();
 
             source = sourceRom.Files; 
             target = targetRom.Files; 

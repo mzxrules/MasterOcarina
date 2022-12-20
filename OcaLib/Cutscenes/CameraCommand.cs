@@ -17,7 +17,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public IEnumerable<IFrameData> IFrameDataEnum => Entries;
 
-        public ushort UnknownA;
+        public ushort Action;
         public ushort zero;
 
         public List<CameraCommandEntry> Entries = new List<CameraCommandEntry>();
@@ -52,7 +52,7 @@ namespace mzxrules.OcaLib.Cutscenes
         private void Load(int command, short startFrame = 0, short endFrame = 0)
         {
             Command = command;
-            UnknownA = 1;
+            Action = 1;
             StartFrame = startFrame;
             EndFrame = endFrame;
             zero = 0;
@@ -63,10 +63,10 @@ namespace mzxrules.OcaLib.Cutscenes
             CameraCommandEntry entry;
             short startFrame;
 
-            UnknownA = br.ReadBigUInt16();
-            StartFrame = br.ReadBigInt16();
-            EndFrame = br.ReadBigInt16();
-            zero = br.ReadBigUInt16();
+            /* 0x04 */ Action = br.ReadBigUInt16();
+            /* 0x06 */ StartFrame = br.ReadBigInt16();
+            /* 0x08 */ EndFrame = br.ReadBigInt16();
+            /* 0x0A */ zero = br.ReadBigUInt16();
 
             startFrame = StartFrame;
 
@@ -98,31 +98,38 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             string commandType;
             string relativity = string.Empty;
+            StringBuilder sb = new();
+
             switch (Command)
             {
-                case 01: relativity = "Static"; commandType = "Positions"; break;
-                case 02: relativity = "Static"; commandType = "Focus Points"; break;
-                case 05: relativity = "Player Relative"; commandType = "Positions"; break;
-                case 06: relativity = "Player Relative"; commandType = "Focus Point"; break;
+                case 01: relativity = "Static"; commandType = "Eye Points"; break;
+                case 02: relativity = "Static"; commandType = "LookAt Points"; break;
+                case 05: relativity = "Rel Player"; commandType = "Eye Points"; break;
+                case 06: relativity = "Rel Player"; commandType = "LookAt Points"; break;
                 default: commandType = "Unknown Command"; break;
             }
 
-            return $"{Command:X8}: {relativity} Camera {commandType}, {ParamsToString()}";
+            sb.AppendLine($"{Command:X4}: Camera {commandType} ({relativity})");
+            sb.Append($"  {ParamsToString()}");
+
+            return sb.ToString();
         }
 
         public string ParamsToString()
         {
-            return $"{UnknownA:X4} Start: {StartFrame:X4} End: {EndFrame:X4} {zero:X4}";
+            return $"Action: {Action:X4} Start: {StartFrame:X4} End: {EndFrame:X4} {zero:X4}";
         }
 
         public override string ReadCommand()
         {
-            StringBuilder result;
+            StringBuilder result = new();
 
-            result = new StringBuilder();
             result.AppendLine(ToString());
             foreach (CameraCommandEntry e in Entries)
-                result.AppendLine($"   {e}");
+            {
+                result.AppendLine($"    {e}");
+            }
+
             return result.ToString();
         }
 
@@ -142,7 +149,7 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             //Head
             bw.WriteBig(Command);
-            bw.WriteBig(UnknownA);
+            bw.WriteBig(Action);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
             bw.WriteBig(zero);
@@ -151,7 +158,7 @@ namespace mzxrules.OcaLib.Cutscenes
             {
                 foreach (CameraCommandEntry item in Entries)
                     item.Terminator = 0;
-                var last = Entries[Entries.Count - 1];
+                var last = Entries[^1];
                 last.Terminator = 0xFF;
             }
             foreach (CameraCommandEntry item in Entries)

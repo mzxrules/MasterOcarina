@@ -108,6 +108,8 @@ namespace Experimental
                 //Operation Name, Function, Open File Dialog Array
                 //Function is either 0 params, or accepts IExperimentalFace and List<string>
                 //
+                new FuncSelector("Dump Cutscenes DBGMQ", Get.CutscenesDumpAll, "Debug MQ"),
+                new FuncSelector("Dump Cutscene Actions DBGMQ", Get.CutscenesDumpActorAction, "Debug MQ"),
                 new FuncSelector("Get Actor Table", DumpActorTable),
                 new FuncSelector("Get Object Table", DumpObjectTable),
                 new FuncSelector("Get Ovl Effect Addresses", DumpOvlEffect),

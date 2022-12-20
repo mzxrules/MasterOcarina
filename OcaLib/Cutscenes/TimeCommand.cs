@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
@@ -8,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
     {
         const int LENGTH = 8;
         private int commandId;
-        public List<TimeEntry> Entries = new List<TimeEntry>();
+        public List<TimeEntry> Entries = new();
 
         public TimeCommand(int commandId, BinaryReader br)
         {
@@ -26,34 +27,22 @@ namespace mzxrules.OcaLib.Cutscenes
             return Entries.Count * TimeEntry.LENGTH + LENGTH;
         }
 
-        public class TimeEntry : IFrameData
+        public override string ReadCommand()
         {
-            public static int LENGTH = 0xC;
-            public CutsceneCommand RootCommand { get; set; }
+            StringBuilder sb = new();
 
-            /* 0x00 */
-            short unk;
-            /* 0x02 */ public short StartFrame { get; set; } //ushort
-            /* 0x04 */ public short EndFrame { get; set; } //ushort
-            /* 0x06 */ byte hour;
-            /* 0x07 */ byte min;
-            /* 0x08 */ int unk3;
-
-            public TimeEntry(CutsceneCommand root, BinaryReader br)
+            sb.AppendLine(ToString());
+            foreach (TimeEntry entry in Entries)
             {
-                RootCommand = root;
+                sb.AppendLine($"   {entry}");
+            }
 
-                unk = br.ReadBigInt16();
-                StartFrame = br.ReadBigInt16();
-                EndFrame = br.ReadBigInt16();
-                hour = br.ReadByte();
-                min = br.ReadByte();
-                unk3 = br.ReadBigInt32();
-            }
-            public override string ToString()
-            {
-                return $"{unk:X4}, start frame {StartFrame}, end frame {EndFrame} Set Time: {hour:D2}:{min:D2}, {unk3:X8}";
-            }
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return $"{Command:X4}: Set Time, Entries: {Entries.Count}";
         }
     }
 }

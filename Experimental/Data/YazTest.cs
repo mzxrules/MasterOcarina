@@ -15,13 +15,13 @@ namespace Experimental.Data
         public static void TestYazDecompress(IExperimentFace face, List<string> filePath)
         {
             StringBuilder sb = new StringBuilder();
-            ORom compRom = new ORom(filePath[0], ORom.Build.N0);
-            ORom decompRom = new ORom(@"C:\Users\mzxrules\Documents\Roms\N64\Games\Ocarina\Ocarina (U10)\Ocarina (U10) (d).z64", ORom.Build.N0);
+            ORom compRom = new(filePath[0], ORom.Build.N0);
+            ORom decompRom = new(@"C:\Users\mzxrules\Documents\Roms\N64\Games\Ocarina\Ocarina (U10)\Ocarina (U10) (d).z64", ORom.Build.N0);
             RomFile compFile = compRom.Files.GetFile(ORom.FileList.code);
             RomFile decompFile = decompRom.Files.GetFile(ORom.FileList.code);
 
-            BinaryReader compReader = new BinaryReader(compFile);
-            BinaryReader decompReader = new BinaryReader(decompFile);
+            BinaryReader compReader = new(compFile);
+            BinaryReader decompReader = new(decompFile);
 
             byte[] compText = compReader.ReadBytes(compFile.Record.VRom.Size);
             byte[] decompText = decompReader.ReadBytes(decompFile.Record.VRom.Size);
@@ -43,14 +43,14 @@ namespace Experimental.Data
 
         public static void TestYazSimple(IExperimentFace face, List<string> filePath)
         {
-            StringBuilder sb = new StringBuilder();
-            ORom rom = new ORom(filePath[0], ORom.Build.N0);
+            StringBuilder sb = new();
+            ORom rom = new(filePath[0], ORom.Build.N0);
 
             RomFile rfile = rom.Files.GetFile(ORom.FileList.code);
             var dmarec_code = rfile.Record;
 
-            BinaryReader compressed = new BinaryReader((MemoryStream)rom.Files.GetPhysicalFile(dmarec_code.VRom));
-            BinaryReader decompressed = new BinaryReader(rfile);
+            BinaryReader compressed = new((MemoryStream)rom.Files.GetPhysicalFile(dmarec_code.VRom));
+            BinaryReader decompressed = new(rfile);
             byte[] decompressedbuffer = decompressed.ReadBytes(rfile.Record.VRom.Size);
 
             //var buffer = new MemoryStream(0x20_0000);
@@ -121,7 +121,8 @@ namespace Experimental.Data
                 {
                     Stream vanillaFile = rom.Files.GetPhysicalFile(file.VRom);
                     var decompressedFile = Yaz.Decode(vanillaFile, file.Rom.Size);
-                    MemoryStream ms = new MemoryStream(file.Rom.Size);
+                    MemoryStream ms = new(file.Rom.Size);
+
                     sb.AppendLine($"{ Yaz.Encode(decompressedFile, decompressedFile.Length, ms):X8}");
                     while (ms.Length < ms.Capacity)
                     {
