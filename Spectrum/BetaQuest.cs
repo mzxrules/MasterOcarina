@@ -10,373 +10,32 @@ namespace Spectrum
     {
         static class BetaQuest
         {
-            public enum Ver
-            {
-                V1_0,
-                V1_6
-            }
-            public static Ver Version = Ver.V1_6;
             public static int GetTBL_OFFSET()
             {
-                switch (Version)
-                {
-                    case Ver.V1_0: return 0x15E8;
-                    case Ver.V1_6: return 0x15EC;
-                    default: return 0;
-                }
+                return 0x15E8;
             }
 
             public static int GetSHUFFLE()
             {
-                switch (Version)
-                {
-                    case Ver.V1_0: return 282;
-                    case Ver.V1_6: return 281;
-                    default: return 0;
-                }
+                return 282;
             }
 
             public static short[] GetVAR_Entrances()
             {
-                switch (Version)
-                {
-                    case Ver.V1_0: return VAR_Entrances1_0;
-                    case Ver.V1_6: return VAR_Entrances1_6;
-                    default: return new short[] { };
-                }
+                return VAR_Entrances;
             }
 
-            static readonly short[] VAR_Entrances1_6 =
+            public static Dictionary<short, string> GetEntrance_Table()
             {
-                0x0371,
-                0x04BE,
-                0x0588,
-                0x04C2,
-                0x0578,
-                0x0315,
-                0x0394,
-                0x0482,
-                0x057C,
-                0x0340,
-                0x0000,
-                0x0004,
-                0x0008,
-                0x000C,
-                0x0010,
-                0x0028,
-                0x002D,
-                0x0033,
-                0x0037,
-                0x003B,
-                0x0043,
-                0x004B,
-                0x004F,
-                0x0053,
-                0x0063,
-                0x0067,
-                0x0072,
-                0x007A,
-                0x007E,
-                0x0082,
-                0x0088,
-                0x008D,
-                0x0098,
-                0x009C,
-                0x00AD,
-                0x00B1,
-                0x00B7,
-                0x00BB,
-                0x00C1,
-                0x00C5,
-                0x00C9,
-                0x00CD,
-                0x00DB,
-                0x00E4,
-                0x00EA,
-                0x00FC,
-                0x0102,
-                0x0108,
-                0x010E,
-                0x0117,
-                0x011E,
-                0x0123,
-                0x0129,
-                0x0130,
-                0x0134,
-                0x0138,
-                0x013D,
-                0x0147,
-                0x014D,
-                0x0157,
-                0x0165,
-                0x0169,
-                0x016D,
-                0x0171,
-                0x0179,
-                0x017D,
-                0x0181,
-                0x0185,
-                0x0189,
-                0x018D,
-                0x0191,
-                0x0195,
-                0x019D,
-                0x01A1,
-                0x01A9,
-                0x01B5,
-                0x01B9,
-                0x01BD,
-                0x01C1,
-                0x01C9,
-                0x01CD,
-                0x01D1,
-                0x01D5,
-                0x01D9,
-                0x01DD,
-                0x01E1,
-                0x01E5,
-                0x01E9,
-                0x01F1,
-                0x01F9,
-                0x01FD,
-                0x0201,
-                0x0205,
-                0x0209,
-                0x020D,
-                0x0211,
-                0x0215,
-                0x0219,
-                0x021D,
-                0x0221,
-                0x0225,
-                0x022D,
-                0x0231,
-                0x0235,
-                0x0239,
-                0x023D,
-                0x0242,
-                0x0246,
-                0x024A,
-                0x0252,
-                0x0256,
-                0x025A,
-                0x025E,
-                0x0262,
-                0x0266,
-                0x026A,
-                0x026E,
-                0x0272,
-                0x0276,
-                0x027E,
-                0x0286,
-                0x028A,
-                0x028E,
-                0x0292,
-                0x0296,
-                0x029A,
-                0x029E,
-                0x02A2,
-                0x02A6,
-                0x02AA,
-                0x02BA,
-                0x02BE,
-                0x02C2,
-                0x02C6,
-                0x02CA,
-                0x02D2,
-                0x02D6,
-                0x02DA,
-                0x02DE,
-                0x02F9,
-                0x02FD,
-                0x0301,
-                0x0305,
-                0x0309,
-                0x030D,
-                0x0311,
-                0x031C,
-                0x0328,
-                0x032C,
-                0x0330,
-                0x0334,
-                0x033C,
-                0x0345,
-                0x0349,
-                0x034D,
-                0x0351,
-                0x0355,
-                0x0359,
-                0x035D,
-                0x0361,
-                0x0365,
-                0x0378,
-                0x037C,
-                0x0380,
-                0x0384,
-                0x0388,
-                0x038C,
-                0x0398,
-                0x039C,
-                0x03A0,
-                0x03A4,
-                0x03A8,
-                0x03AC,
-                0x03B0,
-                0x03B8,
-                0x03BC,
-                0x03C0,
-                0x03C4,
-                0x03CC,
-                0x03D0,
-                0x03D4,
-                0x03DC,
-                0x03E0,
-                0x03E4,
-                0x03EC,
-                0x03F0,
-                0x03F4,
-                0x03FC,
-                0x0400,
-                0x040B,
-                0x040F,
-                0x0413,
-                0x0417,
-                0x041B,
-                0x041F,
-                0x042F,
-                0x0433,
-                0x0437,
-                0x043B,
-                0x043F,
-                0x0443,
-                0x0447,
-                0x044B,
-                0x044F,
-                0x0453,
-                0x045B,
-                0x045F,
-                0x0463,
-                0x0467,
-                0x0472,
-                0x047E,
-                0x0486,
-                0x048A,
-                0x048E,
-                0x0492,
-                0x0496,
-                0x049A,
-                0x049E,
-                0x04A2,
-                0x04A6,
-                0x04AA,
-                0x04AE,
-                0x04B2,
-                0x04B6,
-                0x04BA,
-                0x04D6,
-                0x04DA,
-                0x04DE,
-                0x04E2,
-                0x04E6,
-                0x04EE,
-                0x04F6,
-                0x04FA,
-                0x04FF,
-                0x0507,
-                0x050B,
-                0x051C,
-                0x0524,
-                0x0528,
-                0x052C,
-                0x0530,
-                0x0534,
-                0x0538,
-                0x053C,
-                0x0540,
-                0x0544,
-                0x0548,
-                0x054C,
-                0x0550,
-                0x0554,
-                0x0560,
-                0x0564,
-                0x0568,
-                0x056C,
-                0x0570,
-                0x0580,
-                0x05C8,
-                0x05D0,
-                0x05D4,
-                0x05DC,
-                0x05E0,
-                0x05F4,
-                0x0600,
-                0x0604,
-                0x0608,
-                0x060C,
-                0x0610,
-                0x0598,
-                0x059C,
-                0x05A0,
-                0x05A4,
-                0x05A8,
-                0x05AC,
-                0x05B0,
-                0x05B4,
-                0x05B8,
-                0x05BC,
-                0x05C0,
-                0x05C4,
-                0x05FC,
-                0x003F,
-                0x036D,
-                0x00EE,
-                0x0153,
-                0x0175,
-                0x01A5,
-                0x01AD,
-                0x01ED,
-                0x01F5,
-                0x024E,
-                0x02B2,
-                0x02CE,
-                0x02E2,
-                0x02E6,
-                0x02F5,
-                0x0320,
-                0x0324,
-                0x0390,
-                0x03B4,
-                0x0423,
-                0x0457,
-                0x0476,
-                0x047A,
-                0x04C6,
-                0x0503,
-                0x050F,
-                0x0513,
-                0x0558,
-                0x055C,
-                0x0574,
-                0x0584,
-                0x058C,
-                0x0590,
-                0x0594,
-                0x05CC,
-                0x05EC,
-                0x05F8,
-                0x00A0,
-                0x006B,
-                0x02AE,
-                0x04CA,
-                0x04CE,
-                0x0517,
-                0x05E4,
-                0x05E8,
-                0x05F0
-            };
+                return Entrance_Table;
+            }
 
-            static readonly short[] VAR_Entrances1_0 =
+            public static Dictionary<short, string> GetGrotto_Table()
+            {
+                return Grotto_Table;
+            }
+
+            static readonly short[] VAR_Entrances =
             {
                 0x0371,
                 0x04BE,
@@ -705,81 +364,444 @@ namespace Spectrum
                 0x05E8,
                 0x05F0
             };
-        }
-        
-        [SpectrumCommand(
-            Name = "beta_v",
-            Description = "sets version",
-            Cat = SpectrumCommand.Category.Proto,
-            Sup = SpectrumCommand.Supported.OoT)]
-        [SpectrumCommandSignature(
-            Sig = new Tokens[] { Tokens.LITERAL })]
-        private static void SetBetaQuestVersion(Arguments args)
-        {
-            if (Options.Version != ORom.Build.N0)
-                return;
 
-            string ver = (string)args[0];
-
-            ver = $"V{ver.Replace('.', '_')}";
-            if (Enum.TryParse(ver, out BetaQuest.Ver result))
+            static readonly Dictionary<short, string> Entrance_Table = new()
             {
-                BetaQuest.Version = result;
-                Console.WriteLine("Version updated.");
-            }
-            else
+                { 0x0000, "KF Outside Deku Tree -> Deku Tree Lobby" },
+                { 0x0004, "Death Mountain -> Dodongos Cavern Beginning" },
+                { 0x0008, "Gerudo Fortress -> Gerudo Training Ground Lobby" },
+                { 0x000C, "Forest Temple Boss Door -> Phantom Ganon Boss Room" },
+                { 0x0010, "Lake Hylia -> Water Temple Lobby" },
+                { 0x0028, "Zoras Fountain -> Jabu Jabus Belly Beginning" },
+                { 0x002D, "Graveyard -> Graveyard Royal Familys Tomb" },
+                { 0x0033, "Market -> Market Entrance" },
+                { 0x0037, "Graveyard Warp Pad Region -> Shadow Temple Entryway" },
+                { 0x003B, "Kakariko Village -> Kak Shooting Gallery" },
+                { 0x003F, "Generic Grotto" },
+                { 0x0043, "Lake Hylia -> LH Lab" },
+                { 0x004B, "Graveyard -> Graveyard Shield Grave" },
+                { 0x004F, "Lon Lon Ranch -> LLR Talons House" },
+                { 0x0053, "ToT Entrance -> Temple of Time" },
+                { 0x0063, "Market -> Market Treasure Chest Game" },
+                { 0x0067, "Market Man in Green House -> Market Back Alley" },
+                { 0x006B, "(Special) Chamber of Sages" },
+                { 0x0072, "Kak Backyard -> Kak Odd Medicine Building" },
+                { 0x007A, "Hyrule Castle Grounds -> Castle Courtyard" },
+                { 0x007E, "Market Entrance -> Market Guard House" },
+                { 0x0082, "Desert Colossus -> Spirit Temple Lobby" },
+                { 0x0088, "ZF Ice Ledge -> Ice Cavern Beginning" },
+                { 0x008D, "Spirit Temple Boss Door -> Twinrova Boss Room" },
+                { 0x0098, "Kakariko Village -> Bottom of the Well" },
+                { 0x009C, "Kokiri Forest -> KF House of Twins" },
+                { 0x00A0, "(Special) Sky Temple" },
+                { 0x00AD, "Market -> Market Back Alley Right Side" },
+                { 0x00B1, "Market Entrance -> Market" },
+                { 0x00B7, "Kakariko Village -> Kak Bazaar" },
+                { 0x00BB, "Child Spawn -> KF Links House" },
+                { 0x00C1, "Kokiri Forest -> KF Kokiri Shop" },
+                { 0x00C5, "King Dodongo Boss Room -> Dodongos Cavern Boss Door" },
+                { 0x00C9, "Kokiri Forest -> KF Know It All House" },
+                { 0x00CD, "Zelda Escape Cutscene -> Hyrule Field" },
+                { 0x00DB, "Hyrule Field -> Kakariko Village" },
+                { 0x00E4, "Kakariko Village -> Graveyard" },
+                { 0x00EA, "Hyrule Field -> ZR Front Land" },
+                { 0x00EE, "(Special) Kokiri Forest by Links House" },
+                { 0x00FC, "LW Beyond Mido -> SFM Entryway" },
+                { 0x0102, "Hyrule Field -> Lake Hylia" },
+                { 0x0108, "ZR Behind Waterfall -> Zoras Domain" },
+                { 0x010E, "Barinade Boss Room Blue Warp -> Zoras Fountain" },
+                { 0x0117, "Hyrule Field -> Gerudo Valley" },
+                { 0x011E, "Kokiri Forest -> Lost Woods" },
+                { 0x0123, "Wasteland Near Colossus -> Desert Colossus" },
+                { 0x0129, "GV Fortress Side -> Gerudo Fortress" },
+                { 0x0130, "GF Outside Gate -> Wasteland Near Fortress" },
+                { 0x0134, "Tower Collapse Exterior 2 Gaps Top -> Tower Collapse Interior Boss Room Floor Back" },
+                { 0x0138, "Market -> Castle Grounds" },
+                { 0x013D, "Kak Behind Gate -> Death Mountain" },
+                { 0x0147, "Death Mountain Summit -> DMC Upper Local" },
+                { 0x014D, "Death Mountain -> Goron City" },
+                { 0x0153, "(Special) ZD Eyeball Frog Timeout" },
+                { 0x0157, "Hyrule Field -> Lon Lon Ranch" },
+                { 0x0165, "DMC Fire Temple Entrance -> Fire Temple Lower" },
+                { 0x0169, "SFM Forest Temple Entrance Ledge -> Forest Temple Lobby" },
+                { 0x016D, "Market -> Market Shooting Gallery" },
+                { 0x0171, "Market -> ToT Entrance" },
+                { 0x0175, "(Special) Fire Temple by Boss Door" },
+                { 0x0179, "Tower Collapse Exterior Top -> Tower Collapse Interior Boss Room Floor Front" },
+                { 0x017D, "Kakariko Village -> Hyrule Field" },
+                { 0x0181, "ZR Front Land -> Hyrule Field" },
+                { 0x0185, "LW Bridge -> Hyrule Field" },
+                { 0x0189, "Lake Hylia -> Hyrule Field" },
+                { 0x018D, "Gerudo Valley -> Hyrule Field" },
+                { 0x0191, "Death Mountain -> Kak Behind Gate" },
+                { 0x0195, "Graveyard -> Kakariko Village" },
+                { 0x019D, "Zoras Domain -> ZR Behind Waterfall" },
+                { 0x01A1, "Zoras Fountain -> ZD Behind King Zora" },
+                { 0x01A5, "(Special) GV Caught by Gerudos without Hookshot" },
+                { 0x01A9, "SFM Entryway -> LW Beyond Mido" },
+                { 0x01AD, "(Special) LW Mushroom Timeout" },
+                { 0x01B5, "Tower Collapse Exterior 2 Gaps Bottom -> Tower Collapse Interior Burning Rocks Front" },
+                { 0x01B9, "Goron City -> Death Mountain" },
+                { 0x01BD, "DMC Upper Nearby -> Death Mountain Summit" },
+                { 0x01C1, "DMC Lower Nearby -> GC Darunias Chamber" },
+                { 0x01C9, "Tower Collapse Interior Stalfos Room Front -> Tower Collapse Exterior 0 Gaps Bottom" },
+                { 0x01CD, "Market Shooting Gallery -> Market" },
+                { 0x01D1, "Market Mask Shop -> Market" },
+                { 0x01D5, "Market Treasure Chest Game -> Market" },
+                { 0x01D9, "Hyrule Field -> ZR Front Water" },
+                { 0x01DD, "Lost Woods -> Zora River" },
+                { 0x01E1, "Spirit Temple Lobby -> Desert Colossus From Spirit Lobby" },
+                { 0x01E5, "Spirit Temple Right Iron Knuckle -> Desert Colossus Silver Gauntlets Chest" },
+                { 0x01E9, "Spirit Temple Left Iron Knuckle -> Desert Colossus Mirror Shield Chest" },
+                { 0x01ED, "(Special) Desert Colossus after Requiem Cutscene" },
+                { 0x01F1, "Requiem of Spirit Warp -> Desert Colossus" },
+                { 0x01F5, "(Special) Desert Colossus after Silver Gauntlets Cutscene" },
+                { 0x01F9, "Lon Lon Ranch -> Hyrule Field" },
+                { 0x01FD, "Market Entrance -> Hyrule Field" },
+                { 0x0201, "Kak Bazaar -> Kakariko Village" },
+                { 0x0205, "Shadow Temple Entryway -> Graveyard Warp Pad Region" },
+                { 0x0209, "Deku Tree Lobby -> KF Outside Deku Tree" },
+                { 0x020D, "LW Bridge -> Kokiri Forest" },
+                { 0x0211, "KF Links House -> Kokiri Forest" },
+                { 0x0215, "Forest Temple Lobby -> SFM Forest Temple Entrance Ledge" },
+                { 0x0219, "GV Lower Stream -> Lake Hylia" },
+                { 0x021D, "Water Temple Lobby -> Lake Hylia" },
+                { 0x0221, "Jabu Jabus Belly Beginning -> Zoras Fountain" },
+                { 0x0225, "ZD Behind King Zora -> Zoras Fountain" },
+                { 0x022D, "Gerudo Fortress -> GV Fortress Side" },
+                { 0x0231, "Thieves Hideout 1 Torch Jail Front -> Gerudo Fortress Bottom Left" },
+                { 0x0235, "Thieves Hideout 1 Torch Jail Back -> Gerudo Fortress Behind Crates Left" },
+                { 0x0239, "Thieves Hideout Kitchen Hallway Bottom -> Gerudo Fortress Behind Crates Center" },
+                { 0x023D, "Ganons Castle Lobby -> Castle Grounds From Ganons Castle" },
+                { 0x0242, "Dodongos Cavern Beginning -> Death Mountain" },
+                { 0x0246, "GC Darunias Chamber -> DMC Lower Local" },
+                { 0x024A, "Fire Temple Lower -> DMC Fire Temple Entrance" },
+                { 0x024E, "(Special) Forest Temple by Boss Door" },
+                { 0x0252, "Queen Gohma Boss Room -> Deku Tree Boss Door" },
+                { 0x0256, "Tower Collapse Exterior 0 Gaps Top -> Tower Collapse Interior Burning Rocks Back" },
+                { 0x025A, "Castle Grounds -> Market" },
+                { 0x025E, "ToT Entrance -> Market" },
+                { 0x0262, "Market Back Alley Right Side -> Market" },
+                { 0x0266, "KF Kokiri Shop -> Kokiri Forest" },
+                { 0x026A, "KF Know It All House -> Kokiri Forest" },
+                { 0x026E, "Market Guard House -> Market Entrance" },
+                { 0x0272, "Kokiri Forest -> KF Links House" },
+                { 0x0276, "Hyrule Field -> Market Entrance" },
+                { 0x027E, "LH Owl Flight -> Hyrule Field" },
+                { 0x0286, "LW Forest Exit -> Kokiri Forest" },
+                { 0x028A, "LLR Southern Fence Jump -> Hyrule Field" },
+                { 0x028E, "LLR Western Fence Jump -> Hyrule Field" },
+                { 0x0292, "LLR Eastern Fence Jump -> Hyrule Field" },
+                { 0x0296, "Zeldas Courtyard -> Castle Courtyard" },
+                { 0x029A, "Market -> Market Back Alley Left Side" },
+                { 0x029E, "Market Back Alley Left Side -> Market" },
+                { 0x02A2, "Market Potion Shop -> Market" },
+                { 0x02A6, "Bottom of the Well -> Kakariko Village" },
+                { 0x02AA, "Thieves Hideout Kitchen Hallway Top -> Gerudo Fortress Above GTG Left" },
+                { 0x02AE, "(Special) LLR after Eponas Song Cutscene" },
+                { 0x02B2, "(Special) Shadow Temple by Boss Door" },
+                { 0x02BA, "Thieves Hideout 4 Torch Jail Front -> Gerudo Fortress Left of GTG" },
+                { 0x02BE, "Thieves Hideout 4 Torch Jail Back -> Gerudo Fortress Mid Across from Vines" },
+                { 0x02C2, "Thieves Hideout 2 Torch Jail Bottom -> Gerudo Fortress Above GTG Center" },
+                { 0x02C6, "Thieves Hideout 2 Torch Jail Top -> Gerudo Fortress Above Vines Back" },
+                { 0x02CA, "ToT Pull or Place Sword -> Temple of Time" },
+                { 0x02CE, "(Special) Forest Medallion Cutscene" },
+                { 0x02D2, "Thieves Hideout Kitchen Front -> Gerudo Fortress Above Vines Left" },
+                { 0x02D6, "Thieves Hideout Kitchen Back -> Gerudo Fortress Top" },
+                { 0x02DA, "Thieves Hideout Break Room Bottom -> Gerudo Fortress Left Alcove" },
+                { 0x02DE, "Thieves Hideout Break Room Top -> Gerudo Fortress Balcony" },
+                { 0x02E2, "(Special) LLR Near South Gate" },
+                { 0x02E6, "(Special) LLR Near West Gate" },
+                { 0x02F5, "(Special) Spirit Temple by Boss Door" },
+                { 0x02F9, "Lon Lon Ranch -> LLR Stables" },
+                { 0x02FD, "Kakariko Village -> Kak Carpenter Boss House" },
+                { 0x0301, "Jabu Jabus Belly Boss Door -> Barinade Boss Room" },
+                { 0x0305, "Fire Temple Boss Door -> Volvagia Boss Room" },
+                { 0x0309, "LH Fishing Hole -> LH Fishing Island" },
+                { 0x030D, "Graveyard -> Graveyard Dampes House" },
+                { 0x0311, "ZR Front Water -> Hyrule Field" },
+                { 0x0315, "(Special) DMT Great Fairy Fountain" },
+                { 0x031C, "Graveyard -> Graveyard Heart Piece Grave" },
+                { 0x0320, "(Special) ToT Facing Away From Pedestal" },
+                { 0x0324, "(Special) ToT Pull Sword First Time" },
+                { 0x0328, "Lake Hylia -> Zoras Domain" },
+                { 0x032C, "Tower Collapse Interior Boss Room Floor Back -> Tower Collapse Exterior 2 Gaps Top" },
+                { 0x0330, "Tower Collapse Interior Burning Rocks Front -> Tower Collapse Exterior 2 Gaps Bottom" },
+                { 0x0334, "Tower Collapse Interior Burning Rocks Back -> Tower Collapse Exterior 0 Gaps Top" },
+                { 0x033C, "KF House of Twins -> Kokiri Forest" },
+                { 0x0340, "Castle Great Fairy Fountain -> Castle Grounds" },
+                { 0x0345, "Kak Impas House -> Kakariko Village" },
+                { 0x0349, "Kak Carpenter Boss House -> Kakariko Village" },
+                { 0x034D, "Kak Odd Medicine Building -> Kak Backyard" },
+                { 0x0351, "Kak Windmill -> Kakariko Village" },
+                { 0x0355, "Graveyard Dampes House -> Graveyard" },
+                { 0x0359, "Graveyard Dampes Grave -> Graveyard" },
+                { 0x035D, "Graveyard Shield Grave -> Graveyard" },
+                { 0x0361, "Graveyard Heart Piece Grave -> Graveyard" },
+                { 0x0365, "Desert Colossus -> Wasteland Near Colossus" },
+                { 0x036D, "Fairy Grotto" },
+                { 0x0371, "Zoras Fountain -> ZF Great Fairy Fountain" },
+                { 0x0378, "LLR Talons House -> Lon Lon Ranch" },
+                { 0x037C, "Goron City -> GC Shop" },
+                { 0x0380, "Zoras Domain -> ZD Shop" },
+                { 0x0384, "Kakariko Village -> Kak Potion Shop Front" },
+                { 0x0388, "Market -> Market Potion Shop" },
+                { 0x038C, "Dog Lady House -> Market Back Alley" },
+                { 0x0390, "(Special) Market Bombchu Shop" },
+                { 0x0394, "ZF Great Fairy Fountain -> Zoras Fountain" },
+                { 0x0398, "Market Back Alley -> Dog Lady House" },
+                { 0x039C, "Kakariko Village -> Kak Impas House" },
+                { 0x03A0, "GV Fortress Side -> GV Carpenter Tent" },
+                { 0x03A4, "Thieves Hideout 3 Torch Jail -> Gerudo Fortress Near Top" },
+                { 0x03A8, "Gerudo Training Ground Lobby -> Gerudo Fortress" },
+                { 0x03AC, "Wasteland Near Fortress -> GF Outside Gate" },
+                { 0x03B0, "GF Horse Back Archery -> Gerudo Fortress" },
+                { 0x03B4, "(Special) GF Caught by Gerudos First Time" },
+                { 0x03B8, "Market Bazaar -> Market" },
+                { 0x03BC, "Market Bombchu Bowling -> Market" },
+                { 0x03C0, "Market Bombchu Shop -> Market Back Alley" },
+                { 0x03C4, "ZD Shop -> Zoras Domain" },
+                { 0x03CC, "LH Lab -> Lake Hylia" },
+                { 0x03D0, "GV Carpenter Tent -> GV Fortress Side" },
+                { 0x03D4, "Ice Cavern Beginning -> ZF Ice Ledge" },
+                { 0x03DC, "Tower Collapse Exterior 1 Gap Top -> Tower Collapse Interior Stalfos Fight Back" },
+                { 0x03E0, "Tower Collapse Exterior 0 Gaps Bottom -> Tower Collapse Interior Stalfos Fight Front" },
+                { 0x03E4, "Tower Collapse Exterior 1 Gap Bottom -> Tower Collapse Interior Staircase Top" },
+                { 0x03EC, "Kak Backyard -> Kak Potion Shop Back" },
+                { 0x03F0, "Desert Colossus Silver Gauntlets Chest -> Spirit Temple Right Iron Knuckle" },
+                { 0x03F4, "Desert Colossus Mirror Shield Chest -> Spirit Temple Left Iron Knuckle" },
+                { 0x03FC, "GC Shop -> Goron City" },
+                { 0x0400, "Castle Courtyard -> Zeldas Courtyard" },
+                { 0x040B, "Dodongos Cavern Boss Door -> King Dodongo Boss Room" },
+                { 0x040F, "Deku Tree Boss Door -> Queen Gohma Boss Room" },
+                { 0x0413, "Shadow Temple Boss Door -> Bongo Bongo Boss Room" },
+                { 0x0417, "Water Temple Boss Door -> Morpha Boss Room" },
+                { 0x041B, "Ganons Castle Lobby -> Ganons Tower Bottom" },
+                { 0x041F, "Ganons Tower Top -> Ganondorf Boss Room" },
+                { 0x0423, "(Special) Water Temple by Boss Door" },
+                { 0x042F, "LLR Stables -> Lon Lon Ranch" },
+                { 0x0433, "Kokiri Forest -> KF Midos House" },
+                { 0x0437, "Kokiri Forest -> KF Sarias House" },
+                { 0x043B, "Market Back Alley -> Market Man in Green House" },
+                { 0x043F, "Ganondorf Boss Room -> Tower Collapse Exterior Top" },
+                { 0x0443, "KF Midos House -> Kokiri Forest" },
+                { 0x0447, "KF Sarias House -> Kokiri Forest" },
+                { 0x044B, "Kak Potion Shop Front -> Kakariko Village" },
+                { 0x044F, "Graveyard -> Graveyard Dampes Grave" },
+                { 0x0453, "Kakariko Village -> Kak Windmill" },
+                { 0x0457, "(Special) KF Outside Deku Tree" },
+                { 0x045B, "(Special) DMT Outside Great Fairy Fountain" },
+                { 0x045F, "LH Fishing Island -> LH Fishing Hole" },
+                { 0x0463, "Kak Shooting Gallery -> Kakariko Village" },
+                { 0x0467, "Ganons Castle Grounds -> Ganons Castle Lobby" },
+                { 0x0472, "Temple of Time -> ToT Entrance" },
+                { 0x0476, "LLR Front Gate Jump -> Hyrule Field" },
+                { 0x047A, "(Special) DMT after Darunia Cutscene" },
+                { 0x047E, "Caught by Castle Grounds Guards -> Castle Grounds" },
+                { 0x0482, "DMC Great Fairy Fountain -> DMC Lower Local" },
+                { 0x0486, "Gerudo Fortress Bottom Left -> Thieves Hideout 1 Torch Jail Front" },
+                { 0x048A, "Gerudo Fortress Behind Crates Left -> Thieves Hideout 1 Torch Jail Back" },
+                { 0x048E, "Gerudo Fortress Behind Crates Center -> Thieves Hideout Kitchen Hallway Bottom" },
+                { 0x0492, "Gerudo Fortress Above GTG Left -> Thieves Hideout Kitchen Hallway Top" },
+                { 0x0496, "Gerudo Fortress Left of GTG -> Thieves Hideout 4 Torch Jail" },
+                { 0x049A, "Gerudo Fortress Mid Across from Vines -> Thieves Hideout 4 Torch Jail" },
+                { 0x049E, "Gerudo Fortress Above GTG Center -> Thieves Hideout 2 Torch Jail" },
+                { 0x04A2, "Gerudo Fortress Above Vines Back -> Thieves Hideout 2 Torch Jail" },
+                { 0x04A6, "Gerudo Fortress Above Vines Left -> Thieves Hideout Kitchen Front" },
+                { 0x04AA, "Gerudo Fortress Top -> Thieves Hideout Kitchen Back" },
+                { 0x04AE, "Gerudo Fortress Left Alcove -> Thieves Hideout Break Room Bottom" },
+                { 0x04B2, "Gerudo Fortress Balcony -> Thieves Hideout Break Room Top" },
+                { 0x04B6, "Tower Collapse Interior Bridge Front -> Tower Collapse Interior Staircase Bottom" },
+                { 0x04BA, "Tower Collapse Interior Boss Room Floor Front -> Tower Collapse Exterior Top" },
+                { 0x04BE, "DMC Lower Nearby -> DMC Great Fairy Fountain" },
+                { 0x04C2, "Ganons Castle Grounds -> OGC Great Fairy Fountain" },
+                { 0x04C6, "(Special) LW by Target in Woods" },
+                { 0x04CA, "(Special) LLR Pay Ingo to Ride" },
+                { 0x04CE, "(Special) LLR Beat Ingo" },
+                { 0x04D6, "GC Woods Warp -> Lost Woods" },
+                { 0x04DA, "Zora River -> LW Underwater Entrance" },
+                { 0x04DE, "Hyrule Field -> LW Bridge" },
+                { 0x04E2, "Lost Woods -> GC Woods Warp" },
+                { 0x04E6, "Lake Hylia after Sheik Cutscene" },
+                { 0x04EE, "Kak House of Skulltula -> Kakariko Village" },
+                { 0x04F6, "Bolero of Fire Warp -> DMC Central Local" },
+                { 0x04FA, "Caught by Courtyard Guards -> Castle Grounds" },
+                { 0x04FF, "Kak Potion Shop Back -> Kak Backyard" },
+                { 0x0503, "Windmill after Song of Storms" },
+                { 0x0507, "Market -> Market Bombchu Bowling" },
+                { 0x050B, "Graveyard Royal Familys Tomb -> Graveyard" },
+                { 0x050F, "Hyrule Field after Ocarina of Time" },
+                { 0x0513, "(Special) Kakariko Village after Nocturne Cutscene" },
+                { 0x0517, "(Special) Ganon Battle" },
+                { 0x051C, "Tower Collapse Interior Stalfos Fight Back -> Tower Collapse Exterior 1 Gap Top" },
+                { 0x0524, "Tower Collapse Interior Staircase Top -> Tower Collapse Exterior 1 Gap Bottom" },
+                { 0x0528, "Market Back Alley -> Market Bombchu Shop" },
+                { 0x052C, "Market -> Market Bazaar" },
+                { 0x0530, "Market -> Market Mask Shop" },
+                { 0x0534, "Ganons Tower Bottom -> Ganons Castle Lobby" },
+                { 0x0538, "Clear Forest Trial -> Ganons Castle Lobby" },
+                { 0x053C, "Clear Water Trial -> Ganons Castle Lobby" },
+                { 0x0540, "Clear Shadow Trial -> Ganons Castle Lobby" },
+                { 0x0544, "Clear Fire Trial -> Ganons Castle Lobby" },
+                { 0x0548, "Clear Light Trial -> Ganons Castle Lobby" },
+                { 0x054C, "Clear Spirit Trial -> Ganons Castle Lobby" },
+                { 0x0550, "Kakariko Village -> Kak House of Skulltula" },
+                { 0x0554, "DMT Owl Flight -> Kak Impas Rooftop" },
+                { 0x0558, "(Special) LLR Lose to Ingo" },
+                { 0x055C, "(Special) LLR Near Ingo" },
+                { 0x0560, "Zoras Domain -> Lake Hylia" },
+                { 0x0564, "Volvagia Boss Room Blue Warp -> DMC Fire Temple Entrance" },
+                { 0x0568, "Nocturne of Shadow Warp -> Graveyard Warp Pad Region" },
+                { 0x056C, "Tower Collapse Interior Staircase Bottom -> Tower Collapse Interior Bridge Front" },
+                { 0x0570, "Gerudo Fortress Near Top -> Thieves Hideout 3 Torch Jail" },
+                { 0x0574, "(Special) Royal Familys Tomb after Sun Song Cutscene" },
+                { 0x0578, "Hyrule Castle Grounds -> HC Great Fairy Fountain" },
+                { 0x057C, "Colossus Great Fairy Fountain -> Desert Colossus" },
+                { 0x0580, "Bongo Bongo Boss Room Blue Warp -> Graveyard Warp Pad Region" },
+                { 0x0584, "(Special) Forest Temple Falling Ceiling Room" },
+                { 0x0588, "Desert Colossus -> Colossus Great Fairy Fountain" },
+                { 0x058C, "(Special) ToT after LACS" },
+                { 0x0590, "(Special) ToT in front of Warp Pad" },
+                { 0x0594, "(Special) Hyrule Field after Impa Escort Cutscene" },
+                { 0x0598, "Hyrule Field -> HF Near Kak Grotto" },
+                { 0x059C, "Hyrule Field -> HF Inside Fence Grotto" },
+                { 0x05A0, "Kakariko Village -> Kak Redead Grotto" },
+                { 0x05A4, "3 Scrub Grotto" },
+                { 0x05A8, "Hyrule Field -> HF Cow Grotto" },
+                { 0x05AC, "GV Grotto Ledge -> GV Octorok Grotto" },
+                { 0x05B0, "LW Beyond Mido -> LW Scrubs Grotto" },
+                { 0x05B4, "SFM Entryway -> SFM Wolfos Grotto" },
+                { 0x05B8, "Hyrule Castle Grounds -> HC Storms Grotto" },
+                { 0x05BC, "2 Scrub Grotto" },
+                { 0x05C0, "Hyrule Field -> HF Tektite Grotto" },
+                { 0x05C4, "LW Beyond Mido -> Deku Theater" },
+                { 0x05C8, "Kak Impas Ledge -> Kak Impas House Back" },
+                { 0x05CC, "(Special) Bottom of the Well by Entrance" },
+                { 0x05D0, "Lon Lon Ranch -> LLR Tower" },
+                { 0x05D4, "LLR Tower -> Lon Lon Ranch" },
+                { 0x05DC, "Kak Impas House Back -> Kak Impas Ledge" },
+                { 0x05E0, "Kokiri Forest -> LW Bridge From Forest" },
+                { 0x05E4, "LLR Talons House after Cucco Game -> LLR Talons House" },
+                { 0x05E8, "(Special) KF Deku Sprout Cutscene" },
+                { 0x05EC, "(Special) Spirit Temple Twinrova Room" },
+                { 0x05F0, "(Special) Zeldas Courtyard after Triforce Cutscene" },
+                { 0x05F4, "Prelude of Light Warp -> Temple of Time" },
+                { 0x05F8, "(Special) GF Caught by Gerudos Again" },
+                { 0x05FC, "Death Mountain Summit -> DMT Cow Grotto" },
+                { 0x0600, "Minuet of Forest Warp -> Sacred Forest Meadow" },
+                { 0x0604, "Serenade of Water Warp -> Lake Hylia" },
+                { 0x0608, "Phantom Ganon Boss Room Blue Warp -> SFM Forest Temple Entrance Ledge" },
+                { 0x060C, "Morpha Boss Room Blue Warp -> Lake Hylia" },
+                { 0x0610, "Twinrova Boss Room Blue Warp -> Desert Colossus From Spirit Lobby" },
+            };
+
+            // Entrances overridden by grottos
+            static readonly Dictionary<short, string> Grotto_Table = new()
             {
-                Console.WriteLine("1.0 or 1.6 supported");
-            }
+                { 0x003F, "HF Bomb Grotto near Market Entrance" },
+                { 0x036D, "HF Remote Bomb Grotto" },
+                { 0x00EE, "HF Open Grotto" },
+                { 0x0153, "Kak Open Grotto" },
+                { 0x0175, "ZR Open Grotto" },
+                { 0x01A5, "KF Storms Grotto" },
+                { 0x01AD, "LW Bomb Grotto" },
+                { 0x01ED, "DMT Storms Grotto" },
+                { 0x01F5, "DMC Bomb Grotto" },
+                { 0x024E, "ZD Storms Grotto" },
+                { 0x02B2, "GF Storms Grotto" },
+                { 0x02CE, "SFM Storms Grotto" },
+                { 0x02E2, "ZR Bomb Grotto" },
+                { 0x02E6, "HF Across River Bomb Grotto" },
+            };
         }
 
-
         [SpectrumCommand(
-            Name = "beta_s",
-            Description = "Checks for repeats in beta quest shuffle group",
-            Cat = SpectrumCommand.Category.Proto,
+            Name = "bqspoiler",
+            Description = "Outputs Beta Quest entrance spoiler log",
+            Cat = SpectrumCommand.Category.Spectrum,
             Sup = SpectrumCommand.Supported.OoT)]
-        private static void TestBetaQuestShuffleData(Arguments args)
+        private static void SpoilBetaQuest(Arguments args)
         {
             if (Options.Version != ORom.Build.N0)
                 return;
             Ptr staticCtx = SPtr.New(0x11BA00).Deref();
             Ptr shuffleTable = staticCtx.RelOff(BetaQuest.GetTBL_OFFSET());
 
-            Dictionary<short, int> collisions = new Dictionary<short, int>();
+            short[] VAR_Entrances = BetaQuest.GetVAR_Entrances();
+            Dictionary<short, string> Entrance_Table = BetaQuest.GetEntrance_Table();
+            Dictionary<short, string> Grotto_Table = BetaQuest.GetGrotto_Table();
 
-            int shuffle = BetaQuest.GetSHUFFLE();
-            for (int i = 0; i < shuffle; i++)
+            for (int i = 0; i < VAR_Entrances.Length; i++)
             {
-                short index = shuffleTable.ReadInt16(i * 2);
-                if (collisions.ContainsKey(index))
-                {
-                    collisions[index] += 1;
-                }
-                else
-                {
-                    collisions.Add(index, 1);
-                }
+                short entrance = VAR_Entrances[i];
+                string fromEntrance = Grotto_Table.ContainsKey(entrance) ? Grotto_Table[entrance] : Entrance_Table[entrance];
+
+                short read = shuffleTable.ReadInt16(i * 2);
+                string toEntrance = Entrance_Table[read];
+
+                Console.WriteLine($"{fromEntrance} => {toEntrance}");
             }
-            Console.Clear();
-            Console.WriteLine("Repeats: ");
-            foreach (var item in collisions)
+        }
+
+        [SpectrumCommand(
+            Name = "bqlist",
+            Description = "Lists Beta Quest entrances",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Sup = SpectrumCommand.Supported.OoT)]
+        private static void ListBetaQuestEntrances(Arguments args)
+        {
+            if (Options.Version != ORom.Build.N0)
+                return;
+
+            Dictionary<short, string> Entrance_Table = BetaQuest.GetEntrance_Table();
+
+            foreach(KeyValuePair<short, string> kvp in Entrance_Table)
             {
-                if (item.Value > 1)
+                Console.WriteLine(string.Format($"{kvp.Key:X4} {kvp.Value}"));
+            }
+        }
+
+        [SpectrumCommand(
+            Name = "bqfind",
+            Description = "Locates Beta Quest entrance by name",
+            Cat = SpectrumCommand.Category.Spectrum,
+            Sup = SpectrumCommand.Supported.OoT)]
+        [SpectrumCommandSignature(
+            Sig = new Tokens[] { Tokens.STRING })]
+        private static void FindBetaQuestEntrance(Arguments args)
+        {
+            if (Options.Version != ORom.Build.N0)
+                return;
+            Ptr staticCtx = SPtr.New(0x11BA00).Deref();
+            Ptr shuffleTable = staticCtx.RelOff(BetaQuest.GetTBL_OFFSET());
+
+            string search = (string)args[0];
+            short[] VAR_Entrances = BetaQuest.GetVAR_Entrances();
+            Dictionary<short, string> Entrance_Table = BetaQuest.GetEntrance_Table();
+            Dictionary<short, string> Grotto_Table = BetaQuest.GetGrotto_Table();
+
+            for (int i = 0; i < Entrance_Table.Count; i++)
+            {
+                short read = shuffleTable.ReadInt16(i * 2);
+                string toEntrance = Entrance_Table[read];
+                if (toEntrance.Contains(search, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"{item.Key:X4} - {item.Value}");
+                    short index = VAR_Entrances[i];
+                    string fromEntrance = Grotto_Table.ContainsKey(index) ? Grotto_Table[index] : Entrance_Table[index];
+
+                    Console.WriteLine($"{fromEntrance} => {toEntrance}");
                 }
             }
         }
 
         [SpectrumCommand(
-            Name = "beta_ent",
-            Description = "Locates Beta Quest entrance",
-            Cat = SpectrumCommand.Category.Proto,
+            Name = "bqfindindex",
+            Description = "Locates Beta Quest entrance by index",
+            Cat = SpectrumCommand.Category.Spectrum,
             Sup = SpectrumCommand.Supported.OoT)]
         [SpectrumCommandSignature(
             Sig = new Tokens[] { Tokens.HEX_S16 })]
-        private static void LocateBetaQuestEntrance(Arguments args)
+        private static void FindBetaQuestEntranceByIndex(Arguments args)
         {
             if (Options.Version != ORom.Build.N0)
                 return;
@@ -788,13 +810,19 @@ namespace Spectrum
 
             short index = (short)args[0];
             short[] VAR_Entrances = BetaQuest.GetVAR_Entrances();
+            Dictionary<short, string> Entrance_Table = BetaQuest.GetEntrance_Table();
+            Dictionary<short, string> Grotto_Table = BetaQuest.GetGrotto_Table();
 
-            for (int i = 0; i < 326; i++)
+            for (int i = 0; i < VAR_Entrances.Length; i++)
             {
-                var read = shuffleTable.ReadInt16(i * 2);
+                short read = shuffleTable.ReadInt16(i * 2);
                 if (index == read)
                 {
-                    Console.WriteLine($"{VAR_Entrances[i]:X4}");
+                    short entranceId = VAR_Entrances[i];
+                    string fromEntrance = Grotto_Table.ContainsKey(entranceId) ? Grotto_Table[entranceId] : Entrance_Table[entranceId];
+                    string toEntrance = Entrance_Table[read];
+
+                    Console.WriteLine($"{fromEntrance} => {toEntrance}");
                     return;
                 }
             }
