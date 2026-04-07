@@ -9,8 +9,8 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class Cutscene
     {
-        int CommandCap;
-        public List<CutsceneCommand> Commands = new List<CutsceneCommand>();
+        private int CommandCap;
+        public List<CutsceneCommand> Commands = [];
         public bool CommandCapReached = false;
         public bool InvalidCommandReached = false;
         public int Frames { get; set; }
@@ -321,7 +321,7 @@ namespace mzxrules.OcaLib.Cutscenes
         /// <returns>The output text</returns>
         public string PrintByOccurrence()
         {
-            StringBuilder output = new StringBuilder();
+            StringBuilder output = new();
 
             if (Commands.Count == 0)
                 return "No Cutscene Found";
@@ -334,12 +334,12 @@ namespace mzxrules.OcaLib.Cutscenes
 
             output.AppendLine(string.Format("Length: {0:X4} Hit End? {1}, Commands {2:X8}, End Frame {4:X8}{3}",
                 Commands.Sum(x => x.Length),
-                (Commands.Exists(x => x is EndCommand)) ? "YES" : "NO",
+                Commands.Exists(x => x is EndCommand) ? "YES" : "NO",
                 CommandCount,
                 (command_count_private >= 0 && CommandCount != command_count_private) ? $", Internal Command Count {command_count_private:X2}" : "",
                 Frames));
 
-            var commandOffset = 8L; //Header data is 0x8 bytes
+            var commandOffset = 8; //Header data is 0x8 bytes
             foreach (CutsceneCommand command in Commands)
             {
                 output.AppendLine($"{commandOffset:X4}: {command.ReadCommand()}");
@@ -355,12 +355,12 @@ namespace mzxrules.OcaLib.Cutscenes
         public string PrintByTimeline()
         {
             short time = -1;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             CutsceneCommand lastRoot = null;
 
             foreach (IFrameData f in Commands.OfType<IFrameCollection>()
-                .SelectMany(x =>  x.IFrameDataEnum)
-                .OrderBy(x => x.StartFrame))
+                .SelectMany(static x => x.IFrameDataEnum)
+                .OrderBy(static x => x.StartFrame))
             {
                 if (f.StartFrame > time)
                 {
@@ -373,8 +373,10 @@ namespace mzxrules.OcaLib.Cutscenes
                     sb.AppendLine($"{time:X4} {0:X6}: {f.RootCommand}");
                     lastRoot = f.RootCommand;
                 }
-                if ((f != f.RootCommand))
+                if (f != f.RootCommand)
+                {
                     sb.AppendLine($"{time:X4} FFFFFF:   {f}");
+                }
             }
             return sb.ToString();
         }
@@ -384,7 +386,9 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(Commands.Count - 1);
             bw.WriteBig(Frames);
             foreach (CutsceneCommand command in Commands)
+            {
                 command.Save(bw);
+            }
         }
     }
 }

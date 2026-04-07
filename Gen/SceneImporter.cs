@@ -129,12 +129,10 @@ namespace Gen
 
         private static void UpdateRoomList(BinaryWriter bw, Scene scene, List<FileAddress> addr)
         {
-            RoomListCommand ml;
-
-            ml = (RoomListCommand)scene.Header[HeaderCommands.RoomList];
+            RoomListCommand ml = (RoomListCommand)scene.Header[HeaderCommands.RoomList];
 
             //update room list
-            bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
+            bw.BaseStream.Position = scene.VirtualAddress.Start + ml.SegmentAddress.Offset;
             foreach (FileAddress room in addr)
             {
                 bw.WriteBig(room.Start);
@@ -151,7 +149,7 @@ namespace Gen
                     {
                         ml = (RoomListCommand)header[HeaderCommands.RoomList];
                         //update room list
-                        bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
+                        bw.BaseStream.Position = scene.VirtualAddress.Start + ml.SegmentAddress.Offset;
                         foreach (FileAddress room in addr)
                         {
                             bw.WriteBig(room.Start);

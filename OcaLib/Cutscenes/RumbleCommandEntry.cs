@@ -4,19 +4,19 @@ using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class RumbleCommandEntry : IFrameData
+    public class RumbleCommandEntry : IFrameData
     {
         public CutsceneCommand RootCommand { get; set; }
         public const int LENGTH = 12;
 
-        ushort Action;
+        public ushort Action;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
-        byte SourceStrength;
-        byte Duration;
-        byte DecreaseRate;
-        byte unk1;
-        ushort unk2;
+        public byte SourceStrength;
+        public byte Duration;
+        public byte DecreaseRate;
+        private readonly byte unk1;
+        private readonly ushort unk2;
 
         public RumbleCommandEntry(CutsceneCommand cmd, BinaryReader br)
         {

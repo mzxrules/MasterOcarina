@@ -27,7 +27,9 @@ namespace mzxrules.Helper
                 case FileEncoding.HalfwordSwap: sourceEndian = Endian.Order.Big16; outEndian = Endian.Order.Big32; break;
                 case FileEncoding.LittleEndian16: sourceEndian = Endian.Order.Little16; outEndian = Endian.Order.Big16; break;
                 case FileEncoding.LittleEndian32: sourceEndian = Endian.Order.Little32; outEndian = Endian.Order.Big32; break;
-                default: throw new ArgumentOutOfRangeException();
+                case FileEncoding.Error:
+                    goto default;
+                default: throw new ArgumentOutOfRangeException(nameof(sourceEncoding), sourceEncoding, "Invalid FileEncoding");
             }
             ConvertData(source, sourceEndian, output, outEndian);
         }
@@ -67,7 +69,7 @@ namespace mzxrules.Helper
                 {
                     FlipData(inFile, outFile, 4);
                 }
-                else 
+                else
                     return false;
                 return true;
             }
@@ -80,8 +82,8 @@ namespace mzxrules.Helper
             {
                 for (int j = 0; j < BUFFER_SIZE; j += 4)
                 {
-                    source.Read(buffer, j + 2, 2);
-                    source.Read(buffer, j, 2);
+                    source.ReadExactly(buffer, j + 2, 2);
+                    source.ReadExactly(buffer, j, 2);
                 }
                 write.Write(buffer, 0, BUFFER_SIZE);
             }
@@ -113,9 +115,9 @@ namespace mzxrules.Helper
                 for (int j = 0; j < length; j += size)
                 {
                     Array.Copy(buffer, j, word, 0, size);
-                    write.Write(word.Reverse().ToArray(), 0, size);
+                    write.Write([.. word.Reverse()], 0, size);
                 }
-                //move 
+                //move
                 if (offset != 0)
                 {
                     Array.Copy(buffer, length, buffer, 0, size);

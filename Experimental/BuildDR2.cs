@@ -2,12 +2,8 @@
 using mzxrules.OcaLib.SceneRoom;
 using mzxrules.OcaLib.SceneRoom.Commands;
 using mzxrules.Helper;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Experimental
 {
@@ -36,12 +32,12 @@ namespace Experimental
 
             int NextWriteAddress;
 
-            using (FileStream fs_r = new FileStream(romfile, FileMode.Open, FileAccess.ReadWrite))
+            using (FileStream fs_r = new(romfile, FileMode.Open, FileAccess.ReadWrite))
             {
-                BinaryReader addrReader = new BinaryReader(fs_r);
+                BinaryReader addrReader = new(fs_r);
                 addrReader.BaseStream.Position = FileTable_Off;
                 NextWriteAddress = Endian.ConvertInt32(addrReader.ReadInt32());
-                BinaryWriter bw = new BinaryWriter(fs_r);
+                BinaryWriter bw = new(fs_r);
 
                 //wipe the scene table
                 for (int i = 0; i < 101; i++)
@@ -66,11 +62,11 @@ namespace Experimental
         {
             Scene scene;
             int mapCount;
-            List<FileAddress> mapAddresses = new();
+            List<FileAddress> mapAddresses = [];
             FileAddress fileAddr;
 
             //get scene file from mqd folder
-            using (FileStream fs_s = new FileStream(string.Format("dr2/{0:D2}_h", sceneId), FileMode.Open, FileAccess.Read))
+            using (FileStream fs_s = new(string.Format("dr2/{0:D2}_h", sceneId), FileMode.Open, FileAccess.Read))
             {
                 scene = SceneRoomReader.InitializeScene(Game.OcarinaOfTime, sceneId, new BinaryReader(fs_s));
                 //add the file to the rom
@@ -85,7 +81,7 @@ namespace Experimental
 
             for (int i = 0; i < mapCount; i++)
             {
-                using (FileStream fs_m = new FileStream(string.Format("dr2/{0:D2}_{1:D2}", sceneId, i),
+                using (FileStream fs_m = new(string.Format("dr2/{0:D2}_{1:D2}", sceneId, i),
                     FileMode.Open, FileAccess.Read))
                 {
                     mapAddresses.Add(AddFile(bw, fs_m, ref NextWriteAddress));
@@ -132,12 +128,10 @@ namespace Experimental
 
         private static void UpdateMapList(BinaryWriter bw, Scene scene, List<FileAddress> addr)
         {
-            RoomListCommand ml;
-
-            ml = (RoomListCommand)scene.Header[HeaderCommands.RoomList];
+            RoomListCommand ml = (RoomListCommand)scene.Header[HeaderCommands.RoomList];
 
             //update map list
-            bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
+            bw.BaseStream.Position = scene.VirtualAddress.Start + ml.SegmentAddress.Offset;
             foreach (FileAddress map in addr)
             {
                 bw.Write(Endian.ConvertInt32(map.Start));
@@ -154,11 +148,11 @@ namespace Experimental
                     {
                         ml = (RoomListCommand)header[HeaderCommands.RoomList];
                         //update map list
-                        bw.BaseStream.Position = scene.VirtualAddress.Start + ml.RoomListAddress;
+                        bw.BaseStream.Position = scene.VirtualAddress.Start + ml.SegmentAddress.Offset;
                         foreach (FileAddress map in addr)
                         {
-                            bw.Write(Endian.ConvertInt32((int)map.Start));
-                            bw.Write(Endian.ConvertInt32((int)map.End));
+                            bw.Write(Endian.ConvertInt32(map.Start));
+                            bw.Write(Endian.ConvertInt32(map.End));
                         }
                     }
                 }

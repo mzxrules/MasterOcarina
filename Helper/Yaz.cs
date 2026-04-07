@@ -20,7 +20,7 @@ namespace mzxrules.Helper
             byte[] buf = new byte[sizeof(int)];
 
             sr.Position += 4;
-            sr.Read(buf, 0, sizeof(int));
+            sr.ReadExactly(buf, 0, sizeof(int));
             Endian.ReverseBytes(ref buf, sizeof(int));
             Buffer.BlockCopy(buf, 0, size, 0, sizeof(int));
             sizeInt = size[0];
@@ -43,14 +43,14 @@ namespace mzxrules.Helper
             size = new int[1];
 
             sr.Position += 4;
-            sr.Read(buf, 0, sizeof(int));
+            sr.ReadExactly(buf, 0, sizeof(int));
             Endian.ReverseBytes(ref buf, sizeof(int));
             Buffer.BlockCopy(buf, 0, size, 0, sizeof(int));
             sr.Position += 8;
 
             blockSize -= 0x10;
             buf = new byte[blockSize];
-            sr.Read(buf, 0, blockSize);
+            sr.ReadExactly(buf, 0, blockSize);
 
             Decode(buf, out byte[] result, size[0]);
             return result;
@@ -196,13 +196,13 @@ namespace mzxrules.Helper
             }
             return numBytes;
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static EncodeResult NintendoEnc(YazText src, int pos)
         {
             // if UseResult is set, it means that the previous position was determined by look-ahead try,
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
-            
+
             EncodeResult resultA = src.MatchNext(pos);
 
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
@@ -309,7 +309,7 @@ namespace mzxrules.Helper
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src"></param>
         /// <param name="srcSize"></param>
@@ -325,7 +325,7 @@ namespace mzxrules.Helper
 
             int srcPos = 0;
             int dstPos = 0;
-            
+
             byte[] dst = new byte[24]; // 8 codes * 3 bytes maximum
             int dstSize = 0;
             dstFile = new byte[srcSize];
@@ -338,7 +338,7 @@ namespace mzxrules.Helper
             byte[] header = new byte[] { 0x59, 0x61, 0x7A, 0x30 }; //Yaz0
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(srcSizeArr);
-            
+
             Array.Copy(header, dstFile, 4);
             Array.Copy(srcSizeArr, 0, dstFile, 4, 4);
             dstSize += 0x10;
@@ -607,7 +607,7 @@ namespace mzxrules.Helper
             public bool SkipByte;
         }
 
-        class SimpleEncodeResult 
+        class SimpleEncodeResult
             //Todo: Replace with EncodeResult when rewriting with .net core 3.0 optimizations
         {
             public int MatchPos;

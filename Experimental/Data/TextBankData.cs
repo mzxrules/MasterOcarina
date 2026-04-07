@@ -1,4 +1,5 @@
 ﻿using mzxrules.OcaLib;
+using mzxrules.OcaLib.Text;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ namespace Experimental.Data
             /// <summary>
             /// Contains a list of rom builds that byte for byte share the same message
             /// </summary>
-            public List<ORom.Build> Builds = new();
+            public List<ORom.Build> Builds = [];
             public MesgBuildsPair(List<int> data, ORom.Build build)
             {
                 Data = data;
@@ -51,9 +52,9 @@ namespace Experimental.Data
             return sb.ToString();
         }
 
-        static string CsvEscape(this string value)
+        public static string CsvEscape(this string value)
         {
-            if (value.Contains(","))
+            if (value.Contains(','))
             {
                 return "\"" + value.Replace("\"", "\"\"") + "\"";
             }
@@ -62,24 +63,20 @@ namespace Experimental.Data
 
         public static void TextCompareDump()
         {
-            Dictionary<Rom.Language, Dictionary<ushort, List<MesgBuildsPair>>> jesuschristmarietheyreminerals;
-
-            jesuschristmarietheyreminerals = new Dictionary<Rom.Language, Dictionary<ushort, List<MesgBuildsPair>>>();
+            Dictionary<Rom.Language, Dictionary<ushort, List<MesgBuildsPair>>> jesuschristmarietheyreminerals = [];
 
             foreach (Rom.Language l in ORom.GetAllSupportedLanguages())
-                jesuschristmarietheyreminerals.Add(l, new Dictionary<ushort, List<MesgBuildsPair>>());
+                jesuschristmarietheyreminerals.Add(l, []);
 
             //for all roms i found
             foreach (ORom.Build build in ORom.GetSupportedBuilds()) 
             {
-                ORom rom;
                 string romLoc = string.Empty;
 
                 if (!VerboseOcarina.RomLocation.TryGetRomLocation(build, ref romLoc))
                     continue;
 
-                rom = new ORom(romLoc, build);
-                
+                ORom rom = new(romLoc, build);
                 GameText textModule = new(rom);
 
                 //for all languages supported by the rom
@@ -96,10 +93,7 @@ namespace Experimental.Data
                         //If no data is stored yet for this mesgId, add it
                         if (!LanguageSet.TryGetValue(mesgId, out List<MesgBuildsPair> MessageSet))
                         {
-                            MessageSet = new List<MesgBuildsPair>
-                            {
-                                new MesgBuildsPair(data, build)
-                            };
+                            MessageSet = [new MesgBuildsPair(data, build)];
                             LanguageSet.Add(mesgId, MessageSet);
                             continue;
                         }
@@ -129,7 +123,7 @@ namespace Experimental.Data
 
         private static void OutputTextDump_Wiki(Dictionary<ORom.Language, Dictionary<ushort, List<MesgBuildsPair>>> jesuschrist)
         {
-            Dictionary<ORom.Build, GameText> dialogBanks = new();
+            Dictionary<ORom.Build, GameText> dialogBanks = [];
 
             foreach (ORom.Build b in ORom.GetSupportedBuilds())
             {
@@ -154,8 +148,8 @@ namespace Experimental.Data
                         MessageSet_MessageIteration.Key));
                     sw.WriteLine("|-");
 
-                    List<string> buildStrs = new();
-                    List<string> dialogStrs = new();
+                    List<string> buildStrs = [];
+                    List<string> dialogStrs = [];
 
                     foreach (var MessageIteration in MessageSet_MessageIteration.Value)
                     {
@@ -210,16 +204,13 @@ namespace Experimental.Data
 
             start = rom.Files.GetFileStart(tableStart);
 
-            if (start == null)
+            if (start.IsNull)
                 return;
 
-            using (StreamWriter fs = new($"{rom.Version}-{outFilename}.txt"))
-            using (BinaryReader file = new(rom.Files.GetFile(start.VRom)))
-            {
-                file.BaseStream.Position = start.GetRelativeAddress(tableStart);
-                DumpTable(rom, file, fs);
-            }
-
+            using StreamWriter fs = new($"{rom.Version}-{outFilename}.txt");
+            using BinaryReader file = new(rom.Files.GetFile(start.VRom));
+            file.BaseStream.Position = start.GetRelativeAddress(tableStart);
+            DumpTable(rom, file, fs);
         }
 
 

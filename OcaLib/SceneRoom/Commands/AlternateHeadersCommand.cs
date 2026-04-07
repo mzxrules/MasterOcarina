@@ -10,8 +10,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
     {
         Game Game { get; set; }
         public int DataEndOffset { get; set; }
-        public List<SceneHeader> Headers = new List<SceneHeader>();
-        public List<SegmentAddress> Offsets = new List<SegmentAddress>();
+        public List<SceneHeader> Headers = [];
+        public List<SegmentAddress> Offsets = [];
         public SegmentAddress SegmentAddress { get; set; }
 
         public AlternateHeadersCommand(Game game)
@@ -23,15 +23,15 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             base.SetCommand(command);
             SegmentAddress = Command.Data2;
-            if (command[4] != (byte)ORom.Bank.scene 
-                && command[4] != (byte)ORom.Bank.map)
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene 
+                && SegmentAddress.Segment != (byte)ORom.Bank.map)
                 throw new Exception();
         }
 
         public void Initialize(BinaryReader br)
         {
             int headerCount;
-            List<SegmentAddress> headerOffsets = new List<SegmentAddress>();
+            List<SegmentAddress> headerOffsets = [];
 
             //Get the number of headers
             headerCount = (DataEndOffset - SegmentAddress.Offset) / 4;
@@ -46,9 +46,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 headerOffsets.Add(br.ReadBigUInt32());
             }
-            
+
             //For every header
-            foreach (var segoff in headerOffsets)//int i = 0; i < headerCount; i++)
+            foreach (SegmentAddress segoff in headerOffsets)
             {
                 //Capture the Bank Number and offset to the headers
                 var segment = segoff.Segment;
@@ -90,7 +90,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         
         public override string ToString()
         {
-            return $"Alternate headers start at {SegmentAddress.Offset:X8}.";
+            return $"Alternate headers start at {SegmentAddress}.";
         }
     }
 }

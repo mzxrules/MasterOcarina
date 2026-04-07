@@ -25,7 +25,7 @@ namespace mzxrules.OcaLib.SceneRoom
             }
         }
 
-        List<SceneCommand> cmds = new List<SceneCommand>();
+        private readonly List<SceneCommand> cmds = [];
 
         public long Offset { get; private set; }
 
@@ -50,7 +50,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
             while (KeepReading)
             {
-                SceneWord command = new SceneWord();
+                SceneWord command = new();
                 br.Read(command, 0, 8);
 
                 SetCommand(command, br.BaseStream.Position - 8);
@@ -190,21 +190,23 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public void InitializeAssets(BinaryReader br)
         {
-            foreach (IDataCommand asset in cmds.Where(x => x is IDataCommand && !(x is AlternateHeadersCommand)))
+            foreach (IDataCommand asset in cmds.Where(
+                static x => x is IDataCommand && x is not AlternateHeadersCommand).Cast<IDataCommand>())
             {
-                if (asset is ExitListCommand)
+                switch (asset)
                 {
-                    ((ExitListCommand)asset).EndOffset = ExitListEnd();
-                }
-                else if (asset is EntranceDefinitionsCommand)
-                {
-                    var v = (ActorSpawnCommand)cmds.Single(x => x.Code == (int)HeaderCommands.PositionList);
-                    ((EntranceDefinitionsCommand)asset).Entrances = v.Actors;
-                }
-                if (asset is ActorSpawnCommand)
-                {
-
-                    //ActorList list = new ActorList(Game, )
+                    case ExitListCommand exitCmd:
+                        exitCmd.EndOffset = ExitListEnd();
+                        break;
+                    case EntranceDefinitionsCommand entranceCmd:
+                        {
+                            var v = (ActorSpawnCommand)cmds.Single(static x =>
+                                x.Code == (int)HeaderCommands.PositionList);
+                            entranceCmd.Entrances = v.Actors;
+                            break;
+                        }
+                    case ActorSpawnCommand:
+                        break;
                 }
                 asset.Initialize(br);
             }
@@ -212,7 +214,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public string Read()
         {
-            StringBuilder s = new StringBuilder();
+            StringBuilder s = new();
             HeaderCommands cmd;
 
             foreach (SceneCommand command in cmds)
@@ -270,7 +272,7 @@ namespace mzxrules.OcaLib.SceneRoom
         /// <returns>Returns a list of rooms if the RoomListCommand is found, else returns null</returns>
         public List<FileAddress> GetRoomAddresses()
         {
-            List<FileAddress> resultAddresses = new List<FileAddress>();
+            List<FileAddress> resultAddresses = [];
             RoomListCommand cmd;
 
             cmd = (RoomListCommand)this[HeaderCommands.RoomList];
@@ -311,14 +313,9 @@ namespace mzxrules.OcaLib.SceneRoom
         #region GetActors
         public List<List<ActorSpawn>> GetActorsWithId(int id)
         {
-            AlternateHeadersCommand altCmd;
-            List<List<ActorSpawn>> result;
+            List<List<ActorSpawn>> result = [GetActorsById(id)];
+            AlternateHeadersCommand altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
 
-            result = new List<List<ActorSpawn>>
-            {
-                GetActorsById(id)
-            };
-            altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {
                 for (int i = 0; i < altCmd.Headers.Count; i++)
@@ -326,7 +323,7 @@ namespace mzxrules.OcaLib.SceneRoom
                     if (altCmd.Headers[i] != null)
                         result.Add(altCmd.Headers[i].GetActorsById(id));
                     else
-                        result.Add(new List<ActorSpawn>());
+                        result.Add([]);
                 }
             }
             return result;
@@ -334,8 +331,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private List<ActorSpawn> GetActorsById(int id)
         {
-            List<ActorSpawn> result;
-            result = new List<ActorSpawn>();
+            List<ActorSpawn> result = [];
             IEnumerable<SceneCommand> cmdQuery;
 
             //Linq query
@@ -358,14 +354,9 @@ namespace mzxrules.OcaLib.SceneRoom
         #region GetObjects
         public List<List<ushort>> GetObjectsWithId(int id)
         {
-            AlternateHeadersCommand altCmd;
-            List<List<ushort>> result;
+            List<List<ushort>> result = [GetObjectsById(id)];
+            AlternateHeadersCommand altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
 
-            result = new List<List<ushort>>
-            {
-                GetObjectsById(id)
-            };
-            altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {
                 for (int i = 0; i < altCmd.Headers.Count; i++)
@@ -373,7 +364,7 @@ namespace mzxrules.OcaLib.SceneRoom
                     if (altCmd.Headers[i] != null)
                         result.Add(altCmd.Headers[i].GetObjectsById(id));
                     else
-                        result.Add(new List<ushort>());
+                        result.Add([]);
                 }
             }
             return result;
@@ -381,15 +372,14 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private List<ushort> GetObjectsById(int id)
         {
-            List<ushort> result;
+            List<ushort> result = [];
             IEnumerable<SceneCommand> cmdQuery;
 
-            result = new List<ushort>();
             cmdQuery = from cmd in cmds
                        where cmd is ObjectListCommand
                        select cmd;
 
-            foreach (ObjectListCommand objectList in cmdQuery)
+            foreach (ObjectListCommand objectList in cmdQuery.Cast<ObjectListCommand>())
             {
                 if (id == -1)
                     result.AddRange(objectList.ObjectList);
@@ -402,11 +392,9 @@ namespace mzxrules.OcaLib.SceneRoom
 
         internal List<SceneCommand> GetCommandWithId(int id)
         {
-            List<SceneCommand> current;
-            SceneCommand cmd;
-            current = new List<SceneCommand>();
+            List<SceneCommand> current = [];
+            SceneCommand cmd = cmds.SingleOrDefault(x => x.Code == id);
 
-            cmd = this.cmds.SingleOrDefault(x => x.Code == id);
             if (cmd != null)
                 current.Add(cmd);
 
@@ -416,18 +404,20 @@ namespace mzxrules.OcaLib.SceneRoom
 
         internal List<List<SceneCommand>> GetAllCommandsWithId(int id)
         {
-            List<List<SceneCommand>> result = new List<List<SceneCommand>>
-            {
-                GetCommandWithId(id)
-            };
+            List<List<SceneCommand>> result = [GetCommandWithId(id)];
+
             if (HasAlternateHeaders())
             {
                 foreach (SceneHeader h in Alternate.Headers)
                 {
                     if (h == null)
-                        result.Add(new List<SceneCommand>());
+                    {
+                        result.Add([]);
+                    }
                     else
+                    {
                         result.Add(h.GetCommandWithId(id));
+                    }
                 }
             }
             return result;

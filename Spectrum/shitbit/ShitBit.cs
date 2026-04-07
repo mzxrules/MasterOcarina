@@ -100,7 +100,7 @@ namespace Spectrum
 
         static Bitmap CreateRGBA(byte[] data, int width, int height)
         {
-            Bitmap image = new Bitmap(width, height);
+            Bitmap image = new(width, height);
 
             for (int h = 0; h < height; h++)
             {
@@ -120,7 +120,7 @@ namespace Spectrum
 
         static Bitmap CreateRGB5A1(byte[] data, int width, int height)
         {
-            Bitmap image = new Bitmap(width, height);
+            Bitmap image = new(width, height);
 
             for (int h = 0; h < height; h++)
             {
@@ -141,7 +141,7 @@ namespace Spectrum
 
         static Bitmap CreateIA8(byte[] data, int width, int height)
         {
-            Bitmap image = new Bitmap(width, height);
+            Bitmap image = new(width, height);
 
             for (int h = 0; h < height; h++)
             {
@@ -171,13 +171,13 @@ namespace Spectrum
 
             void _draw_loop()
             {
-                Point location = new Point(0, 2);
+                Point location = new(0, 2);
 
                 Size fontSize = NativeMethods.GetConsoleFontSize();
-                Size imageSize = new Size(info.Width * info.Scale, info.Height * info.Scale); // desired image size
+                Size imageSize = new(info.Width * info.Scale, info.Height * info.Scale); // desired image size
 
                 // translate character positions to pixels
-                Rectangle imageRect = new Rectangle(
+                Rectangle imageRect = new(
                         location.X * fontSize.Width,
                         location.Y * fontSize.Height,
                         imageSize.Width,

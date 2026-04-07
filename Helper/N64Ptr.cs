@@ -1,108 +1,49 @@
 ﻿using System;
 namespace mzxrules.Helper
 {
-    public struct N64Ptr : IEquatable<N64Ptr>, IComparable<N64Ptr>
+    public readonly record struct N64Ptr(long Value) : IEquatable<N64Ptr>, IComparable<N64Ptr>
     {
-        private readonly long value;
+        private readonly long Value = (Value << 32) >> 32;
 
-        public byte Segment => (byte)(value >> 24);
+        public readonly byte Segment => (byte)(Value >> 24);
 
-        public int Offset => (int)(value & 0xFFFFFF);
+        public readonly int Offset => (int)(Value & 0xFFFFFF);
 
-        public N64Ptr(long ptr)
+        public static implicit operator N64Ptr(int ptr) => new(ptr);
+
+        public static implicit operator N64Ptr(uint ptr) => new(ptr);
+
+        public static implicit operator N64Ptr(long ptr) => new(ptr);
+
+        public static explicit operator uint(N64Ptr ptr) => (uint)ptr.Value;
+
+        public static implicit operator int(N64Ptr ptr) => (int)ptr.Value;
+
+        public override readonly string ToString() => $"{(int)Value:X8}";
+
+        public static bool operator <(N64Ptr left, N64Ptr right) => left.CompareTo(right) < 0;
+
+        public static bool operator <=(N64Ptr left, N64Ptr right) => left.CompareTo(right) <= 0;
+
+        public static bool operator >(N64Ptr left, N64Ptr right) => left.CompareTo(right) > 0;
+
+        public static bool operator >=(N64Ptr left, N64Ptr right) => left.CompareTo(right) >= 0;
+
+        public readonly int CompareTo(N64Ptr other)
         {
-            value = (ptr << 32) >> 32;
-        }
-        
-        public static implicit operator N64Ptr(int ptr)
-        {
-            return new N64Ptr(ptr);
-        }
-
-        public static implicit operator N64Ptr(uint ptr)
-        {
-            return new N64Ptr(ptr);
-        }
-
-        public static implicit operator N64Ptr(long ptr)
-        {
-            return new N64Ptr(ptr);
-        }
-
-        public static explicit operator uint(N64Ptr ptr)
-        {
-            return (uint)ptr.value;
-        }
-
-        public static implicit operator int(N64Ptr ptr)
-        {
-            return (int)ptr.value;
+            return ((uint)Value).CompareTo((uint)other.Value);
         }
 
-        public static bool operator ==(N64Ptr a, N64Ptr b)
+        public readonly bool IsNull() => Value == 0;
+
+        public readonly bool IsInRDRAM()
         {
-            return a.value == b.value;
+            return !IsNull() && (uint)(Value & 0x7FFF_FFFF) < 0x80_0000;
         }
 
-        public static bool operator != (N64Ptr a, N64Ptr b)
+        public readonly bool IsEqualRam(N64Ptr right)
         {
-            return !(a == b);
-        }
-
-        public static bool operator > (N64Ptr a, N64Ptr b)
-        {
-            return a.CompareTo(b) == 1;
-        }
-
-        public static bool operator < (N64Ptr a, N64Ptr b)
-        {
-            return a.CompareTo(b) == -1;
-        }
-
-        public static bool operator >= (N64Ptr a, N64Ptr b)
-        {
-            return a.CompareTo(b) >= 0;
-        }
-
-        public static bool operator <= (N64Ptr a, N64Ptr b)
-        {
-            return a.CompareTo(b) <= 0;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is N64Ptr && this == (N64Ptr)obj;
-        }
-
-        public override int GetHashCode()
-        {
-            return value.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return $"{(int)value:X8}";
-        }
-
-        public bool Equals(N64Ptr other)
-        {
-            return value == other.value;
-        }
-
-        public int CompareTo(N64Ptr other)
-        {
-            return ((uint)value).CompareTo((uint)other.value);
-        }
-
-        public bool IsNull()
-        {
-            return value == 0;
-        }
-
-        public bool IsInRDRAM()
-        {
-            uint value = (uint)(this.value & 0x7FFF_FFFF);
-            return !IsNull() && value < 0x80_0000;
+            return (uint)(Value & 0x7FFF_FFFF) == (uint)(right & 0x7FFF_FFFF);
         }
     }
 }

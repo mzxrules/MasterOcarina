@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
     public partial class RumbleCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
-        List<RumbleCommandEntry> Entries = new();
+        public readonly List<RumbleCommandEntry> Entries = [];
 
         public IEnumerable<IFrameData> IFrameDataEnum => GetIFrameDataEnumerator();
         

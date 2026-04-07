@@ -13,7 +13,10 @@ namespace VerboseOcarina
 {
     public partial class VersionSelector : Form
     {
+        [DefaultValue(Game.OcarinaOfTime)]
         public Game Game { get; set; }
+
+        [DefaultValue(ORom.Build.UNKNOWN)]
         public RomVersion Version { get; set; } = ORom.Build.UNKNOWN;
 
         public VersionSelector()

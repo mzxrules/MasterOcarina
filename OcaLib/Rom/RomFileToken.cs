@@ -48,12 +48,12 @@
 
         public override string ToString()
         {
-            switch (Game)
+            return Game switch
             {
-                case Game.OcarinaOfTime: return OFile.ToString();
-                case Game.MajorasMask: return MFile.ToString();
-                default: return base.ToString();
-            }
+                Game.OcarinaOfTime => OFile.ToString(),
+                Game.MajorasMask => MFile.ToString(),
+                _ => base.ToString(),
+            };
         }
     }
 }

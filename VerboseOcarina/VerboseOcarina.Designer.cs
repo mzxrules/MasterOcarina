@@ -28,547 +28,584 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numberTextBox = new System.Windows.Forms.TextBox();
-            this.outputRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.fetchButton = new System.Windows.Forms.Button();
-            this.fetchAllButton = new System.Windows.Forms.Button();
-            this.sceneRadioButton = new System.Windows.Forms.RadioButton();
-            this.actorRadioButton = new System.Windows.Forms.RadioButton();
-            this.commandRadioButton = new System.Windows.Forms.RadioButton();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tChnRadioButton = new System.Windows.Forms.RadioButton();
-            this.chnRadioButton = new System.Windows.Forms.RadioButton();
-            this.customMMRadioButton = new System.Windows.Forms.RadioButton();
-            this.mJ10RadioButton = new System.Windows.Forms.RadioButton();
-            this.mU10RadioButton = new System.Windows.Forms.RadioButton();
-            this.mqpRadioButton = new System.Windows.Forms.RadioButton();
-            this.gcnpRadioButton = new System.Windows.Forms.RadioButton();
-            this.gcnjRadioButton = new System.Windows.Forms.RadioButton();
-            this.v11PRadioButton = new System.Windows.Forms.RadioButton();
-            this.v10PRadioButton = new System.Windows.Forms.RadioButton();
-            this.mqjRadioButton = new System.Windows.Forms.RadioButton();
-            this.v11RadioButton = new System.Windows.Forms.RadioButton();
-            this.customOoTRadioButton = new System.Windows.Forms.RadioButton();
-            this.dbgRadioButton = new System.Windows.Forms.RadioButton();
-            this.v12RadioButton = new System.Windows.Forms.RadioButton();
-            this.v10RadioButton = new System.Windows.Forms.RadioButton();
-            this.cutsceneRadioButton = new System.Windows.Forms.RadioButton();
-            this.textRadioButton = new System.Windows.Forms.RadioButton();
-            this.objectRadioButton = new System.Windows.Forms.RadioButton();
-            this.evalButton = new System.Windows.Forms.Button();
-            this.settingsButton = new System.Windows.Forms.Button();
-            this.mJ11RadioButton = new System.Windows.Forms.RadioButton();
-            this.mP10RadioButton = new System.Windows.Forms.RadioButton();
-            this.mP11RadioButton = new System.Windows.Forms.RadioButton();
-            this.mGCJRadioButton = new System.Windows.Forms.RadioButton();
-            this.mGCPRadioButton = new System.Windows.Forms.RadioButton();
-            this.mGCURadioButton = new System.Windows.Forms.RadioButton();
-            this.mDBGRadioButton = new System.Windows.Forms.RadioButton();
-            this.gcnuRadioButton = new System.Windows.Forms.RadioButton();
-            this.mquRadioButton = new System.Windows.Forms.RadioButton();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            numberTextBox = new System.Windows.Forms.TextBox();
+            outputRichTextBox = new System.Windows.Forms.RichTextBox();
+            fetchButton = new System.Windows.Forms.Button();
+            fetchAllButton = new System.Windows.Forms.Button();
+            sceneRadioButton = new System.Windows.Forms.RadioButton();
+            actorRadioButton = new System.Windows.Forms.RadioButton();
+            commandRadioButton = new System.Windows.Forms.RadioButton();
+            openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            panel1 = new System.Windows.Forms.Panel();
+            mquRadioButton = new System.Windows.Forms.RadioButton();
+            gcnuRadioButton = new System.Windows.Forms.RadioButton();
+            mDBGRadioButton = new System.Windows.Forms.RadioButton();
+            mGCURadioButton = new System.Windows.Forms.RadioButton();
+            mGCPRadioButton = new System.Windows.Forms.RadioButton();
+            mGCJRadioButton = new System.Windows.Forms.RadioButton();
+            mP11RadioButton = new System.Windows.Forms.RadioButton();
+            mP10RadioButton = new System.Windows.Forms.RadioButton();
+            mJ11RadioButton = new System.Windows.Forms.RadioButton();
+            tChnRadioButton = new System.Windows.Forms.RadioButton();
+            chnRadioButton = new System.Windows.Forms.RadioButton();
+            customMMRadioButton = new System.Windows.Forms.RadioButton();
+            mJ10RadioButton = new System.Windows.Forms.RadioButton();
+            mU10RadioButton = new System.Windows.Forms.RadioButton();
+            mqpRadioButton = new System.Windows.Forms.RadioButton();
+            gcnpRadioButton = new System.Windows.Forms.RadioButton();
+            gcnjRadioButton = new System.Windows.Forms.RadioButton();
+            v11PRadioButton = new System.Windows.Forms.RadioButton();
+            v10PRadioButton = new System.Windows.Forms.RadioButton();
+            mqjRadioButton = new System.Windows.Forms.RadioButton();
+            v11RadioButton = new System.Windows.Forms.RadioButton();
+            customOoTRadioButton = new System.Windows.Forms.RadioButton();
+            dbgRadioButton = new System.Windows.Forms.RadioButton();
+            v12RadioButton = new System.Windows.Forms.RadioButton();
+            v10RadioButton = new System.Windows.Forms.RadioButton();
+            cutsceneRadioButton = new System.Windows.Forms.RadioButton();
+            textRadioButton = new System.Windows.Forms.RadioButton();
+            objectRadioButton = new System.Windows.Forms.RadioButton();
+            evalButton = new System.Windows.Forms.Button();
+            settingsButton = new System.Windows.Forms.Button();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // numberTextBox
             // 
-            this.numberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numberTextBox.Location = new System.Drawing.Point(508, 458);
-            this.numberTextBox.Name = "numberTextBox";
-            this.numberTextBox.Size = new System.Drawing.Size(89, 20);
-            this.numberTextBox.TabIndex = 8;
+            numberTextBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            numberTextBox.Location = new System.Drawing.Point(593, 528);
+            numberTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            numberTextBox.Name = "numberTextBox";
+            numberTextBox.Size = new System.Drawing.Size(103, 23);
+            numberTextBox.TabIndex = 8;
             // 
             // outputRichTextBox
             // 
-            this.outputRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputRichTextBox.Location = new System.Drawing.Point(15, 11);
-            this.outputRichTextBox.Name = "outputRichTextBox";
-            this.outputRichTextBox.Size = new System.Drawing.Size(785, 388);
-            this.outputRichTextBox.TabIndex = 0;
-            this.outputRichTextBox.Text = "";
+            outputRichTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            outputRichTextBox.Location = new System.Drawing.Point(18, 13);
+            outputRichTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            outputRichTextBox.Name = "outputRichTextBox";
+            outputRichTextBox.Size = new System.Drawing.Size(915, 447);
+            outputRichTextBox.TabIndex = 0;
+            outputRichTextBox.Text = "";
             // 
             // fetchButton
             // 
-            this.fetchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fetchButton.Location = new System.Drawing.Point(602, 456);
-            this.fetchButton.Name = "fetchButton";
-            this.fetchButton.Size = new System.Drawing.Size(61, 23);
-            this.fetchButton.TabIndex = 9;
-            this.fetchButton.Text = "Fetch";
-            this.fetchButton.UseVisualStyleBackColor = true;
-            this.fetchButton.Click += new System.EventHandler(this.fetchButton_Click);
+            fetchButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            fetchButton.Location = new System.Drawing.Point(702, 526);
+            fetchButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            fetchButton.Name = "fetchButton";
+            fetchButton.Size = new System.Drawing.Size(71, 27);
+            fetchButton.TabIndex = 9;
+            fetchButton.Text = "Fetch";
+            fetchButton.UseVisualStyleBackColor = true;
+            fetchButton.Click += fetchButton_Click;
             // 
             // fetchAllButton
             // 
-            this.fetchAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fetchAllButton.Location = new System.Drawing.Point(668, 456);
-            this.fetchAllButton.Name = "fetchAllButton";
-            this.fetchAllButton.Size = new System.Drawing.Size(61, 23);
-            this.fetchAllButton.TabIndex = 10;
-            this.fetchAllButton.Text = "Fetch All";
-            this.fetchAllButton.UseVisualStyleBackColor = true;
-            this.fetchAllButton.Click += new System.EventHandler(this.fetchAllButton_Click);
+            fetchAllButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            fetchAllButton.Location = new System.Drawing.Point(779, 526);
+            fetchAllButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            fetchAllButton.Name = "fetchAllButton";
+            fetchAllButton.Size = new System.Drawing.Size(71, 27);
+            fetchAllButton.TabIndex = 10;
+            fetchAllButton.Text = "Fetch All";
+            fetchAllButton.UseVisualStyleBackColor = true;
+            fetchAllButton.Click += fetchAllButton_Click;
             // 
             // sceneRadioButton
             // 
-            this.sceneRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.sceneRadioButton.AutoSize = true;
-            this.sceneRadioButton.Checked = true;
-            this.sceneRadioButton.Location = new System.Drawing.Point(15, 459);
-            this.sceneRadioButton.Name = "sceneRadioButton";
-            this.sceneRadioButton.Size = new System.Drawing.Size(54, 17);
-            this.sceneRadioButton.TabIndex = 2;
-            this.sceneRadioButton.TabStop = true;
-            this.sceneRadioButton.Text = "scene";
-            this.sceneRadioButton.UseVisualStyleBackColor = true;
+            sceneRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            sceneRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            sceneRadioButton.AutoSize = true;
+            sceneRadioButton.Checked = true;
+            sceneRadioButton.Location = new System.Drawing.Point(18, 526);
+            sceneRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sceneRadioButton.Name = "sceneRadioButton";
+            sceneRadioButton.Size = new System.Drawing.Size(47, 25);
+            sceneRadioButton.TabIndex = 2;
+            sceneRadioButton.TabStop = true;
+            sceneRadioButton.Text = "scene";
+            sceneRadioButton.UseVisualStyleBackColor = true;
             // 
             // actorRadioButton
             // 
-            this.actorRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.actorRadioButton.AutoSize = true;
-            this.actorRadioButton.Location = new System.Drawing.Point(123, 459);
-            this.actorRadioButton.Name = "actorRadioButton";
-            this.actorRadioButton.Size = new System.Drawing.Size(49, 17);
-            this.actorRadioButton.TabIndex = 4;
-            this.actorRadioButton.Text = "actor";
-            this.actorRadioButton.UseVisualStyleBackColor = true;
+            actorRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            actorRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            actorRadioButton.AutoSize = true;
+            actorRadioButton.Location = new System.Drawing.Point(122, 526);
+            actorRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            actorRadioButton.Name = "actorRadioButton";
+            actorRadioButton.Size = new System.Drawing.Size(44, 25);
+            actorRadioButton.TabIndex = 4;
+            actorRadioButton.Text = "actor";
+            actorRadioButton.UseVisualStyleBackColor = true;
             // 
             // commandRadioButton
             // 
-            this.commandRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.commandRadioButton.AutoSize = true;
-            this.commandRadioButton.Location = new System.Drawing.Point(72, 459);
-            this.commandRadioButton.Name = "commandRadioButton";
-            this.commandRadioButton.Size = new System.Drawing.Size(45, 17);
-            this.commandRadioButton.TabIndex = 3;
-            this.commandRadioButton.Text = "cmd";
-            this.commandRadioButton.UseVisualStyleBackColor = true;
+            commandRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            commandRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            commandRadioButton.AutoSize = true;
+            commandRadioButton.Location = new System.Drawing.Point(73, 526);
+            commandRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            commandRadioButton.Name = "commandRadioButton";
+            commandRadioButton.Size = new System.Drawing.Size(41, 25);
+            commandRadioButton.TabIndex = 3;
+            commandRadioButton.Text = "cmd";
+            commandRadioButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.mquRadioButton);
-            this.panel1.Controls.Add(this.gcnuRadioButton);
-            this.panel1.Controls.Add(this.mDBGRadioButton);
-            this.panel1.Controls.Add(this.mGCURadioButton);
-            this.panel1.Controls.Add(this.mGCPRadioButton);
-            this.panel1.Controls.Add(this.mGCJRadioButton);
-            this.panel1.Controls.Add(this.mP11RadioButton);
-            this.panel1.Controls.Add(this.mP10RadioButton);
-            this.panel1.Controls.Add(this.mJ11RadioButton);
-            this.panel1.Controls.Add(this.tChnRadioButton);
-            this.panel1.Controls.Add(this.chnRadioButton);
-            this.panel1.Controls.Add(this.customMMRadioButton);
-            this.panel1.Controls.Add(this.mJ10RadioButton);
-            this.panel1.Controls.Add(this.mU10RadioButton);
-            this.panel1.Controls.Add(this.mqpRadioButton);
-            this.panel1.Controls.Add(this.gcnpRadioButton);
-            this.panel1.Controls.Add(this.gcnjRadioButton);
-            this.panel1.Controls.Add(this.v11PRadioButton);
-            this.panel1.Controls.Add(this.v10PRadioButton);
-            this.panel1.Controls.Add(this.mqjRadioButton);
-            this.panel1.Controls.Add(this.v11RadioButton);
-            this.panel1.Controls.Add(this.customOoTRadioButton);
-            this.panel1.Controls.Add(this.dbgRadioButton);
-            this.panel1.Controls.Add(this.v12RadioButton);
-            this.panel1.Controls.Add(this.v10RadioButton);
-            this.panel1.Location = new System.Drawing.Point(12, 405);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(788, 46);
-            this.panel1.TabIndex = 1;
-            // 
-            // tChnRadioButton
-            // 
-            this.tChnRadioButton.AutoSize = true;
-            this.tChnRadioButton.Location = new System.Drawing.Point(671, 3);
-            this.tChnRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tChnRadioButton.Name = "tChnRadioButton";
-            this.tChnRadioButton.Size = new System.Drawing.Size(51, 17);
-            this.tChnRadioButton.TabIndex = 13;
-            this.tChnRadioButton.TabStop = true;
-            this.tChnRadioButton.Text = "TChn";
-            this.tChnRadioButton.UseVisualStyleBackColor = true;
-            this.tChnRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // chnRadioButton
-            // 
-            this.chnRadioButton.AutoSize = true;
-            this.chnRadioButton.Location = new System.Drawing.Point(623, 3);
-            this.chnRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chnRadioButton.Name = "chnRadioButton";
-            this.chnRadioButton.Size = new System.Drawing.Size(44, 17);
-            this.chnRadioButton.TabIndex = 12;
-            this.chnRadioButton.TabStop = true;
-            this.chnRadioButton.Text = "Chn";
-            this.chnRadioButton.UseVisualStyleBackColor = true;
-            this.chnRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // customMMRadioButton
-            // 
-            this.customMMRadioButton.AutoSize = true;
-            this.customMMRadioButton.Location = new System.Drawing.Point(459, 26);
-            this.customMMRadioButton.Name = "customMMRadioButton";
-            this.customMMRadioButton.Size = new System.Drawing.Size(60, 17);
-            this.customMMRadioButton.TabIndex = 24;
-            this.customMMRadioButton.TabStop = true;
-            this.customMMRadioButton.Text = "Custom";
-            this.customMMRadioButton.UseVisualStyleBackColor = true;
-            this.customMMRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mJ10RadioButton
-            // 
-            this.mJ10RadioButton.AutoSize = true;
-            this.mJ10RadioButton.Location = new System.Drawing.Point(3, 26);
-            this.mJ10RadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.mJ10RadioButton.Name = "mJ10RadioButton";
-            this.mJ10RadioButton.Size = new System.Drawing.Size(45, 17);
-            this.mJ10RadioButton.TabIndex = 15;
-            this.mJ10RadioButton.TabStop = true;
-            this.mJ10RadioButton.Text = "1.0J";
-            this.mJ10RadioButton.UseVisualStyleBackColor = true;
-            this.mJ10RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mU10RadioButton
-            // 
-            this.mU10RadioButton.AutoSize = true;
-            this.mU10RadioButton.Location = new System.Drawing.Point(108, 26);
-            this.mU10RadioButton.Name = "mU10RadioButton";
-            this.mU10RadioButton.Size = new System.Drawing.Size(48, 17);
-            this.mU10RadioButton.TabIndex = 17;
-            this.mU10RadioButton.TabStop = true;
-            this.mU10RadioButton.Text = "1.0U";
-            this.mU10RadioButton.UseVisualStyleBackColor = true;
-            this.mU10RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mqpRadioButton
-            // 
-            this.mqpRadioButton.AutoSize = true;
-            this.mqpRadioButton.Location = new System.Drawing.Point(515, 3);
-            this.mqpRadioButton.Name = "mqpRadioButton";
-            this.mqpRadioButton.Size = new System.Drawing.Size(49, 17);
-            this.mqpRadioButton.TabIndex = 10;
-            this.mqpRadioButton.TabStop = true;
-            this.mqpRadioButton.Text = "MQP";
-            this.mqpRadioButton.UseVisualStyleBackColor = true;
-            this.mqpRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // gcnpRadioButton
-            // 
-            this.gcnpRadioButton.AutoSize = true;
-            this.gcnpRadioButton.Location = new System.Drawing.Point(359, 3);
-            this.gcnpRadioButton.Name = "gcnpRadioButton";
-            this.gcnpRadioButton.Size = new System.Drawing.Size(40, 17);
-            this.gcnpRadioButton.TabIndex = 7;
-            this.gcnpRadioButton.TabStop = true;
-            this.gcnpRadioButton.Text = "GP";
-            this.gcnpRadioButton.UseVisualStyleBackColor = true;
-            this.gcnpRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // gcnjRadioButton
-            // 
-            this.gcnjRadioButton.AutoSize = true;
-            this.gcnjRadioButton.Location = new System.Drawing.Point(268, 3);
-            this.gcnjRadioButton.Name = "gcnjRadioButton";
-            this.gcnjRadioButton.Size = new System.Drawing.Size(38, 17);
-            this.gcnjRadioButton.TabIndex = 5;
-            this.gcnjRadioButton.TabStop = true;
-            this.gcnjRadioButton.Text = "GJ";
-            this.gcnjRadioButton.UseVisualStyleBackColor = true;
-            this.gcnjRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // v11PRadioButton
-            // 
-            this.v11PRadioButton.AutoSize = true;
-            this.v11PRadioButton.Location = new System.Drawing.Point(215, 3);
-            this.v11PRadioButton.Name = "v11PRadioButton";
-            this.v11PRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.v11PRadioButton.TabIndex = 4;
-            this.v11PRadioButton.TabStop = true;
-            this.v11PRadioButton.Text = "1.1P";
-            this.v11PRadioButton.UseVisualStyleBackColor = true;
-            this.v11PRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // v10PRadioButton
-            // 
-            this.v10PRadioButton.AutoSize = true;
-            this.v10PRadioButton.Location = new System.Drawing.Point(162, 3);
-            this.v10PRadioButton.Name = "v10PRadioButton";
-            this.v10PRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.v10PRadioButton.TabIndex = 3;
-            this.v10PRadioButton.TabStop = true;
-            this.v10PRadioButton.Text = "1.0P";
-            this.v10PRadioButton.UseVisualStyleBackColor = true;
-            this.v10PRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mqjRadioButton
-            // 
-            this.mqjRadioButton.AutoSize = true;
-            this.mqjRadioButton.Location = new System.Drawing.Point(405, 3);
-            this.mqjRadioButton.Name = "mqjRadioButton";
-            this.mqjRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.mqjRadioButton.TabIndex = 8;
-            this.mqjRadioButton.TabStop = true;
-            this.mqjRadioButton.Text = "MQJ";
-            this.mqjRadioButton.UseVisualStyleBackColor = true;
-            this.mqjRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // v11RadioButton
-            // 
-            this.v11RadioButton.AutoSize = true;
-            this.v11RadioButton.Location = new System.Drawing.Point(54, 3);
-            this.v11RadioButton.Name = "v11RadioButton";
-            this.v11RadioButton.Size = new System.Drawing.Size(48, 17);
-            this.v11RadioButton.TabIndex = 1;
-            this.v11RadioButton.TabStop = true;
-            this.v11RadioButton.Text = "1.1N";
-            this.v11RadioButton.UseVisualStyleBackColor = true;
-            this.v11RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // customOoTRadioButton
-            // 
-            this.customOoTRadioButton.AutoSize = true;
-            this.customOoTRadioButton.Location = new System.Drawing.Point(727, 3);
-            this.customOoTRadioButton.Name = "customOoTRadioButton";
-            this.customOoTRadioButton.Size = new System.Drawing.Size(60, 17);
-            this.customOoTRadioButton.TabIndex = 14;
-            this.customOoTRadioButton.TabStop = true;
-            this.customOoTRadioButton.Text = "Custom";
-            this.customOoTRadioButton.UseVisualStyleBackColor = true;
-            this.customOoTRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // dbgRadioButton
-            // 
-            this.dbgRadioButton.AutoSize = true;
-            this.dbgRadioButton.Location = new System.Drawing.Point(570, 3);
-            this.dbgRadioButton.Name = "dbgRadioButton";
-            this.dbgRadioButton.Size = new System.Drawing.Size(48, 17);
-            this.dbgRadioButton.TabIndex = 11;
-            this.dbgRadioButton.TabStop = true;
-            this.dbgRadioButton.Text = "DBG";
-            this.dbgRadioButton.UseVisualStyleBackColor = true;
-            this.dbgRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // v12RadioButton
-            // 
-            this.v12RadioButton.AutoSize = true;
-            this.v12RadioButton.Location = new System.Drawing.Point(108, 3);
-            this.v12RadioButton.Name = "v12RadioButton";
-            this.v12RadioButton.Size = new System.Drawing.Size(48, 17);
-            this.v12RadioButton.TabIndex = 2;
-            this.v12RadioButton.TabStop = true;
-            this.v12RadioButton.Text = "1.2N";
-            this.v12RadioButton.UseVisualStyleBackColor = true;
-            this.v12RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // v10RadioButton
-            // 
-            this.v10RadioButton.AutoSize = true;
-            this.v10RadioButton.Checked = true;
-            this.v10RadioButton.Location = new System.Drawing.Point(3, 3);
-            this.v10RadioButton.Name = "v10RadioButton";
-            this.v10RadioButton.Size = new System.Drawing.Size(48, 17);
-            this.v10RadioButton.TabIndex = 0;
-            this.v10RadioButton.TabStop = true;
-            this.v10RadioButton.Text = "1.0N";
-            this.v10RadioButton.UseVisualStyleBackColor = true;
-            this.v10RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // cutsceneRadioButton
-            // 
-            this.cutsceneRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cutsceneRadioButton.AutoSize = true;
-            this.cutsceneRadioButton.Location = new System.Drawing.Point(238, 459);
-            this.cutsceneRadioButton.Name = "cutsceneRadioButton";
-            this.cutsceneRadioButton.Size = new System.Drawing.Size(69, 17);
-            this.cutsceneRadioButton.TabIndex = 6;
-            this.cutsceneRadioButton.TabStop = true;
-            this.cutsceneRadioButton.Text = "cutscene";
-            this.cutsceneRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // textRadioButton
-            // 
-            this.textRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textRadioButton.AutoSize = true;
-            this.textRadioButton.Location = new System.Drawing.Point(313, 459);
-            this.textRadioButton.Name = "textRadioButton";
-            this.textRadioButton.Size = new System.Drawing.Size(42, 17);
-            this.textRadioButton.TabIndex = 7;
-            this.textRadioButton.TabStop = true;
-            this.textRadioButton.Text = "text";
-            this.textRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // objectRadioButton
-            // 
-            this.objectRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.objectRadioButton.AutoSize = true;
-            this.objectRadioButton.Location = new System.Drawing.Point(178, 459);
-            this.objectRadioButton.Name = "objectRadioButton";
-            this.objectRadioButton.Size = new System.Drawing.Size(54, 17);
-            this.objectRadioButton.TabIndex = 5;
-            this.objectRadioButton.TabStop = true;
-            this.objectRadioButton.Text = "object";
-            this.objectRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // evalButton
-            // 
-            this.evalButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.evalButton.Location = new System.Drawing.Point(734, 456);
-            this.evalButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.evalButton.Name = "evalButton";
-            this.evalButton.Size = new System.Drawing.Size(56, 23);
-            this.evalButton.TabIndex = 11;
-            this.evalButton.Text = "Eval";
-            this.evalButton.UseVisualStyleBackColor = true;
-            this.evalButton.Click += new System.EventHandler(this.evalButton_Click);
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsButton.Location = new System.Drawing.Point(794, 457);
-            this.settingsButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(8, 22);
-            this.settingsButton.TabIndex = 12;
-            this.settingsButton.Text = "Settings";
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
-            // mJ11RadioButton
-            // 
-            this.mJ11RadioButton.AutoSize = true;
-            this.mJ11RadioButton.Location = new System.Drawing.Point(54, 26);
-            this.mJ11RadioButton.Name = "mJ11RadioButton";
-            this.mJ11RadioButton.Size = new System.Drawing.Size(45, 17);
-            this.mJ11RadioButton.TabIndex = 16;
-            this.mJ11RadioButton.TabStop = true;
-            this.mJ11RadioButton.Text = "1.1J";
-            this.mJ11RadioButton.UseVisualStyleBackColor = true;
-            this.mJ11RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mP10RadioButton
-            // 
-            this.mP10RadioButton.AutoSize = true;
-            this.mP10RadioButton.Location = new System.Drawing.Point(162, 26);
-            this.mP10RadioButton.Name = "mP10RadioButton";
-            this.mP10RadioButton.Size = new System.Drawing.Size(47, 17);
-            this.mP10RadioButton.TabIndex = 18;
-            this.mP10RadioButton.TabStop = true;
-            this.mP10RadioButton.Text = "1.0P";
-            this.mP10RadioButton.UseVisualStyleBackColor = true;
-            this.mP10RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mP11RadioButton
-            // 
-            this.mP11RadioButton.AutoSize = true;
-            this.mP11RadioButton.Location = new System.Drawing.Point(215, 26);
-            this.mP11RadioButton.Name = "mP11RadioButton";
-            this.mP11RadioButton.Size = new System.Drawing.Size(47, 17);
-            this.mP11RadioButton.TabIndex = 19;
-            this.mP11RadioButton.TabStop = true;
-            this.mP11RadioButton.Text = "1.1P";
-            this.mP11RadioButton.UseVisualStyleBackColor = true;
-            this.mP11RadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mGCJRadioButton
-            // 
-            this.mGCJRadioButton.AutoSize = true;
-            this.mGCJRadioButton.Location = new System.Drawing.Point(268, 26);
-            this.mGCJRadioButton.Name = "mGCJRadioButton";
-            this.mGCJRadioButton.Size = new System.Drawing.Size(38, 17);
-            this.mGCJRadioButton.TabIndex = 20;
-            this.mGCJRadioButton.TabStop = true;
-            this.mGCJRadioButton.Text = "GJ";
-            this.mGCJRadioButton.UseVisualStyleBackColor = true;
-            this.mGCJRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mGCPRadioButton
-            // 
-            this.mGCPRadioButton.AutoSize = true;
-            this.mGCPRadioButton.Location = new System.Drawing.Point(359, 26);
-            this.mGCPRadioButton.Name = "mGCPRadioButton";
-            this.mGCPRadioButton.Size = new System.Drawing.Size(40, 17);
-            this.mGCPRadioButton.TabIndex = 22;
-            this.mGCPRadioButton.TabStop = true;
-            this.mGCPRadioButton.Text = "GP";
-            this.mGCPRadioButton.UseVisualStyleBackColor = true;
-            this.mGCPRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mGCURadioButton
-            // 
-            this.mGCURadioButton.AutoSize = true;
-            this.mGCURadioButton.Location = new System.Drawing.Point(312, 26);
-            this.mGCURadioButton.Name = "mGCURadioButton";
-            this.mGCURadioButton.Size = new System.Drawing.Size(41, 17);
-            this.mGCURadioButton.TabIndex = 21;
-            this.mGCURadioButton.TabStop = true;
-            this.mGCURadioButton.Text = "GU";
-            this.mGCURadioButton.UseVisualStyleBackColor = true;
-            this.mGCURadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // mDBGRadioButton
-            // 
-            this.mDBGRadioButton.AutoSize = true;
-            this.mDBGRadioButton.Location = new System.Drawing.Point(405, 26);
-            this.mDBGRadioButton.Name = "mDBGRadioButton";
-            this.mDBGRadioButton.Size = new System.Drawing.Size(48, 17);
-            this.mDBGRadioButton.TabIndex = 23;
-            this.mDBGRadioButton.TabStop = true;
-            this.mDBGRadioButton.Text = "DBG";
-            this.mDBGRadioButton.UseVisualStyleBackColor = true;
-            this.mDBGRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
-            // 
-            // gcnuRadioButton
-            // 
-            this.gcnuRadioButton.AutoSize = true;
-            this.gcnuRadioButton.Location = new System.Drawing.Point(312, 3);
-            this.gcnuRadioButton.Name = "gcnuRadioButton";
-            this.gcnuRadioButton.Size = new System.Drawing.Size(41, 17);
-            this.gcnuRadioButton.TabIndex = 6;
-            this.gcnuRadioButton.TabStop = true;
-            this.gcnuRadioButton.Text = "GU";
-            this.gcnuRadioButton.UseVisualStyleBackColor = true;
-            this.gcnuRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Controls.Add(mquRadioButton);
+            panel1.Controls.Add(gcnuRadioButton);
+            panel1.Controls.Add(mDBGRadioButton);
+            panel1.Controls.Add(mGCURadioButton);
+            panel1.Controls.Add(mGCPRadioButton);
+            panel1.Controls.Add(mGCJRadioButton);
+            panel1.Controls.Add(mP11RadioButton);
+            panel1.Controls.Add(mP10RadioButton);
+            panel1.Controls.Add(mJ11RadioButton);
+            panel1.Controls.Add(tChnRadioButton);
+            panel1.Controls.Add(chnRadioButton);
+            panel1.Controls.Add(customMMRadioButton);
+            panel1.Controls.Add(mJ10RadioButton);
+            panel1.Controls.Add(mU10RadioButton);
+            panel1.Controls.Add(mqpRadioButton);
+            panel1.Controls.Add(gcnpRadioButton);
+            panel1.Controls.Add(gcnjRadioButton);
+            panel1.Controls.Add(v11PRadioButton);
+            panel1.Controls.Add(v10PRadioButton);
+            panel1.Controls.Add(mqjRadioButton);
+            panel1.Controls.Add(v11RadioButton);
+            panel1.Controls.Add(customOoTRadioButton);
+            panel1.Controls.Add(dbgRadioButton);
+            panel1.Controls.Add(v12RadioButton);
+            panel1.Controls.Add(v10RadioButton);
+            panel1.Location = new System.Drawing.Point(14, 467);
+            panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(919, 53);
+            panel1.TabIndex = 1;
             // 
             // mquRadioButton
             // 
-            this.mquRadioButton.AutoSize = true;
-            this.mquRadioButton.Location = new System.Drawing.Point(459, 3);
-            this.mquRadioButton.Name = "mquRadioButton";
-            this.mquRadioButton.Size = new System.Drawing.Size(50, 17);
-            this.mquRadioButton.TabIndex = 9;
-            this.mquRadioButton.TabStop = true;
-            this.mquRadioButton.Text = "MQU";
-            this.mquRadioButton.UseVisualStyleBackColor = true;
-            this.mquRadioButton.CheckedChanged += new System.EventHandler(this.versionRadioButton_CheckedChanged);
+            mquRadioButton.AutoSize = true;
+            mquRadioButton.Location = new System.Drawing.Point(536, 3);
+            mquRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mquRadioButton.Name = "mquRadioButton";
+            mquRadioButton.Size = new System.Drawing.Size(53, 19);
+            mquRadioButton.TabIndex = 9;
+            mquRadioButton.TabStop = true;
+            mquRadioButton.Text = "MQU";
+            mquRadioButton.UseVisualStyleBackColor = true;
+            mquRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // gcnuRadioButton
+            // 
+            gcnuRadioButton.AutoSize = true;
+            gcnuRadioButton.Location = new System.Drawing.Point(364, 3);
+            gcnuRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gcnuRadioButton.Name = "gcnuRadioButton";
+            gcnuRadioButton.Size = new System.Drawing.Size(41, 19);
+            gcnuRadioButton.TabIndex = 6;
+            gcnuRadioButton.TabStop = true;
+            gcnuRadioButton.Text = "GU";
+            gcnuRadioButton.UseVisualStyleBackColor = true;
+            gcnuRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mDBGRadioButton
+            // 
+            mDBGRadioButton.AutoSize = true;
+            mDBGRadioButton.Location = new System.Drawing.Point(472, 30);
+            mDBGRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mDBGRadioButton.Name = "mDBGRadioButton";
+            mDBGRadioButton.Size = new System.Drawing.Size(48, 19);
+            mDBGRadioButton.TabIndex = 23;
+            mDBGRadioButton.TabStop = true;
+            mDBGRadioButton.Text = "DBG";
+            mDBGRadioButton.UseVisualStyleBackColor = true;
+            mDBGRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mGCURadioButton
+            // 
+            mGCURadioButton.AutoSize = true;
+            mGCURadioButton.Location = new System.Drawing.Point(364, 30);
+            mGCURadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mGCURadioButton.Name = "mGCURadioButton";
+            mGCURadioButton.Size = new System.Drawing.Size(41, 19);
+            mGCURadioButton.TabIndex = 21;
+            mGCURadioButton.TabStop = true;
+            mGCURadioButton.Text = "GU";
+            mGCURadioButton.UseVisualStyleBackColor = true;
+            mGCURadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mGCPRadioButton
+            // 
+            mGCPRadioButton.AutoSize = true;
+            mGCPRadioButton.Location = new System.Drawing.Point(419, 30);
+            mGCPRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mGCPRadioButton.Name = "mGCPRadioButton";
+            mGCPRadioButton.Size = new System.Drawing.Size(40, 19);
+            mGCPRadioButton.TabIndex = 22;
+            mGCPRadioButton.TabStop = true;
+            mGCPRadioButton.Text = "GP";
+            mGCPRadioButton.UseVisualStyleBackColor = true;
+            mGCPRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mGCJRadioButton
+            // 
+            mGCJRadioButton.AutoSize = true;
+            mGCJRadioButton.Location = new System.Drawing.Point(313, 30);
+            mGCJRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mGCJRadioButton.Name = "mGCJRadioButton";
+            mGCJRadioButton.Size = new System.Drawing.Size(37, 19);
+            mGCJRadioButton.TabIndex = 20;
+            mGCJRadioButton.TabStop = true;
+            mGCJRadioButton.Text = "GJ";
+            mGCJRadioButton.UseVisualStyleBackColor = true;
+            mGCJRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mP11RadioButton
+            // 
+            mP11RadioButton.AutoSize = true;
+            mP11RadioButton.Location = new System.Drawing.Point(251, 30);
+            mP11RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mP11RadioButton.Name = "mP11RadioButton";
+            mP11RadioButton.Size = new System.Drawing.Size(47, 19);
+            mP11RadioButton.TabIndex = 19;
+            mP11RadioButton.TabStop = true;
+            mP11RadioButton.Text = "1.1P";
+            mP11RadioButton.UseVisualStyleBackColor = true;
+            mP11RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mP10RadioButton
+            // 
+            mP10RadioButton.AutoSize = true;
+            mP10RadioButton.Location = new System.Drawing.Point(189, 30);
+            mP10RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mP10RadioButton.Name = "mP10RadioButton";
+            mP10RadioButton.Size = new System.Drawing.Size(47, 19);
+            mP10RadioButton.TabIndex = 18;
+            mP10RadioButton.TabStop = true;
+            mP10RadioButton.Text = "1.0P";
+            mP10RadioButton.UseVisualStyleBackColor = true;
+            mP10RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mJ11RadioButton
+            // 
+            mJ11RadioButton.AutoSize = true;
+            mJ11RadioButton.Location = new System.Drawing.Point(63, 30);
+            mJ11RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mJ11RadioButton.Name = "mJ11RadioButton";
+            mJ11RadioButton.Size = new System.Drawing.Size(44, 19);
+            mJ11RadioButton.TabIndex = 16;
+            mJ11RadioButton.TabStop = true;
+            mJ11RadioButton.Text = "1.1J";
+            mJ11RadioButton.UseVisualStyleBackColor = true;
+            mJ11RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // tChnRadioButton
+            // 
+            tChnRadioButton.AutoSize = true;
+            tChnRadioButton.Location = new System.Drawing.Point(783, 3);
+            tChnRadioButton.Margin = new System.Windows.Forms.Padding(2);
+            tChnRadioButton.Name = "tChnRadioButton";
+            tChnRadioButton.Size = new System.Drawing.Size(53, 19);
+            tChnRadioButton.TabIndex = 13;
+            tChnRadioButton.TabStop = true;
+            tChnRadioButton.Text = "TChn";
+            tChnRadioButton.UseVisualStyleBackColor = true;
+            tChnRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // chnRadioButton
+            // 
+            chnRadioButton.AutoSize = true;
+            chnRadioButton.Location = new System.Drawing.Point(727, 3);
+            chnRadioButton.Margin = new System.Windows.Forms.Padding(2);
+            chnRadioButton.Name = "chnRadioButton";
+            chnRadioButton.Size = new System.Drawing.Size(47, 19);
+            chnRadioButton.TabIndex = 12;
+            chnRadioButton.TabStop = true;
+            chnRadioButton.Text = "Chn";
+            chnRadioButton.UseVisualStyleBackColor = true;
+            chnRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // customMMRadioButton
+            // 
+            customMMRadioButton.AutoSize = true;
+            customMMRadioButton.Location = new System.Drawing.Point(536, 30);
+            customMMRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customMMRadioButton.Name = "customMMRadioButton";
+            customMMRadioButton.Size = new System.Drawing.Size(67, 19);
+            customMMRadioButton.TabIndex = 24;
+            customMMRadioButton.TabStop = true;
+            customMMRadioButton.Text = "Custom";
+            customMMRadioButton.UseVisualStyleBackColor = true;
+            customMMRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mJ10RadioButton
+            // 
+            mJ10RadioButton.AutoSize = true;
+            mJ10RadioButton.Location = new System.Drawing.Point(4, 30);
+            mJ10RadioButton.Margin = new System.Windows.Forms.Padding(2);
+            mJ10RadioButton.Name = "mJ10RadioButton";
+            mJ10RadioButton.Size = new System.Drawing.Size(44, 19);
+            mJ10RadioButton.TabIndex = 15;
+            mJ10RadioButton.TabStop = true;
+            mJ10RadioButton.Text = "1.0J";
+            mJ10RadioButton.UseVisualStyleBackColor = true;
+            mJ10RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mU10RadioButton
+            // 
+            mU10RadioButton.AutoSize = true;
+            mU10RadioButton.Location = new System.Drawing.Point(126, 30);
+            mU10RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mU10RadioButton.Name = "mU10RadioButton";
+            mU10RadioButton.Size = new System.Drawing.Size(48, 19);
+            mU10RadioButton.TabIndex = 17;
+            mU10RadioButton.TabStop = true;
+            mU10RadioButton.Text = "1.0U";
+            mU10RadioButton.UseVisualStyleBackColor = true;
+            mU10RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mqpRadioButton
+            // 
+            mqpRadioButton.AutoSize = true;
+            mqpRadioButton.Location = new System.Drawing.Point(601, 3);
+            mqpRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mqpRadioButton.Name = "mqpRadioButton";
+            mqpRadioButton.Size = new System.Drawing.Size(52, 19);
+            mqpRadioButton.TabIndex = 10;
+            mqpRadioButton.TabStop = true;
+            mqpRadioButton.Text = "MQP";
+            mqpRadioButton.UseVisualStyleBackColor = true;
+            mqpRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // gcnpRadioButton
+            // 
+            gcnpRadioButton.AutoSize = true;
+            gcnpRadioButton.Location = new System.Drawing.Point(419, 3);
+            gcnpRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gcnpRadioButton.Name = "gcnpRadioButton";
+            gcnpRadioButton.Size = new System.Drawing.Size(40, 19);
+            gcnpRadioButton.TabIndex = 7;
+            gcnpRadioButton.TabStop = true;
+            gcnpRadioButton.Text = "GP";
+            gcnpRadioButton.UseVisualStyleBackColor = true;
+            gcnpRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // gcnjRadioButton
+            // 
+            gcnjRadioButton.AutoSize = true;
+            gcnjRadioButton.Location = new System.Drawing.Point(313, 3);
+            gcnjRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gcnjRadioButton.Name = "gcnjRadioButton";
+            gcnjRadioButton.Size = new System.Drawing.Size(37, 19);
+            gcnjRadioButton.TabIndex = 5;
+            gcnjRadioButton.TabStop = true;
+            gcnjRadioButton.Text = "GJ";
+            gcnjRadioButton.UseVisualStyleBackColor = true;
+            gcnjRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // v11PRadioButton
+            // 
+            v11PRadioButton.AutoSize = true;
+            v11PRadioButton.Location = new System.Drawing.Point(251, 3);
+            v11PRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            v11PRadioButton.Name = "v11PRadioButton";
+            v11PRadioButton.Size = new System.Drawing.Size(47, 19);
+            v11PRadioButton.TabIndex = 4;
+            v11PRadioButton.TabStop = true;
+            v11PRadioButton.Text = "1.1P";
+            v11PRadioButton.UseVisualStyleBackColor = true;
+            v11PRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // v10PRadioButton
+            // 
+            v10PRadioButton.AutoSize = true;
+            v10PRadioButton.Location = new System.Drawing.Point(189, 3);
+            v10PRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            v10PRadioButton.Name = "v10PRadioButton";
+            v10PRadioButton.Size = new System.Drawing.Size(47, 19);
+            v10PRadioButton.TabIndex = 3;
+            v10PRadioButton.TabStop = true;
+            v10PRadioButton.Text = "1.0P";
+            v10PRadioButton.UseVisualStyleBackColor = true;
+            v10PRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // mqjRadioButton
+            // 
+            mqjRadioButton.AutoSize = true;
+            mqjRadioButton.Location = new System.Drawing.Point(472, 3);
+            mqjRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mqjRadioButton.Name = "mqjRadioButton";
+            mqjRadioButton.Size = new System.Drawing.Size(49, 19);
+            mqjRadioButton.TabIndex = 8;
+            mqjRadioButton.TabStop = true;
+            mqjRadioButton.Text = "MQJ";
+            mqjRadioButton.UseVisualStyleBackColor = true;
+            mqjRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // v11RadioButton
+            // 
+            v11RadioButton.AutoSize = true;
+            v11RadioButton.Location = new System.Drawing.Point(63, 3);
+            v11RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            v11RadioButton.Name = "v11RadioButton";
+            v11RadioButton.Size = new System.Drawing.Size(49, 19);
+            v11RadioButton.TabIndex = 1;
+            v11RadioButton.TabStop = true;
+            v11RadioButton.Text = "1.1N";
+            v11RadioButton.UseVisualStyleBackColor = true;
+            v11RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // customOoTRadioButton
+            // 
+            customOoTRadioButton.AutoSize = true;
+            customOoTRadioButton.Location = new System.Drawing.Point(848, 3);
+            customOoTRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customOoTRadioButton.Name = "customOoTRadioButton";
+            customOoTRadioButton.Size = new System.Drawing.Size(67, 19);
+            customOoTRadioButton.TabIndex = 14;
+            customOoTRadioButton.TabStop = true;
+            customOoTRadioButton.Text = "Custom";
+            customOoTRadioButton.UseVisualStyleBackColor = true;
+            customOoTRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // dbgRadioButton
+            // 
+            dbgRadioButton.AutoSize = true;
+            dbgRadioButton.Location = new System.Drawing.Point(665, 3);
+            dbgRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dbgRadioButton.Name = "dbgRadioButton";
+            dbgRadioButton.Size = new System.Drawing.Size(48, 19);
+            dbgRadioButton.TabIndex = 11;
+            dbgRadioButton.TabStop = true;
+            dbgRadioButton.Text = "DBG";
+            dbgRadioButton.UseVisualStyleBackColor = true;
+            dbgRadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // v12RadioButton
+            // 
+            v12RadioButton.AutoSize = true;
+            v12RadioButton.Location = new System.Drawing.Point(126, 3);
+            v12RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            v12RadioButton.Name = "v12RadioButton";
+            v12RadioButton.Size = new System.Drawing.Size(49, 19);
+            v12RadioButton.TabIndex = 2;
+            v12RadioButton.TabStop = true;
+            v12RadioButton.Text = "1.2N";
+            v12RadioButton.UseVisualStyleBackColor = true;
+            v12RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // v10RadioButton
+            // 
+            v10RadioButton.AutoSize = true;
+            v10RadioButton.Checked = true;
+            v10RadioButton.Location = new System.Drawing.Point(4, 3);
+            v10RadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            v10RadioButton.Name = "v10RadioButton";
+            v10RadioButton.Size = new System.Drawing.Size(49, 19);
+            v10RadioButton.TabIndex = 0;
+            v10RadioButton.TabStop = true;
+            v10RadioButton.Text = "1.0N";
+            v10RadioButton.UseVisualStyleBackColor = true;
+            v10RadioButton.CheckedChanged += versionRadioButton_CheckedChanged;
+            // 
+            // cutsceneRadioButton
+            // 
+            cutsceneRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            cutsceneRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            cutsceneRadioButton.AutoSize = true;
+            cutsceneRadioButton.Location = new System.Drawing.Point(232, 526);
+            cutsceneRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cutsceneRadioButton.Name = "cutsceneRadioButton";
+            cutsceneRadioButton.Size = new System.Drawing.Size(64, 25);
+            cutsceneRadioButton.TabIndex = 6;
+            cutsceneRadioButton.TabStop = true;
+            cutsceneRadioButton.Text = "cutscene";
+            cutsceneRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // textRadioButton
+            // 
+            textRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            textRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            textRadioButton.AutoSize = true;
+            textRadioButton.Location = new System.Drawing.Point(304, 526);
+            textRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textRadioButton.Name = "textRadioButton";
+            textRadioButton.Size = new System.Drawing.Size(36, 25);
+            textRadioButton.TabIndex = 7;
+            textRadioButton.TabStop = true;
+            textRadioButton.Text = "text";
+            textRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // objectRadioButton
+            // 
+            objectRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            objectRadioButton.Appearance = System.Windows.Forms.Appearance.Button;
+            objectRadioButton.AutoSize = true;
+            objectRadioButton.Location = new System.Drawing.Point(174, 526);
+            objectRadioButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            objectRadioButton.Name = "objectRadioButton";
+            objectRadioButton.Size = new System.Drawing.Size(50, 25);
+            objectRadioButton.TabIndex = 5;
+            objectRadioButton.TabStop = true;
+            objectRadioButton.Text = "object";
+            objectRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // evalButton
+            // 
+            evalButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            evalButton.Location = new System.Drawing.Point(856, 526);
+            evalButton.Margin = new System.Windows.Forms.Padding(2);
+            evalButton.Name = "evalButton";
+            evalButton.Size = new System.Drawing.Size(65, 27);
+            evalButton.TabIndex = 11;
+            evalButton.Text = "Eval";
+            evalButton.UseVisualStyleBackColor = true;
+            evalButton.Click += evalButton_Click;
+            // 
+            // settingsButton
+            // 
+            settingsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            settingsButton.Location = new System.Drawing.Point(926, 527);
+            settingsButton.Margin = new System.Windows.Forms.Padding(2);
+            settingsButton.Name = "settingsButton";
+            settingsButton.Size = new System.Drawing.Size(9, 25);
+            settingsButton.TabIndex = 12;
+            settingsButton.Text = "Settings";
+            settingsButton.UseVisualStyleBackColor = true;
+            settingsButton.Click += settingsButton_Click;
             // 
             // VerboseOcarina
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 488);
-            this.Controls.Add(this.settingsButton);
-            this.Controls.Add(this.evalButton);
-            this.Controls.Add(this.objectRadioButton);
-            this.Controls.Add(this.textRadioButton);
-            this.Controls.Add(this.cutsceneRadioButton);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.commandRadioButton);
-            this.Controls.Add(this.actorRadioButton);
-            this.Controls.Add(this.sceneRadioButton);
-            this.Controls.Add(this.fetchAllButton);
-            this.Controls.Add(this.numberTextBox);
-            this.Controls.Add(this.outputRichTextBox);
-            this.Controls.Add(this.fetchButton);
-            this.Name = "VerboseOcarina";
-            this.Text = "Verbose Ocarina by mzxrules";
-            this.Shown += new System.EventHandler(this.VerboseOcarina_Shown);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(947, 563);
+            Controls.Add(settingsButton);
+            Controls.Add(evalButton);
+            Controls.Add(objectRadioButton);
+            Controls.Add(textRadioButton);
+            Controls.Add(cutsceneRadioButton);
+            Controls.Add(panel1);
+            Controls.Add(commandRadioButton);
+            Controls.Add(actorRadioButton);
+            Controls.Add(sceneRadioButton);
+            Controls.Add(fetchAllButton);
+            Controls.Add(numberTextBox);
+            Controls.Add(outputRichTextBox);
+            Controls.Add(fetchButton);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "VerboseOcarina";
+            Text = "Verbose Ocarina by mzxrules";
+            Shown += VerboseOcarina_Shown;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

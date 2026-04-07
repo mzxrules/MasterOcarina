@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using mzxrules.Helper;
 
 namespace mzxrules.OcaLib
 {
@@ -11,7 +8,7 @@ namespace mzxrules.OcaLib
         public MFileTable(string romLocation, RomVersion version)
         {
             Tables = new TableInfo(version);
-            using (FileStream fs = new FileStream(romLocation, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new(romLocation, FileMode.Open, FileAccess.Read))
             {
                 dmadata = new DmaData(fs, version);
             }
@@ -23,17 +20,18 @@ namespace mzxrules.OcaLib
 
         public RomFile GetMessageFile(Rom.Language language)
         {
-            switch (language)
+            return language switch
             {
-                case Rom.Language.Japanese: return GetFile(MRom.FileList.jpn_message_data_static);
-                case Rom.Language.English: return GetFile(MRom.FileList.nes_message_data_static);
-                case Rom.Language.German: return GetFile(MRom.FileList.ger_message_data_static);
-                case Rom.Language.French: return GetFile(MRom.FileList.fra_message_data_static);
-                case Rom.Language.Spanish: return GetFile(MRom.FileList.spa_message_data_static);
-                default: throw new NotImplementedException();
-            }
+                Rom.Language.Japanese => GetFile(MRom.FileList.jpn_message_data_static),
+                Rom.Language.English => GetFile(MRom.FileList.nes_message_data_static),
+                Rom.Language.German => GetFile(MRom.FileList.ger_message_data_static),
+                Rom.Language.French => GetFile(MRom.FileList.fra_message_data_static),
+                Rom.Language.Spanish => GetFile(MRom.FileList.spa_message_data_static),
+                Rom.Language.Chinese => throw new InvalidOperationException(),
+                _ => throw new NotImplementedException(),
+            };
         }
-        
+
         public override RomFile GetSceneFile(int i)
         {
             byte? sceneIndex = (byte)i; //GetInternalSceneIndex(i);
@@ -72,6 +70,6 @@ namespace mzxrules.OcaLib
         }
 
         #endregion
-        
+
     }
 }

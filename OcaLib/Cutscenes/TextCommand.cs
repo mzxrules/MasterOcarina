@@ -10,7 +10,7 @@ namespace mzxrules.OcaLib.Cutscenes
     public class TextCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
-        public List<TextCommandEntry> Entries = new();
+        public List<TextCommandEntry> Entries = [];
 
         public IEnumerable<IFrameData> IFrameDataEnum => GetIFrameDataEnumerator();
 
@@ -27,9 +27,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         private void Load(BinaryReader br)
         {
-            int entryCount;
-
-            entryCount = br.ReadBigInt32();
+            int entryCount = br.ReadBigInt32();
 
             for (int i = 0; i < entryCount; i++)
             {

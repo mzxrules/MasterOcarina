@@ -1,5 +1,4 @@
 ﻿using mzxrules.Helper;
-using System;
 using System.IO;
 
 namespace mzxrules.OcaLib.Actor

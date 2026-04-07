@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
@@ -11,7 +9,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public SegmentAddress SegmentAddress { get; set; }
 
         public int Objects { get; set; }
-        public List<ushort> ObjectList = new List<ushort>();
+        public List<ushort> ObjectList = [];
 
         public override void SetCommand(SceneWord command)
         {
@@ -48,7 +46,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"There are {Objects} Object(s). List starts at {SegmentAddress.Offset:X8}";
+            return $"There are {Objects} Object(s). List starts at {SegmentAddress}";
         }
     }
 }

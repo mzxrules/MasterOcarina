@@ -11,8 +11,8 @@ namespace mzxrules.OcaLib.Elf
         public int r_offset; //offset relative to section to apply relocation
         public int r_info; //
 
-        public Reloc R_Type => (Reloc)r_info;
-        public int R_Sym => r_info >> 8;
+        public readonly Reloc R_Type => (Reloc)r_info;
+        public readonly int R_Sym => r_info >> 8;
 
         public Elf32_Rel(BinaryReader br)
         {

@@ -40,7 +40,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 return scene;
 
             scene = new Scene(file.Version.Game, id, file.Record.VRom);
-            BinaryReader br = new BinaryReader(file);
+            BinaryReader br = new(file);
 
             //if (file.Version == ORom.Build.N0
             //    && id == 6)
@@ -61,7 +61,7 @@ namespace mzxrules.OcaLib.SceneRoom
         public static Room InitializeRoom(RomFile file)
         {
             BinaryReader br;
-            Room room = new Room(file.Version.Game, file.Record.VRom);
+            Room room = new(file.Version.Game, file.Record.VRom);
 
             br = new BinaryReader(file);
             LoadISceneRoomHeader(br, room);
@@ -71,7 +71,7 @@ namespace mzxrules.OcaLib.SceneRoom
         public static Room LoadSpiritRoom(RomFile file, int roomNo)
         {
             BinaryReader br;
-            Room room = new Room(file.Version.Game, file.Record.VRom);
+            Room room = new(file.Version.Game, file.Record.VRom);
 
             br = new BinaryReader(file);
             SpiritHack.LoadSpiritRoomHeader(br, room, roomNo);
@@ -110,8 +110,11 @@ namespace mzxrules.OcaLib.SceneRoom
             cutscene = null;
 
             addr = rom.Files.GetFileStart(address);
-            if (addr == null)
+            if (addr.IsNull)
+            {
                 return false;
+            }
+
             var s = (Stream)rom.Files.GetFile(addr.VRom);
             s.Position = addr.GetRelativeAddress(address);
             cutscene = new Cutscenes.Cutscene(s);
@@ -120,7 +123,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public static string ReadScene(Scene scene)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new();
 
             if (scene == null)
                 return "NULL";
@@ -133,7 +136,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public static string ReadRoom(Room room)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new();
 
             result.AppendLine($"Room at {room.VirtualAddress.Start:X8}");
 
@@ -143,7 +146,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private static string ReadHeader(SceneHeader Header)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new();
             result.AppendLine("Setup 0: 00000000");
             result.AppendLine(Header.Read());
             if (Header.HasAlternateHeaders())
@@ -171,20 +174,20 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public static string GetEntranceCount(FileStream sr)
         {
-            List<byte[]> list = new List<byte[]>();
+            List<byte[]> list = [];
             byte[] word = new byte[4];
             int foundIndex;
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new();
 
             sr.Seek(Addresser.GetRom(ORom.FileList.code, ORom.Build.DBGMQ, AddressToken.EntranceIndexTable_Start),
                 SeekOrigin.Begin);
             for (int i = 0; i < 0x614; i++)
             {
-                sr.Read(word, 0, 4);
+                sr.ReadExactly(word, 0, 4);
                 foundIndex = list.FindIndex(item => item[0] == word[0]);
                 if (foundIndex == -1)
                 {
-                    list.Add(new byte[] { word[0], word[1] });
+                    list.Add([word[0], word[1]]);
                 }
                 else if (list[foundIndex][1] < word[1])
                 {
@@ -271,7 +274,7 @@ namespace mzxrules.OcaLib.SceneRoom
             Scene scene;
             List<FileAddress> roomAddresses;
             Room room;
-            List<ItemLocation<T>> result = new List<ItemLocation<T>>();
+            List<ItemLocation<T>> result = [];
 
             for (int sceneId = 0; sceneId < rom.Scenes; sceneId++)
             {
@@ -304,12 +307,12 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private static List<ItemLocation<T>> CreateList<T>(int id, SceneHeader header, int scene, int room, CreateListThings<T> del)
         {
-            List<ItemLocation<T>> result = new List<ItemLocation<T>>();
+            List<ItemLocation<T>> result = [];
             List<List<T>> test = del(id);
 
             for (int i = 0; i < test.Count; i++)
             {
-                SceneRoomSetup srs = new SceneRoomSetup(scene, room, i);
+                SceneRoomSetup srs = new(scene, room, i);
                 foreach (var item in test[i])
                     result.Add(new ItemLocation<T>(item, srs));
             }

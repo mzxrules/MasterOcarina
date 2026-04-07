@@ -16,7 +16,7 @@ namespace VerboseOcarina
     {
         Rom rom;
         RomVersion DefaultVersion = ORom.Build.N0;
-        Dictionary<RadioButton, RomVersion> RadioButtonBindings = new() { };
+        Dictionary<RadioButton, RomVersion> RadioButtonBindings = [];
 
         public VerboseOcarina()
         {
@@ -137,39 +137,42 @@ namespace VerboseOcarina
                 else if (cutsceneRadioButton.Checked)
                     FetchCutscene(id);
                 else if (textRadioButton.Checked)
-                    FetchMessageOoT(id);
+                    FetchMessage(id);
             }
         }
 
-        private void FetchMessageOoT(int id)
+        private void FetchMessage(int id)
         {
-            ORom trom = (ORom)rom;
-            List<Rom.Language> languages = trom.GetSupportedLanguages().ToList();
-
             outputRichTextBox.Clear();
 
-            foreach (Rom.Language lang in languages)
+            if (rom is ORom oRom)
             {
-                outputRichTextBox.AppendText($" {lang}:{Environment.NewLine}");
-                if (lang == Rom.Language.Japanese)
+                foreach (Rom.Language lang in oRom.GetSupportedLanguages())
                 {
-                    var font = outputRichTextBox.Font;
-                    outputRichTextBox.SelectionFont = new System.Drawing.Font("MS PGothic", 8.25f);
-                    outputRichTextBox.AppendText(trom.Text.GetMessage((ushort)id, lang));
-                    outputRichTextBox.SelectionFont = font;
+                    outputRichTextBox.AppendText($" {lang}:{Environment.NewLine}");
+                    if (lang == Rom.Language.Japanese)
+                    {
+                        var font = outputRichTextBox.Font;
+                        outputRichTextBox.SelectionFont = new System.Drawing.Font("MS PGothic", 8.25f);
+                        outputRichTextBox.AppendText(oRom.Text.GetMessage((ushort)id, lang));
+                        outputRichTextBox.SelectionFont = font;
+                    }
+                    else
+                    {
+                        outputRichTextBox.AppendText(oRom.Text.GetMessage((ushort)id, lang));
+                    }
+
+                    outputRichTextBox.AppendText(Environment.NewLine + Environment.NewLine);
                 }
-                else
-                    outputRichTextBox.AppendText(trom.Text.GetMessage((ushort)id, lang));
-                outputRichTextBox.AppendText(Environment.NewLine + Environment.NewLine );
             }
         }
 
         private void FetchMessage(string s)
         {
             string[] txt;
-            if (numberTextBox.Text.Contains("."))
+            if (numberTextBox.Text.Contains('.'))
             {
-                txt = numberTextBox.Text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                txt = numberTextBox.Text.Split(['.'], StringSplitOptions.RemoveEmptyEntries);
 
                 if (txt.Length == 2
                     && int.TryParse(txt[0], out int langId)
@@ -184,7 +187,7 @@ namespace VerboseOcarina
         private void FetchAllMessages()
         {
             StringBuilder sb = new();
-            List<Rom.Language> languages = new();
+            List<Rom.Language> languages = [];
 
             TryFetchAllMessages();
             outputRichTextBox.Text = sb.ToString();
@@ -198,7 +201,7 @@ namespace VerboseOcarina
 
                 if (rom is ORom oRom)
                 {
-                    languages = oRom.GetSupportedLanguages().ToList();
+                    languages = [.. oRom.GetSupportedLanguages()];
                     if (langId < 0 || langId >= languages.Count)
                     {
                         PrintLanguages();
@@ -295,7 +298,7 @@ namespace VerboseOcarina
         private void PrintScene(int sceneId, StringBuilder sb)
         {
             Scene scene = SceneRoomReader.InitializeScene(rom.Files.GetSceneFile(sceneId), sceneId);
-            List<Room> rooms = new();
+            List<Room> rooms = [];
             if (scene == null)
             {
                 sb.AppendFormat("Exception: Scene not found");

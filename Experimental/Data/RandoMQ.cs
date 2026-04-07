@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using mzxrules.Helper;
 using System.IO;
@@ -62,17 +61,17 @@ namespace Experimental.Data
             public int Id { get; set; }
 
             [DataMember(Order = 3)]
-            List<string> TActors { get; set; } = new List<string>();
+            List<string> TActors { get; set; } = [];
 
             [DataMember(Order = 4)]
-            List<Path_MQJson> Paths { get; set; } = new List<Path_MQJson>();
+            List<Path_MQJson> Paths { get; set; } = [];
 
             public int RoomsCount = 0;
 
             public SegmentAddress RoomsAddress = 0;
 
             [DataMember(Order = 5)]
-            public List<Room_MQJson> Rooms { get; set; } = new List<Room_MQJson>();
+            public List<Room_MQJson> Rooms { get; set; } = [];
 
             [DataMember(Order = 6)]
             public Col_MQJson ColDelta { get; set; }
@@ -95,7 +94,7 @@ namespace Experimental.Data
 
                 Id = id;
 
-                SceneWord cmd = new SceneWord();
+                SceneWord cmd = new();
                 do
                 {
                     br.Read(cmd, 0, 8);
@@ -147,7 +146,7 @@ namespace Experimental.Data
                         && address.Segment == 0x02)
                     {
                         var seekback = br.BaseStream.Position;
-                        Path_MQJson path = new Path_MQJson();
+                        Path_MQJson path = new();
                         br.BaseStream.Position = address.Offset;
                         for (int i = 0; i < nodes; i++)
                         {
@@ -172,7 +171,7 @@ namespace Experimental.Data
         class Path_MQJson
         {
             [DataMember]
-            public List<short[]> Points { get; set; } = new List<short[]>();
+            public List<short[]> Points { get; set; } = [];
         }
 
         [DataContract(Name = "Room")]
@@ -185,10 +184,10 @@ namespace Experimental.Data
             public int Id { get; set; }
 
             [DataMember(Order = 3)]
-            List<string> Objects { get; set; } = new List<string>();
+            List<string> Objects { get; set; } = [];
 
             [DataMember(Order = 4)]
-            List<string> Actors { get; set; } = new List<string>();
+            List<string> Actors { get; set; } = [];
 
             public Room_MQJson() { }
 
@@ -203,7 +202,7 @@ namespace Experimental.Data
 
                 Id = roomId;
 
-                SceneWord cmd = new SceneWord();
+                SceneWord cmd = new();
                 do
                 {
                     br.Read(cmd, 0, 8);
@@ -245,13 +244,13 @@ namespace Experimental.Data
             public bool IsLarger { get; set; }
 
             [DataMember(Order = 2)]
-            public List<ColPoly_MQJson> Polys = new List<ColPoly_MQJson>();
+            public List<ColPoly_MQJson> Polys = [];
 
             [DataMember(Order = 3)]
-            public List<ColMat_MQJson> PolyTypes = new List<ColMat_MQJson>();
+            public List<ColMat_MQJson> PolyTypes = [];
 
             [DataMember(Order = 4)]
-            public List<ColCam_MQJson> Cams = new List<ColCam_MQJson>();
+            public List<ColCam_MQJson> Cams = [];
 
             public Col_MQJson(CollisionMesh n0, CollisionMesh mq)
             {
@@ -310,59 +309,39 @@ namespace Experimental.Data
         }
 
         [DataContract(Name = "Poly")]
-        class ColPoly_MQJson
+        class ColPoly_MQJson(int id, int type, int ex)
         {
             [DataMember(Order = 1)]
-            public int Id { get; set; }
+            public int Id { get; set; } = id;
 
             [DataMember(Order = 2)]
-            public int Type { get; set; }
+            public int Type { get; set; } = type;
 
             [DataMember(Order = 3)]
-            public int Flags { get; set; }
-
-            public ColPoly_MQJson(int id, int type, int ex)
-            {
-                Id = id;
-                Type = type;
-                Flags = ex;
-            }
+            public int Flags { get; set; } = ex;
         }
 
         [DataContract(Name = "PolyType")]
-        class ColMat_MQJson
+        class ColMat_MQJson(int id, int hi, int lo)
         {
             [DataMember(Order = 1)]
-            public int Id { get; set; }
+            public int Id { get; set; } = id;
 
             [DataMember(Order = 2)]
-            public int High { get; set; }
+            public int High { get; set; } = hi;
 
             [DataMember(Order = 3)]
-            public int Low { get; set; }
-
-            public ColMat_MQJson(int id, int hi, int lo)
-            {
-                Id = id;
-                High = hi;
-                Low = lo;
-            }
+            public int Low { get; set; } = lo;
         }
 
         [DataContract(Name = "Cam")]
-        class ColCam_MQJson
+        class ColCam_MQJson(short cam, short num, int positionIndex)
         {
             [DataMember(Order = 1)]
-            public int Data { get; set; }
+            public int Data { get; set; } = (cam << 16) + num;
 
             [DataMember(Order = 2)]
-            public int PositionIndex { get; set; }
-
-            public ColCam_MQJson(short cam, short num, int positionIndex)
-            {
-                Data = (cam << 16) + num;
-                PositionIndex = positionIndex;
-            }
+            public int PositionIndex { get; set; } = positionIndex;
         }
 
 
@@ -370,7 +349,7 @@ namespace Experimental.Data
         {
             public static string Read(BinaryReader read)
             {
-                List<string> result = new List<string>();
+                List<string> result = [];
                 for (int i = 0; i < 8; i++)
                 {
                     string v = read.ReadBigInt16().ToString("X4");
@@ -382,24 +361,24 @@ namespace Experimental.Data
         }
 
 
-        static readonly int[] MQRandoScenes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13 };
+        static readonly int[] MQRandoScenes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13];
 
         public static void MQRandoCompareHeaders(IExperimentFace face, List<string> filePath)
         {
             Rom n0 = new ORom(filePath[0], ORom.Build.N0);
             Rom mq = new ORom(filePath[1], ORom.Build.MQU);
 
-            StringWriter sw = new StringWriter();
+            StringWriter sw = new();
 
             foreach (Rom rom in new Rom[] { n0, mq })
             {
                 for (int i = 0; i < 16; i++)
                 {
                     var scn = rom.Files.GetSceneFile(i);
-                    BinaryReader br = new BinaryReader(scn);
+                    BinaryReader br = new(scn);
 
                     SceneWord cmd;
-                    SceneWord roomCmd = new SceneWord();
+                    SceneWord roomCmd = new();
                     bool hasRoom = false;
                     do
                     {
@@ -426,7 +405,7 @@ namespace Experimental.Data
                             br.ReadBigInt32();
 
                             var roomFile = rom.Files.GetFile(roomAddr);
-                            BinaryReader brRoom = new BinaryReader(roomFile);
+                            BinaryReader brRoom = new(roomFile);
                             do
                             {
                                 cmd = new SceneWord();
@@ -454,19 +433,19 @@ namespace Experimental.Data
             Rom mq = new ORom(filePath[1], ORom.Build.MQU);
 
 
-            var rom_scenes = new List<List<Scene_MQJson>>();
+            List<List<Scene_MQJson>> rom_scenes = [];
             List<Scene_MQJson> scenes;
 
             foreach (Rom rom in new Rom[] { n0, mq })
             {
-                scenes = new List<Scene_MQJson>();
+                scenes = [];
                 foreach (int sceneId in MQRandoScenes)
                 {
                     if (sceneId == 12)
                         continue;
 
-                    var sceneFile = rom.Files.GetSceneFile(sceneId);
-                    using (BinaryReader br = new BinaryReader(sceneFile))
+                    RomFile sceneFile = rom.Files.GetSceneFile(sceneId);
+                    using (BinaryReader br = new(sceneFile))
                     {
                         var va = sceneFile.Record.VRom;
                         var scene = new Scene_MQJson(br, sceneId, va.Start, va.End);
@@ -494,7 +473,7 @@ namespace Experimental.Data
             SetN0Addresses(scenes, n0_scenes);
 
             MemoryStream ms = SerializeScenes(scenes);
-            StreamReader sr = new StreamReader(ms);
+            StreamReader sr = new(ms);
             string json = sr.ReadToEnd();
 
             face.OutputText(json);
@@ -503,8 +482,8 @@ namespace Experimental.Data
 
         private static MemoryStream SerializeScenes(List<Scene_MQJson> scenes)
         {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<Scene_MQJson>));
-            MemoryStream ms = new MemoryStream();
+            DataContractJsonSerializer ser = new(typeof(List<Scene_MQJson>));
+            MemoryStream ms = new();
 
             ser.WriteObject(ms, scenes);
             ms.Position = 0;
@@ -533,17 +512,17 @@ namespace Experimental.Data
                 scene.ColDelta = delta;
             }
             MemoryStream s = SerializeScenes(scenes);
-            StreamReader sr = new StreamReader(s);
+            StreamReader sr = new(s);
             face.OutputText(sr.ReadToEnd());
 
         }
 
         private static List<Scene_MQJson> Load_Scene_MQJson()
         {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<Scene_MQJson>));
+            DataContractJsonSerializer ser = new(typeof(List<Scene_MQJson>));
 
             List<Scene_MQJson> scenes;
-            using (FileStream fs = new FileStream("mqu.json", FileMode.Open))
+            using (FileStream fs = new("mqu.json", FileMode.Open))
             {
                 scenes = (List<Scene_MQJson>)ser.ReadObject(fs);
             }
@@ -565,8 +544,8 @@ namespace Experimental.Data
             Rom n0 = new ORom(filePath[0], ORom.Build.N0);
             Rom mq = new ORom(filePath[1], ORom.Build.MQU);
 
-            StringBuilder sb_n0 = new StringBuilder();
-            StringBuilder sb_mq = new StringBuilder();
+            StringBuilder sb_n0 = new();
+            StringBuilder sb_mq = new();
 
             foreach (int id in MQRandoScenes)
             {
@@ -679,8 +658,8 @@ namespace Experimental.Data
 
             var ms = SerializeScenes(scenes);
 
-            StreamReader sr = new StreamReader(ms);
-            
+            StreamReader sr = new(ms);
+
             face.OutputText(sr.ReadToEnd());
         }
 
@@ -690,16 +669,16 @@ namespace Experimental.Data
             //uint map_mark_rom_n0 = 0xBF40D0;
             //uint map_mark_table_n0 = 0xBFABBC;
             //uint minimaps_per_dungeon_n0 = 0xB6C794;
-            List<List<DungeonMinimap>> result = new List<List<DungeonMinimap>>();
+            List<List<DungeonMinimap>> result = [];
 
             var map_mark_record = rom.Files.GetFileStart(dung_mark_vrom).VRom;
             var map_mark_file = rom.Files.GetFile(map_mark_record);
             var dung_mark_off = map_mark_file.Record.GetRelativeAddress(dung_mark_vrom);
             N64Ptr map_mark_vram_start = (dung_mark_vram - dung_mark_off);
 
-            List<N64Ptr> dung_ptr_data = new List<N64Ptr>();
+            List<N64Ptr> dung_ptr_data = [];
 
-            using (BinaryReader br = new BinaryReader(map_mark_file))
+            using (BinaryReader br = new(map_mark_file))
             {
                 br.BaseStream.Position = dung_mark_off;
                 for (int i = 0; i < 10; i++)
@@ -711,7 +690,7 @@ namespace Experimental.Data
 
                 for (int i = 0; i < 10; i++)
                 {
-                    List<DungeonMinimap> m = new List<DungeonMinimap>();
+                    List<DungeonMinimap> m = [];
                     var minimaps = (dung_ptr_data[i + 1] - dung_ptr_data[i]) / 0x72;
 
                     br.BaseStream.Position = dung_ptr_data[i] - map_mark_vram_start;
@@ -729,12 +708,11 @@ namespace Experimental.Data
         private static List<List<DungeonFloor>> GetDungeonFloorData(Rom rom, int floor_index_vrom, int floor_data_vrom)
         {
             const int max_floors = (0x42 / 2) + 1;
-            List<short> floorIndices = new List<short>();
-
-            List<List<DungeonFloor>> result = new List<List<DungeonFloor>>();
+            List<short> floorIndices = [];
+            List<List<DungeonFloor>> result = [];
 
             var code_file = rom.Files.GetFile(ORom.FileList.code);
-            using (BinaryReader br = new BinaryReader(code_file))
+            using (BinaryReader br = new(code_file))
             {
                 br.BaseStream.Position = code_file.Record.GetRelativeAddress(floor_index_vrom);
                 for (int i = 0; i < 10; i++)
@@ -749,10 +727,10 @@ namespace Experimental.Data
             var kaliedo_addr = rom.Files.GetPlayPauseAddress(0);
             var kaliedo_file = rom.Files.GetFile(kaliedo_addr);
 
-            List<DungeonFloor> floors = new List<DungeonFloor>();
+            List<DungeonFloor> floors = [];
 
             //read dungeons
-            using (BinaryReader br = new BinaryReader(kaliedo_file))
+            using (BinaryReader br = new(kaliedo_file))
             {
                 br.BaseStream.Position = kaliedo_file.Record.GetRelativeAddress(floor_data_vrom);
                 for (int i = 0; i < max_floors; i++)
@@ -767,7 +745,7 @@ namespace Experimental.Data
                 int index = floorIndices[sceneId];
                 int end = floorIndices[sceneId + 1];
 
-                List<DungeonFloor> dung = new List<DungeonFloor>();
+                List<DungeonFloor> dung = [];
 
                 for (int i = index; i < end; i++)
                 {

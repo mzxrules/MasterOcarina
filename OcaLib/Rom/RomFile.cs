@@ -20,10 +20,5 @@ namespace mzxrules.OcaLib
         {
             return file.Stream;
         }
-
-        //public static explicit operator Stream(RomFile v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

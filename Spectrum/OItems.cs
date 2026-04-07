@@ -86,6 +86,18 @@ namespace Spectrum
             IronBoots = 0x45,
             HoverBoots = 0x46,
 
+            GoronBracelet = 0x50,
+            SilverGauntlets = 0x51,
+            GoldGauntlets = 0x52,
+
+            SilverScale = 0x53,
+            GoldScale = 0x54,
+
+            GiantsKnife = 0x55,
+
+            AdultsWallet = 0x56,
+            GiantsWallet = 0x57,
+
             Minuet = 0x5A,
             Bolero = 0x5B,
             Serenade = 0x5C,
@@ -108,6 +120,10 @@ namespace Spectrum
             Ruby = 0x6D,
             Sapphire = 0x6E,
             StoneOfAgony = 0x6F,
+
+            BossKey = 0x74,
+            Compass = 0x75,
+            Map     = 0x76,
 
             None = 0xFF,
 
@@ -133,24 +149,14 @@ namespace Spectrum
         const int CHILD_TRADE_SLOT = 23;
 
 
-        struct InventoryInfo
+        record InventoryInfo(int Slot, bool Ammo = false, Item LeftEquipment = Item.None)
         {
-            public int Slot;
-            public bool Ammo;
-            public Item LeftEquipment;
-
-            public InventoryInfo(int slot, bool ammo = false, Item leftEquipment = Item.None)
-            {
-                Slot = slot;
-                Ammo = ammo;
-                LeftEquipment = leftEquipment;
-            }
-
             public static implicit operator InventoryInfo(int slot)
             {
                 return new InventoryInfo(slot);
             }
         }
+
         static readonly Dictionary<Item, InventoryInfo> InventorySlot = new()
         {
             { Item.Sticks, new InventoryInfo(0, true, Item.Sticks) },
@@ -210,11 +216,44 @@ namespace Spectrum
                 SetEquipment(item, true, ref equip);
                 saveCtx.Write(0x9C, equip);
             }
+            else if (item >= Item.GoronBracelet && item <= Item.GiantsWallet && item != Item.GiantsKnife)
+            {
+                if (LeftEquipmentItemMap.TryGetValue(item, out LeftEquipmentMapInfo value))
+                {
+                    int equipment = saveCtx.ReadInt32(0xA0);
+                    SetLeftEquipmentItem(value.ItemClass, value.Value, ref equipment);
+                    saveCtx.Write(0xA0, equipment);
+                }
+            }
             else if (item <= Item.StoneOfAgony)
             {
                 int quest = saveCtx.ReadInt32(0xA4);
                 SetQuestItem(item, true, ref quest);
                 saveCtx.Write(0xA4, quest);
+            }
+            else if (item >= Item.BossKey && item <= Item.Map)
+            {
+                ushort mapIndex = saveCtx.ReadUInt16(0x1402);
+                if (mapIndex < 0x20)
+                {
+                    var shift = item switch
+                    {
+                        Item.BossKey => 0,
+                        Item.Compass => 1,
+                        Item.Map => 2,
+                        _ => throw new InvalidOperationException(),
+                    };
+
+                    int dungItemOff = 0xA8 + mapIndex;
+
+                    int dungItems = saveCtx.ReadByte(dungItemOff);
+                    dungItems |= 1 << shift;
+                    saveCtx.Write(dungItemOff, (byte)dungItems);
+                }
+                else
+                {
+                    Console.WriteLine($"mapIndex {mapIndex} >= 0x20");
+                }
             }
             // Set Magic
             else if (item is Item.Magic or Item.DoubleMagic)
@@ -240,10 +279,8 @@ namespace Spectrum
             {
                 inventPtr.Write(18, (byte)item);
             }
-            else if (InventorySlot.ContainsKey(item))
+            else if (InventorySlot.TryGetValue(item, out InventoryInfo info))
             {
-                InventoryInfo info = InventorySlot[item];
-
                 inventPtr.Write(info.Slot, (byte)item);
 
                 SetInventoryItemAmmo(item, 50, saveCtx);
@@ -268,17 +305,7 @@ namespace Spectrum
             }
         }
 
-        struct LeftEquipmentInfo
-        {
-            public int Mask;
-            public int Max;
-
-            public LeftEquipmentInfo(int mask, int max)
-            {
-                Mask = mask;
-                Max = max;
-            }
-        }
+        record LeftEquipmentInfo(int Mask, int Max);
 
         static readonly Dictionary<Item, LeftEquipmentInfo> LeftEquipment = new()
         {
@@ -290,6 +317,21 @@ namespace Spectrum
             { Item.Strength, new LeftEquipmentInfo(MASK_STRENGTH, 3) },
             { Item.Scale, new LeftEquipmentInfo(MASK_SCALE, 2) },
             { Item.Wallet, new LeftEquipmentInfo(MASK_WALLET, 3) },
+        };
+
+        record LeftEquipmentMapInfo(Item ItemClass, int Value);
+
+        static readonly Dictionary<Item, LeftEquipmentMapInfo> LeftEquipmentItemMap = new()
+        {
+            { Item.GoronBracelet, new LeftEquipmentMapInfo(Item.Strength, 1) },
+            { Item.SilverGauntlets, new LeftEquipmentMapInfo(Item.Strength, 2) },
+            { Item.GoldGauntlets, new LeftEquipmentMapInfo(Item.Strength, 3) },
+
+            { Item.SilverScale, new LeftEquipmentMapInfo(Item.Scale, 1) },
+            { Item.GoldScale, new LeftEquipmentMapInfo(Item.Scale, 2) },
+
+            { Item.AdultsWallet, new LeftEquipmentMapInfo(Item.Wallet, 1) },
+            { Item.GiantsWallet, new LeftEquipmentMapInfo(Item.Wallet, 2) },
         };
 
         public static bool SetLeftEquipmentItemMax(Item item, ref int var)
@@ -315,10 +357,8 @@ namespace Spectrum
 
         public static bool SetLeftEquipmentItem(Item item, int value, ref int var)
         {
-            if (!LeftEquipment.ContainsKey(item))
+            if (!LeftEquipment.TryGetValue(item, out LeftEquipmentInfo info))
                 return false;
-
-            var info = LeftEquipment[item];
 
             if (value == int.MaxValue)
             {
@@ -332,17 +372,7 @@ namespace Spectrum
             return true;
         }
 
-        struct EquipmentInfo
-        {
-            public int Mask;
-            public int Value;
-
-            public EquipmentInfo(int mask, int value)
-            {
-                Mask = mask;
-                Value = value;
-            }
-        }
+        record EquipmentInfo(int Mask, int Value);
 
         static readonly Dictionary<Item, EquipmentInfo> Equipment = new()
         {
@@ -365,12 +395,12 @@ namespace Spectrum
 
         public static bool SetEquipment(Item item, bool value, ref short var)
         {
-            if (!Equipment.ContainsKey(item))
+            if (!Equipment.TryGetValue(item, out EquipmentInfo info))
             {
                 return false;
             }
-            var info = Equipment[item];
-            int v = (value) ? 1 : 0;
+
+            int v = value ? 1 : 0;
             int leftshift = Shift.GetRight((uint)info.Mask);
             short write = (short)(v << leftshift);
 
@@ -379,15 +409,7 @@ namespace Spectrum
             return true;
         }
 
-        struct QuestInfo
-        {
-            public int Mask;
-
-            public QuestInfo(int mask)
-            {
-                Mask = mask;
-            }
-        }
+        record QuestInfo(int Mask);
 
         static readonly Dictionary<Item, QuestInfo> QuestItems = new()
         {
@@ -422,11 +444,10 @@ namespace Spectrum
 
         public static bool SetQuestItem(Item item, bool setOn, ref int var)
         {
-            if (!QuestItems.ContainsKey(item))
+            if (!QuestItems.TryGetValue(item, out QuestInfo info))
             {
                 return false;
             }
-            var info = QuestItems[item];
 
             if (setOn == true)
             {

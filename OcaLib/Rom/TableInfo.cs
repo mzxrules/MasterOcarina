@@ -42,16 +42,16 @@ namespace mzxrules.OcaLib
             public int StartOff { get; set; }
         }
 
-        public Table GameOvls = new Table();
-        public Table PlayerPause = new Table(); 
-        public Table Actors = new Table();
-        public Table Particles = new Table();
-        public Table Objects = new Table();
-        public Table Scenes = new Table();
-        public Table TitleCards = new Table();
-        public Table HyruleSkybox = new Table();
-        public Table Transitions = new Table();
-        public Table MapMarkData = new Table();
+        public Table GameOvls = new();
+        public Table PlayerPause = new(); 
+        public Table Actors = new();
+        public Table Particles = new();
+        public Table Objects = new();
+        public Table Scenes = new();
+        public Table TitleCards = new();
+        public Table HyruleSkybox = new();
+        public Table Transitions = new();
+        public Table MapMarkData = new();
 
         public TableInfo()
         {
@@ -87,21 +87,20 @@ namespace mzxrules.OcaLib
 
         public Table GetTable(Type type)
         {
-            switch (type)
+            return type switch
             {
-                case Type.Actors: return Actors;
-                case Type.GameOvls: return GameOvls;
-                case Type.HyruleSkybox: return HyruleSkybox;
-                case Type.Objects: return Objects;
-                case Type.Particles: return Particles;
-                case Type.PlayerPause: return PlayerPause;
-                case Type.Scenes: return Scenes;
-                case Type.TitleCards: return TitleCards;
-                case Type.Transitions: return Transitions;
-                case Type.MapMarkData: return MapMarkData;
-                default:
-                    throw new IndexOutOfRangeException();
-            }
+                Type.Actors => Actors,
+                Type.GameOvls => GameOvls,
+                Type.HyruleSkybox => HyruleSkybox,
+                Type.Objects => Objects,
+                Type.Particles => Particles,
+                Type.PlayerPause => PlayerPause,
+                Type.Scenes => Scenes,
+                Type.TitleCards => TitleCards,
+                Type.Transitions => Transitions,
+                Type.MapMarkData => MapMarkData,
+                _ => throw new ArgumentOutOfRangeException(nameof(type)),
+            };
         }
     }
 }

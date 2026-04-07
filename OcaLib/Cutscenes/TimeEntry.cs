@@ -6,15 +6,15 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class TimeEntry : IFrameData
     {
-        public static int LENGTH = 0xC;
+        public const int LENGTH = 0xC;
         public CutsceneCommand RootCommand { get; set; }
 
-        /* 0x00 */ short Action;
+        /* 0x00 */ public short Action;
         /* 0x02 */ public short StartFrame { get; set; } //ushort
         /* 0x04 */ public short EndFrame { get; set; } //ushort
-        /* 0x06 */ byte Hour;
-        /* 0x07 */ byte Minute;
-        /* 0x08 */ int unknown;
+        /* 0x06 */ public byte Hour;
+        /* 0x07 */ public byte Minute;
+        /* 0x08 */ private readonly int unknown;
 
         public TimeEntry(CutsceneCommand root, BinaryReader br)
         {

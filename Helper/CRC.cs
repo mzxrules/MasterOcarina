@@ -8,23 +8,21 @@ namespace mzxrules.Helper
     {
         public static void Write(string file)
         {
-            using (var fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite))
-            {
-                Write(fs);
-            }
+            using var fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite);
+            Write(fs);
         }
 
         public static void Write(Stream sw)
         {
             uint[] crc = new uint[2];
             byte[] data = new byte[0x00101000];
-			
+
             uint t1, t2, t3, t4, t5, t6 = 0xDF26F436;
 
             t1 = t2 = t3 = t4 = t5 = t6;
 
-            sw.Position = 0; 
-            sw.Read(data, 0, 0x00101000);
+            sw.Position = 0;
+            sw.ReadExactly(data, 0, 0x00101000);
 
             for (int i = 0x00001000; i < 0x00101000; i += 4)
             {
@@ -50,7 +48,7 @@ namespace mzxrules.Helper
                 crc[0] = Endian.ConvertUInt32(crc[0]);
                 crc[1] = Endian.ConvertUInt32(crc[1]);
             }
-            
+
             //Seek to 0x10 from rom start
             sw.Position = 0x10;
             sw.Write(BitConverter.GetBytes(crc[0]), 0, sizeof(uint));
@@ -60,7 +58,7 @@ namespace mzxrules.Helper
         public static FileEncoding VerifyRom(Stream rom, ulong targetCrc)
         {
             ulong crc_File;
-            using (BinaryReader br = new BinaryReader(rom))
+            using (BinaryReader br = new(rom))
             {
                 br.BaseStream.Position = 0x10;
                 crc_File = br.ReadUInt64();

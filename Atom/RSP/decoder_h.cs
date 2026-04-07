@@ -31,9 +31,9 @@ namespace Atom.RSP
         //public opcodes opcode;
         public uint id;
         public uint flags;
-        public opcodes op;
+        public Opcodes op;
 
-        public rsp_opcode(opcodes op)
+        public rsp_opcode(Opcodes op)
         {
             this.op = op;
             id = (uint)op;

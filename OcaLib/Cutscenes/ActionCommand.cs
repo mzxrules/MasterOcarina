@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
     public class ActionCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
-        public List<ActionEntry> Entries = new();
+        public List<ActionEntry> Entries = [];
 
         public IEnumerable<IFrameData> IFrameDataEnum => Entries;
 
@@ -58,25 +58,25 @@ namespace mzxrules.OcaLib.Cutscenes
 
         private string GetName()
         {
-            switch (Command)
+            return Command switch
             {
-                case 0x03: return "Special Execution";
-                case 0x04: return "Set Lighting";
-                case 0x0A: return "Link";
-                case 0x27: return "Rauru (08)";
-                case 0x29: return "Darunia (Chamber of Sages)";
-                case 0x2A: return "Ruto (Adult) (11)";
-                case 0x2B: return "Saria (12)";
-                case 0x2C: return "Sage? (13)";
-                case 0x2F: return "Sheik (12)";
-                case 0x32: return "Darunia (Death Mountain Trail)";
-                case 0x3E: return "Navi";
-                case 0x55: return "Zelda (Adult)";
-                case 0x56: return "Play Background Music";
-                case 0x57: return "Stop Background Music";
-                case 0x7C: return "Fade Background Music";
-                default: return "Actor";
-            }
+                0x03 => "Special Execution",
+                0x04 => "Set Lighting",
+                0x0A => "Link",
+                0x27 => "Rauru (08)",
+                0x29 => "Darunia (Chamber of Sages)",
+                0x2A => "Ruto (Adult) (11)",
+                0x2B => "Saria (12)",
+                0x2C => "Sage? (13)",
+                0x2F => "Sheik (12)",
+                0x32 => "Darunia (Death Mountain Trail)",
+                0x3E => "Navi",
+                0x55 => "Zelda (Adult)",
+                0x56 => "Play Background Music",
+                0x57 => "Stop Background Music",
+                0x7C => "Fade Background Music",
+                _ => "Actor",
+            };
         }
 
         public override string ReadCommand()
@@ -87,7 +87,7 @@ namespace mzxrules.OcaLib.Cutscenes
             foreach (ActionEntry entry in Entries)
             {
                 int i = 0;
-                foreach(var line in entry.ToString().Split(Environment.NewLine))
+                foreach (var line in entry.ToString().Split(Environment.NewLine))
                 {
                     i += 2;
                     sb.AppendLine("".PadLeft(i) + line);
@@ -108,9 +108,10 @@ namespace mzxrules.OcaLib.Cutscenes
                 yield return fd;
         }
 
-        public void AddEntry(IFrameData item)
+        public void AddEntry(IFrameData entry)
         {
-            Entries.Add((ActionEntry)item);
+            ArgumentNullException.ThrowIfNull(entry);
+            Entries.Add((ActionEntry)entry);
         }
     }
 }

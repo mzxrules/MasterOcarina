@@ -5,7 +5,6 @@ using mzxrules.Helper;
 using u64 = System.UInt64;
 using u32 = System.UInt32;
 using static System.Console;
-using System.Text;
 
 namespace Spectrum
 {
@@ -18,7 +17,7 @@ namespace Spectrum
     }
     public class OSThread
     {
-        N64Ptr address;
+        readonly N64Ptr address;
         /*0x00*/
         public N64Ptr OSThread_next { get; set; } //run/mesg queue link
         public int priority;

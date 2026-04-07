@@ -1,17 +1,18 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Text.Code;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace mzxrules.OcaLib
+namespace mzxrules.OcaLib.Text
 {
-    public partial class GameText
+    public class GameText
     {
-        ORom rom;
-        Dictionary<Rom.Language, Dictionary<ushort, TextboxMessage>> Dialogs;
+        Rom rom;
+        Dictionary<Rom.Language, Dictionary<ushort, TextboxMessage>> Dialogs = [];
 
-        public GameText(ORom v)
+        public GameText(Rom v)
         {
             rom = v;
 
@@ -23,12 +24,10 @@ namespace mzxrules.OcaLib
 
         private void LoadPal()
         {
-            Dialogs = new Dictionary<Rom.Language, Dictionary<ushort, TextboxMessage>>();
-
             if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, AddressToken.TextbankTable, out int textbank))
             {
                 RomFile codefile = rom.Files.GetFile(ORom.FileList.code);
-                using (BinaryReader file = new BinaryReader(codefile.Stream))
+                using (BinaryReader file = new(codefile.Stream))
                 {
                     textbank = (int)codefile.Record.GetRelativeAddress(textbank);
                     file.BaseStream.Position = textbank;
@@ -43,7 +42,7 @@ namespace mzxrules.OcaLib
         private void LoadTextTable_Pal2(BinaryReader code, Dictionary<ushort, TextboxMessage> nes_message, Rom.Language language)
         {
             uint current, next;
-            Dictionary<ushort, TextboxMessage> TextBank = new Dictionary<ushort, TextboxMessage>();
+            Dictionary<ushort, TextboxMessage> TextBank = [];
 
             next = code.ReadBigUInt32() & 0xFFFFFF;
 
@@ -67,11 +66,9 @@ namespace mzxrules.OcaLib
 
         private void LoadNtsc()
         {
-            Dialogs = new Dictionary<ORom.Language, Dictionary<ushort, TextboxMessage>>();
-
             if (Addresser.TryGetRom(ORom.FileList.code, rom.Version, AddressToken.TextbankTable, out int textbank))
             {
-                using (BinaryReader file = new BinaryReader(rom.Files.GetFile(ORom.FileList.code)))
+                using (BinaryReader file = new(rom.Files.GetFile(ORom.FileList.code)))
                 {
                     textbank = (int)rom.Files.GetFileStart(textbank).GetRelativeAddress(textbank);
                     file.BaseStream.Position = textbank;
@@ -89,8 +86,7 @@ namespace mzxrules.OcaLib
 
         private void LoadTextTable(BinaryReader file, Rom.Language lang)
         {
-            List<TextboxMessage> messages = new List<TextboxMessage>();
-            Dictionary<ushort, TextboxMessage> TextBank = new Dictionary<ushort, TextboxMessage>();
+            Dictionary<ushort, TextboxMessage> TextBank = [];
             
             InitializeTextBank(TextBank, file);
             Dialogs.Add(lang, TextBank);
@@ -126,9 +122,9 @@ namespace mzxrules.OcaLib
         public List<int> GetMessageData(ushort id, Rom.Language language)
         {
             TextboxMessage mesg = Dialogs[language][id];
-            List<int> result = new List<int>();
+            List<int> result = [];
 
-            using (BinaryReader message_data_static = new BinaryReader(rom.Files.GetMessageFile(language)))
+            using (BinaryReader message_data_static = new(rom.Files.GetMessageFile(language)))
             {
                 message_data_static.BaseStream.Position = mesg.StartOffset;
 
@@ -142,7 +138,7 @@ namespace mzxrules.OcaLib
 
         public string GetMessage(ushort id, Rom.Language language)
         {
-            id = (Dialogs[language].ContainsKey(id)) ? id : (ushort)1;
+            id = Dialogs[language].ContainsKey(id) ? id : (ushort)1;
 
             return GetMessage(Dialogs[language][id], language);
         }
@@ -152,37 +148,40 @@ namespace mzxrules.OcaLib
         /// </summary>
         public string GetMessageOffset(ushort id, Rom.Language language)
         {
-            id = (Dialogs[language].ContainsKey(id)) ? id : (ushort)1;
+            id = Dialogs[language].ContainsKey(id) ? id : (ushort)1;
             TextboxMessage mesg = Dialogs[language][id];
             return $"{mesg.StartOffset:X6}:{mesg.EndOffset:X6}";
         }
 
         private string GetMessage(TextboxMessage textboxMessage, Rom.Language language)
         {
-            Dialog dialog;
             byte[] data;
-
             
-            using (BinaryReader message_data_static = new BinaryReader(rom.Files.GetMessageFile(language)))
+            using (BinaryReader message_data_static = new(rom.Files.GetMessageFile(language)))
             {
                 message_data_static.BaseStream.Position = textboxMessage.StartOffset;
                 data = message_data_static.ReadBytes((int)textboxMessage.Length);
             }
 
-            if (language == Rom.Language.Japanese)
-                dialog = JpnEscapeCustomCodes(data);
-            else
-                dialog = NesEscapeCustomCodes(data);
-
+            Dialog dialog = language switch
+            {
+                Rom.Language.Japanese => JpnEscapeCustomCodes(data),
+                Rom.Language.English => NesEscapeCustomCodes(data),
+                Rom.Language.French => NesEscapeCustomCodes(data),
+                Rom.Language.German => NesEscapeCustomCodes(data),
+                Rom.Language.Spanish => NesEscapeCustomCodes(data),
+                //Rom.Language.Chinese => throw new NotImplementedException(),
+                _ => NesEscapeCustomCodes(data),
+            };
             var settings = new DialogWriterSettings(language,
                         DialogWriterSettings.OutputType.Textbox); 
 
             return dialog.Print(settings);
         }
-        
+
         private static Dialog NesEscapeCustomCodes(byte[] s)
         {
-            Dialog dialog = new Dialog();
+            Dialog dialog = new();
 
             for (int i = 0; i < s.Length; i++)
             {
@@ -242,7 +241,7 @@ namespace mzxrules.OcaLib
                     //[11]		(fade out interface and wait, ignore all following text, no parameters?)
                     case 0x11: dialog.Append(new CustomCode(0x11)); break;
                     //[12 xx xx]	play sound xx xx
-                    case 0x12: i++; dialog.Append(new Sound(Endian.ConvertUShort(s, i))); i++; break;
+                    case 0x12: i++; dialog.Append(new Sfx(Endian.ConvertUShort(s, i))); i++; break;
                     //[13 xx]		show item icon xx
                     case 0x13: i++; dialog.Append(new ItemIcon(s[i])); break;
                     //  xx: 00 = deku stick
@@ -286,8 +285,7 @@ namespace mzxrules.OcaLib
 
         private static Dialog JpnEscapeCustomCodes(byte[] data)
         {
-            Dialog dialog = new Dialog();
-            StringBuilder sb = new StringBuilder();
+            Dialog dialog = new();
             GetUnescapedJpnChars(data, out ushort[] chrRaw, out char[] chr);
 
             for (int i = 0; i < chrRaw.Length; i++)
@@ -295,7 +293,7 @@ namespace mzxrules.OcaLib
                 switch (chrRaw[i])
                 {
                     #region SpecialChars
-                    case 0x839F: sb.Append(ConvertSpecialChars((byte)chrRaw[i])); break;
+                    case 0x839F: dialog.Append(ConvertSpecialChars((byte)chrRaw[i])); break;
                     case 0x83A0: goto case 0x839F;// "[B]";
                     case 0x83A1: goto case 0x839F;// "[C]";
                     case 0x83A2: goto case 0x839F;// "[L]";
@@ -349,7 +347,7 @@ namespace mzxrules.OcaLib
                     //[11]		(fade out interface and wait, ignore all following text, no parameters?)
 
                     //[12 xx xx]	play sound xx xx
-                    case 0x81F3: i++; dialog.Append(new Sound(chrRaw[i])); break;
+                    case 0x81F3: i++; dialog.Append(new Sfx(chrRaw[i])); break;
                     //[13 xx]		show item icon xx
                     case 0x819A: i++; dialog.Append(new ItemIcon((byte)chrRaw[i])); break;
                     //  xx: 00 = deku stick
@@ -414,22 +412,22 @@ namespace mzxrules.OcaLib
 
         private static string DisplayValue(byte p)
         {
-            switch (p)
+            return p switch
             {
-                case 00: return "[Horseback Archery Score]";
-                case 02: return "[Largest Fish]";
-                case 03: return "[Horse Race Time]";
-                case 04: return "[Marathon Time]";
-                case 06: return "[Dampé Race Time]";
-                default: return "[!?]";
-            }
+                00 => "[Horseback Archery Score]",
+                02 => "[Largest Fish]",
+                03 => "[Horse Race Time]",
+                04 => "[Marathon Time]",
+                06 => "[Dampé Race Time]",
+                _ => "[!?]",
+            };
         }
 
-        public class TextboxMessage
+        public class TextboxMessage(GameText.MessageSettings mesg, uint start, uint end)
         {
-            public MessageSettings Message { get; set; }
-            public uint BankStart { get; set; }
-            public uint BankEnd { get; set; }
+            public MessageSettings Message { get; set; } = mesg;
+            public uint BankStart { get; set; } = start;
+            public uint BankEnd { get; set; } = end;
 
             public ushort Id { get { return Message.Id; } }
             public byte Box { get { return Message.Box; } }
@@ -444,71 +442,55 @@ namespace mzxrules.OcaLib
                 get { return BankEnd & 0xFFFFFF; }
                 set { BankEnd = (BankEnd & 0xFF000000) + (value & 0xFFFFFF); }
             }
-
-            public TextboxMessage(MessageSettings mesg, uint start, uint end)
-            {
-                Message = mesg;
-                BankStart = start;
-                BankEnd = end;
-            }
         }
 
-        public class MessageSettings
+        public class MessageSettings(BinaryReader br)
         {
-            public ushort Id;
-            public byte Box;
-            public byte Unused;
-
-            public MessageSettings(BinaryReader br)
-            {
-                Id = br.ReadBigUInt16();
-                Box = br.ReadByte();
-                Unused = br.ReadByte();
-            }
+            public ushort Id = br.ReadBigUInt16();
+            public byte Box = br.ReadByte();
+            public byte Unused = br.ReadByte();
         }
 
-        
+
         /// <summary>
         /// Gets a text representation of a color code
         /// </summary>
         private static string GetColorCode(byte p)
         {
-            string code;
-            switch (p)
+            string code = p switch
             {
-                case 00: code = "wh"; break; //white
-                case 01: code = "re"; break; //red
-                case 02: code = "ge"; break; //green
-                case 03: code = "bu"; break; //blue
-                case 04: code = "cy"; break; //light blue
-                case 05: code = "pi"; break; //pink
-                case 06: code = "ye"; break; //yellow
-                case 07: code = "ba"; break; //black
-                default: code = $"{p:X2}"; break;
-            }
+                00 => "wh",
+                01 => "re",
+                02 => "ge",
+                03 => "bu",
+                04 => "cy",
+                05 => "pi",
+                06 => "ye",
+                07 => "ba",
+                _ => $"{p:X2}",
+            };
             return $"[c:{code}]";
         }
 
-        static string ConvertSpecialChars(byte s)
+        private static string ConvertSpecialChars(byte s)
         {
-            switch (s)
+            return s switch
             {
-                case 0x9F: return "[A]";
-                case 0xA0: return "[B]";
-                case 0xA1: return "[C]";
-                case 0xA2: return "[L]";
-                case 0xA3: return "[R]";
-                case 0xA4: return "[Z]";
-                case 0xA5: return "[C-Up]";
-                case 0xA6: return "[C-Down]";
-                case 0xA7: return "[C-Left]";
-                case 0xA8: return "[C-Right]";
-                case 0xA9: return "[Triangle]";
-                case 0xAA: return "[Control Stick]";
-                case 0xAB: return "[D-pad]";
-                default:
-                    return (s > 0x9F) ? $"[!! {s:X2}]" : ((char)s).ToString();
-            }
+                0x9F => "[A]",
+                0xA0 => "[B]",
+                0xA1 => "[C]",
+                0xA2 => "[L]",
+                0xA3 => "[R]",
+                0xA4 => "[Z]",
+                0xA5 => "[C-Up]",
+                0xA6 => "[C-Down]",
+                0xA7 => "[C-Left]",
+                0xA8 => "[C-Right]",
+                0xA9 => "[Triangle]",
+                0xAA => "[Control Stick]",
+                0xAB => "[D-pad]",
+                _ => (s > 0x9F) ? $"[!! {s:X2}]" : ((char)s).ToString(),
+            };
         }
 
         //old parser code

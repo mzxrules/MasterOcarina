@@ -3,11 +3,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace mzxrules.XActor.Gui
 {
     public partial class ActorControl : UserControl
     {
+        [DefaultValue(null)]
         public XActors Document { get; set; }
         XActor Actor = null;
         public ActorControl()

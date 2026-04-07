@@ -5,7 +5,7 @@ using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class CutsceneCommand : SceneCommand, IDataCommand
+    class CutsceneCommand(Game game) : SceneCommand, IDataCommand
     {
         struct Record
         {
@@ -29,19 +29,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
 
         public SegmentAddress SegmentAddress { get; set; }
-        public int CutsceneAddress
-        {
-            get { return SegmentAddress.Offset; }
-            set { SegmentAddress = new SegmentAddress(SegmentAddress, value); }
-        }
 
         public int Cutscenes;
 
-        List<Record> records = new List<Record>();
-        
-        private readonly Game game;
-
-        public CutsceneCommand(Game game) => this.game = game;
+        private readonly List<Record> records = [];
 
         public override void SetCommand(SceneWord command)
         {
@@ -58,23 +49,28 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             if (game == Game.MajorasMask)
             {
-                string result = $"There are {Cutscenes} cutscenes. List starts at {CutsceneAddress:X8}";
+                string result = $"There are {Cutscenes} cutscenes. List starts at {SegmentAddress}";
                 foreach (var item in records)
                 {
-                    result += $"{Environment.NewLine}" + item;
+                    result += $"{Environment.NewLine}{item}";
                 }
                 return result;
             }
-
-            return $"Cutscene starts at {CutsceneAddress:X8}";
+            else
+            {
+                return $"Cutscene starts at {SegmentAddress}";
+            }
         }
 
         public void Initialize(BinaryReader br)
         {
-            if (game ==  Game.MajorasMask)
+            if (game == Game.MajorasMask)
             {
                 if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
+                {
                     throw new Exception();
+                }
+
                 br.BaseStream.Position = SegmentAddress.Offset;
                 for (int i = 0; i < Cutscenes; i++)
                 {

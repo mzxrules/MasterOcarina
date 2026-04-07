@@ -2,21 +2,18 @@
 
 namespace mzxrules.Helper
 {
-    public class N64PtrRange
+    public record N64PtrRange(N64Ptr Start, N64Ptr End)
     {
-        public N64Ptr Start { get; private set; }
+        public N64Ptr Start { get; private set; } = Start;
+        public N64Ptr End { get; private set; } = End;
 
-        public N64Ptr End { get; private set; }
+        public N64Ptr Size => End - Start;
 
-        public N64Ptr Size { get { return End - Start; } }
-
-        public N64PtrRange()
+        public N64PtrRange() : this(0, 0)
         {
-            Start = 0;
-            End = 0;
         }
 
-        public N64PtrRange(byte[] data)
+        public N64PtrRange(byte[] data) : this(default, default)
         {
             int[] list = new int[2];
 
@@ -24,11 +21,6 @@ namespace mzxrules.Helper
             Buffer.BlockCopy(data, 0, list, 0, 8);
             Start = list[0];
             End = list[1];
-        }
-        public N64PtrRange(N64Ptr start, N64Ptr end)
-        {
-            Start = start;
-            End = end;
         }
 
         public override string ToString()
@@ -38,7 +30,7 @@ namespace mzxrules.Helper
 
         public bool IsInRange(N64Ptr value)
         {
-            N64Ptr start; 
+            N64Ptr start;
             N64Ptr end;
 
             if (Start < End)

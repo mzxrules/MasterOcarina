@@ -8,8 +8,8 @@ namespace mzxrules.OcaLib
     {
         public class BuildInformation
         {
-            public static readonly BuildInformation[] builds = new BuildInformation[]
-            {
+            public static readonly BuildInformation[] builds =
+            [
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.UNKNOWN, Name = "Unknown", Localization = Localization.UNKNOWN},
 
                 new BuildInformation { CRC = 0xEC7011B77616D72B, Version = Build.N0, Name = "NTSC 1.0", Localization = Localization.NTSC },
@@ -31,7 +31,7 @@ namespace mzxrules.OcaLib
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUEC, Name = "Chinese iQue", Localization = Localization.CHI },
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.IQUET, Name = "Traditional Chinese iQue", Localization = Localization.CHI },
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.NRC, Name = "NTSC RC 98-10-18 23:05:00", Localization = Localization.NTSC }
-            };
+            ];
 
             public Build Version { get; private set; }
             public string Name { get; private set; }
@@ -137,13 +137,13 @@ namespace mzxrules.OcaLib
 
         public static IEnumerable<Language> GetSupportedLanguages(Build b)
         {
-            switch (GetLocalization(b))
+            return GetLocalization(b) switch
             {
-                case Localization.NTSC: return new Language[] { Language.Japanese, Language.English };
-                case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French };
-                case Localization.CHI: return new Language[] { Language.Chinese };
-                default: return null;
-            }
+                Localization.NTSC => [Language.Japanese, Language.English],
+                Localization.PAL => [Language.English, Language.German, Language.French],
+                Localization.CHI => [Language.Chinese],
+                _ => null,
+            };
         }
         
         public static bool IsBuildNintendo(Build build)

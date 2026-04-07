@@ -264,7 +264,7 @@ namespace Spectrum
                 Console.WriteLine($"New: {emu}");
                 string input = Console.ReadLine();
 
-                if (input.ToLowerInvariant() == "yes")
+                if (input.Equals("yes", StringComparison.OrdinalIgnoreCase))
                 {
                     Options.Emulators.Remove(key);
                     Options.Emulators.Add(key, emu);
@@ -288,16 +288,16 @@ namespace Spectrum
             }
 
             (Tokens t, Func<object, bool> validateFunc, string s)[] inputChain =
-            {
+            [
                 (Tokens.STRING, (a)=>true, "Enter the exact name of the emulator process, omitting the .exe"),
                 (Tokens.S32, validateProcess, "Enter 32 if emulator is a 32 bit process, or 64 if emulator is a 64 bit process"),
                 (Tokens.STRING, (a)=>true, "Enter an expression that can be used to locate the start of ram"),
                 (Tokens.LITERAL, validateByteOrder, "Enter the emulator's byte order. Big32 = Big Endian 32, Lit32 = Little Endian 32"),
                 (Tokens.LITERAL, (a)=>true, "Enter a short string (no spaces) to reference this emulator via the mount command."),
                 (Tokens.STRING, (a)=>true, "Enter a description for the emulator"),
-            };
+            ];
 
-            List<object> arguments = new();
+            List<object> arguments = [];
 
             foreach (var (token, validate, request) in inputChain)
             {
@@ -375,7 +375,7 @@ namespace Spectrum
             Console.WriteLine("Ram Start expression: " + emu.RamStart);
             string input = Console.ReadLine();
 
-            if (input.ToLowerInvariant() != "yes")
+            if (!input.Equals("yes", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine("Changes cancelled.");
                 return;
@@ -403,7 +403,7 @@ namespace Spectrum
 
         private static void MountEmulator(string emu)
         {
-            List<Emulator> emulatorsToMount = new();
+            List<Emulator> emulatorsToMount = [];
 
             if (emu == "")
             {
@@ -417,7 +417,7 @@ namespace Spectrum
                 }
                 else
                 {
-                    emulatorsToMount = new List<Emulator>() { emulator };
+                    emulatorsToMount = [emulator];
                 }
             }
             if (Zpr.TryMountEmulator(emulatorsToMount))
@@ -1727,7 +1727,7 @@ namespace Spectrum
             N64Ptr frameBufferPtr1 = buffer0; //0x803B5000;
             N64Ptr frameBufferPtr2 = buffer1; //0x803DA800;
 
-            byte[] convertFrameContext = new byte[] { 0x01, 0xDA, 0xDB, 0xDC, 0xDE };
+            byte[] convertFrameContext = [0x01, 0xDA, 0xDB, 0xDC, 0xDE];
 
             if (!File.Exists("dump/frame.bin"))
                 return;
@@ -1817,12 +1817,15 @@ namespace Spectrum
             }
             else
             {
-                PrintBgActorCollision(collisionCtx.dyna.bgActors);
+                PrintBgActorCollision(collisionCtx.dyna);
             }
         }
 
-        private static void PrintBgActorCollision(BgActor[] bgActors)
+        private static void PrintBgActorCollision(DynaCollisionContext dyna)
         {
+            BgActor[] bgActors = dyna.bgActors;
+            ushort[] bgActorFlags = dyna.bgActorFlags;
+
             for (int i = 0; i < 50; i++)
             {
                 BgActor actor = bgActors[i];
@@ -1832,7 +1835,7 @@ namespace Spectrum
 
                     //CollisionActorDoc.AddNewRecord(actor, obj, Options.Version);
 
-                    Console.WriteLine($"{i:X2} {actor}");
+                    Console.WriteLine($"{i:X2} {bgActorFlags[i]:X4} {actor}");
                 }
             }
         }
@@ -1872,7 +1875,7 @@ namespace Spectrum
         private static void CommandColDyna(Arguments args)
         {
             Ptr ptr = GetColCtxPtr();
-            List<(int, BgActor)> bgActors = new();
+            List<(int, BgActor)> bgActors = [];
             for (int i = 0; i < 50; i++)
             {
                 BgActor actor = new(ptr.RelOff(0x54 + (0x64 * i)));
@@ -1897,7 +1900,7 @@ namespace Spectrum
 
         private static List<(string description, List<ColliderShape>)> GetActorCollisionPools()
         {
-            List<(string, List<ColliderShape>)> result = new();
+            List<(string, List<ColliderShape>)> result = [];
 
             int colaOffset;
 
@@ -1916,7 +1919,7 @@ namespace Spectrum
             ushort colAtUnk = colPtr.ReadUInt16(2);
 
             string colAt = $"{colPtr}: colAT, {colAtCount:D2} elements, {colAtUnk:X4}";
-            List<ColliderShape> shapes = new();
+            List<ColliderShape> shapes = [];
 
             result.Add((colAt, shapes));
 
@@ -1940,7 +1943,7 @@ namespace Spectrum
             int count = colPtr.ReadInt32(0);
 
             string description = $"{colPtr}: col{name}, {count:D2} elements";
-            List<ColliderShape> shapes = new();
+            List<ColliderShape> shapes = [];
 
             if (count <= 70)
             {
@@ -2052,13 +2055,13 @@ namespace Spectrum
         private static void AutoDumpSceneCollision(Arguments args) 
         {
             string result = "";
-            List<Action> setupChange = new()
-            {
+            List<Action> setupChange =
+            [
                 () => { SetAge(1); SetTime(10, 0); },
                 () => { SetAge(1); SetTime(23, 50); },
                 () => { SetAge(0); SetTime(10, 0); },
                 () => { SetAge(0); SetTime(23, 50); },
-            };
+            ];
             int scene = 80;
             int setup = 0;
 
@@ -2069,7 +2072,7 @@ namespace Spectrum
                 SpawnToEntrance(scene);
                 Console.Write(">");
                 var input = Console.ReadLine();
-                if (input.ToLowerInvariant().Contains("q"))
+                if (input.Contains('q', StringComparison.InvariantCultureIgnoreCase))
                 {
                     break;
                 }
@@ -2494,7 +2497,7 @@ namespace Spectrum
             }
 
             var data = Console.ReadLine();
-            var lines = data.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            var lines = data.Split(['\n'], StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => int.Parse(x.Trim(), NumberStyles.HexNumber));
 
             var cur = addr;
@@ -2600,7 +2603,7 @@ namespace Spectrum
         private static void VerboseOcarinaGetScene(int sceneId, int roomId, StringBuilder sb)
         {
             Scene scene = SceneRoomReader.InitializeScene(curRom.Files.GetSceneFile(sceneId), sceneId);
-            List<Room> rooms = new();
+            List<Room> rooms = [];
             if (scene == null)
             {
                 sb.AppendFormat("Exception: Scene not found");
@@ -2613,10 +2616,7 @@ namespace Spectrum
             if (roomId >= 0 && roomAddr.Count > roomId)
             {
                 var temp = roomAddr;
-                roomAddr = new List<FileAddress>
-                {
-                    temp[roomId]
-                };
+                roomAddr = [temp[roomId]];
             }
             else
             {
@@ -2839,9 +2839,9 @@ namespace Spectrum
 
         private static void SetTime(string timeStr)
         {
-            if (timeStr.Contains(":"))
+            if (timeStr.Contains(':'))
             {
-                var code = timeStr.Split(new char[] { ':' });
+                var code = timeStr.Split([':']);
                 if (!int.TryParse(code[0], out int hr)
                     || !int.TryParse(code[1], out int min))
                 {
@@ -2914,7 +2914,7 @@ namespace Spectrum
             int kill = 40;
 
 
-            List<OSThread> threads = new();
+            List<OSThread> threads = [];
             while (kill-- > 0
                 && threadCur != 0
                 && threadCur != threadStart)
@@ -3058,8 +3058,8 @@ namespace Spectrum
         {
             if (Options.Version.Game == Game.OcarinaOfTime)
             {
-                var names = Enum.GetNames(typeof(OItems.Item));
-                var values = Enum.GetValues(typeof(OItems.Item));
+                var names = Enum.GetNames<OItems.Item>();
+                var values = Enum.GetValues<OItems.Item>();
 
                 Console.Clear();
 
@@ -3076,7 +3076,7 @@ namespace Spectrum
             }
             else
             {
-                foreach (var name in Enum.GetNames(typeof(MItems.Item)))
+                foreach (var name in Enum.GetNames<MItems.Item>())
                 {
                     Console.WriteLine($"{name}");
                 }
@@ -3276,12 +3276,13 @@ namespace Spectrum
 
             //Determines COP usability
             //COP0 is always usable when running in Kernel Mode or Debug Mode
-            bool[] CU = new bool[4];
-
-            CU[0] = Shift.AsBool(status, 0x10000000);
-            CU[1] = Shift.AsBool(status, 0x20000000);
-            CU[2] = Shift.AsBool(status, 0x40000000);
-            CU[3] = Shift.AsBool(status, 0x80000000);
+            bool[] CU =
+            [
+                Shift.AsBool(status, 0x10000000),
+                Shift.AsBool(status, 0x20000000),
+                Shift.AsBool(status, 0x40000000),
+                Shift.AsBool(status, 0x80000000),
+            ];
 
             //Enables reduced power mode on some implementations (maybe not N64?)
             bool RP = Shift.AsBool(status, 0x08000000);
@@ -3291,16 +3292,17 @@ namespace Spectrum
             bool RE = Shift.AsBool(status, 0x02000000);
 
             //Interrupt Mask. Controls enabling of each of the external, internal, software intterupts
-            bool[] IM = new bool[8];
-
-            IM[0] = Shift.AsBool(status, 0x00000100);
-            IM[1] = Shift.AsBool(status, 0x00000200);
-            IM[2] = Shift.AsBool(status, 0x00000400);
-            IM[3] = Shift.AsBool(status, 0x00000800);
-            IM[4] = Shift.AsBool(status, 0x00001000);
-            IM[5] = Shift.AsBool(status, 0x00002000);
-            IM[6] = Shift.AsBool(status, 0x00004000);
-            IM[7] = Shift.AsBool(status, 0x00008000);
+            bool[] IM =
+            [
+                Shift.AsBool(status, 0x00000100),
+                Shift.AsBool(status, 0x00000200),
+                Shift.AsBool(status, 0x00000400),
+                Shift.AsBool(status, 0x00000800),
+                Shift.AsBool(status, 0x00001000),
+                Shift.AsBool(status, 0x00002000),
+                Shift.AsBool(status, 0x00004000),
+                Shift.AsBool(status, 0x00008000),
+            ];
 
             //Interrupt Enable. Acts as master enable for software and hardware intterupts
             bool IE = Shift.AsBool(status, 0x00000001);
@@ -3330,7 +3332,7 @@ namespace Spectrum
             //}
         }
 
-        static List<int> Stored = new();
+        static List<int> Stored = [];
         static long StoredAddress = 0;
         
         [SpectrumCommand(
@@ -3361,7 +3363,7 @@ namespace Spectrum
                 return;
 
             //save sequence
-            Stored = new List<int>();
+            Stored = [];
             for (int i = 0; i < 6; i++)
             {
                 Stored.Add(Zpr.ReadRamInt32((int)address + (i * 4)));

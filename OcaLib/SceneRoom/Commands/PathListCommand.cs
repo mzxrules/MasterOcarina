@@ -10,7 +10,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
     class PathListCommand : SceneCommand, IDataCommand
     {
         public SegmentAddress SegmentAddress { get; set; }
-        private List<Path> Paths = new List<Path>();
+        private readonly List<Path> Paths = [];
 
         public override void SetCommand(SceneWord command)
         {
@@ -43,7 +43,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                     && address.Segment == (int)ORom.Bank.scene)
                 {
                     var seekback = br.BaseStream.Position;
-                    Path path = new Path(nodes, address.Offset, br);
+                    Path path = new(nodes, address.Offset, br);
                     Paths.Add(path);
                     br.BaseStream.Position = seekback;
 
@@ -59,7 +59,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string Read()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             sb.AppendLine(ToString());
 
@@ -72,13 +72,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"Pathway List starts at {SegmentAddress.Offset:X8}";
+            return $"Pathway List starts at {SegmentAddress}";
         }
 
         class Path
         {
             public int Address { get; private set; }
-            public List<Vector3<short>> PathPoints = new List<Vector3<short>>();
+            public List<Vector3<short>> PathPoints = [];
 
             public Path(int nodes, int address, BinaryReader br)
             {

@@ -8,12 +8,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
     class EntranceDefinitionsCommand : SceneCommand, IDataCommand
     {
         public SegmentAddress SegmentAddress { get; set; }
-        public int EntranceDefinitionsAddress
-        {
-            get { return SegmentAddress.Offset; }
-            set { SegmentAddress = new SegmentAddress(SegmentAddress, value); }
-        }
-        public List<EntranceDef> EntranceDefinitions = new List<EntranceDef>();
+        public List<EntranceDef> EntranceDefinitions = [];
         public int Entrances = 0;
 
         public override void SetCommand(SceneWord command)
@@ -30,7 +25,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             byte position;
             byte room;
 
-            br.BaseStream.Position = EntranceDefinitionsAddress;
+            br.BaseStream.Position = SegmentAddress.Offset;
             maxEntrances = Entrances;
             for (int i = 0; i < maxEntrances; i++)
             {
@@ -55,7 +50,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string ToString()
         {
-            return $"Entrance Index Definitions starts at {EntranceDefinitionsAddress:X8}";
+            return $"Entrance Index Definitions starts at {SegmentAddress}";
         }
     }
 }

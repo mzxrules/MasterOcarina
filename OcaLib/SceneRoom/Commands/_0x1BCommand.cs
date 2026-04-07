@@ -34,7 +34,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public override string ToString()
         {
-            return $"There are {Entries} entries. List starts at {SegmentAddress:X8}";
+            return $"There are {Entries} entries. List starts at {SegmentAddress}";
         }
 
         public void Initialize(BinaryReader br)

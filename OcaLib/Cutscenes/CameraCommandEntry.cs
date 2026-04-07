@@ -1,5 +1,4 @@
 ﻿using mzxrules.Helper;
-using System;
 using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
@@ -15,11 +14,11 @@ namespace mzxrules.OcaLib.Cutscenes
         //0x04
         public float AngleOfView;
         //0x08
-        public Vector3<short> Coordinates = new Vector3<short>();
+        public Vector3<short> Coordinates = new();
         //0x0E
-        public ushort d;
+        private ushort pad_0E;
 
-        public bool IsLastEntry => (Terminator == 0xFF);
+        public bool IsLastEntry => Terminator == 0xFF;
 
         public CutsceneCommand RootCommand { get; set; }
         public short StartFrame { get; set; }
@@ -43,7 +42,6 @@ namespace mzxrules.OcaLib.Cutscenes
             Frames = frames;
             AngleOfView = angleofview;
             Coordinates = coordinates;
-            d = 0;
         }
 
         public void Load(short startFrame, BinaryReader br)
@@ -56,7 +54,7 @@ namespace mzxrules.OcaLib.Cutscenes
             Endian.Convert(out Frames, arr, 2);
             Endian.Convert(out AngleOfView, arr, 4);
             Endian.Convert(out Coordinates, arr, 8);
-            Endian.Convert(out d, arr, 14);
+            Endian.Convert(out pad_0E, arr, 14);
 
             //IFrameData
             StartFrame = startFrame;
@@ -71,7 +69,7 @@ namespace mzxrules.OcaLib.Cutscenes
             {
                 CameraCommand c = (CameraCommand)RootCommand;
                 if (c.Entries.Count > 0)
-                    last = c.Entries[c.Entries.Count - 1];
+                    last = c.Entries[^1];
             }
             byte terminator = (this == last) ? (byte)0xFF : (byte)0x00;
 
@@ -86,7 +84,7 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(Coordinates.y);
             //0x0C
             bw.WriteBig(Coordinates.z);
-            bw.WriteBig(d);
+            bw.WriteBig((short)0);
         }
 
         public override string ToString()
@@ -94,7 +92,7 @@ namespace mzxrules.OcaLib.Cutscenes
             float roll = (float)Rotation * 180 / 128;
             return 
                 $"{Terminator:X2} Frames: {Frames:X4} Roll: {roll:F2}, View Angle: {AngleOfView:F4} " +
-                $"({Coordinates.x}, {Coordinates.y}, {Coordinates.z}) {d:X4}";
+                $"({Coordinates.x}, {Coordinates.y}, {Coordinates.z}) {pad_0E:X4}";
         }
     }
 }

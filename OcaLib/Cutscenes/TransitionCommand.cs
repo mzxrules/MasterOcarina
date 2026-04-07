@@ -8,8 +8,8 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class TransitionCommand : CutsceneCommand, IFrameData
     {
-        const int LENGTH = 0x10;
-        uint Entries;
+        public const int LENGTH = 0x10;
+        int Entries;
         public ushort Transition;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }

@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public SegmentAddress SegmentAddress { get; set; }
 
         public int Actors { get; set; }
-        public List<IActor> ActorList = new();
+        public List<IActor> ActorList = [];
         private delegate ActorSpawn GetActorRecord(short[] data);
 
         readonly GetActorRecord NewActor;
@@ -22,10 +22,12 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             Game = game;
 
-            if (Game == Game.OcarinaOfTime)
-                NewActor = ActorSpawnFactory.OcarinaActors;
-            else if (Game == Game.MajorasMask)
-                NewActor = ActorSpawnFactory.MaskActors;
+            NewActor = Game switch
+            {
+                Game.OcarinaOfTime => ActorSpawnFactory.OcarinaActors,
+                Game.MajorasMask => ActorSpawnFactory.MaskActors,
+                _ => throw new InvalidOperationException(),
+            };
         }
 
         public override void SetCommand(SceneWord command)
@@ -41,10 +43,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string Read()
         {
-            string result;
+            string result = ToString();
 
-            result = ToString();
-            foreach (ActorSpawn a in ActorList)
+            foreach (ActorSpawn a in ActorList.Cast<ActorSpawn>())
             {
                 result += Environment.NewLine + a.Print();
             }
@@ -53,9 +54,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override string ToString()
         {
             if (Code == (byte)HeaderCommands.PositionList)
-                return $"There are {Actors} position(s). List starts at {SegmentAddress:X8}.";
+                return $"There are {Actors} position(s). List starts at {SegmentAddress}.";
             else
-                return $"There are {Actors} actor(s). List starts at {SegmentAddress.Offset:X8}";
+                return $"There are {Actors} actor(s). List starts at {SegmentAddress}";
         }
         
         public void Initialize(BinaryReader br)

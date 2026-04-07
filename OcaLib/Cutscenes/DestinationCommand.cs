@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using mzxrules.Helper;
@@ -19,7 +17,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public short EndFrame { get; set; }
         short endFrame2;
 
-        public DestinationCommand(ushort asm, short start, short end )
+        public DestinationCommand(ushort asm, short start, short end)
         {
             RootCommand = this;
             Command = 0x3E8;
@@ -56,9 +54,6 @@ namespace mzxrules.OcaLib.Cutscenes
             /* 0x0A */ StartFrame = br.ReadBigInt16();
             /* 0x0C */ EndFrame = br.ReadBigInt16();
             /* 0x0E */ endFrame2 = br.ReadBigInt16();
-
-            if (Entries != 1)
-                throw new ArgumentOutOfRangeException("Too many 3E8 command entries");
         }
 
         public override void Save(BinaryWriter bw)

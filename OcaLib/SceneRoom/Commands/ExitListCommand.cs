@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using mzxrules.Helper;
 
@@ -9,13 +8,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
     class ExitListCommand : SceneCommand, IDataCommand
     {
         public SegmentAddress SegmentAddress { get; set; }
-        public int ExitListAddress
-        {
-            get { return SegmentAddress.Offset; }
-            set { SegmentAddress = new SegmentAddress(SegmentAddress, value); }
-        }
         public long EndOffset { get; set; }
-        public List<ushort> ExitList = new List<ushort>();
+        public List<ushort> ExitList = [];
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
@@ -29,10 +23,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             long count;
             if (EndOffset != 0)
             {
-                count = (EndOffset - ExitListAddress) / 2;
+                count = (EndOffset - SegmentAddress.Offset) / 2;
                 if (count > 0x20)
-                    throw new ArgumentOutOfRangeException();
-                br.BaseStream.Position = ExitListAddress;
+                    throw new InvalidOperationException("Exit list is too long");
+                br.BaseStream.Position = SegmentAddress.Offset;
                 for (int i = 0; i < count; i++)
                 {
                     Endian.Convert(out ushort index, br.ReadBytes(2));
@@ -42,7 +36,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string Read()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.Append($"{ToString()}: ");
             foreach (ushort index in ExitList)
             {
@@ -52,14 +46,14 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"Exit List starts at {ExitListAddress:X8}";
+            return $"Exit List starts at {SegmentAddress}";
         }
 
         public string CSV()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
-            sb.Append($"{ExitListAddress:X8},");
+            sb.Append($"{SegmentAddress},");
             foreach (ushort index in ExitList)
             {
                 sb.Append($"{index:X4},");

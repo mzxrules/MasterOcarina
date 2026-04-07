@@ -7,7 +7,7 @@ namespace mzxrules.OcaLib.Cutscenes
         IEnumerable<IFrameData> IFrameDataEnum { get; }
         IEnumerable<IFrameData> GetIFrameDataEnumerator();
 
-        void AddEntry(IFrameData d);
-        void RemoveEntry(IFrameData d);
+        void AddEntry(IFrameData entry);
+        void RemoveEntry(IFrameData entry);
     }
 }

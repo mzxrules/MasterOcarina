@@ -1,5 +1,4 @@
 ﻿using mzxrules.Helper;
-using System;
 
 namespace mzxrules.OcaLib.Actor
 {
@@ -82,12 +81,14 @@ namespace mzxrules.OcaLib.Actor
                 actorName.Replace(',', ';'),
                 variables.Replace(',', ';'),
                 Coords.x, Coords.y, Coords.z,
-                (!NoRotation.x) ? Rotation.x.ToString() : "",
-                (!NoRotation.y) ? Rotation.y.ToString() : "",
-                (!NoRotation.z) ? Rotation.z.ToString() : "",
-                (NoRotation.x) ? Rotation.x.ToString("X2") : "",
-                (NoRotation.y) ? Rotation.y.ToString("X2") : "",
-                (NoRotation.z) ? Rotation.z.ToString("X2") : "",
+                //rotation
+                NoRotation.x ? "" : Rotation.x.ToString(),
+                NoRotation.y ? "" : Rotation.y.ToString(),
+                NoRotation.z ? "" : Rotation.z.ToString(),
+                //rotation params
+                NoRotation.x ? Rotation.x.ToString("X2") : "",
+                NoRotation.y ? Rotation.y.ToString("X2") : "",
+                NoRotation.z ? Rotation.z.ToString("X2") : "",
                 PrintDayFlags(),
                 Scene_0x1B);
         }
@@ -99,17 +100,17 @@ namespace mzxrules.OcaLib.Actor
         public override string PrintRotation()
         {
             return string.Format("({0}, {1}, {2})",
-                (!NoRotation.x) ? Rotation.x.ToString() : "N/A",
-                (!NoRotation.y) ? Rotation.y.ToString() : "N/A",
-                (!NoRotation.z) ? Rotation.z.ToString() : "N/A");
+                NoRotation.x ? "N/A" : Rotation.x.ToString(),
+                NoRotation.y ? "N/A" : Rotation.y.ToString(),
+                NoRotation.z ? "N/A" : Rotation.z.ToString());
         }
 
-        private object PrintRotationVars()
+        private string PrintRotationVars()
         {
             return string.Format("({0}, {1}, {2})",
-                (NoRotation.x) ? Rotation.x.ToString() : "N/A",
-                (NoRotation.y) ? Rotation.y.ToString() : "N/A",
-                (NoRotation.z) ? Rotation.z.ToString() : "N/A");
+                NoRotation.x ? Rotation.x.ToString() : "N/A",
+                NoRotation.y ? Rotation.y.ToString() : "N/A",
+                NoRotation.z ? Rotation.z.ToString() : "N/A");
         }
     }
 }

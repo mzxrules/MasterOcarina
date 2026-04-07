@@ -12,7 +12,7 @@ namespace mzxrules.OcaLib
         public OFileTable(string romLoc, RomVersion version)
         {
             Tables = new TableInfo(version);
-            using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new(romLoc, FileMode.Open, FileAccess.Read))
             {
                 dmadata = new DmaData(fs, version);
             }
@@ -29,14 +29,16 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetMessageFile(Rom.Language language)
         {
-            switch (language)
+            return language switch
             {
-                case Rom.Language.Japanese: return GetFile(ORom.FileList.jpn_message_data_static);
-                case Rom.Language.English: return GetFile(ORom.FileList.nes_message_data_static);
-                case Rom.Language.German: return GetFile(ORom.FileList.ger_message_data_static);
-                case Rom.Language.French: return GetFile(ORom.FileList.fra_message_data_static);
-                default: throw new NotImplementedException();
-            }
+                Rom.Language.Japanese => GetFile(ORom.FileList.jpn_message_data_static),
+                Rom.Language.English => GetFile(ORom.FileList.nes_message_data_static),
+                Rom.Language.German => GetFile(ORom.FileList.ger_message_data_static),
+                Rom.Language.French => GetFile(ORom.FileList.fra_message_data_static),
+                Rom.Language.Spanish => throw new NotImplementedException(),
+                Rom.Language.Chinese => throw new NotImplementedException(),
+                _ => throw new InvalidOperationException(),
+            };
         }
 
         public override RomFile GetSceneFile(int i)

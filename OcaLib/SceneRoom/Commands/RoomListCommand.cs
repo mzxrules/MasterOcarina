@@ -7,12 +7,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     public class RoomListCommand : SceneCommand, IDataCommand
     {
-        public SegmentAddress SegmentAddress { get; set; }
-        public int RoomListAddress
-        {
-            get { return SegmentAddress.Offset; }
-            set { SegmentAddress = new SegmentAddress(SegmentAddress, value); }
-        }
+        public SegmentAddress SegmentAddress { get; set; } // RoomListAddress
         public int Rooms { get; set; }
         public List<FileAddress> RoomAddresses { get; set; }
 
@@ -22,27 +17,27 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             Rooms = Command.Data1;
             SegmentAddress = Command.Data2;
 
-            if (command[4] != (byte)ORom.Bank.scene)
-                throw new Exception();
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
+            {
+                throw new InvalidOperationException("Scene segment incorrect");
+            }
         }
 
         public void Initialize(BinaryReader br)
         {
-            RoomAddresses = new List<FileAddress>();
-            br.BaseStream.Position = RoomListAddress;
+            RoomAddresses = [];
+            br.BaseStream.Position = SegmentAddress.Offset;
 
             for (int i = 0; i < Rooms; i++)
             {
-                var fileAddress = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+                FileAddress fileAddress = new(br.ReadBigUInt32(), br.ReadBigUInt32());
                 RoomAddresses.Add(fileAddress);
             }
         }
 
         public override string Read()
         {
-            string result;
-
-            result = ToString();
+            string result = ToString();
 
             foreach (FileAddress address in RoomAddresses)
             {
@@ -53,7 +48,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string ToString()
         {
-            return $"There are {RoomAddresses.Count} room(s). List starts at {RoomListAddress:X8}";
+            return $"There are {RoomAddresses.Count} room(s). List starts at {SegmentAddress}";
         }
     }
 }

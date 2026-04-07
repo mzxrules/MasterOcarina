@@ -45,7 +45,7 @@ namespace Experimental.Data
 
             var entry = cmd.Entries[0];
 
-            DestinationCommand exit = new DestinationCommand(0x27, entry.StartFrame, entry.EndFrame);
+            DestinationCommand exit = new(0x27, entry.StartFrame, entry.EndFrame);
 
             theEnd.Commands.Remove(theEnd.Commands.SingleOrDefault(x => x.Command == -1));
 
@@ -83,9 +83,9 @@ namespace Experimental.Data
             cs = GetCutscene_N0(file, csAddr);
 
             ActionCommand music = (ActionCommand)cs.Commands.Single(
-                x => (x is ActionCommand)
-                && ((ActionCommand)x).Command == 0x56
-                && ((ActionCommand)x).Entries[0].StartFrame == 0x2C6);
+                x => (x is ActionCommand actionCmd)
+                && actionCmd.Command == 0x56
+                && actionCmd.Entries[0].StartFrame == 0x2C6);
 
             music.Entries[0].StartFrame = 0x283;
             music.Entries[0].EndFrame = 0x284;
@@ -101,8 +101,8 @@ namespace Experimental.Data
 
             CutsceneTrimFromEnd(cs, endFrame);
 
-            cs.Commands.RemoveAll(x => (x is CameraCommand)
-            && (((CameraCommand)x).StartFrame >= endFrame));
+            cs.Commands.RemoveAll(x => (x is CameraCommand camCmd)
+            && (camCmd.StartFrame >= endFrame));
 
             //ActorCommand music = new ActorCommand(0x56, new ActionEntry())
 
@@ -125,10 +125,10 @@ namespace Experimental.Data
                 .Entries.RemoveAll(x => x.Action != 0x80);
 
             stoneCs.Commands.RemoveAll
-                (x => (x is CameraCommand)
-                && (((CameraCommand)x).StartFrame == 0x281
-                || ((CameraCommand)x).StartFrame < startFrame
-                || ((CameraCommand)x).StartFrame >= endFrame));
+                (x => (x is CameraCommand cmd)
+                && (cmd.StartFrame == 0x281
+                || cmd.StartFrame < startFrame
+                || cmd.StartFrame >= endFrame));
 
 
             var exit = stoneCs.Commands.OfType<DestinationCommand>().Single();
@@ -366,7 +366,7 @@ namespace Experimental.Data
             exit.StartFrame -= exitTrim;
             exit.EndFrame -= exitTrim;
 
-            List<CutsceneCommand> remove = new List<CutsceneCommand>();
+            List<CutsceneCommand> remove = [];
 
             foreach (var item in  lightmedallion.Commands.OfType<TransitionCommand>())
             {
@@ -398,7 +398,7 @@ namespace Experimental.Data
             int SheikCsAddr = 0x25314E0;
             int TransformationCsAddr = 0x2531BC0;
             int GetLightArrowCsAddr = 0x2532F70;
-            List<CutsceneCommand> remove = new List<CutsceneCommand>();
+            List<CutsceneCommand> remove = [];
 
             short sheikCsTrimStart = 0xA0;
 
@@ -462,9 +462,8 @@ namespace Experimental.Data
                 TrimExitCommand(ExitCmd, (short)(ExitCmd.EndFrame - getLightArrowTrimEnd+1));
             }
             
-            GetLightArrowCs.Commands = GetLightArrowCs.Commands.OfType<IFrameCollection>().Where
-                (x => x.IFrameDataEnum.Where(y => y.StartFrame < getLightArrowTrimEnd).Count() > 0).Cast<CutsceneCommand>()
-                .ToList();
+            GetLightArrowCs.Commands = [.. GetLightArrowCs.Commands.OfType<IFrameCollection>().Where
+                (x => x.IFrameDataEnum.Any(y => y.StartFrame < getLightArrowTrimEnd)).Cast<CutsceneCommand>()];
             {
                 var TextCmd = GetLightArrowCs.Commands.OfType<TextCommand>().Single();
                 TextCmd.Entries = TextCmd.Entries.Where(x => x.Action == 0x72).ToList();
@@ -564,14 +563,14 @@ namespace Experimental.Data
         private static List<IFrameCollection> CutsceneDeleteSection
             (IEnumerable<IFrameCollection> iFrameCollectionList, short cutStart, short cutEnd)
         {
-            List<IFrameCollection> delete = new List<IFrameCollection>();
+            List<IFrameCollection> delete = [];
             foreach (IFrameCollection item in iFrameCollectionList)
             {
                 List<IFrameData> remove = CutsceneDeleteSection(item.IFrameDataEnum, cutStart, cutEnd);
                 foreach (var i in remove)
                     item.RemoveEntry(i);
             }
-            delete = iFrameCollectionList.Where(x => x.IFrameDataEnum.Count() == 0).ToList();
+            delete = iFrameCollectionList.Where(static x => !x.IFrameDataEnum.Any()).ToList();
             return delete;
         }
 
@@ -585,7 +584,7 @@ namespace Experimental.Data
         private static List<IFrameData> CutsceneDeleteSection
             (IEnumerable<IFrameData> iFrameDataEnumerable,  short cutStart, short cutEnd)
         {
-            List<IFrameData> remove = new();
+            List<IFrameData> remove = [];
             short shift = (short)(cutEnd - cutStart);
 
             foreach (var item in iFrameDataEnumerable)
@@ -643,12 +642,12 @@ namespace Experimental.Data
             //foreach (CutsceneCommand c in remove)
             //    cutscene.Commands.Remove(c);
 
-            List<CutsceneCommand> remove = new List<CutsceneCommand>();
+            List<CutsceneCommand> remove = [];
             foreach (var command in cutscene.Commands)
             {
                 if (command is IFrameCollection frameCollection)
                 {
-                    List<IFrameData> delData = new List<IFrameData>();
+                    List<IFrameData> delData = [];
                     foreach (var item in frameCollection.IFrameDataEnum)
                     {
                         item.EndFrame = (frameEnd > item.EndFrame) ?
@@ -659,7 +658,7 @@ namespace Experimental.Data
                     foreach (var item in delData)
                         frameCollection.RemoveEntry(item);
 
-                    if (frameCollection.IFrameDataEnum.Count() == 0)
+                    if (!frameCollection.IFrameDataEnum.Any())
                         remove.Add((CutsceneCommand)frameCollection);
                 }
             }
@@ -676,18 +675,18 @@ namespace Experimental.Data
 
         private static void TrimFromStart(List<CutsceneCommand> Commands, short frame)
         {
-            List<CutsceneCommand> RemoveCommand = new();
+            List<CutsceneCommand> RemoveCommand = [];
             foreach (var commandIFrameCollection in Commands.OfType<IFrameCollection>())
             {
                 var command = (CutsceneCommand)commandIFrameCollection;
-                List<IFrameData> RemoveIFrameData = new();
+                List<IFrameData> RemoveIFrameData = [];
                 //loop over individual items
                 foreach (var frameItem in commandIFrameCollection.IFrameDataEnum)
                 {
                     frameItem.StartFrame = (short)Math.Max(frameItem.StartFrame - frame, 0);
                     frameItem.EndFrame -= frame;
 
-                    if (!(frameItem is CutsceneCommand) && frameItem.EndFrame <= 0)
+                    if (frameItem is not CutsceneCommand && frameItem.EndFrame <= 0)
                         RemoveIFrameData.Add(frameItem);
                 }
 
@@ -699,11 +698,11 @@ namespace Experimental.Data
                     {
                         commandIFrameCollection.RemoveEntry(entry);
                     }
-                    if (commandIFrameCollection.IFrameDataEnum.Count() == 0)
+                    if (!commandIFrameCollection.IFrameDataEnum.Any())
                         RemoveCommand.Add(command);
                 }
-                if (command is CameraCommand
-                    && ((CameraCommand)command).Entries.Count <= 4)
+                if (command is CameraCommand camCmd
+                    && camCmd.Entries.Count <= 4)
                 {
                     RemoveCommand.Add(command);
                 }
@@ -731,7 +730,7 @@ namespace Experimental.Data
 
         private static void CutScreenTransitions(Cutscene cutscene, short endFrame)
         {
-            List<TransitionCommand> remove = new List<TransitionCommand>();
+            List<TransitionCommand> remove = [];
 
             remove = cutscene.Commands
                 .OfType<TransitionCommand>()

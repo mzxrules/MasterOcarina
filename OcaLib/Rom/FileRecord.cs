@@ -2,7 +2,7 @@
 
 namespace mzxrules.OcaLib
 {
-    public class FileRecord
+    public record struct FileRecord
     {
         /// <summary>
         /// The file's location when a rom is decompressed. Also determines decompressed size.
@@ -19,9 +19,11 @@ namespace mzxrules.OcaLib
         /// The file's location, independent of compression state.
         /// </summary>
         /// 
-        public FileAddress Data => GetDataAddress();
+        public readonly FileAddress Data => GetDataAddress();
 
-        public bool IsCompressed => Rom.End != 0;
+        public readonly bool IsCompressed => Rom.End != 0;
+
+        public readonly bool IsNull => VRom.Start == 0 && VRom.End == 0;
 
         public FileRecord(FileRecord rec)
         {
@@ -35,16 +37,16 @@ namespace mzxrules.OcaLib
             Rom = rom;
         }
 
-        public long GetRelativeAddress(long offset)
+        public readonly long GetRelativeAddress(long offset)
         {
             return offset - VRom.Start;
         }
 
-        private FileAddress GetDataAddress()
+        private readonly FileAddress GetDataAddress()
         {
             var start = Rom.Start;
-            var end = (IsCompressed) ? Rom.End : Rom.Start + VRom.Size;
-            return (start, end);
+            var end = IsCompressed ? Rom.End : Rom.Start + VRom.Size;
+            return new(start, end);
         }
     }
 }

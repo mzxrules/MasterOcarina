@@ -8,12 +8,12 @@ namespace mzxrules.OcaLib.Cutscenes
     internal class TimeCommand : CutsceneCommand
     {
         const int LENGTH = 8;
-        private int commandId;
-        public List<TimeEntry> Entries = new();
 
-        public TimeCommand(int commandId, BinaryReader br)
+        public List<TimeEntry> Entries = [];
+
+        public TimeCommand(int command, BinaryReader br)
         {
-            this.commandId = commandId;
+            Command = command;
 
             int entries = br.ReadBigInt32();
             for (int i = 0; i< entries; i++)

@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.Maps
     public class DungeonFloor
     {
         [DataMember]
-        List<DungeonFloorIcon> Icons = new List<DungeonFloorIcon>(3);
+        List<DungeonFloorIcon> Icons = new(3);
 
         public DungeonFloor(BinaryReader br)
         {
@@ -28,7 +28,7 @@ namespace mzxrules.OcaLib.Maps
     public class DungeonMinimap
     {
         [DataMember]
-        List<DungeonMinimapIcon> Icons = new List<DungeonMinimapIcon>(3);
+        List<DungeonMinimapIcon> Icons = new(3);
 
         public DungeonMinimap(BinaryReader br)
         {
@@ -55,7 +55,7 @@ namespace mzxrules.OcaLib.Maps
 
         [DataMember(Order = 3)]
         /* 0x14 */
-        public List<IconPoint> IconPoints = new List<IconPoint>();
+        public List<IconPoint> IconPoints = [];
 
         public DungeonFloorIcon(BinaryReader br)
         {

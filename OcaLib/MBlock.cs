@@ -16,7 +16,7 @@ namespace mzxrules.OcaLib
         public object Asset;
         LinkedListNode<MBlock> Parent = null;
         LinkedListNode<MBlock> Self = null;
-        LinkedList<MBlock> Children = new LinkedList<MBlock>();
+        LinkedList<MBlock> Children = new();
         public bool ContainsChildren { get { return Children.Count != 0; } }
 
         public MBlock(FileAddress addr)
@@ -76,7 +76,7 @@ namespace mzxrules.OcaLib
         {
             MBlock result;
             MBlock query;
-            FileAddress blockAddr = new FileAddress(start, end);
+            FileAddress blockAddr = new(start, end);
 
             //create new block
             result = new MBlock(new FileAddress(start, end), asset);
@@ -171,16 +171,16 @@ namespace mzxrules.OcaLib
                 if (IsBeforeList)
                 {
                     levelNode = List.Children.First;
-                    current = (levelNode != null) ? levelNode.Value : null;
+                    current = levelNode?.Value;
                     IsBeforeList = false;
                     //StepInThisPass = true;
-                    return (levelNode != null);
+                    return levelNode != null;
                 }
                 else if (levelNode == null)
                     return false;
 
-                if (sub == null)
-                    sub = new Enumerator(levelNode.Value);
+                sub ??= new Enumerator(levelNode.Value);
+
                 if (sub.MoveNext())
                 {
                     current = (MBlock)sub.Current;
@@ -189,8 +189,8 @@ namespace mzxrules.OcaLib
                 sub = null;
 
                 levelNode = levelNode.Next;
-                current = (levelNode != null) ? levelNode.Value : null;
-                return (levelNode != null);
+                current = levelNode?.Value;
+                return levelNode != null;
             }
 
             public void Reset()

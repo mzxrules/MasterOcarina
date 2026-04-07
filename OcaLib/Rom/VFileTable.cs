@@ -23,7 +23,7 @@ namespace mzxrules.OcaLib
         byte[] CachedFile;
         FileAddress CachedFileAddress;
         public TableInfo Tables;
-        
+
         protected VFileTable() { }
 
         public virtual RomFile GetSceneFile(int i)
@@ -48,7 +48,7 @@ namespace mzxrules.OcaLib
             if (dmadata.TryGetFileRecord(address.Start, out FileRecord record)
                 && address.Size == record.VRom.Size)
                     return GetFile(record);
-            
+
             return GetFile(new FileRecord(address, new FileAddress(address.Start, 0)));
         }
 
@@ -86,7 +86,7 @@ namespace mzxrules.OcaLib
             {
                 byte[] data = new byte[record.Data.Size];
                 fs.Position = record.Data.Start;
-                fs.Read(data, 0, record.Data.Size);
+                fs.ReadExactly(data, 0, record.Data.Size);
 
                 if (record.IsCompressed)
                 {
@@ -126,16 +126,16 @@ namespace mzxrules.OcaLib
         /// <param name="file"></param>
         /// <returns></returns>
         public RomFile GetFile(RomFileToken file) => GetFile(Addresser.GetRom(file, Version, AddressToken.__Start));
-        
+
         #endregion
 
         /// <summary>
-        /// Returns a file without attempting to decompress it.  
+        /// Returns a file without attempting to decompress it.
         /// </summary>
         /// <param name="address">Address containing the location of the file</param>
         /// <returns>Returns a stream containing the file</returns>
         public Stream GetPhysicalFile(FileAddress address) => GetPhysicalFile(address.Start);
-        
+
         /// <summary>
         /// Returns a file without attempting to decompress it.
         /// </summary>
@@ -144,7 +144,7 @@ namespace mzxrules.OcaLib
         public Stream GetPhysicalFile(int vromStart)
         {
             byte[] data;
-            
+
             if (!dmadata.TryGetFileRecord(vromStart, out FileRecord tableRecord))
                 throw new Exception();
 
@@ -152,7 +152,7 @@ namespace mzxrules.OcaLib
             {
                 data = new byte[tableRecord.Data.Size];
                 fs.Position = tableRecord.Data.Start;
-                fs.Read(data, 0, tableRecord.Data.Size);
+                fs.ReadExactly(data, 0, tableRecord.Data.Size);
             }
             return new MemoryStream(data);
         }
@@ -161,7 +161,7 @@ namespace mzxrules.OcaLib
         /// Returns the full FileRecord for a file that contains the given address
         /// </summary>
         /// <param name="vromStart"></param>
-        /// <returns>The FileRecord of the containing file, or null if no file contains the given address</returns>
+        /// <returns>The FileRecord of the containing file. Check IsNull to see if the FileRecord is valid</returns>
         public FileRecord GetFileStart(int vromStart)
         {
             return dmadata.Table.FirstOrDefault(x => x.VRom.Start <= vromStart
@@ -272,7 +272,7 @@ namespace mzxrules.OcaLib
         protected FileAddress GetFileByTable(TableInfo.Table refTable, int index)
         {
             RomFileToken token = GetCodeFileToken();
-            
+
             int size = refTable.Length;
             int offset = refTable.StartOff;
             int recordAddr, startAddr, endAddr;
@@ -295,9 +295,9 @@ namespace mzxrules.OcaLib
 
             return result;
         }
-        
+
         #endregion
-        
+
         #region GetOverlayRecord
         public OverlayRecord GetOverlayRecord(int index, TableInfo.Type type)
         {
@@ -347,11 +347,12 @@ namespace mzxrules.OcaLib
 
         private RomFileToken GetCodeFileToken()
         {
-            RomFileToken token = ORom.FileList.invalid;
-            if (Version.Game == Game.OcarinaOfTime)
-                token = ORom.FileList.code;
-            if (Version.Game == Game.MajorasMask)
-                token = MRom.FileList.code;
+            RomFileToken token = Version.Game switch
+            {
+                Game.OcarinaOfTime => (RomFileToken)ORom.FileList.code,
+                Game.MajorasMask => (RomFileToken)MRom.FileList.code,
+                _ => (RomFileToken)ORom.FileList.invalid,
+            };
             return token;
         }
 

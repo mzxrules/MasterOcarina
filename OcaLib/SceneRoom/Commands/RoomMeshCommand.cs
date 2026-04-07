@@ -28,7 +28,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"Room Mesh: {Command.Data2:X8}";
+            return $"Room Mesh: {SegmentAddress}";
         }
 
         enum Type
@@ -49,14 +49,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 Type t = (Type)br.ReadByte();
                 br.BaseStream.Position--;
-                switch(t)
+                return t switch
                 {
-                    case Type.T0: return new T0Header(br); 
-                    case Type.T1: return new T1Header(br); 
-                    case Type.T2: return new T0Header(br);
-                    default:
-                        throw new NotImplementedException();
-                }
+                    Type.T0 => new T0Header(br),
+                    Type.T1 => new T1Header(br),
+                    Type.T2 => new T0Header(br),
+                    _ => throw new NotImplementedException(),
+                };
             }
 
             protected Header(BinaryReader br)

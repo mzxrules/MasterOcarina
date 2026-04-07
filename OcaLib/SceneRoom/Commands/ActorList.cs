@@ -1,11 +1,8 @@
 ﻿using mzxrules.Helper;
 using mzxrules.OcaLib.Actor;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -23,7 +20,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         */
 
         public SegmentAddress Address;
-        List<IActor> Actors = new List<IActor>();
+        List<IActor> Actors = [];
         private int actors;
 
 
@@ -53,7 +50,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public void LoadSpawns(BinaryReader br)
         {
-            List<IActor> list = new List<IActor>();
+            List<IActor> list = [];
             br.BaseStream.Position = Address.Offset;
 
             for (int i = 0; i < actors; i++)
@@ -70,7 +67,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public void LoadTransitions(BinaryReader br)
         {
-            List<IActor> list = new List<IActor>();
+            List<IActor> list = [];
             br.BaseStream.Position = Address.Offset;
 
             var readRemaining = br.BaseStream.Length - br.BaseStream.Position;

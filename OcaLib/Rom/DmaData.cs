@@ -6,7 +6,7 @@ namespace mzxrules.OcaLib
 {
     public class DmaData
     {
-        public List<FileRecord> Table = new List<FileRecord>();
+        public List<FileRecord> Table = [];
         public FileRecord Address { get; private set; }
 
         public DmaData (Stream s, int address)
@@ -36,14 +36,14 @@ namespace mzxrules.OcaLib
             FileAddress fileVirtualAddress;
             FileAddress filePhysicalAddress;
             
-            BinaryReader br = new BinaryReader(fs);
+            BinaryReader br = new(fs);
             //set rom type dependent values
             position = address;
 
             //set stream position
             fs.Position = position;
 
-            positionEnd = GetEndAddress(br);
+            positionEnd = ParseEndAddress(br);
 
             length = (positionEnd - position) / 0x10;
 
@@ -80,7 +80,7 @@ namespace mzxrules.OcaLib
             return false;
         }
 
-        private int GetEndAddress(BinaryReader br)
+        private static int ParseEndAddress(BinaryReader br)
         {
             long seekback;
             int result;

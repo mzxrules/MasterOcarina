@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atom.RSP
 {
-    public enum opcodes
+    public enum Opcodes
     {
         #region 'Standard' Opcodes
         INVALID,

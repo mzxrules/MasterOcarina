@@ -5,80 +5,6 @@ using System.Collections.Generic;
 
 namespace Spectrum
 {
-    class DynaCollisionContext
-    {
-        const int BG_ACTOR_MAX = 50;
-        /* O 0x0000          */ public byte bitFlag = 0;
-        /* O 0x0004          */ public BgActor[] bgActors = new BgActor[BG_ACTOR_MAX];
-        /* O 0x138C          */ public ushort[] bgActorFlags = new ushort[BG_ACTOR_MAX]; // & 0x0008 = no dyna ceiling
-        /* O 0x13F0          */ public Ptr polyList; //dyn_poly
-        /* O 0x13F4          */ public Ptr vtxList; //dyn_vtx
-        /*          M 0x13F8 */ public int mm_0x1448;
-        /*          M 0x13FC */ public Ptr waterBoxList;
-        /* O 0x13F8 M 0x1400 */ public Ptr polyNodes_tbl; //DynaSSNodeList, dyn_list, dyn_count, dyn_max
-        /* O 0x13FC M 0x1404 */ public int polyNodes_count;
-        /* O 0x1400 M 0x1408 */ public int polyNodes_max;
-        /* O 0x1404 M 0x140C */ public int polyNodesMax; //dyn_list_max
-        /* O 0x1408 M 0x1410 */ public int polyListMax; //dyn_poly_max
-        /* O 0x140C M 0x1414 */ public int vtxListMax; //dyn_vtx_max
-
-        RomVersion version;
-
-        public DynaCollisionContext(Ptr ctx, RomVersion version)
-        {
-            for (int i = 0; i < BG_ACTOR_MAX; i++)
-            {
-                bgActors[i] = new BgActor(ctx.RelOff(i * 0x64 + 0x54));
-            }
-
-            polyList = ctx.Deref(0x1440);
-            vtxList = ctx.Deref(0x1444);
-
-            if (version.Game == Game.OcarinaOfTime)
-            {
-                polyNodes_tbl = ctx.Deref(0x1448);
-                polyNodes_count = ctx.ReadInt32(0x144C);
-                polyNodes_max = ctx.ReadInt32(0x1450);
-                polyNodesMax = ctx.ReadInt32(0x1454);
-                polyListMax = ctx.ReadInt32(0x1458);
-                vtxListMax = ctx.ReadInt32(0x145C);
-            }
-            else if (version.Game == Game.MajorasMask)
-            {
-                mm_0x1448 = ctx.ReadInt32(0x1448);
-                waterBoxList = ctx.Deref(0x144C);
-                polyNodes_tbl = ctx.Deref(0x1450);
-                polyNodes_count = ctx.ReadInt32(0x1454);
-                polyNodes_max = ctx.ReadInt32(0x1458);
-                polyNodesMax = ctx.ReadInt32(0x145C);
-                polyListMax = ctx.ReadInt32(0x1460);
-                vtxListMax = ctx.ReadInt32(0x1464);
-            }
-            this.version = version;
-        }
-        public override string ToString()
-        {
-            string result = $"DynaPolyContext:{Environment.NewLine}";
-            result +=
-                $" polyList        {polyList}{Environment.NewLine}" +
-                $" vtxList         {vtxList}{Environment.NewLine}";
-            if (version.Game == Game.MajorasMask)
-            {
-                result +=
-                    $" waterBox_0x1448 {mm_0x1448:X8}{Environment.NewLine}" +
-                    $" waterBoxList    {waterBoxList}{Environment.NewLine}";
-            }
-            result +=
-                $" PolyNodes:{Environment.NewLine}" +
-                $"  tbl            {polyNodes_tbl}{Environment.NewLine}" +
-                $"  count          {polyNodes_count,6}{Environment.NewLine}" +
-                $"  max            {polyNodes_max,6}{Environment.NewLine}" +
-                $" polyNodesMax    {polyNodesMax,6}{Environment.NewLine}" +
-                $" polyListMax     {polyListMax,6}{Environment.NewLine}" +
-                $" vtxListMax      {vtxListMax,6}";
-            return result;
-        }
-    }
     class CollisionCtx
     {
         RomVersion version;
@@ -151,7 +77,7 @@ namespace Spectrum
             SSNodeCount = ctx.ReadInt16(0x46);
             SSNodeTbl = ctx.Deref(0x48);
             polyCheckTbl = ctx.Deref(0x4C);
-            dyna = new DynaCollisionContext(ctx, version);
+            dyna = new DynaCollisionContext(ctx.RelOff(0x50), version);
 
             if (version.Game == Game.OcarinaOfTime)
             {
@@ -266,44 +192,44 @@ namespace Spectrum
 
         public List<SimpleRamItem> GetRamMap()
         {
-            return new List<SimpleRamItem>
-            {
-                new SimpleRamItem()
+            return
+            [
+                new()
                 {
                     Ram = new N64PtrRange(Table, Table + (max.x * max.y * max.z * 6)),
                     Description = "COLCTX Table"
                 },
 
-                new SimpleRamItem()
+                new()
                 {
                     Ram = new N64PtrRange(SSNodeTbl, SSNodeTbl + SSNodeMax * 4),
                     Description = "COLCTX Links"
                 },
 
-                new SimpleRamItem()
+                new()
                 {
                     Ram = new N64PtrRange(polyCheckTbl, SSNodeTbl),
                     Description = "COLCTX Checks"
                 },
 
-                new SimpleRamItem()
+                new()
                 {
                     Ram = new N64PtrRange(dyna.polyList, dyna.polyList + dyna.polyListMax * 0x10),
                     Description = "COLCTX dyn_poly"
                 },
 
-                new SimpleRamItem()
+                new()
                 {
                     Ram = new N64PtrRange(dyna.vtxList, dyna.vtxList + dyna.vtxListMax * 6),
                     Description = "COLCTX dyn_vtx",
                 },
 
-                new SimpleRamItem()
+                new()
                 {
                     Ram = new N64PtrRange(dyna.polyNodes_tbl, dyna.polyNodes_tbl + dyna.polyNodesMax * 4),
                     Description = "COLCTX dyn_list"
                 }
-            };
+            ];
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Scripts
 
             for (int i = 0; i < 0x614; i++)
             {
-                sr.Read(word, 0, 4);
+                sr.ReadExactly(word, 0, 4);
                 result.AppendFormat("{0},{1},{2:X2},{3:X2}",
                     word[0],
                     word[1],
@@ -96,7 +96,7 @@ namespace Scripts
 
             for (int i = 0; i < 0x614; i++)
             {
-                sr.Read(word, 0, 4);
+                sr.ReadExactly(word, 0, 4);
                 if (word[0] != last[0] || word[1] != last[1])
                 {
                     result.AppendFormat("{0},{1},{2}",
@@ -150,7 +150,7 @@ namespace Scripts
             using (FileStream fs = new FileStream("Ocarina10FileTable.dat", FileMode.Open))
             {
                 byte[] array = new byte[fs.Length];
-                fs.Read(array, 0, (int)fs.Length);
+                fs.ReadExactly(array, 0, (int)fs.Length);
 
                 int[] intArray = new int[SceneCount * 5];
                 Buffer.BlockCopy(array, 0, intArray, 0, intArray.Length * sizeof(int));

@@ -8,8 +8,8 @@ namespace mzxrules.OcaLib
     {
         public class BuildInformation
         {
-            public static readonly BuildInformation[] builds = new BuildInformation[]
-            {
+            public static readonly BuildInformation[] builds =
+            [
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.UNKNOWN, Name = "Unknown", Localization = Localization.UNKNOWN},
 
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.J0, Name = "NTSC-J 1.0", Localization = Localization.NTSCJ},
@@ -26,7 +26,7 @@ namespace mzxrules.OcaLib
 
                 new BuildInformation { CRC = 0x0000000000000000, Version = Build.DBG, Name = "PAL DBG", Localization = Localization.PAL},
 
-            };
+            ];
 
             public Build Version { get; private set; }
             public string Name { get; private set; }
@@ -52,11 +52,12 @@ namespace mzxrules.OcaLib
             }
         }
 
-        private static readonly Language[] SupportedLanguages = new Language[] {
+        private static readonly Language[] SupportedLanguages = [
             Language.Japanese,
             Language.English,
             Language.German,
-            Language.French, };
+            Language.French, 
+        ];
 
         public enum Build
         {
@@ -113,13 +114,13 @@ namespace mzxrules.OcaLib
 
         public static IEnumerable<Language> GetSupportedLanguages(Localization l)
         {
-            switch (l)
+            return l switch
             {
-                case Localization.NTSCJ: return new Language[] { Language.Japanese };
-                case Localization.NTSCU: return new Language[] { Language.English };
-                case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French, Language.Spanish };
-                default: return null;
-            }
+                Localization.NTSCJ => [Language.Japanese],
+                Localization.NTSCU => [Language.English],
+                Localization.PAL => [Language.English, Language.German, Language.French, Language.Spanish],
+                _ => null,
+            };
         }
 
         public static bool IsBuildNintendo(RomVersion build)

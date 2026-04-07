@@ -27,7 +27,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"Collision Header starts at {SegmentAddress.Offset:X8}";
+            return $"Collision Header starts at {SegmentAddress}";
         }
     }
 }

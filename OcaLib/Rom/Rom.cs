@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
@@ -30,28 +28,26 @@ namespace mzxrules.OcaLib
 
         protected Rom(string fileLocation, RomVersion version)
         {
-            if (version.Game == Game.OcarinaOfTime)
-                Files = new OFileTable(fileLocation, version);
-            else
-                Files = new MFileTable(fileLocation, version);
-            
-            IsCompressed = false;
-            foreach (FileRecord record in Files)
+            Files = version.Game switch
             {
-                IsCompressed = record.IsCompressed;
-                if (IsCompressed)
-                    break;
-            }
+                Game.OcarinaOfTime => new OFileTable(fileLocation, version),
+                Game.MajorasMask => new MFileTable(fileLocation, version),
+                _ => throw new InvalidOperationException("Invalid Rom.Game"),
+            };
+
+            FileRecord fileRecord = Files.FirstOrDefault(static x => x.IsCompressed);
+
+            IsCompressed = !fileRecord.IsNull;
         }
 
         public static Rom New(string fileLocation, RomVersion version)
         {
-            if (version.Game == Game.OcarinaOfTime)
-                return new ORom(fileLocation, version);
-            else if (version.Game == Game.MajorasMask)
-                return new MRom(fileLocation, version);
-            else
-                return null;
+            return version.Game switch
+            {
+                Game.OcarinaOfTime => new ORom(fileLocation, version),
+                Game.MajorasMask => new MRom(fileLocation, version),
+                _ => null
+            };
         }
     }
 }

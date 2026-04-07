@@ -12,7 +12,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         Game Game { get; set; }
         public SegmentAddress SegmentAddress { get; set; }
 
-        public List<TransitionActorSpawn> TransitionActorList = new List<TransitionActorSpawn>();
+        public List<TransitionActorSpawn> TransitionActorList = [];
         public int TransitionActors { get; set; }
 
         private delegate TransitionActorSpawn GetTransitionActorRecord(byte[] data);
@@ -73,7 +73,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ToString()
         {
-            return $"There are {TransitionActorList.Count} transition actor(s). List starts at {SegmentAddress.Offset:X8}.";
+            return $"There are {TransitionActorList.Count} transition actor(s). List starts at {SegmentAddress}.";
         }
 
         public List<ActorSpawn> GetActors()

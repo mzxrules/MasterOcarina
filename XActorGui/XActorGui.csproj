@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>XActor</AssemblyName>
     <RootNamespace>mzxrules.XActor</RootNamespace>
-    
+	<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+	<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Helper\Helper.csproj"/>
-    <ProjectReference Include="..\OcaLib\OcaLib.csproj"/>
+    <ProjectReference Include="..\Helper\Helper.csproj" />
+    <ProjectReference Include="..\OcaLib\OcaLib.csproj" />
   </ItemGroup>
   
   <ItemGroup>

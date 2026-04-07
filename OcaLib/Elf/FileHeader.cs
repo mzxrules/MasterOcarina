@@ -5,8 +5,8 @@ namespace mzxrules.OcaLib.Elf
 {
     class FileHeader
     {
-        byte[] _elf = { 0x7F, 0x45, 0x4c, 0x46 };
-        byte[] Header = new byte[0x10];
+        readonly byte[] _elf = [0x7F, 0x45, 0x4c, 0x46];
+        readonly byte[] Header = new byte[0x10];
 
         public int e_type;
         public int e_machine;

@@ -8,8 +8,8 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class CameraCommand : CutsceneCommand, IFrameCollection, IFrameData
     {
-        public CutsceneCommand RootCommand { get { return this; } set { throw new InvalidOperationException(); } }
-        public Type CommandType { get { return GetCameraCommandType(); } }
+        public CutsceneCommand RootCommand { get => this; set { throw new InvalidOperationException(); } }
+        public Type CommandType => GetCameraCommandType();
 
         const int LENGTH = 12;
         public short StartFrame { get; set; }
@@ -20,7 +20,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public ushort Action;
         public ushort zero;
 
-        public List<CameraCommandEntry> Entries = new List<CameraCommandEntry>();
+        public List<CameraCommandEntry> Entries = [];
 
         public CameraCommand(int command, BinaryReader br)
             : base(command, br)
@@ -81,17 +81,16 @@ namespace mzxrules.OcaLib.Cutscenes
             while (!entry.IsLastEntry);
         }
 
-
         private Type GetCameraCommandType()
         {
-            switch (Command)
+            return Command switch
             {
-                case 01: return Type.Position;
-                case 05: return Type.Position;
-                case 02: return Type.FocusPoint;
-                case 06: return Type.FocusPoint;
-                default: return Type.Invalid;
-            }
+                01 => Type.Position,
+                05 => Type.Position,
+                02 => Type.FocusPoint,
+                06 => Type.FocusPoint,
+                _ => Type.Invalid,
+            };
         }
 
         public override string ToString()
@@ -156,13 +155,18 @@ namespace mzxrules.OcaLib.Cutscenes
 
             if (Entries.Count > 0)
             {
-                foreach (CameraCommandEntry item in Entries)
+                foreach (var item in Entries)
+                {
                     item.Terminator = 0;
+                }
+
                 var last = Entries[^1];
                 last.Terminator = 0xFF;
             }
-            foreach (CameraCommandEntry item in Entries)
+            foreach (var item in Entries)
+            {
                 item.Save(bw);
+            }
         }
 
         public enum Type

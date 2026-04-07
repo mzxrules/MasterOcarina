@@ -6,7 +6,7 @@ namespace mzxrules.OcaLib.Actor
 {
     public class ActorSpawn : IActor
     {
-        public static int SIZE = 0x10;
+        public const int SIZE = 0x10;
         public ushort Actor { get; set; } = 0xFFFF;
         public ushort Variable { get; set; }
         public Vector3<short> Coords { get; set; } = new Vector3<short>();

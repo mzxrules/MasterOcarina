@@ -16,7 +16,7 @@ namespace Atom.RSP
 
     public class rsp_opcode_table : List<rsp_opcode>
     {
-        public void Add(opcodes op)
+        public void Add(Opcodes op)
         {
             Add(new rsp_opcode(op));
         }
@@ -27,22 +27,22 @@ namespace Atom.RSP
     {
         public static rsp_opcode_table rsp_opcode_table = new rsp_opcode_table
         {
-          {opcodes.SLL},     {opcodes.INVALID}, {opcodes.SRL},     {opcodes.SRA},
-          {opcodes.SLLV},    {opcodes.INVALID}, {opcodes.SRLV},    {opcodes.SRAV},
-          {opcodes.JR},      {opcodes.JALR},    {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.BREAK},   {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.ADDU},    {opcodes.ADDU},    {opcodes.SUBU},    {opcodes.SUBU},
-          {opcodes.AND},     {opcodes.OR},      {opcodes.XOR},     {opcodes.NOR},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.SLT},     {opcodes.SLTU},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.SLL},     {Opcodes.INVALID}, {Opcodes.SRL},     {Opcodes.SRA},
+          {Opcodes.SLLV},    {Opcodes.INVALID}, {Opcodes.SRLV},    {Opcodes.SRAV},
+          {Opcodes.JR},      {Opcodes.JALR},    {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.BREAK},   {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.ADDU},    {Opcodes.ADDU},    {Opcodes.SUBU},    {Opcodes.SUBU},
+          {Opcodes.AND},     {Opcodes.OR},      {Opcodes.XOR},     {Opcodes.NOR},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.SLT},     {Opcodes.SLTU},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  Escaped opcode table: RegImm.
@@ -58,14 +58,14 @@ namespace Atom.RSP
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         //
         // ============================================================================
-          {opcodes.BLTZ},    {opcodes.BGEZ},    {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.BLTZAL},  {opcodes.BGEZAL},  {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.BLTZ},    {Opcodes.BGEZ},    {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.BLTZAL},  {Opcodes.BGEZAL},  {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  Escaped opcode table: COP0.
@@ -80,14 +80,14 @@ namespace Atom.RSP
         //   11 |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         // ============================================================================
-          {opcodes.MFC0},    {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.MTC0},    {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.MFC0},    {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.MTC0},    {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  Escaped opcode table: COP2/1.
@@ -103,10 +103,10 @@ namespace Atom.RSP
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         //
         // ============================================================================
-          {opcodes.MFC2},    {opcodes.INVALID}, {opcodes.CFC2},    {opcodes.INVALID},
-          {opcodes.MTC2},    {opcodes.INVALID}, {opcodes.CTC2},    {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.MFC2},    {Opcodes.INVALID}, {Opcodes.CFC2},    {Opcodes.INVALID},
+          {Opcodes.MTC2},    {Opcodes.INVALID}, {Opcodes.CTC2},    {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  Escaped opcode table: COP2/2.
@@ -126,22 +126,22 @@ namespace Atom.RSP
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         //
         // ============================================================================
-          {opcodes.VMULF},    {opcodes.VMULU},    {opcodes.VRNDP},    {opcodes.VMULQ},
-          {opcodes.VMUDL},    {opcodes.VMUDM},    {opcodes.VMUDN},    {opcodes.VMUDH},
-          {opcodes.VMACF},    {opcodes.VMACU},    {opcodes.VRNDN},    {opcodes.VMACQ},
-          {opcodes.VMADL},    {opcodes.VMADM},    {opcodes.VMADN},    {opcodes.VMADH},
-          {opcodes.VADD},     {opcodes.VSUB},     {opcodes.VINVALID}, {opcodes.VABS},
-          {opcodes.VADDC},    {opcodes.VSUBC},    {opcodes.VINVALID}, {opcodes.VINVALID},
-          {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VINVALID},
-          {opcodes.VINVALID}, {opcodes.VSAR},     {opcodes.VINVALID}, {opcodes.VINVALID},
-          {opcodes.VLT},      {opcodes.VEQ},      {opcodes.VNE},      {opcodes.VGE},
-          {opcodes.VCL},      {opcodes.VCH},      {opcodes.VCR},      {opcodes.VMRG},
-          {opcodes.VAND},     {opcodes.VNAND},    {opcodes.VOR},      {opcodes.VNOR},
-          {opcodes.VXOR},     {opcodes.VNXOR},    {opcodes.VINVALID}, {opcodes.VINVALID},
-          {opcodes.VRCP},     {opcodes.VRCPL},    {opcodes.VRCPH},    {opcodes.VMOV},
-          {opcodes.VRSQ},     {opcodes.VRSQL},    {opcodes.VRSQH},    {opcodes.VNOP},
-          {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VINVALID},
-          {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VINVALID}, {opcodes.VNULL},
+          {Opcodes.VMULF},    {Opcodes.VMULU},    {Opcodes.VRNDP},    {Opcodes.VMULQ},
+          {Opcodes.VMUDL},    {Opcodes.VMUDM},    {Opcodes.VMUDN},    {Opcodes.VMUDH},
+          {Opcodes.VMACF},    {Opcodes.VMACU},    {Opcodes.VRNDN},    {Opcodes.VMACQ},
+          {Opcodes.VMADL},    {Opcodes.VMADM},    {Opcodes.VMADN},    {Opcodes.VMADH},
+          {Opcodes.VADD},     {Opcodes.VSUB},     {Opcodes.VINVALID}, {Opcodes.VABS},
+          {Opcodes.VADDC},    {Opcodes.VSUBC},    {Opcodes.VINVALID}, {Opcodes.VINVALID},
+          {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VINVALID},
+          {Opcodes.VINVALID}, {Opcodes.VSAR},     {Opcodes.VINVALID}, {Opcodes.VINVALID},
+          {Opcodes.VLT},      {Opcodes.VEQ},      {Opcodes.VNE},      {Opcodes.VGE},
+          {Opcodes.VCL},      {Opcodes.VCH},      {Opcodes.VCR},      {Opcodes.VMRG},
+          {Opcodes.VAND},     {Opcodes.VNAND},    {Opcodes.VOR},      {Opcodes.VNOR},
+          {Opcodes.VXOR},     {Opcodes.VNXOR},    {Opcodes.VINVALID}, {Opcodes.VINVALID},
+          {Opcodes.VRCP},     {Opcodes.VRCPL},    {Opcodes.VRCPH},    {Opcodes.VMOV},
+          {Opcodes.VRSQ},     {Opcodes.VRSQL},    {Opcodes.VRSQH},    {Opcodes.VNOP},
+          {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VINVALID},
+          {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VINVALID}, {Opcodes.VNULL},
 
         // ============================================================================
         //  Escaped opcode table: LWC2.
@@ -157,14 +157,14 @@ namespace Atom.RSP
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         //
         // ============================================================================
-          {opcodes.LBV},     {opcodes.LSV},     {opcodes.LLV},     {opcodes.LDV},
-          {opcodes.LQV},     {opcodes.LRV},     {opcodes.LPV},     {opcodes.LUV},
-          {opcodes.LHV},     {opcodes.LFV},     {opcodes.INVALID}, {opcodes.LTV},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.LBV},     {Opcodes.LSV},     {Opcodes.LLV},     {Opcodes.LDV},
+          {Opcodes.LQV},     {Opcodes.LRV},     {Opcodes.LPV},     {Opcodes.LUV},
+          {Opcodes.LHV},     {Opcodes.LFV},     {Opcodes.INVALID}, {Opcodes.LTV},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  Escaped opcode table: SWC2.
@@ -180,14 +180,14 @@ namespace Atom.RSP
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         //
         // ============================================================================
-          {opcodes.SBV},     {opcodes.SSV},     {opcodes.SLV},     {opcodes.SDV},
-          {opcodes.SQV},     {opcodes.SRV},     {opcodes.SPV},     {opcodes.SUV},
-          {opcodes.SHV},     {opcodes.SFV},     {opcodes.SWV},     {opcodes.STV},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
+          {Opcodes.SBV},     {Opcodes.SSV},     {Opcodes.SLV},     {Opcodes.SDV},
+          {Opcodes.SQV},     {Opcodes.SRV},     {Opcodes.SPV},     {Opcodes.SUV},
+          {Opcodes.SHV},     {Opcodes.SFV},     {Opcodes.SWV},     {Opcodes.STV},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
 
         // ============================================================================
         //  First-order opcode table.
@@ -213,22 +213,22 @@ namespace Atom.RSP
         //  111 |  ---  |  ---  | *SWC2 |  ---  |  ---  |  ---  |  ---  |  ---  |
         //      |-------|-------|-------|-------|-------|-------|-------|-------|
         // ============================================================================
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.J},       {opcodes.JAL},
-          {opcodes.BEQ},     {opcodes.BNE},     {opcodes.BLEZ},    {opcodes.BGTZ},
-          {opcodes.ADDIU},   {opcodes.ADDIU},   {opcodes.SLTI},    {opcodes.SLTIU},
-          {opcodes.ANDI},    {opcodes.ORI},     {opcodes.XORI},    {opcodes.LUI},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.LB},      {opcodes.LH},      {opcodes.INVALID}, {opcodes.LW},
-          {opcodes.LBU},     {opcodes.LHU},     {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.SB},      {opcodes.SH},      {opcodes.INVALID}, {opcodes.SW},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID},
-          {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}, {opcodes.INVALID}
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.J},       {Opcodes.JAL},
+          {Opcodes.BEQ},     {Opcodes.BNE},     {Opcodes.BLEZ},    {Opcodes.BGTZ},
+          {Opcodes.ADDIU},   {Opcodes.ADDIU},   {Opcodes.SLTI},    {Opcodes.SLTIU},
+          {Opcodes.ANDI},    {Opcodes.ORI},     {Opcodes.XORI},    {Opcodes.LUI},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.LB},      {Opcodes.LH},      {Opcodes.INVALID}, {Opcodes.LW},
+          {Opcodes.LBU},     {Opcodes.LHU},     {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.SB},      {Opcodes.SH},      {Opcodes.INVALID}, {Opcodes.SW},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID},
+          {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}, {Opcodes.INVALID}
         };
 
 

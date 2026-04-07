@@ -20,8 +20,8 @@ namespace mzxrules.OcaLib.Elf
             public N64Ptr pEnd;
             public N64Ptr vEnd;
 
-            public Dictionary<string, string> BindingSymbolName = new Dictionary<string, string>();
-            public Dictionary<string, N64Ptr> BindingValue = new Dictionary<string, N64Ptr>();
+            public Dictionary<string, string> BindingSymbolName = [];
+            public Dictionary<string, N64Ptr> BindingValue = [];
 
             public void UpdateActorOverlay(BinaryWriter rom, int actorTable, int actor, uint vromStart, uint dmadata)
             {
@@ -52,15 +52,15 @@ namespace mzxrules.OcaLib.Elf
 
         public static void CreateDummyScript(string path)
         {
-            Script script = new Script
+            Script script = new()
             {
                 Rom = new XRom()
                 {
                     Path = "Rom Path",
                     ActorTable = "Actor table location, no hex specifier.",
                 },
-                Actor = new List<XActor>()
-                {
+                Actor =
+                [
                      new XActor()
                      {
                          Path = "Path to gcc object file (*.o)",
@@ -79,14 +79,14 @@ namespace mzxrules.OcaLib.Elf
                          VRom = "0347E000",
                          VRam = "80B87280"
                      }
-                },
+                ],
             };
             script.SaveToFile(path);
         }
 
         public static void ProcessInjectScript(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Script));
+            XmlSerializer serializer = new(typeof(Script));
             Script script;
             try
             {
@@ -118,7 +118,7 @@ namespace mzxrules.OcaLib.Elf
             Console.WriteLine($"Rom: {script.Rom.Path}");
             Console.WriteLine($"Actor Table: {script.Rom.ActorTable:X8}");
 
-            using (FileStream rom = new FileStream(script.Rom.Path, FileMode.Open))
+            using (FileStream rom = new(script.Rom.Path, FileMode.Open))
             {
                 foreach (var actor in script.Actor)
                 {
@@ -145,13 +145,13 @@ namespace mzxrules.OcaLib.Elf
                         Console.WriteLine($"Cannot locate {actor.Path}");
                         continue;
                     }
-                    Ovl odata = new Ovl
+                    Ovl odata = new()
                     {
                         start = vram,
                         BindingSymbolName = { { "init", actor.InitBinding } }
                     };
-                    byte[] data = new byte[0];
-                    using (BinaryReader br = new BinaryReader(File.Open(actor.Path, FileMode.Open)))
+                    byte[] data = [];
+                    using (BinaryReader br = new(File.Open(actor.Path, FileMode.Open)))
                     {
                         if (!TryConvertToOverlay(br, odata, out data))
                         {
@@ -171,26 +171,26 @@ namespace mzxrules.OcaLib.Elf
 
         public static bool TryConvertToOverlay(string elfpath, string ovlpath, N64Ptr rpoint)
         {
-            Ovl odata = new Ovl
+            Ovl odata = new()
             {
                 start = rpoint,
                 BindingSymbolName = { { "init", "initVars" } }
             };
 
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new())
             {
                 byte[] ovlByte;
                 bool result;
-                using (FileStream elfFile = new FileStream(elfpath, FileMode.Open))
+                using (FileStream elfFile = new(elfpath, FileMode.Open))
                 {
                     elfFile.CopyTo(ms);
                     ms.Position = 0;
                 }
-                using (BinaryReader br = new BinaryReader(ms))
+                using (BinaryReader br = new(ms))
                 {
                      result = TryConvertToOverlay(br, odata, out ovlByte);
                 }
-                using (FileStream fs = new FileStream(ovlpath, FileMode.Create))
+                using (FileStream fs = new(ovlpath, FileMode.Create))
                 {
                     fs.Write(ovlByte, 0, ovlByte.Length);
                 }
@@ -201,8 +201,8 @@ namespace mzxrules.OcaLib.Elf
 
         private static bool TryConvertToOverlay(BinaryReader elf, Ovl odata, out byte[] ovlByte)
         {
-            ovlByte = new byte[0];
-            FileHeader header = new FileHeader(elf);
+            ovlByte = [];
+            FileHeader header = new(elf);
             if (!header.VerifyMagic())
             {
                 Console.WriteLine("Not an elf, or not a supported elf format");
@@ -215,8 +215,8 @@ namespace mzxrules.OcaLib.Elf
             //build memory map
             int relocations = GetRelocations(sections);
 
-            Dictionary<string, SectionHeader> map = new Dictionary<string, SectionHeader>();
-            Dictionary<string, (N64Ptr addr, int size)> newMap = new Dictionary<string, (N64Ptr addr, int size)>();
+            Dictionary<string, SectionHeader> map = [];
+            Dictionary<string, (N64Ptr addr, int size)> newMap = [];
             
             N64Ptr cur = odata.start;
 
@@ -227,7 +227,7 @@ namespace mzxrules.OcaLib.Elf
                 {
                     odata.header = cur - odata.start;
                     cur += 0x14 + (relocations * 4) + 4; //header size, reloction size, header offset
-                    cur = Align.To16(cur );
+                    cur = Align.To16(cur);
                     odata.pEnd = cur;
                 }
                 N64Ptr localStart = cur;
@@ -250,8 +250,8 @@ namespace mzxrules.OcaLib.Elf
 
             //create our file
             ovlByte = new byte[odata.pEnd - odata.start];
-            List<Overlay.RelocationWord> ovlRelocations = new List<Overlay.RelocationWord>();
-            using (BinaryWriter ovl = new BinaryWriter(new MemoryStream(ovlByte)))
+            List<Overlay.RelocationWord> ovlRelocations = [];
+            using (BinaryWriter ovl = new(new MemoryStream(ovlByte)))
             {
                 //copy data into the overlay
                 foreach (var kv in map.OrderBy(x => x.Value.NS.Addr))
@@ -389,7 +389,10 @@ namespace mzxrules.OcaLib.Elf
                 ovl.BaseStream.Position = odata.header;
 
                 foreach (var name in ovlSectionsStr)
+                {
                     ovl.WriteBig(newMap[name].size);
+                }
+
                 ovl.WriteBig(relocations);
 
                 foreach (var item in ovlRelocations)
@@ -429,7 +432,7 @@ namespace mzxrules.OcaLib.Elf
 
         private static Dictionary<int, List<Elf32_Sym>> GetSymbols(BinaryReader elf, List<SectionHeader> sections)
         {
-            Dictionary<int, List<Elf32_Sym>> symtabs = new Dictionary<int, List<Elf32_Sym>>();
+            Dictionary<int, List<Elf32_Sym>> symtabs = [];
 
             foreach (var section in sections.Where(x => x.sh_type == SectionHeader.SHT_.REL))
             {
@@ -449,11 +452,11 @@ namespace mzxrules.OcaLib.Elf
 
         private static List<SectionHeader> GetSections(BinaryReader elf, FileHeader header)
         {
-            List<SectionHeader> sections = new List<SectionHeader>();
+            List<SectionHeader> sections = [];
             elf.BaseStream.Position = header.e_shoff;
             for (int i = 0; i < header.e_shnum; i++)
             {
-                var section = new SectionHeader(elf);
+                SectionHeader section = new(elf);
                 sections.Add(section);
             }
 
@@ -461,7 +464,7 @@ namespace mzxrules.OcaLib.Elf
             var shstr = sections[header.e_shstrndx];
 
             elf.BaseStream.Position = shstr.sh_offset;
-            using (MemoryStream ms = new MemoryStream(elf.ReadBytes(shstr.sh_size)))
+            using (MemoryStream ms = new(elf.ReadBytes(shstr.sh_size)))
             {
                 foreach (var section in sections)
                 {
@@ -494,8 +497,8 @@ namespace mzxrules.OcaLib.Elf
             SectionHeader symtab = sections[symtabId];
             SectionHeader strtab = sections[symtab.sh_link];
 
-            List<Elf32_Sym> symbols = new List<Elf32_Sym>();
-            var elements = symtab.sh_size / symtab.sh_entsize;
+            List<Elf32_Sym> symbols = [];
+            int elements = symtab.sh_size / symtab.sh_entsize;
             elf.BaseStream.Position = symtab.sh_offset;
             for (int i = 0; i < elements; i++)
             {
@@ -504,7 +507,7 @@ namespace mzxrules.OcaLib.Elf
             }
 
             elf.BaseStream.Position = strtab.sh_offset;
-            using (MemoryStream ms = new MemoryStream(elf.ReadBytes(strtab.sh_size)))
+            using (MemoryStream ms = new(elf.ReadBytes(strtab.sh_size)))
             {
                 foreach (var symbol in symbols)
                 {
@@ -528,7 +531,7 @@ namespace mzxrules.OcaLib.Elf
         
         private static List<Elf32_Rel> GetSectionRelocations(BinaryReader elf, SectionHeader section)
         {
-            List<Elf32_Rel> rel = new List<Elf32_Rel>();
+            List<Elf32_Rel> rel = [];
 
             elf.BaseStream.Position = section.sh_offset;
             for (int i = 0; i < section.sh_size / section.sh_entsize; i++)
